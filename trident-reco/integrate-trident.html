@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head class="at-element-marker">
+  <title>集成 Astra Trident</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="集成 Astra Trident" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/zh-cn/trident/trident-reco/integrate-trident.html" />
+	<meta property="og:description" content="Kubernetes 集群通常由两种类型的节点组成，每种节点负责不同的功能方面。" />
+  <meta property="og:image" content="https://docs.netapp.com/zh-cn/trident/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/>
+  
+  <meta name="description" content="Kubernetes 集群通常由两种类型的节点组成，每种节点负责不同的功能方面。">
+  <meta name="keywords" content=" kubernetes, clusters, nodes, components, master, compute">
+  
+  
+
+  <!-- Icons -->
+  <link rel="icon" href="/zh-cn/trident/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed -->
+  
+
+  <!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+  <!-- Elastic Search -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/searchkit/0.10.0/theme.css">
+
+  <!-- Controls AsciiDoctor Admonition Blocks -->
+  <link rel="stylesheet" type="text/css" href="/zh-cn/trident/css/font-awesome.min.css">
+
+  <!-- Controls the shadow effect for search dropdown menu -->
+  <link rel="stylesheet" href="/zh-cn/trident/css/boxshadowproperties.css">
+
+  <!-- NetApp CSS controls the technical content -->
+  <link rel="stylesheet" type="text/css" href="/zh-cn/trident/css/netapp.css">
+
+  <!-- WWW CSS Content -->
+  <link rel="stylesheet" type="text/css" href="/zh-cn/trident/css/www-luci-dotcom.min.css">
+  <link rel="stylesheet" type="text/css" href="/zh-cn/trident/css/www-netapp-dotcom.css">
+  <link rel="stylesheet" href="/zh-cn/trident/css/www-netapp-library-critical.min.css" media="all" >
+  <link rel="stylesheet" href="/zh-cn/trident/css/www-netapp-library-non-critical.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="/zh-cn/trident/css/www-netapp-library-global-header-footer.min.css">
+
+  <!-- NetApp IE Customizations -->
+  <link rel="stylesheet" href='/zh-cn/trident/css/na-utility.css' type='text/css'>
+  <link rel="stylesheet" href='/zh-cn/trident/css/na-sidebar.css' type='text/css'>
+  <link rel='stylesheet' href='/zh-cn/trident/css/clouddocs.css' type='text/css'>
+  <link rel='stylesheet' href='/zh-cn/trident/css/na-pagenav.css' type='text/css'>
+
+  
+  <link rel="stylesheet" href="/zh-cn/trident/css/landing-page.css" type="text/css">
+  <link rel="stylesheet" href="/zh-cn/trident/css/tabbed-blocks.css" type="text/css">
+  <link rel="stylesheet" href='/zh-cn/trident/css/product-family.css' type="text/css">
+  
+
+  
+  <link rel='stylesheet' href='/zh-cn/trident/css/na-feature.css' type='text/css'>
+  
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
+  
+    <script src='/zh-cn/trident/js/na-search.js'></script>
+  
+
+  
+  <script src='/zh-cn/trident/js/na-pagenav.js'></script>
+  
+
+  <link rel='stylesheet' href='/zh-cn/trident/css/prism.css' type='text/css'>
+  <link rel='stylesheet' href='/zh-cn/trident/css/prism-netapp.css' type='text/css'>
+
+
+  <script src='/zh-cn/trident/js/na-utility.js'></script>
+  <script src='/zh-cn/trident/js/clouddocs.js'></script>
+  <script>
+  if (document.location.hostname === "docs.netapp.com") {
+    var head = document.getElementsByTagName('head')[0];
+    var adobe = document.createElement("script");
+    adobe.type = "text/javascript";
+    adobe.src = "//assets.adobedtm.com/60287eadf1ee/c284da483c83/launch-e9ff3acac59f.min.js";
+    head.appendChild(adobe);
+  }
+  </script>
+  <script src='/zh-cn/trident/js/jquery.navgoco.min.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src='/zh-cn/trident/js/toc.js'></script>
+  <script src='/zh-cn/trident/js/customscripts.js'></script>
+
+  <script>
+      $(document).ready(function() {
+          
+          var collapseOnInit = true;
+          
+
+          var navSettings = {
+              "caretHtml": '',
+              "accordion": collapseOnInit,
+              "openClass": 'active', // open
+              "save": false, // leave false or nav highlighting doesn't work right
+              "cookie": {
+                  "name": 'navgoco',
+                  "expires": false,
+                  "path": '/'
+              },
+              "slide": {
+                  "duration": 400,
+                  "easing": 'swing'
+              }
+          };
+
+          // Initialize navgoco with default options
+          $("#mysidebar").navgoco(navSettings);
+          
+
+          $("#collapseAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', false);
+          });
+
+          $("#expandAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', true);
+          });
+
+      });
+
+  </script>
+  <script>
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+  </script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-81697994-3"></script>
+  <script>
+  if (document.location.hostname === "docs.netapp.com") {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-81697994-3');
+  }
+  </script>
+  <script src='/zh-cn/trident/js/version-dropdown.js'></script>
+  <script src='/zh-cn/trident/js/product-family.js'></script>
+  <script src='/zh-cn/trident/js/FileSaver.min.js'></script>
+  <script src='/zh-cn/trident/js/jszip-utils.min.js'></script>
+  <script src='/zh-cn/trident/js/jszip.min.js'></script>
+  <script src='/zh-cn/trident/js/pdf-ux.js'></script>
+</head>
+
+
+  <body class role="document">
+    <div id="page" class="n-off-canvas-menu">
+      <div class="n-off-canvas-menu__menu"><!--TODO: Add offcanvas code --></div>
+      <div class="n-off-canvas-menu__content-wrap">
+        <header class="site-header" id="banner">
+  <!-- Start top_hat -->
+  <div class="n-top-hat">
+    <div class="n-container">
+      <div class="n-top-hat__cross-property-nav">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/products-a-z/" class="n-top-hat__link">产品和解决方案</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/support-and-training/netapp-university/" class="n-top-hat__link">支持和培训</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://cloud.netapp.com" class="n-top-hat__link">云中心</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://community.netapp.com/" class="n-top-hat__link">社区</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://blog.netapp.com/" class="n-top-hat__link">日志</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://customers.netapp.com/en/" class="n-top-hat__link">客户案例</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/us/contact-us/index.aspx" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">联系人</a>
+          </li>
+        </ul>
+      </div>
+      <div class="n-top-hat__utils">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/us/contact-us/index.aspx" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">联系人</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End top_hat -->
+
+  <!-- Start property bar -->
+  <style>
+    .n-property-navigation-bar__menus--desktop-experience .n-menu--mega__default-content__heading span {
+    color: #34B0FF;
+    }
+  </style>
+  <div class="n-property-bar " data-ntap-ui="sticky-nav">
+    <div class="n-property-bar__inner-wrap">
+      <div class="n-property-bar__menu-toggle">
+        <a href="#" class="n-property-bar__menu-toggle-link">
+          <span class="n-property-bar__menu-toggle-text">Menu</span>
+          <svg class="n-icon-bars n-property-bar__menu-toggle-icon" aria-labelledby="title">
+            <title>bars</title>
+            <use xlink:href="/zh-cn/trident/common/svg/sprite.svg#bars"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="n-property-bar__property-mark ">
+        <a href="https://www.netapp.com" class="n-property-bar__property-link">
+          <div class="n-property-bar__logo">
+            <svg class="n-icon-netapp-mark n-icon-netapp-mark n-property-bar__netapp-mark-icon" aria-labelledby="title">
+              <title>netapp-mark</title>
+              <use xlink:href="/zh-cn/trident/common/svg/sprite.svg#netapp-mark"></use>
+            </svg>
+            <svg class="n-icon-netapp-logo n-property-bar__logo-svg" aria-labelledby="title">
+              <title>netapp-logo</title>
+              <use xlink:href="/zh-cn/trident/common/svg/sprite.svg#netapp-logo"></use>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      
+      <div class="search-property-bar">
+        <div id="search-demo-container" class="searchbox n-property-bar__search">
+          <div id="react-search" 
+          data-search-html="/zh-cn/trident/search.html"
+          data-type="widget" 
+          data-placeholder="搜索文档" 
+          data-no-results-found="未找到与 {query} 匹配的结果。" 
+          data-did-you-mean="搜索 {suggestion}。" 
+          data-no-results-found-did-you-mean="未找到与 {query} 匹配的结果。您是否要搜索 {suggestion}?" 
+          data-results-found="找到 {hitCount} 个结果"  
+          data-sk-es-pf-indexes=""></div>
+          <button class="n-property-bar__search-toggle-button" type="button">
+            <svg class="n-icon-search n-property-bar__search-toggle-button-icon" aria-labelledby="title">
+              <title>search</title>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/trident/common/svg/sprite.svg#search"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="n-property-bar__toolbar">
+    <!-- Start Language Selector --><div id="ie-i18n" class="n-property-bar__lang-selector">
+      <div id="ie-i18n-menu">
+      <span class="ie-i18n-lang">简体中文</span>
+        <button class="ie-i18n-icon-container" type="button">
+          <svg class="n-globe__icon" aria-labelledby="title">
+            <title>globe</title>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/trident/common/svg/sprite.svg#globe"></use>
+          </svg>
+        </button>
+      </div>
+      <div id="n-property-navigation-bar__menu--language-selector" class="ie-i18n-results-container n-menu n-menu--v3 n-menu--is-active" style="display: none;">
+        <div class="n-language-selector-menu">
+          <ul class="n-menu__list">
+            <li class="n-menu__list-column">
+              <ul class="n-menu__list"><li class="n-menu__list-item n-menu__list-item--level-1">
+                  <a href="https://docs.netapp.com/zh-cn/trident/trident-reco/integrate-trident.html" class="n-menu__header-text"><span translate="no" class="notranslate">简体中文</span></a>
+                </li><li class="n-menu__list-item n-menu__list-item--level-1">
+                  <a href="https://docs.netapp.com/us-en/trident/trident-reco/integrate-trident.html" class="n-menu__header-text"><span translate="no" class="notranslate">English</span></a>
+                </li><li class="n-menu__list-item n-menu__list-item--level-1">
+                  <a href="https://docs.netapp.com/ja-jp/trident/trident-reco/integrate-trident.html" class="n-menu__header-text"><span translate="no" class="notranslate">日本語</span></a>
+                </li></ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- End Language Selector -->
+
+    <div class="n-property-bar__cta"></div>
+  </div>
+  <script>
+    $(function(){
+        var currentLocalization = $('html').attr('lang');
+
+        var localizationsDictionary = {
+            "en-CA" : "https://www.netapp.com/search/index.aspx?for_cr=canada&",
+            "en-IN" : "https://www.netapp.com/search/index.aspx?for_cr=india&",
+            "nl-NL" : "https://www.netapp.com/search/index.aspx?for_cr=netherlands&",
+            "ru-RU" : "https://www.netapp.com/search/index.aspx?for_cr=russia&",
+            "sv-SE" : "https://www.netapp.com/search/index.aspx?for_cr=sweden&",
+            "it-IT" : "https://www.netapp.com/search/index.aspx?for_cr=italy&",
+            "he-IL" : "https://www.netapp.com/search/index.aspx?for_cr=israel&",
+            "ko-KR" : "https://www.netapp.com/search/index.aspx?for_cr=korea&",
+            "zh-TW" : "https://www.netapp.com/search/index.aspx?for_cr=taiwan&",
+            "en-GB" : "https://www.netapp.com/search/index.aspx?for_cr=unitedkingdom&",
+            "en-SG" : "https://www.netapp.com/search/index.aspx?for_cr=asean&",
+            "en-AU" : "https://www.netapp.com/search/index.aspx?for_cr=australia&",
+            "pt-BR" : "https://www.netapp.com/search/index.aspx?for_cr=brasil&",
+            "de-CH" : "https://www.netapp.com/search/index.aspx?for_cr=switzerland&",
+            "es-MX" : "https://www.netapp.com/search/index.aspx?for_cr=mexico&"
+        };
+
+        if($('html').hasClass('ntap-whitelisted') && localizationsDictionary.hasOwnProperty(currentLocalization)) {
+            $('.n-property-bar__property-link').attr('href', '/');
+        }
+    });
+  </script>
+  <!-- End property bar -->
+</header>
+
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+  <!-- Sidebar Column -->
+  
+  <div class="col-md-3" >
+      <div class="n-pdf-header">
+  <a id="toggleButtonPdf" class="n-pdf-button" type="button">
+    <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>可用的 PDF<span>
+    </span>
+  </a>
+</div>
+<div class="n-pdf-body-container">
+  <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
+        <a target="_blank" href="/zh-cn/trident/pdfs/fullsite-sidebar/Astra_Trident_21_10_文档.pdf" >
+          <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>此文档站点的 PDF</a>
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/概念.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            概念
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/入门.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            入门
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用_Trident_操作员进行部署.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            使用 Trident 操作员进行部署
+          </a>
+          
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用_tridentctl_进行部署.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            使用 tridentctl 进行部署
+          </a>
+          
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/管理_Astra_Trident.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            管理 Astra Trident
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用_Astra_Trident.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            使用 Astra Trident
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/配置后端.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            配置后端
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用_ONTAP_SAN_驱动程序配置后端.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            使用 ONTAP SAN 驱动程序配置后端
+          </a>
+          
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用_ONTAP_NAS_驱动程序配置后端.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            使用 ONTAP NAS 驱动程序配置后端
+          </a>
+          
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/执行卷操作.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            执行卷操作
+          </a>
+          
+
+
+
+
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/适用于_Docker_的_Astra_Trident.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            适用于 Docker 的 Astra Trident
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用卷.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            使用卷
+          </a>
+          
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/最佳实践和建议.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            最佳实践和建议
+          </a>
+          
+
+
+
+
+    <ul class="subfolders" style="display:none;"><li class="active pdf-hide">
+  <a target="_blank" href="/zh-cn/trident/pdfs/pages/trident-reco/integrate-trident.pdf" >
+    <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+    PDF of this page
+  </a>
+</li>
+
+</ul>
+  
+
+
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          <a target="_blank" 
+            
+              href="/zh-cn/trident/pdfs/sidebar/参考.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>
+            参考
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+</li></ul>
+  <div class="zip-pdf-link-container" style="display: none;">   
+    <a href="#" id="zipPdf">
+      <img src="/zh-cn/trident/images/pdf-zip.png" width="16" height="16"/>
+      <pre>收集单独的 PDF 文档<span class="zip-size"></span></pre>
+    </a><div id="zip-link-popup" class="hide">
+    <div class="inner-modal">
+        <div class="downloading-progress">
+            <div class="spinner"></div>
+            <h1>Creating your file...</h1>
+            <div>This may take a few minutes. Thanks for your patience.</div>
+            <button class="cancel-download-btn" type="button">Cancel</button>
+        </div>
+        <div class="download-complete hide">
+            <div class="done-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+            </div>
+            <div>Your file is ready</div>
+            <button class="cancel-download-btn" type="button">OK</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(".cancel-download-btn").click(function(){
+        $("#zip-link-popup").addClass("hide");
+        $("#zip-link-popup .downloading-progress").removeClass("hide");
+        $("#zip-link-popup .download-complete").addClass("hide");
+    });
+</script></div>
+</div>
+<script>
+  $("#toggleContainerPdf li.active:last-child").parents('ul.subfolders').toggle('display');
+  $("#toggleButtonPdf").click(function () {
+    $("#toggleContainerPdf").toggle('display');
+    $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+  });
+</script><div class="sidebar-nav-container">
+  <ul id="mysidebar" class="nav"><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/index.html">
+        Astra Trident 文档
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-rn.html">
+        发行说明
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> 概念</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-concepts/intro.html">
+        Astra Trident 简介
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-concepts/ontap-drivers.html">
+        ONTAP 驱动程序
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-concepts/provisioning.html">
+        配置
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-concepts/snapshots.html">
+        卷快照
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-concepts/virtual-storage-pool.html">
+        虚拟存储池
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-concepts/vol-access-groups.html">
+        卷访问组
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> 入门</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-get-started/quickstart.html">
+        试用
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-get-started/requirements.html">
+        要求
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-get-started/kubernetes-deploy.html">
+        部署概述
+      </a></li><li class="subfolders "><a href="/zh-cn/trident/trident-get-started/kubernetes-deploy-operator.html">
+        <div class="na-navbar-padding"> 使用 Trident 操作员进行部署</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-get-started/kubernetes-customize-deploy.html">
+        自定义 Trident 操作员部署
+      </a></li></ul></li><li class="subfolders "><a href="/zh-cn/trident/trident-get-started/kubernetes-deploy-tridentctl.html">
+        <div class="na-navbar-padding"> 使用 tridentctl 进行部署</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-get-started/kubernetes-customize-deploy-tridentctl.html">
+        自定义 tridentctl 部署
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-get-started/kubernetes-postdeployment.html">
+        下一步是什么？
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> 管理 Astra Trident</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-managing-k8s/upgrade-trident.html">
+        升级 Astra Trident
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-managing-k8s/upgrade-operator.html">
+        使用操作员升级
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-managing-k8s/upgrade-tridentctl.html">
+        使用 tridentctl 进行升级
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-managing-k8s/uninstall-trident.html">
+        卸载 Astra Trident
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-managing-k8s/downgrade-trident.html">
+        降级 Astra Trident
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> 使用 Astra Trident</div>
+      </a>
+      <ul><li class="subfolders "><a href="/zh-cn/trident/trident-use/backends.html">
+        <div class="na-navbar-padding"> 配置后端</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
+        配置 ANF 后端
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
+        配置 ADS 后端
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
+        为 AWS 后端配置 CVS
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
+        为 GCP 后端配置 CVS
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/element.html">
+        配置 NetApp HCI 或 SolidFire 后端
+      </a></li><li class="subfolders "><a href="/zh-cn/trident/trident-use/ontap-san.html">
+        <div class="na-navbar-padding"> 使用 ONTAP SAN 驱动程序配置后端</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ontap-san-prep.html">
+        准备
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ontap-san-examples.html">
+        配置选项和示例
+      </a></li></ul></li><li class="subfolders "><a href="/zh-cn/trident/trident-use/ontap-nas.html">
+        <div class="na-navbar-padding"> 使用 ONTAP NAS 驱动程序配置后端</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ontap-nas-prep.html">
+        准备
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ontap-nas-examples.html">
+        配置选项和示例
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/trident-fsx.html">
+        将 Astra Trident 与适用于 NetApp ONTAP 的 Amazon FSX 结合使用
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/backend-kubectl.html">
+        使用 kubectl 创建后端
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/backend_ops_kubectl.html">
+        使用 kubectl 执行后端管理
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/backend_ops_tridentctl.html">
+        使用 tridentctl 执行后端管理
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/backend_options.html">
+        在后端管理选项之间移动
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/manage-stor-class.html">
+        管理存储类
+      </a></li><li class="subfolders "><a href="/zh-cn/trident/trident-use/vol-operations.html">
+        <div class="na-navbar-padding"> 执行卷操作</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/csi-topology.html">
+        使用 CSI 拓扑
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/vol-snapshots.html">
+        使用快照
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/vol-expansion.html">
+        展开卷
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/vol-import.html">
+        导入卷
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/worker-node-prep.html">
+        准备工作节点
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/automatic-workernode.html">
+        自动工作节点准备
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/monitor-trident.html">
+        监控 Astra Trident
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> 适用于 Docker 的 Astra Trident</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-docker/prereqs-docker.html">
+        部署的前提条件
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-docker/deploy-docker.html">
+        部署 Astra Trident
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-docker/upgrade-uninstall-docker.html">
+        升级或卸载 Trident
+      </a></li><li class="subfolders "><a href="/zh-cn/trident/trident-docker/volumes-docker.html">
+        <div class="na-navbar-padding"> 使用卷</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-docker/volume-driver-options.html">
+        驱动程序专用的卷选项
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-docker/collect-logs-docker.html">
+        收集日志
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-docker/multiple-instances-docker.html">
+        管理多个 Astra Trident 实例
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-docker/stor-config.html">
+        存储配置选项
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-docker/known-issues-docker.html">
+        已知问题
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/faq.html">
+        常见问题解答
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/get-help.html">
+        支持
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/troubleshooting.html">
+        故障排除
+      </a></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> 最佳实践和建议</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reco/deploy-reco.html">
+        部署
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reco/storage-config-best-practices.html">
+        存储配置
+      </a></li><li class="  active "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reco/integrate-trident.html">
+        Astra Trident 集成
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reco/backup.html">
+        数据保护
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reco/security-reco.html">
+        安全性
+      </a></li></ul></li><li class="subfolders "><a href="#">
+        <div class="na-navbar-padding"> 参考</div>
+      </a>
+      <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reference/trident-ports.html">
+        Astra Trident 端口
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reference/rest-api.html">
+        Astra Trident REST API
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reference/trident-cl.html">
+        命令行选项
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reference/k8s-netapp.html">
+        与 Kubernetes 集成的 NetApp 产品
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reference/objects.html">
+        Kubernetes 和 Astra Trident 对象
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-reference/tridentctl.html">
+        tridentctl 命令和选项
+      </a></li></ul></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/earlier-versions.html">
+        早期版本
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/legal.html">
+        法律声明
+      </a></li></ul>
+</div>
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+  </div>
+  
+
+  <div class="ie-content-pane n-doc__component-detail-content n-doc__component-detail-content--show-code">
+    <!-- Begin of page container -->
+    <article class="page-content">
+      <div class="ie-utility">
+  <div class="ie-menu">
+    <div class="n-breadcrumb">
+      <ul class="n-breadcrumb__list">
+        <li class="n-breadcrumb__list-item">
+          <a href="https://www.netapp.com">主页</a>
+        </li>
+        <li class="n-breadcrumb__list-item">
+          <a href="https://docs.netapp.com">文档</a>
+        </li>
+        
+
+        <li class="n-breadcrumb__list-item">
+          <a href="/zh-cn/trident/">Astra&nbsp;Trident</a>
+        </li>
+        <li class="n-breadcrumb__list-item">
+          集成 Astra Trident
+        </li>
+      </ul>
+    </div>
+    <div style="clear: both"></div><!-- Main needs to have height -->
+  </div>
+</div>
+
+      <div class="ie-nmt-disclaimer">
+  <span>
+    <div class="ie-nmt-disclaimer-container">
+      <div class="ie-nmt-disclaimer-icon">
+        <svg class="luci-icon" aria-hidden="true">
+          <use xlink:href="/zh-cn/trident/common/svg/sprite.svg#circle-info">
+        </svg>
+      </div>
+      <div class="ie-nmt-disclaimer-content">
+        <span> 简体中文版经机器翻译而成，仅供参考。如与英语版出现任何冲突，应以英语版为准。 </span>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+  </span>
+</div><div class="n-doc__component-detail-heading-wrap">
+  <h1 class="n-doc__component-detail-heading">集成 Astra Trident</h1>
+</div>
+
+
+<p class="page-details">
+  
+    
+    <time datetime="2021-10-19 22:59:17 +0000">10/19/2021</time>
+    
+  
+
+<span>提供者
+  <a target="_blank" href="https://github.com/netapp-rlithman">
+    <img  class="avatar avatar-small"
+          alt="netapp-rlithman"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/54725121?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
+</span>
+
+
+</p>
+
+
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>要集成 Astra Trident ，需要集成以下设计和架构要素：驱动程序选择和部署，存储类设计，虚拟存储池设计，永久性卷声明（ PVC ）对存储配置的影响，卷操作以及使用 Astra Trident 部署 OpenShift 服务。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="驱动程序选择和部署">驱动程序选择和部署</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="为-ontap-选择后端驱动程序">为 ONTAP 选择后端驱动程序</h3>
+<div class="paragraph">
+<p>ONTAP 系统可使用四种不同的后端驱动程序。这些驱动程序根据所使用的协议以及在存储系统上配置卷的方式进行了区分。因此，请仔细考虑要部署的驱动程序。</p>
+</div>
+<div class="paragraph">
+<p>更高级别的是，如果您的应用程序中的组件需要共享存储（多个 Pod 访问同一个 PVC ），则基于 NAS 的驱动程序将成为默认选项，而基于块的 iSCSI 驱动程序则可满足非共享存储的需求。根据应用程序要求以及存储和基础架构团队的舒适程度选择协议。一般来说，对于大多数应用程序来说，它们之间没有什么区别，因此通常是根据是否需要共享存储（多个 POD 需要同时访问）来决定的。</p>
+</div>
+<div class="paragraph">
+<p>下面列出了 ONTAP 后端的五个驱动程序：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ontap-NAS</code> ：配置的每个 PV 都是一个完整的 ONTAP FlexVolume 。</p>
+</li>
+<li>
+<p><code>ontap-nas-economy.</code> ：配置的每个 PV 都是一个 qtree ，每个 FlexVolume 的 qtree 数量是可配置的（默认值为 200 ）。</p>
+</li>
+<li>
+<p><code>ontap-nas-flexgroup</code> ：使用配置为完整 ONTAP FlexGroup 的每个 PV ，以及分配给 SVM 的所有聚合。</p>
+</li>
+<li>
+<p><code>ontap-san</code> ：配置的每个 PV 都是其自身 FlexVolume 中的一个 LUN 。</p>
+</li>
+<li>
+<p><code>ontap-san-economi</code> ：配置的每个 PV 都是一个 LUN ，每个 FlexVolume 具有可配置的 LUN 数量（默认值为 100 ）。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>在三个 NAS 驱动程序之间进行选择会对应用程序可用的功能产生一些影响。</p>
+</div>
+<div class="paragraph">
+<p>请注意，在下表中，并非所有功能都通过 Astra Trident 公开。如果需要某些功能，存储管理员必须在配置后应用这些功能。上标脚注区分了每个功能和驱动程序的功能。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1112%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ONTAP NAS 驱动程序</th>
+<th class="tableblock halign-left valign-top">快照</th>
+<th class="tableblock halign-left valign-top">克隆</th>
+<th class="tableblock halign-left valign-top">动态导出策略</th>
+<th class="tableblock halign-left valign-top">多连接</th>
+<th class="tableblock halign-left valign-top">QoS</th>
+<th class="tableblock halign-left valign-top">调整大小</th>
+<th class="tableblock halign-left valign-top">Replication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ontap-NAS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 5[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ontap-nas-economy.</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 3[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 3[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 5[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 3[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 3[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ontap-nas-flexgroup</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 5[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Astra Trident 为 ONTAP 提供了 2 个 SAN 驱动程序，其功能如下所示。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1112%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ONTAP SAN 驱动程序</th>
+<th class="tableblock halign-left valign-top">快照</th>
+<th class="tableblock halign-left valign-top">克隆</th>
+<th class="tableblock halign-left valign-top">多连接</th>
+<th class="tableblock halign-left valign-top">双向 CHAP</th>
+<th class="tableblock halign-left valign-top">QoS</th>
+<th class="tableblock halign-left valign-top">调整大小</th>
+<th class="tableblock halign-left valign-top">Replication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ontap-san</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 4[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ontap-san-economy.</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 4[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 3[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 3[]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="verseblock">
+<pre class="content">上述表的脚注：是脚注： 1[] ：不受 Astra Trident 管理是脚注： 2[] ：由 Astra Trident 管理，但不是 PV 粒度 Yesfootnote ： 3[] ：不受 Astra Trident 管理，也不是 PV 粒度 Yesnote ： 4[] ：支持原始块卷是脚注： 5[] ： CSI Trident 支持</pre>
+</div>
+<div class="paragraph">
+<p>非 PV 粒度功能将应用于整个 FlexVolume ，而所有 PV （即共享 FlexVol 中的 qtree 或 LUN ）将共享一个通用计划。</p>
+</div>
+<div class="paragraph">
+<p>如上表所示， <code>ontap-nas</code> 与 <code>ontap-nas-economy</code> 之间的大部分功能是相同的。但是，由于 <code>ontap-nas-economy</code> 驱动程序限制了按 PV 粒度控制计划的能力，因此这可能会特别影响灾难恢复和备份规划。对于希望在 ONTAP 存储上利用 PVC 克隆功能的开发团队，只有在使用 <code>ontap-NAS</code> ， <code>ontap-san</code> 或 <code>ontap-san-economy-经济</code> 驱动程序时，才可能实现这一点。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="注">
+</td>
+<td class="content">
+<code>solidfire-san</code> 驱动程序还能够克隆 PVC 。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="为-cloud-volumes-ontap-选择后端驱动程序">为 Cloud Volumes ONTAP 选择后端驱动程序</h3>
+<div class="paragraph">
+<p>Cloud Volumes ONTAP 可为各种使用情形提供数据控制以及企业级存储功能，包括文件共享和为 NAS 和 SAN 协议（ NFS ， SMB/CIFS 和 iSCSI ）提供服务的块级存储。Cloud Volume ONTAP 的兼容驱动程序包括 <code>ontap-nas</code> ， <code>ontap-nas-economy.</code> <code>ontap-san</code> 和 `ontap-san-economy.`这些功能适用于 Cloud Volume ONTAP for AWS ， Cloud Volume ONTAP for Azure ， Cloud Volume ONTAP for GCP 。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="为适用于-ontap-的-amazon-fsx-选择后端驱动程序">为适用于 ONTAP 的 Amazon FSX 选择后端驱动程序</h3>
+<div class="paragraph">
+<p>借助适用于 ONTAP 的 Amazon FSX ，客户可以利用他们熟悉的 NetApp 功能，性能和管理功能，同时利用在 AWS 上存储数据的简便性，灵活性，安全性和可扩展性。FSX for ONTAP 支持 ONTAP 的许多文件系统功能和管理 API 。Cloud Volume ONTAP 的兼容驱动程序包括 <code>ontap-nas</code> ， <code>ontap-nas-economy.</code> <code>ontap-nas-flexgroup</code> ， <code>ontap-san</code> 和 <code>ontap-san-economy.</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="为-netapp-hcisolidfire-选择后端驱动程序">为 NetApp HCI/SolidFire 选择后端驱动程序</h3>
+<div class="paragraph">
+<p>与 NetApp HCI/SolidFire 平台结合使用的 <code>solidfire-san</code> 驱动程序可帮助管理员根据 QoS 限制为 Trident 配置 Element 后端。如果您希望设计后端，以便为 Trident 配置的卷设置特定的 QoS 限制，请在后端文件中使用 <code>type</code> 参数。管理员还可以使用 <code>limitVolumeSize</code> 参数限制可在存储上创建的卷大小。目前， <code>solidfire-san</code> 驱动程序不支持卷大小调整和卷复制等 Element 存储功能。这些操作应通过 Element Software Web UI 手动完成。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 22.2222%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1112%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">SolidFire 驱动程序</th>
+<th class="tableblock halign-left valign-top">快照</th>
+<th class="tableblock halign-left valign-top">克隆</th>
+<th class="tableblock halign-left valign-top">多连接</th>
+<th class="tableblock halign-left valign-top">CHAP</th>
+<th class="tableblock halign-left valign-top">QoS</th>
+<th class="tableblock halign-left valign-top">调整大小</th>
+<th class="tableblock halign-left valign-top">Replication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>solidfire-san</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 2[]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="verseblock">
+<pre class="content">脚注：是脚注： 1[] ：不由 Astra Trident 管理是脚注： 2[] ：支持原始块卷</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="为-azure-netapp-files-选择后端驱动程序">为 Azure NetApp Files 选择后端驱动程序</h3>
+<div class="paragraph">
+<p>Astra Trident 使用 <code>azure-netapp-files</code> 驱动程序来管理 <a href="https://azure.microsoft.com/en-us/services/netapp/" target="_blank" rel="noopener">"Azure NetApp Files"</a> 服务</p>
+</div>
+<div class="paragraph">
+<p>有关此驱动程序及其配置方法的详细信息，请参见 <a href="https://azure.microsoft.com/en-us/services/netapp/" target="_blank" rel="noopener">"适用于 Azure NetApp Files 的 Astra Trident 后端配置"</a>。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Azure NetApp Files 驱动程序</th>
+<th class="tableblock halign-left valign-top">快照</th>
+<th class="tableblock halign-left valign-top">克隆</th>
+<th class="tableblock halign-left valign-top">多连接</th>
+<th class="tableblock halign-left valign-top">QoS</th>
+<th class="tableblock halign-left valign-top">展开</th>
+<th class="tableblock halign-left valign-top">Replication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>azure-netapp-files</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="verseblock">
+<pre class="content">脚注：是脚注： 1[] ：不由 Astra Trident 管理</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="选择适用于采用-aws-的-cloud-volumes-service-的后端驱动程序">选择适用于采用 AWS 的 Cloud Volumes Service 的后端驱动程序</h3>
+<div class="paragraph">
+<p>Astra Trident 使用 <code>AWS-CVS</code> 驱动程序与 AWS 后端的 Cloud Volumes Service 链接。要在 Trident 上配置 AWS 后端，您需要在后端文件中指定 <code>apiRegion</code> ， <code>apiURL</code> ， <code>apiKey</code> 和 <code>secreKey</code> 。这些值可在 CVS Web 门户中的 Account settings/API access 中找到。支持的服务级别与 CVS 一致，包括 <code>standard</code> ， <code>Premium</code> 和 <code>Extreme</code> 。目前，要配置的最小卷大小为 100G 。未来版本的 CVS 可能会删除此限制。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">CVS for AWS 驱动程序</th>
+<th class="tableblock halign-left valign-top">快照</th>
+<th class="tableblock halign-left valign-top">克隆</th>
+<th class="tableblock halign-left valign-top">多连接</th>
+<th class="tableblock halign-left valign-top">QoS</th>
+<th class="tableblock halign-left valign-top">展开</th>
+<th class="tableblock halign-left valign-top">Replication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AWS-CVS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="verseblock">
+<pre class="content">脚注：是脚注： 1[] ：不由 Astra Trident 管理</pre>
+</div>
+<div class="paragraph">
+<p><code>AWS-CVS</code> 驱动程序使用虚拟存储池。虚拟存储池会对后端进行抽象化，从而使 Trident 决定卷的放置。管理员在 backend.json 文件中定义虚拟存储池。存储类使用标签标识虚拟存储池。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="为采用-gcp-的-cloud-volumes-service-选择后端驱动程序">为采用 GCP 的 Cloud Volumes Service 选择后端驱动程序</h3>
+<div class="paragraph">
+<p>Astra Trident 使用 <code>GCP-CVS</code> 驱动程序与 GCP 后端的 Cloud Volumes Service 链接。要在 Trident 上配置 GCP 后端，您需要在后端文件中指定 <code>projectNumber</code> ， <code>apiRegion</code> 和 <code>apiKey</code> 。项目编号可在 GCP Web 门户中找到，而 API 密钥必须从您在 GCP 上为 Cloud Volumes 设置 API 访问时创建的服务帐户专用密钥文件中获取。Astra Trident 可以在两个卷中创建 CVS 卷之一 <a href="https://cloud.google.com/architecture/partners/netapp-cloud-volumes/service-types" target="_blank" rel="noopener">"服务类型"</a>：</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>* CVS* ：基本 CVS 服务类型，可提供较高的区域可用性，但性能级别有限 / 中等。</p>
+</li>
+<li>
+<p>* CVS-Performance* ：经过性能优化的服务类型最适合重视性能的生产工作负载。从三个独特的服务级别中进行选择 <code>standard</code> ， <code>Premium</code> 和 <code>Extreme</code> 。目前， 100 GiB 是要配置的最小 CVS-Performance 卷大小，而 CVS 卷必须至少为 300 GiB 。未来版本的 CVS 可能会删除此限制。</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/caution.svg" alt="注意">
+</td>
+<td class="content">
+使用默认 CVS 服务类型 <code>storageClass=software</code> 部署后端时，用户 * 必须获得 * 对 GCP 上相关项目编号和项目 ID 的子 1TiB 卷功能的访问权限。这对于 Trident 配置低于 1TiB 的卷是必需的。否则，对于小于 600 GiB 的 PVC ，卷创建 * 将失败 * 。使用 &#8230;&#8203; <a href="https://docs.google.com/forms/d/e/1FAIpQLSc7_euiPtlV8bhsKWvwBl3gm9KUL4kOhD7lnbHC3LlQ7m02Dw/viewform" target="_blank" rel="noopener">"此表单"</a> 以访问低于 1 TiB 的卷。
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">适用于 GCP 的 CVS 驱动程序</th>
+<th class="tableblock halign-left valign-top">快照</th>
+<th class="tableblock halign-left valign-top">克隆</th>
+<th class="tableblock halign-left valign-top">多连接</th>
+<th class="tableblock halign-left valign-top">QoS</th>
+<th class="tableblock halign-left valign-top">展开</th>
+<th class="tableblock halign-left valign-top">Replication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>GCP-CVS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="verseblock">
+<pre class="content">脚注：是脚注： 1[] ：不由 Astra Trident 管理</pre>
+</div>
+<div class="paragraph">
+<p><code>GCP-CVS</code> 驱动程序使用虚拟存储池。虚拟存储池会对后端进行抽象化，从而使 Astra Trident 决定卷的放置。管理员在 backend.json 文件中定义虚拟存储池。存储类使用标签标识虚拟存储池。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="存储类设计">存储类设计</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>要创建 Kubernetes 存储类对象，需要配置并应用各个存储类。本节讨论如何为您的应用程序设计存储类。</p>
+</div>
+<div class="sect2">
+<h3 id="针对特定后端利用率的存储类设计">针对特定后端利用率的存储类设计</h3>
+<div class="paragraph">
+<p>可以在特定存储类对象中使用筛选功能来确定要将哪个存储池或一组池与该特定存储类结合使用。可以在存储类中设置三组筛选器： <code>storagePools</code> ， <code>addtionalStoragePools</code> 和 / 或 <code>excludeStoragePools</code> 。</p>
+</div>
+<div class="paragraph">
+<p><code>storagePools</code> 参数有助于将存储限制为与任何指定属性匹配的一组池。<code>addtionalStoragePools</code> 参数用于扩展 Astra Trident 用于配置的池集以及由属性和 <code>storagePools</code> 参数选择的池集。您可以单独使用参数，也可以同时使用这两个参数，以确保选择适当的存储池集。</p>
+</div>
+<div class="paragraph">
+<p><code>excludeStoragePools</code> 参数用于明确排除列出的一组与属性匹配的池。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="用于模拟-qos-策略的存储类设计">用于模拟 QoS 策略的存储类设计</h3>
+<div class="paragraph">
+<p>如果要设计存储类以模拟服务质量策略，请创建一个存储类，其中 <code>mmedia</code> attribute 为 <code>HDD</code> 或 <code>sSD</code> 。根据存储类中提及的 <code>mmedia</code> 属性， Trident 将选择提供 <code>HDD</code> 或 <code>sSD</code> 聚合的相应后端，以便与介质属性匹配，然后将卷配置定向到特定聚合。因此，我们可以创建一个存储类高级版，该高级版会将 <code>mmedia</code> attribute 设置为 <code>sSD</code> ，该高级版可归类为高级 QoS 策略。我们可以创建另一个存储类标准，该标准会将介质属性设置为 `HDD' ，并可归类为标准 QoS 策略。我们还可以使用存储类中的 ``IOPS' 属性将配置重定向到可定义为 QoS 策略的 Element 设备。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="存储类设计可根据特定功能利用后端">存储类设计，可根据特定功能利用后端</h3>
+<div class="paragraph">
+<p>存储类可设计为在启用了精简和厚配置，快照，克隆和加密等功能的特定后端直接配置卷。要指定要使用的存储，请创建存储类，以指定启用了所需功能的相应后端。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="虚拟存储池的存储类设计">虚拟存储池的存储类设计</h3>
+<div class="paragraph">
+<p>所有 Astra Trident 后端均可使用虚拟存储池。您可以使用 Astra Trident 提供的任何驱动程序为任何后端定义虚拟存储池。</p>
+</div>
+<div class="paragraph">
+<p>通过虚拟存储池，管理员可以在后端创建一个抽象级别，并可通过存储类进行引用，从而提高卷在后端的灵活性和效率。可以使用相同的服务类定义不同的后端。此外，可以在同一后端创建多个存储池，但其特征不同。如果为存储类配置了具有特定标签的选择器，则 Astra Trident 会选择与所有选择器标签匹配的后端来放置卷。如果存储类选择器标签与多个存储池匹配，则 Astra Trident 将选择其中一个存储池来配置卷。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="虚拟存储池设计">虚拟存储池设计</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>创建后端时，通常可以指定一组参数。管理员无法使用相同的存储凭据和一组不同的参数创建另一个后端。随着虚拟存储池的推出，此问题描述得以缓解。虚拟存储池是在后端和 Kubernetes 存储类之间引入的级别抽象，因此管理员可以定义参数以及标签，这些参数和标签可以通过 Kubernetes 存储类作为选择器进行引用，并且与后端无关。可以使用 Astra Trident 为所有受支持的 NetApp 后端定义虚拟存储池。该列表包括 SolidFire/NetApp HCI ， ONTAP ， AWS 和 GCP 上的 Cloud Volumes Service 以及 Azure NetApp Files 。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="注">
+</td>
+<td class="content">
+定义虚拟存储池时，建议不要尝试在后端定义中重新排列现有虚拟池的顺序。此外，建议不要编辑 / 修改现有虚拟池的属性，而是定义新的虚拟池。
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="设计虚拟存储池以模拟不同的服务级别-qos">设计虚拟存储池以模拟不同的服务级别 /QoS</h3>
+<div class="paragraph">
+<p>可以设计虚拟存储池来模拟服务类。使用 Cloud Volume Service for AWS 的虚拟池实施，让我们来了解一下如何设置不同的服务类。使用多个标签配置 AWS-CVS 后端，以表示不同的性能级别。将 <code>servicelevel</code> Aspect 设置为适当的性能级别，并在每个标签下添加其他所需的内容。现在，创建可映射到不同虚拟存储池的不同 Kubernetes 存储类。使用 <code>parameters.selector</code> 字段，每个 StorageClass 都会调用可用于托管卷的虚拟池。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="设计用于分配特定方面的虚拟池">设计用于分配特定方面的虚拟池</h3>
+<div class="paragraph">
+<p>可以从一个存储后端设计具有一组特定方面的多个虚拟存储池。为此，请为后端配置多个标签，并在每个标签下设置所需的方面。现在，使用 <code>parameters.selector</code> 字段创建不同的 Kubernetes 存储类，该字段将映射到不同的虚拟存储池。在后端配置的卷将在选定的虚拟存储池中定义相关方面。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="影响存储配置的-pvc-特征">影响存储配置的 PVC 特征</h3>
+<div class="paragraph">
+<p>创建 PVC 时，请求的存储类以外的某些参数可能会影响 Astra Trident 的配置决策过程。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="访问模式">访问模式</h3>
+<div class="paragraph">
+<p>通过 PVC 请求存储时，访问模式为必填字段之一。所需的模式可能会影响所选的托管存储请求的后端。</p>
+</div>
+<div class="paragraph">
+<p>Astra Trident 将尝试与根据下表指定的访问方法所使用的存储协议匹配。这独立于底层存储平台。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 18.1818%;">
+<col style="width: 27.2727%;">
+<col style="width: 27.2727%;">
+<col style="width: 27.2728%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">ReadWriteOnce</th>
+<th class="tableblock halign-left valign-top">ReadOnlyMany</th>
+<th class="tableblock halign-left valign-top">读取写入任何</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">iSCSI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是（原始块）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NFS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>如果在未配置 NFS 后端的情况下向 Trident 部署提交了 ReadWriteMany PVC 请求，则不会配置任何卷。因此，请求者应使用适合其应用程序的访问模式。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="卷操作">卷操作</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="修改永久性卷">修改永久性卷</h3>
+<div class="paragraph">
+<p>除了两个例外，永久性卷是 Kubernetes 中不可变的对象。创建后，可以修改回收策略和大小。但是，这并不会阻止在 Kubernetes 外部修改卷的某些方面。为了针对特定应用程序自定义卷，确保容量不会意外占用，或者出于任何原因将卷移动到其他存储控制器，这一点可能是理想的。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="注">
+</td>
+<td class="content">
+目前， Kubernetes 树中配置程序不支持对 NFS 或 iSCSI PV 执行卷大小调整操作。Astra Trident 支持扩展 NFS 和 iSCSI 卷。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>创建 PV 后，无法修改其连接详细信息。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="创建按需卷快照">创建按需卷快照</h3>
+<div class="paragraph">
+<p>Astra Trident 支持按需创建卷快照，并使用 CSI 框架从快照创建 PVC 。快照提供了一种维护数据时间点副本的便捷方法，并且生命周期独立于 Kubernetes 中的源 PV 。这些快照可用于克隆 PVC 。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="从快照创建卷">从快照创建卷</h3>
+<div class="paragraph">
+<p>Astra Trident 还支持从卷快照创建 PersistentVolumes 。为此，只需创建 PersistentVolumeClaim 并注明 <code>datasource</code> 作为创建卷所需的快照即可。Astra Trident 将通过创建包含快照上的数据的卷来处理此 PVC 。通过此功能，可以跨区域复制数据，创建测试环境，整体更换损坏或损坏的生产卷，或者检索特定文件和目录并将其传输到另一个连接的卷。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="移动集群中的卷">移动集群中的卷</h3>
+<div class="paragraph">
+<p>存储管理员可以在 ONTAP 集群中的聚合和控制器之间无中断地将卷移动到存储使用者。此操作不会影响 Astra Trident 或 Kubernetes 集群，只要目标聚合是 Astra Trident 所使用的 SVM 有权访问的聚合即可。重要的是，如果已将聚合新添加到 SVM ，则需要通过将后端重新添加到 Astra Trident 来刷新后端。这将触发 Astra Trident 对 SVM 重新进行清单配置，以便识别新聚合。</p>
+</div>
+<div class="paragraph">
+<p>但是， Astra Trident 不支持在后端之间自动移动卷。这包括在同一集群中的 SVM 之间，集群之间或不同存储平台上（即使该存储系统是连接到 Astra Trident 的存储系统也是如此）。</p>
+</div>
+<div class="paragraph">
+<p>如果将卷复制到其他位置，则可以使用卷导入功能将当前卷导入到 Astra Trident 中。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="展开卷">展开卷</h3>
+<div class="paragraph">
+<p>Astra Trident 支持调整 NFS 和 iSCSI PV 的大小。这样，用户就可以直接通过 Kubernetes 层调整其卷的大小。所有主要 NetApp 存储平台均可进行卷扩展，包括 ONTAP ， SolidFire/NetApp HCI 和 Cloud Volumes Service 后端。要稍后允许扩展，请在与卷关联的 StorageClass 中将 <code>allowVolumeExpansion</code> 设置为 <code>true</code> 。每当需要调整永久性卷的大小时，请在永久性卷声明中编辑 <code>sPec.resources.requests.storage</code> 标注以指定所需的卷大小。Trident 会自动调整存储集群上卷的大小。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="将现有卷导入到-kubernetes-中">将现有卷导入到 Kubernetes 中</h3>
+<div class="paragraph">
+<p>通过卷导入，可以将现有存储卷导入到 Kubernetes 环境中。目前， <code>ontap-nas</code> ， <code>ontap-nas-flexgroup</code> ， <code>solidfire-san</code> ， <code>azure-netapp-files</code> ， <code>AWS-CVS</code> ， 和 <code>GCP-CVS</code> 驱动程序。在将现有应用程序移植到 Kubernetes 或在灾难恢复场景中，此功能非常有用。</p>
+</div>
+<div class="paragraph">
+<p>使用 ONTAP 和 <code>solidfire-san</code> 驱动程序时，请使用命令 <code>tridentctl import volume &lt;backend-name&gt; &lt;volume-name&gt; -f /path/PVC.YAML</code> 将现有卷导入到要由 Astra Trident 管理的 Kubernetes 中。导入卷命令中使用的 PVC YAML 或 JSON 文件指向将 Astra Trident 标识为配置程序的存储类。使用 NetApp HCI/SolidFire 后端时，请确保卷名称是唯一的。如果卷名称重复，请将卷克隆为唯一名称，以便卷导入功能可以区分它们。</p>
+</div>
+<div class="paragraph">
+<p>如果使用了 <code>AWS-CVS</code> ， <code>azure-netapp-files</code> 或 <code>GCP-CVS</code> 驱动程序，请使用命令 <code>tridentctl import volume &lt;backend-name&gt; &lt;volume path&gt; -f /path/PVC.YAML</code> 将卷导入到要由 Astra Trident 管理的 Kubernetes 中。这样可以确保卷引用是唯一的。</p>
+</div>
+<div class="paragraph">
+<p>执行上述命令后， Astra Trident 将在后端找到卷并读取其大小。它将自动添加（并在必要时覆盖）已配置的 PVC 卷大小。然后， Astra Trident 会创建新的 PV ， Kubernetes 会将 PVC 绑定到 PV 。</p>
+</div>
+<div class="paragraph">
+<p>如果部署的容器需要特定的导入 PVC ，则容器将保持待定状态，直到通过卷导入过程绑定 PVC/PV 对为止。在绑定 PVC/PV 对后，如果没有其他问题，应启动容器。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="部署-openshift-服务">部署 OpenShift 服务</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift 增值集群服务为集群管理员和要托管的应用程序提供了重要功能。这些服务使用的存储可以使用节点本地资源进行配置，但这通常会限制服务的容量，性能，可恢复性和可持续性。利用企业级存储阵列为这些服务提供容量可以显著改善服务，但是，与所有应用程序一样， OpenShift 和存储管理员应密切合作，为每个服务确定最佳选项。应大量利用 Red Hat 文档来确定要求并确保满足规模估算和性能需求。</p>
+</div>
+<div class="sect2">
+<h3 id="注册表服务">注册表服务</h3>
+<div class="paragraph">
+<p>有关为注册表部署和管理存储的文档，请参见 <a href="https://netapp.io/" target="_blank" rel="noopener">"netapp.io"</a> 在中 。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="日志记录服务">日志记录服务</h3>
+<div class="paragraph">
+<p>与其他 OpenShift 服务一样，日志记录服务也是使用清单文件（也称为）提供的配置参数 Ansible 部署的主机，提供给攻略手册。其中包括两种安装方法：在初始 OpenShift 安装期间部署日志记录以及在安装 OpenShift 之后部署日志记录。</p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/caution.svg" alt="注意">
+</td>
+<td class="content">
+自 Red Hat OpenShift 3.9 版开始，官方文档出于对数据损坏的担忧，建议不要对日志记录服务使用 NFS 。这是基于 Red Hat 对其产品的测试得出的。ONTAP 的 NFS 服务器不存在这些问题，可以轻松地备份日志记录部署。最终，您可以选择日志记录服务的协议，只需了解这两种协议在使用 NetApp 平台时都能很好地发挥作用，如果您愿意，也没有理由避免使用 NFS 。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>如果您选择将 NFS 与日志记录服务结合使用，则需要将 Ansible 变量 <code>OpenShift_enable_unsupported _configurations</code> 设置为 <code>true</code> ，以防止安装程序失败。</p>
+</div>
+<div class="sect3">
+<h4 id="入门">入门</h4>
+<div class="paragraph">
+<p>可以选择为这两个应用程序以及 OpenShift 集群本身的核心操作部署日志记录服务。如果选择部署操作日志记录，则通过将变量 <code>OpenShift_logging_use_ops</code> 指定为 <code>true</code> ，将创建两个服务实例。控制操作日志记录实例的变量包含 "ops" ，而应用程序实例则不包含 "ops" 。</p>
+</div>
+<div class="paragraph">
+<p>要确保底层服务使用正确的存储，必须根据部署方法配置 Ansible 变量。让我们来了解一下每种部署方法的选项。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="注">
+</td>
+<td class="content">
+下表仅包含与存储配置相关的变量，因为这些变量与日志记录服务相关。您可以在中找到其他选项 <a href="https://docs.openshift.com/container-platform/3.11/install_config/aggregate_logging.html" target="_blank" rel="noopener">"RedHat OpenShift 日志记录文档"</a> 应根据您的部署情况查看，配置和使用。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>下表中的变量将导致 Ansible 攻略手册使用提供的详细信息为日志记录服务创建 PV 和 PVC 。与在 OpenShift 安装后使用组件安装攻略手册相比，此方法的灵活性明显降低，但是，如果您有可用的现有卷，则可以选择此方法。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">变量</th>
+<th class="tableblock halign-left valign-top">详细信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_storage_kind</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">设置为 <code>NFS</code> ，以使安装程序为日志记录服务创建 NFS PV 。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_storage_host</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NFS 主机的主机名或 IP 地址。此值应设置为虚拟机的数据 LIF 。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_storage_nfs_directory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NFS 导出的挂载路径。例如，如果卷接合为 ` /OpenShift_logging` ，则应使用该路径作为此变量。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_storage_volume_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">要创建的 PV 的名称，例如 <code>PV_ose_logs</code> 。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_storage_volume_size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NFS 导出的大小，例如 <code>100Gi</code> 。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>如果 OpenShift 集群已在运行，因此已部署和配置 Trident ，则安装程序可以使用动态配置来创建卷。需要配置以下变量。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">变量</th>
+<th class="tableblock halign-left valign-top">详细信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_es_vc_dynamic</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">设置为 true 可使用动态配置的卷。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_es_vc_storage_class_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">要在 PVC 中使用的存储类的名称。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_es_vc_size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">在 PVC 中请求的卷大小。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_es_vc_prefix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">日志记录服务使用的 PVC 的前缀。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_es_ops_vc_dynamic</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">设置为 <code>true</code> 可对操作日志记录实例使用动态配置的卷。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_es_ops_vc_storage_class_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">操作日志记录实例的存储类的名称。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_es_ops_vc_size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">操作实例的卷请求大小。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_logging_es_ops_vc_prefix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">操作实例 PVC 的前缀。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="部署日志记录堆栈">部署日志记录堆栈</h4>
+<div class="paragraph">
+<p>如果要在初始 OpenShift 安装过程中部署日志记录，则只需遵循标准部署过程即可。Ansible 将配置和部署所需的服务和 OpenShift 对象，以便在 Ansible 完成后立即提供此服务。</p>
+</div>
+<div class="paragraph">
+<p>但是，如果在初始安装后进行部署，则 Ansible 需要使用组件攻略手册。此过程可能会因 OpenShift 的不同版本而略有变化，因此请务必阅读并遵循 <a href="https://docs.openshift.com/container-platform/3.11/welcome/index.html" target="_blank" rel="noopener">"RedHat OpenShift Container Platform 3.11 文档"</a> 适用于您的版本。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="指标服务">指标服务</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>指标服务可为管理员提供有关 OpenShift 集群的状态，资源利用率和可用性的宝贵信息。此外， POD 自动调整功能也需要使用此功能，许多组织会将来自指标服务的数据用于其成本分摊和 / 或成本分摊应用程序。</p>
+</div>
+<div class="paragraph">
+<p>与日志记录服务和 OpenShift 作为一个整体一样， Ansible 用于部署指标服务。此外，与日志记录服务一样，可以在集群初始设置期间或使用组件安装方法运行之后部署指标服务。下表包含在为指标服务配置永久性存储时非常重要的变量。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="注">
+</td>
+<td class="content">
+下表仅包含与存储配置相关的变量，因为这些变量与指标服务相关。文档中还有许多其他选项，应根据您的部署情况进行查看，配置和使用。
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">变量</th>
+<th class="tableblock halign-left valign-top">详细信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_metrics_storage_kind</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">设置为 <code>NFS</code> ，以使安装程序为日志记录服务创建 NFS PV 。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_metrics_storage_host</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NFS 主机的主机名或 IP 地址。此值应设置为 SVM 的数据 LIF 。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_metrics_storage_nfs_directory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NFS 导出的挂载路径。例如，如果卷接合为 ` /OpenShift_metrics` ，则您将使用该路径作为此变量。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_metrics_storage_volume_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">要创建的 PV 的名称，例如 <code>PV_ose_metrics</code> 。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_metrics_storage_volume_size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NFS 导出的大小，例如 <code>100Gi</code> 。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>如果 OpenShift 集群已在运行，因此已部署和配置 Trident ，则安装程序可以使用动态配置来创建卷。需要配置以下变量。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">变量</th>
+<th class="tableblock halign-left valign-top">详细信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_metrics_Cassandra_vc_prefix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">用于衡量指标 PVC 的前缀。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_metrics_Cassandra_vc_size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">要请求的卷的大小。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_metrics_Cassandra_storage_type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">要用于度量指标的存储类型，必须将此类型设置为动态， Ansible 才能创建具有相应存储类的 PVC 。</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>OpenShift_metrics_cassanda_vc_storage_class_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">要使用的存储类的名称。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="部署指标服务">部署指标服务</h3>
+<div class="paragraph">
+<p>使用在主机 / 清单文件中定义的适当 Ansible 变量，使用 Ansible 部署服务。如果您在 OpenShift 安装时进行部署，则系统将自动创建和使用 PV 。如果您使用组件攻略手册进行部署，则在 OpenShift 安装之后， Ansible 将创建所需的任何 PVC ，并在 Astra Trident 为其配置存储后部署该服务。</p>
+</div>
+<div class="paragraph">
+<p>上述变量以及部署过程可能会随 OpenShift 的每个版本而发生变化。确保您查看并遵循 <a href="https://docs.openshift.com/container-platform/3.11/install_config/cluster_metrics.html" target="_blank" rel="noopener">"RedHat 的 OpenShift 部署指南"</a> 为您的版本配置，以便为您的环境进行配置。</p>
+</div>
+</div>
+</div>
+</div>
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  
+  <!-- Start Page Toolbar -->
+  <div class="page-nav-toolbar">
+    <div id="version-dropdown"></div>
+    <div class="page-nav-contribute"  >
+      <a target="_blank" href="https://github.com/NetAppDocs/trident/issues/new?body=Page%3A%20[集成 Astra Trident](https://docs.netapp.com/zh-cn/trident/trident-reco/integrate-trident.html)" class="page-nav-contribute-link" role="button"><img src="/zh-cn/trident/images/discuss-sm.svg" class="github-icon" />请求文档变更</a>
+      <a target="_blank" href="https://github.com/NetAppDocs/trident/blob/main/trident-reco/integrate-trident.adoc" class="page-nav-contribute-link" role="button"><img src="/zh-cn/trident/images/edit-sm.svg" class="github-icon" />在 GitHub 上编辑</a>
+      <a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  ><img src="/zh-cn/trident/images/article-sm.svg" class="github-icon" />提供者指南</a>
+    </div>
+    <div class="page-nav-container">
+      <nav class="page-nav-fixed">
+        <div class="page-nav-title">在此页面上</div>
+        <div class="page-nav-links">
+          <ul class="page-nav-inner" id="page-menu"></ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  
+  <div style="clear: both"></div><!-- Main needs to have height -->
+</div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+      <div class="n-footer__bottom-left">
+
+        <div class="n-footer__copyright">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+            <a href="https://www.netapp.com/us/legal/copyright.aspx">© 2022 NetApp, Inc.</a>
+            </li>
+
+</ul>
+</div>
+<div class="n-footer__social-links">
+<ul class="n-footer__social-link-list">
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-blog" href="https://blog.netapp.com" target="_blank" title="blog" alt="blog">
+<span class="n-footer__social-link-text">blog</span>
+<svg class="n-icon-blog n-footer__social-link-icon" aria-labelledby="title">
+  <title>blog@</title>
+  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/trident/common/svg/sprite.svg#blog"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-community" href="https://community.netapp.com/" target="_blank" title="community" alt="community">
+<span class="n-footer__social-link-text">community</span>
+<svg class="n-icon-community n-footer__social-link-icon" aria-labelledby="title">
+<title>community@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/trident/common/svg/sprite.svg#comments"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-twitter" href="https://twitter.com/netapp" target="_blank" title="twitter" alt="twitter">
+<span class="n-footer__social-link-text">twitter</span>
+<svg class="n-icon-twitter n-footer__social-link-icon" aria-labelledby="title">
+<title>twitter@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/trident/common/svg/sprite.svg#twitter"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-facebook" href="https://www.facebook.com/NetApp" target="_blank" title="facebook" alt="facebook">
+<span class="n-footer__social-link-text">facebook</span>
+<svg class="n-icon-facebook n-footer__social-link-icon" aria-labelledby="title">
+<title>facebook@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/trident/common/svg/sprite.svg#facebook"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-linkedin" href="https://www.linkedin.com/company/netapp" target="_blank" title="linkedin" alt="linkedin">
+<span class="n-footer__social-link-text">linkedin</span>
+<svg class="n-icon-linkedin n-footer__social-link-icon" aria-labelledby="title">
+<title>linkedin@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/trident/common/svg/sprite.svg#linkedin"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-youtube" href="https://www.youtube.com/user/NetAppTV" target="_blank" title="youtube" alt="youtube">
+<span class="n-footer__social-link-text">youtube</span>
+<svg class="n-icon-youtube n-footer__social-link-icon" aria-labelledby="title">
+<title>youtube@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/trident/common/svg/sprite.svg#youtube"></use>
+</svg>
+
+</a>
+</li>
+<li class="n-footer__social-link-list-item">
+<a class="n-footer__social-link" data-ntap-social="follow-slideshare" href="https://www.slideshare.net/NetApp" target="_blank" title="slideshare" alt="slideshare">
+<span class="n-footer__social-link-text">slideshare</span>
+<svg class="n-icon-slideshare n-footer__social-link-icon" aria-labelledby="title">
+<title>slideshare@</title>
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/zh-cn/trident/common/svg/sprite.svg#slideshare"></use>
+</svg>
+
+</a>
+</li>
+</ul>
+</div>
+
+</div>
+<div class="n-footer__bottom-right">
+  <p class="n-footer__fine-print">想就我们的网站提供反馈?<a target="_self" href="javascript:netapp_mailto()" class="n-footer__copyright">请告诉我们</a>
+  <a href="https://docs.netapp.com/zh-cn/announcements/" class="n-footer__copyright">通知</a>
+  </p>
+</div>
+</div>
+</div>
+</footer>
+
+      </div>
+
+      <!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/zh-cn/trident/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/zh-cn/trident/js/prism.js'></script>
+      <script type="text/javascript" src='/zh-cn/trident/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/zh-cn/trident/js/www-ntap.js'></script>
+    <script src='/zh-cn/trident/js/tabbed-blocks.js'></script>
+  </body>
+
+  
+</html>
