@@ -536,8 +536,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -889,8 +887,6 @@
       </a>
       <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
         配置 ANF 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
-        配置 ADS 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
         为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
@@ -1064,7 +1060,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-01-31 21:09:06 +0000">01/31/2022</time>
+    <time datetime="2022-01-31 22:45:24 +0000">01/31/2022</time>
     
   
 
@@ -1117,7 +1113,7 @@
 <p>Mirantis Kubernetes Engine 3.4</p>
 </li>
 <li>
-<p>OpenShift 4.7 ， 4.8 ， 4.9 （最新版本 4.9 ）</p>
+<p>OpenShift 4.4 ， 4.5 ， 4.6 （ 4.6.8+ ）， 4.7 ， 4.8 （最新的 4.8 ）</p>
 </li>
 </ul>
 </div>
@@ -1130,7 +1126,7 @@
 <p>Kubernetes 1.17 或更高版本（最新版本： 1.22 ）</p>
 </li>
 <li>
-<p>OpenShift 4.7 ， 4.8 ， 4.9 （最新版本 4.9 ）</p>
+<p>OpenShift 4.4 ， 4.5 ， 4.6 （ 4.6.8+ ）， 4.7 ， 4.8 （最新的 4.8 ）</p>
 </li>
 </ul>
 </div>
@@ -1164,9 +1160,6 @@
 </li>
 <li>
 <p>Azure NetApp Files</p>
-</li>
-<li>
-<p>Astra 数据存储</p>
 </li>
 <li>
 <p>Cloud Volumes ONTAP</p>
@@ -1296,13 +1289,13 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="已测试主机操作系统">已测试主机操作系统</h2>
+<h2 id="支持的主机操作系统">支持的主机操作系统</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>默认情况下， Astra Trident 在容器中运行，因此将在任何 Linux 工作程序上运行。但是，根据您使用的后端，这些员工需要能够使用标准 NFS 客户端或 iSCSI 启动程序挂载 Astra Trident 提供的卷。</p>
+<p>默认情况下， Astra Trident 本身在容器中运行，因此它将在任何 Linux 工作程序上运行。但是，根据您使用的后端，这些员工需要能够使用标准 NFS 客户端或 iSCSI 启动程序挂载 Astra Trident 提供的卷。</p>
 </div>
 <div class="paragraph">
-<p>虽然 Astra Trident 不会正式 " 支持 " 特定的操作系统，但已知以下 Linux 版本可以正常运行：</p>
+<p>这些是已知有效的 Linux 分发版：</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1361,28 +1354,28 @@
 <td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p>NetApp/trident ： 21.10.0</p>
+<p>NetApp/trident ： 21.07.0</p>
 </li>
 <li>
-<p>netapp/trident autosupport ： 21.10</p>
+<p>netapp/trident 操作符： 21.07.0</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v2.2.2</p>
+<p>netapp/trident autosupport ： 21.01</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v2.1.1</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.1.0</p>
+</li>
+<li>
+<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.1.0</p>
 </li>
 <li>
 <p>K8s.gcr.io/SIG-storage/CsI-snapshotter ： v3.0.3</p>
 </li>
 <li>
-<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.3.0</p>
-</li>
-<li>
-<p>netapp/trident 操作符： 21.10.0 （可选）</p>
+<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.1.0</p>
 </li>
 </ul>
 </div></div></td>
@@ -1392,28 +1385,22 @@
 <td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p>NetApp/trident ： 21.10.0</p>
+<p>NetApp/trident ： 21.07.0</p>
 </li>
 <li>
-<p>netapp/trident autosupport ： 21.10</p>
+<p>netapp/trident 操作符： 21.07.0</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v2.2.2</p>
+<p>netapp/trident autosupport ： 21.01</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v2.1.1</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.1.0</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-snapshotter ： v3.0.3</p>
-</li>
-<li>
-<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.3.0</p>
-</li>
-<li>
-<p>netapp/trident 操作符： 21.10.0 （可选）</p>
+<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.1.0</p>
 </li>
 </ul>
 </div></div></td>
@@ -1423,28 +1410,28 @@
 <td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p>NetApp/trident ： 21.10.0</p>
+<p>NetApp/trident ： 21.07.0</p>
 </li>
 <li>
-<p>netapp/trident autosupport ： 21.10</p>
+<p>netapp/trident 操作符： 21.07.0</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v2.2.2</p>
+<p>netapp/trident autosupport ： 21.01</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v2.1.1</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.1.0</p>
+</li>
+<li>
+<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.1.0</p>
 </li>
 <li>
 <p>K8s.gcr.io/SIG-storage/CsI-snapshotter ： v3.0.3</p>
 </li>
 <li>
-<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.3.0</p>
-</li>
-<li>
-<p>netapp/trident 操作符： 21.10.0 （可选）</p>
+<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.1.0</p>
 </li>
 </ul>
 </div></div></td>
@@ -1454,28 +1441,28 @@
 <td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p>NetApp/trident ： 21.10.0</p>
+<p>NetApp/trident ： 21.07.0</p>
 </li>
 <li>
-<p>netapp/trident autosupport ： 21.10</p>
+<p>netapp/trident 操作符： 21.07.0</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v3.0.0</p>
+<p>netapp/trident autosupport ： 21.01</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v2.1.1</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.1.0</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-snapshotter ： v3.0.3</p>
+<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.1.0</p>
 </li>
 <li>
-<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-snapshotter ： v4.1.1</p>
 </li>
 <li>
-<p>netapp/trident 操作符： 21.10.0 （可选）</p>
+<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.1.0</p>
 </li>
 </ul>
 </div></div></td>
@@ -1485,59 +1472,28 @@
 <td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
 <ul>
 <li>
-<p>NetApp/trident ： 21.10.0</p>
+<p>NetApp/trident ： 21.07.0</p>
 </li>
 <li>
-<p>netapp/trident autosupport ： 21.10</p>
+<p>netapp/trident 操作符： 21.07.0</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v3.0.0</p>
+<p>netapp/trident autosupport ： 21.01</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v2.1.1</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.1.0</p>
 </li>
 <li>
-<p>K8s.gcr.io/SIG-storage/CsI-snapshotter ： v3.0.3</p>
+<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.1.0</p>
 </li>
 <li>
-<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.3.0</p>
+<p>K8s.gcr.io/SIG-storage/CsI-snapshotter ： v4.1.1</p>
 </li>
 <li>
-<p>netapp/trident 操作符： 21.10.0 （可选）</p>
-</li>
-</ul>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">v1.22.0</p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
-<ul>
-<li>
-<p>NetApp/trident ： 21.10.0</p>
-</li>
-<li>
-<p>netapp/trident autosupport ： 21.10</p>
-</li>
-<li>
-<p>K8s.gcr.io/SIG-storage/CsI-provisioner ： v3.0.0</p>
-</li>
-<li>
-<p>K8s.gcr.io/SIG-storage/CsI-attacher ： v3.3.0</p>
-</li>
-<li>
-<p>K8s.gcr.io/SIG-storage/CsI-resizer ： v1.3.0</p>
-</li>
-<li>
-<p>K8s.gcr.io/SIG-storage/CsI-snapshotter ： v3.0.3</p>
-</li>
-<li>
-<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.3.0</p>
-</li>
-<li>
-<p>netapp/trident 操作符： 21.10.0 （可选）</p>
+<p>k8s.gcr.io/sig-storage/CsI-node-driver-registry:v2.1.0</p>
 </li>
 </ul>
 </div></div></td>

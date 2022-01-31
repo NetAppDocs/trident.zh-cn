@@ -536,8 +536,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -889,8 +887,6 @@
       </a>
       <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
         配置 ANF 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
-        配置 ADS 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
         为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
@@ -1064,11 +1060,19 @@
 <p class="page-details">
   
     
-    <time datetime="2022-01-31 21:09:06 +0000">01/31/2022</time>
+    <time datetime="2022-01-31 22:45:24 +0000">01/31/2022</time>
     
   
 
 <span>提供者
+  <a target="_blank" href="https://github.com/juliantap">
+    <img  class="avatar avatar-small"
+          alt="juliantap"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/83591660?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
 </span>
 
 
@@ -1170,6 +1174,26 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">从内部注册表中提取映像的机密信息</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>控制器插件节点选择器</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">运行 Trident 控制器 CSI 插件的 Pod 的其他节点选择器。格式与 pod.spec.nodeSelector 相同。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无默认值；可选</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>控制器插件公差</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">覆盖运行 Trident 控制器 CSI 插件的 Pod 的容错。格式与 po.spec.Tolerations 相同。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无默认值；可选</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nodePluginNodeSelector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">运行 Trident Node CSI 插件的 Pod 的其他节点选择器。格式与 pod.spec.nodeSelector 相同。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无默认值；可选</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nodePluginTholeations</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">覆盖运行 Trident Node CSI 插件的 Pod 的容错。格式与 po.spec.Tolerations 相同。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无默认值；可选</p></td>
+</tr>
 </tbody>
 </table>
 <div class="admonitionblock important">
@@ -1192,6 +1216,18 @@
 </td>
 <td class="content">
 自动员工节点准备是一项 * 测试版功能 * ，仅用于非生产环境。
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/tip.svg" alt="提示">
+</td>
+<td class="content">
+有关格式化 POD 参数的详细信息，请参见 <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/" target="_blank" rel="noopener">"将 Pod 分配给节点"</a>。
 </td>
 </tr>
 </table>

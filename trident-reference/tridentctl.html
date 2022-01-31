@@ -527,8 +527,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -889,8 +887,6 @@
       </a>
       <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
         配置 ANF 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
-        配置 ADS 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
         为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
@@ -1064,7 +1060,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-01-31 21:09:06 +0000">01/31/2022</time>
+    <time datetime="2022-01-31 22:45:24 +0000">01/31/2022</time>
     
   
 
@@ -1100,7 +1096,7 @@
 <p>有关使用情况信息，请运行 <code>tridentctl -help</code> 。</p>
 </div>
 <div class="paragraph">
-<p>可用的命令和全局选项包括：</p>
+<p>可用的命令和全局选项如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1175,6 +1171,18 @@
 <p><code>` -s ， -server string</code> ： Astra Trident REST 接口的地址 / 端口。</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/caution.svg" alt="注意">
+</td>
+<td class="content">
+可以将 Trident REST 接口配置为仅以 127.0.0.1 （对于 IPv4 ）或（：： 1 ）（对于 IPv6 ）侦听和提供服务。
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>

@@ -527,8 +527,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -889,8 +887,6 @@
       </a>
       <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
         配置 ANF 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
-        配置 ADS 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
         为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
@@ -1064,7 +1060,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-01-31 21:09:06 +0000">01/31/2022</time>
+    <time datetime="2022-01-31 22:45:24 +0000">01/31/2022</time>
     
   
 
@@ -1077,6 +1073,14 @@
           style="border-radius: 50%;"/>
   </a>
   
+  <a target="_blank" href="https://github.com/adkerr">
+    <img  class="avatar avatar-small"
+          alt="adkerr"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/6106766?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
 </span>
 
 
@@ -1086,7 +1090,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>从 Astra Trident 的 20.01 版开始，您可以在 Kubernetes 层创建 PV 快照。您可以使用这些快照维护由 Astra Trident 创建的卷的时间点副本，并计划创建其他卷（克隆）。卷快照受 <code>ontap-nas</code> ， <code>ontap-san</code> ， <code>ontap-san-economics</code> ， <code>solidfire-san</code> ， <code>AWS-CVS</code> 支持。 <code>GCP-CVS</code> 和 <code>azure-netapp-files</code> 驱动程序。</p>
+<p>从 Astra Trident 的 20.01 版开始，您可以在 Kubernetes 层创建 PV 快照。您可以使用这些快照维护由 Astra Trident 创建的卷的时间点副本，并计划创建其他卷（克隆）。卷快照受 <code>ontap-nas</code> ， <code>ontap-nas-flexgroup</code> ， <code>ontap-san</code> ， <code>ontap-san-economics</code> ， <code>solidfire-san</code> 支持。 <code>AWS-CVS</code> ， <code>GCP-CVS</code> 和 <code>azure-netapp-files</code> 驱动程序。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1128,26 +1132,14 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snaps
 </li>
 <li>
 <p>在所需命名空间中创建 snapshot-controller 。编辑以下 YAML 清单以修改命名空间。</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="/us-en/trident/images/note.svg" alt="注">
-</td>
-<td class="content">
-如果在 GKE- 环境中设置按需卷快照，请勿创建快照控制器。GKE- 使用内置的隐藏快照控制器。
-</td>
-</tr>
-</table>
-</div>
-</li>
-</ol>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre>kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-3.0/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/release-3.0/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml</pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="admonitionblock tip">
 <table>

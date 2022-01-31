@@ -19,7 +19,7 @@
   <meta http-equiv="nss-subtype" content="User Guide"/>
   
   <meta name="description" content="NetApp 不断改进和完善其产品和服务。以下是最新版 Astra Trident 中的一些最新功能，增强功能和错误修复。">
-  <meta name="keywords" content=" what's new, new features, enhancements, known issues, resolved issues, troubleshooting">
+  <meta name="keywords" content=" what\'s new, new features, enhancements, known issues, resolved issues, troubleshooting">
   
   
 
@@ -536,8 +536,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -889,8 +887,6 @@
       </a>
       <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
         配置 ANF 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
-        配置 ADS 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
         为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
@@ -1064,7 +1060,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-01-31 21:09:06 +0000">01/31/2022</time>
+    <time datetime="2022-01-31 22:45:24 +0000">01/31/2022</time>
     
   
 
@@ -1103,49 +1099,18 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="21-10-1-中的新增功能">21.10.1 中的新增功能</h2>
+<h2 id="21-10-中的新增功能">21.10 中的新增功能</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>NetApp 不断改进和完善其产品和服务。以下是 Astra Trident 中的一些最新功能。</p>
+<p>NetApp 不断改进和完善其产品和服务。以下是 Astra Trident 的一些最新特性和功能。</p>
 </div>
 <div class="paragraph">
 <p>对于先前版本，请参见 <a href="https://docs.netapp.com/us-en/trident/earlier-versions.html">"文档版本更新版"</a>。</p>
 </div>
 <div class="sect2">
-<h3 id="自-astra-trident-21-10-0-以来的变化">自 Astra Trident 21.10.0 以来的变化</h3>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<img src="/us-en/trident/images/warning.svg" alt="警告">
-</td>
-<td class="content">
-v21.10.0 版本具有一个问题描述，在删除节点并将其重新添加回 Kubernetes 集群时， Trident 控制器可以将其置于 CrashLoopBackOff 状态。此问题描述在 v21.10.1 中得到了修复（ GitHub 问题描述 669 ）。
-</td>
-</tr>
-</table>
-</div>
-<div class="sect3">
-<h4 id="修复">修复</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>修复了在 GCP CVS 后端导入卷导致导入失败的潜在争用情况。</p>
-</li>
-<li>
-<p>修复了一个问题描述，在删除节点并将其重新添加回 Kubernetes 集群时，可能会将 Trident 控制器置于 CrashLoopBackOff 状态（ GitHub 问题描述 669 ）。</p>
-</li>
-<li>
-<p>修复了在未指定 SVM 名称的情况下不再发现 SVM 的问题描述（ GitHub 问题描述 612 ）。</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
 <h3 id="自-astra-trident-21-07-以来发生的变化">自 Astra Trident 21.07 以来发生的变化</h3>
 <div class="sect3">
-<h4 id="修复-2">修复</h4>
+<h4 id="修复">修复</h4>
 <div class="ulist">
 <ul>
 <li>

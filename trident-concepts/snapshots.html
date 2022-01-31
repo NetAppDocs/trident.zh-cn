@@ -536,8 +536,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -889,8 +887,6 @@
       </a>
       <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
         配置 ANF 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
-        配置 ADS 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
         为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
@@ -1064,11 +1060,19 @@
 <p class="page-details">
   
     
-    <time datetime="2022-01-31 21:09:06 +0000">01/31/2022</time>
+    <time datetime="2022-01-31 22:45:24 +0000">01/31/2022</time>
     
   
 
 <span>提供者
+  <a target="_blank" href="https://github.com/adkerr">
+    <img  class="avatar avatar-small"
+          alt="adkerr"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/6106766?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
 </span>
 
 
@@ -1082,6 +1086,9 @@
 <ul>
 <li>
 <p>对于 <code>ontap-nas</code> ， <code>ontap-san</code> ， <code>AWS-CVS</code> ， <code>GCP-CVS</code> 和 <code>azure-netapp-files</code> 驱动程序， 每个永久性卷（ PV ）都会映射到一个 FlexVol 。因此，卷快照会创建为 NetApp 快照。与竞争对手的 Snapshot 技术相比， NetApp 的 Snapshot 技术可提供更高的稳定性，可扩展性，可恢复性和性能。无论是在创建 Snapshot 副本所需的时间还是在存储空间中，这些 Snapshot 副本都极为高效。</p>
+</li>
+<li>
+<p>对于 <code>ontap-nas-flexgroup</code> 驱动程序，每个永久性卷（ PV ）都会映射到一个 FlexGroup 。因此，卷快照会创建为 NetApp FlexGroup 快照。与竞争对手的 Snapshot 技术相比， NetApp 的 Snapshot 技术可提供更高的稳定性，可扩展性，可恢复性和性能。无论是在创建 Snapshot 副本所需的时间还是在存储空间中，这些 Snapshot 副本都极为高效。</p>
 </li>
 <li>
 <p>对于 <code>ontap-san-economy-经济</code> 驱动程序， PV 会映射到在共享 FlexVol 上创建的 LUN 。可以通过对关联 LUN 执行 FlexClones 来实现 PV 的卷快照。借助 ONTAP 的 FlexClone 技术，即使是最大的数据集，也可以几乎即时创建副本。副本与其父级共享数据块，除了元数据所需的存储之外，不会占用任何存储。</p>
