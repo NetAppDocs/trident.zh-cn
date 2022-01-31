@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head class="at-element-marker">
-  <title>接下来是什么？</title>
+  <title>下一步是什么？</title>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
   <meta http-equiv="language" content="en">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="接下来是什么？" />
+  <meta property="og:title" content="下一步是什么？" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://docs.netapp.com/zh-cn/trident/trident-get-started/kubernetes-postdeployment.html" />
 	<meta property="og:description" content="部署 Astra Trident 后，您可以继续创建后端，创建存储类，配置卷以及将卷挂载到 Pod 中。" />
@@ -286,6 +286,8 @@
                   <a href="https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html" class="n-menu__header-text"><span translate="no" class="notranslate">English</span></a>
                 </li><li class="n-menu__list-item n-menu__list-item--level-1">
                   <a href="https://docs.netapp.com/ja-jp/trident/trident-get-started/kubernetes-postdeployment.html" class="n-menu__header-text"><span translate="no" class="notranslate">日本語</span></a>
+                </li><li class="n-menu__list-item n-menu__list-item--level-1">
+                  <a href="https://docs.netapp.com/ko-kr/trident/trident-get-started/kubernetes-postdeployment.html" class="n-menu__header-text"><span translate="no" class="notranslate">한국어</span></a>
                 </li></ul>
             </li>
           </ul>
@@ -331,7 +333,7 @@
 <div class="ie-main">
   <!-- Sidebar Column -->
   
-  <div class="col-md-3" >
+  <div class="col-md-3" id="sidebar-height">
       <div class="n-pdf-header">
   <a id="toggleButtonPdf" class="n-pdf-button" type="button">
     <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>可用的 PDF<span>
@@ -1000,6 +1002,13 @@
         法律声明
       </a></li></ul>
 </div>
+<script>
+  window.onscroll = () => {
+    const value = -40 - (document.body.scrollHeight - (window.innerHeight + document.scrollingElement.scrollTop));
+    
+    document.getElementById("sidebar-height").style.bottom = Math.max(0,value) + "px";
+};
+</script>
 <!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
 <script>$("li.active").parents('li').toggleClass("active");</script>
 
@@ -1025,7 +1034,7 @@
           <a href="/zh-cn/trident/">Astra&nbsp;Trident</a>
         </li>
         <li class="n-breadcrumb__list-item">
-          接下来是什么？
+          下一步是什么？
         </li>
       </ul>
     </div>
@@ -1048,14 +1057,14 @@
     </div>
   </span>
 </div><div class="n-doc__component-detail-heading-wrap">
-  <h1 class="n-doc__component-detail-heading">接下来是什么？</h1>
+  <h1 class="n-doc__component-detail-heading">下一步是什么？</h1>
 </div>
 
 
 <p class="page-details">
   
     
-    <time datetime="2022-01-17 15:16:44 +0000">01/17/2022</time>
+    <time datetime="2022-01-31 14:50:54 +0000">01/31/2022</time>
     
   
 
@@ -1287,7 +1296,7 @@ kubectl delete pod task-pv-pod</pre>
   <div class="page-nav-toolbar">
     <div id="version-dropdown"></div>
     <div class="page-nav-contribute"  >
-      <a target="_blank" href="https://github.com/NetAppDocs/trident/issues/new?body=Page%3A%20[接下来是什么？](https://docs.netapp.com/zh-cn/trident/trident-get-started/kubernetes-postdeployment.html)" class="page-nav-contribute-link" role="button"><img src="/zh-cn/trident/images/discuss-sm.svg" class="github-icon" />请求文档变更</a>
+      <a target="_blank" href="https://github.com/NetAppDocs/trident/issues/new?body=Page%3A%20[下一步是什么？](https://docs.netapp.com/zh-cn/trident/trident-get-started/kubernetes-postdeployment.html)" class="page-nav-contribute-link" role="button"><img src="/zh-cn/trident/images/discuss-sm.svg" class="github-icon" />请求文档变更</a>
       <a target="_blank" href="https://github.com/NetAppDocs/trident/blob/main/trident-get-started/kubernetes-postdeployment.adoc" class="page-nav-contribute-link" role="button"><img src="/zh-cn/trident/images/edit-sm.svg" class="github-icon" />在 GitHub 上编辑</a>
       <a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  ><img src="/zh-cn/trident/images/article-sm.svg" class="github-icon" />提供者指南</a>
     </div>
