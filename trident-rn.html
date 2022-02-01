@@ -342,7 +342,7 @@
 </div>
 <div class="n-pdf-body-container">
   <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
-        <a target="_blank" href="/zh-cn/trident/pdfs/fullsite-sidebar/Astra_Trident_21_10_文档.pdf" >
+        <a target="_blank" href="/zh-cn/trident/pdfs/fullsite-sidebar/Astra_Trident_22_01_文档.pdf" >
           <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>此文档站点的 PDF</a>
 
 
@@ -527,6 +527,8 @@
             配置后端
           </a>
           
+
+
 
 
 
@@ -887,6 +889,8 @@
       </a>
       <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
         配置 ANF 后端
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
+        配置 ADS 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
         为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
@@ -1060,7 +1064,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-01-31 22:45:24 +0000">01/31/2022</time>
+    <time datetime="2022-02-01 01:00:12 +0000">02/01/2022</time>
     
   
 
@@ -1099,18 +1103,96 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="21-10-中的新增功能">21.10 中的新增功能</h2>
+<h2 id="22-01-0-中的新增功能">22.01.0 中的新增功能</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>NetApp 不断改进和完善其产品和服务。以下是 Astra Trident 的一些最新特性和功能。</p>
+<p>NetApp 不断改进和完善其产品和服务。以下是 Astra Trident 中的一些最新功能。对于先前版本，请参见 <a href="https://docs.netapp.com/us-en/trident/earlier-versions.html">"文档版本更新版"</a>。</p>
 </div>
-<div class="paragraph">
-<p>对于先前版本，请参见 <a href="https://docs.netapp.com/us-en/trident/earlier-versions.html">"文档版本更新版"</a>。</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/important.svg" alt="重要">
+</td>
+<td class="content">
+如果要从先前的任何 Trident 版本升级并使用 Azure NetApp Files ，则 <code>location</code> config 参数现在是一个必填字段。
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
-<h3 id="自-astra-trident-21-07-以来发生的变化">自 Astra Trident 21.07 以来发生的变化</h3>
+<h3 id="修复">修复</h3>
+<div class="paragraph">
+<p>固定的 ANF 驱动程序，允许重复的资源名称并将操作限制在一个位置。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="增强功能">增强功能</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Kubernetes 增强功能：</p>
+<div class="ulist">
+<ul>
+<li>
+<p>增加了对 Kubernetes 1.23 的支持。</p>
+</li>
+<li>
+<p>通过 Trident 操作员或 Helm 安装 Trident Pod 时，为其添加计划选项。（<a href="https://github.com/NetApp/trident/issues/651" target="_blank" rel="noopener">"GitHub 问题描述 #651"</a>）</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>在 GCP 驱动程序中允许跨区域卷。（<a href="https://github.com/NetApp/trident/issues/633" target="_blank" rel="noopener">"GitHub 问题描述 #633"</a>）</p>
+</li>
+<li>
+<p>为 ANF 卷增加了对 "unixPermissions" 选项的支持。（<a href="https://github.com/NetApp/trident/issues/666" target="_blank" rel="noopener">"GitHub 问题描述 #666"</a>）</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="已弃用">已弃用</h3>
+<div class="paragraph">
+<p>Trident REST 接口只能在 127.0.0.1 或 [ ：：： 1 ）地址处侦听和提供服务</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="astra-trident-21-10-1-中的变更">Astra Trident 21.10.1 中的变更</h3>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/warning.svg" alt="警告">
+</td>
+<td class="content">
+v21.10.0 版本具有一个问题描述，在删除节点并将其重新添加回 Kubernetes 集群时， Trident 控制器可以将其置于 CrashLoopBackOff 状态。此问题描述在 v21.10.1 中得到了修复（ GitHub 问题描述 669 ）。
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
-<h4 id="修复">修复</h4>
+<h4 id="修复-2">修复</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>修复了在 GCP CVS 后端导入卷导致导入失败的潜在争用情况。</p>
+</li>
+<li>
+<p>修复了一个问题描述，在删除节点并将其重新添加回 Kubernetes 集群时，可能会将 Trident 控制器置于 CrashLoopBackOff 状态（ GitHub 问题描述 669 ）。</p>
+</li>
+<li>
+<p>修复了在未指定 SVM 名称的情况下不再发现 SVM 的问题描述（ GitHub 问题描述 612 ）。</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="21-10-0-中的更改自-astra-trident-21-07-以来">21.10.0 中的更改（自 Astra Trident 21.07 以来）</h3>
+<div class="sect3">
+<h4 id="修复-3">修复</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1154,7 +1236,7 @@
 </div>
 </div>
 <div class="sect3">
-<h4 id="增强功能">增强功能</h4>
+<h4 id="增强功能-2">增强功能</h4>
 <div class="ulist">
 <ul>
 <li>

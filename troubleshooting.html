@@ -342,7 +342,7 @@
 </div>
 <div class="n-pdf-body-container">
   <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
-        <a target="_blank" href="/zh-cn/trident/pdfs/fullsite-sidebar/Astra_Trident_21_10_文档.pdf" >
+        <a target="_blank" href="/zh-cn/trident/pdfs/fullsite-sidebar/Astra_Trident_22_01_文档.pdf" >
           <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>此文档站点的 PDF</a>
 
 
@@ -518,6 +518,8 @@
             配置后端
           </a>
           
+
+
 
 
 
@@ -887,6 +889,8 @@
       </a>
       <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
         配置 ANF 后端
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
+        配置 ADS 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
         为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
@@ -1060,7 +1064,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-01-31 22:45:24 +0000">01/31/2022</time>
+    <time datetime="2022-02-01 01:00:12 +0000">02/01/2022</time>
     
   
 
@@ -1131,8 +1135,11 @@
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre># kubectl patch torc -n --type=merge -p '{"spec":{"debug":true}}'</pre>
+<pre># kubectl patch torc trident -n &lt;namespace&gt; --type=merge -p '{"spec":{"debug":true}}'</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>此操作将重新启动所有 Trident Pod ，这可能需要几秒钟的时间。您可以通过观察 <code>kubectl get pod -n trident</code> 输出中的 "age" 列来检查此问题。</p>
 </div>
 <div class="paragraph">
 <p>对于 Astra Trident 20.07 和 20.10 ，请使用 <code>tprov</code> 代替 <code>Torc</code> 。</p>

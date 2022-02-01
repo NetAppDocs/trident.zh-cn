@@ -342,7 +342,7 @@
 </div>
 <div class="n-pdf-body-container">
   <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
-        <a target="_blank" href="/zh-cn/trident/pdfs/fullsite-sidebar/Astra_Trident_21_10_文档.pdf" >
+        <a target="_blank" href="/zh-cn/trident/pdfs/fullsite-sidebar/Astra_Trident_22_01_文档.pdf" >
           <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>此文档站点的 PDF</a>
 
 
@@ -518,6 +518,8 @@
             配置后端
           </a>
           
+
+
 
 
 
@@ -887,6 +889,8 @@
       </a>
       <ul><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/anf.html">
         配置 ANF 后端
+      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
+        配置 ADS 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
         为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
@@ -1060,7 +1064,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-01-31 22:45:24 +0000">01/31/2022</time>
+    <time datetime="2022-02-01 01:00:12 +0000">02/01/2022</time>
     
   
 
@@ -1222,7 +1226,19 @@
 <li>
 <p>启用多路径：</p>
 <div class="paragraph">
-<p><code>sudo mpathconf -enable -with multipathd y</code></p>
+<p><code>sudo mpathconf -enable -for_multipathd y -find_multipaths n</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="注">
+</td>
+<td class="content">
+确保 <code>detc/multipath.conf</code> contains <code>find_multipaths no</code> under` efaults `.
+</td>
+</tr>
+</table>
 </div>
 </li>
 <li>
@@ -1268,7 +1284,19 @@
 <li>
 <p>启用多路径：</p>
 <div class="paragraph">
-<p><code>sUdo tee /etc/multipath.conf &lt;&#8592;'EOF' defaults ｛ user_friendly_names yes find_multipaths yes ｝ eOF sudo systemctl enable -now multipath-tools.service sudo service multipath-tools restart</code></p>
+<p><code>sUdo tee /etc/multipath.conf &lt;&#8592;'EOF' defaults ｛ user_friendly_names yes find_multipaths no ｝ eOF sudo systemctl enable -now multipath-tools.service sudo service multipath-tools restart</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="注">
+</td>
+<td class="content">
+确保 <code>detc/multipath.conf</code> contains <code>find_multipaths no</code> under` efaults `.
+</td>
+</tr>
+</table>
 </div>
 </li>
 <li>
