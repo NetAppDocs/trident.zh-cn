@@ -1064,24 +1064,24 @@
 <p class="page-details">
   
     
-    <time datetime="2022-02-01 18:51:44 +0000">02/01/2022</time>
+    <time datetime="2022-02-02 18:40:06 +0000">02/02/2022</time>
     
   
 
 <span>提供者
-  <a target="_blank" href="https://github.com/juliantap">
-    <img  class="avatar avatar-small"
-          alt="juliantap"
-          width="20" height="20"
-          src="https://avatars.githubusercontent.com/u/83591660?v=4"
-          style="border-radius: 50%;"/>
-  </a>
-  
   <a target="_blank" href="https://github.com/clintonk">
     <img  class="avatar avatar-small"
           alt="clintonk"
           width="20" height="20"
           src="https://avatars.githubusercontent.com/u/1355869?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
+  <a target="_blank" href="https://github.com/juliantap">
+    <img  class="avatar avatar-small"
+          alt="juliantap"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/83591660?v=4"
           style="border-radius: 50%;"/>
   </a>
   
@@ -1307,6 +1307,11 @@ Astra Trident 21.04.0 及更早版本不支持手动 QoS 容量池。
 <td class="tableblock halign-left valign-top"><p class="tableblock">"0.0.0.0/0</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>snapshotDir</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">控制 .snapshot 目录的可见性</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>s大小</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">新卷的默认大小</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">"100 克 "</p></td>
@@ -1398,6 +1403,7 @@ Astra Trident 21.04.0 及更早版本不支持手动 QoS 容量池。
         "limitVolumeSize": "500Gi",
         "defaults": {
             "exportRule": "10.0.0.0/24,10.0.1.0/24,10.0.2.100",
+            "snapshotDir": "true",
             "size": "200Gi"
         }
     }</pre>
