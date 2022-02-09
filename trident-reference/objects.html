@@ -1064,11 +1064,19 @@
 <p class="page-details">
   
     
-    <time datetime="2022-02-08 16:14:11 +0000">02/08/2022</time>
+    <time datetime="2022-02-09 16:03:39 +0000">02/09/2022</time>
     
   
 
 <span>提供者
+  <a target="_blank" href="https://github.com/juliantap">
+    <img  class="avatar avatar-small"
+          alt="juliantap"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/83591660?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
 </span>
 
 
@@ -1307,7 +1315,9 @@ metadata:
 provisioner: csi.trident.netapp.io
 mountOptions: &lt;Mount Options&gt;
 parameters:
-  &lt;Trident Parameters&gt;</code></pre>
+  &lt;Trident Parameters&gt;
+allowVolumeExpansion: true
+volumeBindingMode: Immediate</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1501,13 +1511,63 @@ parameters:
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ext4 ， ext3 ， xfs 等</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">块卷的文件系统类型</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">solidfire-san ， ontap-san ， ontap-san-economy.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">solidfire-san ， ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup ， ontap-san ， ontap-san-economy-、 E 系列 -iscsi</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">全部</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">允许卷扩展</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">启用或禁用对增加 PVC 大小的支持</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup ， ontap-san ， solidfire-san ， AWS-CVS ， GCP-CVS ， azure-netapp-files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.11 及更高版本</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">卷绑定模式</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">即时， WaitForFirstConsumer"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">选择何时进行卷绑定和动态配置</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">全部</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.17 及更高版本</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/tip.svg" alt="提示">
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>FSType</code> 参数用于控制 SAN LUN 所需的文件系统类型。此外， Kubernetes 还会使用存储类中存在的 <code>FSType</code> 来指示文件系统已存在。只有在设置了 <code>FSType</code> 的情况下，才能使用 Pod 的 <code>fsGroup</code> 安全上下文来控制卷所有权。请参见 <a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/" target="_blank" rel="noopener">"Kubernetes ：为 Pod 或容器配置安全上下文"</a> 有关使用 <code>fsGroup</code> 上下文设置卷所有权的概述。只有在以下情况下， Kubernetes 才会应用 <code>fsGroup</code> 值：</p>
+<div class="ulist">
+<ul>
+<li>
+<p>在存储类中设置 <code>FSType</code> 。</p>
+</li>
+<li>
+<p>PVC 访问模式为 RW 。</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
+<p>对于 NFS 存储驱动程序， NFS 导出中已存在文件系统。要使用 <code>fsGroup</code> ，存储类仍需要指定 <code>FSType</code> 。您可以将其设置为 <code>NFS</code> 或任何非空值。</p>
+</div>
+</li>
+<li>
+<p>请参见 <a href="https://docs.netapp.com/us-en/trident/trident-use/vol-expansion.html" target="_blank" rel="noopener">"展开卷"</a> 有关卷扩展的更多详细信息。</p>
+</li>
+<li>
 <p>Trident 安装程序包提供了几个示例存储类定义，可用于 <code>sample-input/storage-class-* 。 yaml</code> 中的 Trident 。删除 Kubernetes 存储类也会删除相应的 Trident 存储类。</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
