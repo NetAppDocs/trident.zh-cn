@@ -1036,11 +1036,19 @@
 <p class="page-details">
   
     
-    <time datetime="2022-03-09 16:31:51 +0000">03/09/2022</time>
+    <time datetime="2022-03-09 18:37:10 +0000">03/09/2022</time>
     
   
 
 <span>提供者
+  <a target="_blank" href="https://github.com/juliantap">
+    <img  class="avatar avatar-small"
+          alt="juliantap"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/83591660?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
 </span>
 
 
@@ -1275,7 +1283,17 @@
 <img src="/us-en/trident/images/warning.svg" alt="警告">
 </td>
 <td class="content">
-将适用于 NetApp ONTAP 的 Amazon FSx 与 Astra Trident 结合使用时， <code>limitAggregateUsage</code> 参数不适用于 <code>vsadmin</code> 和 <code>fsxadmin</code> 用户帐户。如果指定此参数，配置操作将失败。
+<div class="title">适用于 ONTAP 的 Amazon FSX</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>limitAggregateUsage</code> 参数不适用于 <code>vsadmin</code> 和 <code>fsxadmin</code> 用户帐户。如果指定此参数，配置操作将失败。</p>
+</li>
+<li>
+<p>适用于 NetApp ONTAP 的 Amazon FSX 卷预配置了 SnapMirror 。Trident 无法修改或中断它们。要删除 PVC ，您需要手动删除 PV 和适用于 NetApp ONTAP 的 FSX 卷。</p>
+</li>
+</ul>
+</div>
 </td>
 </tr>
 </table>
