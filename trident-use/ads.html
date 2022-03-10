@@ -1036,7 +1036,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-03-09 18:37:10 +0000">03/09/2022</time>
+    <time datetime="2022-03-10 15:37:16 +0000">03/10/2022</time>
     
   
 
@@ -1259,15 +1259,20 @@
 <div class="paragraph">
 <p>这是绝对的最低后端配置。</p>
 </div>
+<div class="exampleblock">
+<div class="title">示例 1. 展开示例</div>
+<div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>{
+<pre class="highlight"><code class="language-CLI" data-lang="CLI">{
     "version": 1,
     "storageDriverName": "astrads-nas",
     "cluster": "astrads-sti-c6220-09-10-11-12",
     "namespace": "test",
     "kubeconfig": "eyJjdXJyZW50LWNvbnRleHQiOiJmZWRlcmFsLWNvbnRleHQiLCJhcGlWZXJzaW9uIjoidjEiLCJjbHVzdGVycyI6W3siY2x1c3RlciI6eyJhcGktdmVyc2lvbiI6InYxIiwic2VydmVyIjoiaHR0cDovL2Nvdy5vcmc6ODA4MCJ9LCJuYW1lIjoiY293LWNsdXN0ZXIifSx7ImNsdXN0ZXIiOnsiY2VydGlmaWNhdGUtYXV0aG9yaXR5IjoicGF0aC90by9teS9jYWZpbGUiLCJzZXJ2ZXIiOiJodHRwczovL2hvcnNlLm9yZzo0NDQzIn0sIm5hbWUiOiJob3JzZS1jbHVzdGVyIn0seyJjbHVzdGVyIjp7Imluc2VjdXJlLXNraXAtdGxzLXZlcmlmeSI6dHJ1ZSwic2VydmVyIjoiaHR0cHM6Ly9waWcub3JnOjQ0MyJ9LCJuYW1lIjoicGlnLWNsdXN0ZXIifV0sImNvbnRleHRzIjpbeyJjb250ZXh0Ijp7ImNsdXN0ZXIiOiJob3JzZS1jbHVzdGVyIiwibmFtZXNwYWNlIjoiY2hpc2VsLW5zIiwidXNlciI6ImdyZWVuLXVzZXIifSwibmFtZSI6ImZlZGVyYWwtY29udGV4dCJ9LHsiY29udGV4dCI6eyJjbHVzdGVyIjoicGlnLWNsdXN0ZXIiLCJuYW1lc3BhY2UiOiJzYXctbnMiLCJ1c2VyIjoiYmxhY2stdXNlciJ9LCJuYW1lIjoicXVlZW4tYW5uZS1jb250ZXh0In1dLCJraW5kIjoiQ29uZmlnIiwicHJlZmVyZW5jZXMiOnsiY29sb3JzIjp0cnVlfSwidXNlcnMiOlt7Im5hbWUiOiJibHVlLXVzZXIiLCJ1c2VyIjp7InRva2VuIjoiYmx1ZS10b2tlbiJ9fSx7Im5hbWUiOiJncmVlbi11c2VyIiwidXNlciI6eyJjbGllbnQtY2VydGlmaWNhdGUiOiJwYXRoL3RvL215L2NsaWVudC9jZXJ0IiwiY2xpZW50LWtleSI6InBhdGgvdG8vbXkvY2xpZW50L2tleSJ9fV19"
-}</pre>
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1278,9 +1283,12 @@
 <div class="paragraph">
 <p>此示例显示了一个后端文件，该文件对所有由 Astra Trident 创建的存储应用相同的方面。</p>
 </div>
+<div class="exampleblock">
+<div class="title">示例 2. 展开示例</div>
+<div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>{
+<pre class="highlight"><code class="language-CLI" data-lang="CLI">{
     "version": 1,
         "storageDriverName": "astrads-nas",
         "cluster": "astrads-sti-c6220-09-10-11-12",
@@ -1292,7 +1300,9 @@
             "snapshotReserve": "10"
         },
         "labels": {"cloud": "on-prem", "creator": "ads-cluster-1", "performance": "bronze"}
-}</pre>
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -1303,9 +1313,12 @@
 <div class="paragraph">
 <p>此示例显示了使用虚拟存储池配置的后端定义文件以及引用这些池的 StorageClasses 。</p>
 </div>
+<div class="exampleblock">
+<div class="title">示例 3. 展开示例</div>
+<div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>{
+<pre class="highlight"><code class="language-CLI" data-lang="CLI">{
     "version": 1,
     "storageDriverName": "astrads-nas",
     "cluster": "astrads-sti-c6220-09-10-11-12",
@@ -1335,15 +1348,20 @@
             "defaults": {"qosPolicy": "bronze"}
          }
      ]
-}</pre>
+}</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="paragraph">
 <p>以下 StorageClass 定义引用了上述存储池。通过使用 <code>parameters.selector</code> 字段，您可以为每个 StorageClass 指定用于托管卷的虚拟池。卷将在选定虚拟池中定义各个方面。</p>
 </div>
+<div class="exampleblock">
+<div class="title">示例 4. 展开示例</div>
+<div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>apiVersion: storage.k8s.io/v1
+<pre class="highlight"><code class="language-CLI" data-lang="CLI">apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: ads
@@ -1383,7 +1401,9 @@ provisioner: csi.trident.netapp.io
 parameters:
   backendType: astrads-nas
   selector: performance=bronze
-allowVolumeExpansion: true</pre>
+allowVolumeExpansion: true</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
