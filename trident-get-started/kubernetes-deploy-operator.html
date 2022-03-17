@@ -1051,7 +1051,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-03-16 14:01:49 +0000">03/16/2022</time>
+    <time datetime="2022-03-17 13:05:54 +0000">03/17/2022</time>
     
   
 
@@ -1061,6 +1061,14 @@
           alt="juliantap"
           width="20" height="20"
           src="https://avatars.githubusercontent.com/u/83591660?v=4"
+          style="border-radius: 50%;"/>
+  </a>
+  
+  <a target="_blank" href="https://github.com/balaramesh">
+    <img  class="avatar avatar-small"
+          alt="balaramesh"
+          width="20" height="20"
+          src="https://avatars.githubusercontent.com/u/25675836?v=4"
           style="border-radius: 50%;"/>
   </a>
   
@@ -1142,13 +1150,18 @@
 <div class="title">步骤</div>
 <ol class="arabic">
 <li>
-<p>从下载安装程序包 <a href="https://github.com/netapp/trident/releases">"Trident GitHub"</a> 页面。安装程序包的 ` /helm` 目录中包含 Helm 图表。</p>
+<p>添加 Trident 的 Helm 存储库：</p>
+<div class="listingblock">
+<div class="content">
+<pre>helm repo add netapp-trident https://netapp.github.io/trident-helm-chart</pre>
+</div>
+</div>
 </li>
 <li>
 <p>使用 <code>helm install</code> 命令并为您的部署指定一个名称。请参见以下示例：</p>
 <div class="listingblock">
 <div class="content">
-<pre>helm install &lt;name&gt; trident-operator-21.07.1.tgz --namespace &lt;namespace you want to use for Trident&gt;</pre>
+<pre>helm install &lt;release-name&gt; netapp-trident/trident-operator --version 22.1.0 --namespace &lt;trident-namespace&gt;</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1184,7 +1197,7 @@
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ helm install &lt;name&gt; trident-operator-21.07.1.tgz --set tridentDebug=true</pre>
+<pre>$ helm install &lt;name&gt; netapp-trident/trident-operator --version 22.1.0 --set tridentDebug=true</pre>
 </div>
 </div>
 <div class="paragraph">
