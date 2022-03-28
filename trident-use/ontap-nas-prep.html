@@ -1052,7 +1052,7 @@
 <p class="page-details">
   
     
-    <time datetime="2021-10-19 22:59:17 +0000">10/19/2021</time>
+    <time datetime="2022-03-28 22:34:27 +0000">03/28/2022</time>
     
   
 
@@ -1112,7 +1112,7 @@
   "dataLIF": "10.0.0.2",
   "svm": "svm_nfs",
   "username": "vsadmin",
-  "password": "secret",
+  "password": "secret"
 }</pre>
 </div>
 </div>
@@ -1148,7 +1148,7 @@
 <p>生成客户端证书和密钥。生成时，将公用名（ Common Name ， CN ）设置为要作为身份验证的 ONTAP 用户。</p>
 <div class="listingblock">
 <div class="content">
-<pre>openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout k8senv.key -out k8senv.pem -subj "/C=US/ST=NC/L=RTP/O=NetApp/CN=admin"</pre>
+<pre>openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout k8senv.key -out k8senv.pem -subj "/C=US/ST=NC/L=RTP/O=NetApp/CN=vsadmin"</pre>
 </div>
 </div>
 </li>
@@ -1174,13 +1174,13 @@ security ssl modify -vserver &lt;vserver-name&gt; -client-enabled true</pre>
 <p>确认 ONTAP 安全登录角色支持 <code>cert</code> 身份验证方法。</p>
 <div class="listingblock">
 <div class="content">
-<pre>security login create -user-or-group-name admin -application ontapi -authentication-method cert
-security login create -user-or-group-name admin -application http -authentication-method cert</pre>
+<pre>security login create -user-or-group-name vsadmin -application ontapi -authentication-method cert -vserver &lt;vserver-name&gt;
+security login create -user-or-group-name vsadmin -application http -authentication-method cert -vserver &lt;vserver-name&gt;</pre>
 </div>
 </div>
 </li>
 <li>
-<p>使用生成的证书测试身份验证。将 &lt;SVM 管理 LIF&gt; 和 &lt;SVM 名称 &gt; 替换为管理 LIF IP 和 ONTAP 名称。</p>
+<p>使用生成的证书测试身份验证。将 &lt;SVM 管理 LIF&gt; 和 &lt;SVM 名称 &gt; 替换为管理 LIF IP 和 ONTAP 名称。您必须确保 LIF 的服务策略设置为 <code>default-data-management</code> 。</p>
 <div class="listingblock">
 <div class="content">
 <pre>curl -X POST -Lk https://&lt;ONTAP-Management-LIF&gt;/servlets/netapp.servlets.admin.XMLrequest_filer --key k8senv.key --cert ~/k8senv.pem -d '&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;netapp xmlns="http://www.netapp.com/filer/admin" version="1.21" vfiler="&lt;vserver-name&gt;"&gt;&lt;vserver-get&gt;&lt;/vserver-get&gt;&lt;/netapp&gt;'</pre>
@@ -1209,8 +1209,8 @@ base64 -w 0 trustedca.pem &gt;&gt; trustedca_base64</pre>
 "managementLIF": "1.2.3.4",
 "dataLIF": "1.2.3.8",
 "svm": "vserver_test",
-"username": "vsadmin",
-"password": "secret",
+"clientCertificate": "Faaaakkkkeeee...Vaaalllluuuueeee",
+"clientPrivateKey": "LS0tFaKE...0VaLuES0tLS0K",
 "storagePrefix": "myPrefix_"
 }
 
