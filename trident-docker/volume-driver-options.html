@@ -17,7 +17,7 @@
   <meta http-equiv="encoding" content="utf-8">
   <meta http-equiv="nss-type" content="Product Documentation"/>
   <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="每个存储驱动程序都有一组不同的选项，您可以在创建卷时指定这些选项来自定义结果。有关适用于您配置的存储系统的选项，请参见以下内容。">
-  <meta name="keywords" content=" create volumes, astra trident, trident for docker, docker, docker volume, driver options, ontap, element volumes, cloud volumes service on aws, cvs, cloud volumes service on gcp, azure netapp files"><!-- Icons -->
+  <meta name="keywords" content=" create volumes, astra trident, trident for docker, docker, docker volume, driver options, ontap, element volumes, cvs, cloud volumes service on gcp, azure netapp files"><!-- Icons -->
   <link rel="icon" href="/zh-cn/trident/images/favicon.ico" type="image/x-icon">
 
   <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
@@ -562,8 +562,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -947,8 +945,6 @@
         配置 ANF 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
         配置 ADS 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
-        为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
         为 GCP 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/element.html">
@@ -1117,7 +1113,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-18 06:20:48 +0000">04/18/2022</time>
+    <time datetime="2022-04-28 19:02:22 +0000">04/28/2022</time>
     
   
 
@@ -1455,72 +1451,6 @@ Trident 目前不支持 NetApp 聚合加密（ NAE ）。
 </div>
 </div>
 <div class="sect1">
-<h2 id="aws-卷选项上的-cloud-volumes-service-cvs">AWS 卷选项上的 Cloud Volumes Service （ CVS ）</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>AWS 上的 CVS 驱动程序的卷创建选项包括以下内容：</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">选项</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s大小</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>卷的大小默认为 100 GB 。</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s服务级别</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>卷的 CVS 服务级别默认为标准。有效值包括标准，高级和极高。</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sSnapshot 预留</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>`此操作会将快照预留设置为所需百分比。默认值为 no 值，表示 CVS 将选择快照预留（通常为 0% ）。</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="sect2">
-<h3 id="示例-3">示例</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>创建 200 GiB 卷：</p>
-<div class="listingblock">
-<div class="content">
-<pre>docker volume create -d netapp --name demo -o size=200G</pre>
-</div>
-</div>
-</li>
-<li>
-<p>创建一个 500 GiB 高级卷：</p>
-<div class="listingblock">
-<div class="content">
-<pre>docker volume create -d netapp --name demo -o size=500G -o serviceLevel=premium</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>最小卷大小为 100 GB 。</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="gcp-上的-cvs-卷选项">GCP 上的 CVS 卷选项</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -1559,7 +1489,7 @@ Trident 目前不支持 NetApp 聚合加密（ NAE ）。
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="示例-4">示例</h3>
+<h3 id="示例-3">示例</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1613,7 +1543,7 @@ Trident 目前不支持 NetApp 聚合加密（ NAE ）。
 </tbody>
 </table>
 <div class="sect2">
-<h3 id="示例-5">示例</h3>
+<h3 id="示例-4">示例</h3>
 <div class="ulist">
 <ul>
 <li>

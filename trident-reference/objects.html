@@ -562,8 +562,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -947,8 +945,6 @@
         配置 ANF 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
         配置 ADS 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
-        为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
         为 GCP 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/element.html">
@@ -1117,7 +1113,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-28 14:19:27 +0000">04/28/2022</time>
+    <time datetime="2022-04-28 19:02:22 +0000">04/28/2022</time>
     
   
 
@@ -1213,7 +1209,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">trident.netapp.io/cloneFromPVC</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">cloneSourceVolume</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-nas ， ontap-san ， solidfire-san ， AWS-CVS ， azure-netapp-files ， GCP-CVS ， ontap-san-economy.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-nas ， ontap-san ， solidfire-san ， azure-netapp-files ， gcp-cvs ， ontap-san-economy.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">trident.netapp.io/splitOnClone</p></td>
@@ -1238,7 +1234,7 @@
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">trident.netapp.io/snapshotReserve</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SnapshotReserve</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-nas ， ontap-nas-flexgroup ， ontap-san ， AWS-CVS ， GCP-CVS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-nas ， ontap-nas-flexgroup ， ontap-san ， GCP-CVS</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">trident.netapp.io/snapshotDirectory</p></td>
@@ -1457,7 +1453,7 @@ volumeBindingMode: Immediate</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">后端类型</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup ， ontap-san ， solidfire-san ， E 系列 iSCSI ， AWS-CVS ， GCP-CVS ， azure-netapp-files ， ontap-san-economy.</p>
+<p>ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup ， ontap-san ， solidfire-san ， E 系列 iSCSI ， GCP-CVS ， azure-netapp-files ， ontap-san-economy.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">池属于此类型的后端</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">指定后端</p></td>
@@ -1469,7 +1465,7 @@ volumeBindingMode: Immediate</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true false</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Pool 支持具有快照的卷</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">启用了快照的卷</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-NAS ， ontap-san ， solidfire-san ， AWS-CVS ， GCP-CVS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-nas ， ontap-san ， solidfire-san ， gcp-cvs</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">克隆</p></td>
@@ -1477,7 +1473,7 @@ volumeBindingMode: Immediate</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true false</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Pool 支持克隆卷</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">启用了克隆的卷</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-NAS ， ontap-san ， solidfire-san ， AWS-CVS ， GCP-CVS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-nas ， ontap-san ， solidfire-san ， gcp-cvs</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">加密</p></td>
@@ -1560,7 +1556,7 @@ volumeBindingMode: Immediate</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true false</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">启用或禁用对增加 PVC 大小的支持</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup ， ontap-san ， ontap-san-economy. solidfire-san ， AWS-CVS ， GCP-CVS ， azure-netapp-files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup ， ontap-san ， ontap-san-economy. solidfire-san ， gcp-cvs ， azure-netapp-files</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1.11 及更高版本</p></td>
 </tr>
 <tr>
@@ -1868,7 +1864,7 @@ Trident 会创建 <code>VolumeSnapshotContent</code> 对象，并根据其配置
 <td class="tableblock halign-left valign-top"><p class="tableblock">cloneSourceVolume</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">否</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ONTAP （ NAS ， SAN ） &amp; SolidFire AWS-* 和 AWS-CVS* ：要从中克隆的卷的名称</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ONTAP （ NAS ， SAN ）和 SolidFire — * ：要从中克隆的卷的名称</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">splitOnClone</p></td>
@@ -1921,7 +1917,7 @@ Trident 会创建 <code>VolumeSnapshotContent</code> 对象，并根据其配置
 </tbody>
 </table>
 <div class="paragraph">
-<p>创建卷时， Trident 会生成 <code>internalName</code> 。这包括两个步骤。首先，它会将存储前缀（默认值 <code>trident</code> 或后端配置中的前缀）预先添加到卷名称中，从而使名称格式为 ` &lt;prefix&gt;-&lt;volume-name&gt;` 。然后，它将继续清理名称，替换后端不允许使用的字符。对于 ONTAP 后端，它会将连字符替换为下划线（因此，内部名称将变为 ` &lt;prefix&gt;_&lt;volume-name&gt;` ）。对于 Element 后端，它会将下划线替换为连字符。对于对唯一卷创建令牌实施 16 到 36 个字符限制的 CVS （ AWS ）， Trident 会为每个卷的内部名称生成一个随机字符串。</p>
+<p>创建卷时， Trident 会生成 <code>internalName</code> 。这包括两个步骤。首先，它会将存储前缀（默认值 <code>trident</code> 或后端配置中的前缀）预先添加到卷名称中，从而使名称格式为 ` &lt;prefix&gt;-&lt;volume-name&gt;` 。然后，它将继续清理名称，替换后端不允许使用的字符。对于 ONTAP 后端，它会将连字符替换为下划线（因此，内部名称将变为 ` &lt;prefix&gt;_&lt;volume-name&gt;` ）。对于 Element 后端，它会将下划线替换为连字符。</p>
 </div>
 <div class="paragraph">
 <p>您可以使用卷配置使用 REST API 直接配置卷，但在 Kubernetes 部署中，我们希望大多数用户使用标准的 Kubernetes <code>PersistentVolumeClaim</code> 方法。Trident 会在配置过程中自动创建此卷对象。</p>

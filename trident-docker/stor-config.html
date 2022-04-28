@@ -17,7 +17,7 @@
   <meta http-equiv="encoding" content="utf-8">
   <meta http-equiv="nss-type" content="Product Documentation"/>
   <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="请参见适用于您的 Astra Trident 配置的配置选项。">
-  <meta name="keywords" content=" deploy, trident, docker, trident for docker, nfs, iscsi, protcol, nfs protocol, iscsi protocol, configure host, host config, storage config, options, variables, ontap, element, aws, cvs on gcp, cvs on aws, anf, azure netapp files"><!-- Icons -->
+  <meta name="keywords" content=" deploy, trident, docker, trident for docker, nfs, iscsi, protcol, nfs protocol, iscsi protocol, configure host, host config, storage config, options, variables, ontap, element, cvs on gcp, anf, azure netapp files"><!-- Icons -->
   <link rel="icon" href="/zh-cn/trident/images/favicon.ico" type="image/x-icon">
 
   <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
@@ -562,8 +562,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -947,8 +945,6 @@
         配置 ANF 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
         配置 ADS 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
-        为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
         为 GCP 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/element.html">
@@ -1117,7 +1113,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-18 06:20:48 +0000">04/18/2022</time>
+    <time datetime="2022-04-28 19:02:22 +0000">04/28/2022</time>
     
   
 
@@ -1166,7 +1162,7 @@
 <p>存储驱动程序的名称</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><code>ontap-nas</code> ， <code>ontap-san</code> ， <code>ontap-nas-economics</code> ， <code>ontap-nas-flexgroup</code> ， <code>solidfire-san</code> ， <code>azure-netapp-files</code> ， <code>AWS-CVS</code> 或 <code>GCP-CVS</code></p>
+<p><code>ontap-nas</code> ， <code>ontap-san</code> ， <code>ontap-nas-economics</code> ， <code>ontap-nas-flexgroup</code> ， <code>solidfire-san</code> ， <code>azure-netapp-files</code> 或 <code>GCP-CVS</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1742,185 +1738,6 @@ Docker Swarm 目前不支持 <code>ontap-nas-economy-经济</code> 驱动程序�
             }
         }
     ]
-}</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="aws-上的-cloud-volumes-service-cvs-配置">AWS 上的 Cloud Volumes Service （ CVS ）配置</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>在 AWS 上使用 CVS 时，除了全局配置值之外，还可以使用这些选项。所有必需值均可在 CVS Web 用户界面中使用。</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">选项</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>区域</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CVS 帐户区域（必需）。可以在 CVS Web 门户中的 "Account settings" &gt;"API access" 中找到。</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>"us-east-1"</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apiURL</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CVS 帐户 API URL （必需）。可以在 CVS Web 门户中的 "Account settings" &gt;"API access" 中找到。</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="https://cds-aws-bundles.netapp.com:8080/v1”" class="bare">https://cds-aws-bundles.netapp.com:8080/v1”</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>apiKey</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CVS 帐户 API 密钥（必需）。可以在 CVS Web 门户中的 "Account settings" &gt;"API access" 中找到。</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Docker</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>secreKey</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>CVS 帐户密钥（必需）。可以在 CVS Web 门户中的 "Account settings" &gt;"API access" 中找到。</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>default</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>代理 URL</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>代理服务器需要连接到 CVS 帐户时的代理 URL 。代理服务器可以是 HTTP 代理，也可以是 HTTPS 代理。对于 HTTPS 代理，系统会跳过证书验证，以允许在代理服务器中使用自签名证书。* 不支持已启用身份验证的代理服务器 * 。</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="http://proxy-server-hostname/”" class="bare">http://proxy-server-hostname/”</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nfsMountOptions</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>NFS 挂载选项；默认为 -o nfsver=3</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>"nfsver=3 ， proto=tcp ， timeo=600"</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s服务级别</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>性能级别（标准，高级，极高），默认为 " 标准 "</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>高级版</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<img src="/us-en/trident/images/note.svg" alt="注">
-</td>
-<td class="content">
-NetApp Cloud Volumes Service for AWS 不支持小于 100 GB 的卷。为了便于部署应用程序，如果请求的卷较小， Trident 会自动创建 100 GB 的卷。
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>在 AWS 上使用 CVS 时，可以使用这些默认卷选项设置。</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">选项</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exportRule</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>NFS 访问列表（地址和 / 或 CIDR 子网），默认为 "0.0.0.0/0 "</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>"10.0.1.0/24 10.0.0.2.100"</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>snapshotDir</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>控制 ` .snapshot` 目录的可见性</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>false</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sSnapshot 预留</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Snapshot 预留百分比，默认值为 " " 以接受 CVS 默认值 0</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>10</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>s大小</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>卷大小，默认为 100 GB</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>"500 克 "</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<div class="sect2">
-<h3 id="aws-上的-cvs-配置文件示例">AWS 上的 CVS 配置文件示例</h3>
-<div class="listingblock">
-<div class="content">
-<pre>{
-    "version": 1,
-    "storageDriverName": "aws-cvs",
-    "apiRegion": "us-east-1",
-    "apiURL": "https://cds-aws-bundles.netapp.com:8080/v1",
-    "apiKey":    "znHczZsrrtHisIsAbOguSaPIKeyAZNchRAGzlzZE",
-    "secretKey": "rR0rUmWXfNioN1KhtHisiSAnoTherboGuskey6pU",
-    "region": "us-east-1",
-    "proxyURL": "http://proxy-server-hostname/",
-    "serviceLevel": "premium",
-    "limitVolumeSize": "200Gi",
-    "defaults": {
-        "snapshotDir": "true",
-        "snapshotReserve": "5",
-        "exportRule": "10.0.0.0/24,10.0.1.0/24,10.0.2.100",
-        "size": "100Gi"
-    }
 }</pre>
 </div>
 </div>

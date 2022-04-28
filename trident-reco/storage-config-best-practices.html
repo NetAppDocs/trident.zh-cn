@@ -562,8 +562,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -947,8 +945,6 @@
         配置 ANF 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
         配置 ADS 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
-        为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
         为 GCP 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/element.html">
@@ -1117,7 +1113,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-28 14:19:27 +0000">04/28/2022</time>
+    <time datetime="2022-04-28 19:02:22 +0000">04/28/2022</time>
     
   
 
@@ -1516,60 +1512,6 @@ vserver modify -vserver &lt;svm_name&gt; -qos-policy-group &lt;policy_name&gt;</
 </div>
 <div class="paragraph">
 <p>但是，如果无法启用 CHAP 且需要使用 VAG ，请创建访问组并将主机启动程序和卷添加到此访问组。添加到访问组的每个 IQN 都可以使用或不使用 CHAP 身份验证访问组中的每个卷。如果将 iSCSI 启动程序配置为使用 CHAP 身份验证，则会使用基于帐户的访问控制。如果 iSCSI 启动程序未配置为使用 CHAP 身份验证，则会使用卷访问组访问控制。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="snapshot-一致性组">Snapshot 一致性组</h3>
-<div class="paragraph">
-<p>设置快照一致性组也非常适合跨越多个卷的应用程序。一致性组的目的是为多个卷同时创建快照映像，从而确保在特定时间点为一组卷创建一致的副本。您应使用 SANtricity 系统管理器创建一致性组。</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="适用于-aws-的-cloud-volumes-service-最佳实践">适用于 AWS 的 Cloud Volumes Service 最佳实践</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>了解在适用于 Trident 的 AWS 上配置 Cloud Volumes Service 的最佳实践。</p>
-</div>
-<div class="sect2">
-<h3 id="创建导出策略">创建导出策略</h3>
-<div class="paragraph">
-<p>要确保只有经过授权的一组节点才能访问通过 Cloud Volumes Service 配置的卷，请在创建 Cloud Volumes Service 时为此导出策略设置适当的规则。通过 Trident 在云卷服务上配置卷时，请确保在后端文件中使用 <code>exportRule</code> 参数来授予对所需 Kubernetes 节点的访问权限。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="创建快照策略">创建快照策略</h3>
-<div class="paragraph">
-<p>为通过 Cloud Volume Service 配置的卷创建快照策略，以确保按要求的间隔创建快照。这样可以保证定期备份数据，并在数据丢失或数据损坏时恢复数据。您可以通过在卷详细信息页面上选择适当的计划来为 Cloud Volume Service 托管的卷设置快照策略。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="选择适当的服务级别存储容量和存储带宽">选择适当的服务级别，存储容量和存储带宽</h3>
-<div class="paragraph">
-<p>适用于 AWS 的 Cloud Volume Services 提供不同的服务级别，例如标准，高级和极高。这些服务级别可满足不同的存储容量和存储带宽要求。确保您根据业务需求选择适当的服务级别。</p>
-</div>
-<div class="paragraph">
-<p>您应根据应用程序的特定需求在创建卷期间选择所需的已分配存储大小。在确定分配的存储时，需要考虑两个因素：</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>特定应用程序的存储要求</p>
-</li>
-<li>
-<p>峰值或边缘所需的带宽</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>存储带宽取决于所选服务级别和已分配容量的组合。因此，请选择正确的服务级别和分配的容量，同时考虑所需的带宽。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="限制-trident-创建的卷的最大大小-2">限制 Trident 创建的卷的最大大小</h3>
-<div class="paragraph">
-<p>通过在后端配置文件中使用 <code>limitVolumeSize</code> 参数，我可以限制 Trident 在 Cloud Volume Services for AWS 上创建的卷的最大大小。设置此参数可确保在请求的卷大小高于设置值时配置失败。</p>
 </div>
 </div>
 </div>

@@ -17,7 +17,7 @@
   <meta http-equiv="encoding" content="utf-8">
   <meta http-equiv="nss-type" content="Product Documentation"/>
   <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="Kubernetes 集群通常由两种类型的节点组成，每种节点负责不同的功能方面。">
-  <meta name="keywords" content=" kubernetes, clusters, nodes, components, master, compute"><!-- Icons -->
+  <meta name="keywords" content=" kubernetes, clusters, nodes, components, master, compute, fsx, flexgroup, flexvolume, solidfire, hci, virtual storage pool, cvs, gcp, volumes"><!-- Icons -->
   <link rel="icon" href="/zh-cn/trident/images/favicon.ico" type="image/x-icon">
 
   <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
@@ -562,8 +562,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -947,8 +945,6 @@
         配置 ANF 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
         配置 ADS 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
-        为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
         为 GCP 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/element.html">
@@ -1117,7 +1113,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-18 06:20:48 +0000">04/18/2022</time>
+    <time datetime="2022-04-28 19:02:22 +0000">04/28/2022</time>
     
   
 
@@ -1300,7 +1296,7 @@
 <div class="sect2">
 <h3 id="为-cloud-volumes-ontap-选择后端驱动程序">为 Cloud Volumes ONTAP 选择后端驱动程序</h3>
 <div class="paragraph">
-<p>Cloud Volumes ONTAP 可为各种使用情形提供数据控制以及企业级存储功能，包括文件共享和为 NAS 和 SAN 协议（ NFS ， SMB/CIFS 和 iSCSI ）提供服务的块级存储。Cloud Volume ONTAP 的兼容驱动程序包括 <code>ontap-nas</code> ， <code>ontap-nas-economy.</code> <code>ontap-san</code> 和 `ontap-san-economy.`这些功能适用于 Cloud Volume ONTAP for AWS ， Cloud Volume ONTAP for Azure ， Cloud Volume ONTAP for GCP 。</p>
+<p>Cloud Volumes ONTAP 可为各种使用情形提供数据控制以及企业级存储功能，包括文件共享和为 NAS 和 SAN 协议（ NFS ， SMB/CIFS 和 iSCSI ）提供服务的块级存储。Cloud Volume ONTAP 的兼容驱动程序包括 <code>ontap-nas</code> ， <code>ontap-nas-economy.</code> <code>ontap-san</code> 和 `ontap-san-economy.`它们适用于适用于 Azure 的 Cloud Volume ONTAP ，适用于 GCP 的 Cloud Volume ONTAP 。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1397,51 +1393,6 @@
 </table>
 <div class="verseblock">
 <pre class="content">脚注：是脚注： 1[] ：不由 Astra Trident 管理</pre>
-</div>
-</div>
-<div class="sect2">
-<h3 id="选择适用于采用-aws-的-cloud-volumes-service-的后端驱动程序">选择适用于采用 AWS 的 Cloud Volumes Service 的后端驱动程序</h3>
-<div class="paragraph">
-<p>Astra Trident 使用 <code>AWS-CVS</code> 驱动程序与 AWS 后端的 Cloud Volumes Service 链接。要在 Trident 上配置 AWS 后端，您需要在后端文件中指定 <code>apiRegion</code> ， <code>apiURL</code> ， <code>apiKey</code> 和 <code>secreKey</code> 。这些值可在 CVS Web 门户中的 Account settings/API access 中找到。支持的服务级别与 CVS 一致，包括 <code>standard</code> ， <code>Premium</code> 和 <code>Extreme</code> 。目前，要配置的最小卷大小为 100G 。未来版本的 CVS 可能会删除此限制。</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">CVS for AWS 驱动程序</th>
-<th class="tableblock halign-left valign-top">快照</th>
-<th class="tableblock halign-left valign-top">克隆</th>
-<th class="tableblock halign-left valign-top">多连接</th>
-<th class="tableblock halign-left valign-top">QoS</th>
-<th class="tableblock halign-left valign-top">展开</th>
-<th class="tableblock halign-left valign-top">Replication</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AWS-CVS</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">是的。</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">是脚注： 1[]</p></td>
-</tr>
-</tbody>
-</table>
-<div class="verseblock">
-<pre class="content">脚注：是脚注： 1[] ：不由 Astra Trident 管理</pre>
-</div>
-<div class="paragraph">
-<p><code>AWS-CVS</code> 驱动程序使用虚拟存储池。虚拟存储池会对后端进行抽象化，从而使 Trident 决定卷的放置。管理员在 backend.json 文件中定义虚拟存储池。存储类使用标签标识虚拟存储池。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1558,7 +1509,7 @@
 <h2 id="虚拟存储池设计">虚拟存储池设计</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>创建后端时，通常可以指定一组参数。管理员无法使用相同的存储凭据和一组不同的参数创建另一个后端。随着虚拟存储池的推出，此问题描述得以缓解。虚拟存储池是在后端和 Kubernetes 存储类之间引入的级别抽象，因此管理员可以定义参数以及标签，这些参数和标签可以通过 Kubernetes 存储类作为选择器进行引用，并且与后端无关。可以使用 Astra Trident 为所有受支持的 NetApp 后端定义虚拟存储池。该列表包括 SolidFire/NetApp HCI ， ONTAP ， AWS 和 GCP 上的 Cloud Volumes Service 以及 Azure NetApp Files 。</p>
+<p>创建后端时，通常可以指定一组参数。管理员无法使用相同的存储凭据和一组不同的参数创建另一个后端。随着虚拟存储池的推出，此问题描述得以缓解。虚拟存储池是在后端和 Kubernetes 存储类之间引入的级别抽象，因此管理员可以定义参数以及标签，这些参数和标签可以通过 Kubernetes 存储类作为选择器进行引用，并且与后端无关。可以使用 Astra Trident 为所有受支持的 NetApp 后端定义虚拟存储池。该列表包括 SolidFire/NetApp HCI ， ONTAP ， GCP 上的 Cloud Volumes Service 以及 Azure NetApp Files 。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1575,7 +1526,7 @@
 <div class="sect2">
 <h3 id="设计虚拟存储池以模拟不同的服务级别-qos">设计虚拟存储池以模拟不同的服务级别 /QoS</h3>
 <div class="paragraph">
-<p>可以设计虚拟存储池来模拟服务类。使用 Cloud Volume Service for AWS 的虚拟池实施，让我们来了解一下如何设置不同的服务类。使用多个标签配置 AWS-CVS 后端，以表示不同的性能级别。将 <code>servicelevel</code> Aspect 设置为适当的性能级别，并在每个标签下添加其他所需的内容。现在，创建可映射到不同虚拟存储池的不同 Kubernetes 存储类。使用 <code>parameters.selector</code> 字段，每个 StorageClass 都会调用可用于托管卷的虚拟池。</p>
+<p>可以设计虚拟存储池来模拟服务类。使用适用于 Azure NetApp Files 的云卷服务的虚拟池实施，让我们来了解一下如何设置不同的服务类。为 ANF 后端配置多个标签，以表示不同的性能级别。将 <code>servicelevel</code> Aspect 设置为适当的性能级别，并在每个标签下添加其他所需的内容。现在，创建可映射到不同虚拟存储池的不同 Kubernetes 存储类。使用 <code>parameters.selector</code> 字段，每个 StorageClass 都会调用可用于托管卷的虚拟池。</p>
 </div>
 </div>
 <div class="sect2">
@@ -1691,13 +1642,13 @@
 <div class="sect2">
 <h3 id="将现有卷导入到-kubernetes-中">将现有卷导入到 Kubernetes 中</h3>
 <div class="paragraph">
-<p>通过卷导入，可以将现有存储卷导入到 Kubernetes 环境中。目前， <code>ontap-nas</code> ， <code>ontap-nas-flexgroup</code> ， <code>solidfire-san</code> ， <code>azure-netapp-files</code> ， <code>AWS-CVS</code> ， 和 <code>GCP-CVS</code> 驱动程序。在将现有应用程序移植到 Kubernetes 或在灾难恢复场景中，此功能非常有用。</p>
+<p>通过卷导入，可以将现有存储卷导入到 Kubernetes 环境中。目前， <code>ontap-nas</code> ， <code>ontap-nas-flexgroup</code> ， <code>solidfire-san</code> ， <code>azure-netapp-files</code> 和 <code>GCP-CVS</code> 驱动程序均支持此功能。在将现有应用程序移植到 Kubernetes 或在灾难恢复场景中，此功能非常有用。</p>
 </div>
 <div class="paragraph">
 <p>使用 ONTAP 和 <code>solidfire-san</code> 驱动程序时，请使用命令 <code>tridentctl import volume &lt;backend-name&gt; &lt;volume-name&gt; -f /path/PVC.YAML</code> 将现有卷导入到要由 Astra Trident 管理的 Kubernetes 中。导入卷命令中使用的 PVC YAML 或 JSON 文件指向将 Astra Trident 标识为配置程序的存储类。使用 NetApp HCI/SolidFire 后端时，请确保卷名称是唯一的。如果卷名称重复，请将卷克隆为唯一名称，以便卷导入功能可以区分它们。</p>
 </div>
 <div class="paragraph">
-<p>如果使用了 <code>AWS-CVS</code> ， <code>azure-netapp-files</code> 或 <code>GCP-CVS</code> 驱动程序，请使用命令 <code>tridentctl import volume &lt;backend-name&gt; &lt;volume path&gt; -f /path/PVC.YAML</code> 将卷导入到要由 Astra Trident 管理的 Kubernetes 中。这样可以确保卷引用是唯一的。</p>
+<p>如果使用了 <code>azure-netapp-files</code> 或 <code>gcp-cvs</code> 驱动程序，请使用命令 <code>tridentctl import volume &lt;backend-name&gt; &lt;volume path&gt; -f /path/vc.yaml</code> 将卷导入到 Kubernetes 中，以供 Astra Trident 管理。这样可以确保卷引用是唯一的。</p>
 </div>
 <div class="paragraph">
 <p>执行上述命令后， Astra Trident 将在后端找到卷并读取其大小。它将自动添加（并在必要时覆盖）已配置的 PVC 卷大小。然后， Astra Trident 会创建新的 PV ， Kubernetes 会将 PVC 绑定到 PV 。</p>

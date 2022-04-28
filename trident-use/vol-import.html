@@ -562,8 +562,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -947,8 +945,6 @@
         配置 ANF 后端
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/ads.html">
         配置 ADS 后端
-      </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/aws.html">
-        为 AWS 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/gcp.html">
         为 GCP 后端配置 CVS
       </a></li><li class=" "><a class="na-navbar-padding" href="/zh-cn/trident/trident-use/element.html">
@@ -1117,7 +1113,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-18 06:20:48 +0000">04/18/2022</time>
+    <time datetime="2022-04-28 19:02:22 +0000">04/28/2022</time>
     
   
 
@@ -1163,12 +1159,6 @@
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>solidfire-san</code></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>19.04</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AWS-CVS</code></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>19.04</p>
 </div></div></td>
@@ -1450,7 +1440,7 @@ Element 驱动程序支持重复的卷名称。如果卷名称重复，则 Tride
 </div>
 </div>
 <div class="sect1">
-<h2 id="aws-cvs-导入">AWS-CVS 导入</h2>
+<h2 id="gcp-cvs-导入">GCP-CVS 导入</h2>
 <div class="sectionbody">
 <div class="admonitionblock tip">
 <table>
@@ -1459,22 +1449,22 @@ Element 驱动程序支持重复的卷名称。如果卷名称重复，则 Tride
 <img src="/us-en/trident/images/tip.svg" alt="提示">
 </td>
 <td class="content">
-要在 AWS 中导入由 NetApp Cloud Volumes Service 支持的卷，请按卷路径而非名称来标识该卷。
+要在 GCP 中导入由 NetApp Cloud Volumes Service 支持的卷，请按卷路径而非名称来标识该卷。
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>要在后端导入名为 <code>awscvs_YEppr</code> 的 <code>AWS-CVS</code> 卷，并且卷路径为 <code>adrot-joly-swift</code> ，请使用以下命令：</p>
+<p>要在后端导入名为 <code>gcpcvs_yEppr</code> 的 <code>GCP-CVS</code> 卷，并将卷路径设置为 <code>adrot-joly-swift</code> ，请使用以下命令：</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ tridentctl import volume awscvs_YEppr adroit-jolly-swift -f &lt;path-to-pvc-file&gt; -n trident
+<pre>$ tridentctl import volume gcpcvs_YEppr adroit-jolly-swift -f &lt;path-to-pvc-file&gt; -n trident
 
 +------------------------------------------+--------+---------------+----------+--------------------------------------+--------+---------+
 |                   NAME                   |  SIZE  | STORAGE CLASS | PROTOCOL |             BACKEND UUID             | STATE  | MANAGED |
 +------------------------------------------+--------+---------------+----------+--------------------------------------+--------+---------+
-| pvc-a46ccab7-44aa-4433-94b1-e47fc8c0fa55 | 93 GiB | aws-storage   | file     | e1a6e65b-299e-4568-ad05-4f0a105c888f | online | true    |
+| pvc-a46ccab7-44aa-4433-94b1-e47fc8c0fa55 | 93 GiB | gcp-storage   | file     | e1a6e65b-299e-4568-ad05-4f0a105c888f | online | true    |
 +------------------------------------------+--------+---------------+----------+--------------------------------------+--------+---------+</pre>
 </div>
 </div>
@@ -1489,14 +1479,6 @@ Element 驱动程序支持重复的卷名称。如果卷名称重复，则 Tride
 </td>
 </tr>
 </table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="gcp-cvs-导入">GCP-CVS 导入</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>导入 <code>GCP-CVS</code> 卷与导入 <code>AWS-CVS</code> 卷的工作原理相同。</p>
 </div>
 </div>
 </div>
