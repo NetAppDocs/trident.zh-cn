@@ -1117,7 +1117,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-18 06:20:48 +0000">04/18/2022</time>
+    <time datetime="2022-04-28 14:19:27 +0000">04/28/2022</time>
     
   
 
@@ -1921,7 +1921,7 @@ Trident 会创建 <code>VolumeSnapshotContent</code> 对象，并根据其配置
 </tbody>
 </table>
 <div class="paragraph">
-<p>创建卷时， Trident 会生成 <code>internalName</code> 。这包括两个步骤。首先，它会将存储前缀（默认值 <code>trident</code> 或后端配置中的前缀）预先添加到卷名称中，从而使名称格式为 ` &lt;prefix&gt;-&lt;volume-name&gt;` 。然后，它将继续清理名称，替换后端不允许使用的字符。对于 ONTAP 后端，它会将连字符替换为下划线（因此，内部名称将变为 ` &lt;prefix&gt;_&lt;volume-name&gt;` ）。对于 Element 后端，它会将下划线替换为连字符。对于对所有对象名称施加 30 个字符限制的 E 系列， Trident 会为每个卷的内部名称生成随机字符串。对于对唯一卷创建令牌实施 16 到 36 个字符限制的 CVS （ AWS ）， Trident 会为每个卷的内部名称生成一个随机字符串。</p>
+<p>创建卷时， Trident 会生成 <code>internalName</code> 。这包括两个步骤。首先，它会将存储前缀（默认值 <code>trident</code> 或后端配置中的前缀）预先添加到卷名称中，从而使名称格式为 ` &lt;prefix&gt;-&lt;volume-name&gt;` 。然后，它将继续清理名称，替换后端不允许使用的字符。对于 ONTAP 后端，它会将连字符替换为下划线（因此，内部名称将变为 ` &lt;prefix&gt;_&lt;volume-name&gt;` ）。对于 Element 后端，它会将下划线替换为连字符。对于对唯一卷创建令牌实施 16 到 36 个字符限制的 CVS （ AWS ）， Trident 会为每个卷的内部名称生成一个随机字符串。</p>
 </div>
 <div class="paragraph">
 <p>您可以使用卷配置使用 REST API 直接配置卷，但在 Kubernetes 部署中，我们希望大多数用户使用标准的 Kubernetes <code>PersistentVolumeClaim</code> 方法。Trident 会在配置过程中自动创建此卷对象。</p>
