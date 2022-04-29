@@ -356,7 +356,7 @@
         
         
         
-        <a target="_blank" href="/zh-cn/trident/pdfs/fullsite-sidebar/Astra_Trident_22_01_1_文档.pdf" >
+        <a target="_blank" href="/zh-cn/trident/pdfs/fullsite-sidebar/Astra_Trident_22_04_文档.pdf" >
           <img src="/zh-cn/trident/images/pdf.png" width="16" height="16"/>此文档站点的 PDF</a>
 
 
@@ -1113,7 +1113,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-26 18:23:46 +0000">04/26/2022</time>
+    <time datetime="2022-04-29 18:32:15 +0000">04/29/2022</time>
     
   
 
@@ -1124,6 +1124,18 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>您可以使用 Trident 运算符或使用 <code>tridentctl</code> 来部署 Astra Trident 。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="注">
+</td>
+<td class="content">
+从 22.04 版开始，每次安装 Astra Trident 时， AES 密钥将不再重新生成。在此版本中， Astra Trident 将安装一个新的机密对象，该对象会在安装之间持续存在。这意味着， 22.04 中的 <code>tridentctl</code> 可以卸载先前版本的 Trident ，但早期版本无法卸载 22.04 安装。
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
