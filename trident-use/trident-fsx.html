@@ -1157,7 +1157,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-18 06:20:48 +0000">04/18/2022</time>
+    <time datetime="2022-05-20 20:30:32 +0000">05/20/2022</time>
     
   
 
@@ -1246,7 +1246,7 @@
 <p>适用于 NetApp ONTAP 的 Amazon FSX 使用 <a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-mgng-stor-tier-fp/GUID-5A78F93F-7539-4840-AB0B-4A6E3252CF84.html" target="_blank" rel="noopener">"FabricPool"</a> 以管理存储层。通过它，您可以根据数据是否经常访问来将数据存储在层中。</p>
 </div>
 <div class="paragraph">
-<p>Astra Trident 应以 ONTAP 或 SVM 管理员身份运行，使用集群 <code>fsxadmin</code> user 或 <code>vsadmin</code> SVM 用户，或者使用具有相同角色的其他名称的用户。<code>fsxadmin</code> 用户是对 <code>admin</code> cluster 用户的有限替代。对于非 Amazon FSX for ONTAP 部署， Astra Trident 通常使用 <code>admin</code> cluster 用户。</p>
+<p>Astra Trident应以`vsadmin` SVM用户或具有相同角色的其他名称的用户的身份运行。适用于NetApp ONTAP 的Amazon FSX具有一个`fsxadmin`用户、该用户是ONTAP <code>admin</code> cluster用户的有限替代。建议不要在Trident中使用`fsxadmin`用户、因为`vsadmin` SVM用户可以访问更多Astra Trident功能。</p>
 </div>
 <div class="sect2">
 <h3 id="驱动程序">驱动程序</h3>
@@ -1281,10 +1281,22 @@
 <div class="ulist">
 <ul>
 <li>
-<p>基于凭据：您可以使用文件系统的 <code>fsxadmin</code> 用户或为 SVM 配置的 <code>vsadmin</code> 用户。建议使用 <code>vsadmin</code> 用户配置后端。Astra Trident 将使用此用户名和密码与 FSX 文件系统进行通信。</p>
+<p>基于证书： Astra Trident 将使用 SVM 上安装的证书与 FSX 文件系统上的 SVM 进行通信。</p>
 </li>
 <li>
-<p>基于证书： Astra Trident 将使用 SVM 上安装的证书与 FSX 文件系统上的 SVM 进行通信。</p>
+<p>基于凭据：您可以使用文件系统的 <code>fsxadmin</code> 用户或为 SVM 配置的 <code>vsadmin</code> 用户。</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/warning.svg" alt="警告">
+</td>
+<td class="content">
+我们强烈建议使用`vsadmin` user而非`fsxadmin`来配置后端。Astra Trident 将使用此用户名和密码与 FSX 文件系统进行通信。
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ul>
 </div>
