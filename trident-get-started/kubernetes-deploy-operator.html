@@ -1149,7 +1149,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-04-18 06:20:48 +0000">04/18/2022</time>
+    <time datetime="2022-06-07 20:11:28 +0000">06/07/2022</time>
     
   
 
@@ -1159,7 +1159,17 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>您可以使用 Trident 操作员部署 Astra Trident 。您可以手动或使用 Helm 部署 Trident 操作员。</p>
+<p>您可以使用Trident操作员部署Astra Trident。您可以通过以下两种方式之一部署Trident操作员：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>使用Trident <a href="https://artifacthub.io/packages/helm/netapp-trident/trident-operator" target="_blank" rel="noopener">"Helm图表"</a>：Helm图表将部署Trident操作符并分步安装Trident。</p>
+</li>
+<li>
+<p>手动：Trident提供 <a href="https://github.com/NetApp/trident/blob/master/deploy/bundle.yaml" target="_blank" rel="noopener">"bundle.yaml"</a> 可用于安装操作员和创建关联对象的文件。</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1207,7 +1217,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="使用-helm-部署-trident-操作员">使用 Helm 部署 Trident 操作员</h2>
+<h2 id="部署trident操作员并使用helm安装astra-trident">部署Trident操作员并使用Helm安装Astra Trident</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>执行列出的步骤以使用 Helm 部署 Trident 操作员。</p>
