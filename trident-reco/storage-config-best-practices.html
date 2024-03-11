@@ -1,0 +1,3126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head class="at-element-marker">
+  <title>存储配置</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="存储配置" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/zh-cn/trident/trident-reco/storage-config-best-practices.html" />
+	<meta property="og:description" content="Kubernetes 集群通常由两种类型的节点组成，每种节点负责不同的功能方面。" />
+  <meta property="og:image" content="https://docs.netapp.com/zh-cn/trident/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="Kubernetes 集群通常由两种类型的节点组成，每种节点负责不同的功能方面。">
+  <meta name="keywords" content=" kubernetes, clusters, nodes, components, master, compute"><!-- Icons -->
+  <link rel="icon" href="/zh-cn/trident/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+
+  <!-- Combined CSS -->
+  <link rel="stylesheet" type="text/css" href="/zh-cn/trident/css/ie-netappdocs.css">
+
+  
+  <link rel="stylesheet" href="/zh-cn/trident/css/ie-landing-page.css" type="text/css">
+  <link rel="stylesheet" href="/zh-cn/trident/css/ie-tabbed-blocks.css" type="text/css">
+  <!-- Canonical url -->
+  <link rel="canonical" href="https://docs.netapp.com/zh-cn/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="x-default" href="https://docs.netapp.com/us-en/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://docs.netapp.com/zh-cn/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="en" href="https://docs.netapp.com/us-en/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="ja" href="https://docs.netapp.com/ja-jp/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="ko" href="https://docs.netapp.com/ko-kr/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://docs.netapp.com/zh-tw/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="de" href="https://docs.netapp.com/de-de/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="es" href="https://docs.netapp.com/es-es/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="fr" href="https://docs.netapp.com/fr-fr/trident/trident-reco/storage-config-best-practices.html" />
+  <link rel="alternate" hreflang="it" href="https://docs.netapp.com/it-it/trident/trident-reco/storage-config-best-practices.html" />
+  <!-- Top level site integrations -->
+<script type="text/javascript" src="https://cdn.cookielaw.org/consent/72570c5c-fe30-465f-b0e0-b77f7fb4ae34/OtAutoBlock.js"></script>
+    <script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-document-language="true" data-domain-script="72570c5c-fe30-465f-b0e0-b77f7fb4ae34"></script>
+    <script type="text/javascript">function OptanonWrapper() { }</script>
+    <script type="text/plain" class="optanon-category-C0002" src="https://assets.adobedtm.com/60287eadf1ee/c284da483c83/launch-e9ff3acac59f.min.js"></script>
+    <script class="optanon-category-C0001">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.setAttributeNode(d.createAttribute('data-ot-ignore'));j.setAttribute('class','optanon-category-C0001');j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl+'';f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MD73T9M');</script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      const MASTHEAD_OFFSET = 65;
+      const SECTIONS = $("main h2, main h3");
+      // PAGE NAV - Init
+      if (SECTIONS.length == 0) {
+        // remove if there is no elements
+        /*
+        $("#ie-right-navbar").remove();
+        $("#ie-right-navbar-collapse").remove();
+        */
+      } else {
+        $(".page-nav-title").css('display', 'block');
+        for (var i = 0; i < SECTIONS.length; i++) {
+          var sectionId = $(SECTIONS[i]).attr('id');
+          var sectionName = $(SECTIONS[i]).text();
+          var subClass = $(SECTIONS[i]).is("h3") ? ' page-nav__sublink' : '';
+          $("#page-menu").append('<li class="page-nav-item"><a href="#' + sectionId + '" class="page-nav__link' + subClass + '">' + sectionName + '</a></li>');
+        }
+      }
+    });
+  </script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <!-- Used for Product Family Page Sidebar Visibility --><!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script><script src='/zh-cn/trident/js/na-search.js'></script><script src='/zh-cn/trident/js/ie-clouddocs.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script>
+    /*
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+      */
+  </script>
+  <script src='/zh-cn/trident/js/custom-dropdown.js'></script>
+  <script src='/zh-cn/trident/js/FileSaver.min.js'></script>
+  <script src='/zh-cn/trident/js/jszip-utils.min.js'></script>
+  <script src='/zh-cn/trident/js/jszip.min.js'></script><script src='/zh-cn/trident/js/ie-pdf-ux.js'></script></head>
+
+
+  <body class role="document" data-flavor="">
+    <div class="skip-to-main">
+      <a href="#main" >Skip to main content</a>
+    </div><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MD73T9M"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="page" class="">
+      <div id="ie-phone-menu" class=""></div>
+      <div id="ie-content-wrap" class="">
+        <nav id="ie-new-header">
+    <ul>
+        <li id="ie-phone-menu-button">
+            <a href="#">
+                <image id="" src="/zh-cn/trident/images/hamburger.svg" alt="menu" />
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.netapp.com/cn">
+                <image id="ie-header-logo" src="/zh-cn/trident/images/netapp_logo.svg" alt="netapp" />
+            </a>
+        </li>
+        <li id="ie-header-docs">
+            <a href="https://www.netapp.com/support-and-training/documentation/">文档</a>
+        </li>
+
+        <!-- Empty container to push header left with or without lang selector -->
+        <li id="empty-container" style="margin-left: auto">
+        </li>
+        <!-- Start Language Selector --><li id="ie-language-dropdown">
+            <div id="language-dropdown" class="custom-dropdown custom-dropdown-lang">
+                <div class="custom-dropdown-select custom-dropdown-select-lang">
+                    <img src="/zh-cn/trident/images/language_white_24dp.svg" class="n-globe__icon" />
+                    <span class="lang-name">简体中文</span>
+                    <img src="/zh-cn/trident/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown header invisible" />
+                    <img src="/zh-cn/trident/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup header" />
+                    </button>
+                </div>
+
+                <ul class="custom-dropdown-menu"><li>
+                        <a href="https://docs.netapp.com/zh-cn/trident/trident-reco/storage-config-best-practices.html"
+                            target="_self"><span translate="no" class="notranslate">简体中文</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/us-en/trident/trident-reco/storage-config-best-practices.html"
+                            target="_self"><span translate="no" class="notranslate">English</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/ja-jp/trident/trident-reco/storage-config-best-practices.html"
+                            target="_self"><span translate="no" class="notranslate">日本語</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/ko-kr/trident/trident-reco/storage-config-best-practices.html"
+                            target="_self"><span translate="no" class="notranslate">한국어</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/zh-tw/trident/trident-reco/storage-config-best-practices.html"
+                            target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/de-de/trident/trident-reco/storage-config-best-practices.html"
+                            target="_self"><span translate="no" class="notranslate">Deutsch</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/es-es/trident/trident-reco/storage-config-best-practices.html"
+                            target="_self"><span translate="no" class="notranslate">Español</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/fr-fr/trident/trident-reco/storage-config-best-practices.html"
+                            target="_self"><span translate="no" class="notranslate">Français</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/it-it/trident/trident-reco/storage-config-best-practices.html"
+                            target="_self"><span translate="no" class="notranslate">Italiano</span></a>
+                    </li></ul>
+            </div>
+            </li>
+        <!-- End Language Selector -->
+
+
+        <li id="ie-allnetapp">
+            <div id="allnetapp-dropdown" class="custom-dropdown custom-dropdown-allnetapp">
+                <div class="custom-dropdown-select custom-dropdown-select-allnetapp">
+                    <img src="/zh-cn/trident/images/apps_white_24dp.svg" alt="" class="allnetapp-icon" />
+                    <span class="allnetapp-name">全部来自 NetApp</span>
+                    <img src="/zh-cn/trident/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown header invisible" />
+                    <img src="/zh-cn/trident/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup header" />
+                    </button>
+                </div>
+
+                <ul class="custom-dropdown-menu allnetapp-dropdown">
+                    <li>
+                        <a href="https://bluexp.netapp.com/"
+                            target="_self"><span translate="no" class="notranslate">BlueXP</span></a>
+                    </li>
+                    <li>
+                        <a href="https://mysupport.netapp.com/site/"
+                            target="_self"><span translate="no" class="notranslate">支持</span></a>
+                    </li>
+                    <li>
+                        <a href="https://kb.netapp.com/"
+                            target="_self"><span translate="no" class="notranslate">知识库</span></a>
+                    </li>
+                    <li>
+                        <a href="https://www.netapp.com/zh-hans/support-and-training/netapp-learning-services/"
+                            target="_self"><span translate="no" class="notranslate">训练</span></a>
+                    </li>
+                </ul>
+            </div>
+
+        </li>
+
+    </ul>
+</nav>
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+
+<div id="ie-new-sidebar-collapse" style="display: none">
+    <img id="sidebar-expand" class="ie-searchbox-icon" src="/zh-cn/trident/images/double_arrow.svg" alt="" />
+</div>
+<div id="ie-new-sidebar">
+    <div id="ie-product-identity-lockup">
+        <div id="sidebar-collapse" class="">
+            <img src="/zh-cn/trident/images/double_arrow.svg" alt="" />
+        </div>
+        <div id="ie-breadcrumb" class="">
+  <ul class="ie-breadcrumb">
+    <li class="">
+      <a href="https://docs.netapp.com">所有文档</a>
+    </li>
+    
+    
+
+    
+    <li class="">
+      <a href="https://docs.netapp.com/zh-cn/astra-family/">
+        Astra
+      </a>
+    </li>
+    
+  </ul>
+  
+  <div class="ie-product-name" >
+    <!--<a href="/zh-cn/trident/">-->
+      Astra Trident
+    <!--</a>-->
+  </div>
+</div>
+
+            
+<div id="ie-selectors"><div id="version-dropdown-new" class="custom-dropdown" >
+  <div class="custom-dropdown-select unselected" title=" 24.02">
+    <label>版本</label>
+    <span translate="no" class="notranslate">24.02</span>
+    <img src="/zh-cn/trident/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown version invisible" />
+    <img src="/zh-cn/trident/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup version" />
+  </div>
+
+  <ul class="custom-dropdown-menu"><li>
+      
+      <a href="https://docs.netapp.com/zh-cn/trident/trident-reco/storage-config-best-practices.html" target="_self">
+        <span translate="no" class="notranslate"><span class="version"> 24.02</span></span>
+      </a>
+                     
+    </li>
+    <li>
+      
+      <a href="https://docs.netapp.com/zh-cn/trident-2310/trident-reco/storage-config-best-practices.html" target="_self">
+        <span translate="no" class="notranslate"><span class="version"> 23.10</span></span>
+      </a>
+                     
+    </li>
+    <li>
+      
+      <a href="https://docs.netapp.com/zh-cn/trident-2307/trident-reco/storage-config-best-practices.html" target="_self">
+        <span translate="no" class="notranslate"><span class="version"> 23.07</span></span>
+      </a>
+                     
+    </li>
+    <li>
+      
+      <a href="https://docs.netapp.com/zh-cn/trident-2304/trident-reco/storage-config-best-practices.html" target="_self">
+        <span translate="no" class="notranslate"><span class="version"> 23.04</span></span>
+      </a>
+                     
+    </li>
+    <li>
+      
+      <a href="https://docs.netapp.com/zh-cn/trident-2301/trident-reco/storage-config-best-practices.html" target="_self">
+        <span translate="no" class="notranslate"><span class="version"> 23.01</span></span>
+      </a>
+                     
+    </li>
+    <li>
+      
+      <a href="https://docs.netapp.com/zh-cn/trident-2210/trident-reco/storage-config-best-practices.html" target="_self">
+        <span translate="no" class="notranslate"><span class="version"> 22.10</span></span>
+      </a>
+                     
+    </li>
+    
+  </ul>
+</div></div>
+        
+        
+
+<div id="ie-searchbox" class="ie-searchbox-sidebar ">
+    <img class="ie-searchbox-icon" src="/zh-cn/trident/images/loupe.svg" alt=""/>
+    <div id="react-search" 
+        data-search-html="/zh-cn/trident/search.html" 
+        data-type="widget"
+        data-placeholder="搜索文档"
+        data-no-results-found="未找到 {query} 的相关结果"
+        data-did-you-mean="搜索 {suggestion}。"
+        data-no-results-found-did-you-mean="未找到 {query} 的相关结果。您是指 {suggestion}？"
+        data-results-found="找到 {hitCount} 个结果"
+        data-error-message="发生错误。请重试。"
+        data-error-reset="重置搜索"
+        data-sk-es-pf-indexes="" 
+        data-flavor="">
+    </div>
+</div>
+        
+    </div>
+    <div id="ie-new-toc"><script>
+  let sidebarAccordion = true;
+
+  /* specific css rules for Mac */
+  if(navigator.platform.match('Mac') !== null) {
+    document.body.setAttribute('class', 'OSX');
+  }
+
+</script>
+
+<div id="ie-sidebar-container">
+  <ul id="ie-sidebar-list" ><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Astra Trident 文档"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/index.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/zh-cn/trident/index.html">
+        Astra Trident 文档
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="发行说明"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 发行说明</div>-->
+         发行说明
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="新增功能"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-rn.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-rn.html">
+        新增功能
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="早期版本"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/earlier-versions.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/earlier-versions.html">
+        早期版本
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="入门"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 入门</div>-->
+         入门
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="了解 Astra Trident"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 了解 Astra Trident</div>-->
+         了解 Astra Trident
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Astra Trident概述"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/intro.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-get-started/intro.html">
+        Astra Trident概述
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Astra Trident架构"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/architecture.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-get-started/architecture.html">
+        Astra Trident架构
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="概念"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 概念</div>-->
+         概念
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="配置"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-concepts/provisioning.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-concepts/provisioning.html">
+        配置
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="卷快照"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-concepts/snapshots.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-concepts/snapshots.html">
+        卷快照
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="虚拟池"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-concepts/virtual-storage-pool.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-concepts/virtual-storage-pool.html">
+        虚拟池
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="卷访问组"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-concepts/vol-access-groups.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-concepts/vol-access-groups.html">
+        卷访问组
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="快速入门"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/quickstart.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-get-started/quickstart.html">
+        快速入门
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="要求"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/requirements.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-get-started/requirements.html">
+        要求
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="安装 Astra Trident"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 安装 Astra Trident</div>-->
+         安装 Astra Trident
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="安装概述"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/kubernetes-deploy.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-get-started/kubernetes-deploy.html">
+        安装概述
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用Trident操作员安装"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 使用Trident操作员安装</div>-->
+         使用Trident操作员安装
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="手动部署Trident操作员(标准)"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/kubernetes-deploy-operator.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-get-started/kubernetes-deploy-operator.html">
+        手动部署Trident操作员(标准)
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="手动部署Trident操作员(脱机)"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/kubernetes-deploy-operator-mirror.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-get-started/kubernetes-deploy-operator-mirror.html">
+        手动部署Trident操作员(脱机)
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用Trident Helm图表(标准)"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/kubernetes-deploy-helm.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-get-started/kubernetes-deploy-helm.html">
+        使用Trident Helm图表(标准)
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用Trident Helm图表(脱机)"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/kubernetes-deploy-helm-mirror.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-get-started/kubernetes-deploy-helm-mirror.html">
+        使用Trident Helm图表(脱机)
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="自定义Trident操作员安装"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/kubernetes-customize-deploy.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-get-started/kubernetes-customize-deploy.html">
+        自定义Trident操作员安装
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用tridentctl进行安装"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 使用tridentctl进行安装</div>-->
+         使用tridentctl进行安装
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用tridentctl进行安装"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/kubernetes-deploy-tridentctl.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-get-started/kubernetes-deploy-tridentctl.html">
+        使用tridentctl进行安装
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="自定义tridentctl安装"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-get-started/kubernetes-customize-deploy-tridentctl.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-get-started/kubernetes-customize-deploy-tridentctl.html">
+        自定义tridentctl安装
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用 Astra Trident"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 使用 Astra Trident</div>-->
+         使用 Astra Trident
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="准备工作节点"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/worker-node-prep.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-use/worker-node-prep.html">
+        准备工作节点
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="配置和管理后端"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 配置和管理后端</div>-->
+         配置和管理后端
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="概述"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/backends.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/backends.html">
+        概述
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Azure NetApp Files"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Azure NetApp Files</div>-->
+         Azure NetApp Files
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="概述"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/anf.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/anf.html">
+        概述
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="准备配置"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/anf-prep.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/anf-prep.html">
+        准备配置
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="配置选项和示例"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/anf-examples.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/anf-examples.html">
+        配置选项和示例
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="适用于 Google Cloud 的 Cloud Volumes Service"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/gcp.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/gcp.html">
+        适用于 Google Cloud 的 Cloud Volumes Service
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp HCI 或SolidFire"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/element.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/element.html">
+        NetApp HCI 或SolidFire
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="ONTAP SAN 驱动程序"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> ONTAP SAN 驱动程序</div>-->
+         ONTAP SAN 驱动程序
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="概述"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/ontap-san.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/ontap-san.html">
+        概述
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="准备配置"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/ontap-san-prep.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/ontap-san-prep.html">
+        准备配置
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="配置选项和示例"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/ontap-san-examples.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/ontap-san-examples.html">
+        配置选项和示例
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="ONTAP NAS 驱动程序"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> ONTAP NAS 驱动程序</div>-->
+         ONTAP NAS 驱动程序
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="概述"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/ontap-nas.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/ontap-nas.html">
+        概述
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="准备配置"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/ontap-nas-prep.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/ontap-nas-prep.html">
+        准备配置
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="配置选项和示例"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/ontap-nas-examples.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/ontap-nas-examples.html">
+        配置选项和示例
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="适用于 NetApp ONTAP 的 Amazon FSX"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 适用于 NetApp ONTAP 的 Amazon FSX</div>-->
+         适用于 NetApp ONTAP 的 Amazon FSX
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="概述"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/trident-fsx.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/trident-fsx.html">
+        概述
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="集成适用于ONTAP 的Amazon FSX"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/trident-fsx-prep.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/trident-fsx-prep.html">
+        集成适用于ONTAP 的Amazon FSX
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="配置选项和示例"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/trident-fsx-examples.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/trident-fsx-examples.html">
+        配置选项和示例
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="在EKS集群上配置Asta Trident EKS加载项"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/trident-aws-addon.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/trident-aws-addon.html">
+        在EKS集群上配置Asta Trident EKS加载项
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用 kubectl 创建后端"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/backend-kubectl.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/backend-kubectl.html">
+        使用 kubectl 创建后端
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="管理后端"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 管理后端</div>-->
+         管理后端
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用kubec联系 管理后端"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/backend_ops_kubectl.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/backend_ops_kubectl.html">
+        使用kubec联系 管理后端
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用trdentctrd管理后端"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/backend_ops_tridentctl.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/backend_ops_tridentctl.html">
+        使用trdentctrd管理后端
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="在后端管理选项之间移动"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/backend_options.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-use/backend_options.html">
+        在后端管理选项之间移动
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="创建和管理存储类"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 创建和管理存储类</div>-->
+         创建和管理存储类
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="创建存储类。"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/create-stor-class.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/create-stor-class.html">
+        创建存储类。
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="管理存储类"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/manage-stor-class.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/manage-stor-class.html">
+        管理存储类
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="配置和管理卷"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 配置和管理卷</div>-->
+         配置和管理卷
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="配置卷"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/vol-provision.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/vol-provision.html">
+        配置卷
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="展开卷"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/vol-expansion.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/vol-expansion.html">
+        展开卷
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="导入卷"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/vol-import.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/vol-import.html">
+        导入卷
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="在命名空间之间共享NFS卷"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/volume-share.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/volume-share.html">
+        在命名空间之间共享NFS卷
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用 CSI 拓扑"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/csi-topology.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/csi-topology.html">
+        使用 CSI 拓扑
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用快照"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/vol-snapshots.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-use/vol-snapshots.html">
+        使用快照
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="管理和监控Asta Trandent"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 管理和监控Asta Trandent</div>-->
+         管理和监控Asta Trandent
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="升级 Astra Trident"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 升级 Astra Trident</div>-->
+         升级 Astra Trident
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="升级概述"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-managing-k8s/upgrade-trident.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-managing-k8s/upgrade-trident.html">
+        升级概述
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用操作员升级"
+      data-li-level="3" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-3  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 使用操作员升级</div>-->
+         使用操作员升级
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="了解操作员升级工作流"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-managing-k8s/upgrade-operator-overview.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-managing-k8s/upgrade-operator-overview.html">
+        了解操作员升级工作流
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用操作员升级"
+      data-li-level="4#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-managing-k8s/upgrade-operator.html" 
+    ><a class="ie-sidebar-menuitem-4 " href="/zh-cn/trident/trident-managing-k8s/upgrade-operator.html">
+        使用操作员升级
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用 tridentctl 进行升级"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-managing-k8s/upgrade-tridentctl.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-managing-k8s/upgrade-tridentctl.html">
+        使用 tridentctl 进行升级
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用tridentct利 管理Astra三端"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-managing-k8s/tridentctl.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-managing-k8s/tridentctl.html">
+        使用tridentct利 管理Astra三端
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="监控 Astra Trident"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-use/monitor-trident.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-use/monitor-trident.html">
+        监控 Astra Trident
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="卸载 Astra Trident"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-managing-k8s/uninstall-trident.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-managing-k8s/uninstall-trident.html">
+        卸载 Astra Trident
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="适用于 Docker 的 Astra Trident"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 适用于 Docker 的 Astra Trident</div>-->
+         适用于 Docker 的 Astra Trident
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="部署的前提条件"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-docker/prereqs-docker.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-docker/prereqs-docker.html">
+        部署的前提条件
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="部署 Astra Trident"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-docker/deploy-docker.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-docker/deploy-docker.html">
+        部署 Astra Trident
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="升级或卸载 Trident"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-docker/upgrade-uninstall-docker.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-docker/upgrade-uninstall-docker.html">
+        升级或卸载 Trident
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="使用卷"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-docker/volumes-docker.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-docker/volumes-docker.html">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 使用卷</div>-->
+         使用卷
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="驱动程序专用的卷选项"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-docker/volume-driver-options.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-docker/volume-driver-options.html">
+        驱动程序专用的卷选项
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="收集日志"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-docker/collect-logs-docker.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-docker/collect-logs-docker.html">
+        收集日志
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="管理多个 Astra Trident 实例"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-docker/multiple-instances-docker.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-docker/multiple-instances-docker.html">
+        管理多个 Astra Trident 实例
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="存储配置选项"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-docker/stor-config.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-docker/stor-config.html">
+        存储配置选项
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="已知问题"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-docker/known-issues-docker.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-docker/known-issues-docker.html">
+        已知问题
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="最佳实践和建议"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 最佳实践和建议</div>-->
+         最佳实践和建议
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="部署"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reco/deploy-reco.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-reco/deploy-reco.html">
+        部署
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="存储配置"
+      data-li-level="2#" 
+      class="  ie-sidebar-selected    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reco/storage-config-best-practices.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-reco/storage-config-best-practices.html">
+        存储配置
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Astra Trident 集成"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reco/integrate-trident.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-reco/integrate-trident.html">
+        Astra Trident 集成
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="数据保护和灾难恢复"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reco/backup.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-reco/backup.html">
+        数据保护和灾难恢复
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="安全性"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 安全性</div>-->
+         安全性
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="安全建议"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reco/security-reco.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-reco/security-reco.html">
+        安全建议
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Linux统一密钥设置(LUKS)"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reco/security-luks.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/zh-cn/trident/trident-reco/security-luks.html">
+        Linux统一密钥设置(LUKS)
+      </a></li></ul></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="知识和支持"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 知识和支持</div>-->
+         知识和支持
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="常见问题解答"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/faq.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/faq.html">
+        常见问题解答
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="故障排除"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/troubleshooting.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/troubleshooting.html">
+        故障排除
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="获取帮助"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/get-help.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/get-help.html">
+        获取帮助
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="参考"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/zh-cn/trident/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/zh-cn/trident/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> 参考</div>-->
+         参考
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Astra Trident 端口"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reference/ports.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-reference/ports.html">
+        Astra Trident 端口
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Astra Trident REST API"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reference/rest-api.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-reference/rest-api.html">
+        Astra Trident REST API
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="命令行选项"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reference/trident-cl.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-reference/trident-cl.html">
+        命令行选项
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Kubernetes 和 Astra Trident 对象"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reference/objects.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-reference/objects.html">
+        Kubernetes 和 Astra Trident 对象
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="POD安全标准(PSS)和安全上下文限制(SCC)"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/trident-reference/pod-security.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/zh-cn/trident/trident-reference/pod-security.html">
+        POD安全标准(PSS)和安全上下文限制(SCC)
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="法律声明"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/trident-reco/storage-config-best-practices.html" 
+      dale-entry-url="/legal-notices.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/zh-cn/trident/legal-notices.html">
+        法律声明
+      </a></li></ul>
+</div>
+<script>
+
+  $(".ie-sidebar-button").click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    expandedLI = $('li.ie-sidebar-expand')
+
+    const li = $(this).closest("li");
+
+    const parentsLI = $(li).parents('li');
+
+    expandedLI.map(element => {
+      if (sidebarAccordion && !li.hasClass('ie-sidebar-expand') && jQuery.inArray(expandedLI[element], parentsLI) == -1) {
+        $(expandedLI[element]).toggleClass('ie-sidebar-expand');
+        $(expandedLI[element]).children("ul").animate({ height: 'toggle' }, 400, function () {
+          $(li).children("ul").toggleClass('ie-sidebar-open');
+
+        })
+      }
+
+    })
+
+    $(li).toggleClass('ie-sidebar-expand');
+    $(li).children("ul").animate({ height: 'toggle' }, 400, function () {
+      $(li).children("ul").toggleClass('ie-sidebar-open');
+    })
+  });
+
+
+  
+    $("li.ie-sidebar-selected").parents('ul').toggleClass("ie-sidebar-open");
+    $("li.ie-sidebar-selected").toggleClass("ie-sidebar-expand")
+    $("ul.ie-sidebar-open").parent().toggleClass("ie-sidebar-expand");
+    $("li.ie-sidebar-selected").children('ul').toggleClass("ie-sidebar-open")
+  
+  
+</script>
+    </div>
+</div>
+<script>
+
+    
+    let sidebarScrollTopPosition = 0;
+    $("#ie-new-toc").on("scroll", function () {
+        if (sidebarScrollTopPosition == 0) {
+            $.cookie("sidebarScroll", $("#ie-new-toc").scrollTop(), {
+                path: "/zh-cn/trident"
+            });
+        }
+
+        if ($("#ie-new-toc").scrollTop() > 0) {
+            $('#ie-product-identity-lockup').addClass('ie-addShadow');
+        } else {
+            $('#ie-product-identity-lockup').removeClass('ie-addShadow');
+        }
+    });
+
+    $(function () {
+        if ($.cookie("sidebarScroll")) {
+            $("#ie-new-toc").scrollTop($.cookie("sidebarScroll"));
+        }
+    });
+
+    function setSidebarBottom() {
+        const footerGap = PXinViewport($(".n-footer"));
+        document.getElementById("ie-new-sidebar").style.bottom = Math.max(0, footerGap) + "px";
+    }
+
+    window.onscroll = () => {
+        setSidebarBottom();
+    };
+
+    $("#sidebar-collapse").click(function (e) {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        e.preventDefault();
+        const width = $(".ie-content-pane").width();
+        const marginLeft = parseInt($(".ie-content-pane").css('marginLeft'));
+
+        if ($.cookie("sidebarScroll")) {
+            sidebarScrollTopPosition = $.cookie("sidebarScroll");
+        }
+
+        $("#ie-new-sidebar").animate({ width: 'toggle' }, 350, function () {
+            $("#ie-new-sidebar-collapse").show();
+            $("#ie-new-sidebar").removeClass("open")
+            $("#ie-new-sidebar").addClass("close")
+            $("#ie-new-sidebar").removeAttr("style")
+        });
+        $(".ie-content-pane").animate({ width: (width + sidebarWidth), marginLeft: (marginLeft - sidebarWidth) }, 350, function () {
+            resizeContent()
+        })
+
+    });
+    $("#sidebar-expand").click(function (e) {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        e.preventDefault();
+        const width = $(".ie-content-pane").width();
+        const marginLeft = parseInt($(".ie-content-pane").css('marginLeft'));
+
+        $("#ie-new-sidebar").animate({ width: 'toggle' }, 250, function () {
+            $('#ie-new-sidebar').css('display', 'flex');
+            $("#ie-new-sidebar-collapse").hide();
+            $("#ie-new-sidebar").removeClass("close")
+            $("#ie-new-sidebar").addClass("open")
+            setSidebarBottom();
+
+            if (sidebarScrollTopPosition != 0) {
+                $.cookie("sidebarScroll", sidebarScrollTopPosition, {
+                    path: "/zh-cn/trident"
+                })
+                $("#ie-new-toc").scrollTop(sidebarScrollTopPosition);
+                sidebarScrollTopPosition = 0;
+            }
+        });
+        $(".ie-content-pane").animate({ width: (width - sidebarWidth), 'marginLeft': (marginLeft + sidebarWidth) }, 250, function () {
+            resizeContent()
+        })
+    });
+    function resizeContent() {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        const rightNavbarVisible =  $("#ie-right-navbar").css('display') && $("#ie-right-navbar").css('display') != 'none';
+        const sidebarVisible = $("#ie-new-sidebar").css('display') != 'none';
+        const rightNavbarWidth = $("#ie-right-navbar").width();
+        const rightNavbarCollapseWidth = $("#ie-right-navbar-collapse").width();
+        const rightNavbarCollapseVisible = $("#ie-right-navbar-collapse").css('display') && $("#ie-right-navbar-collapse").css('display') != 'none';
+        
+        if (rightNavbarVisible && sidebarVisible) {
+            $(".ie-content-pane").width(`calc(100% - ${sidebarWidth + rightNavbarWidth}px)`)
+            $(".ie-content-pane").css('marginLeft', `${sidebarWidth}px`)
+        } else if (sidebarVisible) {
+            $(".ie-content-pane").css('marginLeft', `${sidebarWidth}px`)
+            if (rightNavbarCollapseVisible) {
+                $(".ie-content-pane").width(`calc(100% - ${sidebarWidth + rightNavbarCollapseWidth}px)`)
+            } else {
+                $(".ie-content-pane").width(`calc(100% - ${$("#ie-new-sidebar").width()}px)`)
+            }
+
+        } else if (rightNavbarVisible) {
+            $(".ie-content-pane").css('marginLeft', `${$("#ie-new-sidebar-collapse").width()}px`)
+            $(".ie-content-pane").width(`calc(100% - ${rightNavbarWidth}px)`)
+        } else {
+            $(".ie-content-pane").css('marginLeft', `${$("#ie-new-sidebar-collapse").width()}px`)
+            if (rightNavbarCollapseVisible) {
+                $(".ie-content-pane").width(`calc(100% - ${rightNavbarCollapseWidth}px)`);
+            } else {
+                $(".ie-content-pane").width(`calc(100% - ${$("#ie-new-sidebar-collapse").width()}px) `);
+            }
+            
+        }
+    }
+    $(window).on("resize load", function () {
+        setSidebarBottom();
+        resizeContent()
+    });
+
+
+</script>
+
+<div class="ie-content-pane ie-component-detail-content ie-component-detail-content--show-code">
+    <!-- Begin of page container --><article class="page-content" id="main">
+      <!-- include utility.html -->
+      <div class="ie-info-disclaimer">
+    <span>
+      <div class="ie-info-disclaimer-container">
+        <div class="ie-info-disclaimer-icon">
+          <img src="/zh-cn/trident/images/notification-icons.svg" class="luci-icon" alt="" />
+        </div>
+        <div class="ie-info-disclaimer-content">
+          <span> 简体中文版经机器翻译而成，仅供参考。如与英语版出现任何冲突，应以英语版为准。 </span>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </span>
+  </div><div class="ie-component-detail-heading-wrap">
+  <h1 class="ie-component-detail-heading">存储配置</h1>
+</div>
+
+<div id="ie-byline">
+  
+<div class="page-details">
+    
+        
+            <time datetime="2024-03-07 06:16:35 +0000">03/07/2024</time>
+        
+    
+    
+        <span>贡献者
+        </span>
+    
+    
+</div>
+<div class="page-controls">
+    <div id="contribute-dropdown" class="custom-dropdown custom-dropdown-contrib" >
+        <div class="custom-dropdown-select custom-dropdown-select-contrib">
+        <span class="contrib-name"><img src="/zh-cn/trident/images/discuss-sm.svg" alt="" class="github-icon" />建议更改</span>
+        <img src="/zh-cn/trident/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown invisible" />
+        <img src="/zh-cn/trident/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup" />
+        </div>
+        <ul class="custom-dropdown-menu suggested-changes-dropdown"><li>
+                <a target="_blank" href="https://github.com/NetAppDocs/trident.zh-cn/issues/new?template=new-from-page.yml&page-url=https://docs.netapp.com/zh-cn/trident/trident-reco/storage-config-best-practices.html&page-title=存储配置" class="page-nav-contribute-link" role="button">请求文档更改</a>
+            </li><li> 
+                <a target="_blank" href="https://github.com/NetAppDocs/trident/blob/main/trident-reco/storage-config-best-practices.adoc" class="page-nav-contribute-link" role="button">编辑此页面</a>
+            </li><li><a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  >了解如何贡献</a></li>
+        </ul>
+    </div>
+    <div id="pdf-control-container">
+        <div class="n-pdf-header">
+            <a id="toggleButtonPdf" class="n-pdf-button" type="button">
+                <img class="adobe-icon" src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>PDF<img src="/zh-cn/trident/images/dropdown-arrow.svg" class="custom-icon" alt="" />
+            </a>
+        </div>
+        <div class="n-pdf-body-container">
+            <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
+                    
+                    
+                    
+                    <a target="_blank" class="pdf-download-link" href="/zh-cn/trident/pdfs/fullsite-sidebar/Asta_Trident_24_02文档.pdf" >
+                    <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>本文档站点的 PDF</a>
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/发行说明.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            发行说明
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/入门.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            入门
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/了解_Astra_Trident.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            了解 Astra Trident
+          </a>
+          
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/概念.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            概念
+          </a>
+          
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/安装_Astra_Trident.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            安装 Astra Trident
+          </a>
+          
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用Trident操作员安装.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            使用Trident操作员安装
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用tridentctl进行安装.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            使用tridentctl进行安装
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用_Astra_Trident.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            使用 Astra Trident
+          </a>
+          
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/配置和管理后端.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            配置和管理后端
+          </a>
+          
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/Azure_NetApp_Files.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Azure NetApp Files
+          </a>
+          
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/ONTAP_SAN_驱动程序.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            ONTAP SAN 驱动程序
+          </a>
+          
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/ONTAP_NAS_驱动程序.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            ONTAP NAS 驱动程序
+          </a>
+          
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/适用于_NetApp_ONTAP_的_Amazon_FSX.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            适用于 NetApp ONTAP 的 Amazon FSX
+          </a>
+          
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/管理后端.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            管理后端
+          </a>
+          
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/创建和管理存储类.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            创建和管理存储类
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/配置和管理卷.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            配置和管理卷
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/管理和监控Asta_Trandent.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            管理和监控Asta Trandent
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/升级_Astra_Trident.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            升级 Astra Trident
+          </a>
+          
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用操作员升级.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            使用操作员升级
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/适用于_Docker_的_Astra_Trident.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            适用于 Docker 的 Astra Trident
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/使用卷.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            使用卷
+          </a>
+          
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/最佳实践和建议.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            最佳实践和建议
+          </a>
+          
+
+
+    <ul class="subfolders" id="pdf-remove" style="display:none;"><li class="active"></li></ul>
+  
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/安全性.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            安全性
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/知识和支持.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            知识和支持
+          </a>
+          
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/zh-cn/trident/pdfs/sidebar/参考.pdf" 
+            
+          >
+            <img src="/zh-cn/trident/images/pdf-icon.png" alt="" width="16" height="16"/>
+            参考
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+</li></ul>
+            <div class="zip-pdf-link-container" style="display: none;">   
+                <a href="#" id="zipPdf">
+                <img src="/zh-cn/trident/images/pdf-zip.png" alt="" width="16" height="16"/>
+                <pre>单独 PDF 文档的收集<span class="zip-size"></span></pre>
+                </a><div id="zip-link-popup" class="hide">
+    <div class="inner-modal">
+        <div class="downloading-progress">
+            <div class="spinner"></div>
+            <h1>Creating your file...</h1>
+            <div>This may take a few minutes. Thanks for your patience.</div>
+            <button class="cancel-download-btn" type="button">Cancel</button>
+        </div>
+        <div class="download-complete hide">
+            <div class="done-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+            </div>
+            <div>Your file is ready</div>
+            <button class="cancel-download-btn" type="button">OK</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(".cancel-download-btn").click(function(){
+        $("#zip-link-popup").addClass("hide");
+        $("#zip-link-popup .downloading-progress").removeClass("hide");
+        $("#zip-link-popup .download-complete").addClass("hide");
+    });
+</script></div>
+        </div>
+    </div>        
+<script>
+$("#toggleContainerPdf li.active:last-child").parents('ul.subfolders').toggle('display');
+$("#toggleButtonPdf").on('click', function(e){ 
+    e.stopPropagation();
+    $("#toggleContainerPdf").toggle('display');
+    $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+});
+
+//hide is by clicking outside pdfcontainer
+$(document).on('click', function (e) {
+    if ($('#toggleContainerPdf').is(':visible') && !$('.n-pdf-body-container').is(e.target) && !$('.n-pdf-body-container').has(e.target).length)  {
+        
+        $("#toggleContainerPdf").toggle('display');
+        $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+        $("#toggleButtonPdf").removeClass("active");
+    }
+});
+</script>
+<script>
+    function getPdfLocation() {
+        const pdfLocation = window.scrollX + document.querySelector('#pdf-control-container').getBoundingClientRect().left
+        if (pdfLocation < 450) {
+            $(".n-pdf-body-container").addClass("block")
+        } else {
+            $(".n-pdf-body-container").removeClass("block")
+        }
+    
+    }
+    $( window ).on( "resize", function() {
+        getPdfLocation()
+} );
+</script>
+<script>
+    const pdfButtonWidth =  $(".n-pdf-header").width();
+    const pdfMenuWidth = $(".n-pdf-body-container").width();
+    $(".n-pdf-body-container").css('margin-left', `calc(${pdfButtonWidth - pdfMenuWidth}px)`);
+</script>
+</div>
+
+    
+
+</div>
+
+
+
+
+<div class="content-to-index">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>NetApp产品组合中的每个存储平台都具有独特的功能、无论应用程序是容器化还是非容器化、都能从中受益。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="平台概述">平台概述</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Trident 可与 ONTAP 和 Element 结合使用。没有一个平台比另一个平台更适合所有应用程序和场景，但是，在选择平台时，应考虑应用程序和设备管理团队的需求。</p>
+</div>
+<div class="paragraph">
+<p>您应遵循使用所使用协议的主机操作系统的基线最佳实践。或者，您也可以考虑将应用程序最佳实践（如果有）与后端，存储类和 PVC 设置结合使用，以便为特定应用程序优化存储。</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ontap-和-cloud-volumes-ontap-最佳实践">ONTAP 和 Cloud Volumes ONTAP 最佳实践</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>了解为 Trident 配置 ONTAP 和 Cloud Volumes ONTAP 的最佳实践。</p>
+</div>
+<div class="paragraph">
+<p>以下建议是为容器化工作负载配置 ONTAP 的准则，容器化工作负载会占用 Trident 动态配置的卷。应考虑并评估每个问题在您的环境中的适用性。</p>
+</div>
+<div class="sect2">
+<h3 id="使用专用于-trident-的-svm">使用专用于 Trident 的 SVM</h3>
+<div class="paragraph">
+<p>Storage Virtual Machine （ SVM ）可在 ONTAP 系统上的租户之间实现隔离和管理隔离。通过将 SVM 专用于应用程序，可以委派特权并应用最佳实践来限制资源消耗。</p>
+</div>
+<div class="paragraph">
+<p>可通过多种方法管理 SVM ：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>在后端配置中提供集群管理接口以及相应的凭据，并指定 SVM 名称。</p>
+</li>
+<li>
+<p>使用 ONTAP 系统管理器或命令行界面为 SVM 创建专用管理接口。</p>
+</li>
+<li>
+<p>与 NFS 数据接口共享管理角色。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>在每种情况下，接口都应位于 DNS 中，配置 Trident 时应使用 DNS 名称。这有助于在不使用网络身份保留的情况下实施某些灾难恢复方案，例如 SVM-DR 。</p>
+</div>
+<div class="paragraph">
+<p>在为 SVM 配置专用管理 LIF 或共享管理 LIF 之间没有任何偏好，但是，您应确保网络安全策略与您选择的方法一致。无论如何，管理 LIF 应可通过 DNS 访问，以实现最大的灵活性 <a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-dap/GUID-B9E36563-1C7A-48F5-A9FF-1578B99AADA9.html" target="_blank" rel="noopener">"SVM-DR"</a> 与 Trident 结合使用。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="限制最大卷数">限制最大卷数</h3>
+<div class="paragraph">
+<p>ONTAP 存储系统具有最大卷数，具体取决于软件版本和硬件平台。请参见 <a href="https://hwu.netapp.com/" target="_blank" rel="noopener">"NetApp Hardware Universe"</a> 以 ONTAP 确定确切限制。当卷计数用尽时，配置操作不仅会对 Trident 失败，而且会对所有存储请求失败。</p>
+</div>
+<div class="paragraph">
+<p>Trident 的 <code>ontap-nas</code> 和 <code>ontap-san</code> 驱动程序为创建的每个 Kubernetes 永久性卷（ PV ）配置一个 FlexVolume 。<code>ontap-nas-economy</code> 驱动程序会为每 200 个 PV 创建大约一个 FlexVolume （可在 50 到 300 之间配置）。<code>ontap-san-economy-经济</code> 驱动程序会为每 100 个 PV 创建大约一个 FlexVolume （可配置为 50 到 200 ）。要防止 Trident 占用存储系统上的所有可用卷，您应对 SVM 设置限制。您可以从命令行执行此操作：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>vserver modify -vserver &lt;svm_name&gt; -max-volumes &lt;num_of_volumes&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>max-volumes</code> 的值因环境的特定条件而异：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ONTAP 集群中现有卷的数量</p>
+</li>
+<li>
+<p>希望在 Trident 之外为其他应用程序配置的卷数</p>
+</li>
+<li>
+<p>Kubernetes 应用程序预期占用的永久性卷数</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>max-volumes</code> 值是在 ONTAP 集群中的所有节点上配置的总卷数，而不是在单个 ONTAP 节点上配置的总卷数。因此，在某些情况下， ONTAP 集群节点所配置的 Trident 卷可能远远多于或少于其他节点。</p>
+</div>
+<div class="paragraph">
+<p>例如，一个双节点 ONTAP 集群最多可以托管 2000 个 FlexVolume 。将最大卷数设置为 1250 似乎非常合理。但是，如果只是 <a href="https://library.netapp.com/ecmdocs/ECMP1368859/html/GUID-3AC7685D-B150-4C1F-A408-5ECEB3FF0011.html" target="_blank" rel="noopener">"聚合"</a> 从一个节点分配给 SVM ，或者从一个节点分配的聚合无法配置（例如，由于容量），则另一个节点将成为所有 Trident 配置卷的目标。这意味着，在达到 <code>max-volumes</code> 值之前，可能会达到该节点的卷限制，从而影响使用该节点的 Trident 和其他卷操作。* 您可以通过确保将集群中每个节点的聚合分配给 Trident 使用的 SVM 来避免这种情况。 *</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="限制-trident-创建的卷的最大大小">限制 Trident 创建的卷的最大大小</h3>
+<div class="paragraph">
+<p>要为 Trident 可以创建的卷配置最大大小，请在 <code>backend.json</code> 定义中使用 <code>limitVolumeSize</code> 参数。</p>
+</div>
+<div class="paragraph">
+<p>除了控制存储阵列上的卷大小之外，您还应利用 Kubernetes 功能。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="配置-trident-以使用双向-chap">配置 Trident 以使用双向 CHAP</h3>
+<div class="paragraph">
+<p>您可以在后端定义中指定 CHAP 启动程序以及目标用户名和密码，并在 SVM 上启用 Trident CHAP 。使用 <code>useCHAP</code> 参数在后端配置中、Trident使用CHAP对ONTAP 后端的iSCSI连接进行身份验证。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="创建并使用-svm-qos-策略">创建并使用 SVM QoS 策略</h3>
+<div class="paragraph">
+<p>利用应用于 SVM 的 ONTAP QoS 策略，限制 Trident 配置的卷可使用的 IOPS 数量。这有助于实现 <a href="http://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-perf-mon/GUID-77DF9BAF-4ED7-43F6-AECE-95DFB0680D2F.html?cp=7_1_2_1_2" target="_blank" rel="noopener">"防止抢占资源"</a> 或控制不足的容器，以使其不会影响 Trident SVM 以外的工作负载。</p>
+</div>
+<div class="paragraph">
+<p>您可以通过几个步骤为 SVM 创建 QoS 策略。有关最准确的信息，请参见适用于您的 ONTAP 版本的文档。以下示例将创建一个 QoS 策略，将 SVM 可用的总 IOPS 限制为 5000 。</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre># create the policy group for the SVM
+qos policy-group create -policy-group &lt;policy_name&gt; -vserver &lt;svm_name&gt; -max-throughput 5000iops
+
+# assign the policy group to the SVM, note this will not work
+# if volumes or files in the SVM have existing QoS policies
+vserver modify -vserver &lt;svm_name&gt; -qos-policy-group &lt;policy_name&gt;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>此外，如果您的 ONTAP 版本支持此功能，则可以考虑使用最低 QoS 来保证容器化工作负载的吞吐量。自适应 QoS 与 SVM 级别策略不兼容。</p>
+</div>
+<div class="paragraph">
+<p>专用于容器化工作负载的 IOPS 数量取决于许多方面。其中包括：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>使用存储阵列的其他工作负载。如果存在与 Kubernetes 部署无关的其他工作负载，则应注意利用存储资源，以确保这些工作负载不会意外受到不利影响。</p>
+</li>
+<li>
+<p>容器中运行的预期工作负载。如果 IOPS 要求较高的工作负载将在容器中运行，则 QoS 策略较低会导致出现不良体验。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>请务必记住，在 SVM 级别分配的 QoS 策略会导致配置到 SVM 的所有卷共享同一个 IOPS 池。如果一个或少量容器化应用程序的 IOPS 要求较高，则可能会成为其他容器化工作负载的抢占资源的应用程序。如果是这种情况，您可能需要考虑使用外部自动化来分配每个卷的 QoS 策略。</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/important.svg" alt="重要说明">
+</td>
+<td class="content">
+如果 ONTAP 版本早于 9.8 ，则应将此 QoS 策略组分配给 SVM * 仅 * 。
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="为-trident-创建-qos-策略组">为 Trident 创建 QoS 策略组</h3>
+<div class="paragraph">
+<p>服务质量（ QoS ）可确保关键工作负载的性能不会因争用工作负载而降级。ONTAP QoS 策略组为卷提供 QoS 选项，并使用户能够为一个或多个工作负载定义吞吐量上限。有关QoS的详细信息、请参见 <a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-perf-mon/GUID-77DF9BAF-4ED7-43F6-AECE-95DFB0680D2F.html" target="_blank" rel="noopener">"通过 QoS 保证吞吐量"</a>。<br>
+您可以在后端或存储池中指定 QoS 策略组，这些策略组将应用于该池或后端创建的每个卷。</p>
+</div>
+<div class="paragraph">
+<p>ONTAP 有两种类型的 QoS 策略组：传统和自适应。传统策略组以 IOPS 为单位提供固定的最大（或最小）吞吐量。自适应 QoS 会根据工作负载大小自动扩展吞吐量，并在工作负载大小发生变化时保持 IOPS 与 TBSGB 的比率。如果您要在大型部署中管理数百或数千个工作负载，则这将带来显著优势。</p>
+</div>
+<div class="paragraph">
+<p>创建 QoS 策略组时，请考虑以下事项：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>您应在后端配置的 <code>defaults</code> 块中设置 <code>qosPolicy</code> 密钥。请参见以下后端配置示例：</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>  ---
+version: 1
+storageDriverName: ontap-nas
+managementLIF: 0.0.0.0
+dataLIF: 0.0.0.0
+svm: svm0
+username: user
+password: pass
+defaults:
+  qosPolicy: standard-pg
+storage:
+- labels:
+    performance: extreme
+  defaults:
+    adaptiveQosPolicy: extremely-adaptive-pg
+- labels:
+    performance: premium
+  defaults:
+    qosPolicy: premium-pg</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>您应该对每个卷应用策略组，以便每个卷都获得策略组指定的整个吞吐量。不支持共享策略组。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>有关QoS策略组的详细信息、请参阅 <a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-cmpr-980/TOC__qos.html" target="_blank" rel="noopener">"ONTAP 9.8 QoS 命令"</a>。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="将存储资源访问限制为-kubernetes-集群成员">将存储资源访问限制为 Kubernetes 集群成员</h3>
+<div class="paragraph">
+<p>限制对 Trident 创建的 NFS 卷和 iSCSI LUN 的访问是 Kubernetes 部署安全状况的重要组成部分。这样可以防止不属于 Kubernetes 集群的主机访问卷并可能意外修改数据。</p>
+</div>
+<div class="paragraph">
+<p>请务必了解命名空间是 Kubernetes 中资源的逻辑边界。假设同一命名空间中的资源可以共享，但重要的是，没有跨命名空间功能。这意味着，即使 PV 是全局对象，但在绑定到 PVC 时，它们只能由同一命名空间中的 Pod 访问。* 请务必确保使用命名空间在适当时提供分隔。 *</p>
+</div>
+<div class="paragraph">
+<p>大多数组织在 Kubernetes 环境中的数据安全方面的主要顾虑是，容器中的进程可以访问挂载到主机但不适用于容器的存储。  <a href="https://en.wikipedia.org/wiki/Linux_namespaces" target="_blank" rel="noopener">"命名空间"</a> 旨在防止这种类型的损害。但是，存在一个例外：特权容器。</p>
+</div>
+<div class="paragraph">
+<p>有权限的容器是指运行时拥有比正常情况更多主机级别权限的容器。默认情况下，这些选项不会被拒绝，因此请确保使用禁用此功能 <a href="https://kubernetes.io/docs/concepts/policy/pod-security-policy/" target="_blank" rel="noopener">"POD 安全策略"</a>。</p>
+</div>
+<div class="paragraph">
+<p>对于需要从 Kubernetes 和外部主机访问的卷，应采用传统方式管理存储，并由管理员引入 PV ，而不是由 Trident 管理。这样可以确保只有在 Kubernetes 和外部主机断开连接且不再使用此卷时，才会销毁此存储卷。此外，还可以应用自定义导出策略，以便从 Kubernetes 集群节点和 Kubernetes 集群以外的目标服务器进行访问。</p>
+</div>
+<div class="paragraph">
+<p>对于具有专用基础架构节点(例如OpenShift)或其他无法计划用户应用程序的节点的部署、应使用单独的导出策略进一步限制对存储资源的访问。其中包括为部署到这些基础架构节点的服务（例如 OpenShift 指标和日志记录服务）以及部署到非基础架构节点的标准应用程序创建导出策略。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="使用专用导出策略">使用专用导出策略</h3>
+<div class="paragraph">
+<p>您应确保每个后端都有一个导出策略，该策略仅允许访问 Kubernetes 集群中的节点。｛\f270可以自动创建和管理导出策略｝｛\f151。｝通过这种方式， Trident 会限制对其配置给 Kubernetes 集群中节点的卷的访问，并简化节点的添加 / 删除。</p>
+</div>
+<div class="paragraph">
+<p>或者，您也可以手动创建导出策略，并使用一个或多个导出规则来填充此策略，这些导出规则用于处理每个节点访问请求：</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>使用 <code>vserver export-policy create</code> ONTAP 命令行界面命令创建导出策略。</p>
+</li>
+<li>
+<p>使用 <code>vserver export-policy rule create</code> ONTAP 命令行界面命令向导出策略添加规则。</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>通过运行这些命令，您可以限制哪些 Kubernetes 节点可以访问数据。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="禁用-showmount-用于应用程序svm">禁用 <code>showmount</code> 用于应用程序SVM</h3>
+<div class="paragraph">
+<p>通过 <code>showmount</code> 功能， NFS 客户端可以向 SVM 查询可用 NFS 导出列表。部署到 Kubernetes 集群的 Pod 可以对数据 LIF 执行问题描述 <code>showmount -e</code> 命令，并接收可用挂载列表，包括其无权访问的挂载。虽然这本身并不会影响安全，但它确实会提供不必要的信息，可能有助于未经授权的用户连接到 NFS 导出。</p>
+</div>
+<div class="paragraph">
+<p>您应使用 SVM 级别的 ONTAP 命令行界面命令禁用 <code>showmount</code> ：</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>vserver nfs modify -vserver &lt;svm_name&gt; -showmount disabled</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="solidfire-最佳实践">SolidFire 最佳实践</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>了解为 Trident 配置 SolidFire 存储的最佳实践。</p>
+</div>
+<div class="sect2">
+<h3 id="创建-solidfire-帐户">创建 SolidFire 帐户</h3>
+<div class="paragraph">
+<p>每个 SolidFire 帐户都代表一个唯一的卷所有者，并接收自己的一组质询握手身份验证协议（ Challenge-Handshake Authentication Protocol ， CHAP ）凭据。您可以使用帐户名称和相对 CHAP 凭据或通过卷访问组访问分配给帐户的卷。一个帐户最多可以分配 2 ， 000 个卷，但一个卷只能属于一个帐户。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="创建-qos-策略">创建 QoS 策略</h3>
+<div class="paragraph">
+<p>如果要创建并保存可应用于多个卷的标准化服务质量设置，请使用 SolidFire 服务质量（ QoS ）策略。</p>
+</div>
+<div class="paragraph">
+<p>您可以按卷设置 QoS 参数。通过设置三个可配置的参数来定义 QoS ，可以确保每个卷的性能：最小 IOPS ，最大 IOPS 和突发 IOPS 。</p>
+</div>
+<div class="paragraph">
+<p>以下是 4 KB 块大小的可能最小，最大和突发 IOPS 值。</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">IOPS 参数</th>
+<th class="tableblock halign-left valign-top">定义</th>
+<th class="tableblock halign-left valign-top">最小value</th>
+<th class="tableblock halign-left valign-top">默认值</th>
+<th class="tableblock halign-left valign-top">最大值（ 4 KB ）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>最小 IOPS</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>卷的性能保障级别。</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">50</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>50</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>15000</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>最大 IOPS</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>性能不会超过此限制。</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">50</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>15000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>200,000</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>突发 IOPS</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>在短时突发情形下允许的最大 IOPS 。</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">50</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>15000</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>200,000</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="备注">
+</td>
+<td class="content">
+虽然最大 IOPS 和突发 IOPS 可设置为高达 200 ， 000 ，但卷的实际最大性能受集群使用情况和每节点性能的限制。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>块大小和带宽会直接影响 IOPS 数量。随着块大小的增加，系统会将带宽增加到处理较大块大小所需的级别。随着带宽的增加，系统能够达到的 IOPS 数量也会减少。请参见 <a href="https://www.netapp.com/pdf.html?item=/media/10502-tr-4644pdf.pdf" target="_blank" rel="noopener">"SolidFire 服务质量"</a> 有关 QoS 和性能的详细信息。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="solidfire-身份验证">SolidFire 身份验证</h3>
+<div class="paragraph">
+<p>Element 支持两种身份验证方法： CHAP 和卷访问组（ VAG ）。CHAP 使用 CHAP 协议向后端对主机进行身份验证。卷访问组控制对其配置的卷的访问。NetApp 建议使用 CHAP 进行身份验证，因为它更简单，并且没有扩展限制。</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/trident/images/note.svg" alt="备注">
+</td>
+<td class="content">
+具有增强型 CSI 配置程序的 Trident 支持使用 CHAP 身份验证。VAG 只能在传统的非 CSI 操作模式下使用。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>只有基于帐户的访问控制才支持 CHAP 身份验证（验证启动程序是否为目标卷用户）。如果使用 CHAP 进行身份验证，则可以使用两个选项：单向 CHAP 和双向 CHAP 。单向 CHAP 使用 SolidFire 帐户名称和启动程序密钥对卷访问进行身份验证。双向 CHAP 选项可提供最安全的卷身份验证方法，因为卷会通过帐户名称和启动程序密钥对主机进行身份验证，然后主机通过帐户名称和目标密钥对卷进行身份验证。</p>
+</div>
+<div class="paragraph">
+<p>但是，如果无法启用 CHAP 且需要使用 VAG ，请创建访问组并将主机启动程序和卷添加到此访问组。添加到访问组的每个 IQN 都可以使用或不使用 CHAP 身份验证访问组中的每个卷。如果将 iSCSI 启动程序配置为使用 CHAP 身份验证，则会使用基于帐户的访问控制。如果 iSCSI 启动程序未配置为使用 CHAP 身份验证，则会使用卷访问组访问控制。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="如何查找更多信息">如何查找更多信息</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>下面列出了一些最佳实践文档。搜索 <a href="https://www.netapp.com/search/" target="_blank" rel="noopener">"NetApp 库"</a> 对于最新版本。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>ONTAP *</p>
+</li>
+<li>
+<p><a href="https://www.netapp.com/us/media/tr-4067.pdf" target="_blank" rel="noopener">"NFS 最佳实践和实施指南"</a></p>
+</li>
+<li>
+<p><a href="http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanag/home.html" target="_blank" rel="noopener">"《 SAN 管理指南》"</a> （对于 iSCSI ）</p>
+</li>
+<li>
+<p><a href="http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-iscsi-rhel-cg/home.html" target="_blank" rel="noopener">"适用于 RHEL 的 iSCSI 快速配置"</a></p>
+</li>
+<li>
+<p>Element 软件 *</p>
+</li>
+<li>
+<p><a href="https://www.netapp.com/pdf.html?item=/media/10507-tr4639pdf.pdf" target="_blank" rel="noopener">"配置适用于 Linux 的 SolidFire"</a></p>
+</li>
+<li>
+<p>NetApp HCI *</p>
+</li>
+<li>
+<p><a href="https://docs.netapp.com/us-en/hci/docs/hci_prereqs_overview.html" target="_blank" rel="noopener">"NetApp HCI 部署前提条件"</a></p>
+</li>
+<li>
+<p><a href="https://docs.netapp.com/us-en/hci/docs/concept_nde_access_overview.html" target="_blank" rel="noopener">"访问 NetApp 部署引擎"</a></p>
+</li>
+<li>
+<p>应用程序最佳实践信息 *</p>
+</li>
+<li>
+<p><a href="https://www.netapp.com/us/media/tr-4722.pdf" target="_blank" rel="noopener">"基于 ONTAP 的 MySQL 最佳实践"</a></p>
+</li>
+<li>
+<p><a href="https://www.netapp.com/pdf.html?item=/media/10510-tr-4605.pdf" target="_blank" rel="noopener">"基于 SolidFire 的 MySQL 最佳实践"</a></p>
+</li>
+<li>
+<p><a href="http://www.netapp.com/us/media/tr-4635.pdf" target="_blank" rel="noopener">"NetApp SolidFire 和 Cassandra"</a></p>
+</li>
+<li>
+<p><a href="http://www.netapp.com/us/media/tr-4606.pdf" target="_blank" rel="noopener">"SolidFire 上的 Oracle 最佳实践"</a></p>
+</li>
+<li>
+<p><a href="http://www.netapp.com/us/media/tr-4610.pdf" target="_blank" rel="noopener">"SolidFire 上的 PostgreSQL 最佳实践"</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>并非所有应用程序都有特定的准则，与您的 NetApp 团队合作并使用非常重要 <a href="https://www.netapp.com/search/" target="_blank" rel="noopener">"NetApp 库"</a> 以查找最新文档。</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  
+  <!-- Start Page Toolbar -->
+<div id="ie-right-navbar-collapse" class="close">
+  <img id="navbar-expand" class="ie-searchbox-icon" src="/zh-cn/trident/images/double_arrow.svg" alt="" />
+</div>
+<div id="ie-right-navbar" class="open">
+  <div id="right-navbar-collapse">
+    <img src="/zh-cn/trident/images/double_arrow.svg" alt="" />
+  </div>
+  <div class="page-nav-container">
+    <nav class="page-nav-fixed">
+      <div class="page-nav-title">在本页面中</div>
+      <div class="page-nav-links">
+        <ul class="page-nav-inner" id="page-menu"></ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+<script>
+  resizeContent();
+  function setRightBarHeight() {
+    var h = 0;
+
+    // header 1
+    h += PXinViewport($('.n-footer'));
+    h += PXinViewport($('#ie-new-header'));
+
+    if ($('#ie-right-navbar').length) {
+      $('#ie-right-navbar').css({ height: `calc(100vh - ${h}px)` });
+    }
+    if ($('.page-nav-links').length) {
+      h += 98;
+      $('.page-nav-links').css({ height: `calc(100vh - ${h}px)` });
+    }
+  }
+
+  $(document).ready(function () {
+    // PAGE NAV - Click
+    const MASTHEAD_OFFSET = 65;
+    const SECTIONS = $("main h2, main h3");
+    let calculateActiveSection = false;
+    setTimeout(() => {
+      calculateActiveSection = true;
+    }, 100)
+
+    $(".page-nav__link").click(function (event) {
+      calculateActiveSection = false;
+      $(".page-nav__link").removeClass('page-nav__link--active');
+      var target = $(event.target);
+      target.addClass('page-nav__link--active');
+      location.hash = event.target.hash;
+      setTimeout(() => {
+        calculateActiveSection = true;
+      }, 100)
+
+    });
+
+    // PAGE NAV - Scroll
+    $(window).on('resize scroll', function () {
+      if (calculateActiveSection) {
+        var activeSection = getActiveSection(SECTIONS, MASTHEAD_OFFSET);
+        if (activeSection) {
+          var activeHref = $(activeSection).attr('id');
+          $(".page-nav__link").removeClass('page-nav__link--active');
+          $("#page-menu a[href=#" + activeHref + "]").addClass('page-nav__link--active');
+          if (location.hash != "#" + activeHref) {
+            if (history.replaceState) {
+              history.replaceState(null, null, "#" + activeHref);
+            }
+          }
+        }
+      }
+    });
+
+    $(".n-pdf-button").click(function () {
+      $(this).toggleClass("active");
+    });
+
+    $.fn.isVisibleAndInViewport = function () {
+      var elementTop = $(this).offset().top;
+      var elementBottom = elementTop + $(this).outerHeight();
+
+      var viewportTop = $(window).scrollTop();
+      var viewportBottom = viewportTop + $(window).height();
+
+      return elementBottom > viewportTop && elementTop < viewportBottom && $(this).is(":visible");
+    };
+
+
+    $(window).on('resize scroll', function () {
+      setRightBarHeight();
+    });
+
+    $(window).trigger('resize');
+
+
+  });
+
+  $("#right-navbar-collapse").click(function (e) {
+    const rightNavbarWidth = $("#ie-right-navbar").width() - $("#ie-right-navbar-collapse").width();
+    e.preventDefault();
+    const width = $(".ie-content-pane").width();
+
+    $("#ie-right-navbar").animate({ width: 'toggle' }, 350, function () {
+      $("#ie-right-navbar-collapse").removeClass("close")
+      $("#ie-right-navbar-collapse").addClass("open")
+      $("#ie-right-navbar").removeClass("open")
+      $("#ie-right-navbar").addClass("close")
+    });
+    $(".ie-content-pane").animate({ width: (width + rightNavbarWidth) }, 350, function () {
+      resizeContent()
+      setSidebarBottom();
+    })
+
+  });
+  $("#navbar-expand").click(function (e) {
+    const rightNavbarWidth = $("#ie-right-navbar").width() - $("#ie-right-navbar-collapse").width();
+    e.preventDefault();
+    const width = $(".ie-content-pane").width();
+    $("#ie-right-navbar").animate({ width: 'toggle' }, 250, function () {
+      $("#ie-right-navbar-collapse").removeClass("open")
+      $("#ie-right-navbar-collapse").addClass("close")
+      $("#ie-right-navbar").removeClass("close")
+      $("#ie-right-navbar").addClass("open")
+      setRightBarHeight();
+      setSidebarBottom();
+    });
+    $(".ie-content-pane").animate({ width: (width - rightNavbarWidth) }, 250, function () {
+      resizeContent()
+    })
+  });
+
+  function navbarResize() {
+    const rightNavbarResized = $("#ie-right-navbar-collapse").hasClass('resized');
+    if (window.innerWidth < 1024) {
+      $("#ie-right-navbar").removeClass("open")
+      $("#ie-right-navbar").addClass("close")
+      $("#ie-right-navbar").removeAttr("style")
+      $("#ie-right-navbar-collapse").removeClass("close")
+      $("#ie-right-navbar-collapse").addClass("open")
+      $("#ie-right-navbar-collapse").addClass("resized")
+    } else {
+      if (rightNavbarResized) {
+        $('#ie-right-navbar').removeClass('close');
+        $('#ie-right-navbar').addClass('open');
+        $("#ie-right-navbar-collapse").removeClass("resized")
+        $("#ie-right-navbar-collapse").removeClass("open")
+        $("#ie-right-navbar-collapse").addClass("close")
+      }
+    }
+    resizeContent()
+  }
+  navbarResize();
+  $(window).on('resize load', function () {
+    navbarResize()
+  });
+
+  function getActiveSection(sections, offset) {
+    var scrollPosition = $(window).scrollTop() + offset + 5;
+    var activeSection;
+    for (var i = 0; i < sections.length; i++) {
+      var el = $(sections[i]);
+      var activePosition = el.offset().top;
+      if (activePosition > scrollPosition) {
+        break;
+      }
+
+      activeSection = sections[i];
+    }
+
+    return activeSection;
+  }
+
+  $("a[href*=#]:not([href=#])").click(function () {
+    setTimeout(() => {
+      $(window).trigger('scroll');
+    }, 105)
+  })
+
+  const hashOnLoad = location.href.split("#")[1];
+  setTimeout(function () {
+    if (hashOnLoad) {
+      $(".page-nav__link").removeClass('page-nav__link--active');
+      $("#page-menu a[href=#" + hashOnLoad + "]").addClass('page-nav__link--active');
+    }
+  }, 100)
+
+</script>
+
+
+  <div style="clear: both"></div><!-- Main needs to have height --></div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+        <div class="n-footer__left">
+          <li class="n-footer__copyright-link">
+                    <a href="https://www.netapp.com/company/legal/copyright/">© 2024 NetApp, Inc.</a>
+          </li>
+        </div>
+        <div class="n-footer__center">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/terms-of-use/">使用条款</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/privacy-policy/">隐私策略</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/cookie-policy/">Cookie 政策</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a class="ot-sdk-show-settings">Cookie 设置</a>
+            </li>
+          </ul>
+       </div>
+        <div class="n-footer__right">
+              <li class="n-footer__copyright-link">
+                <a target="_self" href="javascript:netapp_mailto()">请发送有关此页面的反馈</a>
+              </li>
+        </div>
+     </div>
+  </div>
+</footer>
+
+      </div><!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/zh-cn/trident/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/zh-cn/trident/js/prism.js'></script>
+      <script type="text/javascript" src='/zh-cn/trident/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/zh-cn/trident/js/ie-tabbed-blocks.js'></script>
+    <script src='/zh-cn/trident/js/ie-sidebar.js'></script>
+  </body>
+
+</html>
