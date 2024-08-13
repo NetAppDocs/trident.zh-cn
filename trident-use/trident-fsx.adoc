@@ -43,7 +43,7 @@ NOTE: 确保按照Amazon Linux和Ubuntu所需的节点准备步骤进行操作 h
 +
 ** SMB卷支持使用 `ontap-nas` 仅限驱动程序。
 ** Asta Trident EKS加载项不支持SMB卷。
-** Astra Trident仅支持将SMB卷挂载到Windows节点上运行的Pod。请参见 <<准备配置SMB卷>> 了解详细信息。
+** Astra Trident仅支持将SMB卷挂载到Windows节点上运行的Pod。有关详细信息、请参见 link:../trident-use/trident-fsx-storage-backend.html#prepare-to-provision-smb-volumes["准备配置SMB卷"] 。
 
 
 * 在Astra Drident 24.02之前的版本中、在启用了自动备份的Amazon FSx文件系统上创建的卷无法被Drident删除。要在Asta三端到高24.02或更高版本中阻止此问题描述、请指定 `fsxFilesystemID`、AWS `apiRegion`、AWS `apikey`和AWS `secretKey` 在AWS FSx for ONTAP的后端配置文件中。

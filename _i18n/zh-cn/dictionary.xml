@@ -1630,8 +1630,6 @@
   <block id="ea643bf7aaf130341a17f697a7009368" category="list-text"><block ref="ea643bf7aaf130341a17f697a7009368" category="inline-link-rx"></block></block>
   <block id="9d6ffa6ef31bd0b92876314219f18ef5" category="inline-link">Astra API 文档</block>
   <block id="9c2cf0e947812ecb3fc0bfccaa8b3c61" category="list-text"><block ref="9c2cf0e947812ecb3fc0bfccaa8b3c61" category="inline-link-rx"></block></block>
-  <block id="a93e9e44b7a375a4236260f5ff2b251e" category="inline-link">Astra Trident 21.07</block>
-  <block id="3830d427e146a8a64454dc373d9b1502" category="list-text"><block ref="3830d427e146a8a64454dc373d9b1502" category="inline-link-rx"></block></block>
   <block id="af7c8216a3289efe1a298a19c00b8b8c" category="section-title">已测试主机操作系统</block>
   <block id="57b3e1695eb7d16642702fbce3837b86" category="paragraph">默认情况下， Astra Trident 在容器中运行，因此将在任何 Linux 工作程序上运行。但是，根据您使用的后端，这些员工需要能够使用标准 NFS 客户端或 iSCSI 启动程序挂载 Astra Trident 提供的卷。</block>
   <block id="c0227cef6f07a8cd2ac72f2945b031aa" category="section-title">开放源代码</block>
@@ -3320,8 +3318,6 @@ SMB</block>
   <block id="1d6d13ec4b4db5f5d3487f7624ba2730" category="paragraph"><block ref="1d6d13ec4b4db5f5d3487f7624ba2730" category="inline-link-macro-rx"></block></block>
   <block id="ecdd0ca053bad0e4dd13561a556a27a2" category="inline-link-macro">21.10.</block>
   <block id="26868cf4e34a30cd32082fe3a81f7a5b" category="paragraph"><block ref="26868cf4e34a30cd32082fe3a81f7a5b" category="inline-link-macro-rx"></block></block>
-  <block id="b327964aef72f8262abc54b607c5acf2" category="inline-link-macro">21.07.</block>
-  <block id="989e34685c65cba24936de4972bf6714" category="paragraph"><block ref="989e34685c65cba24936de4972bf6714" category="inline-link-macro-rx"></block></block>
   <block id="1cf7168782187634fbc408c66b895dbc" category="section-title">社区支持</block>
   <block id="314c5cdde6da009a7b0571d60c8422ae" category="paragraph">Astra上有一个由容器用户(包括Astra三端开发人员)组成的活跃公共社区 <block ref="6130664377fa14615bb1abd5257e9714" category="inline-link-macro-rx"></block>。这是一个很好的地方，可以提出有关项目的一般问题，并与志同道合的同行讨论相关主题。</block>
   <block id="965b11d07d6acceebc9efec23e5e74a9" category="section-title">NetApp技术支持</block>
@@ -3875,11 +3871,9 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="2af6474930eac7fe47a45b3658bef5bf" category="image-alt">AWS EKS 05</block>
   <block id="cec2926f3f12e3edd6577d4f1edd4e22" category="section-title">使用命令行界面安装/卸载A作用 的三端EKS加载项</block>
   <block id="64f82c86eee854db6eefc72dbf352f85" category="paragraph-title">使用命令行界面安装Asta Trident EKS加载项：</block>
-  <block id="8a9b3d7ba157ca60525a14459fd3f806" category="paragraph">以下示例命令用于安装Asta Trdent EKS加载项：<block ref="b0cca58f8f0307eaab81f8066a9e1952" prefix=" " category="inline-code"></block><block ref="c1ad0081ff15bc4dd47b3591865bef09" prefix=" " category="inline-code"></block> (使用专用版本)</block>
   <block id="5fef1c4f3767262a0ef823aaa69e1703" category="paragraph-title">使用命令行界面卸载Asta Trident EKS加载项：</block>
   <block id="e1f272eb0b2aaba7b1cb689543f653e0" category="paragraph">以下命令将卸载Asta三端EKS加载项：<block ref="09a3e9c644b219341aa6e2e8a8922e59" prefix=" " category="inline-code"></block></block>
   <block id="c6861e88433ccd90f1ce8143d7e5fed0" category="sidebar">在EKS集群上配置Asta Trident EKS加载项</block>
-  <block id="7ed15597cafdca20d5859b7e394bc0ab" category="doc">在EKS集群上配置Asta Trident EKS加载项23.10版</block>
   <block id="4262957957c18f0bab73d8ddafcb642f" category="list-text">Azure NetApp Files 服务不支持小于100 GB的卷。如果请求的卷较小、Asta三端技术支持会自动创建100-GiB卷。</block>
   <block id="f825c914a8659f5b0de8a9219ab365b6" category="paragraph">要将新创建的20MiB PV调整为1GiB、请编辑PVC并进行设置<block ref="02b011e6fe36e26e5f7365ba08bf5a48" prefix=" " category="inline-code"></block> 到1 GiB：</block>
   <block id="f3554362e5b550c58586036685aca0f6" category="list-text">基于凭据：此模式需要对ONTAP后端具有足够的权限。建议使用与预定义安全登录角色关联的帐户、例如<block ref="21232f297a57a5a743894a0e4a801fc3" prefix=" " category="inline-code"></block> 或<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 以确保与ONTAP 版本的最大兼容性。</block>
@@ -4270,4 +4264,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="53f64465dc89ebfc8f426b3cdf4d1614" category="sidebar">创建IAM角色和AWS密钥</block>
   <block id="0a3c6c3b1b9418c792ec73b934ca8fdd" category="sidebar">配置存储后端</block>
   <block id="50399b7d6597b32502708277dd2be03c" category="sidebar">配置存储类和PVC</block>
+  <block id="264f54d7bb69e0d02e466e1cb2cf3f28" category="doc">在EKS集群上配置Astra Trident EKS加载项</block>
+  <block id="1cc677653e529e467295ac3f9837cb49" category="paragraph">以下示例命令可安装Asta Trident EKS加载项：<block ref="b953d7904e30d543f476863b48e725fe" prefix=" " category="inline-code"></block><block ref="f8f93460dda1ad1de5db2f2f1c577532" prefix=" " category="inline-code"></block> (使用专用版本)</block>
+  <block id="5ec02c0ee9e1b493e42f3bb5a9e8b94c" category="list-text">Astra Trident仅支持将SMB卷挂载到Windows节点上运行的Pod。有关详细信息、请参见 <block ref="5d9770278862f1ca4af19e761a5fa655" category="inline-link-macro-rx"></block> 。</block>
 </blocks>
