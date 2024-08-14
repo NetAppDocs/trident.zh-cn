@@ -16,6 +16,14 @@ entries:
       url: "/trident-use/anf-prep.html"
     - title: 配置选项和示例
       url: "/trident-use/anf-examples.html"
+  - title: Google Cloud NetApp卷
+    entries:
+    - title: 概述
+      url: "/trident-use/gcnv.html"
+    - title: 准备配置
+      url: "/trident-use/gcnv-prep.html"
+    - title: 配置选项和示例
+      url: "/trident-use/gcnv-examples.html"
   - title: 适用于 Google Cloud 的 Cloud Volumes Service
     url: "/trident-use/gcp.html"
   - title: NetApp HCI 或SolidFire

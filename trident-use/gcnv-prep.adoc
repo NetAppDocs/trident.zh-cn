@@ -1,0 +1,32 @@
+---
+sidebar: sidebar 
+permalink: trident-use/gcnv-prep.html 
+keywords: trident backend, google cloud netapp volumes, smb volumes, active directory, csi proxy, aks, cloud identity 
+summary: 在配置Google Cloud NetApp Volumes后端之前、您需要确保满足以下要求。 
+---
+= 准备配置Google Cloud NetApp卷后端
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+在配置Google Cloud NetApp Volumes后端之前、您需要确保满足以下要求。
+
+
+
+== NFS卷的前提条件
+
+如果您是首次使用Google Cloud NetApp卷或在新位置使用、则需要进行一些初始配置才能设置Google Cloud NetApp卷和创建NFS卷。请参阅 link:https://cloud.google.com/netapp/volumes/docs/before-you-begin/application-resilience["开始之前"^]。
+
+在配置Google Cloud NetApp卷后端之前、请确保您满足以下条件：
+
+* 配置有Google Cloud NetApp卷服务的Google Cloud帐户。请参阅 link:https://cloud.google.com/netapp-volumes["Google Cloud NetApp卷"^]。
+* 您的Google Cloud帐户的项目编号。请参阅 link:https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects["确定项目"^]。
+* 具有NetApp卷管理员角色的Google Cloud服务帐户 (`netappcloudvolumes.admin`。请参阅 link:https://cloud.google.com/netapp/volumes/docs/get-started/configure-access/iam#roles_and_permissions["身份和访问管理角色和权限"^]。
+* 您的GCNV帐户的API密钥文件。请参见 link:https://cloud.google.com/docs/authentication/api-keys["使用API密钥进行身份验证"^]
+* 存储池。请参阅 link:https://cloud.google.com/netapp/volumes/docs/configure-and-use/storage-pools/overview["存储池概述"^]。
+
+
+有关如何设置对Google Cloud NetApp卷的访问权限的详细信息，请参阅 link:https://cloud.google.com/netapp/volumes/docs/get-started/configure-access/workflow#before_you_begin["设置对Google Cloud NetApp卷的访问权限"^]。

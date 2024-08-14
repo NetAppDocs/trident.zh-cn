@@ -4267,4 +4267,59 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="264f54d7bb69e0d02e466e1cb2cf3f28" category="doc">在EKS集群上配置Astra Trident EKS加载项</block>
   <block id="1cc677653e529e467295ac3f9837cb49" category="paragraph">以下示例命令可安装Asta Trident EKS加载项：<block ref="b953d7904e30d543f476863b48e725fe" prefix=" " category="inline-code"></block><block ref="f8f93460dda1ad1de5db2f2f1c577532" prefix=" " category="inline-code"></block> (使用专用版本)</block>
   <block id="5ec02c0ee9e1b493e42f3bb5a9e8b94c" category="list-text">Astra Trident仅支持将SMB卷挂载到Windows节点上运行的Pod。有关详细信息、请参见 <block ref="5d9770278862f1ca4af19e761a5fa655" category="inline-link-macro-rx"></block> 。</block>
+  <block id="cb4d8d2a5476183e7996047b4bd621a5" category="summary">了解适用于Google Cloud NetApp卷的NFS和NFS后端配置选项并查看配置示例。</block>
+  <block id="45868a9cc24b15883bb385cc21568b9c" category="doc">Google Cloud NetApp Volumes后端配置选项和示例</block>
+  <block id="87e818a9e54a1044aee0c06933ae4154" category="paragraph">了解适用于Google Cloud NetApp卷的NFS后端配置选项并查看配置示例。</block>
+  <block id="24efddb2a68726b53abbc21ed25602ec" category="cell">的值<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block> 必须指定为"gosle-Cloud NetApp-volumes"。</block>
+  <block id="486c28964f4c2b1cb7d4cf8476c6f43b" category="cell">(可选)存储后端的自定义名称</block>
+  <block id="04075132f95c6ef305485ab113422c5a" category="cell">用于指定用于创建卷的存储池的可选参数。</block>
+  <block id="3c48ebd4c4115423adde42d518db3987" category="cell">Asta Trident创建GCNV卷的Google Cloud位置。创建跨区域Kubnetes集群时、在中创建的卷<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> 可用于在多个Google Cloud区域的节点上计划的工作负载。跨区域流量会产生额外成本。</block>
+  <block id="1124e7ce466aaa9571f3fbccbdc49189" category="cell">具有角色的Google Cloud服务帐户的API密钥<block ref="4a5395c87dd91b3242056f83b7cedb9b" prefix=" " category="inline-code"></block> 。它包括 Google Cloud 服务帐户专用密钥文件的 JSON 格式的内容（逐字复制到后端配置文件）。<block ref="c9ff119073ea2567730fb42e3a4fe805" prefix=" " category="inline-code"></block>必须包括以下键的键值对：<block ref="599dcce2998a6b40b1e38e8c6006cb0a" prefix=" " category="inline-code"></block>、<block ref="b098ad43c65e68f3d8ce27a3c7e6f6e2" prefix=" " category="inline-code"></block>、<block ref="a4a9fd77bfb3720e66b510bef7ffe71a" prefix=" " category="inline-code"></block>、、<block ref="2bfe9d72a4aae8f06a31025b7536be80" prefix=" " category="inline-code"></block><block ref="478cc0e49bfbb9ded4ffc7ea662d3968" prefix=" " category="inline-code"></block><block ref="98b215082431c21156af94f3aa69f838" prefix=" " category="inline-code"></block><block ref="8201fe8e688f4f948a62370fd1b411d4" prefix=" " category="inline-code"></block>和<block ref="61426bc7fdd11e59a5c98e7ee37e3dbb" prefix=" " category="inline-code"></block>。</block>
+  <block id="1713a0b57aa7aa8811b66291bd6740ea" category="cell">存储池及其卷的服务级别。值为<block ref="897a779351421523cadbafccdce22efe" prefix=" " category="inline-code"></block>、、<block ref="c00f0c4675b91fb8b918e4079a0b1bac" prefix=" " category="inline-code"></block><block ref="a288195832f8717bca4671416014a464" prefix=" " category="inline-code"></block>或<block ref="287e9593819b2fcdf9945e7ccacd637d" prefix=" " category="inline-code"></block>。</block>
+  <block id="c1a95f00cc65baba0b4226ef5a52eb6c" category="cell">用于GCNV卷的Google Cloud网络。</block>
+  <block id="ed9bce6a4d879e7f479badb9932b75b3" category="cell">故障排除时要使用的调试标志。例如，<block ref="448bcae3131355f9b92b192b1057af2f" prefix=" " category="inline-code"></block>。除非您正在进行故障排除并需要详细的日志转储，否则请勿使用此功能。</block>
+  <block id="fb52ca5d2a493e686d9e2211731e6746" category="cell">表示此后端支持的区域和区域的列表。有关详细信息，请参阅 <block ref="a735758eec435cad1c5672b75bd657c0" category="inline-link-macro-rx"></block>。例如：<block ref="8a9f2f1da64ded561b14b71ac1693e00" prefix=" " category="inline-code"></block></block>
+  <block id="95c5fc7684c0c685ae305908e8360de5" category="cell">新卷的导出规则。必须是IPv4地址任意组合的逗号分隔列表。</block>
+  <block id="3731633acfd0b9fb847e03ce2fdab4fa" category="cell">""(接受默认值0)</block>
+  <block id="f666bd4432d66c3d0a6c3eb68602a507" category="cell">新卷的UNIX权限(4个八进制数字)。</block>
+  <block id="d4f218c41505a7c6161c931fe87b30f3" category="paragraph">这是绝对的最低后端配置。通过此配置、Astra Trident会发现在配置位置委派给Google Cloud NetApp卷的所有存储池、并随机将新卷放置在其中一个池中。由于<block ref="296026821ada2ab8aebcf13547a63df5" prefix=" " category="inline-code"></block> 省略了、因此会<block ref="2521ef5d58fc027d3121662b7d8f9ac2" prefix=" " category="inline-code"></block> 应用默认设置、后端将为NFS卷配置。</block>
+  <block id="b0663450e547d90a59ef16fd10b49313" category="paragraph">当您刚刚开始使用Google Cloud NetApp卷并尝试操作时、此配置是理想的选择、但实际上、您很可能需要为您配置的卷提供额外的范围界定。</block>
+  <block id="2d55ceabc505d58735d6f639a0ddee3c" category="example-title">使用StoragePools筛选器的配置</block>
+  <block id="9f50e88dc1b2f50c32d6623a46186422" category="paragraph">此后端配置可在一个文件中定义多个虚拟池。虚拟池在一节中进行了定义<block ref="ddecebdea58b5f264d27f1f7909bab74" prefix=" " category="inline-code"></block> 。如果您有多个存储池支持不同的服务级别、而您希望在Kubbernetes中创建表示这些服务级别的存储类、则这些选项板非常有用。虚拟池标签用于区分池。例如、在以下示例中<block ref="c05f6c233521207f6fe311afef550c3c" prefix=" " category="inline-code"></block> 、标签和<block ref="f1d0ae63f2e948a9e43dcc60303d595d" prefix=" " category="inline-code"></block> 类型用于区分虚拟池。</block>
+  <block id="88b8febb44310d1976318cdfbfc8e272" category="paragraph">此外、您还可以设置一些适用于所有虚拟池的默认值、并覆盖各个虚拟池的默认值。在以下示例中、<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block> 和<block ref="c72971f17465d2a32345bc872af62a34" prefix=" " category="inline-code"></block> 用作所有虚拟池的默认值。</block>
+  <block id="6a34de146c5cb15d515a8eccfe1e159a" category="paragraph">有关详细信息，请参阅 <block ref="2485f0c91682fe52be2f7fb65e682d5e" category="inline-link-macro-rx"></block>。</block>
+  <block id="aae18f7253cac406ae284f53b287a9df" category="paragraph">要验证是否已成功创建后端、请运行以下命令：</block>
+  <block id="03b8a172613e4de074d79fb4f46074a3" category="paragraph">如果后端创建失败，则后端配置出现问题。您可以使用命令说明后端<block ref="229abe1e223382a9207e6c5818f53303" prefix=" " category="inline-code"></block> 、或者运行以下命令查看日志以确定原因：</block>
+  <block id="c80946da495de259ca1ba66a90f669f1" category="paragraph">确定并更正配置文件的问题后、您可以删除后端并再次运行create命令。</block>
+  <block id="f43bca7c7b2ce941f9a34838d862550f" category="section-title">更多示例</block>
+  <block id="d66e2be406c48591554571ad9aec4297" category="section-title">存储类定义示例</block>
+  <block id="7412fabe1fe110c48954fa7d913c7aa6" category="paragraph">下面是有关上述后端的基本<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> 定义。</block>
+  <block id="73edba1e6e192a3d47eeb049261cf706" category="paragraph">*使用字段的示例定义<block ref="4d859186a09b1da3597e5901157d9400" prefix=" " category="inline-code"></block> :*</block>
+  <block id="131942def57ce0eceb784a70e3a3c6b7" category="inline-link-macro">虚拟池</block>
+  <block id="21f282d336bd6884d8049de5c63672b5" category="paragraph">使用、<block ref="4d859186a09b1da3597e5901157d9400" prefix=" " category="inline-code"></block> 您可以为每个指定<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> <block ref="6679d756882db6798c9460928c0b140b" category="inline-link-macro-rx"></block> 用于托管卷的。卷将在选定池中定义各个方面。</block>
+  <block id="017c90fe97524fad37b16a935c4a6d93" category="paragraph">有关存储类的详细信息，请参见 <block ref="70514be1adf68f525abe0b1ddd1123f6" category="inline-link-macro-rx"></block>。</block>
+  <block id="f9f2eb48a9034cb5dc809b4a8cfe0514" category="section-title">PVC定义示例</block>
+  <block id="1fa71ec0db169cb1ef6cfabf7648910e" category="paragraph">要验证PVC是否已绑定、请运行以下命令：</block>
+  <block id="42d7c2849e22a4d78da8b275f64f75aa" category="summary">在配置Google Cloud NetApp Volumes后端之前、您需要确保满足以下要求。</block>
+  <block id="b50d4e4fb1b847d1270df87e42364fe0" category="doc">准备配置Google Cloud NetApp卷后端</block>
+  <block id="0935df2153a18d9a4776751ebfb7cb82" category="section-title">NFS卷的前提条件</block>
+  <block id="a03c3224ff98ca5b518f8a11ed9d6f72" category="paragraph">如果您是首次使用Google Cloud NetApp卷或在新位置使用、则需要进行一些初始配置才能设置Google Cloud NetApp卷和创建NFS卷。请参阅 <block ref="d2edeebd0b5ddcd8a293f6eb7960f37c" category="inline-link-macro-rx"></block>。</block>
+  <block id="ec8b4b1603705e8f5deb17b1f83c5b04" category="paragraph">在配置Google Cloud NetApp卷后端之前、请确保您满足以下条件：</block>
+  <block id="1215f8190533dfdf63d2224a6d88266f" category="inline-link-macro">Google Cloud NetApp卷</block>
+  <block id="cbd1a08f0c7e9ece495b85acebbda95f" category="list-text">配置有Google Cloud NetApp卷服务的Google Cloud帐户。请参阅 <block ref="633097af004065de10009ea2f33900c4" category="inline-link-macro-rx"></block>。</block>
+  <block id="d602f37c15ba943e502f28694eb5a2b1" category="inline-link-macro">确定项目</block>
+  <block id="ecf1c0124555e123ac90e38128ef83e5" category="list-text">您的Google Cloud帐户的项目编号。请参阅 <block ref="64c0ff4c5d45f1d3f3d8ce4197eed1cc" category="inline-link-macro-rx"></block>。</block>
+  <block id="aa22e5fd0429d1ecf78d5deedf0c6dc8" category="inline-link-macro">身份和访问管理角色和权限</block>
+  <block id="53541745c9aef32587459280a54f1807" category="list-text">具有NetApp卷管理员角色的Google Cloud服务帐户 <block ref="4a5395c87dd91b3242056f83b7cedb9b" prefix="(" category="inline-code"></block>。请参阅 <block ref="4f506c30a158c85db714d53536a12770" category="inline-link-macro-rx"></block>。</block>
+  <block id="2046572933d7db54142d1425499e1cb2" category="inline-link-macro">使用API密钥进行身份验证</block>
+  <block id="1cfccdf67b855dda984a356f4d29b923" category="list-text">您的GCNV帐户的API密钥文件。请参见 <block ref="37c61838ce0a305950c70b2b32fc8104" category="inline-link-macro-rx"></block></block>
+  <block id="ef2186bedd233e9b009e5d1764dc1e3c" category="inline-link-macro">存储池概述</block>
+  <block id="33773afc759728866f9a57d82940a56c" category="list-text">存储池。请参阅 <block ref="d347dce2da907b926fcf6a02a7257712" category="inline-link-macro-rx"></block>。</block>
+  <block id="dd2c158264290c91be79556252aca308" category="inline-link-macro">设置对Google Cloud NetApp卷的访问权限</block>
+  <block id="7cef0ad261753740989fa192df2e19e9" category="paragraph">有关如何设置对Google Cloud NetApp卷的访问权限的详细信息，请参阅 <block ref="5e9b4ec852ec4a511a1370be58118d01" category="inline-link-macro-rx"></block>。</block>
+  <block id="b73a4f3ea8538e5ef0b4078c119b3c8d" category="doc">配置Google Cloud NetApp卷后端</block>
+  <block id="32487801edf6d6f388bbce7941ff4901" category="paragraph">现在、您可以将Google Cloud NetApp卷配置为Astra Trident的后端。您可以使用Google Cloud NetApp卷后端连接NFS卷。</block>
+  <block id="23fa813a6884f33dc0d2070ae5260e6a" category="section-title">Google Cloud NetApp卷驱动程序详细信息</block>
+  <block id="5fb193ca50759ba375397b4085f1116f" category="paragraph">Asta Trident提供了<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 用于与集群通信的驱动程序。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。</block>
+  <block id="5ab9649a1218ec1b35bfb38efbeaea76" category="cell"><block ref="94594b2ccbc8e0d220ad37504461650b" prefix="" category="inline-code"></block></block>
 </blocks>

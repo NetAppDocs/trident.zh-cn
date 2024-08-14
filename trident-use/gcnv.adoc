@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: trident-use/gcnv.html 
+keywords: trident backend, google cloud netapp volumes, nfs volumes, nfs, drivers, access modes, rwo, rwx, rwp, rwop, file system, gke, cloud identity, google cloud 
+summary:  
+---
+= 配置Google Cloud NetApp卷后端
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+现在、您可以将Google Cloud NetApp卷配置为Astra Trident的后端。您可以使用Google Cloud NetApp卷后端连接NFS卷。
+
+[listing]
+----
+ Google Cloud NetApp Volumes is a tech preview feature in Astra Trident 24.06.
+----
+
+
+== Google Cloud NetApp卷驱动程序详细信息
+
+Asta Trident提供了 `google-cloud-netapp-volumes` 用于与集群通信的驱动程序。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
+
+[cols="2, 1, 1, 2, 2"]
+|===
+| 驱动程序 | 协议 | 卷模式 | 支持的访问模式 | 支持的文件系统 
+
+
+| `google-cloud-netapp-volumes`  a| 
+NFS
+ a| 
+文件系统
+ a| 
+Rwo、ROX、rwx、RWOP
+ a| 
+`nfs`
+
+|===
