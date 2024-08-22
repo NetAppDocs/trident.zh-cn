@@ -1504,7 +1504,6 @@
   <block id="925060a0c0a15f99ef1bee43f1660ea4" category="paragraph">可选，如果使用量超过此百分比，则配置失败</block>
   <block id="876885770cf58d20ef5672cc5594e85d" category="inline-link">请参见此处的 NFS 主机配置信息</block>
   <block id="0a19ca3d1db7e5bc24b58f73b91c3f49" category="paragraph">对 NFS 挂载选项进行精细控制；默认为 -o nfsver=3 。* 仅适用于 `ontap-nas` 和 `ontap-nas- 经济` 驱动程序 * 。<block ref="71f7a3f48cfd3876cffba401813b7db0" category="inline-link-rx"></block>。</block>
-  <block id="5c5adadf8175fd69d4af9bfdb608c42c" category="paragraph">可请求的最大卷大小和 qtree 父卷大小。* 对于 `ontap-nas-economy` 驱动程序，此选项还会限制其创建的 FlexVol 的大小 * 。</block>
   <block id="3890063556e337d458019437f027030b" category="paragraph">您可以使用默认选项来避免在创建的每个卷上指定这些选项：</block>
   <block id="b326b5062b2f0e69046810717534cb09" category="paragraph">true</block>
   <block id="90adf331b7868c7af46ad6e035e93844" category="section-title">扩展选项</block>
@@ -4322,4 +4321,11 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="23fa813a6884f33dc0d2070ae5260e6a" category="section-title">Google Cloud NetApp卷驱动程序详细信息</block>
   <block id="5fb193ca50759ba375397b4085f1116f" category="paragraph">Asta Trident提供了<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 用于与集群通信的驱动程序。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。</block>
   <block id="5ab9649a1218ec1b35bfb38efbeaea76" category="cell"><block ref="94594b2ccbc8e0d220ad37504461650b" prefix="" category="inline-code"></block></block>
+  <block id="74d08e13aea757b8172499f067668443" category="paragraph">可要求的最大卷大小。</block>
+  <block id="f14a3ef36727dfbbea91c1d6b3fdbede" category="cell"><block ref="c8f83e727d4a4255a6485c24776e86bb" prefix="" category="inline-code"></block></block>
+  <block id="33fefa32caf35cd4691465f3592a0539" category="cell">*<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>仅支持和驱动程序。*限制ONTAP ONTAP经济型和ONTAP经济型驱动程序中的FlexVol大小。</block>
+  <block id="1b75c146ff0568d5fc11072b08cfe580" category="section-title">限制Trident创建的FlexVol的大小上限</block>
+  <block id="913d5950907a31c9d3ea6cd0a3b6a524" category="paragraph">要配置用作ONTAP SAN经济型驱动程序和ONTAP NAS经济型驱动程序池的FlexVol的最大大小、请<block ref="c8f83e727d4a4255a6485c24776e86bb" prefix=" " category="inline-code"></block>在<block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block>定义中使用参数。</block>
+  <block id="ae7be78c2d3d933d426bc82820accfae" category="cell">在qtree-NAS ONTAP经济型后端使用qtrees时可请求的最大FlexVol大小。</block>
+  <block id="d981d675ba14b9478a2c2da5c7df780b" category="cell">在LUS-SAN-Economy后端使用ONTAP时可要求的最大FlexVol大小。</block>
 </blocks>

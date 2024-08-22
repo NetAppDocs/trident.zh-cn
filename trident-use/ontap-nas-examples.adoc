@@ -119,6 +119,9 @@ summary: 了解如何在安装Astra Trident时创建和使用ONTAP NAS驱动程�
 
 
 | `useREST` | 用于使用 ONTAP REST API 的布尔参数。 `useREST` 设置为时 `true`，Asta三端将使用ONTAP REST API与后端通信；设置为时 `false`，Asta三端将使用ONTAP ZAPI调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontap` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Asta三元组24.06版本和ONTAP 9.15.1或更高版本开始、默认情况下会 `userREST` 设置为 `true` ；更 `useREST` 改为 `false` 以使用ONTAP ZAPI调用。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
+
+
+| `limitVolumePoolSize` | 在qtree-NAS ONTAP经济型后端使用qtrees时可请求的最大FlexVol大小。 | "" （默认情况下不强制实施） 
 |===
 
 

@@ -163,6 +163,9 @@ NVMe/TCP不支持使用此类数据加密。 | ""
 
 
 | `nameTemplate` | 用于创建自定义卷名称的模板。 | "" 
+
+
+| `limitVolumePoolSize` | 在LUS-SAN-Economy后端使用ONTAP时可要求的最大FlexVol大小。 | "" （默认情况下不强制实施） 
 |===
 
 

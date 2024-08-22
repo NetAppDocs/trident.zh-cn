@@ -80,6 +80,12 @@ vserver modify -vserver <svm_name> -max-volumes <num_of_volumes>
 
 
 
+=== 限制Trident创建的FlexVol的大小上限
+
+要配置用作ONTAP SAN经济型驱动程序和ONTAP NAS经济型驱动程序池的FlexVol的最大大小、请 `limitVolumePoolSize`在 `backend.json`定义中使用参数。
+
+
+
 === 配置 Trident 以使用双向 CHAP
 
 您可以在后端定义中指定 CHAP 启动程序以及目标用户名和密码，并在 SVM 上启用 Trident CHAP 。使用 `useCHAP` 参数在后端配置中、Trident使用CHAP对ONTAP 后端的iSCSI连接进行身份验证。

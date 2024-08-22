@@ -152,7 +152,7 @@ Asta三元数据可按节点创建和管理 `igroups` 作为 `netappdvp`。
 
 
 | `limitVolumeSize`  a| 
-可请求的最大卷大小和 qtree 父卷大小。* 对于 `ontap-nas-economy` 驱动程序，此选项还会限制其创建的 FlexVol 的大小 * 。
+可要求的最大卷大小。
  a| 
 `300g`
 
@@ -170,6 +170,11 @@ Asta三元数据可按节点创建和管理 `igroups` 作为 `netappdvp`。
 | `sanType` | *支持 `ontap-san` 仅限驱动程序。*
 
 使用选择 `iscsi` 对于iSCSI或 `nvme` 适用于NVMe/TCP。 | `iscsi` 如果为空 
+
+
+| `limitVolumePoolSize` | * `ontap-san-economy` `ontap-san-economy`仅支持和驱动程序。*限制ONTAP ONTAP经济型和ONTAP经济型驱动程序中的FlexVol大小。  a| 
+`300g`
+
 |===
 您可以使用默认选项来避免在创建的每个卷上指定这些选项：
 
