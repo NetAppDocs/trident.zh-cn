@@ -2058,8 +2058,6 @@
   <block id="d041a310ba7cc2599250e64801594107" category="list-text">增加了对的支持 <block ref="ca184a2eda203b6d98158bdf24e5cf7d" category="inline-link-macro-rx"></block>。</block>
   <block id="adbfe36f6399f2846983b2901604a962" category="list-text">已添加 <block ref="40be42d37bc6014716dcd0a1d368ffb5" category="inline-link-macro-rx"></block> 通过<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> 存储驱动程序。</block>
   <block id="f18a50f02f48551895d57b81dd288142" category="sidebar">在命名空间之间共享NFS卷</block>
-  <block id="fd1117c82327fbe8671f26e897ceb8f4" category="inline-link-macro">使用BlueXP的Astra Trident</block>
-  <block id="a76a1e164520105317267dc41b95e8ce" category="paragraph">使用 <block ref="f8c16e8c21124ccc028d2db7fd32a98f" category="inline-link-macro-rx"></block>、您可以升级到最新版本的Astra Trident、添加和管理存储类并将其连接到工作环境、以及使用Cloud Backup Service 备份永久性卷。BlueXP支持使用Trident操作员手动或使用Helm部署Astra Trident。</block>
   <block id="66f2c42a4ca561f5472459301bc7d096" category="list-text">ONTAP 驱动程序的自动MetroCluster 切换检测现已全面推出。</block>
   <block id="e87ded5ef8bc8adbc3c135528636f4f2" category="list-text"><block ref="e87ded5ef8bc8adbc3c135528636f4f2" category="inline-link-macro-rx"></block></block>
   <block id="fce586d9f649fb529d0a1846495ba259" category="list-text"><block ref="fce586d9f649fb529d0a1846495ba259" category="inline-link-macro-rx"></block></block>
@@ -2231,7 +2229,6 @@
   <block id="cbbeebc91e4ea4f1960f7a74b5b14c23" category="paragraph">您可以使用操作员轻松更新现有部署。您只需编辑<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> cr以更新安装。</block>
   <block id="561b04cbccb34a376c360e7325ad76d0" category="paragraph">例如，请考虑需要启用 Astra Trident 以生成调试日志的情形。为此、请修补<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> 设置<block ref="8cddd364bfd0d68f21e3a9ba1123b849" prefix=" " category="inline-code"></block> to<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>：</block>
   <block id="f72ba1a3a498489a96fd8774bfa9ea9d" category="example-title">&lt;strong&gt; Kubernetes升级&lt;/strong&gt;</block>
-  <block id="c3b2fe84f143129d7a18ad12df229bc6" category="example-title">&lt;strong&gt; 将使用BlueXP (以前称为Cloud Manager)&lt;/strong&gt; 进行集群管理</block>
   <block id="4c24a3b9facf2ea9fc7ed2ca52dab45d" category="inline-link-macro">自定义&lt;block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category='inline-code'/&gt; 软件安装</block>
   <block id="40beff6895ce0eeff65f9568dd5c7247" category="paragraph">您可以 <block ref="d16089dfa270d6679e80d43ec8b5c378" category="inline-link-macro-rx"></block> 生成Trident资源的清单。其中包括 Astra Trident 在安装过程中创建的部署，取消设置，服务帐户和集群角色。</block>
   <block id="cb024a74bf03f9ba7a9433337492808e" category="admonition">从 22.04 版开始，每次安装 Astra Trident 时， AES 密钥将不再重新生成。在此版本中， Astra Trident 将安装一个新的机密对象，该对象会在安装之间持续存在。这意味着、<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 在22.04中、可以卸载先前版本的Trident、但早期版本无法卸载22.04安装。选择适当的安装_method。</block>
@@ -4328,4 +4325,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="913d5950907a31c9d3ea6cd0a3b6a524" category="paragraph">要配置用作ONTAP SAN经济型驱动程序和ONTAP NAS经济型驱动程序池的FlexVol的最大大小、请<block ref="c8f83e727d4a4255a6485c24776e86bb" prefix=" " category="inline-code"></block>在<block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block>定义中使用参数。</block>
   <block id="ae7be78c2d3d933d426bc82820accfae" category="cell">在qtree-NAS ONTAP经济型后端使用qtrees时可请求的最大FlexVol大小。</block>
   <block id="d981d675ba14b9478a2c2da5c7df780b" category="cell">在LUS-SAN-Economy后端使用ONTAP时可要求的最大FlexVol大小。</block>
+  <block id="64049136ec90cc479c7521e9b6e172eb" category="section-title">用于导入UKS卷的PVC配置</block>
+  <block id="b49b86551096c421a3bc5d3b79eede84" category="paragraph">要动态导入LUKS卷、请将标注设置<block ref="36720d50814e4335401b2047257bfedf" prefix=" " category="inline-code"></block>为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>、并在PVC中包含启用了LUKS的存储类、如本示例所示。</block>
 </blocks>

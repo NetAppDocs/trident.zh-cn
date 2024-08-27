@@ -115,6 +115,29 @@ defaults:
 ----
 
 
+== 用于导入UKS卷的PVC配置
+
+要动态导入LUKS卷、请将标注设置 `trident.netapp.io/luksEncryption`为 `true`、并在PVC中包含启用了LUKS的存储类、如本示例所示。
+
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: luks-pvc
+  namespace: trident
+  annotations:
+    trident.netapp.io/luksEncryption: "true"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: luks-sc
+----
+
+
 == 轮换LUKS密码短语
 
 您可以轮换LUKS密码短语并确认轮换。
