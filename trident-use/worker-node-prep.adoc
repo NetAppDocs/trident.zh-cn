@@ -112,6 +112,13 @@ NOTE: 例如、如果在存储控制器上轮换了CHAP密钥、而网络断开�
 * 缺少LUN
 
 
+*升级Trident前的注意事项*
+
+* 如果仅使用了每个节点的igroup (在23.04及更高版本中推出)、则iSCSI自我修复功能将对SCSI总线中的所有设备启动SCSI重新检查。
+* 如果仅使用后端范围的igroup (自23.04起已弃用)、则iSCSI自行恢复功能将启动SCSI重新检查、以确定SCSI总线中的确切LUN ID。
+* 如果混合使用了每个节点的igroub和后端范围的igroux、则iSCSI自我修复功能将对SCSI总线中的确切LUN ID启动SCSI重新检查。
+
+
 
 
 === 安装iSCSI工具

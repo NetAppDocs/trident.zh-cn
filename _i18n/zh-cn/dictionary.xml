@@ -4327,4 +4327,8 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="d981d675ba14b9478a2c2da5c7df780b" category="cell">在LUS-SAN-Economy后端使用ONTAP时可要求的最大FlexVol大小。</block>
   <block id="64049136ec90cc479c7521e9b6e172eb" category="section-title">用于导入UKS卷的PVC配置</block>
   <block id="b49b86551096c421a3bc5d3b79eede84" category="paragraph">要动态导入LUKS卷、请将标注设置<block ref="36720d50814e4335401b2047257bfedf" prefix=" " category="inline-code"></block>为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>、并在PVC中包含启用了LUKS的存储类、如本示例所示。</block>
+  <block id="eb80be396693610ba21c23b6b222bb73" category="paragraph">*升级Trident前的注意事项*</block>
+  <block id="b100864b32a36993557470c9854e7e3a" category="list-text">如果仅使用了每个节点的igroup (在23.04及更高版本中推出)、则iSCSI自我修复功能将对SCSI总线中的所有设备启动SCSI重新检查。</block>
+  <block id="284bb2f9d2596017aa72985df760fdb3" category="list-text">如果仅使用后端范围的igroup (自23.04起已弃用)、则iSCSI自行恢复功能将启动SCSI重新检查、以确定SCSI总线中的确切LUN ID。</block>
+  <block id="0d6cf1de077f00140ee25c03f94e4805" category="list-text">如果混合使用了每个节点的igroub和后端范围的igroux、则iSCSI自我修复功能将对SCSI总线中的确切LUN ID启动SCSI重新检查。</block>
 </blocks>
