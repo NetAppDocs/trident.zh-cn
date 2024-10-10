@@ -23,7 +23,7 @@ summary: 在安装Astra Trident之前、您应查看这些常规系统要求。�
 .<strong> 中有关Astra </strong> 的信息
 [%collapsible%open]
 ====
-* 现在、Asta三端磁盘支持Kubbernetes 1.30。在升级Kubnetes之前、请先升级Asta Trdent。
+* 现在、Asta三端磁盘支持Kubbernetes 1.31。在升级Kubnetes之前、请先升级Asta Trdent。
 * Astra Trident会严格强制在SAN环境中使用多路径配置、建议值为 `find_multipaths: no` 在multipath.conf文件中。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Asta Trendent建议使用 `find_multipaths: no` 自21.07版起。
@@ -38,14 +38,14 @@ summary: 在安装Astra Trident之前、您应查看这些常规系统要求。�
 Astra Trident 支持多个容器引擎和流程编排程序，其中包括：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
-* Kubbernetes 1.24 - 1.30
+* Kubbernetes 1.24 - 1.31
 * OpenShift 4.10 - 4.16
 
 
 以下版本支持 Trident 操作符：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
-* Kubbernetes 1.24 - 1.30
+* Kubbernetes 1.24 - 1.31
 * OpenShift 4.10 - 4.16
 
 
@@ -83,56 +83,56 @@ WARNING: 在将安装了Astra三元数据的Kubernetes集群从1.24升级到1.25
 
 
 | Astra Trident  a| 
-1.24 - 1.30
+1.24 - 1.31
  a| 
 否
 
 
 
 | 卷快照  a| 
-1.24 - 1.30
+1.24 - 1.31
  a| 
 否
 
 
 
 | 卷快照中的 PVC  a| 
-1.24 - 1.30
+1.24 - 1.31
  a| 
 否
 
 
 
 | iSCSI PV 调整大小  a| 
-1.24 - 1.30
+1.24 - 1.31
  a| 
 否
 
 
 
 | ONTAP 双向 CHAP  a| 
-1.24 - 1.30
+1.24 - 1.31
  a| 
 否
 
 
 
 | 动态导出策略  a| 
-1.24 - 1.30
+1.24 - 1.31
  a| 
 否
 
 
 
 | Trident 运算符  a| 
-1.24 - 1.30
+1.24 - 1.31
  a| 
 否
 
 
 
 | CSI 拓扑  a| 
-1.24 - 1.30
+1.24 - 1.31
  a| 
 否
 
@@ -192,7 +192,7 @@ link:../trident-reference/ports.html["Astra Trident 端口"]
 | Kubernetes版本 | 容器映像 
 
 
-| v1.24.0、v1.25.0、v1.26.0、v1.27.0、v1.28.0、 v1.29.0、v1.30.0  a| 
+| v1.24.0、v1.25.0、v1.26.0、v1.27.0、v1.28.0、 v1.29.0、v1.30.0、v1.31.0  a| 
 * dDocker。io/NetApp/trdent：24.06.0
 * docer.io/NetApp/trdent-autostsupport：24.06
 * 注册表.k8s.io/sig-storage/CsI-置 配置程序：v4.0.1
