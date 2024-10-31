@@ -49,13 +49,13 @@ Rwo、ROX、rwx、RWOP
 
 * 使用GKE部署的Kubbernetes集群。
 * 在GKE集群上配置的工作负载标识和oidc-uIssuer。
-* 已安装Asta Trident、其中包括 `cloudProvider`用于指定 `"GCP"`和 `cloudIdentity`指定工作负载标识的。
+* 已安装Trident、其中包括 `cloudProvider`用于指定 `"GCP"`和 `cloudIdentity`指定工作负载标识的。
 +
 [role="tabbed-block"]
 ====
 .Trident 运算符
 --
-要使用Trident运算符安装Astra Trident，请编辑 `tridentorchestrator_cr.yaml`以将设置为，并将 `cloudIdentity`设置 `cloudProvider`为 `"GCP"` `iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com`。
+要使用Trident运算符安装Trident，请编辑 `tridentorchestrator_cr.yaml`以将设置为，并将 `cloudIdentity`设置 `cloudProvider`为 `"GCP"` `iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com`。
 
 例如：
 
@@ -80,7 +80,7 @@ spec:
 `export CP="GCP"`
 `export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
 
-以下示例将安装Astra Trident并使用环境变量设置 `cloudProvider`为GCP `$CP`，并使用环境变量 `$ANNOTATION`设置 `cloudIdentity`：
+以下示例将安装Trident并使用环境变量将设置 `cloudProvider`为GCP `$CP`，并使用环境变量 `$ANNOTATION`设置 `cloudIdentity`：
 
 [listing]
 ----
@@ -94,7 +94,7 @@ helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --s
 `export CP="GCP"`
 `export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
 
-以下示例将安装Asta Trident并将标志设置 `cloud-provider`为 `$CP`、和 `cloud-identity` `$ANNOTATION`：
+以下示例将安装Trident并将标志设置 `cloud-provider`为 `$CP`、和 `cloud-identity` `$ANNOTATION`：
 
 [listing]
 ----

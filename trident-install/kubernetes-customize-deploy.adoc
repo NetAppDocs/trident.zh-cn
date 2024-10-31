@@ -268,7 +268,7 @@ spec:
 .适用于GKE的云身份
 [%collapsible]
 ====
-此示例将Asta Trident安装到GKE集群上、以便与云身份结合使用。
+此示例将在GKE集群上安装Trident以与云标识结合使用。
 
 [listing]
 ----
