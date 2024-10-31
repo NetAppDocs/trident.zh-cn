@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-deploy-tridentctl.html 
-keywords: deploy, astra trident, methods, tridentctl, windows 
-summary: '您可以使用安装Astra Trident `tridentctl`。此过程将处理适用场景 安装、其中、Astra Trident所需的容器映像是否存储在专用注册表中。' 
+keywords: deploy, Trident, methods, tridentctl, windows 
+summary: '您可以使用安装Trident `tridentctl`。此过程适用于Trident所需容器映像存储在或未存储在私有注册表中的安装。' 
 ---
 = 使用tridentctl进行安装
 :hardbreaks:
@@ -12,19 +12,19 @@ summary: '您可以使用安装Astra Trident `tridentctl`。此过程将处理�
 
 
 [role="lead"]
-您可以使用安装Astra Trident `tridentctl`。此过程将处理适用场景 安装、其中、Astra Trident所需的容器映像是否存储在专用注册表中。以自定义 `tridentctl` 部署、请参见 link:kubernetes-customize-deploy-tridentctl.html["自定义 tridentctl 部署"]。
+您可以使用安装Trident `tridentctl`。此过程适用于Trident所需容器映像存储在或未存储在私有注册表中的安装。要自定义 `tridentctl`部署，请参见link:kubernetes-customize-deploy-tridentctl.html["自定义 tridentctl 部署"]。
 
 
 
-== 有关Astra Trdent的重要信息24.06
+== 有关Trident 24.10的重要信息
 
-*您必须阅读以下有关Astra Trident的重要信息。*
+*您必须阅读以下有关Trident的重要信息。*
 
-.<strong> 中有关Astra </strong> 的信息
+.<strong>与Trident </strong>相关的信息
 [%collapsible%open]
 ====
 * 现在、在Trident中支持Kubnetes 1.27。在升级Kubernetes之前升级Trident。
-* Astra Trident会严格强制在SAN环境中使用多路径配置、建议值为 `find_multipaths: no` 在multipath.conf文件中。
+* Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
 
@@ -33,7 +33,7 @@ summary: '您可以使用安装Astra Trident `tridentctl`。此过程将处理�
 ====
 
 
-== 使用安装Astra Trident `tridentctl`
+== 使用安装Trident `tridentctl`
 
 请查看 link:../trident-get-started/kubernetes-deploy.html["安装概述"] 以确保满足安装前提条件并为您的环境选择正确的安装选项。
 
@@ -71,19 +71,19 @@ kubectl run -i --tty ping --image=busybox --restart=Never --rm -- \
 
 == 第1步：下载Trident安装程序包
 
-Astra Trident安装程序包可创建Trident Pod、配置用于保持其状态的CRD对象、并初始化CSI sidecars以执行配置卷以及将卷附加到集群主机等操作。从下载并提取最新版本的Trident安装程序 link:https://github.com/NetApp/trident/releases/latest["GitHub上的_assets_部分"^]。在示例中、使用选定的<trident-installer-XX.XX.X.tar.gz> Trident版本更新_Astra Trident。
+Trident安装程序包会创建Trident Pod、配置用于保持其状态的CRD对象、并初始化CSI边形以执行配置卷并将卷附加到集群主机等操作。从下载并解压缩最新版本的Trident安装程序link:https://github.com/NetApp/trident/releases/latest["GitHub上的_assets_部分"^]。使用您选择的版本更新Trident本示例中的Trident安装程序-XX．．．．．．tar．gz>_。
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v24.06.0/trident-installer-24.06.0.tar.gz
-tar -xf trident-installer-24.06.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v24.10.0/trident-installer-24.10.0.tar.gz
+tar -xf trident-installer-24.10.0.tar.gz
 cd trident-installer
 ----
 
 
-== 第2步：安装Astra Trident
+== 第2步：安装Trident
 
-通过执行在所需命名空间中安装Astra Trident `tridentctl install` 命令：您可以添加其他参数来指定映像注册表位置。
+执行命令、在所需的命名空间中安装Trident `tridentctl install`。您可以添加其他参数来指定映像注册表位置。
 
 [role="tabbed-block"]
 ====
@@ -98,16 +98,14 @@ cd trident-installer
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:24.06 --trident-image <your-registry>/trident:24.06.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:24.10 --trident-image <your-registry>/trident:24.10.0
 ----
 --
 .不同注册表中的映像
 --
-您必须附加 `sig-storage` 到 `imageRegistry` 使用不同的注册表位置。
-
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry>/sig-storage --autosupport-image <your-registry>/netapp/trident-autosupport:24.06 --trident-image <your-registry>/netapp/trident:24.06.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:24.10 --trident-image <your-registry>/trident:24.10.0
 ----
 --
 ====
@@ -128,7 +126,7 @@ INFO Created Trident daemonset.
 INFO Waiting for Trident pod to start.
 INFO Trident pod started.                          namespace=trident pod=trident-controller-679648bd45-cv2mx
 INFO Waiting for Trident REST interface.
-INFO Trident REST interface is up.                 version=24.06.0
+INFO Trident REST interface is up.                 version=24.10.0
 INFO Trident installation succeeded.
 ....
 ----
@@ -142,7 +140,7 @@ INFO Trident installation succeeded.
 
 === 正在使用POD创建状态
 
-您可以通过查看已创建Pod的状态来确认Astra Trident安装是否已完成：
+您可以通过查看已创建Pod的状态来确认Trident安装是否已完成：
 
 [listing]
 ----
@@ -159,7 +157,7 @@ NOTE: 如果安装程序未成功完成或 `trident-controller-<generated id>` (
 
 === 使用 `tridentctl`
 
-您可以使用 `tridentctl` 检查安装的Astra Trident版本。
+您可以使用 `tridentctl`检查安装的Trident版本。
 
 [listing]
 ----
@@ -168,19 +166,19 @@ NOTE: 如果安装程序未成功完成或 `trident-controller-<generated id>` (
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 24.06.0        | 24.06.0        |
+| 24.10.0        | 24.10.0        |
 +----------------+----------------+
 ----
 
 
 == 配置示例
 
-以下示例提供了使用安装A作用 的示例配置 `tridentctl`。
+以下示例提供了使用安装Trident的示例配置 `tridentctl`。
 
 .Windows节点
 [%collapsible]
 ====
-要在Windows节点上运行A作用 是：
+要使Trident能够在Windows节点上运行、请执行以下操作：
 
 [listing]
 ----

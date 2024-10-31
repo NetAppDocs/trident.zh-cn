@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-docker/known-issues-docker.html 
 keywords: known issues, trident, trident for docker, docker 
-summary: 查找有关将 Astra Trident 与 Docker 结合使用时的已知问题的信息。 
+summary: 查找有关将Trident与Docker结合使用时的已知问题的信息。 
 ---
 = 已知问题和限制
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 查找有关将 Astra Trident 与 Docker 结合使用时的已知问题
 
 
 [role="lead"]
-查找有关将 Astra Trident 与 Docker 结合使用时的已知问题和限制的信息。
+查找有关将Trident与Docker结合使用时的已知问题和限制的信息。
 
 
 
@@ -48,11 +48,11 @@ NOTE: 这是 Docker 客户端的限制。客户端会将单个字符名称解释
 
 
 
-== Docker Swarm 的某些行为会阻止 Astra Trident 在每个存储和驱动程序组合中为其提供支持。
+== Docker Swarm的某些行为会使Trident无法为每个存储和驱动程序组合提供支持。
 
 * Docker Swarm 目前使用卷名称而非卷 ID 作为其唯一卷标识符。
 * 卷请求会同时发送到 Swarm 集群中的每个节点。
-* 卷插件（包括 Astra Trident ）必须在 Swarm 集群中的每个节点上独立运行。由于 ONTAP 的工作方式以及 `ontap-NAS` 和 `ontap-san` 驱动程序的工作方式，它们恰好是唯一能够在这些限制范围内运行的驱动程序。
+* 卷插件(包括Trident)必须在Swarm集群中的每个节点上单独运行。由于ONTAP的工作方式以及和 `ontap-san`驱动程序的工作方式 `ontap-nas`、它们是唯一能够在这些限制下运行的驱动程序。
 
 
 其余驱动程序可能会受到诸如争用情况等问题的影响，这些问题可能会导致为单个请求创建大量卷，而无需明确的 " 赢家 " ；例如， Element 具有一项功能，允许卷具有相同的名称，但 ID 不同。

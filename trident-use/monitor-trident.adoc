@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/monitor-trident.html 
-keywords: telemetry, astra trident, monitor, metrics, health, volume usage, autosupport 
-summary: Astra Trident 提供了一组 Prometheus 指标端点，您可以使用这些端点监控 Astra Trident 的性能。 
+keywords: telemetry, Trident, monitor, metrics, health, volume usage, autosupport 
+summary: Trident提供了一组Prometheus指标端点、您可以使用这些端点来监控Trident的性能。 
 ---
-= 监控 Astra Trident
+= 监控Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,25 +12,25 @@ summary: Astra Trident 提供了一组 Prometheus 指标端点，您可以使用
 
 
 [role="lead"]
-Asta Trident提供了一组Prometheus指标端点、可用于监控Asta Trident的性能。
+Trident提供了一组Prometheus指标端点、可用于监控Trident性能。
 
 
 
 == 概述
 
-通过 Astra Trident 提供的指标，您可以执行以下操作：
+通过Trident提供的指标、您可以执行以下操作：
 
-* 保留有关 Astra Trident 运行状况和配置的选项卡。您可以检查操作的成功程度以及它是否能够按预期与后端进行通信。
+* 密切关注Trident的运行状况和配置。您可以检查操作的成功程度以及它是否能够按预期与后端进行通信。
 * 检查后端使用情况信息，并了解在后端配置的卷数量以及占用的空间量等。
 * 维护可用后端配置的卷数量的映射关系。
-* 跟踪性能。您可以了解 Astra Trident 与后端通信并执行操作所需的时间。
+* 跟踪性能。您可以查看Trident与后端通信并执行操作所需的时间。
 
 
 
 NOTE: 默认情况下， Trident 的指标会显示在 `/metrics` 端点的目标端口` 8001 ` 上。安装 Trident 时，这些指标默认为 * 已启用 * 。
 
 .您需要的内容
-* 安装了 Astra Trident 的 Kubernetes 集群。
+* 安装了Trident的Kubnetes集群。
 * 一个 Prometheus 实例。可以是 https://github.com/prometheus-operator/prometheus-operator["容器化 Prometheus 部署"^] 或者，您也可以选择将 Prometheus 作为运行 https://prometheus.io/download/["原生应用程序"^]。
 
 
@@ -38,7 +38,7 @@ NOTE: 默认情况下， Trident 的指标会显示在 `/metrics` 端点的目�
 
 == 第 1 步：定义 Prometheus 目标
 
-您应定义一个 Prometheus 目标以收集指标并获取有关后端 Astra Trident 管理的信息，它创建的卷等。这 https://netapp.io/2020/02/20/prometheus-and-trident/["博客"^] 介绍如何将 Prometheus 和 Grafana 与 Astra Trident 结合使用来检索指标。本博客介绍了如何以操作员身份在Kubelnetes集群中运行Prometheus、以及如何创建ServiceMonitor来获取Astra Tandent指标。
+您应定义Prometheus目标、以收集指标并获取有关Trident管理的后端及其创建的卷等的信息。这 https://netapp.io/2020/02/20/prometheus-and-trident/["博客"^]说明了如何将Prometheus和Grafana与Trident结合使用来检索指标。本博客介绍了如何以操作员身份在Kubelnetes集群中运行Prometheus、以及如何创建ServiceMonitor来获取Trident指标。
 
 
 
@@ -67,9 +67,9 @@ spec:
   - port: metrics
     interval: 15s
 ----
-此 ServiceMonitor 定义会检索 `trident CSI` 服务返回的指标，并专门查找服务的 `mtrics` 端点。因此， Prometheus 现在已配置为了解 Astra Trident 的指标。
+此ServiceMonitor定义检索服务返回的指标 `trident-csi`、并专门查找 `metrics`服务的端点。因此、Prometheus现在可以配置为了解Trident的指标。
 
-除了直接从Astra Trident获得的指标之外、kubelet还公开了许多指标 `kubelet_volume_*` 通过自己的指标端点查看指标。Kubelet 可以提供有关已连接的卷， Pod 及其处理的其他内部操作的信息。请参见 https://kubernetes.io/docs/concepts/cluster-administration/monitoring/["此处"^]。
+除了直接从Trident获得的指标之外、kubelet还会通过自己的指标端点公开许多 `kubelet_volume_*`指标。Kubelet 可以提供有关已连接的卷， Pod 及其处理的其他内部操作的信息。请参阅 https://kubernetes.io/docs/concepts/cluster-administration/monitoring/["此处"^]。
 
 
 
@@ -83,21 +83,21 @@ PromQL 非常适合创建返回时间序列或表格数据的表达式。
 
 === 获取 Trident 运行状况信息
 
-* 来自 Astra Trident 的 HTTP 2XX 响应的百分比
+* **来自Trident的HTTP 2XX响应的百分比**
 
 
 [listing]
 ----
 (sum (trident_rest_ops_seconds_total_count{status_code=~"2.."} OR on() vector(0)) / sum (trident_rest_ops_seconds_total_count)) * 100
 ----
-* 通过状态代码来自 Astra Trident 的 REST 响应的百分比
+* **通过状态代码来自Trident的REST响应的百分比**
 
 
 [listing]
 ----
 (sum (trident_rest_ops_seconds_total_count) by (status_code)  / scalar (sum (trident_rest_ops_seconds_total_count))) * 100
 ----
-* * 由 Astra Trident 执行的操作的平均持续时间（毫秒） *
+* **由Trident执行的操作的平均持续时间(以毫秒为单位)**
 
 
 [listing]
@@ -106,7 +106,7 @@ sum by (operation) (trident_operation_duration_milliseconds_sum{success="true"})
 ----
 
 
-=== 获取 Astra Trident 使用信息
+=== 获取Trident使用情况信息
 
 * 卷大小 * 平均值 *
 
@@ -138,18 +138,18 @@ kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes * 100
 ----
 
 
-== 了解有关 Astra Trident AutoSupport 遥测的信息
+== 了解Trident AutoSupport遥测
 
-默认情况下， Astra Trident 会按每日节奏向 NetApp 发送 Prometheus 指标和基本后端信息。
+默认情况下、Trident会每天向NetApp发送Prometheus指标和基本后端信息。
 
-* 要阻止 Astra Trident 向 NetApp 发送 Prometheus 指标和基本后端信息，请在 Astra Trident 安装期间传递 ` -silning-autosupport` 标志。
-* Astra Trident 还可以通过 `tridentctl send AutoSupport` 按需将容器日志发送到 NetApp 支持部门。您需要触发 Astra Trident 以上传其日志。在提交日志之前，您应接受 NetApp 的https://www.netapp.com/company/legal/privacy-policy/["隐私政策"^]。
-* 除非另有说明，否则 Astra Trident 会从过去 24 小时提取日志。
-* 您可以使用指定日志保留时间范围 `--since` 标志。例如： `tridentctl send autosupport --since=1h`。此信息通过收集和发送 `trident-autosupport` 与Astra Trident一起安装的容器。您可以从获取容器映像 https://hub.docker.com/r/netapp/trident-autosupport["Trident AutoSupport"^]。
+* 要阻止Trident向NetApp发送Prometheus指标和基本后端信息、请在Trident安装期间传递此 `--silence-autosupport`标志。
+* Trident还可以通过按需向NetApp支持发送容器日志 `tridentctl send autosupport`。您需要触发Trident来上传其日志。在提交日志之前，应接受NetApp的https://www.netapp.com/company/legal/privacy-policy/["隐私政策"^]。
+* 除非指定、否则Trident将提取过去24小时的日志。
+* 您可以使用标志指定日志保留时间范围 `--since`。例如： `tridentctl send autosupport --since=1h`。此信息通过随Trident一起安装的容器收集和发送 `trident-autosupport`。您可以从获取容器映像 https://hub.docker.com/r/netapp/trident-autosupport["Trident AutoSupport"^]。
 * Trident AutoSupport 不会收集或传输个人身份信息（ PiII ）或个人信息。它附带的 https://www.netapp.com/us/media/enduser-license-agreement-worldwide.pdf["EULA"^] 不适用于三端存储容器映像本身。您可以详细了解NetApp对数据安全和信任的承诺 https://www.netapp.com/pdf.html?item=/media/14114-enduserlicenseagreementworldwidepdf.pdf["此处"^]。
 
 
-Astra Trident 发送的有效负载示例如下：
+Trident发送的有效负载示例如下所示：
 
 [listing]
 ----
@@ -176,6 +176,6 @@ items:
 
 
 
-== 禁用 Astra Trident 指标
+== 禁用Trident指标
 
 要 ` 报告指标，您应生成自定义 YAML （使用` -generate-custom-yaml ` 标志）并对其进行编辑，以删除为 `trident 主` 容器调用的` -metrics 标志。

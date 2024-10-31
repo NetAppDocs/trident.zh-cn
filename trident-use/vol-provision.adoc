@@ -203,4 +203,4 @@ kubectl delete pod task-pv-pod
 ----
 
 
-请参见 link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"] 有关存储类如何与交互的详细信息 `PersistentVolumeClaim` 和用于控制Asta Trident配置卷的方式的参数。
+有关存储类如何与和参数交互以控制Trident如何配置卷的详细信息 `PersistentVolumeClaim`、请参见link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"]。

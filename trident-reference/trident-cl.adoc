@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-reference/trident-cl.html 
 keywords: command-line, options, logging, kubernetes, docker, ports 
-summary: Astra Trident 为 Trident 流程编排程序提供了多个命令行选项，并可通过特定端口进行通信。 
+summary: Trident为Trident流程编排程序提供了多个命令行选项、并可通过特定端口进行通信。 
 ---
 = 命令行选项
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Astra Trident 为 Trident 流程编排程序提供了多个命令行选
 
 
 [role="lead"]
-Astra Trident 为 Trident 流程编排程序提供了多个命令行选项。您可以使用这些选项修改部署。
+Trident为Trident流程编排程序提供了多个命令行选项。您可以使用这些选项修改部署。
 
 
 
@@ -27,7 +27,7 @@ Astra Trident 为 Trident 流程编排程序提供了多个命令行选项。您
 == Kubernetes
 
 `-k8s_pod`:: 使用此选项或 `-k8s_api_server` 以启用Kubernetes支持。如果设置此值，则 Trident 将使用其所属 POD 的 Kubernetes 服务帐户凭据来联系 API 服务器。只有当 Trident 在启用了服务帐户的 Kubernetes 集群中作为 POD 运行时，此功能才有效。
-`-k8s_api_server <insecure-address:insecure-port>`:: 使用此选项或 `-k8s_pod` 以启用Kubernetes支持。指定后， Trident 将使用提供的不安全地址和端口连接到 Kubernetes API 服务器。这样可以在 Pod 之外部署 Trident ；但是，它仅支持与 API 服务器的不安全连接。要安全连接、请使用在Pod中部署Trident `-k8s_pod` 选项
+`-k8s_api_server <insecure-address:insecure-port>`:: 使用此选项或启用Kubornetes `-k8s_pod`支持。指定后， Trident 将使用提供的不安全地址和端口连接到 Kubernetes API 服务器。这样、Trident便可部署在POD之外；但是、它仅支持与API服务器的不安全连接。要安全连接、请使用选项在POD中部署Trident `-k8s_pod`。
 
 
 

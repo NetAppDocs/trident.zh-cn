@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-deploy-helm.html 
-keywords: deploy, astra trident, operator, helm, helm chart, configuration, values, standard, registry 
-summary: 您可以使用Helm部署Trident操作员并安装Astra Trident。此过程将处理适用场景 安装、其中、Astra Trident所需的容器映像不会存储在专用注册表中。 
+keywords: deploy, Trident, operator, helm, helm chart, configuration, values, standard, registry 
+summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程适用于Trident所需容器映像未存储在私有注册表中的安装。 
 ---
 = 使用Helm部署Trident操作员(标准模式)
 :hardbreaks:
@@ -12,28 +12,31 @@ summary: 您可以使用Helm部署Trident操作员并安装Astra Trident。此�
 
 
 [role="lead"]
-您可以使用Helm部署Trident操作员并安装Astra Trident。此过程将处理适用场景 安装、其中、Astra Trident所需的容器映像不会存储在专用注册表中。如果您有专用映像注册表、请使用 link:kubernetes-deploy-helm-mirror.html["脱机部署过程"]。
+您可以使用Helm部署Trident操作员并安装Trident。此过程适用于Trident所需容器映像未存储在私有注册表中的安装。如果您有私有映像注册表，请使用link:kubernetes-deploy-helm-mirror.html["脱机部署过程"]。
 
 
 
-== 有关Astra Trdent的重要信息24.06
+== 有关Trident 24.10的重要信息
 
-*您必须阅读以下有关Astra Trident的重要信息。*
+*您必须阅读以下有关Trident的重要信息。*
 
-.<strong> 中有关Astra </strong> 的信息
+.<strong>与Trident </strong>相关的信息
 [%collapsible%open]
 ====
-* 现在、Asta三端磁盘支持Kubbernetes 1.31。在升级Kubernetes之前升级Trident。
-* Astra Trident会严格强制在SAN环境中使用多路径配置、建议值为 `find_multipaths: no` 在multipath.conf文件中。
+[]
+=====
+* 现在、在Trident中支持Kubnetes 1.31。在升级Kubernetes之前升级Trident。
+* Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
 
 
 
+=====
 ====
 
 
-== 部署Trident操作员并使用Helm安装Astra Trident
+== 部署Trident操作员并使用Helm安装Trident
 
 使用Trident link:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Helm图表"^] 您可以一步部署Trident操作员并安装Trident。
 
@@ -43,17 +46,17 @@ summary: 您可以使用Helm部署Trident操作员并安装Astra Trident。此�
 除了 link:../trident-get-started/kubernetes-deploy.html#before-you-deploy["部署前提条件"] 您需要 link:https://v3.helm.sh/["Helm 版本 3"^]。
 
 .步骤
-. 添加Astra Trident Helm存储库：
+. 添加Trident Helm存储库：
 +
 [listing]
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. 使用 `helm install` 并指定您的部署名称、如以下示例所示、其中 `100.2404.0` 是您正在安装的Asta Trandent版本。
+. 使用 `helm install`并指定部署名称、如以下示例所示、其中 `100.2404.0`是要安装的Trident版本。
 +
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2406.0 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 100.2410.0 --create-namespace --namespace <trident-namespace>
 ----
 +
 
@@ -83,11 +86,11 @@ NOTE: 如果已为Trident创建命名空间、则`-create-namespace`参数不会
 在命令行上指定覆盖。
 
 |===
-例如，要更改的默认值 `debug`，请运行以下命令， `--set` 其中 `100.2406.0` 是您正在安装的Asta Trdent版本：
+例如，要更改的默认值 `debug`，请运行以下命令，其中 `100.2410.0`是要安装的Trident版本：
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2406.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 100.2410.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 
 
@@ -95,7 +98,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 
 此表和 `values.yaml` 文件(属于Helm图表的一部分)提供了键列表及其默认值。
 
-[cols="1,2,1"]
+[cols="1,2,3"]
 |===
 | 选项 | Description | Default 
 
@@ -112,7 +115,27 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 | `tolerations` | POD分配的差值 |  
 
 
-| `affinity` | 用于Pod分配的相关性 |  
+| `affinity` | 用于Pod分配的相关性  a| 
+[listing]
+----
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - arm64
+              - amd64
+            - key: kubernetes.io/os
+              operator: In
+              values:
+              - linux
+----
+
+WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自定义相关性、请扩展默认相关性。
+
 
 
 | `tridentControllerPluginNodeSelector` | Pod的其他节点选择器。请参见 <<了解控制器Pod和节点Pod>> 了解详细信息。 |  
@@ -127,7 +150,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 | `tridentNodePluginTolerations` | 覆盖Kubernetes对Pod的容错。请参见 <<了解控制器Pod和节点Pod>> 了解详细信息。 |  
 
 
-| `imageRegistry` | 标识的注册表 `trident-operator`， `trident`和其他图像。留空以接受默认值。 | `""` 
+| `imageRegistry` | 标识、 `trident`和其它图像的注册表 `trident-operator`。留空以接受默认值。重要信息：在私有存储库中安装Trident时、如果 `imageRegistry`使用交换机指定存储库位置、请勿在存储库路径中使用 `/netapp/`。 | `""` 
 
 
 | `imagePullPolicy` | 设置的映像提取策略 `trident-operator`。 | `IfNotPresent` 
@@ -151,7 +174,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 | `operatorImageTag` | 允许覆盖的标记 `trident-operator` 图像。 | `""` 
 
 
-| `tridentIPv6` | 允许在IPv6集群中使用Astra Trident。 | `false` 
+| `tridentIPv6` | 允许在IPv6集群中启用Trident。 | `false` 
 
 
 | `tridentK8sTimeout` | 覆盖大多数Kubernetes API操作的默认30秒超时(如果不为零、则以秒为单位)。 | `0` 
@@ -160,43 +183,43 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 | `tridentHttpRequestTimeout` | 使用覆盖HTTP请求的默认90秒超时 `0s` 为超时的无限持续时间。不允许使用负值。 | `"90s"` 
 
 
-| `tridentSilenceAutosupport` | 允许禁用Astra Trident定期AutoSupport 报告。 | `false` 
+| `tridentSilenceAutosupport` | 允许禁用Trident定期AutoSupport报告。 | `false` 
 
 
-| `tridentAutosupportImageTag` | 允许覆盖Astra Trident AutoSupport 容器的映像标记。 | `<version>` 
+| `tridentAutosupportImageTag` | 允许覆盖Trident AutoSupport容器的映像标记。 | `<version>` 
 
 
-| `tridentAutosupportProxy` | 允许Astra Trident AutoSupport 容器通过HTTP代理进行回拨。 | `""` 
+| `tridentAutosupportProxy` | 允许Trident AutoSupport容器通过HTTP代理回拨。 | `""` 
 
 
-| `tridentLogFormat` | 设置Astra Trident日志记录格式 (`text` 或 `json`）。 | `"text"` 
+| `tridentLogFormat` | 设置Trident日志记录格式(`text`或 `json`)。 | `"text"` 
 
 
-| `tridentDisableAuditLog` | 禁用Astra Trident审核日志程序。 | `true` 
+| `tridentDisableAuditLog` | 禁用Trident审核日志程序。 | `true` 
 
 
-| `tridentLogLevel` | 允许将Astra Trident的日志级别设置为： `trace`， `debug`， `info`， `warn`， `error`或 `fatal`。 | `"info"` 
+| `tridentLogLevel` | 允许将Trident的日志级别设置为： `trace`、 `debug` `info`、、、 `warn` `error`或 `fatal`。 | `"info"` 
 
 
-| `tridentDebug` | 允许将Astra Trident的日志级别设置为 `debug`。 | `false` 
+| `tridentDebug` | 允许将Trident的日志级别设置为 `debug`。 | `false` 
 
 
-| `tridentLogWorkflows` | 允许为跟踪日志记录或日志禁止启用特定的Astra Trident工作流。 | `""` 
+| `tridentLogWorkflows` | 允许为跟踪日志记录或日志抑制启用特定的Trident工作流。 | `""` 
 
 
-| `tridentLogLayers` | 允许为跟踪日志记录或日志禁止启用特定的Astra Trident层。 | `""` 
+| `tridentLogLayers` | 允许为跟踪日志记录或日志抑制启用特定的Trident层。 | `""` 
 
 
-| `TridentImage` | 允许完全覆盖Astra Trident的映像。 | `""` 
+| `TridentImage` | 允许完全覆盖Trident的图像。 | `""` 
 
 
-| `tridentImageTag` | 允许覆盖Astra Trident的映像标记。 | `""` 
+| `tridentImageTag` | 允许覆盖Trident的映像标记。 | `""` 
 
 
 | `tridentProbePort` | 允许覆盖用于Kubernetes活动/就绪性探测的默认端口。 | `""` 
 
 
-| `windows` | 允许在Windows工作节点上安装Astra Trident。 | `false` 
+| `windows` | 使Trident能够安装在Windows工作节点上。 | `false` 
 
 
 | `enableForceDetach` | 允许启用强制分离功能。 | `false` 
@@ -208,19 +231,22 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 | `cloudProvider` | 设置为 `"Azure"` 在AKS集群上使用托管身份或云身份时。如果在EKS集群上使用云标识、请设置为"Aws"。 | `""` 
 
 
-| `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在EKS集群上使用云身份时、设置为AWS IAM角色("' eks.amazonaws.com/role-arn: arn：aws：iam：：：：12356：roe/astratriident-roe'")。 | `""` 
+| `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe"")。 | `""` 
 
 
 | `iscsiSelfHealingInterval` | 调用iSCSI自我修复的间隔。 | `5m0s` 
 
 
 | `iscsiSelfHealingWaitTime` | iSCSI自我修复通过执行注销和后续登录来尝试解决陈旧会话之前经过的持续时间。 | `7m0s` 
+
+
+| `nodePrep` | 使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。* |  
 |===
 
 
 === 了解控制器Pod和节点Pod
 
-Astra Trident作为一个控制器POD运行、并在集群中的每个工作节点上运行一个节点POD。节点POD必须在任何可能要挂载Astra Trident卷的主机上运行。
+Trident作为单个控制器Pod以及集群中每个工作节点上的一个节点Pod运行。节点Pod必须运行在可能要挂载Trident卷的任何主机上。
 
 Kubernetes link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["节点选择器"^] 和 link:https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/["容忍和损害"^] 用于限制Pod在特定节点或首选节点上运行。使用`ControllerPlugin`和 `NodePlugin`、您可以指定约束和覆盖。
 

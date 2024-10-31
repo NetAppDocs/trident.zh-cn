@@ -18,10 +18,10 @@ summary: 了解适用于Azure NetApp Files的NFS和SMB后端配置选项并查�
 
 == 后端配置选项
 
-Asta三端存储使用您的后端配置(子网、虚拟网络、服务级别和位置)在请求位置可用的容量池上创建Azure NetApp Files卷、并与请求的服务级别和子网匹配。
+Trident可使用您的后端配置(子网、虚拟网络、服务级别和位置)在请求位置可用的容量池上创建Azure NetApp Files卷、并与请求的服务级别和子网匹配。
 
 
-NOTE: Astra Trident 不支持手动 QoS 容量池。
+NOTE: Trident不支持手动QoS容量池。
 
 Azure NetApp Files后端提供了这些配置选项。
 
@@ -106,7 +106,7 @@ NOTE: 有关网络功能的详细信息、请参见 link:https://docs.microsoft.
 
 === 所需权限和资源
 
-如果在创建PVC时收到"No Capacity Pools"(未找到容量池)错误、则您的应用程序注册可能没有关联的所需权限和资源(子网、虚拟网络、容量池)。如果启用了调试、则Astra Trident将记录创建后端时发现的Azure资源。验证是否正在使用适当的角色。
+如果在创建PVC时收到"No Capacity Pools"(未找到容量池)错误、则您的应用程序注册可能没有关联的所需权限和资源(子网、虚拟网络、容量池)。如果启用了调试、Trident将记录在创建后端时发现的Azure资源。验证是否正在使用适当的角色。
 
 的值 `resourceGroups`， `netappAccounts`， `capacityPools`， `virtualNetwork`，和 `subnet` 可以使用短名称或完全限定名称来指定。在大多数情况下、建议使用完全限定名称、因为短名称可以与多个同名资源匹配。
 
@@ -146,7 +146,7 @@ NOTE: 有关网络功能的详细信息、请参见 link:https://docs.microsoft.
 `exportRule` 必须是以CIDR表示法表示的任意IPv4地址或IPv4子网组合的逗号分隔列表。SMB卷已忽略。 | "0.0.0.0/0 
 
 
-| `snapshotDir` | 控制 .snapshot 目录的可见性 | false 
+| `snapshotDir` | 控制 .snapshot 目录的可见性 | 对于NFSv4、为"TRUE"；对于NFSv3、为"false" 
 
 
 | `s大小` | 新卷的默认大小 | "100 克 " 
@@ -163,7 +163,7 @@ NOTE: 有关网络功能的详细信息、请参见 link:https://docs.microsoft.
 .最低配置
 [%collapsible]
 ====
-这是绝对的最低后端配置。使用此配置、Asta三端存储可以发现已配置位置委派给Azure NetApp Files的所有NetApp帐户、容量池和子网、并随机将新卷放置在其中一个池和子网上。因为 `nasType` 省略 `nfs` 默认情况下适用、后端将为NFS卷配置。
+这是绝对的最低后端配置。使用此配置时、Trident会发现在所配置位置委派给Azure NetApp Files的所有NetApp帐户、容量池和子网、并随机将新卷放置在其中一个池和子网上。由于 `nasType` 省略了、因此会 `nfs` 应用默认设置、后端将为NFS卷配置。
 
 当您刚刚开始使用Azure NetApp Files并尝试某些操作时、此配置是理想的选择、但实际上、您需要为所配置的卷提供额外的范围界定。
 
@@ -234,7 +234,7 @@ spec:
 .使用容量池筛选器的特定服务级别配置
 [%collapsible]
 ====
-此后端配置会将卷放置在Azure中 `eastus` 位置 `Ultra` 容量池。Asta三端存储自动发现该位置委派给Azure NetApp Files的所有子网、并随机在其中一个子网上放置一个新卷。
+此后端配置会将卷放置在Azure的 `eastus`容量池中 `Ultra`。Trident会自动发现该位置委派给Azure NetApp Files的所有子网、并随机在其中一个子网上放置一个新卷。
 
 [listing]
 ----
@@ -330,7 +330,7 @@ storage:
 .支持的拓扑配置
 [%collapsible]
 ====
-Asta Trildent可以根据区域和可用性区域为工作负载配置卷。 `supportedTopologies`此后端配置中的块用于提供每个后端的区域和分区列表。此处指定的区域和分区值必须与每个Kubnetes集群节点上标签中的区域和分区值匹配。这些区域和分区表示可在存储类中提供的允许值列表。对于包含后端提供的部分区域和分区的存储类、Asta Trident将在上述区域和分区中创建卷。有关详细信息，请参阅 link:../trident-use/csi-topology.html["使用 CSI 拓扑"]。
+Trident可以根据区域和可用性区域为工作负载配置卷。 `supportedTopologies`此后端配置中的块用于提供每个后端的区域和分区列表。此处指定的区域和分区值必须与每个Kubnetes集群节点上标签中的区域和分区值匹配。这些区域和分区表示可在存储类中提供的允许值列表。对于包含后端提供的部分区域和区域的存储类、Trident会在上述区域和区域中创建卷。有关详细信息，请参阅 link:../trident-use/csi-topology.html["使用 CSI 拓扑"]。
 
 [listing]
 ----

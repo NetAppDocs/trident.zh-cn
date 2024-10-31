@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: earlier-versions.html 
-keywords: earlier versions, astra trident versions 
+keywords: earlier versions, Trident versions 
 summary: 您可以使用版本选择器在最新版本和以前的四个版本之间导航、也可以使用以下链接。 
 ---
 = 文档的早期版本
@@ -12,16 +12,16 @@ summary: 您可以使用版本选择器在最新版本和以前的四个版本�
 
 
 [role="lead"]
-如果您未运行Asta Trident 24.06，则可从获取以前版本的文档 link:get-help.html["Astra三端支持生命周期"]。
+如果您未运行Trident 24.10，则可从获取以前版本的文档link:get-help.html["Trident支持生命周期"]。
 
-* https://docs.netapp.com/us-en/trident-2402/index.html["Astra三端到子24.02"^]
-* https://docs.netapp.com/us-en/trident-2310/index.html["Astra三打23.10."^]
-* https://docs.netapp.com/us-en/trident-2307/index.html["A作用 三排版23.07"^]
-* https://docs.netapp.com/us-en/trident-2304/index.html["Astra三排版23.04"^]
-* https://docs.netapp.com/us-en/trident-2301/index.html["Astra三排版23.01"^]
-* https://docs.netapp.com/us-en/trident-2210/index.html["Astra Trident 22.10"^]
-* https://docs.netapp.com/us-en/trident-2207/index.html["Astra Trident 22.07"^]
-* https://docs.netapp.com/us-en/trident-2204/index.html["Astra Trident 22.04"^]
-* https://docs.netapp.com/us-en/trident-2201/index.html["Astra Trident 22.01"^]
-* https://docs.netapp.com/us-en/trident-2110/index.html["Astra Trident 21.10"^]
+* https://docs.netapp.com/us-en/trident-2406/index.html["Trident 24.06"^]
+* https://docs.netapp.com/us-en/trident-2402/index.html["Trident 24.02"^]
+* https://docs.netapp.com/us-en/trident-2310/index.html["Trident 23.10"^]
+* https://docs.netapp.com/us-en/trident-2307/index.html["Trident 23.07"^]
+* https://docs.netapp.com/us-en/trident-2304/index.html["Trident 23.04"^]
+* https://docs.netapp.com/us-en/trident-2301/index.html["Trident 23.01"^]
+* https://docs.netapp.com/us-en/trident-2210/index.html["Trident 22.10"^]
+* https://docs.netapp.com/us-en/trident-2207/index.html["Trident 22.07"^]
+* https://docs.netapp.com/us-en/trident-2204/index.html["Trident 22.04"^]
+* https://docs.netapp.com/us-en/trident-2201/index.html["Trident 22.01"^]
 

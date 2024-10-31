@@ -32,24 +32,31 @@ link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nvm
 
 NOTE: 对于NVMe/TCP、建议使用ONTAP 9.12或更高版本。
 
+.基于FC的SCSI工具
+*基于光纤通道的SCSI (FC)是Trident 24.10版本中的一项技术预览功能。*
+
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#install-the-iscsi-tools["安装iSCSI工具"]如果您使用的是 `ontap-san`sanType `fcp` (基于FC的SCSI)。
+
+有关详细信息、请参见 link:https://docs.netapp.com/us-en/ontap/san-config/configure-fc-nvme-hosts-ha-pairs-reference.html["配置FC和FC-NVMe SAN主机的方式()"] 。
+
 
 
 == 节点服务发现
 
-Astra Trident会尝试自动检测节点是否可以运行iSCSI或NFS服务。
+Trident会尝试自动检测节点是否可以运行iSCSI或NFS服务。
 
 
 NOTE: 节点服务发现可识别已发现的服务、但无法保证服务已正确配置。相反、如果没有发现的服务、则无法保证卷挂载将失败。
 
 .查看事件
-Astra Trident会为节点创建事件以标识发现的服务。要查看这些事件、请运行：
+Trident会为此节点创建事件以确定发现的服务。要查看这些事件、请运行：
 
 [listing]
 ----
 kubectl get event -A --field-selector involvedObject.name=<Kubernetes node name>
 ----
 .查看发现的服务
-Astra Trident标识为Trident节点CR上的每个节点启用的服务。要查看发现的服务、请运行：
+Trident标识为Trident节点CR上的每个节点启用的服务。要查看发现的服务、请运行：
 
 [listing]
 ----
@@ -85,25 +92,25 @@ WARNING: 安装NFS工具后重新启动工作节点、以防止在将卷连接�
 
 == iSCSI 卷
 
-Astra Trident可以自动建立iSCSI会话、扫描LUN、发现多路径设备、对其进行格式化并将其挂载到Pod。
+Trident可以自动建立iSCSI会话、扫描LUN、发现多路径设备、对其进行格式化并将其挂载到Pod。
 
 
 
 === iSCSI自我修复功能
 
-对于ONTAP 系统、Astra Trident每五分钟运行一次iSCSI自我修复、以便：
+对于ONTAP系统、Trident每五分钟运行一次iSCSI自我修复、以便：
 
 . *确定*所需的iSCSI会话状态和当前的iSCSI会话状态。
-. *将所需状态与当前状态进行比较*、以确定所需的修复。Astra Trident可确定修复优先级以及提前修复的时间。
+. *将所需状态与当前状态进行比较*、以确定所需的修复。Trident确定修复优先级以及何时抢占修复。
 . 需要执行*修复*才能将当前iSCSI会话状态恢复为所需的iSCSI会话状态。
 
 
 
-NOTE: 自我修复活动日志位于中 `trident-main` 相应的Demonset Pod上的容器。要查看日志、必须已设置 `debug` 在Astra Trident安装期间设置为"true"。
+NOTE: 自我修复活动日志位于相应的Demonset Pod上的容器中 `trident-main`。要查看日志、必须在Trident安装期间将设置 `debug`为"TRUE"。
 
-Astra Trident iSCSI自我修复功能有助于防止：
+Trident iSCSI自我修复功能有助于防止：
 
-* 在网络连接问题描述 之后可能发生的陈旧或运行不正常的iSCSI会话。如果会话已过时、则Astra Trident会等待七分钟、然后再注销以重新建立与门户的连接。
+* 在网络连接问题描述 之后可能发生的陈旧或运行不正常的iSCSI会话。如果会话陈旧、Trident将等待七分钟后再注销、以便重新建立与门户的连接。
 +
 
 NOTE: 例如、如果在存储控制器上轮换了CHAP密钥、而网络断开了连接、则旧的(_stal_) CHAP密钥可能会持续存在。自修复功能可以识别此问题、并自动重新建立会话以应用更新后的CHAP密码。
@@ -144,19 +151,13 @@ sudo sed -i 's/^\(node.session.auth.chap_algs\).*/\1 = MD5/' /etc/iscsi/iscsid.c
 +
 [listing]
 ----
-sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath
+sudo yum install -y lsscsi iscsi-initiator-utils device-mapper-multipath
 ----
 . 检查 iscsi-initiator-utils 版本是否为 6.2.0.877-2.el7 或更高版本：
 +
 [listing]
 ----
 rpm -q iscsi-initiator-utils
-----
-. 将扫描设置为手动：
-+
-[listing]
-----
-sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
 ----
 . 启用多路径：
 +
@@ -240,7 +241,7 @@ NOTE: 对于 Ubuntu 18.04 ，您必须先使用 `iscsiadm` 发现目标端口，
 
 === 配置或禁用iSCSI自我修复
 
-您可以配置以下A作用 力三端iSCSI自我修复设置来修复陈旧的会话：
+您可以配置以下Trident iSCSI自我修复设置来修复陈旧会话：
 
 * *iSCSI自我修复间隔*：确定调用iSCSI自我修复的频率(默认值：5分钟)。您可以将其配置为通过设置较小的数字来提高运行频率、也可以通过设置较大的数字来降低运行频率。
 
@@ -263,7 +264,7 @@ NOTE: 对于 Ubuntu 18.04 ，您必须先使用 `iscsiadm` 发现目标端口，
 
 [listing]
 ----
-helm install trident trident-operator-100.2406.0.tgz --set iscsiSelfHealingInterval=3m0s --set iscsiSelfHealingWaitTime=6m0s -n trident
+helm install trident trident-operator-100.2410.0.tgz --set iscsiSelfHealingInterval=3m0s --set iscsiSelfHealingWaitTime=6m0s -n trident
 ----
 --
 .Tridentctl
@@ -323,4 +324,4 @@ sudo modprobe nvme-tcp
 cat /etc/nvme/hostnqn
 ----
 
-WARNING: A作用 是修改 `ctrl_device_tmo` 用于确保NVMe在路径发生故障时不会放弃的值。请勿更改此设置。
+WARNING: Trident会修改此 `ctrl_device_tmo`值、以确保NVMe在路径发生故障时不会放弃此路径。请勿更改此设置。

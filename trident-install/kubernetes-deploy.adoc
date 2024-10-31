@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-deploy.html 
-keywords: deploy, astra trident, methods, operator, tridentctl, helm, tanzu, vmware 
-summary: '您可以使用Trident操作符(手动或使用Helm)或安装Astra Trident `tridentctl`。本主题提供了有关为您选择正确安装过程的重要信息。' 
+keywords: deploy, Trident, methods, operator, tridentctl, helm, tanzu, vmware 
+summary: '您可以使用Trident操作员(手动或使用Helm)或与一起安装Trident `tridentctl`。本主题提供了有关为您选择正确安装过程的重要信息。' 
 ---
-= 了解有关Astra Trident安装的信息
+= 了解Trident安装
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,24 +12,27 @@ summary: '您可以使用Trident操作符(手动或使用Helm)或安装Astra Tri
 
 
 [role="lead"]
-为了确保Astra Trident能够安装在各种环境和组织中、NetApp提供了多种安装选项。您可以使用Trident操作符(手动或使用Helm)或安装Astra Trident `tridentctl`。本主题提供了有关为您选择正确安装过程的重要信息。
+为了确保Trident可以安装在各种环境和组织中、NetApp提供了多种安装选项。您可以使用Trident操作员(手动或使用Helm)或与一起安装Trident `tridentctl`。本主题提供了有关为您选择正确安装过程的重要信息。
 
 
 
-== 有关Astra Trdent的重要信息24.06
+== 有关Trident 24.06的重要信息
 
-*您必须阅读以下有关Astra Trident的重要信息。*
+*您必须阅读以下有关Trident的重要信息。*
 
-.<strong> 中有关Astra </strong> 的信息
+.<strong>与Trident </strong>相关的信息
 [%collapsible%open]
 ====
-* 现在、Asta三端磁盘支持Kubbernetes 1.31。在升级Kubernetes之前升级Trident。
-* Astra Trident会严格强制在SAN环境中使用多路径配置、建议值为 `find_multipaths: no` 在multipath.conf文件中。
+[]
+=====
+* 现在、在Trident中支持Kubnetes 1.31。在升级Kubernetes之前升级Trident。
+* Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
 
 
 
+=====
 ====
 
 
@@ -58,11 +61,11 @@ TIP: 如果您尚未熟悉 link:../trident-concepts/intro.html["基本概念"^]�
 
 === 使用Trident运算符
 
-无论是手动部署还是使用Helm部署、Trident操作员都是简化安装和动态管理Astra Trident资源的绝佳方式。您可以做到这一点 link:../trident-get-started/kubernetes-customize-deploy.html["自定义Trident操作员部署"] 使用中的属性 `TridentOrchestrator` 自定义资源(CR)。
+无论是手动部署还是使用Helm部署、Trident操作员都是简化安装和动态管理Trident资源的绝佳方式。您甚至可以link:../trident-get-started/kubernetes-customize-deploy.html["自定义Trident操作员部署"]使用自定义资源(CR)中的属性 `TridentOrchestrator`。
 
 使用Trident运算符的优势包括：
 
-.<strong> A Trident对象</strong>
+.<strong> Trident对象</strong>
 [%collapsible]
 ====
 Trident操作符会自动为您的Kubernetes版本创建以下对象。
@@ -77,13 +80,13 @@ Trident操作符会自动为您的Kubernetes版本创建以下对象。
 .<strong>帐户</strong>
 [%collapsible]
 ====
-集群范围的三端修复操作符可在集群级别管理与Astra三端修复安装关联的资源。这可减少使用命名空间范围的操作符维护集群范围的资源时可能导致的错误。这对于自我修复和修补至关重要。
+集群范围的Trident操作员在集群级别管理与Trident安装关联的资源。这可减少使用命名空间范围的操作符维护集群范围的资源时可能导致的错误。这对于自我修复和修补至关重要。
 
 ====
 .<strong> —修复功能—</strong>
 [%collapsible]
 ====
-操作员监控Astra Trident的安装、并主动采取措施来解决问题、例如部署何时被删除或意外修改。答 `trident-operator-<generated-id>` 此时将创建与关联的POD `TridentOrchestrator` 安装了Astra Trident的CR。这样可以确保集群中只有一个Astra Trident实例并控制其设置、从而确保安装有效。对安装进行更改（例如删除部署或节点取消设置）时，操作员会识别这些更改并逐个修复它们。
+操作员监控Trident安装并主动采取措施解决问题、例如何时删除部署或意外修改部署。此时将创建一个 `trident-operator-<generated-id>`POD、将CR与Trident安装关联起来 `TridentOrchestrator`。这样可以确保集群中只有一个Trident实例、并控制其设置、从而确保安装有效。对安装进行更改（例如删除部署或节点取消设置）时，操作员会识别这些更改并逐个修复它们。
 
 ====
 .<strong> 更新了现有安装的</strong>
@@ -91,7 +94,7 @@ Trident操作符会自动为您的Kubernetes版本创建以下对象。
 ====
 您可以使用操作员轻松更新现有部署。您只需编辑 `TridentOrchestrator` cr以更新安装。
 
-例如，请考虑需要启用 Astra Trident 以生成调试日志的情形。为此、请修补 `TridentOrchestrator` 设置 `spec.debug` to `true`：
+例如、假设您需要启用Trident以生成调试日志。要执行此操作，请修补 `TridentOrchestrator`以将设置 `spec.debug`为 `true`：
 
 [listing]
 ----
@@ -103,28 +106,28 @@ kubectl patch torc <trident-orchestrator-name> -n trident --type=merge -p '{"spe
 .<strong> Clean重新安装</strong>
 [%collapsible]
 ====
-通过集群范围的三端技术参数操作符、可以完全删除集群范围的资源。用户可以完全卸载Astra tandent并轻松重新安装。
+通过集群范围的三端技术参数操作符、可以完全删除集群范围的资源。用户可以完全卸载Trident并轻松重新安装。
 
 ====
 .<strong> Kubernetes升级</strong>
 [%collapsible]
 ====
-当集群的 Kubernetes 版本升级到受支持的版本时，操作员会自动更新现有的 Astra Trident 安装并进行更改，以确保其满足 Kubernetes 版本的要求。
+将集群的Kubnetes版本升级到受支持的版本后、操作员会自动更新现有Trident安装并进行更改、以确保满足Kubnetes版本的要求。
 
 
-NOTE: 如果集群升级到不受支持的版本，则操作员会阻止安装 Astra Trident 。如果已随操作员安装了 Astra Trident ，则会显示一条警告，指示 Astra Trident 安装在不受支持的 Kubernetes 版本上。
+NOTE: 如果集群升级到不受支持的版本、则操作员将阻止安装Trident。如果已使用操作员安装Trident、则会显示一条警告、指示Trident安装在不受支持的Kubnetes版本上。
 
 ====
 
 
 === 使用 `tridentctl`
 
-如果您的现有部署必须升级、或者您希望对部署进行高度自定义、则应考虑 。这是部署 Astra Trident 的传统方法。
+如果您的现有部署必须升级，或者您希望高度自定义您的部署，则应考虑。这是部署Trident的传统方法。
 
-您可以  生成Trident资源的清单。其中包括 Astra Trident 在安装过程中创建的部署，取消设置，服务帐户和集群角色。
+您可以为Trident资源生成清单。其中包括Trident在安装过程中创建的部署、守护进程、服务帐户和集群角色。
 
 
-NOTE: 从 22.04 版开始，每次安装 Astra Trident 时， AES 密钥将不再重新生成。在此版本中， Astra Trident 将安装一个新的机密对象，该对象会在安装之间持续存在。这意味着、 `tridentctl` 在22.04中、可以卸载先前版本的Trident、但早期版本无法卸载22.04安装。选择适当的安装_method。
+NOTE: 从22.04版开始、每次安装Trident时、不会再重新生成AES密钥。在此版本中、Trident将安装一个新的机密对象、此对象会在安装期间持续存在。这意味着、 `tridentctl`在22.04中可以卸载早期版本的Trident、但早期版本无法卸载22.04安装。选择适当的安装_method。
 
 
 
@@ -136,12 +139,12 @@ NOTE: 从 22.04 版开始，每次安装 Astra Trident 时， AES 密钥将不�
 ====
 .标准安装
 --
-这是安装Astra Trident的最简单方法、适用于大多数不会实施网络限制的环境。标准安装模式使用默认注册表来存储所需的Trident (`docker.io`)和CSI (`registry.k8s.io`)映像。
+这是安装Trident的最简单方法、适用于不施加网络限制的大多数环境。标准安装模式使用默认注册表来存储所需的Trident (`docker.io`()和CSI (`registry.k8s.io`()图像。
 
-使用标准模式时、Astra Trident安装程序将：
+使用标准模式时、Trident安装程序将：
 
 * 通过Internet提取容器映像
-* 创建部署或节点取消命名集、以便在Kubernetes集群中所有符合条件的节点上启动Astra Trident Pod
+* 创建部署或节点守护进程、以便在Kubornetes集群中所有符合条件的节点上启动Trident Pod
 
 
 --
@@ -157,7 +160,7 @@ NOTE: 无论注册表配置如何、CSI映像都必须驻留在一个注册表�
 --
 下面简要概述了远程安装过程：
 
-* 在要部署 Astra Trident 的远程计算机上部署适当版本的 `kubectl` 。
+* 在要从中部署Trident的远程计算机上部署适当版本的 `kubectl`。
 * 从 Kubernetes 集群复制配置文件，并在远程计算机上设置 `KUBECONFIG` 环境变量。
 * 启动 `kubectl get nodes` 命令，验证您是否可以连接到所需的 Kubernetes 集群。
 * 使用标准安装步骤从远程计算机完成部署。
@@ -200,8 +203,8 @@ link:kubernetes-deploy-tridentctl.html["标准或脱机安装"]
 
 您可以决定更改安装方法。在执行此操作之前、请考虑以下事项：
 
-* 安装和卸载Astra Trident时、请始终使用相同的方法。如果您已使用部署 `tridentctl`、您应使用的相应版本 `tridentctl` 用于卸载Astra Trident的二进制文件。同样、如果要使用操作员进行部署、则应编辑 `TridentOrchestrator` CR和设置 `spec.uninstall=true` 卸载Astra Trident。
-* 如果您的部署基于操作员、则要删除此部署并改用此部署 `tridentctl` 要部署Astra Trident、您应先编辑 `TridentOrchestrator` 并设置 `spec.uninstall=true` 卸载Astra Trident。然后删除 `TridentOrchestrator` 和操作员部署。然后、您可以使用安装 `tridentctl`。
+* 请始终使用相同的方法安装和卸载Trident。如果已使用部署 `tridentctl`，则应使用适当版本的 `tridentctl`二进制文件卸载Trident。同样、如果使用操作员进行部署、则应编辑 `TridentOrchestrator`CR并设置 `spec.uninstall=true`为卸载Trident。
+* 如果要删除基于操作员的部署并使用它 `tridentctl`来部署Trident、则应首先编辑并设置 `spec.uninstall=true`为卸载Trident。 `TridentOrchestrator`然后删除 `TridentOrchestrator`和操作员部署。然后，您可以使用安装 `tridentctl`。
 * 如果您使用的是基于操作员的手动部署、并且要使用基于Helm的Trident操作员部署、则应先手动卸载此操作员、然后再执行Helm安装。这样， Helm 就可以使用所需的标签和标注来部署 Trident 操作员。如果不执行此操作，则基于 Helm 的 Trident 操作员部署将失败，并显示标签验证错误和标注验证错误。如果您有 `tridentctl`基于部署、您可以使用基于Helm的部署、而不会遇到问题。
 
 
@@ -209,7 +212,7 @@ link:kubernetes-deploy-tridentctl.html["标准或脱机安装"]
 
 == 其他已知配置选项
 
-在 VMware Tanzu Portfolio 产品上安装 Astra Trident 时：
+在VMware Tanzu产品组合上安装Trident时：
 
 * 集群必须支持有权限的工作负载。
 * ` -kubelet-dir` 标志应设置为 kubelet 目录的位置。默认情况下，此值为 ` /var/vcap/data/kubelet` 。

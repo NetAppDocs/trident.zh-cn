@@ -1,10 +1,10 @@
 ---
 section: trident-docker
-title: 适用于 Docker 的 Astra Trident
+title: 适用于Docker的Trident
 entries:
 - title: 部署的前提条件
   url: "/trident-docker/prereqs-docker.html"
-- title: 部署 Astra Trident
+- title: 部署Trident
   url: "/trident-docker/deploy-docker.html"
 - title: 升级或卸载 Trident
   url: "/trident-docker/upgrade-uninstall-docker.html"
@@ -15,7 +15,7 @@ entries:
     url: "/trident-docker/volume-driver-options.html"
 - title: 收集日志
   url: "/trident-docker/collect-logs-docker.html"
-- title: 管理多个 Astra Trident 实例
+- title: 管理多个Trident实例
   url: "/trident-docker/multiple-instances-docker.html"
 - title: 存储配置选项
   url: "/trident-docker/stor-config.html"

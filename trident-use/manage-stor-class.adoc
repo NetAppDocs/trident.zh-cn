@@ -32,14 +32,14 @@ kubectl get storageclass
 ----
 kubectl get storageclass <storage-class> -o json
 ----
-* 要查看 Astra Trident 的同步存储类，请运行以下命令：
+* 要查看Trident的同步存储类、请运行以下命令：
 
 
 [listing]
 ----
 tridentctl get storageclass
 ----
-* 要查看 Astra Trident 的同步存储类详细信息，请运行以下命令：
+* 要查看Trident的已同步存储类详细信息、请运行以下命令：
 
 
 [listing]
@@ -76,7 +76,7 @@ NOTE: 集群中一次只能有一个默认存储类。Kubernetes 在技术上不
 
 == 确定存储类的后端
 
-以下是您可以使用问题解答与 JSON 一起为 Astra Trident 后端对象输出的 `tridentctl` 类问题的示例。此操作将使用 `JQ` 实用程序，您可能需要先安装该实用程序。
+以下是您可以使用为Trident后端对象输出的JSON回答的问题示例 `tridentctl`。这将使用 `jq`实用程序、您可能需要先安装该实用程序。
 
 [listing]
 ----
@@ -94,7 +94,7 @@ kubectl delete storageclass <storage-class>
 ----
 ` < 存储类 >` 应替换为您的存储类。
 
-通过此存储类创建的任何永久性卷将保持不变， Astra Trident 将继续对其进行管理。
+通过此存储类创建的任何永久性卷将保持不变、Trident将继续对其进行管理。
 
 
-NOTE: Astra Trident强制使用空 `fsType` 创建的卷。对于iSCSI后端、建议强制实施 `parameters.fsType` 在StorageClass中。您应删除现有StorageClasses并使用重新创建它们 `parameters.fsType` 已指定。
+NOTE: Trident会对其创建的卷强制使用空白 `fsType`。对于iSCSI后端、建议在StorageClass中强制实施 `parameters.fsType`。您应删除现有StorageClasses、然后使用指定的重新创建它们 `parameters.fsType`。

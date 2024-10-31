@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/backends.html 
 keywords: backends, storage system, anf, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, fsx 
-summary: 后端定义了 Astra Trident 与存储系统之间的关系。它告诉 Astra Trident 如何与该存储系统进行通信，以及 Astra Trident 如何从该存储系统配置卷。 
+summary: 后端用于定义Trident与存储系统之间的关系。它会告诉Trident如何与该存储系统通信、以及Trident如何从该存储系统配置卷。 
 ---
 = 配置后端
 :hardbreaks:
@@ -12,14 +12,14 @@ summary: 后端定义了 Astra Trident 与存储系统之间的关系。它告�
 
 
 [role="lead"]
-后端定义了 Astra Trident 与存储系统之间的关系。它告诉 Astra Trident 如何与该存储系统进行通信，以及 Astra Trident 如何从该存储系统配置卷。
+后端用于定义Trident与存储系统之间的关系。它会告诉Trident如何与该存储系统通信、以及Trident如何从该存储系统配置卷。
 
-Astra Trident会自动从后端提供符合存储类定义的要求的存储池。了解如何为存储系统配置后端。
+Trident会自动从满足存储类定义的要求的后端提供存储池。了解如何为存储系统配置后端。
 
 * link:anf.html["配置 Azure NetApp Files 后端"^]
 * link:gcp.html["配置适用于 Google 云平台的 Cloud Volumes Service 后端"^]
 * link:element.html["配置 NetApp HCI 或 SolidFire 后端"^]
 * link:ontap-nas.html["使用 ONTAP 或 Cloud Volumes ONTAP NAS 驱动程序配置后端"^]
 * link:ontap-san.html["使用 ONTAP 或 Cloud Volumes ONTAP SAN 驱动程序配置后端"^]
-* link:trident-fsx.html["将 Astra Trident 与适用于 NetApp ONTAP 的 Amazon FSX 结合使用"^]
+* link:trident-fsx.html["将Trident与Amazon FSx for NetApp ONTAP结合使用"^]
 

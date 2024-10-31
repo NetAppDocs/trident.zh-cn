@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-managing-k8s/uninstall-trident.html 
-keywords: uninstall, astra trident, methods, operator, tridentctl, helm, downgrade, obliviate, crds, wipeout, downgrade 
-summary: 您应使用与安装Asta三端安装相同的方法卸载Asta三端安装。如果您需要修复在升级、依赖关系问题或升级失败或不完整后发现的错误、则应卸载Astra三端存储、然后按照该版本的特定说明重新安装早期版本。 
+keywords: uninstall, Trident, methods, operator, tridentctl, helm, downgrade, obliviate, crds, wipeout, downgrade 
+summary: 您应使用与安装Trident相同的方法卸载Trident。如果您需要修复在升级、依赖关系问题或升级失败或不完整后发现的错误、则应卸载Trident、然后按照该版本的特定说明重新安装早期版本。 
 ---
-= 卸载 Astra Trident
+= 卸载 Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,32 +12,32 @@ summary: 您应使用与安装Asta三端安装相同的方法卸载Asta三端安
 
 
 [role="lead"]
-您应使用与安装Asta三端安装相同的方法卸载Asta三端安装。
+您应使用与安装Trident相同的方法卸载Trident。
 
 .关于此任务
-* 如果您需要修复在升级、依赖关系问题或升级失败或不完整后发现的错误、则应卸载Asta Trendent、然后按照相应的特定说明重新安装早期版本 link:../earlier-versions.html["version"]。这是将_降 级_降级到早期版本的唯一建议方法。
-* 为了便于升级和重新安装、卸载Asta Dent不会删除CRD或Asta Dent创建的相关对象。如果您需要完全删除A作用 中的三项技术及其所有数据、请参见 link:../troubleshooting.html#completely-remove-astra-trident-and-crds["完全删除Asta Trandent和CRD"]。
+* 如果您需要修复在升级、依赖关系问题或升级失败或不完整后发现的错误，则应卸载Trident，然后按照适用于该版本的特定说明重新安装早期版本link:../earlier-versions.html["version"]。这是将_降 级_降级到早期版本的唯一建议方法。
+* 为了便于升级和重新安装、卸载Trident不会删除Trident创建的CRD或相关对象。如果需要完全删除Trident及其所有数据，请参见link:../troubleshooting.html#completely-remove-trident-and-crds["完全删除Trident和CRD"]。
 
 
 .开始之前
-如果要停用Kubnetes集群、则必须在卸载之前删除使用ASRA三端存储创建的卷的所有应用程序。这样可以确保在删除之前、在Kubbernetes节点上未取消对这些PVC的审核。
+如果要停用Kubnetes集群、则必须在卸载之前删除使用Trident创建的卷的所有应用程序。这样可以确保在删除之前、在Kubbernetes节点上未取消对这些PVC的审核。
 
 
 
 == 确定原始安装方法
 
-您应使用与安装Asta Trdent相同的方法来卸载它。卸载之前、请验证最初安装Asta Trdent时使用的版本。
+您应使用与安装Trident相同的方法来卸载它。卸载之前、请验证最初安装Trident时使用的版本。
 
 . 使用 ... `kubectl get pods -n trident` 检查Pod。
 +
-** 如果没有操作员POD、则使用安装了Asta三端盘 `tridentctl`。
-** 如果有操作员模块、则使用三端操作员手动或使用Helm安装了A作用 曲三端。
+** 如果没有操作员POD，则使用安装了Trident `tridentctl`。
+** 如果有操作员POD、则Trident是使用Trident操作员手动或使用Helm安装的。
 
 
-. 如果有操作员控制盒、请使用 `kubectl describe tproc trident` 确定是否使用Helm安装了Astra Trdent。
+. 如果有操作员POD、请使用 `kubectl describe tproc trident`确定Trident是否是使用Helm安装的。
 +
-** 如果有Helm标签、则表示Asta Trdent是使用Helm安装的。
-** 如果没有Helm标签、则使用Trident操作人员手动安装A作用 于Trident。
+** 如果有Helm标签、则Trident是使用Helm安装的。
+** 如果没有Helm标签、则Trident是使用Trident操作员手动安装的。
 
 
 
@@ -52,7 +52,7 @@ summary: 您应使用与安装Asta三端安装相同的方法卸载Asta三端安
 
 === 卸载手动安装
 
-如果您使用操作员安装了Astra Trdent、则可以通过执行以下操作之一将其卸载：
+如果您使用操作员安装了Trident、则可以通过执行以下操作之一将其卸载：
 
 . *编辑 `TridentOrchestrator` CR并设置卸载标志**：
 +
@@ -63,7 +63,7 @@ kubectl patch torc <trident-orchestrator-name> --type=merge -p '{"spec":{"uninst
 +
 当 `uninstall` 标志设置为 `true`、Trident操作符将卸载Trident、但不会删除Trident Orchestrator本身。如果要重新安装 Trident ，应清理 Trident Orchestrator 并创建新的 Trident 。
 
-. *删除 `TridentOrchestrator`**：通过删除 `TridentOrchestrator` cr用于部署Astra Trident、此时您需要指示操作员卸载Trident。操作员将处理的删除操作 `TridentOrchestrator` 然后继续删除Astra Trident部署和取消定义、并删除在安装过程中创建的Trident Pod。
+. **删除 `TridentOrchestrator`**:删除用于部署Trident的CR后 `TridentOrchestrator`，您将指示操作员卸载Trident。操作员将处理Trident部署和守护进程的删除过程、并继续删除此部署和守护进程 `TridentOrchestrator`、同时删除其在安装过程中创建的Trident Pod。
 +
 [listing]
 ----
@@ -75,11 +75,11 @@ kubectl delete -f deploy/<bundle.yaml> -n <namespace>
 
 === 卸载Helm安装
 
-如果您使用 Helm 安装了 Astra Trident ，则可以使用 `helm uninstall` 将其卸载。
+如果您使用Helm安装了Trident，则可以使用将其卸载 `helm uninstall`。
 
 [listing]
 ----
-#List the Helm release corresponding to the Astra Trident install.
+#List the Helm release corresponding to the Trident install.
 helm ls -n trident
 NAME          NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                           APP VERSION
 trident       trident         1               2021-04-20 00:26:42.417764794 +0000 UTC deployed        trident-operator-21.07.1        21.07.1
@@ -92,7 +92,7 @@ release "trident" uninstalled
 
 == 卸载 `tridentctl` 安装
 
-使用 `uninstall` 命令输入 `tridentctl` 要删除与Asta Trandent关联的所有资源(CRD和相关对象除外)、请执行以下操作：
+使用 `uninstall`中的命令 `tridentctl`删除与Trident关联的所有资源(CRD和相关对象除外)：
 
 [listing]
 ----

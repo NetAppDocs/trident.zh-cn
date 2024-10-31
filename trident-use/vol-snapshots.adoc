@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/vol-snapshots.html 
 keywords: volumes, on-demand volume snapshots, create snapshots, backends, kubernetes, create PVCs, PVCs, snapshot, volume snapshot, import snapshot, recover data 
-summary: '持久卷(PVs)的Kubbernetes卷快照支持卷的时间点副本。您可以为使用Asta Trident创建的卷创建快照、导入在Asta Trident外部创建的快照、从现有快照创建新卷以及从快照恢复卷数据。' 
+summary: '持久卷(PVs)的Kubbernetes卷快照支持卷的时间点副本。您可以为使用Trident创建的卷创建快照、导入在Trident外部创建的快照、从现有快照创建新卷以及从快照恢复卷数据。' 
 ---
 = 使用快照
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: '持久卷(PVs)的Kubbernetes卷快照支持卷的时间点副本。您
 
 
 [role="lead"]
-持久卷(PVs)的Kubbernetes卷快照支持卷的时间点副本。您可以为使用Asta Trident创建的卷创建快照、导入在Asta Trident外部创建的快照、从现有快照创建新卷以及从快照恢复卷数据。
+持久卷(PVs)的Kubbernetes卷快照支持卷的时间点副本。您可以为使用Trident创建的卷创建快照、导入在Trident外部创建的快照、从现有快照创建新卷以及从快照恢复卷数据。
 
 
 
@@ -35,7 +35,7 @@ NOTE: 如果在GKE环境中创建按需卷快照、请勿创建快照控制器�
 .步骤
 . 创建 `VolumeSnapshotClass`。有关详细信息，请参见 link:../trident-reference/objects.html#kubernetes-volumesnapshotclass-objects["VolumeSnapshotClass"]。
 +
-** 。 `driver` 指向A作用 力三端CSI驱动程序。
+**  `driver`指向Trident CSI驱动程序。
 ** `deletionPolicy` 可以是 `Delete` 或 `Retain`。设置为时 `Retain`、存储集群上的底层物理快照会保留、即使在使用时也是如此 `VolumeSnapshot` 对象已删除。
 +
 .示例
@@ -141,16 +141,16 @@ spec:
 
 == 导入卷快照
 
-Asta三项功能支持 link:https://kubernetes.io/docs/concepts/storage/volume-snapshots/#static["Kubbernetes预配置快照过程"^] 以使集群管理员能够创建 `VolumeSnapshotContent` 在Asta Trident外部创建的对象和导入快照。
+Trident支持通过link:https://kubernetes.io/docs/concepts/storage/volume-snapshots/#static["Kubbernetes预配置快照过程"^]、集群管理员可以创建 `VolumeSnapshotContent`对象并导入在Trident外部创建的快照。
 
 .开始之前
-Asta三端存储必须已创建或导入快照的父卷。
+Trident必须已创建或导入快照的父卷。
 
 .步骤
-. *集群管理员：*创建一个 `VolumeSnapshotContent` 引用后端快照的对象。这将在Asta Trdent中启动快照工作流。
+. *集群管理员：*创建 `VolumeSnapshotContent`引用后端快照的对象。这将在Trident中启动快照工作流。
 +
 ** 在中指定后端快照的名称 `annotations` 作为 `trident.netapp.io/internalSnapshotName: <"backend-snapshot-name">`。
-** 指定 `<name-of-parent-volume-in-trident>/<volume-snapshot-content-name>` 在中 `snapshotHandle`。这是外部快照程序在中向Asta Trident提供的唯一信息 `ListSnapshots` 致电。
+** 在中指定 `<name-of-parent-volume-in-trident>/<volume-snapshot-content-name>`。这是调用中 `snapshotHandle`外部快照程序向Trident提供的唯一信息。 `ListSnapshots`
 +
 
 NOTE: 。 `<volumeSnapshotContentName>` 由于CR命名限制、不能始终与后端快照名称匹配。
@@ -193,7 +193,7 @@ spec:
   source:
     volumeSnapshotContentName: import-snap-content
 ----
-. *内部处理(无需执行任何操作)：*外部快照程序可识别新创建的 `VolumeSnapshotContent` 并运行 `ListSnapshots` 致电。Asta三项功能可创建 `TridentSnapshot`。
+. *内部处理(无需执行任何操作)：*外部快照程序识别新创建的 `VolumeSnapshotContent`并运行 `ListSnapshots`调用。Trident将创建 `TridentSnapshot`。
 +
 ** 外部快照程序用于设置 `VolumeSnapshotContent` to `readyToUse` 和 `VolumeSnapshot` to `true`。
 ** TRIdent返回 `readyToUse=true`。
@@ -244,7 +244,7 @@ NOTE: 还原Snapshot副本时、现有卷配置将被覆盖。创建Snapshot副�
 
 == 删除具有关联快照的PV
 
-删除具有关联快照的永久性卷时，相应的 Trident 卷将更新为 " 正在删除 " 状态。删除卷快照以删除Asta Trdent卷。
+删除具有关联快照的永久性卷时，相应的 Trident 卷将更新为 " 正在删除 " 状态。删除卷快照以删除Trident卷。
 
 
 

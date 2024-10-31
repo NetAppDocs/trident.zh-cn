@@ -18,20 +18,20 @@ summary: 了解使用ONTAP NAS驱动程序配置ONTAP后端的要求、身份验
 
 == 要求
 
-* 对于所有 ONTAP 后端， Astra Trident 需要至少为 SVM 分配一个聚合。
+* 对于所有ONTAP后端、Trident要求至少为SVM分配一个聚合。
 * 您可以运行多个驱动程序，并创建指向其中一个驱动程序的存储类。例如、您可以配置一个使用的黄金类 `ontap-nas` 驱动程序和使用的铜牌类 `ontap-nas-economy` 一个。
 * 所有Kubernetes工作节点都必须安装适当的NFS工具。请参见 link:worker-node-prep.html["此处"] 有关详细信息：
-* Astra Trident仅支持将SMB卷挂载到Windows节点上运行的Pod。请参见 <<准备配置SMB卷>> 了解详细信息。
+* Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。有关详细信息、请参见 <<准备配置SMB卷>> 。
 
 
 
 
 == 对ONTAP后端进行身份验证
 
-Astra Trident 提供了两种对 ONTAP 后端进行身份验证的模式。
+Trident提供了两种对ONTAP后端进行身份验证的模式。
 
 * 基于凭据：此模式需要对ONTAP后端具有足够的权限。建议使用与预定义安全登录角色关联的帐户、例如 `admin` 或 `vsadmin` 以确保与ONTAP 版本的最大兼容性。
-* 基于证书：此模式要求在后端安装证书、才能使Astra Trident与ONTAP集群进行通信。此处，后端定义必须包含客户端证书，密钥和可信 CA 证书的 Base64 编码值（如果使用）（建议）。
+* 基于证书：此模式需要在后端安装证书、Trident才能与ONTAP集群进行通信。此处，后端定义必须包含客户端证书，密钥和可信 CA 证书的 Base64 编码值（如果使用）（建议）。
 
 
 您可以更新现有后端、以便在基于凭据的方法和基于证书的方法之间移动。但是、一次仅支持一种身份验证方法。要切换到其他身份验证方法、必须从后端配置中删除现有方法。
@@ -43,7 +43,7 @@ WARNING: 如果您尝试同时提供*凭据和证书*、则后端创建将失败
 
 === 启用基于凭据的身份验证
 
-Astra Trident 需要 SVM 范围 / 集群范围的管理员的凭据才能与 ONTAP 后端进行通信。建议使用标准的预定义角色，例如 `admin` 或 `vsadmin` 。这样可以确保与未来的 ONTAP 版本向前兼容，这些版本可能会使功能 API 公开供未来的 Astra Trident 版本使用。可以创建自定义安全登录角色并将其用于 Astra Trident ，但不建议使用。
+Trident需要SVM范围/集群范围的管理员的凭据才能与ONTAP后端进行通信。建议使用标准的预定义角色，如 `admin`或 `vsadmin`。这样可以确保与未来ONTAP版本的正向兼容性、这些版本可能会公开未来Trident版本要使用的功能API。可以创建自定义安全登录角色并将其用于Trident、但不建议这样做。
 
 后端定义示例如下所示：
 
@@ -197,28 +197,90 @@ tridentctl update backend NasBackend -f cert-backend-updated.json -n trident
 
 NOTE: 轮换密码时，存储管理员必须先在 ONTAP 上更新用户的密码。然后进行后端更新。轮换证书时，可以向用户添加多个证书。之后，后端将更新以使用新证书，然后可以从 ONTAP 集群中删除旧证书。
 
-更新后端不会中断对已创建卷的访问，也不会影响在之后建立的卷连接。成功的后端更新表明， Astra Trident 可以与 ONTAP 后端进行通信并处理未来的卷操作。
+更新后端不会中断对已创建卷的访问，也不会影响在之后建立的卷连接。后端更新成功表示Trident可以与ONTAP后端通信并处理未来的卷操作。
+
+
+
+=== 为Trident创建自定义ONTAP角色
+
+您可以创建Privileges最低的ONTAP集群角色、这样就不必使用ONTAP管理员角色在Trident中执行操作。如果在Trident后端配置中包含用户名、则Trident将使用您创建的ONTAP集群角色来执行操作。
+
+有关创建Trident自定义角色的详细信息、请参见link:https://github.com/NetApp/trident/tree/master/contrib/ontap/trident_role["Trident自定义角色生成器"]。
+
+[role="tabbed-block"]
+====
+.使用ONTAP命令行界面
+--
+. 使用以下命令创建新角色：
++
+`security login role create <role_name\> -cmddirname "command" -access all –vserver <svm_name\>`
+
+. 为Trident用户创建用户名：
++
+`security login create -username <user_name\> -application ontapi -authmethod <password\> -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+
+. 将角色映射到用户：
++
+`security login modify username <user_name\> –vserver <svm_name\> -role <role_name\> -application ontapi -application console -authmethod <password\>`
+
+
+
+--
+.使用 System Manager
+--
+在ONTAP系统管理器中执行以下步骤：
+
+. *创建自定义角色*：
++
+.. 要在集群级别创建自定义角色，请选择*Cluster > Settings*。
++
+(或)要在SVM级别创建自定义角色、请选择*存储> Storage VM `required SVM` >>设置>用户和角色*。
+
+.. 选择*用户和角色*旁边的箭头图标(*->*)。
+.. 在*角色*下选择*+添加*。
+.. 定义角色的规则，然后单击*Save*。
+
+
+. *将角色映射到Trident user*：+在*Users and Roles*页面上执行以下步骤：
++
+.. 在*用户*下选择添加图标*+*。
+.. 选择所需的用户名，然后在下拉菜单中为*rouser*选择一个角色。
+.. 单击 * 保存 * 。
+
+
+
+
+--
+====
+有关详细信息、请参见以下页面：
+
+* link:https://kb.netapp.com/on-prem/ontap/Ontap_OS/OS-KBs/FAQ__Custom_roles_for_administration_of_ONTAP["用于管理ONTAP的自定义角色"^]或link:https://docs.netapp.com/us-en/ontap/authentication/define-custom-roles-task.html["定义自定义角色"^]
+* link:https://docs.netapp.com/us-en/ontap-automation/rest/rbac_roles_users.html#rest-api["使用角色和用户"^]
+
 
 
 
 == 管理 NFS 导出策略
 
-Astra Trident 使用 NFS 导出策略来控制对其配置的卷的访问。
+Trident使用NFS导出策略控制对其配置的卷的访问。
 
-使用导出策略时， Astra Trident 提供了两个选项：
+使用导出策略时、Trident提供了两个选项：
 
-* Astra Trident 可以动态管理导出策略本身；在此操作模式下，存储管理员会指定一个表示可接受 IP 地址的 CIDR 块列表。Astra Trident 会自动将属于这些范围的节点 IP 添加到导出策略中。或者，如果未指定任何 CIDR ，则在节点上找到的任何全局范围的单播 IP 都将添加到导出策略中。
-* 存储管理员可以手动创建导出策略和添加规则。除非在配置中指定了不同的导出策略名称，否则 Astra Trident 将使用默认导出策略。
+* Trident可以动态管理导出策略本身；在此操作模式下、存储管理员可以指定一个表示可接受IP地址的CIDR块列表。Trident会在发布时自动将这些范围内的适用节点IP添加到导出策略中。或者、如果未指定CIDR、则在要发布卷的节点上找到的所有全局范围单播IP都将添加到导出策略中。
+* 存储管理员可以手动创建导出策略和添加规则。除非在配置中指定了其他导出策略名称、否则Trident将使用默认导出策略。
 
 
 
 
 === 动态管理导出策略
 
-Asta三叉式存储提供了动态管理ONTAP后端导出策略的功能。这样，存储管理员就可以为工作节点 IP 指定允许的地址空间，而不是手动定义显式规则。它大大简化了导出策略管理；修改导出策略不再需要手动干预存储集群。此外、这有助于将对存储集群的访问限制为仅允许IP位于指定范围内的工作节点访问、从而支持精细的自动化管理。
+通过Trident、可以动态管理ONTAP后端的导出策略。这样，存储管理员就可以为工作节点 IP 指定允许的地址空间，而不是手动定义显式规则。它大大简化了导出策略管理；修改导出策略不再需要手动干预存储集群。此外、这还有助于将对存储集群的访问限制为仅限正在挂载卷且IP位于指定范围内的工作节点访问、从而支持精细的自动化管理。
 
 
 NOTE: 使用动态导出策略时、请勿使用网络地址转换(Network Address Translation、NAT)。使用NAT时、存储控制器会看到前端NAT地址、而不是实际IP主机地址、因此、如果在导出规则中找不到匹配项、则会拒绝访问。
+
+
+NOTE: 在Trident 24.10中、 `ontap-nas`存储驱动程序将继续与早期版本一样工作；ONTAP NAS驱动程序未进行任何更改。在Trident 24.10中、只有 `ontap-nas-economy`存储驱动程序具有基于卷的粒度访问控制。
 
 
 
@@ -230,7 +292,7 @@ NOTE: 使用动态导出策略时、请勿使用网络地址转换(Network Addre
 ----
 ---
 version: 1
-storageDriverName: ontap-nas
+storageDriverName: ontap-nas-economy
 backendName: ontap_nas_auto_export
 managementLIF: 192.168.0.135
 svm: svm1
@@ -241,19 +303,32 @@ autoExportCIDRs:
 autoExportPolicy: true
 ----
 
-NOTE: 使用此功能时、您必须确保SVM中的根接合具有先前创建的导出策略、并具有允许节点CIDR块的导出规则(例如默认导出策略)。始终遵循NetApp建议的最佳实践、为Astra三端存储专用SVM。
+NOTE: 使用此功能时、您必须确保SVM中的根接合具有先前创建的导出策略、并具有允许节点CIDR块的导出规则(例如默认导出策略)。始终遵循NetApp建议的最佳实践、将SVM专用于Trident。
 
 以下是使用上述示例对此功能的工作原理进行的说明：
 
-* `autosExportPolicy` 设置为 `true` 。这表示 Astra Trident 将为 `svm1` SVM 创建导出策略，并使用 `autosExportCIDRS` 地址块处理规则的添加和删除。例如， UUID 为 403b5326-8482-40db-96d0-d83fb3f4daec 且 `autodExportPolicy` 设置为 `true` 的后端会在 SVM 上创建一个名为 `trident -403b5326-8482-40db-96d0-d83fb3f4daec` 的导出策略。
-* `autosExportCIDR` 包含地址块列表。此字段为可选字段，默认为 "0.0.0.0/0 ， " ：： /0" 。如果未定义，则 Astra Trident 会添加在工作节点上找到的所有全局范围的单播地址。
+* `autoExportPolicy`设置为 `true`。这表示Trident会为SVM的使用此后端配置的每个卷创建一个导出策略 `svm1`、并使用地址块处理规则的添加和删除 `autoexportCIDRs`。在将卷连接到节点之前、此卷会使用一个空导出策略、此策略不带任何规则来防止对该卷进行不必要的访问。将卷发布到节点后、Trident会创建一个与指定CIDR块中包含节点IP的底层qtree同名的导出策略。这些IP也会添加到父FlexVol使用的导出策略中。
++
+** 例如：
++
+*** 后端UUID 403b5326/8482-40db-96d0-d83fb3f4daec
+*** `autoExportPolicy`将设置为 `true`
+*** 存储前缀 `trident`
+*** pvc UUID a79bcf5f-7b6d-4a40-9876- e2551f159c1c
+*** 名为svm_pvc_a79bcf5f_7b6d_4a40_9876_e2551f159c1c的qtree会为名为的FlexVol创建一个导出策略、为名为的qtree创建一个导出策略、
+`trident_pvc_a79bcf5f_7b6d_4a40_9876_e2551f159c1c`并在Trident上创建 `trident-403b5326-8482-40db96d0-d83fb3f4daec`一个名为的空导出策略 `trident_empty`。FlexVol导出策略的规则将是qtree导出策略中包含的任何规则的超集。空导出策略将由所有未附加的卷重复使用。
 
 
-在此示例中，提供了 `192.168.0.0/24` 地址空间。这表示此地址范围内的 Kubernetes 节点 IP 将添加到 Astra Trident 创建的导出策略中。当 Astra Trident 注册其运行的节点时，它会检索该节点的 IP 地址，并根据 `autosExportCIDRS` 中提供的地址块对其进行检查。筛选 IP 后， Astra Trident 会为其发现的客户端 IP 创建导出策略规则，并为其标识的每个节点创建一个规则。
+
+
+* `autoExportCIDRs`包含地址块列表。此字段为可选字段，默认为 "0.0.0.0/0 ， " ：： /0" 。如果未定义、则Trident会添加在具有出版物的工作节点上找到的所有全局范围单播地址。
+
+
+在此示例中、 `192.168.0.0/24`提供了地址空间。这表示属于此地址范围且发布内容的Kub联网 节点IP将添加到Trident创建的导出策略中。当Trident注册运行该功能的节点时，它将检索该节点的IP地址，并根据中提供的地址块对其进行检查 `autoExportCIDRs`。发布时，在筛选IP之后，Trident将为要发布到的节点的客户端IP创建导出策略规则。
 
 创建后，您可以为后端更新 `autosExportPolicy` 和 `autosExportCIDR` 。您可以为自动管理的后端附加新的 CIDR ，也可以删除现有的 CIDR 。删除 CIDR 时请务必小心，以确保现有连接不会断开。您也可以选择对后端禁用 `autosExportPolicy` ，并回退到手动创建的导出策略。这需要在后端配置中设置 `exportPolicy` 参数。
 
-在 Astra Trident 创建或更新后端后，您可以使用 `tridentctl` 或相应的 `tridentbackend` CRD 检查后端：
+在Trident创建或更新后端后、您可以使用或相应的 `tridentbackend`CRD检查后端 `tridentctl`：
 
 [listing]
 ----
@@ -278,16 +353,14 @@ items:
       exportPolicy: <automatic>
       fileSystemType: ext4
 ----
-当节点添加到 Kubernetes 集群并向 Astra Trident 控制器注册后，现有后端的导出策略将会更新（前提是它们位于后端的 `autosExportCIDR` 中指定的地址范围内）。
+删除节点后、Trident会检查所有导出策略以删除与该节点对应的访问规则。通过从受管后端的导出策略中删除此节点IP、Trident可防止恶意挂载、除非集群中的新节点重复使用此IP。
 
-删除节点后， Astra Trident 会检查所有联机后端，以删除该节点的访问规则。通过从受管后端的导出策略中删除此节点 IP ， Astra Trident 可防止恶意挂载，除非此 IP 可由集群中的新节点重复使用。
-
-对于以前存在的后端、请使用更新后端 `tridentctl update backend` 将确保Astra Trident自动管理导出策略。这将创建一个以后端UUID命名的新导出策略、后端上的卷在重新挂载时将使用新创建的导出策略。
+对于以前存在的后端、使用更新后端 `tridentctl update backend`可确保Trident自动管理导出策略。这样会根据需要创建两个新的导出策略、并以后端的UUID和qtree名称命名。后端上的卷在卸载并重新挂载后将使用新创建的导出策略。
 
 
 NOTE: 删除具有自动管理导出策略的后端将删除动态创建的导出策略。如果重新创建后端，则会将其视为新的后端，并会创建新的导出策略。
 
-如果更新了活动节点的 IP 地址，则必须在此节点上重新启动 Astra Trident Pod 。然后， Astra Trident 将更新其管理的后端的导出策略，以反映此 IP 更改。
+如果更新了活动节点的IP地址、则必须在此节点上重新启动Trident Pod。然后、Trident将更新其管理的后端的导出策略、以反映此IP更改。
 
 
 
@@ -298,11 +371,14 @@ NOTE: 删除具有自动管理导出策略的后端将删除动态创建的导�
 
 WARNING: 要创建、您必须在SVM上同时配置NFS和SMB/CCIFS协议 `ontap-nas-economy` 适用于内部ONTAP 的SMB卷。如果未能配置其中任一协议、则发生原因 SMB卷创建将失败。
 
+
+NOTE: `autoExportPolicy`SMB卷不支持。
+
 .开始之前
 在配置SMB卷之前、您必须满足以下条件。
 
-* 一个Kubernetes集群、其中包含一个Linux控制器节点以及至少一个运行Windows Server 2022的Windows工作节点。Astra Trident仅支持将SMB卷挂载到Windows节点上运行的Pod。
-* 至少一个包含Active Directory凭据的Astra Trident密钥。以生成密钥 `smbcreds`：
+* 一个Kubernetes集群、其中包含一个Linux控制器节点以及至少一个运行Windows Server 2022的Windows工作节点。Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。
+* 至少一个包含Active Directory凭据的Trident密钥。生成密钥 `smbcreds`：
 +
 [listing]
 ----
@@ -312,7 +388,7 @@ kubectl create secret generic smbcreds --from-literal username=user --from-liter
 
 
 .步骤
-. 对于内部ONTAP、您可以选择创建SMB共享、也可以选择Astra三端存储为您创建一个共享。
+. 对于内部ONTAP、您可以选择创建SMB共享、也可以选择Trident为您创建一个共享。
 +
 
 NOTE: Amazon FSx for ONTAP需要SMB共享。
@@ -350,11 +426,7 @@ NOTE: 请参见 link:https://docs.netapp.com/us-en/ontap/smb-config/create-share
 | 参数 | Description | 示例 
 
 
-| `smbShare` | 您可以指定以下选项之一：使用Microsoft管理控制台或ONTAP命令行界面创建的SMB共享的名称；允许Asta三端到功能创建SMB共享的名称；或者、您可以将参数留空以防止对卷进行通用共享访问。
-
-对于内部ONTAP、此参数是可选的。
-
-此参数对于Amazon FSx for ONTAP后端为必填项、不能为空。 | `smb-share` 
+| `smbShare` | 您可以指定以下选项之一：使用Microsoft管理控制台或ONTAP命令行界面创建的SMB共享的名称；允许Trident创建SMB共享的名称；或者、您可以将参数留空以防止对卷进行通用共享访问。对于内部ONTAP、此参数是可选的。此参数对于Amazon FSx for ONTAP后端为必填项、不能为空。 | `smb-share` 
 
 
 | `nasType` | *必须设置为 `smb`如果为空、则默认为 `nfs`。 | `smb` 

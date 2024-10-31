@@ -18,7 +18,7 @@ summary: '了解如何使用 `kubectl` 执行后端管理操作。'
 
 == 删除后端
 
-通过删除 `TridentBackendConfig` ，您可以指示 Astra Trident 删除 / 保留后端（基于 `detionPolicy` ）。要删除后端，请确保将 `deletionPolicy` 设置为 delete 。要仅删除 `TridentBackendConfig` ，请确保将 `deletionPolicy` 设置为 Retain 。这样可以确保后端仍然存在，并可使用 `tridentctl` 进行管理。
+通过删除 `TridentBackendConfig`，您可以指示Trident删除/保留后端(基于 `deletionPolicy`)。要删除后端、请确保 `deletionPolicy`将设置为delete。要仅删除 `TridentBackendConfig`，请确保 `deletionPolicy`将设置为保留。这样可以确保后端仍然存在，并且可以使用进行管理 `tridentctl`。
 
 运行以下命令：
 
@@ -26,7 +26,7 @@ summary: '了解如何使用 `kubectl` 执行后端管理操作。'
 ----
 kubectl delete tbc <tbc-name> -n trident
 ----
-Astra Trident 不会删除 `TridentBackendConfig` 使用的 Kubernetes 机密。Kubernetes 用户负责清理密钥。删除机密时必须小心。只有在后端未使用机密时，才应将其删除。
+Trident不会删除正在使用的Kubnetes加密 `TridentBackendConfig`。Kubernetes 用户负责清理密钥。删除机密时必须小心。只有在后端未使用机密时，才应将其删除。
 
 
 
@@ -46,7 +46,7 @@ kubectl get tbc -n trident
 
 更新后端可能有多种原因：
 
-* 存储系统的凭据已更改。要更新凭据，必须更新 `TridentBackendConfig` 对象中使用的 Kubernetes Secret 。Astra Trident 将使用提供的最新凭据自动更新后端。运行以下命令以更新 Kubernetes Secret ：
+* 存储系统的凭据已更改。要更新凭据、必须更新对象中使用的Kubbernetes机密 `TridentBackendConfig`。Trident将使用提供的最新凭据自动更新后端。运行以下命令以更新 Kubernetes Secret ：
 +
 [listing]
 ----

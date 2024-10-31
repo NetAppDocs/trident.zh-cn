@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/trident-fsx-storageclass-pvc.html 
 keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident 
-summary: '通过将Asta三端存储与Amazon FSx for NetApp ONTAP 结合使用、您可以确保在Amazon Elastic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP 支持的块和文件永久性卷。' 
+summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以确保在Amazon Elic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP支持的块和文件永久性卷。' 
 ---
 = 配置存储类和PVC
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: '通过将Asta三端存储与Amazon FSx for NetApp ONTAP 结合使用�
 
 
 [role="lead"]
-配置Kubnetes StorageClass对象并创建存储类、以指示Astra Trident如何配置卷。创建一个使用已配置的Kubernetes StorageClass来请求对PV的访问的永久性卷(PV)和永久性卷克莱姆(PVC)。然后、您可以将PV挂载到POD。
+配置Kubnetes StorageClass对象并创建存储类、以指示Trident如何配置卷。创建一个使用已配置的Kubernetes StorageClass来请求对PV的访问的永久性卷(PV)和永久性卷克莱姆(PVC)。然后、您可以将PV挂载到POD。
 
 
 
@@ -22,7 +22,7 @@ summary: '通过将Asta三端存储与Amazon FSx for NetApp ONTAP 结合使用�
 
 === 配置Kubnetes StorageClass对象
 
- https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubnetes StorageClass对象"^]将Astra Trident标识为用于该类的配置程序、指示Astra Trident如何配置卷。例如：
+ https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubnetes StorageClass对象"^]将Trident标识为用于该类的配置程序、指示Trident如何配置卷。例如：
 
 [listing]
 ----
@@ -37,7 +37,7 @@ parameters:
   provisioningType: "thin"
   snapshots: "true"
 ----
-请参见 link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"] 有关存储类如何与交互的详细信息 `PersistentVolumeClaim` 和用于控制Asta Trident配置卷的方式的参数。
+有关存储类如何与和参数交互以控制Trident如何配置卷的详细信息 `PersistentVolumeClaim`、请参见link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"]。
 
 
 
@@ -50,7 +50,7 @@ parameters:
 ----
 kubectl create -f storage-class-ontapnas.yaml
 ----
-. 现在， Kubernetes 和 Astra Trident 都应显示 * 基本 -CSI * 存储类， Astra Trident 应已发现后端的池。
+. 现在，Kubernetes和Trident中都应显示一个*BASIC－Csi*存储类，并且Trident应已发现后端的池。
 +
 [listing]
 ----
@@ -174,13 +174,13 @@ pvc-storage Bound  pv-name 2Gi      RWO                       5m
 ----
 
 
-请参见 link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"] 有关存储类如何与交互的详细信息 `PersistentVolumeClaim` 和用于控制Asta Trident配置卷的方式的参数。
+有关存储类如何与和参数交互以控制Trident如何配置卷的详细信息 `PersistentVolumeClaim`、请参见link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"]。
 
 
 
-== Asta Trident属性
+== Trident属性
 
-这些参数用于确定应使用哪些A作用 于Astra三端存储池来配置给定类型的卷。
+这些参数决定了应使用哪些 Trident 管理的存储池来配置给定类型的卷。
 
 [cols=",,,,,"]
 |===

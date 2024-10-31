@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/backend-kubectl.html 
 keywords: backends, storage system, anf, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, kubectl, create backends 
-summary: '后端定义了 Astra Trident 与存储系统之间的关系。它告诉 Astra Trident 如何与该存储系统进行通信，以及 Astra Trident 如何从该存储系统配置卷。安装 Astra Trident 后，下一步是创建后端。使用 `TridentBackendConfig` Custom Resource Definition （ CRD ），您可以直接通过 Kubernetes 界面创建和管理 Trident 后端。为此，您可以对 Kubernetes 分发版使用 `kubectl` 或等效的命令行界面工具。' 
+summary: '后端用于定义Trident与存储系统之间的关系。它会告诉Trident如何与该存储系统通信、以及Trident如何从该存储系统配置卷。安装Trident后、下一步是创建后端。 `TridentBackendConfig`通过自定义资源定义(CRD)、您可以直接通过Kubednetes界面创建和管理Trident后端。您可以使用或对Kubornetes分发等效的命令行界面工具来执行此操作 `kubectl`。' 
 ---
 = 使用 kubectl 创建后端
 :hardbreaks:
@@ -12,24 +12,24 @@ summary: '后端定义了 Astra Trident 与存储系统之间的关系。它告�
 
 
 [role="lead"]
-后端定义了 Astra Trident 与存储系统之间的关系。它告诉 Astra Trident 如何与该存储系统进行通信，以及 Astra Trident 如何从该存储系统配置卷。安装 Astra Trident 后，下一步是创建后端。使用 `TridentBackendConfig` Custom Resource Definition （ CRD ），您可以直接通过 Kubernetes 界面创建和管理 Trident 后端。为此，您可以对 Kubernetes 分发版使用 `kubectl` 或等效的命令行界面工具。
+后端用于定义Trident与存储系统之间的关系。它会告诉Trident如何与该存储系统通信、以及Trident如何从该存储系统配置卷。安装Trident后、下一步是创建后端。 `TridentBackendConfig`通过自定义资源定义(CRD)、您可以直接通过Kubednetes界面创建和管理Trident后端。您可以使用或对Kubornetes分发等效的命令行界面工具来执行此操作 `kubectl`。
 
 
 
 == `TridentBackendConfig`
 
-`TridentBackendConfig` （`tbc` ， `tbconfig` ， `tbackendconfig` ）是一个前端命名的 CRD ，可用于使用 `kubectl` 管理 Astra Trident 后端。现在， Kubernetes 和存储管理员可以直接通过 Kubernetes 命令行界面创建和管理后端，而无需专用命令行实用程序（`tridentctl` ）。
+`TridentBackendConfig`(`tbc` `tbconfig`、、 `tbackendconfig`)是一个前端，具有名称节奏的CRD，使您可以使用管理Trident后端 `kubectl`。现在，Kubbernetes和存储管理员可以直接通过Kubbernetes CLI创建和管理后端，而无需专用的命令行实用程序(`tridentctl`)。
 
 创建 `TridentBackendConfig` 对象时，将发生以下情况：
 
-* Astra Trident 会根据您提供的配置自动创建后端。此值在内部表示为 `TridentBackend` （`tbe` ， `tridentbackend` ） CR 。
-* `TridentBackendConfig` 唯一绑定到由 Astra Trident 创建的 `TridentBackend` 。
+* Trident会根据您提供的配置自动创建后端。这在内部表示为 `TridentBackend` (`tbe`， `tridentbackend`) CR。
+*  `TridentBackendConfig`唯一绑定到由Trident创建的 `TridentBackend`。
 
 
 每个 `TridentBackendConfig` 都与 `TridentBackend` 保持一对一映射。前者是为用户提供的用于设计和配置后端的接口；后者是 Trident 表示实际后端对象的方式。
 
 
-WARNING: `TridentBackend` CRS 由 Astra Trident 自动创建。您 * 不应 * 修改它们。如果要更新后端，请通过修改 `TridentBackendConfig` 对象来执行此操作。
+WARNING: `TridentBackend`CRS由Trident自动创建。您 * 不应 * 修改它们。如果要更新后端、请通过修改对象来执行此操作 `TridentBackendConfig`。
 
 有关 `TridentBackendConfig` CR 的格式，请参见以下示例：
 
@@ -68,7 +68,7 @@ spec:
 NOTE: 后端名称使用 `sPec.backendName` 设置。如果未指定，则后端的名称将设置为 `TridentBackendConfig` 对象的名称（ metadata.name ）。建议使用 `sPec.backendName` 显式设置后端名称。
 
 
-TIP: 使用 `tridentctl` 创建的后端没有关联的 `TridentBackendConfig` 对象。您可以通过创建 `TridentBackendConfig` CR ，选择使用 `kubectl` 来管理此类后端。必须注意指定相同的配置参数（例如 `sPec.backendName` ， `sPec.storagePrefix` ， `sPec.storageDriverName` 等）。Astra Trident 会自动将新创建的 `TridentBackendConfig` 与已有的后端绑定。
+TIP: 使用创建的后端 `tridentctl`没有关联 `TridentBackendConfig`对象。您可以通过创建CR来 `TridentBackendConfig`选择使用管理此类后端 `kubectl`。必须注意指定相同的配置参数(如 `spec.backendName`、、 `spec.storagePrefix` `spec.storageDriverName`等)。Trident将自动将新创建的与已有的后端绑定 `TridentBackendConfig`。
 
 
 
@@ -76,7 +76,7 @@ TIP: 使用 `tridentctl` 创建的后端没有关联的 `TridentBackendConfig` �
 
 要使用 `kubectl` 创建新后端，应执行以下操作：
 
-. 创建 https://kubernetes.io/docs/concepts/configuration/secret/["Kubernetes 机密"^]。此密钥包含 Astra Trident 与存储集群 / 服务通信所需的凭据。
+. 创建 https://kubernetes.io/docs/concepts/configuration/secret/["Kubernetes 机密"^]。此密钥包含Trident与存储集群/服务通信所需的凭据。
 . 创建 `TridentBackendConfig` 对象。其中包含有关存储集群 / 服务的详细信息，并引用了上一步中创建的密钥。
 
 
@@ -231,12 +231,12 @@ backend-tbc-ontap-san   ontap-san-backend     8d24fce7-6f60-4d4a-8ef6-bab2699e6a
 * `Unbound` ：使用 ` ""` 表示。`TridentBackendConfig` 对象未绑定到后端。默认情况下，所有新创建的 `TridentBackendConfig` CRS 均处于此阶段。此阶段发生更改后，它将无法再次还原为 "Unbound （已取消绑定） " 。
 * `Deleting`： `TridentBackendConfig` CR `deletionPolicy` 已设置为delete。当 `TridentBackendConfig` CR将被删除、它将过渡到Deleting状态。
 +
-** 如果后端不存在永久性卷请求（ PVC ），则删除 `TridentBackendConfig` 将导致 Astra Trident 删除后端以及 `TridentBackendConfig` CR 。
+** 如果后端不存在永久性卷请求(PVC)、则删除 `TridentBackendConfig`将导致Trident删除后端以及CR。 `TridentBackendConfig`
 ** 如果后端存在一个或多个 PVC ，则会进入删除状态。`TridentBackendConfig` CR 随后也会进入删除阶段。只有在删除所有 PVC 后，才会删除后端和 `TridentBackendConfig` 。
 
 
 * `Lost` ：与 `TridentBackendConfig` CR 关联的后端被意外或故意删除， `TridentBackendConfig` CR 仍引用已删除的后端。无论 `detionPolicy` 值如何，仍可删除 `TridentBackendConfig` CR 。
-* `Unknown`：Astra Trident无法确定与关联的后端的状态或是否存在 `TridentBackendConfig` CR.例如、如果API服务器未响应或 `tridentbackends.trident.netapp.io` 缺少CRD。这可能需要干预。
+* `Unknown`：Trident无法确定与CR关联的后端的状态或是否存在 `TridentBackendConfig`。例如、如果API服务器未响应或 `tridentbackends.trident.netapp.io`缺少CRD。这可能需要干预。
 
 
 在此阶段，已成功创建后端！此外，还可以处理多个操作，例如 link:backend_ops_kubectl.html["后端更新和后端删除"^]。
@@ -293,7 +293,7 @@ status:
   message: Backend 'ontap-san-backend' created
   phase: Bound
 ----
-`backendInfo` 包含为响应 `TridentBackendConfig` CR 而创建的后端的 `backendName` 和 `backendUUID` 。`lastOperationStatus` 字段表示 `TridentBackendConfig` CR 的上次操作状态，该操作可以是用户触发的（例如，用户在 `sPec` 中更改了某个内容），也可以是由 Astra Trident 触发的（例如，在 Astra Trident 重新启动期间）。可以是成功，也可以是失败。`phase` 表示 `TridentBackendConfig` CR 与后端之间关系的状态。在上面的示例中， `phase` 的值为 bound ，这意味着 `TridentBackendConfig` CR 与后端关联。
+`backendInfo`包含 `backendName`响应CR而创建的后端的 `TridentBackendConfig`和 `backendUUID`。 `lastOperationStatus`字段表示CR的上次操作状态，可以是用户触发的操作(例如，用户在中更改了某些内容)，也可以是Trident触发的操作 `TridentBackendConfig`(例如， `spec`在Trident重新启动期间)。可以是成功、也可以是失败。 `phase`表示CR和后端之间关系的状态 `TridentBackendConfig`。在上面的示例中、 `phase`具有绑定值、这意味着 `TridentBackendConfig`CR与后端关联。
 
 您可以运行 `kubectl -n trident describe tbc <tbc-cr-name>` 命令来获取事件日志的详细信息。
 

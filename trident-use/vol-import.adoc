@@ -18,7 +18,7 @@ summary: '您可以使用 `tridentctl import` 将现有存储卷作为 Kubernete
 
 == 概述和注意事项
 
-您可以将卷导入到Astra三端到以下位置：
+您可以将卷导入到Trident中、以便：
 
 * 将应用程序容器化并重复使用其现有数据集
 * 对一个应用程序使用数据集的克隆
@@ -29,20 +29,20 @@ summary: '您可以使用 `tridentctl import` 将现有存储卷作为 Kubernete
 .注意事项
 导入卷之前、请查看以下注意事项。
 
-* Asta三端磁盘只能导入RW (读写)类型的ONTAP卷。DP (数据保护)类型的卷是SnapMirror目标卷。在将卷导入Astra三端存储之前、您应先中断镜像关系。
+* Trident只能导入RW (读写)类型的ONTAP卷。DP (数据保护)类型的卷是SnapMirror目标卷。在将卷导入Trident之前、应先中断镜像关系。
 * 我们建议导入没有活动连接的卷。要导入当前使用的卷、请克隆此卷、然后执行导入。
 +
 
 WARNING: 这对于块卷尤其重要、因为Kubnetes不会意识到先前的连接、并且可以轻松地将活动卷连接到Pod。这可能会导致数据损坏。
 
-* 不过 `StorageClass` 必须在PVC上指定、A作用 是在导入期间不使用此参数。创建卷期间会使用存储类根据存储特征从可用池中进行选择。由于卷已存在、因此导入期间不需要选择池。因此、即使卷位于与PVC中指定的存储类不匹配的后端或池中、导入也不会失败。
+* 虽然 `StorageClass`必须在PVC上指定、但Trident在导入期间不使用此参数。创建卷期间会使用存储类根据存储特征从可用池中进行选择。由于卷已存在、因此导入期间不需要选择池。因此、即使卷位于与PVC中指定的存储类不匹配的后端或池中、导入也不会失败。
 * 现有卷大小在PVC中确定和设置。存储驱动程序导入卷后，系统将创建 PV ，并为其创建一个 Claims Ref 。
 +
 ** 回收策略最初设置为 `retain` 在PV中。Kubernetes 成功绑定 PVC 和 PV 后，将更新回收策略以匹配存储类的回收策略。
 ** 存储类的回收策略为时 `delete`、删除PV时、存储卷将被删除。
 
 
-* 默认情况下、Asta三端存储管理PVC、并在后端重命名FlexVol和LUN。您可以通过 `--no-manage` 用于导入非受管卷的标志。如果您使用 `--no-manage`中，A作用 是在对象的生命周期内不对PVC或PV执行任何其他操作。删除PV后、不会删除存储卷、并且卷克隆和卷大小调整等其他操作也会被忽略。
+* 默认情况下、Trident管理PVC并在后端重命名FlexVol和LUN。您可以传递此 `--no-manage`标志以导入非受管卷。如果使用 `--no-manage`，则在对象的生命周期内，Trident不会对PVC或PV执行任何附加操作。删除PV后、不会删除存储卷、并且卷克隆和卷大小调整等其他操作也会被忽略。
 +
 
 TIP: 如果要对容器化工作负载使用 Kubernetes ，但希望在 Kubernetes 外部管理存储卷的生命周期，则此选项非常有用。
@@ -78,7 +78,7 @@ spec:
 
 WARNING: 请勿包含PV名称或卷大小等其他参数。这可能发生原因会使导入命令失败。
 
-. 使用 `tridentctl import` 命令以指定包含卷的Asta三元数据后端的名称以及在存储上唯一标识卷的名称(例如：ONTAP FlexVol、Element卷、Cloud Volumes Service路径)。。 `-f` 指定PVC文件的路径需要参数。
+. 使用 `tridentctl import`命令指定包含卷的Trident后端的名称以及在存储上唯一标识卷的名称(例如：ONTAP FlexVol、Element卷、Cloud Volumes Service路径)。 `-f`指定PVC文件的路径需要参数。
 +
 [listing]
 ----
@@ -96,7 +96,7 @@ tridentctl import volume <backendName> <volumeName> -f <path-to-pvc-file>
 
 === ONTAP NAS和ONTAP NAS FlexGroup
 
-Astra三项功能支持使用导入卷 `ontap-nas` 和 `ontap-nas-flexgroup` 驱动程序。
+Trident支持使用和 `ontap-nas-flexgroup`驱动程序导入卷 `ontap-nas`。
 
 [NOTE]
 ====
@@ -129,7 +129,7 @@ tridentctl import volume ontap_nas managed_volume -f <path-to-pvc-file>
 --
 .非受管卷
 --
-使用时 `--no-manage` 参数、A作用 是不对卷进行重命名。
+使用参数时 `--no-manage`、Trident不会重命名卷。
 
 以下示例导入 `unmanaged_volume` 在上 `ontap_nas` 后端：
 
@@ -149,9 +149,9 @@ tridentctl import volume nas_blog unmanaged_volume -f <path-to-pvc-file> --no-ma
 
 === ONTAP SAN
 
-Astra三项功能支持使用导入卷 `ontap-san` 驱动程序。不支持使用导入卷 `ontap-san-economy` 驱动程序。
+Trident支持使用和 `ontap-san-economy`驱动程序导入卷 `ontap-san`。
 
-Astra三端存储可以导入包含单个LUN的ONTAP SAN FlexVol。这与一致 `ontap-san` 驱动程序、用于为FlexVol 中的每个PVC和LUN创建FlexVol。Asta三进位导入FlexVol并将其与PVC定义关联起来。
+Trident可以导入包含单个LUN的ONTAP SAN FlexVol。这与驱动程序一致 `ontap-san`、该驱动程序会为FlexVol中的每个PVC和LUN创建一个FlexVol。Trident导入FlexVol并将其与PVC定义关联。
 
 .ONTAP SAN示例
 以下是受管卷和非受管卷导入的示例。
@@ -160,7 +160,7 @@ Astra三端存储可以导入包含单个LUN的ONTAP SAN FlexVol。这与一致 
 ====
 .受管卷
 --
-对于受管卷、Asta三端存储将FlexVol重命名为 `pvc-<uuid>` 将FlexVol 中的LUN格式化为 `lun0`。
+对于受管卷，Trident会将FlexVol重命名为格式，并将FlexVol中的LUN重命名 `pvc-<uuid>`为 `lun0`。
 
 以下示例将导入 `ontap-san-managed` 上存在的FlexVol `ontap_san_default` 后端：
 
@@ -201,10 +201,10 @@ image:./san-import-igroup.png["映射到iqn和集群iqn的LUN的图像。"]
 
 === Element
 
-Astra三端存储支持使用NetApp Element软件和NetApp HCI卷导入 `solidfire-san` 驱动程序。
+Trident支持使用驱动程序导入NetApp Element软件和NetApp HCI卷 `solidfire-san`。
 
 
-NOTE: Element 驱动程序支持重复的卷名称。但是、如果存在重复的卷名称、Asta Dent将返回错误。作为临时解决策、克隆卷、提供唯一的卷名称并导入克隆的卷。
+NOTE: Element 驱动程序支持重复的卷名称。但是、如果存在重复的卷名称、Trident将返回错误。作为临时解决策、克隆卷、提供唯一的卷名称并导入克隆的卷。
 
 .元素示例
 以下示例将导入 `element-managed` 后端上的卷 `element_default`。
@@ -223,7 +223,7 @@ tridentctl import volume element_default element-managed -f pvc-basic-import.yam
 
 === Google 云平台
 
-Astra三项功能支持使用导入卷 `gcp-cvs` 驱动程序。
+Trident支持使用驱动程序导入卷 `gcp-cvs`。
 
 
 NOTE: 要在Google云平台中导入NetApp Cloud Volumes Service支持的卷、请按卷路径确定该卷。卷路径是卷的导出路径的一部分、位于之后 `:/`。例如、如果导出路径为 `10.0.0.1:/adroit-jolly-swift`、卷路径为 `adroit-jolly-swift`。
@@ -245,7 +245,7 @@ tridentctl import volume gcpcvs_YEppr adroit-jolly-swift -f <path-to-pvc-file> -
 
 === Azure NetApp Files
 
-Astra三项功能支持使用导入卷 `azure-netapp-files` 驱动程序。
+Trident支持使用驱动程序导入卷 `azure-netapp-files`。
 
 
 NOTE: 要导入Azure NetApp Files卷、请按卷路径确定该卷。卷路径是卷的导出路径的一部分、位于之后 `:/`。例如、如果挂载路径为 `10.0.0.2:/importvol1`、卷路径为 `importvol1`。

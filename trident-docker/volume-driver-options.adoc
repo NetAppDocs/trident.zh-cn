@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/volume-driver-options.html 
-keywords: create volumes, astra trident, trident for docker, docker, docker volume, driver options, ontap, element volumes, cvs, cloud volumes service on gcp, azure netapp files 
+keywords: create volumes, Trident, trident for docker, docker, docker volume, driver options, ontap, element volumes, cvs, cloud volumes service on gcp, azure netapp files 
 summary: 每个存储驱动程序都有一组不同的选项，您可以在创建卷时指定这些选项来自定义结果。有关适用于您配置的存储系统的选项，请参见以下内容。 
 ---
 = 驱动程序专用的卷选项
@@ -55,9 +55,9 @@ NFS 和 iSCSI 的卷创建选项包括以下内容：
 | `加密`  a| 
 在新卷上启用NetApp卷加密(NVE)；默认为`false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。
 
-如果在后端启用了NAE、则在Astra Trident中配置的任何卷都将启用NAE。
+如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。
 
-有关详细信息、请参见： link:../trident-reco/security-reco.html["Astra Trident如何与NVE和NAE配合使用"]。
+有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。
 
 
 
@@ -131,7 +131,7 @@ docker volume create -d netapp --name demo -o unixPermissions=4755
 
 最小卷大小为 20MiB 。
 
-如果未指定快照预留且快照策略为 `none` ，则 Trident 将使用 0% 的快照预留。
+如果未指定快照预留且快照策略为 `none`，则Trident将使用0%的快照预留。
 
 * 创建无快照策略且无快照预留的卷：
 +

@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-managing-k8s/upgrade-tridentctl.html 
 keywords: upgrade, trident, methods, operator, tridentctl, helm 
-summary: '您可以使用 `tridentctl` 轻松升级现有的 Astra Trident 安装。' 
+summary: '您可以使用轻松升级现有的Trident安装 `tridentctl`。' 
 ---
 = 使用 tridentctl 进行升级
 :hardbreaks:
@@ -12,22 +12,22 @@ summary: '您可以使用 `tridentctl` 轻松升级现有的 Astra Trident 安�
 
 
 [role="lead"]
-您可以使用轻松升级现有的Astra Trident安装 `tridentctl`。
+您可以使用轻松升级现有的Trident安装 `tridentctl`。
 
 .关于此任务
-卸载并重新安装 Astra Trident 可作为升级。卸载 Trident 时，不会删除 Astra Trident 部署所使用的永久性卷声明（ PVC ）和永久性卷（ PV ）。在 Astra Trident 脱机期间，已配置的 PV 仍可用，而 Astra Trident 将在恢复联机后为在此期间创建的任何 PVC 配置卷。
+卸载和重新安装Trident相当于升级。卸载Trident时、不会删除Trident部署所使用的永久性卷请求(PVC)和永久性卷(PV)。已配置的PV在Trident脱机时仍可用、Trident将在恢复联机后为在此期间创建的任何PVC配置卷。
 
 .开始之前
 请查看 link:upgrade-trident.html#select-an-upgrade-method["选择升级方法"] 升级之前 `tridentctl`。
 
 .步骤
-. 在中运行卸载命令 `tridentctl` 删除与Asta Trandent关联的所有资源(CRD和相关对象除外)。
+. 在中运行卸载命令 `tridentctl`以删除与Trident关联的所有资源、CRD和相关对象除外。
 +
 [listing]
 ----
 ./tridentctl uninstall -n <namespace>
 ----
-. 重新安装Asta Trdent。请参见 link:../trident-get-started/kubernetes-deploy-tridentctl.html["使用 tridentctl 安装 Astra Trident"]。
+. 重新安装Trident。请参阅 link:../trident-get-started/kubernetes-deploy-tridentctl.html["使用trdentcl安装Trident"]。
 
 
 

@@ -2,13 +2,13 @@
 section: trident-reference
 title: 参考
 entries:
-- title: Astra Trident 端口
+- title: Trident端口
   url: "/trident-reference/ports.html"
-- title: Astra Trident REST API
+- title: Trident REST API
   url: "/trident-reference/rest-api.html"
 - title: 命令行选项
   url: "/trident-reference/trident-cl.html"
-- title: Kubernetes 和 Astra Trident 对象
+- title: Kubernetes 和 Trident 对象
   url: "/trident-reference/objects.html"
 - title: POD安全标准(PSS)和安全上下文限制(SCC)
   url: "/trident-reference/pod-security.html"

@@ -1,6 +1,6 @@
 ---
 section: trident-install
-title: 安装 Astra Trident
+title: 安装 Trident
 entries:
 - title: 安装概述
   url: "/trident-get-started/kubernetes-deploy.html"

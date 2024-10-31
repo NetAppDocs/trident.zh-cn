@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: troubleshooting.html 
 keywords: troubleshooting, trident 
-summary: 使用此处提供的指针排除安装和使用 Astra Trident 时可能遇到的问题。 
+summary: 使用此处提供的指针解决您在安装和使用Trident时可能遇到的问题。 
 ---
 = 故障排除
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 使用此处提供的指针排除安装和使用 Astra Trident 时可�
 
 
 [role="lead"]
-使用此处提供的指针排除安装和使用 Astra Trident 时可能遇到的问题。
+使用此处提供的指针解决您在安装和使用Trident时可能遇到的问题。
 
 
 
@@ -33,7 +33,7 @@ kubectl patch torc trident -n <namespace> --type=merge -p '{"spec":{"debug":true
 ----
 此操作将重新启动所有 Trident Pod ，这可能需要几秒钟的时间。您可以通过观察 `kubectl get pod -n trident` 输出中的 "age" 列来检查此问题。
 
-对于 Astra Trident 20.07 和 20.10 ，请使用 `tprov` 代替 `Torc` 。
+对于Trident 20.07和20.10，请使用 `tprov`代替 `torc`。
 
 --
 随 Helm 一起安装::
@@ -157,18 +157,18 @@ INFO Trident uninstallation succeeded.
 ----
 
 
-== 完全删除Asta Trandent和CRD
+== 完全删除Trident和CRD
 
-您可以完全删除Asta Dent以及所有创建的CRD和关联的自定义资源。
+您可以完全删除Trident和所有创建的CRD以及关联的自定义资源。
 
 
-WARNING: 此操作无法撤消。除非您需要全新安装Asta三端安装、否则请勿执行此操作。要在不删除CRD的情况下卸载Astra Trdent、请参阅 link:trident-managing-k8s/uninstall-trident.html["卸载 Astra Trident"]。
+WARNING: 此操作无法撤消。除非您需要全新安装Trident、否则请勿执行此操作。要卸载Trident而不删除CRD，请参阅link:trident-managing-k8s/uninstall-trident.html["卸载 Trident"]。
 
 [role="tabbed-block"]
 ====
 .Trident 运算符
 --
-要卸载Asta Dandent并使用Dandent操作符完全删除CRD：
+要使用Trident运算符卸载Trident并完全删除CRD、请执行以下操作：
 
 [listing]
 ----
@@ -177,7 +177,7 @@ kubectl patch torc <trident-orchestrator-name> --type=merge -p '{"spec":{"wipeou
 --
 .掌舵
 --
-要使用Helm卸载Asta Dent并完全删除CRD、请执行以下操作：
+要使用Helm卸载Trident并完全删除CRD、请执行以下操作：
 
 [listing]
 ----
@@ -186,7 +186,7 @@ kubectl patch torc trident --type=merge -p '{"spec":{"wipeout":["crds"],"uninsta
 --
 .<code>tridentctl</code>
 --
-在使用卸载Asta Dent后完全删除CRD `tridentctl`
+使用卸载Trident后完全删除CRD `tridentctl`
 
 [listing]
 ----
@@ -204,7 +204,7 @@ tridentctl obliviate crd
 
 === 已删除命名空间和POD
 
-假设您已将Asta三端到托管命名空间(NVMe永久性卷)附加到Pod。如果直接从ONTAP后端删除命名空间、则取消暂存过程会在您尝试删除Pod后停滞。此情形不会影响Kubornetes集群或其他功能。
+假设您已将Trident托管命名空间(NVMe永久性卷)连接到Pod。如果直接从ONTAP后端删除命名空间、则取消暂存过程会在您尝试删除Pod后停滞。此情形不会影响Kubornetes集群或其他功能。
 
 .临时解决策
 从相应节点卸载永久性卷(与该命名空间对应)并将其删除。
@@ -213,7 +213,7 @@ tridentctl obliviate crd
 
 === 已阻止数据LIF
 
- If you block (or bring down) all the dataLIFs of the NVMe Astra Trident backend, the unstaging process gets stuck when you attempt to delete the pod. In this scenario, you cannot run any NVMe CLI commands on the Kubernetes node.
+ If you block (or bring down) all the dataLIFs of the NVMe Trident backend, the unstaging process gets stuck when you attempt to delete the pod. In this scenario, you cannot run any NVMe CLI commands on the Kubernetes node.
 .临时解决策
 启动dataLIF以恢复完整功能。
 

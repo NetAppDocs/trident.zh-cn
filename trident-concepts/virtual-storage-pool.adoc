@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-concepts/virtual-storage-pool.html 
-keywords: virtual pools, astra trident, backends 
-summary: 虚拟池在Astra Trident的存储后端和Kubernetes的StorageClasses之间提供了一个抽象层。管理员可以通过这些协议以一种通用的，与后端无关的方式定义各个方面，例如每个后端的位置，性能和保护，而不会使 StorageClass 指定要用于满足所需条件的物理后端，后端池或后端类型。 
+keywords: virtual pools, Trident, backends 
+summary: 虚拟池在Trident的存储后端和KubeNet的StorageCluster之间提供了一个抽象层。管理员可以通过这些协议以一种通用的，与后端无关的方式定义各个方面，例如每个后端的位置，性能和保护，而不会使 StorageClass 指定要用于满足所需条件的物理后端，后端池或后端类型。 
 ---
 = 虚拟池
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: 虚拟池在Astra Trident的存储后端和Kubernetes的StorageClasses�
 
 
 [role="lead"]
-虚拟池在Astra Trident存储后端和Kubernetes之间提供了一个抽象层 `StorageClasses`。管理员可以通过这些协议以一种通用的、与后端无关的方式定义各个方面、例如每个后端的位置、性能和保护、而无需创建 `StorageClass` 指定要用于满足所需条件的物理后端、后端池或后端类型。
+虚拟池在Trident存储后端和Kubnetes之间提供了一个抽象层 `StorageClasses`。管理员可以通过它们以一种不受后端限制的通用方式定义各个方面、例如每个后端的位置、性能和保护、而无需 `StorageClass`指定要用于满足所需条件的物理后端、后端池或后端类型。
 
 
 
 == 了解虚拟池
 
-存储管理员可以在JSON或YAML定义文件中的任一Astra Trident后端定义虚拟池。
+存储管理员可以在JSON或YAML定义文件中的任何Trident后端定义虚拟池。
 
 image::virtual_storage_pools.png[显示了虚拟池的概念图。]
 

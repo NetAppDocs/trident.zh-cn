@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/backend_options.html 
 keywords: backends, storage system, anf, cvs for aws, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, kubectl, tridentctl, backend management options 
-summary: 了解如何在 Astra Trident 中管理后端。 
+summary: 了解在Trident中管理后端的不同方法。 
 ---
 = 在后端管理选项之间移动
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 了解如何在 Astra Trident 中管理后端。
 
 
 [role="lead"]
-了解如何在 Astra Trident 中管理后端。
+了解在Trident中管理后端的不同方法。
 
 
 
@@ -36,7 +36,7 @@ summary: 了解如何在 Astra Trident 中管理后端。
 * 使用 `tridentctl` 创建的新后端，而存在其他 `TridentBackendConfig` 对象。
 
 
-在这两种情况下，后端仍会存在，其中 Astra Trident 会计划卷并对其进行操作。管理员可以选择以下两种方式之一：
+在这两种情况下、都将继续存在后端、Trident会为这些后端计划卷并在其上运行。管理员可以选择以下两种方式之一：
 
 * 继续使用 `tridentctl` 管理使用它创建的后端。
 * 使用 `tridentctl` 创建的后端绑定到新的 `TridentBackendConfig` 对象。这样做意味着将使用 `kubectl` 而不是 `tridentctl` 来管理后端。
@@ -44,7 +44,7 @@ summary: 了解如何在 Astra Trident 中管理后端。
 
 要使用 `kubectl` 管理已有后端，您需要创建一个绑定到现有后端的 `TridentBackendConfig` 。下面简要介绍了它的工作原理：
 
-. 创建 Kubernetes 机密。此密钥包含 Astra Trident 与存储集群 / 服务通信所需的凭据。
+. 创建 Kubernetes 机密。此密钥包含Trident与存储集群/服务通信所需的凭据。
 . 创建 `TridentBackendConfig` 对象。其中包含有关存储集群 / 服务的详细信息，并引用了上一步中创建的密钥。必须注意指定相同的配置参数（例如 `sPec.backendName` ， `sPec.storagePrefix` ， `sPec.storageDriverName` 等）。`sPec.backendName` 必须设置为现有后端的名称。
 
 
@@ -235,7 +235,7 @@ tridentctl get backend ontap-san-backend -n trident
 
 === 第1步：确认 `deletionPolicy` 设置为 `retain`
 
-让我们来看看 `deletionPolicy` 的价值。需要将此值设置为 `retain` 。这样可以确保删除 `TridentBackendConfig` CR 时，后端定义仍存在，并可使用 `tridentctl` 进行管理。
+让我们来看看的价值 `deletionPolicy`。需要将其设置为 `retain`。这样可以确保在删除CR时 `TridentBackendConfig`，后端定义仍然存在，并且可以使用进行管理 `tridentctl`。
 
 [listing]
 ----
@@ -273,4 +273,4 @@ tridentctl get backend ontap-san-backend -n trident
 | ontap-san-backend | ontap-san      | 81abcb27-ea63-49bb-b606-0a5315ac5f82 | online |      33 |
 +-------------------+----------------+--------------------------------------+--------+---------+
 ----
-删除 `TridentBackendConfig` 对象后， Astra Trident 只需删除该对象，而无需实际删除后端本身。
+删除对象后 `TridentBackendConfig`、Trident会直接将其删除、而不会实际删除后端本身。

@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/intro.html 
-keywords: product overview, astra trident, fsx, element, astra, google cloud, cvs, architecture, test drive, node pod, controller pod, pods, csi, sidecar 
-summary: 'Astra Trident 是一个受全面支持的开源项目，由 NetApp 作为 Astra 产品系列的一部分进行维护。它旨在帮助您使用容器存储接口(CSI)等行业标准接口满足容器化应用程序的持久性需求。' 
+keywords: product overview, Trident, fsx, element, google cloud, cvs, architecture, test drive, node pod, controller pod, pods, csi, sidecar 
+summary: 'Trident 是一个由 NetApp 维护的完全受支持的开源项目。它旨在帮助您使用容器存储接口(CSI)等行业标准接口满足容器化应用程序的持久性需求。' 
 ---
-= 了解 Astra Trident
+= 了解Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,36 +12,26 @@ summary: 'Astra Trident 是一个受全面支持的开源项目，由 NetApp 作
 
 
 [role="lead"]
-Asta三端存储是一个完全受支持的开放源代码项目、由NetApp作为的一部分维护 link:https://docs.netapp.com/us-en/astra-family/intro-family.html["Astra 产品系列"^]。它旨在帮助您使用容器存储接口(CSI)等行业标准接口满足容器化应用程序的持久性需求。
+Trident 是由 NetApp 维护的一个受全面支持的开源项目。它旨在帮助您使用容器存储接口(CSI)等行业标准接口满足容器化应用程序的持久性需求。
 
 
 
-== 什么是 Astra ？
+== 什么是Trident？
 
-借助 Astra ，企业可以更轻松地在公有云内部和内部环境中管理，保护和移动 Kubernetes 上运行的数据丰富的容器化工作负载。
+NetApp Trident支持在公有云或内部环境中的所有常见NetApp存储平台上使用和管理存储资源、包括ONTAP (AFF、FAS、Select、云、Amazon FSx for NetApp ONTAP)、Element软件(NetApp HCI、SolidFire)、Azure NetApp Files服务和Google Cloud上的Cloud Volumes Service。
 
-Asta配置并提供基于Asta Trandent构建的永久性容器存储。此外、它还提供高级应用程序感知型数据管理功能、例如快照、备份和还原、活动日志和主动克隆、用于数据保护、灾难/数据恢复、数据审核以及Kubbernetes工作负载的迁移用例。
+Trident是一款与本机集成的符合容器存储接口(CI)的动态存储流程编排程序link:https://kubernetes.io/["Kubernetes"^]。Trident在集群中的每个工作节点上作为一个控制器Pod加一个节点Pod运行。有关详细信息、请参见 link:../trident-get-started/architecture.html["Trident架构"] 。
 
-了解更多信息 link:https://bluexp.netapp.com/astra["Astra或注册获取免费试用版"^]。
-
-
-
-== 什么是Astra Trdent？
-
-Asta Trident支持在公有云或内部环境中的所有常见NetApp存储平台上使用和管理存储资源、包括ONTAP (AFF、FAS、Select、云、 Amazon FSx for NetApp ONTAP)、Element软件(NetApp HCI、SolidFire)、Azure NetApp Files服务以及Google Cloud上的Cloud Volumes Service。
-
-Asta Dent是一款与本机集成的符合容器存储接口(CSI)的动态存储编排程序 link:https://kubernetes.io/["Kubernetes"^]。Asta三端存储作为一个控制器Pod和一个节点Pod运行在集群中的每个工作节点上。请参见 link:../trident-get-started/architecture.html["Astra Trident架构"] 了解详细信息。
-
-Asta Trident还可以直接与适用于NetApp存储平台的Docker生态系统集成。NetApp Docker卷插件(nDVP)支持从存储平台到Docker主机配置和管理存储资源。请参见 link:../trident-docker/deploy-docker.html["部署适用于 Docker 的 Astra Trident"] 了解详细信息。
+Trident还可以直接与适用于NetApp存储平台的Docker生态系统集成。NetApp Docker卷插件(nDVP)支持从存储平台到Docker主机配置和管理存储资源。有关详细信息、请参见 link:../trident-docker/deploy-docker.html["部署适用于Docker的Trident"] 。
 
 
 NOTE: 如果这是您首次使用Kubarnetes、您应熟悉 link:https://kubernetes.io/docs/home/["Kubbernetes概念和工具"^]。
 
 
 
-== 试用Asta Trident
+== 试用Trident
 
-要进行试用、请请求访问"为容器化工作负载轻松部署和克隆永久性存储" link:https://www.netapp.com/us/try-and-buy/test-drive/index.aspx["NetApp 试用"^] 使用随时可用的实验室映像。此试用版提供了一个沙盒环境、其中安装并配置了三节点Kubbernetes集群和Asta Trident。这是熟悉Astra Trandent并了解其功能的绝佳方式。
+要进行试用、请使用随时可用的实验室映像申请访问"轻松部署和克隆容器化工作负载的永久性存储"link:https://www.netapp.com/us/try-and-buy/test-drive/index.aspx["NetApp 试用"^]。此测试驱动器提供了一个沙盒环境、其中安装并配置了三节点Kubbernetes集群和Trident。这是熟悉Trident并了解其功能的绝佳方式。
 
 另一个选项是 link:https://kubernetes.io/docs/setup/independent/install-kubeadm/["《 kubeadm 安装指南》"] 由 Kubernetes 提供。
 
@@ -89,7 +79,7 @@ https://www.netapp.com/data-management/element-software/["Element"^] 通过保�
 ====
 link:https://docs.netapp.com/us-en/hci/docs/concept_hci_product_overview.html["NetApp HCI"^] 通过自动化执行日常任务并使基础架构管理员能够专注于更重要的功能，简化数据中心的管理和扩展。
 
-Asta三端存储可以直接在底层NetApp HCI存储平台上为容器化应用程序配置和管理存储设备。
+Trident 可以直接在底层 NetApp HCI 存储平台上为容器化应用程序配置和管理存储设备。
 
 ====
 .NetApp ONTAP
@@ -97,15 +87,6 @@ Asta三端存储可以直接在底层NetApp HCI存储平台上为容器化应用
 ====
 link:https://docs.netapp.com/us-en/ontap/index.html["NetApp ONTAP"^] 是NetApp多协议统一存储操作系统、可为任何应用程序提供高级数据管理功能。
 
-ONTAP 系统采用全闪存，混合或全 HDD 配置，并提供多种不同的部署模式，包括专门设计的硬件（ FAS 和 AFF ），白盒（ ONTAP Select ）和纯云（ Cloud Volumes ONTAP ）。Astra三端存储支持这些ONTAP部署模式。
+ONTAP 系统采用全闪存，混合或全 HDD 配置，并提供多种不同的部署模式，包括专门设计的硬件（ FAS 和 AFF ），白盒（ ONTAP Select ）和纯云（ Cloud Volumes ONTAP ）。Trident支持这些ONTAP部署模式。
 
 ====
-
-
-== 有关详细信息 ...
-
-* https://docs.netapp.com/us-en/astra-family/intro-family.html["NetApp Astra 产品系列"^]
-* https://docs.netapp.com/us-en/astra/get-started/intro.html["Astra Control Service 文档"^]
-* https://docs.netapp.com/us-en/astra-control-center/index.html["Astra 控制中心文档"^]
-* https://docs.netapp.com/us-en/astra-automation/get-started/before_get_started.html["Astra API 文档"^]
-

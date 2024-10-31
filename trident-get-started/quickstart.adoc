@@ -4,7 +4,7 @@ permalink: trident-get-started/quickstart.html
 keywords: kubernetes cluster, simple installation, Kubernetes installation 
 summary: 如果您刚刚开始使用 Kubernetes ，请按照说明安装 Kubernetes 以进行尝试。这些说明提供了一个裸机单节点集群， Trident 可以与此集群集成以供演示。 
 ---
-= Astra三端快速入门
+= Trident快速入门
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,17 +12,17 @@ summary: 如果您刚刚开始使用 Kubernetes ，请按照说明安装 Kuberne
 
 
 [role="lead"]
-您可以通过几个步骤安装Asta Trandent并开始管理存储资源。开始之前、请查看 link:requirements.html["Astra Trident 要求"]。
+您可以通过几个步骤安装Trident并开始管理存储资源。开始之前，请查看link:requirements.html["Trident要求"]。
 
 
-NOTE: 对于Docker、请参见 link:../trident-docker/deploy-docker.html["适用于 Docker 的 Astra Trident"]。
+NOTE: 对于Docker，请参见link:../trident-docker/deploy-docker.html["适用于Docker的Trident"]。
 
-.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["一个"] 安装 Astra Trident
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["一个"]安装Trident
 [role="quick-margin-para"]
-Asta三端设计提供了多种针对各种环境和组织进行了优化的安装方法和模式。
+Trident提供了多种针对各种环境和组织进行了优化的安装方法和模式。
 
 [role="quick-margin-para"]
-link:../trident-get-started/kubernetes-deploy.html["安装 Astra Trident"]
+link:../trident-get-started/kubernetes-deploy.html["安装 Trident"]
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["两个"] 准备工作节点
 [role="quick-margin-para"]
@@ -33,14 +33,14 @@ link:../trident-use/worker-node-prep.html["准备工作节点"]
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["三个"] 创建后端
 [role="quick-margin-para"]
-后端定义了 Astra Trident 与存储系统之间的关系。它告诉 Astra Trident 如何与该存储系统进行通信，以及 Astra Trident 如何从该存储系统配置卷。
+后端用于定义Trident与存储系统之间的关系。它会告诉Trident如何与该存储系统通信、以及Trident如何从该存储系统配置卷。
 
 [role="quick-margin-para"]
 link:../trident-use/backends.html["配置后端"] 存储系统
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["四个"] 创建Kubbernetes存储类
 [role="quick-margin-para"]
-Kubbernetes StorageClass对象指定Astra tandent作为配置程序、并允许您创建存储类以配置具有可自定义属性的卷。Asta Trdent会为指定Asta Trdent配置程序的Kubbernetes对象创建匹配的存储类。
+Kubnetes StorageClass对象将Trident指定为配置程序、并允许您创建存储类以配置具有可自定义属性的卷。Trident会为指定Trident配置程序的Kubbernetes对象创建匹配的存储类。
 
 [role="quick-margin-para"]
 link:../trident-use/create-stor-class.html["创建存储类。"]

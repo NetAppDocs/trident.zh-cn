@@ -1,6 +1,6 @@
 ---
 section: trident-use
-title: 使用 Astra Trident
+title: 使用Trident
 entries:
 - title: 准备工作节点
   url: "/trident-use/worker-node-prep.html"
@@ -50,7 +50,7 @@ entries:
       url: "/trident-use/trident-fsx.html"
     - title: 创建IAM角色和AWS密钥
       url: "/trident-use/trident-fsx-iam-role.html"
-    - title: 安装 Astra Trident
+    - title: 安装 Trident
       url: "/trident-use/trident-fsx-install-trident.html"
     - title: 配置存储后端
       url: "/trident-use/trident-fsx-storage-backend.html"
@@ -58,7 +58,7 @@ entries:
       url: "/trident-use/trident-fsx-storageclass-pvc.html"
     - title: 部署示例应用程序
       url: "/trident-use/trident-fsx-deploy-sample.html"
-    - title: 在EKS集群上配置Asta Trident EKS加载项
+    - title: 在EKS集群上配置Trident EKS加载项
       url: "/trident-use/trident-aws-addon.html"
   - title: 使用 kubectl 创建后端
     url: "/trident-use/backend-kubectl.html"

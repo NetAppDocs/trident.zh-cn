@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-customize-deploy.html 
 keywords: deploy, trident, methods, operator, tridentctl, helm, attributes, customize, tridentorchestrator, smb, windows 
-summary: '使用 Trident 操作符，您可以使用 `TridentOrchestrator` 规范中的属性自定义 Astra Trident 的安装方式。' 
+summary: '通过Trident运算符、您可以使用规范中的属性自定义Trident的安装方式 `TridentOrchestrator`。' 
 ---
 = 自定义Trident操作员安装
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: '使用 Trident 操作符，您可以使用 `TridentOrchestrator` 规�
 
 
 [role="lead"]
-使用Trident操作员可以使用中的属性自定义Astra Trident安装 `TridentOrchestrator` 规格如果您要对安装进行自定义、使其超出预期范围 `TridentOrchestrator` 参数允许、请考虑使用 `tridentctl` 生成自定义YAML清单以根据需要进行修改。
+Trident操作员允许您使用规范中的属性自定义Trident安装 `TridentOrchestrator`。如果要在允许的参数之外自定义安装 `TridentOrchestrator`、请考虑使用生成自定义YAML清单、 `tridentctl`以便根据需要进行修改。
 
 
 
 == 了解控制器Pod和节点Pod
 
-Astra Trident作为一个控制器POD运行、并在集群中的每个工作节点上运行一个节点POD。节点POD必须在任何可能要挂载Astra Trident卷的主机上运行。
+Trident作为单个控制器Pod以及集群中每个工作节点上的一个节点Pod运行。节点Pod必须运行在可能要挂载Trident卷的任何主机上。
 
 Kubernetes link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["节点选择器"^] 和 link:https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/["容忍和损害"^] 用于限制Pod在特定节点或首选节点上运行。使用`ControllerPlugin`和 `NodePlugin`、您可以指定约束和覆盖。
 
@@ -31,7 +31,7 @@ Kubernetes link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-p
 == 配置选项
 
 
-WARNING: `spec.namespace` 在中指定 `TridentOrchestrator` 表示安装了Astra Trident的命名空间。此参数 * 安装 Astra Trident 后无法更新 * 。如果尝试执行此操作、则会导致 `TridentOrchestrator` 要更改为的状态 `Failed`。Astra Trident不能跨命名空间迁移。
+WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Trident的命名空间。安装Trident后无法更新此参数*。尝试执行此操作会导致 `TridentOrchestrator`状态更改为 `Failed`。Trident不应跨多个名称卷进行迁移。
 
 此表详细介绍了相关信息 `TridentOrchestrator` 属性。
 
@@ -40,15 +40,13 @@ WARNING: `spec.namespace` 在中指定 `TridentOrchestrator` 表示安装了Astr
 | 参数 | Description | Default 
 
 
-| `namespace` | 用于安装 Astra Trident 的命名空间 | `"default"` 
+| `namespace` | 要安装Trident的命名空间 | `"default"` 
 
 
-| `debug` | 为 Astra Trident 启用调试 | `false` 
+| `debug` | 为Trident启用调试 | `false` 
 
 
-| `enableForceDetach` | `ontap-san` 和 `ontap-san-economy` 仅限。
-
-可与Kubnetes非正常节点关闭(NGN)结合使用、使集群管理员能够在节点运行状况不正常时将已挂载卷的工作负载安全地迁移到新节点。 | `false` 
+| `enableForceDetach` | `ontap-san` `ontap-san-economy`仅限、和 `ontap-nas-economy`。可与Kubnetes非正常节点关闭(NGN)结合使用、使集群管理员能够在节点运行状况不正常时将已挂载卷的工作负载安全地迁移到新节点。 | `false` 
 
 
 | `windows` | 设置为 `true` 启用在Windows工作节点上的安装。 | `false` 
@@ -57,10 +55,10 @@ WARNING: `spec.namespace` 在中指定 `TridentOrchestrator` 表示安装了Astr
 | `cloudProvider` | 设置为 `"Azure"` 在AKS集群上使用托管身份或云身份时。如果在EKS集群上使用云标识、请设置为"Aws"。 | `""` 
 
 
-| `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在EKS集群上使用云身份时、设置为AWS IAM角色("' eks.amazonaws.com/role-arn: arn：aws：iam：：：：12356：roe/astratriident-roe")。 | `""` 
+| `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe")。 | `""` 
 
 
-| `IPv6` | 安装基于 IPv6 的 Astra Trident | false 
+| `IPv6` | 安装基于IPv6的Trident | false 
 
 
 | `k8sTimeout` | Kubernetes 操作超时 | `30sec` 
@@ -70,32 +68,30 @@ WARNING: `spec.namespace` 在中指定 `TridentOrchestrator` 表示安装了Astr
 自动 | `false` 
 
 
-| `autosupport 映像` | AutoSupport 遥测的容器映像 | `"netapp/trident-autosupport:24.06"` 
+| `autosupport 映像` | AutoSupport 遥测的容器映像 | `"netapp/trident-autosupport:24.10"` 
 
 
 | `autosupport 代理` | 用于发送AutoSupport的代理的地址/端口
 遥测 | `"http://proxy.example.com:8888"` 
 
 
-| `卸载` | 用于卸载 Astra Trident 的标志 | `false` 
+| `卸载` | 用于卸载Trident的标志 | `false` 
 
 
-| `logFormat` | 要使用的 Astra Trident 日志记录格式 [text ， json] | `"text"` 
+| `logFormat` | 要使用的Trident日志记录格式[text,json] | `"text"` 
 
 
-| `TridentImage` | 要安装的 Astra Trident 映像 | `"netapp/trident:24.06"` 
+| `TridentImage` | 要安装的Trident映像 | `"netapp/trident:24.10"` 
 
 
 | `imageRegistry` | 内部注册表的路径、格式
-`<registry FQDN>[:port][/subpath]` | `"k8s.gcr.io/sig-storage"` (Kubenetes 1.19及更高版本)
-或 `"quay.io/k8scsi"` 
+`<registry FQDN>[:port][/subpath]` | `"k8s.gcr.io"`(Kubornetes 1.19+)或 `"quay.io/k8scsi"` 
 
 
 | `kubeletDir` | 主机上的 kubelet 目录的路径 | `"/var/lib/kubelet"` 
 
 
-| `wipeout` | 要删除以执行完全删除的资源列表
-Astra Trident |  
+| `wipeout` | 要删除以执行Trident完全删除的资源列表 |  
 
 
 | `imagePullSecs` | 从内部注册表中提取映像的机密信息 |  
@@ -117,6 +113,9 @@ Astra Trident |
 
 
 | `nodePluginTholeations` | 覆盖Kubernetes对Pod的容错。遵循与相同的格式 `pod.spec.Tolerations`。 | 无默认值；可选 
+
+
+| `nodePrep` | 使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。* |  
 |===
 
 NOTE: 有关格式化POD参数的详细信息、请参阅 link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["将 Pod 分配给节点"^]。
@@ -125,25 +124,28 @@ NOTE: 有关格式化POD参数的详细信息、请参阅 link:https://kubernete
 
 === 有关强制断开的详细信息
 
-可对使用强制断开 `ontap-san` 和 `ontap-san-economy` 仅限。在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。有关详细信息，请参见 link:https://kubernetes.io/docs/concepts/architecture/nodes/#non-graceful-node-shutdown["Kubnetes：节点非正常关闭"^]。
+强制分离仅适用于 `ontap-san`、和 `onatp-nas-economy`。 `ontap-san-economy`在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。有关详细信息，请参阅 link:https://kubernetes.io/docs/concepts/architecture/nodes/#non-graceful-node-shutdown["Kubnetes：节点非正常关闭"^]。
 
 
-WARNING: 由于Astra三端存储依赖于Kubbernetes NGN、因此请勿删除 `out-of-service` 运行状况不正常的节点会导致出现问题、直到重新计划所有不可支持的工作负载为止。不负责任地应用或删除该问题可能会危及后端数据保护。
+NOTE: 使用驱动程序时 `ontap-nas-economy`、您需要将后端配置中的参数设置 `autoExportPolicy`为 `true`、以便Trident可以限制通过受管导出策略应用了此内容的Kubbernetes节点的访问。
 
-当Kubnetes集群管理员应用了时 `node.kubernetes.io/out-of-service=nodeshutdown:NoExecute` 此节点和存在污染 `enableForceDetach` 设置为 `true`，Asta Trident将确定节点状态，并：
+
+WARNING: 由于Trident依赖于Kubbernetes NGN、因此在重新计划所有不可允许的工作负载之前、请勿从运行状况不正常的节点中删除 `out-of-service`污点。不负责任地应用或删除该问题可能会危及后端数据保护。
+
+当Kubnetes集群管理员已将此标记应用 `node.kubernetes.io/out-of-service=nodeshutdown:NoExecute`于节点并 `enableForceDetach`设置为 `true`时，Trident将确定节点状态并：
 
 . 停止挂载到该节点的卷的后端I/O访问。
-. 将Astra三端节点对象标记为 `dirty` (对于新出版物不安全)。
+. 将Trident节点对象标记为 `dirty`(对于新出版物不安全)。
 +
 
-NOTE: 在节点重新通过资格认定(标记为后)之前、三端技术(Trident)控制器将拒绝新的发布卷请求 `dirty`)。只有在Asta三端存储能够验证使用已挂载PVC的任何工作负载(即使在集群节点运行状况良好且已准备就绪后)、此工作负载才会被接受 `clean` (可安全发布新出版物)。
+NOTE: Trident控制器将拒绝新的发布卷请求，直到节点被Trident节点POD重新认定(标记为后)为止 `dirty`。使用挂载的PVC计划的任何工作负载(即使在集群节点运行状况良好且已准备就绪之后)都将无法接受、直到Trident能够验证该节点 `clean`(对于新发布的产品来说是安全的)。
 
 
 
-在恢复节点运行状况并删除此污染后、Asta Trident将：
+在恢复节点运行状况并删除此污染后、Trident将：
 
 . 确定并清除节点上陈旧的已发布路径。
-. 如果节点位于中 `cleanable` 状态(已删除服务中断的部分、并且节点处于状态 `Ready` 状态)、并且所有过时的已发布路径都是干净的、Asta三端技术将将节点重新提交为 `clean` 并允许向节点发布新的已发布卷。
+. 如果此节点处于某个 `cleanable`状态(已删除服务中断、并且此节点处于 `Ready`状态)、并且所有陈旧的已发布路径均已清理、则Trident会将此节点重新提交为、并允许新的已发布卷访问此节点 `clean`。
 
 
 
@@ -174,7 +176,7 @@ spec:
 .节点选择器
 [%collapsible]
 ====
-此示例将安装具有节点选择器的Asta Trdent。
+此示例将安装具有节点选择器的Trident。
 
 [listing]
 ----
@@ -194,7 +196,7 @@ spec:
 .Windows工作节点
 [%collapsible]
 ====
-此示例将A作用 于Windows工作节点上。
+此示例将Trident安装在Windows工作节点上。
 
 [listing]
 ----
@@ -212,7 +214,7 @@ spec:
 .AKS集群上的受管身份
 [%collapsible]
 ====
-此示例将安装A作用 于在AKS集群上启用受管身份。
+此示例将安装Trident以在AKS集群上启用受管身份。
 
 [listing]
 ----
@@ -229,7 +231,7 @@ spec:
 .AKS集群上的云身份
 [%collapsible]
 ====
-此示例将在AKS集群上安装用于云身份的Asta Dent。
+此示例将在AKS集群上安装Trident以与云标识结合使用。
 
 [listing]
 ----
@@ -248,7 +250,7 @@ spec:
 .EKS集群上的云身份
 [%collapsible]
 ====
-此示例将在AKS集群上安装用于云身份的Asta Dent。
+此示例将在AKS集群上安装Trident以与云标识结合使用。
 
 [listing]
 ----
@@ -260,6 +262,27 @@ spec:
   debug: true
   namespace: trident
   cloudProvider: "AWS"
-  cloudIdentity: "'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/astratrident-role'"
+  cloudIdentity: "'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/trident-role'"
+----
+====
+.适用于GKE的云身份
+[%collapsible]
+====
+此示例将Asta Trident安装到GKE集群上、以便与云身份结合使用。
+
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-gcp-gcnv
+spec:
+  version: 1
+  storageDriverName: google-cloud-netapp-volumes
+  projectNumber: '012345678901'
+  network: gcnv-network
+  location: us-west2
+  serviceLevel: Premium
+  storagePool: pool-premium1
 ----
 ====

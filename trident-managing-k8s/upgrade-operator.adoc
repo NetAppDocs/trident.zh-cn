@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-managing-k8s/upgrade-operator.html 
 keywords: upgrade, trident, methods, operator, tridentctl, helm 
-summary: 您可以使用操作员轻松升级现有的 Astra Trident 安装。 
+summary: 您可以使用操作员轻松升级现有的Trident安装。 
 ---
-= 使用Trident Operator或Helm升级Astra三端安装
+= 使用Trident Operator或Helm升级Trident安装
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,47 +12,47 @@ summary: 您可以使用操作员轻松升级现有的 Astra Trident 安装。
 
 
 [role="lead"]
-您可以使用三端操作员手动或使用Helm升级A作用 于三端的Astra。您可以从一个TRIdent操作员安装升级到另一个TRIdent操作员安装或从升级 `tridentctl` 安装到一个TRIdent操作员版本。请查看 link:upgrade-trident.html#select-an-upgrade-method["选择升级方法"] 升级三端修复程序安装之前。
+您可以使用Trident操作员手动或使用Helm升级Trident。您可以从Trident操作员安装升级到另一个Trident操作员安装、也可以从安装升级 `tridentctl`到Trident操作员版本。在升级Trident操作员安装之前、请查看link:upgrade-trident.html#select-an-upgrade-method["选择升级方法"]。
 
 
 
 == 升级手动安装
 
-您可以从集群范围的三端技术人员安装升级到另一个集群范围的三端技术人员安装。所有Astra Trident 21.01及更高版本均使用集群范围的运算符。
+您可以从集群范围的三端技术人员安装升级到另一个集群范围的三端技术人员安装。所有Trident 21.01及更高版本都使用集群范围的运算符。
 
 
-NOTE: 要从使用命名空间范围的运算符(版本20.07到20.10)安装的Asta三端技术升级、请按照的升级说明进行操作 link:../earlier-versions.html["您安装的版本"] 的Astra三端。
+NOTE: 要从使用命名空间范围的运算符(版本20.07到20.10)安装的Trident升级、请按照Trident的升级说明进行操作link:../earlier-versions.html["您安装的版本"]。
 
 .关于此任务
 ｛\f270通过｝｛\f270｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270通过｝｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270｝
 
-* 对于运行Kubbernetes 1.24的集群，请使用 link:https://github.com/NetApp/trident/tree/stable/v24.06/deploy/bundle_pre_1_25.yaml["bundle_pre_1_25.yaml"^]。
-* 对于运行Kubernetes 1.25或更高版本的集群，请使用 link:https://github.com/NetApp/trident/tree/stable/v24.06/deploy/bundle_post_1_25.yaml["bundle_post_1_25.yaml"^]。
+* 对于运行Kubbernetes 1.24的集群，请使用 link:https://github.com/NetApp/trident/tree/stable/v24.10/deploy/bundle_pre_1_25.yaml["bundle_pre_1_25.yaml"^]。
+* 对于运行Kubernetes 1.25或更高版本的集群，请使用 link:https://github.com/NetApp/trident/tree/stable/v24.10/deploy/bundle_post_1_25.yaml["bundle_post_1_25.yaml"^]。
 
 
 .开始之前
 确保您使用的是正在运行的Kubbernetes集群 link:../trident-get-started/requirements.html["支持的Kubernetes版本"]。
 
 .步骤
-. 验证Astra Trident版本：
+. 验证Trident版本：
 +
 [listing]
 ----
 ./tridentctl -n trident version
 ----
-. 删除用于安装当前 Astra Trident 实例的 Trident 运算符。例如、如果要从23.07升级、请运行以下命令：
+. 删除用于安装当前Trident实例的Trident运算符。例如、如果要从23.07升级、请运行以下命令：
 +
 [listing]
 ----
 kubectl delete -f 23.07.0/trident-installer/deploy/<bundle.yaml> -n trident
 ----
 . 如果您使用自定义了初始安装 `TridentOrchestrator` 属性、您可以编辑 `TridentOrchestrator` 用于修改安装参数的对象。其中可能包括为脱机模式指定镜像Trident和CSI映像注册表、启用调试日志或指定映像提取密钥所做的更改。
-. 使用适用于您的环境的正确捆绑包YAML_文件安装Astra、其中_Kubornetes_是或基于您的<bundle.yaml>
-`bundle_pre_1_25.yaml` `bundle_post_1_25.yaml` 版本。例如、如果要安装Asta Trident 24.06、请运行以下命令：
+. 使用适用于您的环境的正确捆绑包YAML文件安装Trident、其中_是 或 `bundle_post_1_25.yaml`基于您的<bundle.yaml>
+`bundle_pre_1_25.yaml`版本。例如、如果要安装Trident 24.10、请运行以下命令：
 +
 [listing]
 ----
-kubectl create -f 24.06.0/trident-installer/deploy/<bundle.yaml> -n trident
+kubectl create -f 24.10.0/trident-installer/deploy/<bundle.yaml> -n trident
 ----
 
 
@@ -60,20 +60,37 @@ kubectl create -f 24.06.0/trident-installer/deploy/<bundle.yaml> -n trident
 
 == 升级Helm安装
 
-您可以升级Asta三端Helm安装。
+您可以升级Trident Helm安装。
 
 
-WARNING: 将安装了Astra Trident的Kubernetes集群从1.24升级到1.25或更高版本时、必须将values.yaml更新为set `excludePodSecurityPolicy` to `true` 或添加 `--set excludePodSecurityPolicy=true` 到 `helm upgrade` 命令。
+WARNING: 在将安装了Trident的Kubernetes集群从1.24升级到1.25或更高版本时、您必须 `helm upgrade`先更新values.yaml以设置为或添加到 `true`命令、 `--set excludePodSecurityPolicy=true`然后才能升级集群。 `excludePodSecurityPolicy`
 
-.步骤
-. 如果您 link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-astra-trident-using-helm["已使用Helm安装Asta Trdent"]使用，则可以使用 `helm upgrade trident netapp-trident/trident-operator --version 100.2406.0` 一步升级。如果您未添加Helm repo或无法使用它进行升级：
-+
-.. 从下载最新的Astra Trdent版本 link:https://github.com/NetApp/trident/releases/latest["GitHub上的_assets_部分"^]。
-.. 使用 `helm upgrade` 命令、其中 `trident-operator-24.06.0.tgz` 反映了要升级到的版本。
+如果您已将Kubnetes集群从1.24升级到1.25、但未升级Trident Helm、则Helm升级将失败。要完成Helm升级、请作为前提条件执行以下步骤：
+
+. 从安装helm-mapkubeapis插件 https://github.com/helm/helm-mapkubeapis[]。
+. 在安装了Trident的命名空间中对Trident版本执行演练。此操作将列出要清理的资源。
 +
 [listing]
 ----
-helm upgrade <name> trident-operator-24.06.0.tgz
+helm mapkubeapis --dry-run trident  --namespace trident
+----
+. 使用Helm执行完整运行以执行清理。
++
+[listing]
+----
+helm mapkubeapis trident  --namespace trident
+----
+
+
+.步骤
+. 如果您 link:../trident-get-started/kubernetes-deploy-helm.html#deploy-the-trident-operator-and-install-trident-using-helm["已使用Helm安装Trident"]使用，则可以使用 `helm upgrade trident netapp-trident/trident-operator --version 100.2410.0` 一步升级。如果您未添加Helm repo或无法使用它进行升级：
++
+.. 从下载最新的Trident版本link:https://github.com/NetApp/trident/releases/latest["GitHub上的_assets_部分"^]。
+.. 使用 `helm upgrade` 命令、其中 `trident-operator-24.10.0.tgz` 反映了要升级到的版本。
++
+[listing]
+----
+helm upgrade <name> trident-operator-24.10.0.tgz
 ----
 +
 
@@ -94,15 +111,15 @@ NOTE: 如果您在初始安装期间设置了自定义选项(例如、为三端�
 NOTE: 在切换安装方法之前、请查看 link:../trident-get-started/kubernetes-deploy.html#moving-between-installation-methods["在安装方法之间移动"]。
 
 .步骤
-. 下载最新的 Astra Trident 版本。
+. 下载最新版本的Trident。
 +
 [listing]
 ----
-# Download the release required [24.060.0]
-mkdir 24.06.0
-cd 24.06.0
-wget https://github.com/NetApp/trident/releases/download/v24.06.0/trident-installer-24.06.0.tar.gz
-tar -xf trident-installer-24.06.0.tar.gz
+# Download the release required [24.10.0]
+mkdir 24.10.0
+cd 24.10.0
+wget https://github.com/NetApp/trident/releases/download/v24.10.0/trident-installer-24.10.0.tar.gz
+tar -xf trident-installer-24.10.0.tar.gz
 cd trident-installer
 ----
 . 从清单中创建 `tridentorchator` CRD 。
@@ -129,7 +146,7 @@ trident-controller-79df798bdc-m79dc   6/6     Running   0          150d
 trident-node-linux-xrst8              2/2     Running   0          150d
 trident-operator-5574dbbc68-nthjv     1/1     Running   0          1m30s
 ----
-. 创建 `TridentOrchestrator` CR 以安装 Astra Trident 。
+. 创建 `TridentOrchestrator`CR以安装Trident。
 +
 [listing]
 ----
@@ -159,6 +176,6 @@ kubectl describe torc trident | grep Message -A 3
 Message:                Trident installed
 Namespace:              trident
 Status:                 Installed
-Version:                v24.06.0
+Version:                v24.10.0
 ----
 

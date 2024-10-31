@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/ontap-san-examples.html 
 keywords: map backends, storage classes, trident backend, ontap san, ontap san economy, options, storageclasses, fsx, metrocluster 
-summary: 了解如何在您的 Astra Trident 安装中创建和使用 ONTAP SAN 驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。 
+summary: 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。 
 ---
 = ONTAP SAN配置选项和示例
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 了解如何在您的 Astra Trident 安装中创建和使用 ONTAP SAN 
 
 
 [role="lead"]
-了解如何在Astra三端安装中创建和使用ONTAP SAN驱动程序。本节提供了将后端映射到StorageClasses的后端配置示例和详细信息。
+了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了将后端映射到StorageClasses的后端配置示例和详细信息。
 
 
 
@@ -34,20 +34,10 @@ summary: 了解如何在您的 Astra Trident 安装中创建和使用 ONTAP SAN 
 | `backendName` | 自定义名称或存储后端 | 驱动程序名称+"_"+ dataLIF 
 
 
-| `m年` 月 日 | 集群或SVM管理LIF的IP地址。
-
-可以指定完全限定域名(FQDN)。
-
-如果使用IPv6标志安装了Asta三元组、则可以设置为使用IPv6地址。IPv6地址必须使用方括号进行定义、例如 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`。
-
-有关无缝MetroCluster切换、请参见 <<mcc-best>>。 | "10.0.0.1 " ， "2001 ： 1234 ： abcd ：：： fefe] " 
+| `m年` 月 日 | 集群或SVM管理LIF的IP地址。可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`。有关无缝MetroCluster切换的信息，请参见<<mcc-best>>。 | "10.0.0.1 " ， "2001 ： 1234 ： abcd ：：： fefe] " 
 
 
-| `dataLIF` | 协议 LIF 的 IP 地址。
-
-*请勿为iSCSI指定。* Astra Trident使用 link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^] 发现建立多路径会话所需的iSCI LIF。如果出现、则会生成警告 `dataLIF` 已明确定义。
-
-*对于MetroCluster省略。*请参见 <<mcc-best>>。 | 由SVM派生 
+| `dataLIF` | 协议 LIF 的 IP 地址。*不指定iSCSI。*Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iCI LUN。如果明确定义、则会生成警告 `dataLIF`。*省略MetroCluster。*请参见<<mcc-best>>。 | 由SVM派生 
 
 
 | `sVM` | 要使用的 Storage Virtual Machine
@@ -55,7 +45,7 @@ summary: 了解如何在您的 Astra Trident 安装中创建和使用 ONTAP SAN 
 *对于MetroCluster省略。*请参见 <<mcc-best>>。 | 如果指定了 SVM `managementLIF` ，则派生 
 
 
-| `使用 CHAP` | 使用CHAP对iSCSI的ONTAP SAN驱动程序进行身份验证[布尔值]。设置为 `true` 让Astra Trident为后端给定的SVM配置并使用双向CHAP作为默认身份验证。请参见 link:ontap-san-prep.html["准备使用ONTAP SAN驱动程序配置后端"] 了解详细信息。 | `false` 
+| `使用 CHAP` | 使用CHAP对iSCSI的ONTAP SAN驱动程序进行身份验证[布尔值]。将设置为 `true`、以便Trident配置双向CHAP并将其用作后端中给定SVM的默认身份验证。有关详细信息、请参见 link:ontap-san-prep.html["准备使用ONTAP SAN驱动程序配置后端"] 。 | `false` 
 
 
 | `chapInitiatorSecret` | CHAP 启动程序密钥。如果为 `useCHAP=true` ，则为必需项 | "" 
@@ -94,7 +84,17 @@ summary: 了解如何在您的 Astra Trident 安装中创建和使用 ONTAP SAN 
 | `s存储前缀` | 在 SVM 中配置新卷时使用的前缀。无法稍后修改。要更新此参数、您需要创建一个新的后端。 | `trident` 
 
 
-| `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。如果您使用适用于NetApp ONTAP 后端的Amazon FSX、请勿指定  `limitAggregateUsage`。提供的 `fsxadmin` 和 `vsadmin` 请勿包含检索聚合使用情况所需的权限、并使用Astra Trident对其进行限制。 | "" （默认情况下不强制实施） 
+| `聚合`  a| 
+要配置的聚合（可选；如果设置了聚合，则必须将其分配给 SVM ）。对于 `ontap-nas-flexgroup`驱动程序、此选项将被忽略。如果未分配、则 可以使用任何可用聚合来配置FlexGroup卷。
+
+
+NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法是轮询SVM、而无需重新启动Trident控制器。在Trident中配置了特定聚合以配置卷后、如果将该聚合重命名或移出SVM、则在轮询SVM聚合时、后端将在Trident中变为故障状态。您必须将聚合更改为SVM上的聚合、或者将其全部删除、以使后端恢复联机。
+ a| 
+""
+
+
+
+| `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。如果您使用的是Amazon FSx for NetApp ONTAP后端，请勿指定 `limitAggregateUsage`。提供的和 `vsadmin`不包含使用Trident检索聚合使用情况并对其进行限制所需的 `fsxadmin`权限。 | "" （默认情况下不强制实施） 
 
 
 | `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为qtree和LUN管理的卷的最大大小。 | ""(默认情况下不强制实施) 
@@ -109,13 +109,34 @@ summary: 了解如何在您的 Astra Trident 安装中创建和使用 ONTAP SAN 
 
 
 | `useREST` | 用于使用 ONTAP REST API 的布尔参数。
-`useREST` 设置为时 `true`，Asta三端将使用ONTAP REST API与后端通信；设置为时 `false`，Asta三端将使用ONTAP ZAPI调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontap` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Asta三元组24.06版本和ONTAP 9.15.1或更高版本开始、默认情况下会 `userREST` 设置为 `true` ；更
-`useREST` 改为 `false` 以使用ONTAP ZAPI调用。
+`useREST`设置为时 `true`，Trident使用ONTAP REST API与后端通信；设置为时 `false`，Trident使用ONTAP ZAPI调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontap` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Trident 24.06版和ZAPI.151或更高版本开始、默认情况下会设置为 `true`；更
+`useREST`改为 `false`以使用ONTAP 9 `userREST` ONTAP调用。
 `useREST` 完全符合NVMe/TCP要求。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
 
 
-| `sanType` | 使用选择 `iscsi` 对于iSCSI或 `nvme` 适用于NVMe/TCP。 | `iscsi` 如果为空 
+ a| 
+`sanType`
+| 用于为iSCSI、 `nvme`NVMe/TCP或基于光纤通道的 `fcp`SCSI (FC)选择 `iscsi`。*"FCP"(基于FC的SCSI)是Trident 24.10版本中的一项技术预览功能。* | `iscsi` 如果为空 
+
+
+| `formatOptions`  a| 
+ `formatOptions`用于指定命令的命令行参数、每当对卷进行格式化时、都会应用这些参数 `mkfs`。这样、您可以根据偏好格式化卷。请确保指定与mkfs命令选项类似的格式选项，但不包括设备路径。示例："-E nobdiscard"
+
+* `ontap-san` `ontap-san-economy`仅支持和驱动程序。*
+ a| 
+
 |===
+
+
+=== 有关使用formatOptions的建议
+
+Trident建议使用以下选项来加快格式化过程：
+
+*-E NODiscard：*
+
+* 保留、不要尝试在mkfs时间丢弃块(丢弃块最初在固态设备和稀疏/精简配置存储上很有用)。此选项将取代已弃用的选项"-K"、并适用于所有文件系统(xfs、ext3和ext4)。
+
+
 
 
 == 用于配置卷的后端配置选项
@@ -136,7 +157,7 @@ summary: 了解如何在您的 Astra Trident 安装中创建和使用 ONTAP SAN 
 | `sSnapshot 策略` | 要使用的 Snapshot 策略 | "无" 
 
 
-| `qosPolicy` | 要为创建的卷分配的 QoS 策略组。选择每个存储池 / 后端的 qosPolicy 或 adaptiveQosPolicy 之一。在 Astra Trident 中使用 QoS 策略组需要 ONTAP 9.8 或更高版本。建议使用非共享QoS策略组、并确保策略组分别应用于每个成分卷。共享 QoS 策略组将对所有工作负载的总吞吐量实施上限。 | "" 
+| `qosPolicy` | 要为创建的卷分配的 QoS 策略组。选择每个存储池 / 后端的 qosPolicy 或 adaptiveQosPolicy 之一。将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。 | "" 
 
 
 | `adaptiveQosPolicy` | 要为创建的卷分配的自适应 QoS 策略组。选择每个存储池 / 后端的 qosPolicy 或 adaptiveQosPolicy 之一 | "" 
@@ -148,7 +169,7 @@ summary: 了解如何在您的 Astra Trident 安装中创建和使用 ONTAP SAN 
 | `splitOnClone` | 创建克隆时，从其父级拆分该克隆 | false 
 
 
-| `加密` | 在新卷上启用NetApp卷加密(NVE)；默认为`false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Astra Trident中配置的任何卷都将启用NAE。有关详细信息、请参见： link:../trident-reco/security-reco.html["Astra Trident如何与NVE和NAE配合使用"]。 | false 
+| `加密` | 在新卷上启用NetApp卷加密(NVE)；默认为 `false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | false 
 
 
 | `luksEncryption` | 启用LUKS加密。请参见 link:../trident-reco/security-luks.html["使用Linux统一密钥设置(LUKS)"]。
@@ -166,6 +187,9 @@ NVMe/TCP不支持使用此类数据加密。 | ""
 
 
 | `limitVolumePoolSize` | 在LUS-SAN-Economy后端使用ONTAP时可要求的最大FlexVol大小。 | "" （默认情况下不强制实施） 
+
+
+| `denyNewVolumePools` | 限制 `ontap-san-economy`后端创建新的FlexVol卷以包含其LUN。仅会使用已有的FlexVol配置新的PV. |  
 |===
 
 
@@ -198,15 +222,15 @@ defaults:
 
 ----
 
-NOTE: 对于使用 `ontap-san` 驱动程序创建的所有卷， Astra Trident 会向 FlexVol 额外添加 10% 的容量，以容纳 LUN 元数据。LUN 将使用用户在 PVC 中请求的确切大小进行配置。Astra Trident 将 FlexVol 增加 10% （在 ONTAP 中显示为可用大小）。用户现在将获得所请求的可用容量。此更改还可防止 LUN 变为只读状态，除非已充分利用可用空间。这不适用于 ontap-san-economy.
+NOTE: 对于使用驱动程序创建的所有卷 `ontap-san`、Trident会向FlexVol额外添加10%的容量、以容纳LUN元数据。LUN 将使用用户在 PVC 中请求的确切大小进行配置。Trident会将10%的空间添加到FlexVol中(在ONTAP中显示为可用大小)。用户现在将获得所请求的可用容量。此更改还可防止 LUN 变为只读状态，除非已充分利用可用空间。这不适用于 ontap-san-economy.
 
-对于定义 `snapshotReserve` 的后端， Astra Trident 将按如下方式计算卷的大小：
+对于定义的后端 `snapshotReserve`，Trident将按如下所示计算卷的大小：
 
 [listing]
 ----
 Total volume size = [(PVC requested size) / (1 - (snapshotReserve percentage) / 100)] * 1.1
 ----
-1.1 是 Astra Trident 向 FlexVol 额外添加 10% 以容纳 LUN 元数据。对于 `snapshotReserve` = 5% ， PVC 请求 = 5GiB ，卷总大小为 5.79GiB ，可用大小为 5.5GiB 。`volume show` 命令应显示与以下示例类似的结果：
+1.1是Trident为容纳LUN元数据而向FlexVol额外增加的10%。对于 `snapshotReserve`= 5%、PVC请求= 5 GiB、则卷总大小为5.79 GiB、可用大小为5.5 GiB。此 `volume show`命令应显示类似于以下示例的结果：
 
 image::../media/vol-show-san.png[显示了 volume show 命令的输出。]
 
@@ -219,7 +243,7 @@ image::../media/vol-show-san.png[显示了 volume show 命令的输出。]
 以下示例显示了将大多数参数保留为默认值的基本配置。这是定义后端的最简单方法。
 
 
-NOTE: 如果您将Amazon FSx on NetApp ONTAP与Asta Dent结合使用、则建议您为指定DNS名称、而不是IP地址。
+NOTE: 如果您将Amazon FSx on NetApp ONTAP与结合使用、建议您为Trident指定DNS名称、而不是IP地址。
 
 .ONTAP SAN示例
 [%collapsible]
@@ -376,13 +400,32 @@ defaults: {
 "labels": {"cluster": "ClusterA", "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"}
 ----
 ====
+.formatOptions <code> ONTAP－san－</code>驱动程序示例
+[%collapsible]
+====
+[listing]
+----
+version: 1
+storageDriverName: ontap-san-economy
+managementLIF: ''
+svm: svm1
+username: ''
+password: "!"
+storagePrefix: whelk_
+debugTraceFlags:
+  method: true
+  api: true
+defaults:
+  formatOptions: "-E nodiscard"
+----
+====
 
 
 == 虚拟池后端示例
 
 在这些示例后端定义文件中、为所有存储池设置了特定默认值、例如 `spaceReserve` 无、 `spaceAllocation` 为false、和 `encryption` 为false。虚拟池在存储部分中进行定义。
 
-A作用 是在"Comments"字段中设置配置标签。注释在FlexVol 上设置。在配置时、Astra Trident会将虚拟池上的所有标签复制到存储卷。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。
+Trident会在"Comments"字段中设置配置标签。注释在FlexVol 上设置。配置时、Trident会将虚拟池上的所有标签复制到存储卷。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。
 
 在这些示例中、某些存储池会自行设置 `spaceReserve`， `spaceAllocation`，和 `encryption` 值、而某些池会覆盖默认值。
 
@@ -604,4 +647,4 @@ parameters:
 ----
 
 
-Astra Trident将决定选择哪个虚拟池、并确保满足存储要求。
+Trident将决定选择哪个虚拟池、并确保满足存储要求。

@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-deploy-helm-mirror.html 
-keywords: deploy, astra trident, operator, helm, helm chart, configuration, values, offline, air gap, gap, registry 
-summary: 您可以使用Helm部署Trident操作员并安装Astra Trident。此过程将处理适用场景 安装、其中、Astra Trident所需的容器映像存储在专用注册表中。 
+keywords: deploy, Trident, operator, helm, helm chart, configuration, values, offline, air gap, gap, registry 
+summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程适用于将Trident所需的容器映像存储在私有注册表中的安装。 
 ---
 = 使用Helm部署Trident操作员(脱机模式)
 :hardbreaks:
@@ -12,28 +12,31 @@ summary: 您可以使用Helm部署Trident操作员并安装Astra Trident。此�
 
 
 [role="lead"]
-您可以使用Helm部署Trident操作员并安装Astra Trident。此过程将处理适用场景 安装、其中、Astra Trident所需的容器映像存储在专用注册表中。如果您没有专用映像注册表、请使用 link:kubernetes-deploy-helm.html["标准部署流程"]。
+您可以使用Helm部署Trident操作员并安装Trident。此过程适用于将Trident所需的容器映像存储在私有注册表中的安装。如果没有专用映像注册表，请使用link:kubernetes-deploy-helm.html["标准部署流程"]。
 
 
 
-== 有关Astra Trdent的重要信息24.06
+== 有关Trident 24.10的重要信息
 
-*您必须阅读以下有关Astra Trident的重要信息。*
+*您必须阅读以下有关Trident的重要信息。*
 
-.<strong> 中有关Astra </strong> 的信息
+.<strong>与Trident </strong>相关的信息
 [%collapsible%open]
 ====
-* 现在、Asta三端磁盘支持Kubbernetes 1.31。在升级Kubernetes之前升级Trident。
-* Astra Trident会严格强制在SAN环境中使用多路径配置、建议值为 `find_multipaths: no` 在multipath.conf文件中。
+[]
+=====
+* 现在、在Trident中支持Kubnetes 1.31。在升级Kubernetes之前升级Trident。
+* Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
 
 
 
+=====
 ====
 
 
-== 部署Trident操作员并使用Helm安装Astra Trident
+== 部署Trident操作员并使用Helm安装Trident
 
 使用Trident link:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Helm图表"^] 您可以一步部署Trident操作员并安装Trident。
 
@@ -42,14 +45,17 @@ summary: 您可以使用Helm部署Trident操作员并安装Astra Trident。此�
 .开始之前
 除了 link:../trident-get-started/kubernetes-deploy.html#before-you-deploy["部署前提条件"] 您需要 link:https://v3.helm.sh/["Helm 版本 3"^]。
 
+
+IMPORTANT: 在私有存储库中安装Trident时、如果 `imageRegistry`使用交换机指定存储库位置、请勿在存储库路径中使用 `/netapp/`。
+
 .步骤
-. 添加Astra Trident Helm存储库：
+. 添加Trident Helm存储库：
 +
 [listing]
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. 使用 `helm install` 并指定部署和映像注册表位置的名称。您的 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident和CSI映像"] 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。在示例中、 `100.2406.0` 是您正在安装的A作用 是三端到端的版本。
+. 使用 `helm install` 并指定部署和映像注册表位置的名称。您的 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident和CSI映像"] 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。在示例中、 `100.2410.0`是要安装的Trident版本。
 +
 [role="tabbed-block"]
 ====
@@ -57,16 +63,14 @@ helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 --
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2406.0 --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 100.2410.0 --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 .不同注册表中的映像
 --
-您必须附加 `sig-storage` 到 `imageRegistry` 使用不同的注册表位置。
-
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2406.0 --set imageRegistry=<your-registry>/sig-storage --set operatorImage=<your-registry>/netapp/trident-operator:24.06.0 --set tridentAutosupportImage=<your-registry>/netapp/trident-autosupport:24.06 --set tridentImage=<your-registry>/netapp/trident:24.06.0 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 100.2410.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:24.10.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:24.06 --set tridentImage=<your-registry>/trident:24.10.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 ====
@@ -98,17 +102,26 @@ NOTE: 如果已为Trident创建命名空间、则`-create-namespace`参数不会
 在命令行上指定覆盖。
 
 |===
-例如，要更改的默认值 `debug`，请运行以下命令， `--set` 其中 `100.2406.0` 是您正在安装的Asta Trdent版本：
+例如，要更改的默认值 `debug`，请运行以下命令，其中 `100.2410.0`是要安装的Trident版本：
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2406.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 100.2410.0  --create-namespace --namespace trident --set tridentDebug=true
+----
+要添加nodePrep值、请运行以下命令：
+
+[listing]
+----
+helm install <name> netapp-trident/trident-operator --version 100.2406.0  --create-namespace --namespace trident --set nodePrep={iscsi}
 ----
 
 
 == 配置选项
 
 此表和 `values.yaml` 文件(属于Helm图表的一部分)提供了键列表及其默认值。
+
+
+WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自定义相关性、请扩展默认相关性。
 
 [cols="3"]
 |===
@@ -127,7 +140,27 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 | `tolerations` | POD分配的差值 |  
 
 
-| `affinity` | 用于Pod分配的相关性 |  
+| `affinity` | 用于Pod分配的相关性  a| 
+[listing]
+----
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - arm64
+              - amd64
+            - key: kubernetes.io/os
+              operator: In
+              values:
+              - linux
+----
+
+WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自定义相关性、请扩展默认相关性。
+
 
 
 | `tridentControllerPluginNodeSelector` | Pod的其他节点选择器。请参见 link:../trident-get-started/architecture.html#understanding-controller-pods-and-node-pods["了解控制器Pod和节点Pod"] 了解详细信息。 |  
@@ -142,7 +175,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 | `tridentNodePluginTolerations` | 覆盖Kubernetes对Pod的容错。请参见 link:../trident-get-started/architecture.html#understanding-controller-pods-and-node-pods["了解控制器Pod和节点Pod"] 了解详细信息。 |  
 
 
-| `imageRegistry` | 标识的注册表 `trident-operator`， `trident`和其他图像。留空以接受默认值。 | "" 
+| `imageRegistry` | 标识、 `trident`和其它图像的注册表 `trident-operator`。留空以接受默认值。重要信息：在私有存储库中安装Trident时、如果 `imageRegistry`使用交换机指定存储库位置、请勿在存储库路径中使用 `/netapp/`。 | "" 
 
 
 | `imagePullPolicy` | 设置的映像提取策略 `trident-operator`。 | `IfNotPresent` 
@@ -166,7 +199,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 | `operatorImageTag` | 允许覆盖的标记 `trident-operator` 图像。 | "" 
 
 
-| `tridentIPv6` | 允许在IPv6集群中使用Astra Trident。 | `false` 
+| `tridentIPv6` | 允许在IPv6集群中启用Trident。 | `false` 
 
 
 | `tridentK8sTimeout` | 覆盖大多数Kubernetes API操作的默认30秒超时(如果不为零、则以秒为单位)。 | `0` 
@@ -175,47 +208,50 @@ helm install <name> netapp-trident/trident-operator --version 100.2406.0  --crea
 | `tridentHttpRequestTimeout` | 使用覆盖HTTP请求的默认90秒超时 `0s` 为超时的无限持续时间。不允许使用负值。 | `"90s"` 
 
 
-| `tridentSilenceAutosupport` | 允许禁用Astra Trident定期AutoSupport 报告。 | `false` 
+| `tridentSilenceAutosupport` | 允许禁用Trident定期AutoSupport报告。 | `false` 
 
 
-| `tridentAutosupportImageTag` | 允许覆盖Astra Trident AutoSupport 容器的映像标记。 | `<version>` 
+| `tridentAutosupportImageTag` | 允许覆盖Trident AutoSupport容器的映像标记。 | `<version>` 
 
 
-| `tridentAutosupportProxy` | 允许Astra Trident AutoSupport 容器通过HTTP代理进行回拨。 | "" 
+| `tridentAutosupportProxy` | 允许Trident AutoSupport容器通过HTTP代理回拨。 | "" 
 
 
-| `tridentLogFormat` | 设置Astra Trident日志记录格式 (`text` 或 `json`）。 | `"text"` 
+| `tridentLogFormat` | 设置Trident日志记录格式(`text`或 `json`)。 | `"text"` 
 
 
-| `tridentDisableAuditLog` | 禁用Astra Trident审核日志程序。 | `true` 
+| `tridentDisableAuditLog` | 禁用Trident审核日志程序。 | `true` 
 
 
-| `tridentLogLevel` | 允许将Astra Trident的日志级别设置为： `trace`， `debug`， `info`， `warn`， `error`或 `fatal`。 | `"info"` 
+| `tridentLogLevel` | 允许将Trident的日志级别设置为： `trace`、 `debug` `info`、、、 `warn` `error`或 `fatal`。 | `"info"` 
 
 
-| `tridentDebug` | 允许将Astra Trident的日志级别设置为 `debug`。 | `false` 
+| `tridentDebug` | 允许将Trident的日志级别设置为 `debug`。 | `false` 
 
 
-| `tridentLogWorkflows` | 允许为跟踪日志记录或日志禁止启用特定的Astra Trident工作流。 | "" 
+| `tridentLogWorkflows` | 允许为跟踪日志记录或日志抑制启用特定的Trident工作流。 | "" 
 
 
-| `tridentLogLayers` | 允许为跟踪日志记录或日志禁止启用特定的Astra Trident层。 | "" 
+| `tridentLogLayers` | 允许为跟踪日志记录或日志抑制启用特定的Trident层。 | "" 
 
 
-| `TridentImage` | 允许完全覆盖Astra Trident的映像。 | "" 
+| `TridentImage` | 允许完全覆盖Trident的图像。 | "" 
 
 
-| `tridentImageTag` | 允许覆盖Astra Trident的映像标记。 | "" 
+| `tridentImageTag` | 允许覆盖Trident的映像标记。 | "" 
 
 
 | `tridentProbePort` | 允许覆盖用于Kubernetes活动/就绪性探测的默认端口。 | "" 
 
 
-| `windows` | 允许在Windows工作节点上安装Astra Trident。 | `false` 
+| `windows` | 使Trident能够安装在Windows工作节点上。 | `false` 
 
 
 | `enableForceDetach` | 允许启用强制分离功能。 | `false` 
 
 
 | `excludePodSecurityPolicy` | 从创建过程中排除操作员POD安全策略。 | `false` 
+
+
+| `nodePrep` | 使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。* |  
 |===

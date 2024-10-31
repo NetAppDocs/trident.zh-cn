@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/volume-share.html 
 keywords: volref, volume reference, share, pvc, pv, nfs, namespace, cvna, cross-namespace, sharing 
-summary: 使用Astra Trident、您可以在主命名空间中创建卷、并在一个或多个二级命名空间中共享该卷。 
+summary: 使用Trident、您可以在主命名空间中创建卷、并在一个或多个二级命名空间中共享该卷。 
 ---
 = 在命名空间之间共享NFS卷
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: 使用Astra Trident、您可以在主命名空间中创建卷、并在�
 
 
 [role="lead"]
-使用Astra Trident、您可以在主命名空间中创建卷、并在一个或多个二级命名空间中共享该卷。
+使用Trident、您可以在主命名空间中创建卷、并在一个或多个二级命名空间中共享该卷。
 
 
 
 == 功能
 
-使用Astra TridentVolumeReference CR、您可以在一个或多个Kubernetes命名空间之间安全地共享ReadWriteMany (rwx) NFS卷。此Kubernetes本机解决方案 具有以下优势：
+通过TridentvolumeReference CR、您可以在一个或多个Kubernetes名空间之间安全地共享ReadwriteMany (rwx) NFS卷。此Kubernetes本机解决方案 具有以下优势：
 
 * 可通过多个级别的访问控制来确保安全性
 * 适用于所有Trident NFS卷驱动程序
@@ -78,7 +78,7 @@ spec:
       storage: 100Gi
 ----
 +
-Astra Trident会创建PV及其后端NFS存储卷。
+Trident将创建PV及其后端NFS存储卷。
 
 +
 [NOTE]
@@ -129,13 +129,13 @@ NOTE: 目标PVC的大小必须小于或等于源PVC。
 
 
 .结果
-Astra Trident读取 `shareFromPVC` 在目标PVC上添加标注、并将目标PV创建为一个从属卷、而其自身没有指向源PV的存储资源、并共享源PV存储资源。目标PVC和PV显示为正常绑定。
+Trident会读取 `shareFromPVC`目标PVC上的标注、并将目标PV创建为其自身没有指向源PV的存储资源的子卷、同时共享源PV存储资源。目标PVC和PV显示为正常绑定。
 
 
 
 == 删除共享卷
 
-您可以删除跨多个命名空间共享的卷。Astra Trident将删除对源命名空间上卷的访问、并保持对共享该卷的其他命名空间的访问。删除引用卷的所有命名空间后、Astra Trident将删除该卷。
+您可以删除跨多个命名空间共享的卷。Trident将删除对源命名空间上的卷的访问权限、并保留共享该卷的其他命名空间的访问权限。删除引用卷的所有名称空间后、Trident将删除该卷。
 
 
 
@@ -159,7 +159,7 @@ flags
 
 == 限制
 
-* Astra Trident无法阻止目标命名空间写入共享卷。您应使用文件锁定或其他进程来防止覆盖共享卷数据。
+* Trident无法阻止目标名称空间写入共享卷。您应使用文件锁定或其他进程来防止覆盖共享卷数据。
 * 您不能通过删除来撤消对源PVC的访问 `shareToNamespace` 或 `shareFromNamespace` 标注或删除 `TridentVolumeReference` CR.要撤消访问、必须删除从属PVC。
 * 无法在从属卷上执行快照、克隆和镜像。
 

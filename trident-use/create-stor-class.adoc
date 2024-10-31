@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/create-stor-class.html 
 keywords: storage class, manage storage class, storage classes, kubernetes storage classes 
-summary: 您可以设计一个Kubnetes StorageClass文件并创建StorageClass、以指示Astra Trident如何配置卷。 
+summary: 您可以设计一个Kubnetes存储类文件并创建存储类、以指示Trident如何配置卷。 
 ---
 = 创建存储类。
 :hardbreaks:
@@ -12,13 +12,13 @@ summary: 您可以设计一个Kubnetes StorageClass文件并创建StorageClass�
 
 
 [role="lead"]
-配置Kubnetes StorageClass对象并创建存储类、以指示Astra Trident如何配置卷。
+配置Kubnetes StorageClass对象并创建存储类、以指示Trident如何配置卷。
 
 
 
 == 配置Kubnetes StorageClass对象
 
-。 https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubnetes StorageClass对象"^] 将Asta Tandent标识为用于该类的配置程序、并指示Asta Tandent如何配置卷。例如：
+ https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubnetes StorageClass对象"^]将Trident标识为用于该类的配置程序、并指示Trident如何配置卷。例如：
 
 [listing]
 ----
@@ -33,7 +33,7 @@ parameters:
 allowVolumeExpansion: true
 volumeBindingMode: Immediate
 ----
-请参见 link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"] 有关存储类如何与交互的详细信息 `PersistentVolumeClaim` 和用于控制Asta Trident配置卷的方式的参数。
+有关存储类如何与和参数交互以控制Trident如何配置卷的详细信息 `PersistentVolumeClaim`、请参见link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"]。
 
 
 
@@ -48,7 +48,7 @@ volumeBindingMode: Immediate
 ----
 kubectl create -f sample-input/storage-class-basic-csi.yaml
 ----
-. 现在， Kubernetes 和 Astra Trident 都应显示 * 基本 -CSI * 存储类， Astra Trident 应已发现后端的池。
+. 现在，Kubernetes和Trident中都应显示一个*BASIC－Csi*存储类，并且Trident应已发现后端的池。
 +
 [listing]
 ----
@@ -87,7 +87,7 @@ basic-csi    csi.trident.netapp.io   15h
 
 === 存储类示例
 
-Asta三项功能 https://github.com/NetApp/trident/tree/master/trident-installer/sample-input/storage-class-samples["适用于特定后端的简单存储类定义"^]。
+Trident提供 https://github.com/NetApp/trident/tree/master/trident-installer/sample-input/storage-class-samples["适用于特定后端的简单存储类定义"^]。
 
 或者、您也可以进行编辑 `sample-input/storage-class-csi.yaml.templ` 安装程序随附的文件、然后进行替换 `__BACKEND_TYPE__` 和存储驱动程序名称。
 

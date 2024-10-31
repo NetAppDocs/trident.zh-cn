@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/vol-expansion.html 
 keywords: volumes, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion 
-summary: 通过 Astra Trident ， Kubernetes 用户可以在创建卷后对其进行扩展。查找有关扩展 iSCSI 和 NFS 卷所需配置的信息。 
+summary: Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展 iSCSI 和 NFS 卷所需配置的信息。 
 ---
 = 展开卷
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 通过 Astra Trident ， Kubernetes 用户可以在创建卷后对其�
 
 
 [role="lead"]
-通过 Astra Trident ， Kubernetes 用户可以在创建卷后对其进行扩展。查找有关扩展 iSCSI 和 NFS 卷所需配置的信息。
+Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展 iSCSI 和 NFS 卷所需配置的信息。
 
 
 
@@ -65,7 +65,7 @@ spec:
       storage: 1Gi
   storageClassName: ontap-san
 ----
-Astra Trident 会创建一个永久性卷（ PV ）并将其与此永久性卷声明（ PVC ）关联。
+Trident会创建一个永久性卷(PV)并将其与此永久性卷请求(PVC)相关联。
 
 [listing]
 ----
@@ -83,8 +83,8 @@ pvc-8a814d62-bd58-4253-b0d1-82f2885db671   1Gi        RWO            Delete     
 
 将PV连接到POD以调整大小。调整 iSCSI PV 大小时，有两种情况：
 
-* 如果 PV 连接到 Pod ，则 Astra Trident 会扩展存储后端的卷，重新扫描设备并调整文件系统大小。
-* 尝试调整未连接 PV 的大小时， Astra Trident 会扩展存储后端的卷。将 PVC 绑定到 Pod 后， Trident 会重新扫描设备并调整文件系统大小。然后， Kubernetes 会在扩展操作成功完成后更新 PVC 大小。
+* 如果PV连接到Pod、则Trident会扩展存储后端的卷、重新扫描设备并重新设置文件系统大小。
+* 尝试调整未连接PV的大小时、Trident会扩展存储后端的卷。将 PVC 绑定到 Pod 后， Trident 会重新扫描设备并调整文件系统大小。然后， Kubernetes 会在扩展操作成功完成后更新 PVC 大小。
 
 
 在此示例中，创建了一个使用 `san-PVC` 的 Pod 。
@@ -151,7 +151,7 @@ spec:
 
 === 第 5 步：验证扩展
 
-您可以通过检查 PVC ， PV 和 Astra Trident 卷的大小来验证扩展是否正常运行：
+您可以通过检查PVC、PV和Trident卷的大小来验证扩展是否正常：
 
 [listing]
 ----
@@ -172,7 +172,7 @@ tridentctl get volumes -n trident
 
 == 展开 NFS 卷
 
-Astra Trident 支持对在 `ontap-nas` ， `ontap-nas-economy` ， `ontap-nas-flexgroup` ， `GCP-CVS` 和 `azure-netapp-files` 后端配置的 NFS PV 进行卷扩展。
+Trident支持对、 `ontap-nas-economy`、 `ontap-nas-flexgroup`、 `gcp-cvs`和 `azure-netapp-files`后端配置的NFS PV进行卷扩展 `ontap-nas`。
 
 
 
@@ -213,7 +213,7 @@ spec:
       storage: 20Mi
   storageClassName: ontapnas
 ----
-Astra Trident 应为此 PVC 创建一个 20 MiB NFS PV ：
+Trident应为此PVC创建一个20MiB NFS PV：
 
 [listing]
 ----
@@ -265,7 +265,7 @@ spec:
 
 === 第 4 步：验证扩展
 
-您可以通过检查 PVC ， PV 和 Astra Trident 卷的大小来验证调整大小是否正常工作：
+您可以通过检查PVC、PV和Trident卷的大小来验证调整大小是否正常：
 
 [listing]
 ----

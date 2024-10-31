@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/element.html 
 keywords: trident backend, solidfire, netapp hci, drivers, access modes, rwo, rwx, rwp, rwop, file system 
-summary: 了解如何在 Astra Trident 安装中创建和使用 Element 后端。 
+summary: 了解如何在 Trident 安装中创建和使用 Element 后端。 
 ---
 = 配置 NetApp HCI 或 SolidFire 后端
 :hardbreaks:
@@ -12,15 +12,15 @@ summary: 了解如何在 Astra Trident 安装中创建和使用 Element 后端�
 
 
 [role="lead"]
-了解如何在Asta Trident安装中创建和使用Element后端。
+了解如何在Trident安装中创建和使用Element后端。
 
 
 
 == Element驱动程序详细信息
 
-Asta三项功能提供 `solidfire-san` 用于与集群通信的存储驱动程序。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
+Trident提供了 `solidfire-san`用于与集群通信的存储驱动程序。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
 
-。 `solidfire-san` 存储驱动程序支持_file_和_block_卷模式。。 `Filesystem` volumemode、Astra Trident会创建卷并创建文件系统。文件系统类型由 StorageClass 指定。
+ `solidfire-san`存储驱动程序支持_file_和_block_卷模式。对于 `Filesystem`卷模式、Trident会创建一个卷并创建一个文件系统。文件系统类型由 StorageClass 指定。
 
 [cols="5"]
 |===
@@ -94,7 +94,7 @@ Rwo、RWO1.
 | `InitiatorIFace` | 将 iSCSI 流量限制为特定主机接口 | default 
 
 
-| `UseCHAP` | 使用CHAP对iSCSI进行身份验证。Asta三端到子使用CHAP。 | true 
+| `UseCHAP` | 使用CHAP对iSCSI进行身份验证。Trident使用CHAP。 | true 
 
 
 | `访问组` | 要使用的访问组 ID 列表 | 查找名为 "trident " 的访问组的 ID 
@@ -153,7 +153,7 @@ Types:
 
 此示例显示了使用虚拟池配置的后端定义文件以及引用这些池的StorageClasses。
 
-在配置时、Astra Trident会将存储池上的标签复制到后端存储LUN。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。
+配置时、Trident会将存储池上的标签复制到后端存储LUN。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。
 
 在下面所示的示例后端定义文件中、为所有存储池设置了特定的默认值、这些存储池设置了 `type` 在Silver。虚拟池在中进行定义 `storage` 部分。在此示例中、某些存储池会设置自己的类型、而某些存储池会覆盖上面设置的默认值。
 
@@ -211,7 +211,7 @@ storage:
 ----
 以下StorageClass定义引用了上述虚拟池。使用 `parameters.selector` 字段中、每个StorageClass都会调用可用于托管卷的虚拟池。卷将在选定虚拟池中定义各个方面。
 
-第一个StorageClass (`solidfire-gold-four`)将映射到第一个虚拟池。这是唯一一个可通过提供金牌性能的池 `Volume Type QoS` 金牌。最后一个StorageClass (`solidfire-silver`)调用提供银牌性能的任何存储池。Astra Trident将决定选择哪个虚拟池、并确保满足存储要求。
+第一个StorageClass(`solidfire-gold-four`)将映射到第一个虚拟池。这是唯一一个提供金牌性能的池 `Volume Type QoS`。最后一个StorageClass(`solidfire-silver`)会调用任何提供银牌性能的存储池。Trident将决定选择哪个虚拟池、并确保满足存储要求。
 
 [listing]
 ----

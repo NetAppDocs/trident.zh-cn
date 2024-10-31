@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/trident-fsx-iam-role.html 
 keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident 
-summary: '通过将Asta三端存储与Amazon FSx for NetApp ONTAP 结合使用、您可以确保在Amazon Elastic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP 支持的块和文件永久性卷。' 
+summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以确保在Amazon Elic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP支持的块和文件永久性卷。' 
 ---
 = 创建IAM角色和AWS机密
 :hardbreaks:
@@ -21,7 +21,7 @@ NOTE: 要使用AWS IAM角色进行身份验证、您必须使用EKS部署Kubenet
 
 == 创建AWS机密管理器密钥
 
-以下示例将创建一个AWS机密管理器密钥、用于存储ASRA Trident CSI凭据：
+以下示例将创建一个AWS机密管理器密钥、用于存储Trident CSI凭据：
 
 `aws secretsmanager create-secret --name trident-secret --description "Trident CSI credentials" --secret-string "{"user":"vsadmin","password":"<svmpassword>"}"`
 

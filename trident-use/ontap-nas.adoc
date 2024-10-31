@@ -18,10 +18,7 @@ summary: 了解如何使用 ONTAP NAS 驱动程序配置 ONTAP 后端。
 
 == ONTAP NAS驱动程序详细信息
 
-Asta三端存储提供了以下NAS存储驱动程序、用于与ONTAP集群进行通信。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
-
-
-IMPORTANT: 如果您使用Astra Control进行保护、恢复和移动、请阅读 <<Astra Control驱动程序兼容性>>。
+Trident提供了以下NAS存储驱动程序来与ONTAP集群进行通信。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
 
 [cols="2, 1, 1, 2, 2"]
 |===
@@ -63,12 +60,6 @@ Rwo、ROX、rwx、RWOP
 ""、 `nfs`， `smb`
 
 |===
-
-
-=== Astra Control驱动程序兼容性
-
-Astra Control可为使用创建的卷提供无缝保护、灾难恢复和移动性(在Kubernetes集群之间移动卷) `ontap-nas`， `ontap-nas-flexgroup`，和 `ontap-san` 驱动程序。请参见 link:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html#replication-prerequisites["Astra Control复制前提条件"^] 了解详细信息。
-
 [WARNING]
 ====
 * 使用 ... `ontap-san-economy` 只有当永久性卷使用量计数预期高于时、才会显示此值 link:https://docs.netapp.com/us-en/ontap/volumes/storage-limits-reference.html["支持的ONTAP卷限制"^]。
@@ -81,11 +72,11 @@ Astra Control可为使用创建的卷提供无缝保护、灾难恢复和移动�
 
 == 用户权限
 
-Astra Trident应以ONTAP 或SVM管理员身份运行、通常使用 `admin` 集群用户或 `vsadmin` SVM用户或具有相同角色的其他名称的用户。
+Trident应以ONTAP或SVM管理员身份运行、通常使用集群用户 `vsadmin`或SVM用户、或者使用 `admin`具有相同角色的其他名称的用户。
 
-对于适用于NetApp ONTAP 的Amazon FSX部署、Astra Trident应使用集群以ONTAP 或SVM管理员身份运行 `fsxadmin` 用户或 `vsadmin` SVM用户或具有相同角色的其他名称的用户。。 `fsxadmin` 用户是集群管理员用户的有限替代用户。
+对于Amazon FSx for NetApp ONTAP部署、Trident应使用集群用户 `vsadmin`或SVM用户以ONTAP或SVM管理员身份运行、或者使用具有相同角色的其他名称的用户运行 `fsxadmin`。此 `fsxadmin`用户只能有限地替代集群管理员用户。
 
 
-NOTE: 如果使用 `limitAggregateUsage` 参数，则需要集群管理员权限。将适用于 NetApp ONTAP 的 Amazon FSx 与 Astra Trident 结合使用时， `limitAggregateUsage` 参数不适用于 `vsadmin` 和 `fsxadmin` 用户帐户。如果指定此参数，配置操作将失败。
+NOTE: 如果使用 `limitAggregateUsage`参数、则需要集群管理员权限。将Amazon FSx for NetApp ONTAP与Trident结合使用时、 `limitAggregateUsage`参数不适用于 `vsadmin`和 `fsxadmin`用户帐户。如果指定此参数，配置操作将失败。
 
 虽然可以在ONTAP中创建一个可以由三端驱动程序使用的限制性更强的角色、但我们不建议这样做。大多数新版本的 Trident 都会调用需要考虑的其他 API ，从而使升级变得困难且容易出错。

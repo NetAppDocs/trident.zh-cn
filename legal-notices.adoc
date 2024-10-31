@@ -45,4 +45,4 @@ link:https://www.netapp.com/company/legal/privacy-policy/["https://www.netapp.co
 
 == 开放源代码
 
-您可以在每个版本的通知文件中查看用于 Astra Trident 的 NetApp 软件中使用的第三方版权和许可证 https://github.com/NetApp/trident/[]。
+您可以在每个版本的notices文件中查看适用于Trident的NetApp软件中使用的第三方版权和许可证，网址为 https://github.com/NetApp/trident/[]。

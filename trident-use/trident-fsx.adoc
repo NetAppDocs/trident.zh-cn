@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-use/trident-fsx.html 
 keywords: Amazon FSx for NetApp ONTAP, FSx for ONTAP, deploy Trident, integrate Trident, Trident 
-summary: '通过将Asta三端存储与Amazon FSx for NetApp ONTAP 结合使用、您可以确保在Amazon Elastic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP 支持的块和文件永久性卷。' 
+summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以确保在Amazon Elic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP支持的块和文件永久性卷。' 
 ---
-= 将 Astra Trident 与适用于 NetApp ONTAP 的 Amazon FSX 结合使用
+= 将Trident与Amazon FSx for NetApp ONTAP结合使用
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -14,17 +14,17 @@ summary: '通过将Asta三端存储与Amazon FSx for NetApp ONTAP 结合使用�
 [role="lead"]
 https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["适用于 NetApp ONTAP 的 Amazon FSX"^] 是一种完全托管的AWS服务、可使客户启动和运行由NetApp ONTAP 存储操作系统提供支持的文件系统。借助适用于ONTAP 的FSx、您可以利用您熟悉的NetApp功能、性能和管理功能、同时利用在AWS上存储数据的简便性、灵活性、安全性和可扩展性。FSX for ONTAP 支持ONTAP 文件系统功能和管理API。
 
-您可以将适用于NetApp ONTAP 的Amazon FSX文件系统与Astra Trident集成、以确保在Amazon Elastic Kubernetes Service (EKS)中运行的Kubernetes集群可以配置由ONTAP 提供支持的块和文件永久性卷。
+您可以将Amazon FSx for NetApp ONTAP文件系统与Trident进行集成、以确保在Amazon Elic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP支持的块和文件永久性卷。
 
 文件系统是 Amazon FSX 中的主要资源，类似于内部部署的 ONTAP 集群。在每个 SVM 中，您可以创建一个或多个卷，这些卷是将文件和文件夹存储在文件系统中的数据容器。借助适用于 NetApp ONTAP 的 Amazon FSX ， Data ONTAP 将作为云中的托管文件系统提供。新的文件系统类型称为 * NetApp ONTAP * 。
 
-通过将 Astra Trident 与适用于 NetApp ONTAP 的 Amazon FSx 结合使用，您可以确保在 Amazon Elastic Kubernetes Service （ EKS ）中运行的 Kubernetes 集群可以配置由 ONTAP 备份的块和文件永久性卷。
+通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以确保在Amazon Elic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP支持的块和文件永久性卷。
 
 
 
 == 要求
 
-此外 link:../trident-get-started/requirements.html["Astra Trident 要求"]要将适用于ONTAP 的FSx与Astra Trident集成、您需要：
+除了link:../trident-get-started/requirements.html["Trident要求"]，要将FSx for ONTAP与Trident集成，您还需要：
 
 * 已安装 `kubectl` 的现有 Amazon EKS 集群或自管理 Kubernetes 集群。
 * 可从集群的工作节点访问的现有Amazon FSx for NetApp ONTAP文件系统和Storage Virtual Machine (SVM)。
@@ -42,14 +42,14 @@ NOTE: 确保按照Amazon Linux和Ubuntu所需的节点准备步骤进行操作 h
 * SMB卷：
 +
 ** SMB卷支持使用 `ontap-nas` 仅限驱动程序。
-** Asta Trident EKS加载项不支持SMB卷。
-** Astra Trident仅支持将SMB卷挂载到Windows节点上运行的Pod。有关详细信息、请参见 link:../trident-use/trident-fsx-storage-backend.html#prepare-to-provision-smb-volumes["准备配置SMB卷"] 。
+** Trident EKS加载项不支持SMB卷。
+** Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。有关详细信息、请参见 link:../trident-use/trident-fsx-storage-backend.html#prepare-to-provision-smb-volumes["准备配置SMB卷"] 。
 
 
-* 在Astra Drident 24.02之前的版本中、在启用了自动备份的Amazon FSx文件系统上创建的卷无法被Drident删除。要在Asta三端到高24.02或更高版本中阻止此问题描述、请指定 `fsxFilesystemID`、AWS `apiRegion`、AWS `apikey`和AWS `secretKey` 在AWS FSx for ONTAP的后端配置文件中。
+* 在Trident 24.02之前的版本中、Trident无法删除在已启用自动备份的Amazon FSx文件系统上创建的卷。要在Trident 24.02或更高版本中防止此问题，请在AWS FSx for ONTAP的后端配置文件中指定 `fsxFilesystemID`、AWS、 `apikey`AWS `apiRegion`和AWS `secretKey`。
 +
 
-NOTE: 如果要为Asta Trident指定IAM角色、则可以省略指定 `apiRegion`， `apiKey`，和 `secretKey` 将字段显式添加到Asta三端。有关详细信息，请参见 link:../trident-use/trident-fsx-examples.html["适用于ONTAP 的FSX配置选项和示例"]。
+NOTE: 如果要为Trident指定IAM角色，则可以省略为Trident明确指定 `apiRegion`、 `apiKey`和 `secretKey`字段。有关详细信息，请参阅 link:../trident-use/trident-fsx-examples.html["适用于ONTAP 的FSX配置选项和示例"]。
 
 
 
@@ -57,14 +57,14 @@ NOTE: 如果要为Asta Trident指定IAM角色、则可以省略指定 `apiRegion
 
 == 身份验证
 
-Astra Trident提供两种身份验证模式。
+Trident提供两种身份验证模式。
 
 * 基于凭据(建议)：将凭据安全地存储在AWS机密管理器中。您可以使用文件系统的用户、也可以使用 `fsxadmin` `vsadmin` 为SVM配置的用户。
 +
 
-WARNING: Astra Trident应作为运行 `vsadmin` SVM用户或具有相同角色的其他名称的用户。适用于NetApp ONTAP 的Amazon FSX具有 `fsxadmin` 有限更换ONTAP 的用户 `admin` 集群用户。我们强烈建议使用 `vsadmin` 使用Astra Trident。
+WARNING: Trident应以SVM用户身份运行、或者以具有相同角色的其他名称的用户身份运行 `vsadmin`。Amazon FSx for NetApp ONTAP的某个 `fsxadmin`用户只能有限地替代ONTAP `admin`集群用户。强烈建议将与Trident结合使用 `vsadmin`。
 
-* 基于证书： Astra Trident 将使用 SVM 上安装的证书与 FSX 文件系统上的 SVM 进行通信。
+* 基于证书：Trident将使用SVM上安装的证书与FSx文件系统上的SVM进行通信。
 
 
 有关启用身份验证的详细信息、请参阅适用于您的驱动程序类型的身份验证：

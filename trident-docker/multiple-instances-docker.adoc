@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/multiple-instances-docker.html 
-keywords: deploy, astra trident, docker, trident for docker, managed plugin, trident instances, alias 
-summary: 如果您希望同时提供多个存储配置，则需要多个 Astra Trident 实例。多个实例的关键在于，在主机上实例化 Trident 时，使用 -alias 选项和容器化插件或 -volume-driver 选项为其提供不同的名称。 
+keywords: deploy, Trident, docker, trident for docker, managed plugin, trident instances, alias 
+summary: 如果希望同时提供多个存储配置，则需要多个 Trident 实例。多个实例的关键在于，在主机上实例化 Trident 时，使用 -alias 选项和容器化插件或 -volume-driver 选项为其提供不同的名称。 
 ---
-= 管理多个 Astra Trident 实例
+= 管理多个Trident实例
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

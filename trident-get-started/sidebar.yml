@@ -2,11 +2,11 @@
 section: trident-get-started
 title: 入门
 entries:
-- title: 了解 Astra Trident
+- title: 了解Trident
   entries:
-  - title: Astra Trident概述
+  - title: Trident概述
     url: "/trident-get-started/intro.html"
-  - title: Astra Trident架构
+  - title: Trident架构
     url: "/trident-get-started/architecture.html"
   - title: 概念
     entries:

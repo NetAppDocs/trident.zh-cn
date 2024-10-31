@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/kubernetes-customize-deploy-tridentctl.html 
-keywords: deploy, astra trident, methods, operator, tridentctl, helm, attributes, customize 
-summary: 您可以使用Astra Trident安装程序自定义部署。 
+keywords: deploy, Trident, methods, operator, tridentctl, helm, attributes, customize 
+summary: 您可以使用Trident安装程序自定义部署。 
 ---
 = 自定义tridentctl安装
 :hardbreaks:
@@ -12,13 +12,16 @@ summary: 您可以使用Astra Trident安装程序自定义部署。
 
 
 [role="lead"]
-您可以使用Astra Trident安装程序自定义安装。
+您可以使用Trident安装程序自定义安装。
 
 
 
 == 了解安装程序
 
-使用Astra Trident安装程序可以自定义属性。例如、如果已将Trident映像复制到专用存储库、则可以使用指定映像名称 `--trident-image`。如果已将Trident映像以及所需的CSI sidecar映像复制到专用存储库、则最好使用指定该存储库的位置 `--image-registry` 交换机、其形式为 `<registry FQDN>[:port]`。
+通过Trident安装程序、您可以自定义属性。例如，如果已将Trident映像复制到私有存储库，则可以使用指定映像名称 `--trident-image`。如果您已将Trident映像以及所需的CSI副本映像复制到私有存储库，则最好使用开关指定该存储库的位置， `--image-registry`其格式为 `<registry FQDN>[:port]`。
+
+
+IMPORTANT: 在私有存储库中安装Trident时、如果 `--image-registry`使用交换机指定存储库位置、请勿在存储库路径中使用 `/netapp/`。例如： `./tridentctl install --image-registry <image-registry> -n <namespace>`
 
 如果您使用的是 Kubernetes 的分发版本，其中 `kubelet` 将其数据保存在通常的 ` /var/lib/kubelet` 以外的路径上，则可以使用 ` -kubelet-dir` 指定备用路径。
 

@@ -35,7 +35,7 @@ summary: 在配置Azure NetApp Files 后端之前、您需要确保满足以下�
 * `tenantID`， `clientID`，和 `clientSecret` 从 link:https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal["应用程序注册"^] 在 Azure Active Directory 中，具有足够的 Azure NetApp Files 服务权限。应用程序注册应使用以下任一项：
 +
 ** 所有者或贡献者角色 link:https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles["由Azure预定义"^]。
-** 答 link:https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal["自定义贡献者角色"] 订阅级别 (`assignableScopes`)、并具有以下权限、这些权限仅限于Astra Trident所需的权限。创建自定义角色后、 link:https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal["使用Azure门户分配角色"^]。
+** link:https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal["自定义贡献者角色"]订阅级别(`assignableScopes`的)具有以下权限，这些权限仅限于Trident所需的权限。创建自定义角色后，link:https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal["使用Azure门户分配角色"^]。
 +
 .自定义贡献者角色
 [%collapsible]
@@ -96,8 +96,8 @@ summary: 在配置Azure NetApp Files 后端之前、您需要确保满足以下�
 要创建SMB卷、您必须具有：
 
 * 已配置Active Directory并连接到Azure NetApp Files。请参见 link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/create-active-directory-connections["Microsoft：创建和管理Azure NetApp Files 的Active Directory连接"^]。
-* 一个Kubernetes集群、其中包含一个Linux控制器节点以及至少一个运行Windows Server 2022的Windows工作节点。Astra Trident仅支持将SMB卷挂载到Windows节点上运行的Pod。
-* 至少一个包含Active Directory凭据的Astra Trident密钥、以便Azure NetApp Files 可以向Active Directory进行身份验证。以生成密钥 `smbcreds`：
+* 一个Kubernetes集群、其中包含一个Linux控制器节点以及至少一个运行Windows Server 2022的Windows工作节点。Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。
+* 至少一个包含Active Directory凭据的Trident密钥、以便Azure NetApp Files可以向Active Directory进行身份验证。生成密钥 `smbcreds`：
 +
 [listing]
 ----

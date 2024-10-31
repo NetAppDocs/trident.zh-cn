@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-reco/security-luks.html 
 keywords: security, luks, linux unified key setup, encryption, key rotation, resizing, advanced encryption, rotation, key, import 
-summary: '您可以启用Linux统一密钥设置(LUKS)来对Astra Trident上的ONTAP SAN和ONTAP SAN经济卷进行加密。Astra Trident支持对已加密的LUKS卷进行卷大小调整和密钥(密码短语)轮换。' 
+summary: '您可以启用Linux统一密钥设置(Unified Key Setup、LKS)来对Trident上的ONTAP SAN和ONTAP SAN经济型卷进行加密。Trident支持对经过LUN加密的卷调整卷大小和密钥(密码短语)轮换。' 
 ---
 = Linux统一密钥设置(LUKS)
 :hardbreaks:
@@ -12,9 +12,9 @@ summary: '您可以启用Linux统一密钥设置(LUKS)来对Astra Trident上的O
 
 
 [role="lead"]
-您可以启用Linux统一密钥设置(LUKS)来对Astra Trident上的ONTAP SAN和ONTAP SAN经济卷进行加密。Astra Trident支持对LUKS加密卷执行密码短语轮换和卷扩展。
+您可以启用Linux统一密钥设置(Unified Key Setup、LKS)来对Trident上的ONTAP SAN和ONTAP SAN经济型卷进行加密。Trident支持对经过LUN加密的卷进行密码短语轮换和卷扩展。
 
-在Astra Trident中、LUKS加密的卷会按照建议使用AES-XTS-plain64 Cypher和模式 link:https://csrc.nist.gov/publications/detail/sp/800-38e/final["NIST"^]。
+在Trident中，根据的建议，经过LUN加密的卷使用AES-XTS-PLAN 64 cypher和模式link:https://csrc.nist.gov/publications/detail/sp/800-38e/final["NIST"^]。
 
 .开始之前
 * 工作节点必须安装加密设置2.1或更高版本(但低于3.0)。有关详细信息，请访问 link:https://gitlab.com/cryptsetup/cryptsetup["Gitlab：密码设置"^]。
@@ -96,7 +96,7 @@ LUKS加密的卷无法利用ONTAP 重复数据删除和数据压缩功能。
 
 == 用于导入LUKS卷的后端配置
 
-要导入LUKS卷、必须设置 `luksEncryption` to(`true` 在后端。。 `luksEncryption` Option可告知A作用 中的三端磁盘是否符合LUKS (`true`)或不符合LUKS (`false`)、如以下示例所示。
+要导入LUN卷、必须在后端将设置 `luksEncryption`为(`true`。该 `luksEncryption`选项会告诉Trident卷是符合LUN (`true`(兼容)还是不符合LUN (`false`(兼容)，如以下示例所示。
 
 [listing]
 ----
@@ -146,7 +146,7 @@ spec:
 WARNING: 请勿忘记密码短语、除非您确认任何卷、快照或密钥不再引用它。如果引用的密码短语丢失、您可能无法挂载此卷、并且数据将保持加密状态且无法访问。
 
 .关于此任务
-如果在指定新的LUKS密码短语后创建了挂载卷的POD、则会发生LUKS密码短语轮换。创建新的Pod时、Astra Trident会将卷上的LUKS密码短语与密钥中的活动密码短语进行比较。
+如果在指定新的LUKS密码短语后创建了挂载卷的POD、则会发生LUKS密码短语轮换。创建新Pod时、Trident会将卷上的LUN密码短语与密钥中的活动密码短语进行比较。
 
 * 如果卷上的密码短语与密钥中的活动密码短语不匹配、则会发生轮换。
 * 如果卷上的密码短语与密钥中的活动密码短语匹配、则会显示 `previous-luks-passphrase` 参数将被忽略。

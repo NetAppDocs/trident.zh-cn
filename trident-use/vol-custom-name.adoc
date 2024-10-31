@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/vol-custom-name.html 
 keywords: volumes, volume name, custom volume name, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion, 
-summary: 'Asta Trivent支持为创建的卷分配有意义的名称和标签、以便更容易识别、监控和管理这些卷、并轻松地将其映射到相应的Kubnetes资源(PVC)。' 
+summary: 'Trident支持为创建的卷分配有意义的名称和标签、以便更轻松地识别和监控这些卷、并轻松地将其映射到相应的Kubnetes资源(PVC)。' 
 ---
 = 自定义卷名称和标签
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: 'Asta Trivent支持为创建的卷分配有意义的名称和标签、�
 
 
 [role="lead"]
-使用Astra三端存储、您可以为创建的卷分配有意义的名称和标签。这有助于您识别卷并轻松地将其映射到其各自的Kubnetes资源(PVC)。您还可以在后端级别定义用于创建自定义卷名称和自定义标签的模板；您创建、导入或克隆的任何卷都将遵循这些模板。
+使用Trident、您可以为创建的卷分配有意义的名称和标签。这有助于您识别卷并轻松地将其映射到其各自的Kubnetes资源(PVC)。您还可以在后端级别定义用于创建自定义卷名称和自定义标签的模板；您创建、导入或克隆的任何卷都将遵循这些模板。
 
 
 
@@ -117,7 +117,7 @@ summary: 'Asta Trivent支持为创建的卷分配有意义的名称和标签、�
 
 . 对于卷导入、只有当现有卷具有特定格式的标签时、才会更新标签。例如： `{"provisioning":{"Cluster":"ClusterA", "PVC": "pvcname"}}`。
 . 对于受管卷导入、卷名称遵循后端定义中根级别定义的名称模板。
-. Asta三元组不支持使用带有存储前缀的分区运算符。
-. 如果这些模板不会生成唯一的卷名称、Asta Trandent将附加一些随机字符以创建唯一的卷名称。
-. 如果NAS经济型卷的自定义名称长度超过64个字符、Asta Trident将根据现有命名约定为卷命名。对于所有其他ONTAP驱动程序、如果卷名称超过名称限制、则卷创建过程将失败。
+. Trident不支持使用带有存储前缀的分区操作符。
+. 如果这些模板不会生成唯一的卷名称、则Trident将附加一些随机字符来创建唯一的卷名称。
+. 如果NAS经济型卷的自定义名称长度超过64个字符、则Trident将根据现有命名约定为卷命名。对于所有其他ONTAP驱动程序、如果卷名称超过名称限制、则卷创建过程将失败。
 

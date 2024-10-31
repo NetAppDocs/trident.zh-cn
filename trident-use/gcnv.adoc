@@ -12,17 +12,17 @@ summary:
 
 
 [role="lead"]
-现在、您可以将Google Cloud NetApp卷配置为Astra Trident的后端。您可以使用Google Cloud NetApp卷后端连接NFS卷。
+现在、您可以将Google Cloud NetApp卷配置为Trident的后端。您可以使用Google Cloud NetApp卷后端连接NFS卷。
 
 [listing]
 ----
- Google Cloud NetApp Volumes is a tech preview feature in Astra Trident 24.06.
+ Google Cloud NetApp Volumes is a tech preview feature in Trident 24.06.
 ----
 
 
 == Google Cloud NetApp卷驱动程序详细信息
 
-Asta Trident提供了 `google-cloud-netapp-volumes` 用于与集群通信的驱动程序。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
+Trident提供了 `google-cloud-netapp-volumes`用于与集群通信的驱动程序。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
 
 [cols="2, 1, 1, 2, 2"]
 |===
@@ -39,3 +39,67 @@ Rwo、ROX、rwx、RWOP
 `nfs`
 
 |===
+
+
+== 适用于GKE的云身份
+
+通过云身份、Kubnetes Pod可以通过作为工作负载身份进行身份验证来访问Google Cloud资源、而不是提供明确的Google Cloud凭据。
+
+要在Google Cloud中利用云身份、您必须：
+
+* 使用GKE部署的Kubbernetes集群。
+* 在GKE集群上配置的工作负载标识和oidc-uIssuer。
+* 已安装Asta Trident、其中包括 `cloudProvider`用于指定 `"GCP"`和 `cloudIdentity`指定工作负载标识的。
++
+[role="tabbed-block"]
+====
+.Trident 运算符
+--
+要使用Trident运算符安装Astra Trident，请编辑 `tridentorchestrator_cr.yaml`以将设置为，并将 `cloudIdentity`设置 `cloudProvider`为 `"GCP"` `iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com`。
+
+例如：
+
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  imagePullPolicy: IfNotPresent
+  cloudProvider: "GCP"
+  cloudIdentity: 'iam.gke.io/gcp-service-account: cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com'
+----
+--
+.掌舵
+--
+使用以下环境变量设置*云提供程序(CP)*和*云身份(CI)*标志的值：
+
+`export CP="GCP"`
+`export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
+
+以下示例将安装Astra Trident并使用环境变量设置 `cloudProvider`为GCP `$CP`，并使用环境变量 `$ANNOTATION`设置 `cloudIdentity`：
+
+[listing]
+----
+helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --set cloudIdentity="$ANNOTATION"
+----
+--
+.<code>tridentctl</code>
+--
+使用以下环境变量设置*云提供程序*和*云身份*标志的值：
+
+`export CP="GCP"`
+`export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
+
+以下示例将安装Asta Trident并将标志设置 `cloud-provider`为 `$CP`、和 `cloud-identity` `$ANNOTATION`：
+
+[listing]
+----
+tridentctl install --cloud-provider=$CP --cloud-identity="$ANNOTATION" -n trident
+----
+--
+====
+

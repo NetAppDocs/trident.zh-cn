@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/deploy-docker.html 
-keywords: deploy, astra trident, trident for docker, docker 
-summary: 适用于Docker的A作用 是直接与适用于NetApp存储平台的Docker生态系统集成。它支持从存储平台到 Docker 主机的存储资源配置和管理，并提供一个框架，用于在未来添加其他平台。 
+keywords: deploy, Trident, trident for docker, docker 
+summary: 适用于Docker的Trident可与适用于NetApp存储平台的Docker生态系统直接集成。它支持从存储平台到 Docker 主机的存储资源配置和管理，并提供一个框架，用于在未来添加其他平台。 
 ---
-= 部署 Astra Trident
+= 部署Trident
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,12 +12,12 @@ summary: 适用于Docker的A作用 是直接与适用于NetApp存储平台的Doc
 
 
 [role="lead"]
-适用于Docker的A作用 是直接与适用于NetApp存储平台的Docker生态系统集成。它支持从存储平台到 Docker 主机的存储资源配置和管理，并提供一个框架，用于在未来添加其他平台。
+适用于Docker的Trident可与适用于NetApp存储平台的Docker生态系统直接集成。它支持从存储平台到 Docker 主机的存储资源配置和管理，并提供一个框架，用于在未来添加其他平台。
 
-Astra Trident 的多个实例可以同时在同一主机上运行。这样可以同时连接到多个存储系统和存储类型，并能够自定义用于 Docker 卷的存储。
+多个Trident实例可以同时在同一主机上运行。这样可以同时连接到多个存储系统和存储类型，并能够自定义用于 Docker 卷的存储。
 
 .您需要的内容
-请参见 link:prereqs-docker.html["部署的前提条件"]。确保满足前提条件后，即可部署 Astra Trident 。
+请参见link:prereqs-docker.html["部署的前提条件"]。确保满足这些前提条件后、即可部署Trident。
 
 
 
@@ -25,7 +25,7 @@ Astra Trident 的多个实例可以同时在同一主机上运行。这样可以
 
 .开始之前
 
-NOTE: 如果您在传统守护进程方法中使用了 Astra Trident 之前的 Docker 1.13/ 17.03 ，请确保在使用受管插件方法之前停止 Astra Trident 进程并重新启动 Docker 守护进程。
+NOTE: 如果在传统守护进程方法中使用的是Trident Docker 1.3/17.03之前的版本、请确保先停止Trident进程并重新启动Docker守护进程、然后再使用托管插件方法。
 
 . 停止所有正在运行的实例：
 +
@@ -85,13 +85,13 @@ EOF
 
 
 
-. 使用受管插件系统启动 Astra Trident 。替换 `<version>` 您正在使用的插件版本(xxx.xx.x)。
+. 使用受管插件系统启动Trident。请替换 `<version>`为您正在使用的插件版本(xxx.xx.x)。
 +
 [listing]
 ----
 docker plugin install --grant-all-permissions --alias netapp netapp/trident-plugin:<version> config=myConfigFile.json
 ----
-. 开始使用 Astra Trident 消耗已配置系统中的存储。
+. 开始使用Trident使用已配置系统中的存储。
 +
 .. 创建名为 "firstVolume" 的卷：
 +
@@ -147,8 +147,8 @@ curl -fsSL https://get.docker.com/ | sh
 +
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v24.10.0/trident-installer-24.06.0.tar.gz
-tar zxf trident-installer-24.06.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v24.10.0/trident-installer-24.10.0.tar.gz
+tar zxf trident-installer-24.10.0.tar.gz
 ----
 .. 移动到托箱路径中的某个位置：
 +
@@ -219,7 +219,7 @@ docker volume rm trident_2
 
 
 
-== 在系统启动时启动 Astra Trident
+== 在系统启动时启动Trident
 
 有关基于系统d的系统的示例单元文件、请参见 `contrib/trident.service.example` 在Git repo.要对RHEL使用此文件、请执行以下操作：
 

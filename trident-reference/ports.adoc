@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-reference/ports.html 
-keywords: astra trident, port, ports 
-summary: 详细了解 Astra Trident 所通过的端口。 
+keywords: Trident, port, ports 
+summary: 详细了解Trident通信所使用的端口。 
 ---
-= Astra Trident 端口
+= Trident端口
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,13 +12,13 @@ summary: 详细了解 Astra Trident 所通过的端口。
 
 
 [role="lead"]
-详细了解Astra Trident用于通信的端口。
+详细了解Trident用于通信的端口。
 
 
 
-== Astra Trident 端口
+== Trident端口
 
-Astra Trident 通过以下端口进行通信：
+Trident通过以下端口进行通信：
 
 [cols="2,4"]
 |===

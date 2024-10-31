@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/volumes-docker.html 
-keywords: create volumes, astra trident, trident for docker, docker, docker volume 
-summary: '要创建卷，请根据需要使用标准的 `docker volume` 命令以及指定的 Astra Trident 驱动程序名称。' 
+keywords: create volumes, Trident, trident for docker, docker, docker volume 
+summary: '要创建卷、请使用标准 `docker volume`命令以及根据需要指定的Trident驱动程序名称。' 
 ---
 = 使用卷
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: '要创建卷，请根据需要使用标准的 `docker volume` 命令�
 
 
 [role="lead"]
-您可以根据需要使用标准的 `docker volume` 命令以及指定的 Astra Trident 驱动程序名称轻松创建，克隆和删除卷。
+您可以使用标准命令以及根据需要指定的Trident驱动程序名称轻松创建、克隆和删除卷 `docker volume`。
 
 
 
@@ -24,7 +24,7 @@ summary: '要创建卷，请根据需要使用标准的 `docker volume` 命令�
 ----
 docker volume create -d netapp --name firstVolume
 ----
-* 使用特定的 Astra Trident 实例创建卷：
+* 创建具有特定Trident实例的卷：
 +
 [listing]
 ----
@@ -62,13 +62,13 @@ IMPORTANT: 使用 `solidfire-san` 驱动程序时，上述示例将删除并清�
 
 
 
-执行以下步骤以升级适用于 Docker 的 Astra Trident 。
+执行以下步骤升级适用于Docker的Trident。
 
 
 
 == 克隆卷
 
-使用 `ontap-nas` ， `ontap-san` ， `solidfire-san` 和 `GCP-CVS 存储驱动程序` 时， Astra Trident 可以克隆卷。使用 `ontap-nas-flexgroup` 或 `ontap-nas-economy-经济` 驱动程序时，不支持克隆。从现有卷创建新卷将创建新快照。
+使用 `ontap-nas`、、 `ontap-san` `solidfire-san`和 `gcp-cvs storage drivers`时，Trident可以克隆卷。使用或 `ontap-nas-economy`驱动程序时 `ontap-nas-flexgroup`、不支持克隆。从现有卷创建新卷将创建新快照。
 
 * 检查卷以枚举快照：
 +
@@ -130,4 +130,4 @@ docker volume rm volFromSnap
 
 == 访问外部创建的卷
 
-如果容器没有分区，并且 Astra Trident 支持其文件系统（例如： A `ext4` 格式的 ` /dev/sdc1` 将无法通过 Astra Trident 访问），则可以使用 Trident * only * 通过容器访问外部创建的块设备（或其克隆）。
+如果容器没有分区、并且Trident支持其文件系统、则您可以使用Trident *仅*通过容器访问外部创建的块设备(或其克隆)(例如、 `ext4`无法通过Trident访问格式化的 `/dev/sdc1`)。

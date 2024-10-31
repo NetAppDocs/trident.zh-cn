@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-docker/collect-logs-docker.html 
-keywords: deploy, astra trident, trident for docker, docker, logs, binary, managed plugin 
+keywords: deploy, Trident, trident for docker, docker, logs, binary, managed plugin 
 summary: 您可以收集日志以帮助进行故障排除。收集日志的方法因运行 Docker 插件的方式而异。 
 ---
 = 收集日志
@@ -19,7 +19,7 @@ summary: 您可以收集日志以帮助进行故障排除。收集日志的方�
 == 收集日志以进行故障排除
 
 .步骤
-. 如果您使用建议的受管插件方法（例如，使用 `docker plugin` 命令）运行 Astra Trident ，请按如下所示查看它们：
+. 如果您正在使用建议的托管插件方法(即使用命令)运行Trident、请按如下所示查看这些插件 `docker plugin`：
 +
 [listing]
 ----

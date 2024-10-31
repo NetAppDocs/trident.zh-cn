@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-reference/rest-api.html 
 keywords: rest api, get, post, json, object, backends 
-summary: 如果您希望与 Astra Trident 的 REST API 进行交互，则可以直接使用 REST 端点。 
+summary: 如果您希望与Trident的REST API进行交互、则可以直接使用REST端点。 
 ---
-= Astra Trident REST API
+= Trident REST API
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,21 +12,21 @@ summary: 如果您希望与 Astra Trident 的 REST API 进行交互，则可以�
 
 
 [role="lead"]
-同时 link:tridentctl.html["tridentctl 命令和选项"] 是与Astra Trident REST API交互的最简单方式、您可以根据需要直接使用REST端点。
+虽然link:tridentctl.html["tridentctl 命令和选项"]这是与Trident REST API交互的最简单方式、但您也可以根据需要直接使用REST端点。
 
 
 
 == 何时使用REST API
 
-REST API适用于在非Kubernetes部署中使用Astra Trident作为独立二进制文件的高级安装。
+对于在非Kubnetes部署中使用Trident作为独立二进制文件的高级安装、REST API非常有用。
 
-为了提高安全性、我们使用了Astra Trident `REST API` 默认情况下、在Pod内部运行时、仅限于localhost。要更改此行为、您需要设置Astra Trident `-address` 参数。
+为了提高安全性、默认情况下、在Pod中运行时、Trident `REST API`仅限于本地主机。要更改此行为、您需要在Pod配置中设置Trident的 `-address`参数。
 
 
 
 == 使用REST API
 
-有关如何调用这些API的示例、请通过调试 (`-d`)标志。有关详细信息，请参见 link:../trident-managing-k8s/tridentctl.html["使用tridentct利 管理Astra三端"]。
+有关如何调用这些API的示例，请传递debug (`-d`)标志。有关详细信息，请参阅 link:../trident-managing-k8s/tridentctl.html["使用trdentctrd管理Trident"]。
 
 API 的工作原理如下：
 
@@ -45,7 +45,7 @@ API 的工作原理如下：
 `POST <trident-address>/trident/v1/<object-type>`:: 创建指定类型的对象。
 +
 --
-* 需要为要创建的对象配置 JSON 。有关每种对象类型的规范、请参见 link:../trident-managing-k8s/tridentctl.html["使用tridentct利 管理Astra三端"]。
+* 需要为要创建的对象配置 JSON 。有关每种对象类型的规范，请参见link:../trident-managing-k8s/tridentctl.html["使用trdentctrd管理Trident"]。
 * 如果对象已存在，则行为会有所不同：后端更新现有对象，而所有其他对象类型将使操作失败。
 
 
@@ -60,7 +60,7 @@ API 的工作原理如下：
 +
 --
 
-NOTE: 与后端或存储类关联的卷将继续存在；必须单独删除这些卷。有关详细信息，请参见 link:../trident-managing-k8s/tridentctl.html["使用tridentct利 管理Astra三端"]。
+NOTE: 与后端或存储类关联的卷将继续存在；必须单独删除这些卷。有关详细信息，请参阅 link:../trident-managing-k8s/tridentctl.html["使用trdentctrd管理Trident"]。
 
 --
 
