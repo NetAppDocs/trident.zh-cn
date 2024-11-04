@@ -172,6 +172,9 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 
 
 | `nameTemplate` | 用于创建自定义卷名称的模板。 | "" 
+
+
+| `denyNewVolumePools` | 限制 `ontap-nas-economy`后端创建新的FlexVol卷以包含其qtrees。仅会使用已有的FlexVol配置新的PV. |  
 |===
 
 NOTE: 将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。
