@@ -93,10 +93,7 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 | "" 
 
 
-| `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为qtree和LUN以及管理的卷的最大大小 `qtreesPerFlexvol` 选项用于自定义每个FlexVol 的最大qtree数。 | ""(默认情况下不强制实施) 
-
-
-| `lunsPerFlexvol` | 每个 FlexVol 的最大 LUN 数，必须在 50 ， 200 范围内 | "100" 
+| `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为qtrees管理的卷的大小上限、并且此 `qtreesPerFlexvol`选项允许自定义每个FlexVol的qtrees的最大数量。 | ""(默认情况下不强制实施) 
 
 
 | `debugTraceFlags` | 故障排除时要使用的调试标志。例如、｛"api"：false、"METHO"：true｝
@@ -120,6 +117,9 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 
 
 | `limitVolumePoolSize` | 在qtree-NAS ONTAP经济型后端使用qtrees时可请求的最大FlexVol大小。 | "" （默认情况下不强制实施） 
+
+
+| `denyNewVolumePools` | 限制 `ontap-nas-economy`后端创建新的FlexVol卷以包含其qtrees。仅会使用已有的FlexVol配置新的PV. |  
 |===
 
 
@@ -132,7 +132,7 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 | 参数 | Description | Default 
 
 
-| `spaceAllocation` | LUN 的空间分配 | "正确" 
+| `spaceAllocation` | qtrees的空间分配 | "正确" 
 
 
 | `s页面预留` | 空间预留模式；"无"(精简)或"卷"(厚) | "无" 
@@ -172,9 +172,6 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 
 
 | `nameTemplate` | 用于创建自定义卷名称的模板。 | "" 
-
-
-| `denyNewVolumePools` | 限制 `ontap-nas-economy`后端创建新的FlexVol卷以包含其qtrees。仅会使用已有的FlexVol配置新的PV. |  
 |===
 
 NOTE: 将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。

@@ -28,7 +28,7 @@ summary: 请按照此处列出的建议确保Trident安装安全。
 
 Trident支持对ONTAP SAN工作负载进行基于CHAP的身份验证(使用 `ontap-san`和 `ontap-san-economy`驱动程序)。NetApp建议对Trident使用双向CHAP在主机和存储后端之间进行身份验证。
 
-对于使用SAN存储驱动程序的ONTAP后端，Trident可以通过设置双向CHAP并管理CHAP用户名和机密 `tridentctl`。要了解Trident如何在ONTAP后端配置CHAP、请参见link:../trident-use/ontap-san-prep.html[""^]。
+对于使用SAN存储驱动程序的ONTAP后端，Trident可以通过设置双向CHAP并管理CHAP用户名和机密 `tridentctl`。要了解Trident如何在ONTAP后端配置CHAP、请参见link:../trident-use/ontap-san-prep.html["准备使用ONTAP SAN驱动程序配置后端"^]。
 
 
 

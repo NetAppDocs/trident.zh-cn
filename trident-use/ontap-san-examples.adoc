@@ -97,7 +97,7 @@ NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法�
 | `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。如果您使用的是Amazon FSx for NetApp ONTAP后端，请勿指定 `limitAggregateUsage`。提供的和 `vsadmin`不包含使用Trident检索聚合使用情况并对其进行限制所需的 `fsxadmin`权限。 | "" （默认情况下不强制实施） 
 
 
-| `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为qtree和LUN管理的卷的最大大小。 | ""(默认情况下不强制实施) 
+| `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为LUN管理的卷的大小上限。 | ""(默认情况下不强制实施) 
 
 
 | `lunsPerFlexvol` | 每个 FlexVol 的最大 LUN 数，必须在 50 ， 200 范围内 | `100` 
@@ -125,6 +125,12 @@ NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法�
 * `ontap-san` `ontap-san-economy`仅支持和驱动程序。*
  a| 
 
+
+
+| `limitVolumePoolSize` | 在LUS-SAN-Economy后端使用ONTAP时可要求的最大FlexVol大小。 | "" （默认情况下不强制实施） 
+
+
+| `denyNewVolumePools` | 限制 `ontap-san-economy`后端创建新的FlexVol卷以包含其LUN。仅会使用已有的FlexVol配置新的PV. |  
 |===
 
 
@@ -184,12 +190,6 @@ NVMe/TCP不支持使用此类数据加密。 | ""
 
 
 | `nameTemplate` | 用于创建自定义卷名称的模板。 | "" 
-
-
-| `limitVolumePoolSize` | 在LUS-SAN-Economy后端使用ONTAP时可要求的最大FlexVol大小。 | "" （默认情况下不强制实施） 
-
-
-| `denyNewVolumePools` | 限制 `ontap-san-economy`后端创建新的FlexVol卷以包含其LUN。仅会使用已有的FlexVol配置新的PV. |  
 |===
 
 
