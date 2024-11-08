@@ -1,0 +1,175 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-cli.html 
+keywords: trident, protect, command line utility, cli, netapp, custom, resources 
+summary: 您可以使用protect c结合 命令创建Trident Protect自定义资源并与之进行交互。 
+---
+= 安装Trident Protect命令行界面插件
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用Trident Protect命令行插件(Trident实用程序的扩展)创建Trident Protect `tridentctl`自定义资源(CRS)并与之交互。
+
+
+
+== 安装Trident Protect命令行界面插件
+
+在使用命令行实用程序之前、您需要将其安装在用于访问集群的计算机上。根据您的计算机使用的是x64 CPU还是ARM CPU、执行以下步骤。
+
+[role="tabbed-block"]
+====
+.下载适用于Linux amd64 CPU的插件
+--
+. 下载Trident Protect命令行界面插件：
++
+[source, console]
+----
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/24.10.0/tridentctl-protect-linux-amd64
+----
+
+
+--
+.下载适用于Linux ARM64 CPU的插件
+--
+. 下载Trident Protect命令行界面插件：
++
+[source, console]
+----
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/24.10.0/tridentctl-protect-linux-arm64
+----
+
+
+--
+.下载适用于Mac amd64 CPU的插件
+--
+. 下载Trident Protect命令行界面插件：
++
+[source, console]
+----
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/24.10.0/tridentctl-protect-macos-amd64
+----
+
+
+--
+.下载适用于Mac ARM64 CPU的插件
+--
+. 下载Trident Protect命令行界面插件：
++
+[source, console]
+----
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/24.10.0/tridentctl-protect-macos-arm64
+----
+
+
+--
+====
+. 为二进制文件启用执行权限：
++
+[source, console]
+----
+chmod +x tridentctl-protect
+----
+. 将插件二进制文件复制到您选择的路径：
++
+[source, console]
+----
+cp ./tridentctl-protect ~/bin/
+----
+. (可选)要全局安装二进制文件、请将插件二进制文件复制到全局路径。例如： `/usr/bin`或 `/usr/local/bin`(您可能需要提升Privileges)：
++
+[source, console]
+----
+cp ./tridentctl-protect /usr/local/bin/
+----
+
+
+
+
+== 查看Trident命令行界面插件帮助
+
+您可以使用内置插件的帮助功能获取有关插件功能的详细帮助：
+
+.步骤
+. 使用帮助功能查看使用指南：
++
+[source, console]
+----
+tridentctl protect help
+----
+
+
+
+
+== 启用命令自动完成
+
+安装Trident Protect命令行界面插件后、您可以对某些命令启用自动完成。
+
+[role="tabbed-block"]
+====
+.为bash shell启用自动完成
+--
+. 下载完成脚本：
++
+[source, console]
+----
+curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/24.10.0/tridentctl-completion.bash
+----
+. 在主目录中创建一个新目录以包含该脚本：
++
+[source, console]
+----
+md ~/.bash/completions
+----
+. 将下载的脚本移动到 `~/.bash/completions`目录：
++
+[source, console]
+----
+mv tridentctl-completion.bash ~/.bash/completions/
+----
+. 将以下行添加到 `~/.bashrc`主目录中的文件：
++
+[source, console]
+----
+source ~/.bash/completions/tridentctl-completion.bash
+----
+
+
+--
+.为Z shell启用自动完成
+--
+. 下载完成脚本：
++
+[source, console]
+----
+curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/24.10.0/tridentctl-completion.zsh
+----
+. 在主目录中创建一个新目录以包含该脚本：
++
+[source, console]
+----
+md ~/.zsh/completions
+----
+. 将下载的脚本移动到 `~/.zsh/completions`目录：
++
+[source, console]
+----
+mv tridentctl-completion.zsh ~/.zsh/completions/
+----
+. 将以下行添加到 `~/.zprofile`主目录中的文件：
++
+[source, console]
+----
+source ~/.zsh/completions/tridentctl-completion.zsh
+----
+
+
+--
+====
+.结果
+下次shell登录时、您可以将命令自动完成与trdentctrL保护插件结合使用。

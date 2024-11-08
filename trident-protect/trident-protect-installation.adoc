@@ -1,0 +1,158 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-installation.html 
+keywords: install, trident, protect, requirements, registry 
+summary: 如果您的环境符合要求、则可以按照以下步骤安装Trident Protect。 
+---
+= 安装和配置Trident Protect
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您的环境满足Trident Protect的要求、您可以按照以下步骤在集群上安装Trident Protect。您可以从NetApp获取Trident Protect、也可以从您自己的私人注册表安装它。如果集群无法访问Internet、则从专用注册表进行安装非常有用。
+
+[role="tabbed-block"]
+====
+.安装Trident Protect from NetApp
+--
+. 添加Trident Helm存储库：
++
+[source, console]
+----
+helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart/index.yaml
+----
+. 使用Helm安装Trident Protect。替换 `<name_of_cluster>`为集群名称、此名称将分配给集群并用于标识此集群中的备份和快照：
++
+[source, console]
+----
+helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.0
+----
++
+[source, console]
+----
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect
+----
+. (可选)冻结VM。如果您对SnapMirror使用KubeVirt支持、则冻结VM有助于有效管理这些虚拟机：
++
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
+----
++
+
+NOTE: 要使冻结功能正常运行、您需要设置虚拟化。在此设置后部署的VM包括冻结和取消冻结所需的二进制文件。要了解有关设置虚拟化的详细信息，请参见link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["安装OpenShift虚拟化"^]。
+
+
+
+--
+.从专用注册表安装Trident Protect
+--
+如果您的Trident集群无法访问Internet、则可以从专用映像注册表安装Kubbernetes Protect。在以下示例中、将括号中的值替换为您环境中的信息：
+
+. 将以下映像提取到本地计算机、更新标记、然后将其推送到您的私人注册表：
++
+[source, console]
+----
+netapp/controller:24.10.0
+netapp/restic:24.10.0
+netapp/kopia:24.10.0
+netapp/trident-autosupport:24.10.0
+netapp/exechook:24.10.0
+netapp/resourcebackup:24.10.0
+netapp/resourcerestore:24.10.0
+bitnami/kubectl:1.30.2
+kubebuilder/kube-rbac-proxy:v0.16.0
+----
++
+例如：
+
++
+[source, console]
+----
+docker pull netapp/controller:24.10.0
+----
++
+[source, console]
+----
+docker tag netapp/controller:24.10.0 <private-registry-url>/controller:24.10.0
+----
++
+[source, console]
+----
+docker push <private-registry-url>/controller:24.10.0
+----
+. 创建Trident Protect系统命名空间：
++
+[source, console]
+----
+kubectl create ns trident-protect
+----
+. 登录到注册表：
++
+[source, console]
+----
+helm registry login <private-registry-url> -u <account-id> -p <api-token>
+----
+. 创建用于私人注册表身份验证的拉机密：
++
+[source, console]
+----
+kubectl create secret docker-registry regcred --docker-username=<registry-username> --docker-password=<api-token> -n trident-protect --docker-server=<private-registry-url>
+----
+. 添加Trident Helm存储库：
++
+[source, console]
+----
+helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart/index.yaml
+----
+. 创建一个名为的文件 `protectValues.yaml`、其中包含以下Trident保护设置：
++
+[source, yaml]
+----
+image:
+  registry: <private-registry-url>
+imagePullSecrets:
+- name: regcred
+controller:
+  image:
+    registry: <private-registry-url>
+rbacProxy:
+  image:
+    registry: <private-registry-url>
+crCleanup:
+  imagePullSecrets:
+  - name: regcred
+webhooksCleanup:
+  imagePullSecrets:
+  - name: regcred
+----
+. 使用Helm安装Trident Protect：
++
+[source, console]
+----
+helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.0
+----
++
+[source, console]
+----
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect -f protectValues.yaml
+----
+. (可选)冻结VM。如果您对SnapMirror使用KubeVirt支持、则冻结VM有助于有效管理这些虚拟机：
++
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
+----
++
+
+NOTE: 要使冻结功能正常运行、您需要设置虚拟化。在此设置后部署的VM包括冻结和取消冻结所需的二进制文件。要了解有关设置虚拟化的详细信息，请参见link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["安装OpenShift虚拟化"^]。
+
+
+
+--
+====

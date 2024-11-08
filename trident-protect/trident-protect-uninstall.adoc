@@ -1,0 +1,40 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-uninstall.html 
+keywords: trident, protect, netapp, uninstall, full version 
+summary: 如果您要从产品的试用版升级到完整版本、则可能需要删除Trident Protect组件。 
+---
+= 卸载Trident Protect
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+如果您要从产品的试用版升级到完整版本、则可能需要删除Trident Protect组件。
+
+要删除Trident Protect、请执行以下步骤。
+
+.步骤
+. 删除Trident Protect CR文件：
++
+[source, console]
+----
+helm uninstall trident-protect-crds
+----
+. 删除Trident保护：
++
+[source, console]
+----
+helm uninstall -n trident-protect trident-protect
+----
+. 删除Trident Protect命名空间：
++
+[source, console]
+----
+kubectl delete ns trident-protect
+----
+

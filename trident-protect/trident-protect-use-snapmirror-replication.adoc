@@ -1,0 +1,510 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-use-snapmirror-replication.html 
+keywords: trident, protect, netapp, snapmirror, data, asynchronous, replication, clusters 
+summary: 通过使用Trident Protect、您可以使用NetApp SnapMirror技术的异步复制功能将数据和应用程序更改从一个存储后端复制到另一个存储后端、复制到同一集群上或复制到不同集群之间。 
+---
+= 使用NetApp SnapMirror复制应用程序
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+通过使用Trident Protect、您可以使用NetApp SnapMirror技术的异步复制功能将数据和应用程序更改从一个存储后端复制到另一个存储后端、复制到同一集群上或复制到不同集群之间。
+
+
+
+== 设置复制关系
+
+设置复制关系涉及以下方面：
+
+* 选择希望Trident Protect创建应用程序快照的频率(包括应用程序的Kubbernetes资源以及应用程序每个卷的卷快照)
+* 选择复制计划(包括Kubbernetes资源以及永久性卷数据)
+* 设置创建快照的时间
+
+
+.步骤
+. 在源集群上为源应用程序创建AppVault。根据您的存储提供程序、修改中的示例link:trident-protect-appvault-custom-resources.html["AppVault自定义资源"]以适合您的环境：
++
+[role="tabbed-block"]
+====
+.使用CR创建AppVault
+--
+.. 创建自定义资源(CR)文件并将其命名(例如 `trident-protect-appvault-primary-source.yaml`)。
+.. 配置以下属性：
++
+*** * metadata.name*:(_required__) AppVault自定义资源的名称。请记下您选择的名称、因为复制关系所需的其他CR文件会引用此值。
+*** *。spec.providerConfig*:(_required__)存储使用指定提供程序访问AppVault所需的配置。为您的提供商选择一个BucketName和任何其他必要的详细信息。请记下所选的值、因为复制关系所需的其他CR文件会引用这些值。有关其他提供商的AppVault CRS示例、请参见link:trident-protect-appvault-custom-resources.html["AppVault自定义资源"]。
+*** *。spec.providerCredentials*:(_required__)存储对使用指定提供程序访问AppVault所需的任何凭据的引用。
++
+**** *。spec.providerCredentials.valueFromSecret*:(_required__)表示凭据值应来自密钥。
++
+***** *key*:(_required_)要从中选择的密钥的有效密钥。
+***** *name*:(_required_)包含此字段值的机密的名称。必须位于同一命名空间中。
+
+
+**** * spec.providerCredentials.secretAccessKey*:(_required__)用于访问提供程序的访问密钥。名称*应与*。spec.providerCredentials.valueFromSecret.name*。
+
+
+*** *。spec.providerType*:(_required__)用于确定提供备份的内容；例如、NetApp ONTAP S3、通用S3、Google Cloud或Microsoft Azure。可能值：
++
+**** aws
+**** azure
+**** GCP
+**** 常规S3
+**** ONTAP S3
+**** StorageGRID S3
+
+
+
+
+.. 使用正确的值填充文件后 `trident-protect-appvault-primary-source.yaml` 、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-appvault-primary-source.yaml -n trident-protect
+----
+
+
+--
+.使用命令行界面创建AppVault
+--
+.. 创建AppVault、将括号中的值替换为您环境中的信息：
++
+[source, console]
+----
+tridentctl protect create vault Azure <vault-name> --account <account-name> --bucket <bucket-name> --secret <secret-name>
+----
+
+
+--
+====
+. 创建源应用程序CR：
++
+[role="tabbed-block"]
+====
+.使用CR创建源应用程序
+--
+.. 创建自定义资源(CR)文件并将其命名(例如 `trident-protect-app-source.yaml`)。
+.. 配置以下属性：
++
+*** *metadata.name*:(_required__)应用程序自定义资源的名称。请记下您选择的名称、因为复制关系所需的其他CR文件会引用此值。
+*** *。spec.includedNamespaces*:(_required__)一个由命名区域和关联标签组成的数组。使用命名空间名称、并可选择通过标签缩小命名空间的范围、以指定此处列出的命名空间中存在的资源。应用程序命名空间必须属于此数组。
++
+*示例YAML*：
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: maria
+  namespace: my-app-namespace
+spec:
+  includedNamespaces:
+    - namespace: maria
+      labelSelector: {}
+----
+
+
+.. 使用正确的值填充文件后 `trident-protect-app-source.yaml` 、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-app-source.yaml -n my-app-namespace
+----
+
+
+--
+.使用命令行界面创建源应用程序
+--
+.. 创建源应用程序。例如：
++
+[source, console]
+----
+tridentctl protect create app maria --namespaces maria -n my-app-namespace
+----
+
+
+--
+====
+. (可选)为源应用程序创建快照。此快照将用作目标集群上应用程序的基础。如果跳过此步骤、则需要等待运行下一个计划快照、以便获得最新快照。
++
+[role="tabbed-block"]
+====
+.使用CR创建快照
+--
+.. 为源应用程序创建复制计划：
++
+... 创建自定义资源(CR)文件并将其命名(例如 `trident-protect-schedule.yaml`)。
+... 配置以下属性：
++
+**** * metadata.name*:(_required__)计划自定义资源的名称。
+**** *spec.appVaultRef*：(_required_)此值必须与源应用程序的AppVault的metadata.name字段匹配。
+**** *spec.ApplicationRef*：(_required_)此值必须与源应用程序CR的metadata.name字段匹配。
+**** *spec.backup놣 쇴*：(_required_)此字段为必填字段、且值必须设置为0。
+**** *spec.enabled *：必须设置为true。
+**** *。spec.granularity*:必须设置为 `Custom`。
+**** *spec.rec发 规则*：定义UTC时间的开始日期和重复间隔。
+**** *spec.snapshot놣 쇴*：必须设置为2。
++
+YAML示例：
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Schedule
+metadata:
+  name: appmirror-schedule-0e1f88ab-f013-4bce-8ae9-6afed9df59a1
+  namespace: my-app-namespace
+spec:
+  appVaultRef: generic-s3-trident-protect-src-bucket-04b6b4ec-46a3-420a-b351-45795e1b5e34
+  applicationRef: maria
+  backupRetention: "0"
+  enabled: true
+  granularity: custom
+  recurrenceRule: |-
+    DTSTART:20220101T000200Z
+    RRULE:FREQ=MINUTELY;INTERVAL=5
+  snapshotRetention: "2"
+----
+
+
+... 使用正确的值填充文件后 `trident-protect-schedule.yaml` 、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-schedule.yaml -n my-app-namespace
+----
+
+
+
+
+--
+.使用命令行界面创建快照
+--
+.. 创建快照、将括号中的值替换为您环境中的信息。例如：
++
+[source, console]
+----
+tridentctl protect create snapshot <my_snapshot_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot>
+----
+
+
+--
+====
+. 在目标集群上创建一个与源集群上应用的AppVault CR相同的源应用程序AppVault CR，并将其命名为(例如 `trident-protect-appvault-primary-destination.yaml`)。
+. 应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-appvault-primary-destination.yaml -n my-app-namespace
+----
+. 在目标集群上为目标应用程序创建AppVault。根据您的存储提供程序、修改中的示例link:trident-protect-appvault-custom-resources.html["AppVault自定义资源"]以适合您的环境：
++
+.. 创建自定义资源(CR)文件并将其命名(例如 `trident-protect-appvault-secondary-destination.yaml`)。
+.. 配置以下属性：
++
+*** * metadata.name*:(_required__) AppVault自定义资源的名称。请记下您选择的名称、因为复制关系所需的其他CR文件会引用此值。
+*** *。spec.providerConfig*:(_required__)存储使用指定提供程序访问AppVault所需的配置。为您的提供商选择 `bucketName`以及任何其他必要的详细信息。请记下所选的值、因为复制关系所需的其他CR文件会引用这些值。有关其他提供商的AppVault CRS示例、请参见link:trident-protect-appvault-custom-resources.html["AppVault自定义资源"]。
+*** *。spec.providerCredentials*:(_required__)存储对使用指定提供程序访问AppVault所需的任何凭据的引用。
++
+**** *。spec.providerCredentials.valueFromSecret*:(_required__)表示凭据值应来自密钥。
++
+***** *key*:(_required_)要从中选择的密钥的有效密钥。
+***** *name*:(_required_)包含此字段值的机密的名称。必须位于同一命名空间中。
+
+
+**** * spec.providerCredentials.secretAccessKey*:(_required__)用于访问提供程序的访问密钥。名称*应与*。spec.providerCredentials.valueFromSecret.name*。
+
+
+*** *。spec.providerType*:(_required__)用于确定提供备份的内容；例如、NetApp ONTAP S3、通用S3、Google Cloud或Microsoft Azure。可能值：
++
+**** aws
+**** azure
+**** GCP
+**** 常规S3
+**** ONTAP S3
+**** StorageGRID S3
+
+
+
+
+.. 使用正确的值填充文件后 `trident-protect-appvault-secondary-destination.yaml` 、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-appvault-secondary-destination.yaml -n my-app-namespace
+----
+
+
+. 创建App镜像 关系CR文件：
++
+[role="tabbed-block"]
+====
+.使用CR创建App镜像 关系
+--
+.. 创建自定义资源(CR)文件并将其命名(例如 `trident-protect-relationship.yaml`)。
+.. 配置以下属性：
++
+*** * metadata.name:*(必需) App镜像 关系自定义资源的名称。
+*** *。spec.destinationAppVaultRef*:(_required__)此值必须与目标集群上目标应用程序的AppVault名称匹配。
+*** *。spec.namespaceMapping*:(_required__)目标和源命名空间必须与相应应用程序CR中定义的应用程序命名空间匹配。
+*** *spec.sourceAppVaultRef*：(_required_)此值必须与源应用程序的AppVault名称匹配。
+*** *spec.sourceApplicationName*:(_required_)此值必须与您在源应用程序CR中定义的源应用程序的名称匹配。
+*** *spec.storageClassName*：(_required_)选择集群上有效存储类的名称。存储类必须与部署源应用程序的源集群上正在使用的存储类建立对等关系。
+*** *spec.rec发 规则*：定义UTC时间的开始日期和重复间隔。
++
+YAML示例：
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppMirrorRelationship
+metadata:
+  name: amr-16061e80-1b05-4e80-9d26-d326dc1953d8
+  namespace: my-app-namespace
+spec:
+  desiredState: Established
+  destinationAppVaultRef: generic-s3-trident-protect-dst-bucket-8fe0b902-f369-4317-93d1-ad7f2edc02b5
+  namespaceMapping:
+    - destination: my-app-namespace
+      source: my-app-namespace
+  recurrenceRule: |-
+    DTSTART:20220101T000200Z
+    RRULE:FREQ=MINUTELY;INTERVAL=5
+  sourceAppVaultRef: generic-s3-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  sourceApplicationName: maria
+  sourceApplicationUID: 7498d32c-328e-4ddd-9029-122540866aeb
+  storageClassName: sc-vsim-2
+----
+
+
+.. 使用正确的值填充文件后 `trident-protect-relationship.yaml` 、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
+----
+
+
+--
+.使用命令行界面创建App镜像 关系
+--
+.. 创建并应用App镜像 关系对象、将括号中的值替换为环境中的信息。例如：
++
+[source, console]
+----
+tridentctl protect create appmirrorrelationship <name_of_appmirorrelationship> --destination-app-vault <my_vault_name> --recurrence-rule <rule> --source-app <my_source_app> --source-app-vault <my_source_app_vault>
+----
+
+
+--
+====
+. (_可 选_)检查复制关系的状态：
++
+[source, console]
+----
+kubectl get amr -n my-app-namespace <relationship name> -o=jsonpath='{.status}' | jq
+----
+
+
+
+
+=== 故障转移到目标集群
+
+使用Trident Protect、您可以将复制的应用程序故障转移到目标集群。此操作步骤 将停止复制关系并使应用程序在目标集群上联机。如果源集群上的应用程序正常运行、则Trident Protect不会停止该应用程序。
+
+.步骤
+. 打开AppMirectorRelationship CR文件(例如 `trident-protect-relationship.yaml`)，并将*。spec.desiredState*的值更改为 `Promoted`。
+. 保存 CR 文件。
+. 应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
+----
+. (_可 选_)在故障转移应用程序上创建所需的任何保护计划。
+. (_可 选_)检查复制关系的状态：
++
+[source, console]
+----
+kubectl get amr -n my-app-namespace <relationship name> -o=jsonpath='{.status}' | jq
+----
+
+
+
+
+=== 重新同步故障转移复制关系
+
+重新同步操作将重新建立复制关系。执行重新同步操作后、原始源应用程序将成为正在运行的应用程序、对目标集群上正在运行的应用程序所做的任何更改将被丢弃。
+
+此过程会先停止目标集群上的应用程序、然后再重新建立复制。
+
+
+IMPORTANT: 故障转移期间写入目标应用程序的所有数据都将丢失。
+
+.步骤
+. 创建源应用程序的快照。
+. 打开AppMirectorRelationship CR文件(例如 `trident-protect-relationship.yaml`)，并将spec.desiredState的值更改为 `Established`。
+. 保存 CR 文件。
+. 应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
+----
+. 如果您在目标集群上创建了任何保护计划来保护故障转移应用程序、请将其删除。任何保留的计划都会导致卷快照失败。
+
+
+
+
+=== 反向重新同步故障转移复制关系
+
+反向重新同步故障转移复制关系时、目标应用程序将成为源应用程序、而源将成为目标。在故障转移期间对目标应用程序所做的更改将保留下来。
+
+.步骤
+. 删除初始目标集群上的App镜像 关系CR。这会使目标成为源。如果新目标集群上仍有任何保护计划、请将其删除。
+. 通过将最初用于设置复制关系的CR文件应用于对等集群来设置复制关系。
+. 确保每个集群上的AppVault CRS均已准备就绪。
+. 在另一个集群上设置复制关系、并配置反向值。
+
+
+
+
+== 反转应用程序复制方向
+
+反向复制方向时、Trident Protect会将应用程序移至目标存储后端、同时继续复制回原始源存储后端。Trident Protect会先停止源应用程序并将数据复制到目标、然后再故障转移到目标应用程序。
+
+在这种情况下、您将交换源和目标。
+
+.步骤
+. 创建关闭快照：
++
+[role="tabbed-block"]
+====
+.使用CR创建关闭快照
+--
+.. 禁用源应用程序的保护策略计划。
+.. 创建Sh关机Snapshot CR文件：
++
+... 创建自定义资源(CR)文件并将其命名(例如 `trident-protect-shutdownsnapshot.yaml`)。
+... 配置以下属性：
++
+**** * metadata.name*:(_required__)自定义资源的名称。
+**** *spec.appVaultRef*：(_required_)此值必须与源应用程序的AppVault的metadata.name字段匹配。
+**** *spec.ApplicationRef*：(_required_)此值必须与源应用程序CR文件的metadata.name字段匹配。
++
+YAML示例：
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: ShutdownSnapshot
+metadata:
+  name: replication-shutdown-snapshot-afc4c564-e700-4b72-86c3-c08a5dbe844e
+  namespace: my-app-namespace
+spec:
+  appVaultRef: generic-s3-trident-protect-src-bucket-04b6b4ec-46a3-420a-b351-45795e1b5e34
+  applicationRef: maria
+----
+
+
+
+
+.. 使用正确的值填充文件后 `trident-protect-shutdownsnapshot.yaml` 、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-shutdownsnapshot.yaml -n my-app-namespace
+----
+
+
+--
+.使用命令行界面创建关闭快照
+--
+.. 创建关闭快照、将括号中的值替换为环境中的信息。例如：
++
+[source, console]
+----
+tridentctl protect create shutdownsnapshot <my_shutdown_snapshot> --appvault <my_vault> --app <app_to_snapshot>
+----
+
+
+--
+====
+. 快照完成后、获取快照的状态：
++
+[source, console]
+----
+kubectl get shutdownsnapshot -n my-app-namespace <shutdown_snapshot_name> -o yaml
+----
+. 使用以下命令查找*shutdownSnapshot．statues.appArchivePath*的值，并记录文件路径的最后一部分(也称为基本名称；这将是最后一个斜杠后面的所有内容)：
++
+[source, console]
+----
+k get shutdownsnapshot -n my-app-namespace <shutdown_snapshot_name> -o jsonpath='{.status.appArchivePath}'
+----
+. 执行从目标集群到源集群的故障转移、并进行以下更改：
++
+
+NOTE: 在故障转移过程的第2步中、将字段包含 `spec.promotedSnapshot`在App镜像 关系CR文件中、并将其值设置为您在上述第3步中记录的基本名称。
+
+. 执行中的反向重新同步步骤<<Reverse resync a failed over replication>>。
+. 在新的源集群上启用保护计划。
+
+
+
+
+=== 结果
+
+反向复制会导致以下操作：
+
+* 系统会为原始源应用程序的Kubbernetes资源创建一个快照。
+* 通过删除原始源应用程序的Kubernetes资源(保留PVC和PV)、可以正常停止原始源应用程序的Pod。
+* 关闭Pod后、将为应用程序的卷创建快照并进行复制。
+* SnapMirror关系将中断、从而使目标卷做好读/写准备。
+* 此应用程序的Kubornetes资源将使用在初始源应用程序关闭后复制的卷数据从关闭前的快照中还原。
+* 反向重新建立复制。
+
+
+
+
+=== 将应用程序故障恢复到原始源集群
+
+通过使用Trident Protect、您可以通过以下操作序列在故障转移操作后实现"故障恢复"。在此恢复原始复制方向的工作流中、Trident Protect会在反转复制方向之前将所有应用程序更改复制(重新同步)回原始源应用程序。
+
+此过程从已完成故障转移到目标的关系开始、涉及以下步骤：
+
+* 从故障转移状态开始。
+* 反向重新同步此关系。
+* 反转复制。
+
+
+.步骤
+. 执行<<Resync a failed over replication>>步骤
+. 执行<<Reverse resync a failed over replication>>步骤
+
+
+
+
+=== 删除复制关系
+
+您可以随时删除复制关系。删除应用程序复制关系后、会导致两个单独的应用程序之间没有关系。
+
+.步骤
+. 删除App镜像 关系CR：
++
+[source, console]
+----
+kubectl delete -f trident-protect-relationship.yaml -n my-app-namespace
+----
+

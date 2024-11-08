@@ -41,6 +41,17 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 ==== Kubernetes
 
+* 为KubeNet本机工作流添加了新的Trident功能：
++
+** 数据保护
+** 数据迁移
+** 灾难恢复
+** 应用程序移动性
++
+link:/trident-protect/learn-about-trident-protect.html["详细了解Trident Protect"](英文)
+
+
+
 * 为安装程序添加了一个新标志 `--k8s_api_qps`、用于设置Trident与Kubbernetes API服务器通信所使用的QPS值。
 * 为安装程序添加了 `--node-prep`一个标志、用于自动管理Kubernetes集群节点上的存储协议依赖关系。已测试并验证与Amazon Linux 2023 iSCSI存储协议的兼容性
 * 增加了对在非正常节点关闭情况下强制断开ONTAP - NAS经济型卷的支持。
@@ -87,7 +98,7 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 === 产品品牌重塑
 
-从24.10版开始、Astra Trident更名为Trident (NetApp Trident)。此品牌重塑不会影响Trident的任何功能、支持的平台以及互操作性。
+从24.10版开始、Astra Trident更名为Trident (NetApp Trident)。此品牌重塑不会影响Trident的任何功能、支持的平台或互操作性。
 
 
 

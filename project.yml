@@ -30,7 +30,7 @@ settings:
     url: "/trident-2204"
   - version-number: '22.01'
     url: "/trident-2201"
-  langs: zh-cn,us-en,de-de,es-es,fr-fr,it-it,pt-br,ja-jp,ko-kr,zh-tw
+  langs: zh-cn,us-en,ja-jp,ko-kr,zh-tw,de-de,es-es,fr-fr,it-it
 sidebar:
   entries:
   - title: Trident文档
@@ -47,6 +47,7 @@ sidebar:
   - section: trident-managing-k8s
   - section: trident-docker
   - section: trident-reco
+  - section: trident-protect
   - title: 知识和支持
     entries:
     - title: 常见问题解答

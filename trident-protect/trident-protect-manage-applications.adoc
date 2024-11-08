@@ -1,0 +1,76 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-manage-applications.html 
+keywords: appvault, data protection, custom resource, namespace, application, cluster 
+summary: 您可以通过创建应用程序CR和关联的Trident Vault CR来使AppProtect能够识别要管理的应用程序。 
+---
+= 定义要管理的应用程序
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以通过创建应用程序CR和关联的Trident Vault CR来定义要使用AppProtect管理的应用程序。
+
+
+
+== 创建AppVault CR
+
+您需要创建一个AppVault CR、以便在对应用程序执行数据保护操作时使用、并且AppVault CR需要驻留在安装了Trident Protect的集群上。AppVault CR特定于您的环境；有关AppVault CRS的示例、请参见link:trident-protect-appvault-custom-resources.html["AppVault自定义资源。"]
+
+
+
+== 创建应用程序CR
+
+您需要为要使用Trident Protect管理的每个应用程序创建一个应用程序CR。您可以通过手动创建应用程序CR或使用Trident Protect命令行界面创建CR来添加要管理的应用程序。
+
+[role="tabbed-block"]
+====
+.使用CR添加应用程序
+--
+. 创建目标应用程序CR文件：
++
+.. 创建自定义资源(CR)文件并将其命名(例如 `maria-app.yaml`)。
+.. 配置以下属性：
++
+*** *metadata.name*:(_required__)应用程序自定义资源的名称。请注意您选择的名称、因为保护操作所需的其他CR文件会引用此值。
+*** *。spec.includedNamespaces*:(_required__)使用命名空间标签或命名空间名称来指定应用程序资源所在的命名空间。应用程序命名空间必须属于此列表。
++
+YAML示例：
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: maria
+  namespace: my-app-namespace
+spec:
+  includedNamespaces:
+    labelSelector: {}
+    namespace: my-app-namespace
+----
+
+
+
+
+
+
+--
+.使用命令行界面添加应用程序
+--
+. 创建并应用应用应用程序定义、将括号中的值替换为您环境中的信息。您可以使用逗号分隔列表和以下示例中所示的参数在应用程序定义中包括名称和资源：
++
+[source, console]
+----
+tridentctl protect create application <my_new_app_cr_name> --namespaces <namespaces_to_include> --csr <cluster_scoped_resources_to_include>
+----
+
+
+--
+====

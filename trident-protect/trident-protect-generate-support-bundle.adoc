@@ -1,0 +1,80 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-generate-support-bundle.html 
+keywords: trident, protect, bundle, support, netapp, custom, resource, file 
+summary: '通过Trident Protect、管理员可以生成包含对NetApp支持有用信息的捆绑包、其中包括有关所管理的集群和应用程序的日志、指标和拓扑信息。如果您已连接到Internet、则可以使用自定义资源(CR)文件将支持包上传到NetApp支持站点(NSS)。' 
+---
+= 生成支持包
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+通过Trident Protect、管理员可以生成包含对NetApp支持有用信息的捆绑包、其中包括有关所管理的集群和应用程序的日志、指标和拓扑信息。如果您已连接到Internet、则可以使用自定义资源(CR)文件将支持包上传到NetApp支持站点(NSS)。
+
+[role="tabbed-block"]
+====
+.使用CR创建支持包
+--
+. 创建自定义资源(CR)文件并将其命名(例如 `trident-protect-support-bundle.yaml`)。
+. 配置以下属性：
++
+** *。metadata.name*:(_required__)此自定义资源的名称；请为您的环境选择一个唯一且合理的名称。
+** *spec.t触发 器Type*：(_required_)用于确定是立即生成支持包、还是按计划生成支持包。计划在UTC时间中午12点生成捆绑包。可能值：
++
+*** 已计划
+*** 手动
+
+
+** *spec.u倍 加载已启用*：(_可 选_)控制是否应在生成支持包后将其上传到NetApp支持站点。如果未指定，则默认为 `false`。可能值：
++
+*** true
+*** false (默认)
+
+
+** *spec.dataWindowStart*：(_可 选_) RFC 3339格式的日期字符串，指定支持包中包含的数据窗口应开始的日期和时间。如果未指定、则默认为24小时前。您可以指定的最早窗口日期是7天前。
++
+YAML示例：
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AutoSupportBundle
+metadata:
+  name: trident-protect-support-bundle
+spec:
+  triggerType: Manual
+  uploadEnabled: true
+  dataWindowStart: 2024-05-05T12:30:00Z
+----
+
+
+. 使用正确的值填充文件后 `astra-support-bundle.yaml` 、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-support-bundle.yaml
+----
+
+
+--
+.使用命令行界面创建支持包
+--
+. 创建支持包、将括号中的值替换为您环境中的信息。 `trigger-type`确定是否立即创建分发包，或者是否由计划决定了创建时间，可以是 `Manual`或 `Scheduled`。默认设置为 `Manual`。
++
+例如：
+
++
+[source, console]
+----
+tridentctl protect create autosupportbundle <my_bundle_name> --trigger-type <trigger_type>
+----
+
+
+--
+====

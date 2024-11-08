@@ -1,0 +1,195 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-use-execution-hooks.html 
+keywords: trident, protect, execution hooks 
+summary: 您可以使用Trident Protect为应用程序创建自定义执行挂钩。要创建执行挂钩，您需要拥有所有者，管理员或成员权限。 
+---
+= 管理执行挂钩
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+执行挂钩是一种自定义操作、您可以将其配置为与受管应用程序的数据保护操作结合运行。例如、如果您有一个数据库应用程序、则可以使用执行挂钩在快照之前暂停所有数据库事务、并在快照完成后恢复事务。这样可以确保应用程序一致的快照。
+
+
+
+== 执行挂钩的类型
+
+Trident Protect支持以下类型的执行挂钩、具体取决于它们可以运行的时间：
+
+* 预快照
+* 快照后
+* 预备份
+* 备份后
+* 还原后
+* 故障转移后
+
+
+
+
+=== 执行顺序
+
+运行数据保护操作时、执行钩事件按以下顺序发生：
+
+. 任何适用的自定义操作前执行挂钩都会在相应的容器上运行。您可以根据需要创建和运行任意数量的自定义操作前挂钩、但操作前这些挂钩的执行顺序既不能保证也不可配置。
+. 执行数据保护操作。
+. 任何适用的自定义操作后执行挂钩都会在相应的容器上运行。您可以根据需要创建和运行任意数量的自定义操作后挂机、但这些挂机在操作后的执行顺序既不能保证也不可配置。
+
+
+如果创建多个相同类型的执行挂钩(例如、预快照)、则无法保证这些挂钩的执行顺序。但是、可以保证不同类型的挂钩的执行顺序。例如、以下是具有所有不同类型挂钩的配置的执行顺序：
+
+. 已执行预快照挂钩
+. 已执行后快照挂钩
+. 已执行备份前的挂钩
+. 已执行备份后挂钩
+
+
+
+NOTE: 只有在运行不使用现有快照的备份时、上述顺序示例才适用。
+
+
+NOTE: 在生产环境中启用执行钩脚本之前，应始终对其进行测试。您可以使用 "kubectl exec" 命令方便地测试脚本。在生产环境中启用执行挂钩后、请测试生成的快照和备份、以确保它们一致。为此、您可以将应用程序克隆到临时命名空间、还原快照或备份、然后测试应用程序。
+
+
+
+== 有关自定义执行挂钩的重要注意事项
+
+在为应用程序规划执行挂钩时，请考虑以下几点。
+
+* 执行挂钩必须使用脚本执行操作。许多执行挂钩可以引用同一个脚本。
+* Trident Protect要求以可执行shell脚本的格式编写执行挂钩所使用的脚本。
+* 脚本大小限制为96 KB。
+* Trident Protect使用执行挂钩设置和任何匹配条件来确定哪些挂钩适用于快照、备份或还原操作。
+
+
+
+NOTE: 由于执行挂钩通常会减少或完全禁用其运行的应用程序的功能，因此您应始终尽量缩短自定义执行挂钩运行所需的时间。如果使用关联的执行挂钩启动备份或快照操作、但随后将其取消、则在备份或快照操作已开始时、仍允许运行这些挂钩。这意味着、备份后执行挂钩中使用的逻辑不能假定备份已完成。
+
+
+
+== 执行钩筛选器
+
+在为应用程序添加或编辑执行挂钩时、可以向执行挂钩添加筛选器、以管理挂钩将匹配的容器。对于在所有容器上使用相同容器映像的应用程序、筛选器非常有用、但可能会将每个映像用于不同的用途(例如Elasticsearch)。通过筛选器、您可以创建执行挂钩在某些容器上运行的方案、但不一定是所有相同的容器上运行的方案。如果为单个执行钩创建多个筛选器、则这些筛选器将与逻辑运算符和运算符结合使用。每个执行连接最多可以有10个活动筛选器。
+
+添加到执行挂钩中的每个筛选器都会使用一个正则表达式来匹配集群中的容器。当某个挂钩与某个容器匹配时、该挂钩将在该容器上运行其关联脚本。筛选器的正则表达式使用正则表达式2 (RE2)语法、不支持创建从匹配列表中排除容器的筛选器。有关Trident Protect在执行挂钩过滤器中支持正则表达式的语法的信息，请参阅 https://github.com/google/re2/wiki/Syntax["正则表达式2 (RE2)语法支持"^]。
+
+
+NOTE: 如果将命名空间筛选器添加到在还原或克隆操作之后运行的执行挂钩、并且还原或克隆源和目标位于不同的命名空间中、则命名空间筛选器仅会应用于目标命名空间。
+
+
+
+== 执行钩示例
+
+请访问 https://github.com/NetApp/Verda["NetApp Verda GitHub项目"] 、下载适用于Apache cassandr和Elascearch等常见应用程序的真实执行挂钩。您还可以查看示例并了解如何构建自己的自定义执行挂钩。
+
+
+
+== 创建执行挂钩
+
+您可以使用Trident Protect为应用程序创建自定义执行挂钩。要创建执行挂钩，您需要拥有所有者，管理员或成员权限。
+
+[role="tabbed-block"]
+====
+.使用CR
+--
+. 创建自定义资源(CR)文件并将其命名为 `trident-protect-hook.yaml`。
+. 根据您的Trident Protect环境和集群配置配置以下属性：
++
+** *。metadata.name*:(_required__)此自定义资源的名称；请为您的环境选择一个唯一且合理的名称。
+** *spec.applicationRef*：(_required_)要运行执行挂钩的应用程序的Kubernetes名称。
+** *spec.stage *：(_required_)一个字符串，指示执行挂钩应在操作期间的哪个阶段运行。可能值：
++
+*** 预
+*** 发布
+
+
+** *spec.action*：(_required_)一个字符串，指示执行挂钩将执行的操作，假设指定的任何执行挂钩过滤器都匹配。可能值：
++
+*** Snapshot
+*** 备份
+*** 还原
+*** 故障转移
+
+
+** *spec.enabled *：(_可 选_)指示此执行挂钩是启用还是禁用。如果未指定、则默认值为true。
+** *spec.hookSource*：(_required_)包含base64编码的挂钩脚本的字符串。
+** *spec.timeout *：(_可 选_)一个数字，用于定义允许执行挂钩运行多长时间(以分钟为单位)。最小值为1分钟、如果未指定、则默认值为25分钟。
+** *spic.arge件*：(_可 选_)可为执行挂钩指定的YAML参数列表。
+** *spec.匹 配Criteria：(_可 选_)标准键值对的可选列表，每个对构成执行挂钩筛选器。每个执行挂钩最多可以添加10个筛选器。
+** *spec.匹 配Cricera.type*：(_可 选_)标识执行挂钩筛选器类型的字符串。可能值：
++
+*** 内容管理器映像
+*** 内容名
+*** 播客名称
+*** PodLabel
+*** NamespaceName
+
+
+** *spec.匹 配Cricery.value*：(_可 选_)用于标识执行挂钩筛选器值的字符串或正则表达式。
++
+YAML示例：
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: ExecHook
+metadata:
+  name: example-hook-cr
+  namespace: my-app-namespace
+  annotations:
+    astra.netapp.io/astra-control-hook-source-id: /account/test/hookSource/id
+spec:
+  applicationRef: my-app-name
+  stage: Pre
+  action: Snapshot
+  enabled: true
+  hookSource: IyEvYmluL2Jhc2gKZWNobyAiZXhhbXBsZSBzY3JpcHQiCg==
+  timeout: 10
+  arguments:
+    - FirstExampleArg
+    - SecondExampleArg
+  matchingCriteria:
+    - type: containerName
+      value: mysql
+    - type: containerImage
+      value: bitnami/mysql
+    - type: podName
+      value: mysql
+    - type: namespaceName
+      value: mysql-a
+    - type: podLabel
+      value: app.kubernetes.io/component=primary
+    - type: podLabel
+      value: helm.sh/chart=mysql-10.1.0
+    - type: podLabel
+      value: deployment-type=production
+----
+
+
+. 使用正确的值填充CR文件后、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-hook.yaml
+----
+
+
+--
+.使用命令行界面
+--
+. 创建执行挂钩、将括号中的值替换为环境中的信息。例如：
++
+[source, console]
+----
+tridentctl protect create exechook <my_exec_hook_name> --action <action_type> --app <app_to_use_hook> --stage <pre_or_post_stage> --source-file <script-file>
+----
+
+
+--
+====

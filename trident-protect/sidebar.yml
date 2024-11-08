@@ -1,0 +1,38 @@
+---
+section: trident-protect
+title: 使用Trident Protect保护应用程序
+entries:
+- title: 了解Trident Protect
+  url: "/trident-protect/learn-about-trident-protect.html"
+- title: 安装Trident Protect
+  entries:
+  - title: Trident Protect要求
+    url: "/trident-protect/trident-protect-requirements.html"
+  - title: 安装Trident Protect
+    url: "/trident-protect/trident-protect-installation.html"
+  - title: 安装Trident Protect命令行界面插件
+    url: "/trident-protect/trident-protect-cli.html"
+- title: 管理Trident Protect
+  entries:
+  - title: 管理授权和访问控制
+    url: "/trident-protect/manage-authorization-access-control.html"
+  - title: 生成Trident Protect支持包
+    url: "/trident-protect/trident-protect-generate-support-bundle.html"
+- title: 管理和保护应用程序
+  entries:
+  - title: 使用AppVault对象管理分段
+    url: "/trident-protect/trident-protect-appvault-custom-resources.html"
+  - title: 定义要管理的应用程序
+    url: "/trident-protect/trident-protect-manage-applications.html"
+  - title: 保护应用程序
+    url: "/trident-protect/trident-protect-protect-apps.html"
+  - title: 还原应用程序
+    url: "/trident-protect/trident-protect-restore-apps.html"
+  - title: 使用NetApp SnapMirror复制应用程序
+    url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
+  - title: 迁移应用程序
+    url: "/trident-protect/trident-protect-migrate-apps.html"
+  - title: 使用Trident Protect管理执行挂钩
+    url: "/trident-protect/trident-protect-use-execution-hooks.html"
+- title: 卸载Trident Protect
+  url: "/trident-protect/trident-protect-uninstall.html"

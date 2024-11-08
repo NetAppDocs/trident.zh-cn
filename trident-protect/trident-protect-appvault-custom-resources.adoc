@@ -1,0 +1,264 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-appvault-custom-resources.html 
+keywords: trident. appvault, custom, protect, kubernetes 
+summary: '用于Trident Protect的存储分段自定义资源(CR)称为AppVault。AppVault是存储分段的声明性Kubarnetes工作流表示形式。' 
+---
+= 使用AppVault对象管理分段
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+用于Trident Protect的存储分段自定义资源(CR)称为AppVault。AppVault对象是存储分段的声明性Kubarnetes工作流表示形式。AppVault CR包含在备份、快照、还原操作和SnapMirror复制等保护操作中使用存储分段所需的配置。只有管理员才能创建AppVault。
+
+
+
+== 密钥生成和AppVault定义示例
+
+定义AppVault CR时、您需要包含凭据才能访问由提供程序托管的资源。根据提供程序的不同、为凭据生成密钥的方式也会有所不同。以下是多个提供程序的命令行密钥生成示例、然后是每个提供程序的AppVault定义示例。
+
+
+
+=== Google Cloud
+
+密钥生成示例：
+
+[source, console]
+----
+kubectl create secret generic gcp-creds --from-file=credentials=<mycreds-file.json> -n trident-protect
+----
+以下AppVault定义示例以CR的形式提供、您可以使用和修改、或者以Trident Protect命令行界面命令的示例形式为您生成AppVault CR：
+
+[role="tabbed-block"]
+====
+.AppVault CR示例
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: gcp-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: GCP
+  providerConfig:
+    gcp:
+      bucketName: trident-protect-src-bucket
+      projectID: project-id
+  providerCredentials:
+    credentials:
+      valueFromSecret:
+        key: credentials
+        name: gcp-trident-protect-src-bucket-secret
+----
+--
+.使用Trident Protect命令行界面创建AppVault CR的示例
+--
+[source, console]
+----
+tridentctl protect create vault gcp my-new-vault --bucket mybucket --project my-gcp-project --secret <gcp-creds>/<credentials>
+----
+--
+====
+
+
+=== Amazon S3
+
+密钥生成示例：
+
+[source, console]
+----
+kubectl create secret generic -n trident-protect s3 --from-literal=accessKeyID=<secret-name> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret>
+----
+以下AppVault定义示例以CR的形式提供、您可以使用和修改、或者以Trident Protect命令行界面命令的示例形式为您生成AppVault CR：
+
+[role="tabbed-block"]
+====
+.AppVault CR示例
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: amazon-s3-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: AWS
+  providerConfig:
+    s3:
+      bucketName: trident-protect-src-bucket
+      endpoint: s3.example.com
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: s3
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: s3
+----
+--
+.使用命令行界面创建AppVault的示例
+--
+[source, console]
+----
+tridentctl protect create vault GenericS3 s3vault --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
+====
+
+
+=== Microsoft Azure
+
+密钥生成示例：
+
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accountKey=<secret-name> -n trident-protect
+----
+以下AppVault定义示例以CR的形式提供、您可以使用和修改、或者以Trident Protect命令行界面命令的示例形式为您生成AppVault CR：
+
+[role="tabbed-block"]
+====
+.AppVault CR示例
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: azure-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: Azure
+  providerConfig:
+    azure:
+      accountName: account-name
+      bucketName: trident-protect-src-bucket
+  providerCredentials:
+    accountKey:
+      valueFromSecret:
+        key: accountKey
+        name: azure-trident-protect-src-bucket-secret
+----
+--
+.使用命令行界面创建AppVault的示例
+--
+[source, console]
+----
+tridentctl protect create vault Azure <vault-name> --account <account-name> --bucket <bucket-name> --secret <secret-name>
+----
+--
+====
+
+
+=== 支持的配置程序类型和配置程序配置值
+
+ `providerType`AppVault CR中的和 `providerConfig`键需要特定值。下表列出了支持的密钥值 `providerType`以及需要与每个值结合使用的关联 `providerConfig`密钥 `providerType`。
+
+[cols="2,2"]
+|===
+| 支持的 `providerType`值 | 关联 `providerConfig`密钥 
+
+
+| AWS | s3 
+
+
+| Azure | azure 
+
+
+| GCP | GCP 
+
+
+| GenericS3 | s3 
+
+
+| OntapS3 | s3 
+
+
+| StorageGridS3 | s3 
+|===
+
+
+== 使用AppVault浏览器查看AppVault信息
+
+您可以使用Trident保护命令行界面插件查看有关在集群上创建的AppVault对象的信息。
+
+.步骤
+. 查看AppVault对象的内容：
++
+[source, console]
+----
+tridentctl protect get appvaultcontent gcp-vault --show-resources all
+----
++
+*示例输出*：
+
++
+[listing]
+----
++-------------+-------+----------+-----------------------------+---------------------------+
+|   CLUSTER   |  APP  |   TYPE   |            NAME             |         TIMESTAMP         |
++-------------+-------+----------+-----------------------------+---------------------------+
+|             | mysql | snapshot | mysnap                      | 2024-08-09 21:02:11 (UTC) |
+| production1 | mysql | snapshot | hourly-e7db6-20240815180300 | 2024-08-15 18:03:06 (UTC) |
+| production1 | mysql | snapshot | hourly-e7db6-20240815190300 | 2024-08-15 19:03:06 (UTC) |
+| production1 | mysql | snapshot | hourly-e7db6-20240815200300 | 2024-08-15 20:03:06 (UTC) |
+| production1 | mysql | backup   | hourly-e7db6-20240815180300 | 2024-08-15 18:04:25 (UTC) |
+| production1 | mysql | backup   | hourly-e7db6-20240815190300 | 2024-08-15 19:03:30 (UTC) |
+| production1 | mysql | backup   | hourly-e7db6-20240815200300 | 2024-08-15 20:04:21 (UTC) |
+| production1 | mysql | backup   | mybackup5                   | 2024-08-09 22:25:13 (UTC) |
+|             | mysql | backup   | mybackup                    | 2024-08-09 21:02:52 (UTC) |
++-------------+-------+----------+-----------------------------+---------------------------+
+----
+. (可选)要查看每个资源的AppVaultPath，请使用标志 `--show-paths`。
++
+只有在Trident Protect Helm安装中指定了集群名称时、此表第一列中的集群名称才可用。例如： `--set clusterName=production1`。
+
+
+
+
+
+== 删除AppVault
+
+您可以随时删除AppVault对象。
+
+
+NOTE: 在删除AppVault对象之前、请勿 `finalizers`删除AppVault CR中的密钥。如果这样做、可能会导致AppVault存储分段中有残留数据、集群中会出现孤立资源。
+
+.开始之前
+确保已删除存储在关联存储分段中的所有快照和备份。
+
+[role="tabbed-block"]
+====
+.使用Kubbernetes命令行界面删除AppVault
+--
+. 删除AppVault对象、替换 `appvault_name`为要删除的AppVault对象的名称：
++
+[source, console]
+----
+kubectl delete appvault <appvault_name> -n trident-protect
+----
+
+
+--
+.使用Trident命令行界面删除AppVault
+--
+. 删除AppVault对象、替换 `appvault_name`为要删除的AppVault对象的名称：
++
+[source, console]
+----
+tridentctl protect delete appvault <appvault_name> -n trident-protect
+----
+
+
+--
+====
