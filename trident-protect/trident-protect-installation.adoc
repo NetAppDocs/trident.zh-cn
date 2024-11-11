@@ -24,7 +24,7 @@ summary: 如果您的环境符合要求、则可以按照以下步骤安装Tride
 +
 [source, console]
 ----
-helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart/index.yaml
+helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart
 ----
 . 使用Helm安装Trident Protect。替换 `<name_of_cluster>`为集群名称、此名称将分配给集群并用于标识此集群中的备份和快照：
 +
@@ -65,6 +65,7 @@ netapp/trident-autosupport:24.10.0
 netapp/exechook:24.10.0
 netapp/resourcebackup:24.10.0
 netapp/resourcerestore:24.10.0
+netapp/resourcedelete:24.10.0
 bitnami/kubectl:1.30.2
 kubebuilder/kube-rbac-proxy:v0.16.0
 ----
@@ -108,7 +109,7 @@ kubectl create secret docker-registry regcred --docker-username=<registry-userna
 +
 [source, console]
 ----
-helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart/index.yaml
+helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart
 ----
 . 创建一个名为的文件 `protectValues.yaml`、其中包含以下Trident保护设置：
 +
