@@ -4911,7 +4911,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="645a84975202e30700b572b49a5ee29d" category="list-text">灾难恢复</block>
   <block id="11d5920d0c0b3a97e764f84dc92ef110" category="list-text">应用程序移动性</block>
   <block id="f593e32b2a3ead4ac029c13126d3531d" category="inline-link-macro">详细了解Trident Protect</block>
-  <block id="4f341cba22662b4f62e28f58e573db1f" category="paragraph"><block ref="d74b9942b9f31e879889873ba2e086e3" category="inline-link-macro-rx"></block>(英文)</block>
   <block id="487dc96e91d89134e7a216bab529a019" category="paragraph">从24.10版开始、Astra Trident更名为Trident (NetApp Trident)。此品牌重塑不会影响Trident的任何功能、支持的平台或互操作性。</block>
   <block id="cf3f16653945ea2a3c2a47b5dce1e6b2" category="list-text">*保留集群上的附加软件*-此选项将删除Amazon EKS对任何设置的管理。此外、它还会使Amazon EKS无法通知您更新、并在您启动更新后自动更新Amazon EKS附加项。但是、它会保留集群上的附加软件。此选项可使附加组件成为自管理安装、而不是Amazon EKS附加组件。通过此选项、此附加组件不会出现停机。保留命令中的<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> 选项以保留此附加项。</block>
   <block id="b84ba52748723df31fdf54485208c120" category="list-text">*从集群中完全删除附加软件*-我们建议您仅在集群中没有依赖于此附加软件的资源时、才从集群中删除此附加软件。从命令中删除<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> 此选项<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> 以删除此加载项。</block>
@@ -4924,4 +4923,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="b9ef0ee6944eb101de3de64b82db00dd" category="sidebar">生成Trident Protect支持包</block>
   <block id="1ae067a03c56065918252f36c73024d1" category="sidebar">管理和保护应用程序</block>
   <block id="793ba052e921b84a44dd053d68f45012" category="sidebar">使用Trident Protect管理执行挂钩</block>
+  <block id="a4ac350fb585f51020f747525f3175d8" category="paragraph"><block ref="2c7a14b5507108d57a83e6eb9858f03a" category="inline-link-macro-rx"></block>(英文)</block>
 </blocks>
