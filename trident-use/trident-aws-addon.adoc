@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/trident-aws-addon.html 
-keywords: Trident add-on, Trident EKS add-on, Trident AWS EKS add-on, integrate Trident, Trident 
-summary: 将Trident EKS加载项添加到Kubenetes集群。 
+keywords: Trident add-on, Astra Trident EKS add-on, Trident AWS EKS add-on, integrate Trident, Trident 
+summary: 将Asta Trident EKS加载项添加到Kubbernetes集群。 
 ---
-= 在EKS集群上配置Trident EKS加载项
+= 在EKS集群上配置Astra Trident EKS加载项
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
@@ -12,13 +12,13 @@ summary: 将Trident EKS加载项添加到Kubenetes集群。
 
 
 [role="lead"]
-Trident简化了Kubelnetes中适用于NetApp ONTAP的Amazon FSx存储管理、使开发人员和管理员能够专注于应用程序部署。Trident EKS加载项包括最新的安全修补程序和错误修复、并已通过AWS验证、可与Amazon EKS配合使用。通过EKS加载项、您可以始终确保Amazon EKS集群安全稳定、并减少安装、配置和更新加载项所需的工作量。
+Asta三端存储简化了Kubelnetes中适用于NetApp ONTAP存储的Amazon FSx管理、使开发人员和管理员能够专注于应用程序部署。A作用 是通过AWS验证、可与Amazon EKS配合使用。通过EKS加载项、您可以始终确保Amazon EKS集群安全稳定、并减少安装、配置和更新加载项所需的工作量。
 
 
 
 == 前提条件
 
-在配置适用于AWS EKS的Trident加载项之前、请确保满足以下条件：
+在配置适用于AWS EKS的Asta TrIDent加载项之前、请确保满足以下条件：
 
 * 具有附加订阅的Amazon EKS集群帐户
 * AWS对AWS Marketplace的权限：
@@ -42,15 +42,25 @@ image::../media/aws-eks-01.png[AWS EKS 01]
 +
 image::../media/aws-eks-02.png[AWS EKS 02]
 
-. 找到*AstraDent* by NetApp，然后选中Trident插件的复选框。
+. 找到*Astra*并选中NetApp Trident Trident插件的复选框。
 . 选择所需的附加软件版本。
 +
 image::../media/aws-eks-03.png[AWS EKS 03]
 
 . 选择要从节点继承的IAM角色选项。
-. 根据需要配置任何可选设置，然后选择*Next*。
 +
 image::../media/aws-eks-04.png[AWS EKS 04]
+
+. (可选)根据需要配置任何可选配置设置，然后选择*Next*。
++
+遵循*附加配置模式*，并将*配置值*部分中的configurationvalues*参数设置为您在上一步中创建的roe-arn (值格式应为： `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`)。如果您为冲突解决方法选择覆盖、则可以使用Amazon EKS附加设置覆盖现有附加项的一个或多个设置。如果未启用此选项、并且与现有设置存在冲突、则操作将失败。您可以使用生成的错误消息来解决冲突。在选择此选项之前、请确保Amazon EKS附加组件未管理您需要自行管理的设置。
+
++
+
+NOTE: 在配置可选参数 `cloudIdentity`时，请确保在使用EKS加载项安装Trident时将指定 `AWS`为 `cloudProvider`。
+
++
+image::../media/aws-eks-06.png[AWS EKS 06]
 
 . 选择 * 创建 * 。
 . 验证此加载项的状态是否为_Active_.
@@ -61,13 +71,16 @@ image::../media/aws-eks-05.png[AWS EKS 05]
 
 
 
-== 使用命令行界面安装/卸载Trident EKS加载项
+== 使用命令行界面安装/卸载A作用 的三端EKS加载项
 
-.使用命令行界面安装Trident EKS加载项：
-以下示例命令可安装Trident EKS附加软件：
-`eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v24.2.0-eksbuild.`
-`eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v24.2.0-eksbuild.1`(使用专用版本)
+.使用命令行界面安装Asta Trident EKS加载项：
+以下示例命令安装Asta Trident EKS加载项：
+`eksctl create addon --cluster K8s-arm --name netapp_trident-operator --version v24.6.1-eksbuild`
+`eksctl create addon --cluster clusterName --name netapp_trident-operator --version v24.6.1-eksbuild.1`(使用专用版本)
 
-.使用命令行界面卸载Trident EKS加载项：
-以下命令将卸载Trident EKS加载项：
+
+NOTE: 在配置可选参数 `cloudIdentity`时，请确保在使用EKS加载项安装Trident时指定 `cloudProvider`。
+
+.使用命令行界面卸载Asta Trident EKS加载项：
+以下命令将卸载Asta Trident EKS加载项：
 `eksctl delete addon --cluster K8s-arm --name netapp_trident-operator`
