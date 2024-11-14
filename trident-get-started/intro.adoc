@@ -62,31 +62,31 @@ https://www.netapp.com/azure/azure-netapp-files/["Azure NetApp Files"^] 是一�
 link:https://www.netapp.com/cloud-services/cloud-volumes-ontap/["Cloud Volumes ONTAP"^] 是一款纯软件存储设备，可在云中运行 ONTAP 数据管理软件。
 
 ====
-.适用于 Google Cloud 的 Cloud Volumes Service
+.Google Cloud NetApp卷
 [%collapsible]
 ====
-link:https://bluexp.netapp.com/google-cloud-netapp-volumes?utm_source=GitHub&utm_campaign=Trident["适用于 Google Cloud 的 NetApp Cloud Volumes Service"^] 是一种云原生文件服务，可通过 NFS 和 SMB 提供具有全闪存性能的 NAS 卷。
+link:https://bluexp.netapp.com/google-cloud-netapp-volumes?utm_source=GitHub&utm_campaign=Trident["Google Cloud NetApp卷"^] 是Google Cloud中的一项完全托管的文件存储服务、可提供高性能企业级文件存储。
 
-====
-.Element 软件
-[%collapsible]
 ====
 https://www.netapp.com/data-management/element-software/["Element"^] 通过保证性能并简化存储占用空间，使存储管理员能够整合工作负载。
 
+[]
 ====
-.NetApp HCI
-[%collapsible]
+
 ====
 link:https://docs.netapp.com/us-en/hci/docs/concept_hci_product_overview.html["NetApp HCI"^] 通过自动化执行日常任务并使基础架构管理员能够专注于更重要的功能，简化数据中心的管理和扩展。
 
 Trident 可以直接在底层 NetApp HCI 存储平台上为容器化应用程序配置和管理存储设备。
 
+[]
 ====
-.NetApp ONTAP
-[%collapsible]
+
 ====
 link:https://docs.netapp.com/us-en/ontap/index.html["NetApp ONTAP"^] 是NetApp多协议统一存储操作系统、可为任何应用程序提供高级数据管理功能。
 
 ONTAP 系统采用全闪存，混合或全 HDD 配置，并提供多种不同的部署模式，包括专门设计的硬件（ FAS 和 AFF ），白盒（ ONTAP Select ）和纯云（ Cloud Volumes ONTAP ）。Trident支持这些ONTAP部署模式。
+
+[]
+====
 
 ====

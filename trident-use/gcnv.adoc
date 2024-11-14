@@ -14,10 +14,6 @@ summary:
 [role="lead"]
 现在、您可以将Google Cloud NetApp卷配置为Trident的后端。您可以使用Google Cloud NetApp卷后端连接NFS卷。
 
-[listing]
-----
- Google Cloud NetApp Volumes is a tech preview feature in Trident 24.06.
-----
 
 
 == Google Cloud NetApp卷驱动程序详细信息

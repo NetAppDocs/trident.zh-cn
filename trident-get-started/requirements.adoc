@@ -70,7 +70,7 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.24升级到1.25或更高�
 * 适用于 NetApp ONTAP 的 Amazon FSX
 * Azure NetApp Files
 * Cloud Volumes ONTAP
-* 适用于 GCP 的 Cloud Volumes Service
+* Google Cloud NetApp卷
 * FAS/AFF/Select 9.5或更高版本
 * NetApp 全 SAN 阵列（ ASA ）
 * NetApp HCI/ Element软件11或更高版本
