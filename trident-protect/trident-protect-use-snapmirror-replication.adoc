@@ -458,7 +458,7 @@ k get shutdownsnapshot -n my-app-namespace <shutdown_snapshot_name> -o jsonpath=
 
 NOTE: 在故障转移过程的第2步中、将字段包含 `spec.promotedSnapshot`在App镜像 关系CR文件中、并将其值设置为您在上述第3步中记录的基本名称。
 
-. 执行中的反向重新同步步骤<<Reverse resync a failed over replication>>。
+. 执行中的反向重新同步步骤<<反向重新同步故障转移复制关系>>。
 . 在新的源集群上启用保护计划。
 
 
@@ -485,13 +485,17 @@ NOTE: 在故障转移过程的第2步中、将字段包含 `spec.promotedSnapsho
 此过程从已完成故障转移到目标的关系开始、涉及以下步骤：
 
 * 从故障转移状态开始。
-* 反向重新同步此关系。
-* 反转复制。
+* 反向重新同步复制关系。
++
+
+CAUTION: 请勿执行正常的重新同步操作、因为这会丢弃在故障转移过程中写入目标集群的数据。
+
+* 反转复制方向。
 
 
 .步骤
-. 执行<<Resync a failed over replication>>步骤
-. 执行<<Reverse resync a failed over replication>>步骤
+. 执行<<反向重新同步故障转移复制关系>>步骤。
+. 执行<<反转应用程序复制方向>>步骤。
 
 
 

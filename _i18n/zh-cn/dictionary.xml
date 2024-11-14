@@ -4454,7 +4454,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="9ee0b57319616120eef37546fa8e4c42" category="doc">安装和配置Trident Protect</block>
   <block id="dc48a335c2095fb6a79ee14ee62b4806" category="paragraph">如果您的环境满足Trident Protect的要求、您可以按照以下步骤在集群上安装Trident Protect。您可以从NetApp获取Trident Protect、也可以从您自己的私人注册表安装它。如果集群无法访问Internet、则从专用注册表进行安装非常有用。</block>
   <block id="1d5f2a4008fa2c223d0ebc6aea423256" category="open-title">安装Trident Protect from NetApp</block>
-  <block id="6802e29016a0674682497c848bf90236" category="list-text">使用Helm安装Trident Protect。替换<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block>为集群名称、此名称将分配给集群并用于标识此集群中的备份和快照：</block>
   <block id="b533d7fe842e47fbd62d24400867d3f2" category="list-text">(可选)冻结VM。如果您对SnapMirror使用KubeVirt支持、则冻结VM有助于有效管理这些虚拟机：</block>
   <block id="e49b02afb984c32aa521917480fc4012" category="inline-link-macro">安装OpenShift虚拟化</block>
   <block id="c096df753a5c7335177118895259c96a" category="admonition">要使冻结功能正常运行、您需要设置虚拟化。在此设置后部署的VM包括冻结和取消冻结所需的二进制文件。要了解有关设置虚拟化的详细信息，请参见<block ref="2e657c6eb92d8a54673acb8e93eb84d5" category="inline-link-macro-rx"></block>。</block>
@@ -4465,7 +4464,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="e0f6b701766eb28d805d7ba1e820f582" category="list-text">登录到注册表：</block>
   <block id="814565bb5d7e7359fff967986fd4195a" category="list-text">创建用于私人注册表身份验证的拉机密：</block>
   <block id="9fd6c1e403ca347a1528f0f6688f6a06" category="list-text">创建一个名为的文件<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block>、其中包含以下Trident保护设置：</block>
-  <block id="5d276dc92276b59621488d2545356081" category="list-text">使用Helm安装Trident Protect：</block>
   <block id="86e8b34710172d33dcae839e1f4dd07e" category="summary">您可以通过创建应用程序CR和关联的Trident Vault CR来使AppProtect能够识别要管理的应用程序。</block>
   <block id="80b940e5c68d020c06f9dc2f188d2169" category="doc">定义要管理的应用程序</block>
   <block id="1e10d655f5307ce7f79aeee68a9e72f3" category="paragraph">您可以通过创建应用程序CR和关联的Trident Vault CR来定义要使用AppProtect管理的应用程序。</block>
@@ -4854,7 +4852,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="eae3a231fcdd07328a039c0bd1b3ebdf" category="list-text">使用以下命令查找*shutdownSnapshot．statues.appArchivePath*的值，并记录文件路径的最后一部分(也称为基本名称；这将是最后一个斜杠后面的所有内容)：</block>
   <block id="9facdd349a186c792ec6a26f5b938472" category="list-text">执行从目标集群到源集群的故障转移、并进行以下更改：</block>
   <block id="bdd0666b03fe73dd725c0376fdb435e0" category="admonition">在故障转移过程的第2步中、将字段包含<block ref="60464bee8fcac84cb209df68a2b05fba" prefix=" " category="inline-code"></block>在App镜像 关系CR文件中、并将其值设置为您在上述第3步中记录的基本名称。</block>
-  <block id="6813800aea854bfb29f3b2931dae3410" category="list-text">执行中的反向重新同步步骤<block ref="34fbd8efeee5eb11716e5f3f4c6db090" category="inline-xref-macro-rx"></block>。</block>
   <block id="ab486212bb19e45c8e71532739574a22" category="list-text">在新的源集群上启用保护计划。</block>
   <block id="aea4fd534bd3152673956c6bbd7c115c" category="paragraph">反向复制会导致以下操作：</block>
   <block id="a23cf6af7e31f808d57bb74c992226c6" category="list-text">系统会为原始源应用程序的Kubbernetes资源创建一个快照。</block>
@@ -4867,10 +4864,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="fbe6471033a142db5e3165e4034c1157" category="paragraph">通过使用Trident Protect、您可以通过以下操作序列在故障转移操作后实现"故障恢复"。在此恢复原始复制方向的工作流中、Trident Protect会在反转复制方向之前将所有应用程序更改复制(重新同步)回原始源应用程序。</block>
   <block id="3a045f0ae84563b460627f43bb272936" category="paragraph">此过程从已完成故障转移到目标的关系开始、涉及以下步骤：</block>
   <block id="9cbd7771b861e31b5edb23d83de4758c" category="list-text">从故障转移状态开始。</block>
-  <block id="9f8be3d8552ca406f8bc6e98f620deeb" category="list-text">反向重新同步此关系。</block>
-  <block id="ad04ac539c02d43abb5b3468d853b96d" category="list-text">反转复制。</block>
-  <block id="a98cf8721f50314020f780a1b99cc880" category="list-text">执行<block ref="3767bb9c312610e22029cc3e24b4717f" category="inline-xref-macro-rx"></block>步骤</block>
-  <block id="b776a375decd9bf6b9cc3c7744034e92" category="list-text">执行<block ref="34fbd8efeee5eb11716e5f3f4c6db090" category="inline-xref-macro-rx"></block>步骤</block>
   <block id="39d2beed854377dcad2ea22fe9e58477" category="section-title">删除复制关系</block>
   <block id="a6c87e2b66308cd117a39af0fdac9885" category="paragraph">您可以随时删除复制关系。删除应用程序复制关系后、会导致两个单独的应用程序之间没有关系。</block>
   <block id="146012b834b7d1f68305ff2495a1beb7" category="list-text">删除App镜像 关系CR：</block>
@@ -4933,4 +4926,26 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="8019e0dcd97c1bda9a4283c660df9424" category="list-text">单击*Add-ons*选项卡，然后单击*Astra Trident by NetApp。*</block>
   <block id="03f2a9d8b5b9f1a03bc58b91a939d84f" category="paragraph"><block ref="ad43edaec055586043c762c9475bde5c" category="inline-link-macro-rx"></block> 是Google Cloud中的一项完全托管的文件存储服务、可提供高性能企业级文件存储。</block>
   <block id="0ce84605b24873b2ee81987302d60089" category="paragraph"><block ref="bc468e9b0072cb6f1552f9bc0a3b6063" category="inline-link-rx"></block>是一种云原生文件服务、可通过NFS为NAS卷提供全闪存性能。此服务支持在GCP云中运行任何工作负载、包括传统应用程序。它提供了一种完全托管的服务，可提供稳定一致的高性能，即时克隆，数据保护以及对 Google Compute Engine （ GCE ）实例的安全访问。</block>
+  <block id="afb432a9cb893dca3218bf5ed8f124b6" category="section-title">第6步：授予对AppVault对象的访问权限</block>
+  <block id="518792e00e0ca0d711657c9051ae8b45" category="paragraph">要执行备份和快照等数据管理任务、集群管理员需要向各个用户授予对AppVault对象的访问权限。</block>
+  <block id="3ce2b0dd65dc314e4d0ccf4ed02db5a7" category="list-text">创建并应用AppVault和机密组合YAML文件、以授予用户对AppVault的访问权限。例如、以下CR将授予用户对AppVault的访问权限<block ref="6ca05da537cc3daa1ec22134c0b69946" prefix=" " category="inline-code"></block>：</block>
+  <block id="f1c648202447b3667edef5439e1a8c5e" category="list-text">创建并应用角色CR、使集群管理员能够授予对命名空间中特定资源的访问权限。例如：</block>
+  <block id="2ebacf7e8f38b367350c5c91618a6e79" category="list-text">创建并应用RoleBinding CR以将权限绑定到用户eng-user。例如：</block>
+  <block id="dc3d0a515ce0266cb00eb5cc06c4fe94" category="list-text">验证权限是否正确。</block>
+  <block id="b5c9b7c142e23b0f885d64628ec267ff" category="list-text">尝试检索所有名称库的AppVault对象信息：</block>
+  <block id="d0848afd8553c34945705222a97a4553" category="paragraph">您应看到类似于以下内容的输出：</block>
+  <block id="07337191562a62a775a853d9901903a6" category="list-text">测试用户是否可以获取他们现在有权访问的AppVault信息：</block>
+  <block id="e7165fc51f62031fcae1d793899febaa" category="paragraph">您为其授予了AppVault权限的用户应该能够使用授权的AppVault对象执行应用程序数据管理操作、并且不能访问分配的命名区之外的任何资源、也不能创建他们无权访问的新资源。</block>
+  <block id="a268a576db3133de464aad1cd81ab3e1" category="inline-link-macro">生成支持包</block>
+  <block id="a10e94152d7706a1754c5224358811ad" category="admonition">默认情况下、Trident Protect会收集有助于处理您可能创建的任何NetApp支持案例的支持信息、包括有关集群和托管应用程序的日志、指标和拓扑信息。Trident Protect会按每日计划将这些支持包发送给NetApp。在安装Trident Protect时、您可以选择禁用此支持包收集。您可以随时手动<block ref="dedfc5877c343d6cbe77701c7edd9bde" category="inline-link-macro-rx"></block>执行此操作。</block>
+  <block id="76d9687f27080e6c2da9c8a0d64fbd42" category="list-text">安装Trident Protect CRD：</block>
+  <block id="a29c2442da7eaa2adc245c73a4fa8969" category="list-text">使用Helm通过以下命令之一安装Trident Protect。替换<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block>为集群名称、此名称将分配给集群并用于标识集群的备份和快照：</block>
+  <block id="7eccc1ff44845b9328911013fd4f479d" category="list-text">正常安装Trident Protect：</block>
+  <block id="567ddef6d1b44dd7de5bb03fcf15e432" category="list-text">安装Trident Protect并禁用计划的每日Trident Protect AutoSupport支持包上传：</block>
+  <block id="753f99fdafabdea1282917a0d7df52d4" category="list-text">执行中的反向重新同步步骤<block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>。</block>
+  <block id="fe411ea35c29677771dcaad52985fc08" category="list-text">反向重新同步复制关系。</block>
+  <block id="eb10e971ec83f13f35beb8166ae8958b" category="admonition">请勿执行正常的重新同步操作、因为这会丢弃在故障转移过程中写入目标集群的数据。</block>
+  <block id="de5da2c7cfd6c7eda31703be01d3513e" category="list-text">反转复制方向。</block>
+  <block id="be41e0ea028981dcba35343dcbd34991" category="list-text">执行<block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>步骤。</block>
+  <block id="e3f67484570d0b1b5736841718c5ab22" category="list-text">执行<block ref="80fca82e419d46692dbbc4fbbcd0c990" category="inline-xref-macro-rx"></block>步骤。</block>
 </blocks>
