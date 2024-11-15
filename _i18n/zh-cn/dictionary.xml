@@ -4946,7 +4946,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="be41e0ea028981dcba35343dcbd34991" category="list-text">执行<block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>步骤。</block>
   <block id="e3f67484570d0b1b5736841718c5ab22" category="list-text">执行<block ref="80fca82e419d46692dbbc4fbbcd0c990" category="inline-xref-macro-rx"></block>步骤。</block>
   <block id="d5b345f45f80f7f56440408591048e1a" category="inline-link-macro">光纤通道支持</block>
-  <block id="f1c09cfcd8aa6e6314b92b3a724aca83" category="list-text">增加了对ONTAP驱动程序的光纤通道支持的技术预览。请参阅 <block ref="9954ad164e99690ed1af0635a7949c36" category="inline-link-macro-rx"></block>。</block>
   <block id="3ffb7f02782ced1dbec181c6524bea0b" category="doc">光纤通道(FC)支持</block>
   <block id="51d8fa0a5eb3f269bad2a2a47a660a2d" category="paragraph">现在、您可以在Trident中使用光纤通道(Fibre Channel、FC)协议来配置和管理ONTAP系统上的存储资源。</block>
   <block id="5084aac4393e5aff5539dc0265ab2e37" category="paragraph">光纤通道因其高性能、可靠性和可扩展性而成为企业存储环境中广泛采用的协议。它为存储设备提供了一个强大而高效的通信通道、可实现快速而安全的数据传输。通过使用基于光纤通道的SCSI、您可以利用现有基于SCSI的存储基础架构、同时享受光纤通道的高性能和远距离功能。它可以整合存储资源、创建可扩展的高效存储区域网络(SAN)、从而以低延迟处理大量数据。</block>
@@ -4978,4 +4977,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="07e8df1ea1cba20edddeb5a9da554efd" category="sidebar">基于光纤通道的SCSI (FC)</block>
   <block id="766a0f35ad6c38b247125809df6efead" category="list-text">OpenShift 4.10 - 4.17</block>
   <block id="64467ac9530ff26c4e6495117175346d" category="admonition">如果使用的ONTAP是包含24个或更多字符的storagePrefix、则qtrees不会嵌入存储前缀、但会显示在卷名称中。</block>
+  <block id="716e675a4fa1eb80b65e215c4053483e" category="list-text">增加了对ONTAP驱动程序的光纤通道支持的技术预览。请参阅 <block ref="261f4d716d9b6dc09663ffbaf6630011" category="inline-link-macro-rx"></block>。</block>
 </blocks>
