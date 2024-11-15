@@ -63,7 +63,7 @@ link:./trident-protect/learn-about-trident-protect.html["详细了解Trident Pro
 
 ==== 试验性增强功能
 
-* 增加了对ONTAP驱动程序的光纤通道支持的技术预览。请参阅 link:../trident-use/fcp.html["光纤通道支持"]。
+* 增加了对ONTAP驱动程序的光纤通道支持的技术预览。请参阅 link:./trident-use/fcp.html["光纤通道支持"]。
 
 
 
