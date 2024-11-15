@@ -133,7 +133,7 @@ spec:
 使用以下环境变量设置*云提供程序(CP)*和*云身份(CI)*标志的值：
 
 `export CP="Azure"`
-`export CI="azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"`
+`export CI="'azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx'"`
 
 以下示例将安装Trident并使用环境变量将设置 `cloudProvider`为Azure `$CP`、并使用环境变量 `$CI`设置 `cloudIdentity`：
 
