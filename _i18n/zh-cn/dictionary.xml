@@ -4949,7 +4949,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="3ffb7f02782ced1dbec181c6524bea0b" category="doc">光纤通道(FC)支持</block>
   <block id="51d8fa0a5eb3f269bad2a2a47a660a2d" category="paragraph">现在、您可以在Trident中使用光纤通道(Fibre Channel、FC)协议来配置和管理ONTAP系统上的存储资源。</block>
   <block id="5084aac4393e5aff5539dc0265ab2e37" category="paragraph">光纤通道因其高性能、可靠性和可扩展性而成为企业存储环境中广泛采用的协议。它为存储设备提供了一个强大而高效的通信通道、可实现快速而安全的数据传输。通过使用基于光纤通道的SCSI、您可以利用现有基于SCSI的存储基础架构、同时享受光纤通道的高性能和远距离功能。它可以整合存储资源、创建可扩展的高效存储区域网络(SAN)、从而以低延迟处理大量数据。</block>
-  <block id="87ef5e348a9702ee84419ab313442e62" category="paragraph">通过将FC功能与Trident结合使用、您可以执行以下操作：*使用部署规范动态配置PVC。*创建卷快照并从快照创建新卷。*克隆现有FC-PVC。*调整已部署卷的大小。</block>
   <block id="822b1839c387749c78601eebc94c8d7d" category="paragraph">为FC配置所需的网络和节点设置。</block>
   <block id="f508b22c8fc4486b19fee39d5ded3841" category="section-title">网络设置</block>
   <block id="16fdd92def5a71313d6535c74ef67b81" category="inline-link-macro">network interface show</block>
@@ -4979,4 +4978,9 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="64467ac9530ff26c4e6495117175346d" category="admonition">如果使用的ONTAP是包含24个或更多字符的storagePrefix、则qtrees不会嵌入存储前缀、但会显示在卷名称中。</block>
   <block id="0d28255dc96cb23d422741096c09ce8e" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="bd5ed83ae12ddcfe924a6af54a0be554" prefix=" " category="inline-code"></block></block>
   <block id="8643539c7696bee604cfc39337280ef3" category="list-text">增加了对ONTAP驱动程序的光纤通道支持的技术预览。请参阅 <block ref="5aa030ef89b8f38b2fa353dc2fa17e8d" category="inline-link-macro-rx"></block>。</block>
+  <block id="1803781f7c004f51be9b62cbcd506ed2" category="paragraph">将FC功能与Trident结合使用、您可以执行以下操作：</block>
+  <block id="7294f3b61be368d5929dcdabac5431cf" category="list-text">使用部署规范动态配置PVC。</block>
+  <block id="aedb73fd0ccffbcf4bb3a5bc721b9603" category="list-text">创建卷快照并从此快照创建新卷。</block>
+  <block id="aa2fd96b8dfdeb6aaaf2bb11da1413aa" category="list-text">克隆现有FC-PVC。</block>
+  <block id="de35bb06ba09c90d091b31450c61efd7" category="list-text">调整已部署卷的大小。</block>
 </blocks>
