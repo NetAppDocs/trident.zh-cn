@@ -42,7 +42,7 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
 * Kubbernetes 1.25 - 1.31
-* OpenShift 4.10 - 4.16
+* OpenShift 4.10 - 4.17
 * R能 手Kubernetes Engine 2 (RKE2) v1.28.5+rke2r1
 
 
@@ -50,7 +50,7 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
 * Kubbernetes 1.25 - 1.31
-* OpenShift 4.10 - 4.16
+* OpenShift 4.10 - 4.17
 * R能 手Kubernetes Engine 2 (RKE2) v1.28.5+rke2r1
 
 
