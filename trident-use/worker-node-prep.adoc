@@ -12,7 +12,7 @@ summary: Kubernetes 集群中的所有工作节点都需要能够挂载为 Pod �
 
 
 [role="lead"]
-Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。要准备工作节点、必须根据您选择的驱动程序安装NFS、iSCSI或NVMe/TCP工具。
+Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。要准备工作节点、必须根据您选择的驱动程序安装NFS、iSCSI、NVMe/TCP或FC工具。
 
 
 

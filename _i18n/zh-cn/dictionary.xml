@@ -2834,7 +2834,6 @@ SMB</block>
   <block id="e80aabfb35c98e66a71baf6a3c90a7df" category="paragraph">启动dataLIF以恢复完整功能。</block>
   <block id="5afe86ac983ac04ac6d9268beb2bc024" category="section-title">已删除命名空间映射</block>
   <block id="9b0dbff182f270b33423b281f92bddc2" category="paragraph">添加<block ref="a564a902c12941efa27c1d2ea4a19f8e" prefix=" " category="inline-code"></block> 返回到子系统。</block>
-  <block id="cedfb4d575651cbf026e87084c68731c" category="paragraph">Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。要准备工作节点、必须根据您选择的驱动程序安装NFS、iSCSI或NVMe/TCP工具。</block>
   <block id="2994aa6a94d7af57a2fb9663129866a9" category="paragraph">如果您使用的是驱动程序组合、则应安装驱动程序所需的所有工具。默认情况下、最新版本的RedHat CoreTM OS已安装这些工具。</block>
   <block id="bfd6781963e74cc6cfd1f864a28a5b5b" category="admonition">对于NVMe/TCP、建议使用ONTAP 9.12或更高版本。</block>
   <block id="4771a9c521a7d39c2dcf6ee71d0ef032" category="section-title">NVMe/TCP卷</block>
@@ -3956,7 +3955,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="326a8f228f219b0e904c9d182f05edc0" category="list-text">使用后端选项时、新的NFS-NAS经济型ONTAP卷将使用每个qtree导出策略<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>。只有在发布时、qtrees才会映射到节点限制性导出策略、以提高访问控制和安全性。当Trident从所有节点取消发布卷时、现有qtrees将切换到新的导出策略模型、这样做不会影响活动工作负载。</block>
   <block id="62900e6f021ab726737e77fc086ef8d8" category="list-text">增加了对Kubnetes 1.31的支持。</block>
   <block id="99feca4f342726633c553b7037f4effd" category="section-title">试验性增强功能</block>
-  <block id="b4da90c52a04dd004929d86ec62cc931" category="list-text">增加了对ONTAP驱动程序的光纤通道支持的技术预览。</block>
   <block id="f47cb8e173cabaf3981c7356253eaf5f" category="list-text">*Kubernetes*：</block>
   <block id="d17c6ce149a6479587ff459c15a1f857" category="inline-link-macro">问题描述#839</block>
   <block id="0d72ada08f4f4a9200f5e98c300ac3f5" category="list-text">阻止Trident Helm安装的固定兰彻入场网钩<block ref="db779c46d1b4e6ce40c3816626258ba8" category="inline-link-macro-rx"></block>()。</block>
@@ -4948,4 +4946,35 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="de5da2c7cfd6c7eda31703be01d3513e" category="list-text">反转复制方向。</block>
   <block id="be41e0ea028981dcba35343dcbd34991" category="list-text">执行<block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>步骤。</block>
   <block id="e3f67484570d0b1b5736841718c5ab22" category="list-text">执行<block ref="80fca82e419d46692dbbc4fbbcd0c990" category="inline-xref-macro-rx"></block>步骤。</block>
+  <block id="d5b345f45f80f7f56440408591048e1a" category="inline-link-macro">光纤通道支持</block>
+  <block id="f1c09cfcd8aa6e6314b92b3a724aca83" category="list-text">增加了对ONTAP驱动程序的光纤通道支持的技术预览。请参阅 <block ref="9954ad164e99690ed1af0635a7949c36" category="inline-link-macro-rx"></block>。</block>
+  <block id="3ffb7f02782ced1dbec181c6524bea0b" category="doc">光纤通道(FC)支持</block>
+  <block id="51d8fa0a5eb3f269bad2a2a47a660a2d" category="paragraph">现在、您可以在Trident中使用光纤通道(Fibre Channel、FC)协议来配置和管理ONTAP系统上的存储资源。</block>
+  <block id="5084aac4393e5aff5539dc0265ab2e37" category="paragraph">光纤通道因其高性能、可靠性和可扩展性而成为企业存储环境中广泛采用的协议。它为存储设备提供了一个强大而高效的通信通道、可实现快速而安全的数据传输。通过使用基于光纤通道的SCSI、您可以利用现有基于SCSI的存储基础架构、同时享受光纤通道的高性能和远距离功能。它可以整合存储资源、创建可扩展的高效存储区域网络(SAN)、从而以低延迟处理大量数据。</block>
+  <block id="87ef5e348a9702ee84419ab313442e62" category="paragraph">通过将FC功能与Trident结合使用、您可以执行以下操作：*使用部署规范动态配置PVC。*创建卷快照并从快照创建新卷。*克隆现有FC-PVC。*调整已部署卷的大小。</block>
+  <block id="822b1839c387749c78601eebc94c8d7d" category="paragraph">为FC配置所需的网络和节点设置。</block>
+  <block id="f508b22c8fc4486b19fee39d5ded3841" category="section-title">网络设置</block>
+  <block id="16fdd92def5a71313d6535c74ef67b81" category="inline-link-macro">network interface show</block>
+  <block id="fc2e7b75efdee011ff06c37c7b71f6a6" category="list-text">获取目标接口的WWPN。有关详细信息、请参见 <block ref="cc71fd7fb2f6e7e70f421fe2150fdc04" category="inline-link-macro-rx"></block> 。</block>
+  <block id="cc7e69899d736126df9787634ad41870" category="list-text">获取启动程序(主机)上接口的WWPN。</block>
+  <block id="1089b965cabd19cfee7f3ef855fbd63d" category="paragraph">请参阅相应的主机操作系统实用程序。</block>
+  <block id="6f58745fc3a341adae0772d30d9e508c" category="list-text">使用主机和目标的WWPN在FC交换机上配置分区。</block>
+  <block id="54336aa51b161faac4d0ebb1b76b1536" category="paragraph">有关信息、请参见相应的交换机供应商文档。</block>
+  <block id="299f2e1a529559eb06c9dfbe12ccdea9" category="paragraph">有关详细信息、请参见以下ONTAP文档：</block>
+  <block id="d7281ba358054b30594dcd34819057a1" category="inline-link">光纤通道和 FCoE 分区概述</block>
+  <block id="bce9f24194c15bbf6b5ad6cd1d8d1899" category="list-text"><block ref="bce9f24194c15bbf6b5ad6cd1d8d1899" category="inline-link-rx"></block></block>
+  <block id="9b9db0b6f6df6361aa97412feea7ae07" category="list-text"><block ref="1a83c479258a4b0e250085c944bae4de" category="inline-link-rx"></block></block>
+  <block id="a92a311c4eeb6cfdcc775cfca067ea8d" category="paragraph">Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。要为FC准备工作节点、必须安装所需的工具。</block>
+  <block id="36b37761159ed00a729b4f6fab9a0f02" category="paragraph-title">安装FC工具</block>
+  <block id="f0ad3dc6a6ba17b1e77a2a4af657f22a" category="paragraph">使用适用于您的操作系统的命令安装FC工具。</block>
+  <block id="ef7c7fb7512d2686223cbef4d18a4687" category="section-title">创建后端配置</block>
+  <block id="9ca5edfbebc9d61a4e6f574ff097a540" category="paragraph">为驱动程序和<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block>创建一个Trident后端<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>作为sanType。</block>
+  <block id="6563093287f74a616e9d7ac49b4d6a44" category="paragraph">请参阅：</block>
+  <block id="c8a4ebb8f375440952f478262c6dc775" category="list-text"><block ref="c8a4ebb8f375440952f478262c6dc775" category="inline-link-macro-rx"></block></block>
+  <block id="4dff3394c7a642139ff55771ed74588c" category="list-text"><block ref="4dff3394c7a642139ff55771ed74588c" category="inline-link-macro-rx"></block></block>
+  <block id="db9cdbb22315c0c520742eed35564a6e" category="listing-title">使用FC的后端配置示例</block>
+  <block id="2f8299f876158db323c08455b12b585a" category="paragraph">有关详细信息、请参见：</block>
+  <block id="61379a8f62ab2974cb68f4754e439dfd" category="list-text"><block ref="61379a8f62ab2974cb68f4754e439dfd" category="inline-link-macro-rx"></block></block>
+  <block id="553ac32ac6bcab84d5384eda7468d415" category="paragraph">Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。要准备工作节点、必须根据您选择的驱动程序安装NFS、iSCSI、NVMe/TCP或FC工具。</block>
+  <block id="07e8df1ea1cba20edddeb5a9da554efd" category="sidebar">基于光纤通道的SCSI (FC)</block>
 </blocks>
