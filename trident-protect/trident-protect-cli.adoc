@@ -75,17 +75,17 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 ----
 chmod +x tridentctl-protect
 ----
-. 将插件二进制文件复制到您选择的路径：
-+
-[source, console]
-----
-cp ./tridentctl-protect ~/bin/
-----
-. (可选)要全局安装二进制文件、请将插件二进制文件复制到全局路径。例如： `/usr/bin`或 `/usr/local/bin`(您可能需要提升Privileges)：
+. 将插件二进制文件复制到路径变量中定义的位置。例如、 `/usr/bin`或 `/usr/local/bin`(您可能需要提升Privileges)：
 +
 [source, console]
 ----
 cp ./tridentctl-protect /usr/local/bin/
+----
+. 您也可以将二进制文件复制到主目录中的某个位置。在这种情况下、您可能需要将位置添加到路径变量中：
++
+[source, console]
+----
+cp ./tridentctl-protect ~/bin/
 ----
 
 
