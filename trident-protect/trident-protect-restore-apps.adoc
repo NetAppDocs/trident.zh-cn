@@ -25,6 +25,9 @@ NOTE: 还原应用程序时、为该应用程序配置的所有执行挂钩都�
 
 使用BackupRestore CR将备份还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、但还原后的应用程序不会自动受Trident Protect保护。要保护已还原的应用程序、您需要为已还原的应用程序创建应用程序CR、以使其受到Trident Protect的保护。
 
+
+NOTE: 将备份还原到具有现有资源的其他命名空间不会更改与备份中的资源共享名称的任何资源。要还原备份中的所有资源、请删除并重新创建目标命名空间、或者将备份还原到新命名空间。
+
 [role="tabbed-block"]
 ====
 .使用CR
@@ -121,9 +124,6 @@ tridentctl protect create backuprestore <my_restore_name> --backup <backup_names
 == 从备份还原到原始命名空间
 
 您可以随时将备份还原到原始命名空间。
-
-
-NOTE: 将备份还原到包含现有资源的命名空间不会更改与备份中的资源共享名称的任何资源。要还原备份中的所有资源、请删除并重新创建目标命名空间、或者将备份还原到新命名空间。
 
 [role="tabbed-block"]
 ====
