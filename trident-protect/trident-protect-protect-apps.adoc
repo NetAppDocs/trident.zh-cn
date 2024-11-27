@@ -26,6 +26,7 @@ summary: 通过使用自动保护策略或临时创建快照和备份来保护�
 ====
 .使用CR创建快照
 --
+.步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-snapshot-cr.yaml`。
 . 在创建的文件中、配置以下属性：
 +
@@ -64,6 +65,7 @@ kubectl apply -f trident-protect-snapshot-cr.yaml
 --
 .使用命令行界面创建快照
 --
+.步骤
 . 创建快照、将括号中的值替换为您环境中的信息。例如：
 +
 [source, console]
@@ -84,6 +86,7 @@ tridentctl protect create snapshot <my_snapshot_name> --appvault <my_appvault_na
 ====
 .使用CR创建备份
 --
+.步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-backup-cr.yaml`。
 . 在创建的文件中、配置以下属性：
 +
@@ -129,6 +132,7 @@ kubectl apply -f trident-protect-backup-cr.yaml
 --
 .使用命令行界面创建备份
 --
+.步骤
 . 创建备份、将括号中的值替换为您环境中的信息。例如：
 +
 [source, console]
@@ -149,6 +153,7 @@ tridentctl protect create backup <my_backup_name> --appvault <my-vault-name> --a
 ====
 .使用CR创建计划
 --
+.步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-schedule-cr.yaml`。
 . 在创建的文件中、配置以下属性：
 +
@@ -208,6 +213,7 @@ kubectl apply -f trident-protect-schedule-cr.yaml
 --
 .使用命令行界面创建计划
 --
+.步骤
 . 创建保护计划、将括号中的值替换为您环境中的信息。例如：
 +
 

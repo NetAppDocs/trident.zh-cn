@@ -23,6 +23,7 @@ NOTE: 默认情况下、Trident Protect会收集有助于处理您可能创建�
 ====
 .安装Trident Protect from NetApp
 --
+.步骤
 . 添加Trident Helm存储库：
 +
 [source, console]
@@ -68,6 +69,7 @@ NOTE: 要使冻结功能正常运行、您需要设置虚拟化。在此设置�
 --
 如果您的Trident集群无法访问Internet、则可以从专用映像注册表安装Kubbernetes Protect。在以下示例中、将括号中的值替换为您环境中的信息：
 
+.步骤
 . 将以下映像提取到本地计算机、更新标记、然后将其推送到您的私人注册表：
 +
 [source, console]

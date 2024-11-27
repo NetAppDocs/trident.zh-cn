@@ -4279,7 +4279,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="39e92ae6d270535c1cad298373650560" category="list-text">Trident无法阻止目标名称空间写入共享卷。您应使用文件锁定或其他进程来防止覆盖共享卷数据。</block>
   <block id="b709b82e3d76fa5433fd3117387424b7" category="paragraph-title">基于FC的SCSI工具</block>
   <block id="538d9a372d40e637e45a51fde689ef1e" category="paragraph">*基于光纤通道的SCSI (FC)是Trident 24.10版本中的一项技术预览功能。*</block>
-  <block id="71cde5377ffe15a11aa498d698ca098f" category="paragraph"><block ref="918981963bb555a1b3a006c12fd13637" category="inline-link-macro-rx"></block>如果您使用的是<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>sanType<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block> (基于FC的SCSI)。</block>
   <block id="867cf4bbcb92ecc7017612aafa765813" category="inline-link-macro">配置FC和FC-NVMe SAN主机的方式(&amp;A)</block>
   <block id="fb42223c0808d27492a06be4e773dc26" category="paragraph">有关详细信息、请参见 <block ref="ee9d56c9130a1d3814c95b35eb7c82a4" category="inline-link-macro-rx"></block> 。</block>
   <block id="16649adc62ed952ba4dac811c548cbfb" category="paragraph">Trident会尝试自动检测节点是否可以运行iSCSI或NFS服务。</block>
@@ -4983,4 +4982,8 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="15286900a0d0667ffc4d515aeec6a1d2" category="list-text">将插件二进制文件复制到路径变量中定义的位置。例如、<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block>或<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block>(您可能需要提升Privileges)：</block>
   <block id="b3062a04e26d499596575c6767c02c16" category="list-text">您也可以将二进制文件复制到主目录中的某个位置。在这种情况下、您可能需要将位置添加到路径变量中：</block>
   <block id="cff063350a0daf1b0ee4c6c97eb2e2de" category="admonition">将备份还原到具有现有资源的其他命名空间不会更改与备份中的资源共享名称的任何资源。要还原备份中的所有资源、请删除并重新创建目标命名空间、或者将备份还原到新命名空间。</block>
+  <block id="e8e7bb3124435135f9fc5dab713148e1" category="list-text">如果将运行RHE/RedHat Core-OS的工作节点与FC PV结合使用、请在StorageClass中指定<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block>mountOption以执行实时空间回收。请参阅<block ref="cef8948c7b8e90d5be591e67d93555a7" category="inline-link-rx"></block>。</block>
+  <block id="0ac202e458490a734271522fcedf4876" category="list-text">确保<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>正在运行：</block>
+  <block id="69eeaf73fccab6d6abcba46bd6a3a3bf" category="list-text">确保<block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block>已启用且正在运行：</block>
+  <block id="00ea3f7016d7b9a4ad023b106cc1e6d3" category="paragraph"><block ref="7e7b7908484dc2cebc13ec93d8042bd0" category="inline-link-macro-rx"></block>如果您使用的是<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>sanType<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block> (基于FC的SCSI)。</block>
 </blocks>

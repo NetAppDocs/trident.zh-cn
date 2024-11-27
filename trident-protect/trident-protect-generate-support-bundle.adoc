@@ -20,6 +20,7 @@ summary: '通过Trident Protect、管理员可以生成包含对NetApp支持有�
 ====
 .使用CR创建支持包
 --
+.步骤
 . 创建自定义资源(CR)文件并将其命名(例如 `trident-protect-support-bundle.yaml`)。
 . 配置以下属性：
 +
@@ -65,6 +66,7 @@ kubectl apply -f trident-protect-support-bundle.yaml
 --
 .使用命令行界面创建支持包
 --
+.步骤
 . 创建支持包、将括号中的值替换为您环境中的信息。 `trigger-type`确定是否立即创建分发包，或者是否由计划决定了创建时间，可以是 `Manual`或 `Scheduled`。默认设置为 `Manual`。
 +
 例如：

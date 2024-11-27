@@ -32,6 +32,7 @@ NOTE: 将备份还原到具有现有资源的其他命名空间不会更改与�
 ====
 .使用CR
 --
+.步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-backup-restore-cr.yaml`。
 . 在创建的文件中、配置以下属性：
 +
@@ -109,6 +110,7 @@ kubectl apply -f trident-protect-backup-restore-cr.yaml
 --
 .使用命令行界面
 --
+.步骤
 . 将备份还原到其他命名空间、将括号中的值替换为环境中的信息。此 `namespace-mapping`参数使用冒号分隔的卷来将源卷的源卷映射到格式为的正确目标卷的 `source1:dest1,source2:dest2`卷。例如：
 +
 [source, console]
@@ -129,6 +131,7 @@ tridentctl protect create backuprestore <my_restore_name> --backup <backup_names
 ====
 .使用CR
 --
+.步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-backup-ipr-cr.yaml`。
 . 在创建的文件中、配置以下属性：
 +
@@ -203,6 +206,7 @@ kubectl apply -f trident-protect-backup-ipr-cr.yaml
 --
 .使用命令行界面
 --
+.步骤
 . 将备份还原到原始命名空间、将括号中的值替换为环境中的信息。 `backup`参数使用格式为的命名空间和备份名称 `<namespace>/<name>`。例如：
 +
 [source, console]
@@ -223,6 +227,7 @@ tridentctl protect create backupinplacerestore <my_restore_name> --backup <names
 ====
 .使用CR
 --
+.步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-snapshot-restore-cr.yaml`。
 . 在创建的文件中、配置以下属性：
 +
@@ -300,6 +305,7 @@ kubectl apply -f trident-protect-snapshot-restore-cr.yaml
 --
 .使用命令行界面
 --
+.步骤
 . 将快照还原到其他命名空间、将括号中的值替换为环境中的信息。
 +
 **  `snapshot`参数使用格式为的命名空间和快照名称 `<namespace>/<name>`。
@@ -328,6 +334,7 @@ tridentctl protect create snapshotrestore <my_restore_name> --snapshot <namespac
 ====
 .使用CR
 --
+.步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-snapshot-ipr-cr.yaml`。
 . 在创建的文件中、配置以下属性：
 +
@@ -399,6 +406,7 @@ kubectl apply -f trident-protect-snapshot-ipr-cr.yaml
 --
 .使用命令行界面
 --
+.步骤
 . 将快照还原到原始命名空间、将括号中的值替换为环境中的信息。例如：
 +
 [source, console]

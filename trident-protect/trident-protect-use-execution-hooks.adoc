@@ -97,6 +97,7 @@ NOTE: 如果将命名空间筛选器添加到在还原或克隆操作之后运�
 ====
 .使用CR
 --
+.步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-hook.yaml`。
 . 根据您的Trident Protect环境和集群配置配置以下属性：
 +
@@ -183,6 +184,7 @@ kubectl apply -f trident-protect-hook.yaml
 --
 .使用命令行界面
 --
+.步骤
 . 创建执行挂钩、将括号中的值替换为环境中的信息。例如：
 +
 [source, console]
