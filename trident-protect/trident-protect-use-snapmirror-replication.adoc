@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-use-snapmirror-replication.html
 keywords: trident, protect, netapp, snapmirror, data, asynchronous, replication, clusters 
 summary: 通过使用Trident Protect、您可以使用NetApp SnapMirror技术的异步复制功能将数据和应用程序更改从一个存储后端复制到另一个存储后端、复制到同一集群上或复制到不同集群之间。 
 ---
-= 使用NetApp SnapMirror复制应用程序
+= 使用NetApp SnapMirror和Trident Protect复制应用程序
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

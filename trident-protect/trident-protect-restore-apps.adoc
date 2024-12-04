@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-restore-apps.html
 keywords: trident, protect, restore, data, backup 
 summary: 您可以使用Trident Protect从快照或备份还原应用程序。将应用程序还原到同一集群时，从现有快照进行还原的速度会更快。 
 ---
-= 还原应用程序
+= 使用Trident Protect还原应用程序
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

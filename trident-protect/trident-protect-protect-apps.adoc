@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-protect-apps.html
 keywords: protect, snapshots, demand, configuration, cluster, appvault 
 summary: 通过使用自动保护策略或临时创建快照和备份来保护所有应用程序。 
 ---
-= 保护应用程序
+= 使用Trident Protect保护应用程序
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

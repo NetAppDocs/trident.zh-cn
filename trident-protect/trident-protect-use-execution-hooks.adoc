@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-use-execution-hooks.html
 keywords: trident, protect, execution hooks 
 summary: 您可以使用Trident Protect为应用程序创建自定义执行挂钩。要创建执行挂钩，您需要拥有所有者，管理员或成员权限。 
 ---
-= 管理执行挂钩
+= 管理Trident Protect执行挂钩
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

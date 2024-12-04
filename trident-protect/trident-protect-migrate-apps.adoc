@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-migrate-apps.html
 keywords: trident, protect, migrate, storage, restore, backup 
 summary: 您可以将备份或快照数据还原到其他集群或存储类 
 ---
-= 迁移应用程序
+= 使用Trident Protect迁移应用程序
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

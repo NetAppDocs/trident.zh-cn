@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-generate-support-bundle.html
 keywords: trident, protect, bundle, support, netapp, custom, resource, file 
 summary: '通过Trident Protect、管理员可以生成包含对NetApp支持有用信息的捆绑包、其中包括有关所管理的集群和应用程序的日志、指标和拓扑信息。如果您已连接到Internet、则可以使用自定义资源(CR)文件将支持包上传到NetApp支持站点(NSS)。' 
 ---
-= 生成支持包
+= 生成Trident Protect支持包
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

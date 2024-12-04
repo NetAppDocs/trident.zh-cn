@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: manage, authentication, rbac 
 summary: 'Trident Protect使用基于角色的访问控制(Role-Based Access Control、RBAC)的Kubelnetes模型。您可以使用Trident保护RBAC功能更精细地控制对资源的访问。' 
 ---
-= 管理授权和访问控制
+= 管理Trident保护授权和访问控制
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/

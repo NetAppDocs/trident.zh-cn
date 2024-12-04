@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-manage-applications.html
 keywords: appvault, data protection, custom resource, namespace, application, cluster 
 summary: 您可以通过创建应用程序CR和关联的Trident Vault CR来使AppProtect能够识别要管理的应用程序。 
 ---
-= 定义要管理的应用程序
+= 使用Trident Protect定义要管理的应用程序
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

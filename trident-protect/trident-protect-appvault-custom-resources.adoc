@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-appvault-custom-resources.html
 keywords: trident. appvault, custom, protect, kubernetes 
 summary: '用于Trident Protect的存储分段自定义资源(CR)称为AppVault。AppVault是存储分段的声明性Kubarnetes工作流表示形式。' 
 ---
-= 使用AppVault对象管理分段
+= 使用Trident Protect AppVault对象管理分段
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

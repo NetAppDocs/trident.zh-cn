@@ -4429,7 +4429,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">结果</block>
   <block id="a2290b3f31cfd85a3e9ff7885be716a7" category="paragraph">下次shell登录时、您可以将命令自动完成与trdentctrL保护插件结合使用。</block>
   <block id="7b6672be7a52979b1357ccc3d2a45f8a" category="summary">通过Trident Protect、管理员可以生成包含对NetApp支持有用信息的捆绑包、其中包括有关所管理的集群和应用程序的日志、指标和拓扑信息。如果您已连接到Internet、则可以使用自定义资源(CR)文件将支持包上传到NetApp支持站点(NSS)。</block>
-  <block id="c06b3814928e21adcd4d633f11293a23" category="doc">生成支持包</block>
   <block id="e984343e441956b7136d09919877b5ab" category="open-title">使用CR创建支持包</block>
   <block id="dd942fa25b8e28c96c8d05e37b0f157e" category="list-text">创建自定义资源(CR)文件并将其命名(例如<block ref="699c503b46d4ca3ec78905dff3704cac" prefix=" " category="inline-code"></block>)。</block>
   <block id="18924d9e76d2dc9a88bddb772904461d" category="list-text">配置以下属性：</block>
@@ -4680,7 +4679,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="aec02c2a1b714f40a949aa18d1f2d588" category="list-text">删除Trident保护：</block>
   <block id="20c06650be80c297c0e4dc5ae977d44f" category="list-text">删除Trident Protect命名空间：</block>
   <block id="a8c1fc9f09b8338dd9f8badd5c3d30c0" category="summary">您可以使用Trident Protect为应用程序创建自定义执行挂钩。要创建执行挂钩，您需要拥有所有者，管理员或成员权限。</block>
-  <block id="cbb269e08085ebb437449cc744357ee6" category="doc">管理执行挂钩</block>
   <block id="ccd62d676165e34c2e9c6d088c06e70f" category="paragraph">执行挂钩是一种自定义操作、您可以将其配置为与受管应用程序的数据保护操作结合运行。例如、如果您有一个数据库应用程序、则可以使用执行挂钩在快照之前暂停所有数据库事务、并在快照完成后恢复事务。这样可以确保应用程序一致的快照。</block>
   <block id="83fbf1604bedff410ea11872b40ab9f0" category="section-title">执行挂钩的类型</block>
   <block id="d702711249a4d54c15ce81c80152b8e7" category="paragraph">Trident Protect支持以下类型的执行挂钩、具体取决于它们可以运行的时间：</block>
@@ -4986,4 +4984,12 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="0ac202e458490a734271522fcedf4876" category="list-text">确保<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>正在运行：</block>
   <block id="69eeaf73fccab6d6abcba46bd6a3a3bf" category="list-text">确保<block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block>已启用且正在运行：</block>
   <block id="00ea3f7016d7b9a4ad023b106cc1e6d3" category="paragraph"><block ref="7e7b7908484dc2cebc13ec93d8042bd0" category="inline-link-macro-rx"></block>如果您使用的是<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>sanType<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block> (基于FC的SCSI)。</block>
+  <block id="0cc310db20eaee9161e8ef937010b536" category="doc">管理Trident保护授权和访问控制</block>
+  <block id="97f3fa7a4bb86197f0db69aa160c73e9" category="doc">使用Trident Protect AppVault对象管理分段</block>
+  <block id="bf4313699bccd15d73aa8653cfdfd754" category="doc">使用Trident Protect定义要管理的应用程序</block>
+  <block id="b6a8ee5a5280d899b4ea1be0f8697335" category="doc">使用Trident Protect迁移应用程序</block>
+  <block id="8686ed080978191a10848ee52cd0c87a" category="doc">使用Trident Protect保护应用程序</block>
+  <block id="0539043b2ec0bd1bfae64dc58173dec7" category="doc">使用Trident Protect还原应用程序</block>
+  <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">管理Trident Protect执行挂钩</block>
+  <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">使用NetApp SnapMirror和Trident Protect复制应用程序</block>
 </blocks>
