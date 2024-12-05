@@ -649,8 +649,6 @@
   <block id="923680056b0f0258907f498670b4ead1" category="section-title">容器映像以及相应的 Kubernetes 版本</block>
   <block id="aa92c4c233bc01609d957e469736b699" category="cell">容器映像</block>
   <block id="a60c2f57df655a9ac5fcaa0750886195" category="summary">如果您刚刚开始使用 Kubernetes ，请按照说明安装 Kubernetes 以进行尝试。这些说明提供了一个裸机单节点集群， Trident 可以与此集群集成以供演示。</block>
-  <block id="e8dadc588901af436e2c6036acf23973" category="inline-link-macro">NetApp 试用</block>
-  <block id="8685ac2061f9dca7ab48f41e0871f7af" category="inline-link-macro">《 kubeadm 安装指南》</block>
   <block id="231cf4c70d866b616c21baddaeed0696" category="doc">故障排除</block>
   <block id="40e41fb2db11266b8f751c0d5c67cba0" category="inline-link">NetApp 知识库（需要登录）</block>
   <block id="163fb9eb00818e2c7109900db1a3cc82" category="section-title">常规故障排除</block>
@@ -2548,8 +2546,6 @@ SMB</block>
   <block id="8f29ef239c0926132689374fc142a732" category="image-alt">运行CSI节点插件并具有适用CSI二进化标准的三进位节点Pod示意图。</block>
   <block id="58095fffdb6c13585af5e47e876f7afe" category="inline-link-macro">Kubbernetes概念和工具</block>
   <block id="1bc6462cd59612636c72620a6a67410b" category="admonition">如果这是您首次使用Kubarnetes、您应熟悉 <block ref="41eecc10f74d492dbf2a2c207d5acb1b" category="inline-link-macro-rx"></block>。</block>
-  <block id="3ff64d30b8ccd0f89740b2ba54cf8bf3" category="paragraph">另一个选项是 <block ref="c7dbb75618a5e106a360075f923cb87f" category="inline-link-macro-rx"></block> 由 Kubernetes 提供。</block>
-  <block id="80f4cfbe493e12651c3514c9481ce1ee" category="admonition">请勿在生产环境中使用按照以下说明构建的Kubennet集群。请使用您的分销商提供的生产部署指南来了解生产就绪集群。</block>
   <block id="2d15dd50ddfe5e28746975645a5652ca" category="paragraph-title"><block ref="54f425ce8d89f4ed6b8a546561af5d60" category="inline-image-macro-rx" type="image"></block> 准备工作节点</block>
   <block id="aba4bc9d3bde7d18b07c23d5c7d0f495" category="paragraph">Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。</block>
   <block id="f3b066024fd8e2699d194d41d5e46a5d" category="paragraph-title"><block ref="05b2444faffd66d76e88602ea7dd353f" category="inline-image-macro-rx" type="image"></block> 创建后端</block>
@@ -3579,8 +3575,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="b1779edf31deaecac634566a2a377f62" category="paragraph">Trident是一款与本机集成的符合容器存储接口(CI)的动态存储流程编排程序<block ref="c4f47b2d4c7b6c009c3ed9bc1f952dce" category="inline-link-macro-rx"></block>。Trident在集群中的每个工作节点上作为一个控制器Pod加一个节点Pod运行。有关详细信息、请参见 <block ref="9f6208219ae600271f6632db354451ed" category="inline-link-macro-rx"></block> 。</block>
   <block id="d613d80a6fcacbbceeb665fc5b0846f0" category="inline-link-macro">部署适用于Docker的Trident</block>
   <block id="5b6cbf8e3be454064a322ad7f9c47cc2" category="paragraph">Trident还可以直接与适用于NetApp存储平台的Docker生态系统集成。NetApp Docker卷插件(nDVP)支持从存储平台到Docker主机配置和管理存储资源。有关详细信息、请参见 <block ref="168e02b8c5756e29b56aa79aa4a1b715" category="inline-link-macro-rx"></block> 。</block>
-  <block id="3c22b34ac3f55b89b9b011bed80160de" category="section-title">试用Trident</block>
-  <block id="f8bae4faf187691bac6dbbda926fb426" category="paragraph">要进行试用、请使用随时可用的实验室映像申请访问"轻松部署和克隆容器化工作负载的永久性存储"<block ref="eb9c34df0ed196dd801ef85207c8bf2c" category="inline-link-macro-rx"></block>。此测试驱动器提供了一个沙盒环境、其中安装并配置了三节点Kubbernetes集群和Trident。这是熟悉Trident并了解其功能的绝佳方式。</block>
   <block id="ad82bf93e4b28ad012a8be09e30d3d59" category="paragraph">Trident 可以直接在底层 NetApp HCI 存储平台上为容器化应用程序配置和管理存储设备。</block>
   <block id="2c1264786e66608f1b91c735d79624ad" category="paragraph">ONTAP 系统采用全闪存，混合或全 HDD 配置，并提供多种不同的部署模式，包括专门设计的硬件（ FAS 和 AFF ），白盒（ ONTAP Select ）和纯云（ Cloud Volumes ONTAP ）。Trident支持这些ONTAP部署模式。</block>
   <block id="10f0fa4079121b371145e16713fdbb44" category="section-title">Trident</block>
@@ -4992,4 +4986,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="0539043b2ec0bd1bfae64dc58173dec7" category="doc">使用Trident Protect还原应用程序</block>
   <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">管理Trident Protect执行挂钩</block>
   <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">使用NetApp SnapMirror和Trident Protect复制应用程序</block>
+  <block id="2fc23e09b483dc4495beb473646c0273" category="list-text"><block ref="2fc23e09b483dc4495beb473646c0273" category="inline-link-macro-rx"></block></block>
 </blocks>

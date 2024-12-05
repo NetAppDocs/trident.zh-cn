@@ -17,6 +17,7 @@ summary: 后端用于定义Trident与存储系统之间的关系。它会告诉T
 Trident会自动从满足存储类定义的要求的后端提供存储池。了解如何为存储系统配置后端。
 
 * link:anf.html["配置 Azure NetApp Files 后端"^]
+* link:gcnv.html["配置Google Cloud NetApp卷后端"^]
 * link:gcp.html["配置适用于 Google 云平台的 Cloud Volumes Service 后端"^]
 * link:element.html["配置 NetApp HCI 或 SolidFire 后端"^]
 * link:ontap-nas.html["使用 ONTAP 或 Cloud Volumes ONTAP NAS 驱动程序配置后端"^]
