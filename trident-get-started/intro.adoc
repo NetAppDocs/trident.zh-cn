@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/intro.html 
-keywords: product overview, Trident, fsx, element, google cloud, cvs, architecture, test drive, node pod, controller pod, pods, csi, sidecar 
+keywords: product overview, Trident, fsx, element, google cloud, cvs, architecture, node pod, controller pod, pods, csi, sidecar 
 summary: 'Trident 是一个由 NetApp 维护的完全受支持的开源项目。它旨在帮助您使用容器存储接口(CSI)等行业标准接口满足容器化应用程序的持久性需求。' 
 ---
 = 了解Trident
@@ -26,17 +26,6 @@ Trident还可以直接与适用于NetApp存储平台的Docker生态系统集成�
 
 
 NOTE: 如果这是您首次使用Kubarnetes、您应熟悉 link:https://kubernetes.io/docs/home/["Kubbernetes概念和工具"^]。
-
-
-
-== 试用Trident
-
-要进行试用、请使用随时可用的实验室映像申请访问"轻松部署和克隆容器化工作负载的永久性存储"link:https://www.netapp.com/us/try-and-buy/test-drive/index.aspx["NetApp 试用"^]。此测试驱动器提供了一个沙盒环境、其中安装并配置了三节点Kubbernetes集群和Trident。这是熟悉Trident并了解其功能的绝佳方式。
-
-另一个选项是 link:https://kubernetes.io/docs/setup/independent/install-kubeadm/["《 kubeadm 安装指南》"] 由 Kubernetes 提供。
-
-
-NOTE: 请勿在生产环境中使用按照以下说明构建的Kubennet集群。请使用您的分销商提供的生产部署指南来了解生产就绪集群。
 
 
 
