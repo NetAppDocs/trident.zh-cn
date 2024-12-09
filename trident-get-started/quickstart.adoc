@@ -17,19 +17,19 @@ summary: 如果您刚刚开始使用 Kubernetes ，请按照说明安装 Kuberne
 
 NOTE: 对于Docker，请参见link:../trident-docker/deploy-docker.html["适用于Docker的Trident"]。
 
-.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["一个"]安装Trident
-[role="quick-margin-para"]
-Trident提供了多种针对各种环境和组织进行了优化的安装方法和模式。
-
-[role="quick-margin-para"]
-link:../trident-get-started/kubernetes-deploy.html["安装 Trident"]
-
-.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["两个"] 准备工作节点
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["一个"]准备工作节点
 [role="quick-margin-para"]
 Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。
 
 [role="quick-margin-para"]
 link:../trident-use/worker-node-prep.html["准备工作节点"]
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["两个"]安装Trident
+[role="quick-margin-para"]
+Trident提供了多种针对各种环境和组织进行了优化的安装方法和模式。
+
+[role="quick-margin-para"]
+link:../trident-get-started/kubernetes-deploy.html["安装 Trident"]
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["三个"] 创建后端
 [role="quick-margin-para"]

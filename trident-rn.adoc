@@ -144,13 +144,6 @@ link:./trident-protect/learn-about-trident-protect.html["详细了解Trident Pro
 
 
 
-=== 已弃用
-
-* 不再支持EOL Windows Server 2019。
-
-
-
-
 == 24.02中的变化
 
 

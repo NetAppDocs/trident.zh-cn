@@ -37,7 +37,7 @@ summary: 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。�
 | `m年` 月 日 | 集群或SVM管理LIF的IP地址。可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`。有关无缝MetroCluster切换的信息，请参见<<mcc-best>>。 | "10.0.0.1 " ， "2001 ： 1234 ： abcd ：：： fefe] " 
 
 
-| `dataLIF` | 协议 LIF 的 IP 地址。*不指定iSCSI。*Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iCI LUN。如果明确定义、则会生成警告 `dataLIF`。*省略MetroCluster。*请参见<<mcc-best>>。 | 由SVM派生 
+| `dataLIF` | 协议 LIF 的 IP 地址。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`。*不指定iSCSI。*Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iCI LUN。如果明确定义、则会生成警告 `dataLIF`。*省略MetroCluster。*请参见<<mcc-best>>。 | 由SVM派生 
 
 
 | `sVM` | 要使用的 Storage Virtual Machine
