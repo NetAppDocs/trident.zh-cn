@@ -36,7 +36,7 @@ summary:
 
 === 网络设置
 
-. 获取目标接口的WWPN。有关详细信息、请参见 link:..https://docs.netapp.com/us-en/ontap-cli//network-interface-show.html["network interface show"^] 。
+. 获取目标接口的WWPN。有关详细信息、请参见 https://docs.netapp.com/us-en/ontap-cli//network-interface-show.html["network interface show"^] 。
 . 获取启动程序(主机)上接口的WWPN。
 +
 请参阅相应的主机操作系统实用程序。

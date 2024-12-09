@@ -3228,7 +3228,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="98c3c9acd444d11890d48438db3c165e" category="paragraph">您可以通过作为AWS IAM角色进行身份验证(而不是提供显式AWS凭据)来配置Kubbernetes Pod以访问AWS资源。</block>
   <block id="3f566b5ded6e7ac8c26dd3c07a2ea056" category="admonition">要使用AWS IAM角色进行身份验证、您必须使用EKS部署Kubenetes集群。</block>
   <block id="3a218e8961578d046aa713039445902b" category="section-title">创建AWS机密管理器密钥</block>
-  <block id="6a73f77169c507b4f8a8e33a9180355b" category="paragraph"><block ref="0d1bf1201bf9db7aed15db6de2873c7a" prefix="" category="inline-code"></block></block>
   <block id="3926fdac6344d565c95f560468946335" category="section-title">创建IAM策略</block>
   <block id="78edc229f8df1c5e0840f6469bc28454" category="paragraph">以下示例将使用AWS命令行界面创建IAM策略：</block>
   <block id="96cc21e053acccb273475c8c6744b18e" category="paragraph"><block ref="21a8f9d92c42f5ae09a1d5ac91dbb3c5" prefix="" category="inline-code"></block></block>
@@ -4940,7 +4939,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="822b1839c387749c78601eebc94c8d7d" category="paragraph">为FC配置所需的网络和节点设置。</block>
   <block id="f508b22c8fc4486b19fee39d5ded3841" category="section-title">网络设置</block>
   <block id="16fdd92def5a71313d6535c74ef67b81" category="inline-link-macro">network interface show</block>
-  <block id="fc2e7b75efdee011ff06c37c7b71f6a6" category="list-text">获取目标接口的WWPN。有关详细信息、请参见 <block ref="cc71fd7fb2f6e7e70f421fe2150fdc04" category="inline-link-macro-rx"></block> 。</block>
   <block id="cc7e69899d736126df9787634ad41870" category="list-text">获取启动程序(主机)上接口的WWPN。</block>
   <block id="1089b965cabd19cfee7f3ef855fbd63d" category="paragraph">请参阅相应的主机操作系统实用程序。</block>
   <block id="6f58745fc3a341adae0772d30d9e508c" category="list-text">使用主机和目标的WWPN在FC交换机上配置分区。</block>
@@ -4987,4 +4985,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">管理Trident Protect执行挂钩</block>
   <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">使用NetApp SnapMirror和Trident Protect复制应用程序</block>
   <block id="2fc23e09b483dc4495beb473646c0273" category="list-text"><block ref="2fc23e09b483dc4495beb473646c0273" category="inline-link-macro-rx"></block></block>
+  <block id="e132245ad28668c6b32dee21fb8a3820" category="list-text">获取目标接口的WWPN。有关详细信息、请参见<block ref="92fd8fd0370792cd397ea6fdc3c8edb0" category="inline-link-rx"></block> 。</block>
+  <block id="5597ca99169fee10411d6b2ace3c56ea" category="paragraph"><block ref="bf121260f097199f29e6e1734da8ea69" prefix="" category="inline-code"></block></block>
 </blocks>
