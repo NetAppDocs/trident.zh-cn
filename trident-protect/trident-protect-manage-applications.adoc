@@ -24,9 +24,9 @@ summary: 您可以通过创建应用程序CR和关联的Trident Vault CR来使Ap
 
 
 
-== 创建应用程序CR
+== 定义应用程序
 
-您需要为要使用Trident Protect管理的每个应用程序创建一个应用程序CR。您可以通过手动创建应用程序CR或使用Trident Protect命令行界面创建CR来添加要管理的应用程序。
+您需要定义要使用Trident Protect管理的每个应用程序。您可以通过手动创建应用程序CR或使用Trident Protect命令行界面来定义要管理的应用程序。
 
 [role="tabbed-block"]
 ====
@@ -53,13 +53,18 @@ metadata:
   namespace: my-app-namespace
 spec:
   includedNamespaces:
-    labelSelector: {}
-    namespace: my-app-namespace
+    - namespace: my-app-namespace
 ----
 
 
 
 
+. 创建应用程序CR以匹配您的环境后、请应用CR。例如：
++
+[source, console]
+----
+kubectl apply -f maria-app.yaml
+----
 
 
 --
