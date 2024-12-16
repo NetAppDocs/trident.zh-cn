@@ -52,16 +52,6 @@ helm install trident-protect netapp-trident-protect/trident-protect --set autoSu
 ----
 
 
-. (可选)冻结VM。如果您对SnapMirror使用KubeVirt支持、则冻结VM有助于有效管理这些虚拟机：
-+
-[source, console]
-----
-kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
-----
-+
-
-NOTE: 要使冻结功能正常运行、您需要设置虚拟化。在此设置后部署的VM包括冻结和取消冻结所需的二进制文件。要了解有关设置虚拟化的详细信息，请参见link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["安装OpenShift虚拟化"^]。
-
 
 
 --
@@ -169,16 +159,6 @@ helm install trident-protect netapp-trident-protect/trident-protect --set cluste
 helm install trident-protect netapp-trident-protect/trident-protect --set autoSupport.enabled=false --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect -f protectValues.yaml
 ----
 
-
-. (可选)冻结VM。如果您对SnapMirror使用KubeVirt支持、则冻结VM有助于有效管理这些虚拟机：
-+
-[source, console]
-----
-kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
-----
-+
-
-NOTE: 要使冻结功能正常运行、您需要设置虚拟化。在此设置后部署的VM包括冻结和取消冻结所需的二进制文件。要了解有关设置虚拟化的详细信息，请参见link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["安装OpenShift虚拟化"^]。
 
 
 

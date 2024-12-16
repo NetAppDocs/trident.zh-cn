@@ -1,0 +1,31 @@
+= 
+:allow-uri-read: 
+
+
+保护在KubeVirt VM上运行的应用程序时、Trident Protect 24.10 24.10.1及更高版本的行为会有所不同。对于这两个版本、您都可以在数据保护操作期间启用或禁用文件系统冻结和解除冻结。
+
+[NOTE]
+====
+对于所有Trident Protect版本、要在OpenShift环境中启用或禁用自动冻结功能、您可能需要授予应用程序命名空间特权权限。例如：
+
+[source, console]
+----
+oc adm policy add-scc-to-user privileged -z default -n <application-namespace>
+----
+====
+.Trident智能驭领保障24.10
+Trident Protect 24.10不会在数据保护操作期间自动确保KubeVirt VM文件系统的状态一致。如果要使用Trident Protect 24.10保护KubeVirt VM数据、则需要在执行数据保护操作之前手动为文件系统启用冻结/取消冻结功能。这样可确保文件系统处于一致状态。
+
+您可以先配置Trident Protect 24.10、以便在执行数据保护操作期间管理VM文件系统的冻结和解除冻结link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["正在配置虚拟化"^]、然后使用以下命令：
+
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
+----
+.Trident®24.10.1及更高版本
+从Trident Protect 24.10.1开始、Trident Protect会在数据保护操作期间自动冻结和解除冻结KubeVirt文件系统。或者、您可以使用以下命令禁用此自动行为：
+
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=false -n trident-protect
+----

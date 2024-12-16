@@ -23,7 +23,7 @@ summary: 如果您要从产品的试用版升级到完整版本、则可能需�
 +
 [source, console]
 ----
-helm uninstall trident-protect-crds
+helm uninstall -n trident-protect trident-protect-crds
 ----
 . 删除Trident保护：
 +

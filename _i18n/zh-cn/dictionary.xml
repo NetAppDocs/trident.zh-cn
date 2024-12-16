@@ -4436,9 +4436,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="9ee0b57319616120eef37546fa8e4c42" category="doc">安装和配置Trident Protect</block>
   <block id="dc48a335c2095fb6a79ee14ee62b4806" category="paragraph">如果您的环境满足Trident Protect的要求、您可以按照以下步骤在集群上安装Trident Protect。您可以从NetApp获取Trident Protect、也可以从您自己的私人注册表安装它。如果集群无法访问Internet、则从专用注册表进行安装非常有用。</block>
   <block id="1d5f2a4008fa2c223d0ebc6aea423256" category="open-title">安装Trident Protect from NetApp</block>
-  <block id="b533d7fe842e47fbd62d24400867d3f2" category="list-text">(可选)冻结VM。如果您对SnapMirror使用KubeVirt支持、则冻结VM有助于有效管理这些虚拟机：</block>
-  <block id="e49b02afb984c32aa521917480fc4012" category="inline-link-macro">安装OpenShift虚拟化</block>
-  <block id="c096df753a5c7335177118895259c96a" category="admonition">要使冻结功能正常运行、您需要设置虚拟化。在此设置后部署的VM包括冻结和取消冻结所需的二进制文件。要了解有关设置虚拟化的详细信息，请参见<block ref="2e657c6eb92d8a54673acb8e93eb84d5" category="inline-link-macro-rx"></block>。</block>
   <block id="f1db582519ebcfcc20d90e41c0c5e9cc" category="open-title">从专用注册表安装Trident Protect</block>
   <block id="73dac5f92be0a06ecbcb1b8139b40593" category="paragraph">如果您的Trident集群无法访问Internet、则可以从专用映像注册表安装Kubbernetes Protect。在以下示例中、将括号中的值替换为您环境中的信息：</block>
   <block id="dfb8cfd789dde682f000a96e0aabb1f1" category="list-text">将以下映像提取到本地计算机、更新标记、然后将其推送到您的私人注册表：</block>
@@ -4621,8 +4618,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="1000954a94920c8ffd3752b548978ccf" category="list-text">*基于TCP的NVMe*：对于使用基于TCP协议的Trident的存储后端、NVMe保护不支持NetApp SnapMirror复制。</block>
   <block id="57fe82c052fea1c269ca2b14e92e80d3" category="section-title">用于SnapMirror复制的Trident / ONTAP配置</block>
   <block id="59292a70a610fc937685ef1c3a3b5cb1" category="paragraph">Trident Protect要求您至少配置一个存储后端、以便为源集群和目标集群同时支持复制。如果源集群和目标集群相同、则目标应用程序应使用与源应用程序不同的存储后端、以获得最佳故障恢复能力。</block>
-  <block id="3b3186bfde639bfb8d074bc442b4dd99" category="section-title">使用KubeVirt时的注意事项</block>
-  <block id="848b401dccd2553e826a5baf5064321a" category="paragraph">如果您计划将虚拟机与SnapMirror复制结合使用<block ref="dfbafe671f5f5e6c95dde413429a5999" category="inline-link-rx"></block>、则需要设置虚拟化、以便可以冻结和取消冻结SVM。设置虚拟化后、您部署的SVM将包括冻结和取消冻结所需的工具。要了解有关设置虚拟化的详细信息，请参见<block ref="e91eeccdebb36ea585bcf119dba9a3b4" category="inline-link-rx"></block>。</block>
   <block id="4b92c534580865d96f1efb9f86289249" category="summary">您可以使用Trident Protect从快照或备份还原应用程序。将应用程序还原到同一集群时，从现有快照进行还原的速度会更快。</block>
   <block id="ff29014f3961a30f52557df7142d1a65" category="doc">还原应用程序</block>
   <block id="f346d32ba5d9c332bf8577bf1bacda07" category="admonition">还原应用程序时、为该应用程序配置的所有执行挂钩都会随该应用程序还原。如果存在还原后执行挂钩、则它会在还原操作中自动运行。</block>
@@ -4987,4 +4982,48 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="2fd92693952062fc00d949899370185d" category="section-title">定义应用程序</block>
   <block id="da305154e58c2f6709cee1cca6b2d8c8" category="paragraph">您需要定义要使用Trident Protect管理的每个应用程序。您可以通过手动创建应用程序CR或使用Trident Protect命令行界面来定义要管理的应用程序。</block>
   <block id="964ba319e15e38c5b0f3ee2a3dd4a8f8" category="list-text">创建应用程序CR以匹配您的环境后、请应用CR。例如：</block>
+  <block id="26ff92fc2410a19d125f3783f36a21f5" category="paragraph">保护在KubeVirt VM上运行的应用程序时、Trident Protect 24.10 24.10.1及更高版本的行为会有所不同。对于这两个版本、您都可以在数据保护操作期间启用或禁用文件系统冻结和解除冻结。</block>
+  <block id="39f898ec3965dde14aeec545419037ac" category="paragraph">对于所有Trident Protect版本、要在OpenShift环境中启用或禁用自动冻结功能、您可能需要授予应用程序命名空间特权权限。例如：</block>
+  <block id="4d2e55f1e0d6587dd3b63700ee1065af" category="paragraph-title">Trident智能驭领保障24.10</block>
+  <block id="2d261bce9a1e151a31ff22788033f212" category="paragraph">Trident Protect 24.10不会在数据保护操作期间自动确保KubeVirt VM文件系统的状态一致。如果要使用Trident Protect 24.10保护KubeVirt VM数据、则需要在执行数据保护操作之前手动为文件系统启用冻结/取消冻结功能。这样可确保文件系统处于一致状态。</block>
+  <block id="acb14ba5b70eb330a1d4de9c6b7a325d" category="inline-link-macro">正在配置虚拟化</block>
+  <block id="74c1cc067621b7ea2ccf9f91b4595bd8" category="paragraph">您可以先配置Trident Protect 24.10、以便在执行数据保护操作期间管理VM文件系统的冻结和解除冻结<block ref="e0dd4c4b8aa16596df6c3f5cb36d3cdc" category="inline-link-macro-rx"></block>、然后使用以下命令：</block>
+  <block id="72768e0f0d0f990d0abd53363fda4696" category="paragraph-title">Trident®24.10.1及更高版本</block>
+  <block id="42a2550b14037192e0c3252e7666ec4d" category="paragraph">从Trident Protect 24.10.1开始、Trident Protect会在数据保护操作期间自动冻结和解除冻结KubeVirt文件系统。或者、您可以使用以下命令禁用此自动行为：</block>
+  <block id="cedf2576eebff15fc6b30d5a7109eb6b" category="doc">还原和故障转移操作期间的命名空间标注和标签</block>
+  <block id="131ff34387be167411ffda7d60b577e7" category="paragraph">在还原和故障转移操作期间、目标命名空间中的标签和标注会与源命名空间中的标签和标注相匹配。此时将添加源命名空间中目标命名空间中不存在的标签或标注、并覆盖已存在的任何标签或标注、以便与源命名空间中的值匹配。仅存在于目标命名空间上的标签或标注保持不变。</block>
+  <block id="20f40e0b9308901dac07ce8a8efb3350" category="inline-link">OpenShift安全上下文约束文档</block>
+  <block id="0723b21821c458b89843cb5f68a4cfdc" category="admonition">如果您使用RedHat OpenShift、请务必注意命名空间标注在OpenShift环境中的关键作用。命名空间标注可确保还原的Pod遵循OpenShift安全上下文约束(SCC)定义的适当权限和安全配置、并可在没有权限问题的情况下访问卷。有关详细信息，请参阅<block ref="8806a202f84108289eeb3181c071d58e" category="inline-link-rx"></block>。</block>
+  <block id="6c83555d4261acb08ebbc5f24823dc7b" category="paragraph">在执行还原或故障转移操作之前、您可以通过设置Kubornetes环境变量来防止目标命名空间中的特定标注被覆盖<block ref="1580ff61f204e9d56cd5324c7e9221ba" prefix=" " category="inline-code"></block>。例如：</block>
+  <block id="11a75e55f9a91a12e7d31886a76ff312" category="paragraph">如果您使用带有标志的Helm安装源应用程序，则会对标签键进行<block ref="cc1f5c1d16e33b8463c9ee27295cd5df" prefix=" " category="inline-code"></block>特殊处理<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>。在还原或故障转移过程中、Trident Protect会将此标签复制到目标命名空间、但如果源命名空间中的值与源命名空间匹配、则会将此值更新为目标命名空间值。如果此值与源命名空间不匹配、则会将其复制到目标命名空间、而不会发生任何更改。</block>
+  <block id="1280c48f074ec68fd2281266662c9a3f" category="paragraph">以下示例显示了一个源和目标命名空间、每个命名空间都具有不同的标注和标签。您可以查看目标命名空间在操作前后的状态、以及标注和标签在目标命名空间中的组合或覆盖方式。</block>
+  <block id="2cfe257f724ed59a07ab01918c828fb5" category="section-title">在执行还原或故障转移操作之前</block>
+  <block id="c972cd959174c84d137520d91c011446" category="paragraph">下表说明了执行还原或故障转移操作之前示例源和目标名称卷的状态：</block>
+  <block id="b3ba0fe968ce39dcfc6fe8cc0f1b02da" category="cell">命名空间</block>
+  <block id="933e469cb306a0ea9faabd3e4235d3be" category="cell">标注</block>
+  <block id="86a2c974d76e381c7efd2206939722b7" category="cell">命名空间ns-1 (源)</block>
+  <block id="278dbe8403d8ebf0d4ec8f723ca24aa6" category="list-text">标注.One/键："updatedvalue"</block>
+  <block id="7217e7166d38adddcd72b9b1c9359148" category="list-text">标注。双/键："TRUE"</block>
+  <block id="a03c56a353af6ece3297a5fcad5250f2" category="list-text">环境=生产</block>
+  <block id="d1642f369aa9d43205cf91975f1359d4" category="list-text">合规性=HIPAA</block>
+  <block id="fc10b995e3d1c13cbae652922eba0bb6" category="list-text">name=ns-1</block>
+  <block id="58e6b4eeb688a71c985d2593769d2fda" category="cell">命名空间ns-2 (目标)</block>
+  <block id="f0e6f2ec2d0d1aa7012e3b32889c034c" category="list-text">标注.One/键："TRUE"</block>
+  <block id="1e678090acf06eb2bf74c38dee9d3317" category="list-text">标注三个/项："false"</block>
+  <block id="ebbaf450aa5330e33917a8de9157e099" category="list-text">Role=database</block>
+  <block id="46c40b68ab6fcc817f5134602b1985e3" category="section-title">还原操作之后</block>
+  <block id="15d6567aa33ad00e352de9164a741b8b" category="paragraph">下表显示了还原或故障转移操作后示例目标命名空间的状态。已添加某些密钥、某些密钥已被覆盖、并且<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>标签已更新以与目标命名空间匹配：</block>
+  <block id="a8306d4d1af4239dba9a6bcfd799eba7" category="list-text">name=nS-2</block>
+  <block id="da1046077b664fa54e4894632960137d" category="paragraph">您可以通过使用自动保护策略或临时创建快照和备份来保护Trident Protect管理的所有应用程序。</block>
+  <block id="e27f117e119beccd01579e6a8d0151fb" category="inline-link-macro">详细了解如何使用Trident Protect配置文件系统冻结</block>
+  <block id="9efebf2c277b6c382e759b6b916fd0dd" category="admonition">您可以将Trident Protect配置为在数据保护操作期间冻结和取消冻结文件系统。<block ref="d0a15703ee89b8fa8b780fb2dbace2bd" category="inline-link-macro-rx"></block>(英文)</block>
+  <block id="ac84b7596169ab3fb6c24e8a5c85c234" category="section-title">使用KubeVirt VM保护数据</block>
+  <block id="c14dcfe7b0231c7a77642ffab50a55eb" category="summary">您可以将Trident Protect升级到最新版本、以利用新功能或错误修复。</block>
+  <block id="91d6fa36b819133d3be4dc9c8bf2cf22" category="doc">升级Trident Protect</block>
+  <block id="9a4ef497aa1e88e71b08a41b069a9cf4" category="paragraph">要升级Trident Protect、请执行以下步骤。</block>
+  <block id="08583ac87350c1205f57ca5d8c629482" category="list-text">更新Trident Helm存储库：</block>
+  <block id="0f5b1b3a9bfb872579b78d2db623d3d8" category="list-text">升级Trident Protect CRD：</block>
+  <block id="a16ec228f0e3336de76f224b11d860d9" category="list-text">升级Trident Protect：</block>
+  <block id="08810911e9a818361e28207072354bd4" category="list-text">如果适用、会发生文件系统冻结。<block ref="d0a15703ee89b8fa8b780fb2dbace2bd" category="inline-link-macro-rx"></block>(英文)</block>
+  <block id="caf47630bbafdc416f6b6ecdb585e83e" category="list-text">如果适用、冻结的文件系统将被解除冻结。</block>
 </blocks>

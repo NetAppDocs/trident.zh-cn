@@ -18,6 +18,8 @@ entries:
     url: "/trident-protect/manage-authorization-access-control.html"
   - title: 生成Trident Protect支持包
     url: "/trident-protect/trident-protect-generate-support-bundle.html"
+  - title: 升级Trident Protect
+    url: "/trident-protect/trident-protect-upgrade.html"
 - title: 管理和保护应用程序
   entries:
   - title: 使用AppVault对象管理分段

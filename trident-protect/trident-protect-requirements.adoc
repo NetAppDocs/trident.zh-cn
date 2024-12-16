@@ -83,6 +83,37 @@ NOTE: 通过将Trident后端配置选项设置为，您可以默认为 `true`新
 
 
 
+== 使用KubeVirt VM保护数据
+
+保护在KubeVirt VM上运行的应用程序时、Trident Protect 24.10 24.10.1及更高版本的行为会有所不同。对于这两个版本、您都可以在数据保护操作期间启用或禁用文件系统冻结和解除冻结。
+
+[NOTE]
+====
+对于所有Trident Protect版本、要在OpenShift环境中启用或禁用自动冻结功能、您可能需要授予应用程序命名空间特权权限。例如：
+
+[source, console]
+----
+oc adm policy add-scc-to-user privileged -z default -n <application-namespace>
+----
+====
+.Trident智能驭领保障24.10
+Trident Protect 24.10不会在数据保护操作期间自动确保KubeVirt VM文件系统的状态一致。如果要使用Trident Protect 24.10保护KubeVirt VM数据、则需要在执行数据保护操作之前手动为文件系统启用冻结/取消冻结功能。这样可确保文件系统处于一致状态。
+
+您可以先配置Trident Protect 24.10、以便在执行数据保护操作期间管理VM文件系统的冻结和解除冻结link:https://docs.openshift.com/container-platform/4.16/virt/install/installing-virt.html["正在配置虚拟化"^]、然后使用以下命令：
+
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
+----
+.Trident®24.10.1及更高版本
+从Trident Protect 24.10.1开始、Trident Protect会在数据保护操作期间自动冻结和解除冻结KubeVirt文件系统。或者、您可以使用以下命令禁用此自动行为：
+
+[source, console]
+----
+kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=false -n trident-protect
+----
+
+
 == SnapMirror复制的要求
 
 对于以下ONTAP解决方案、NetApp SnapMirror可与Trident Protect结合使用：
@@ -131,9 +162,3 @@ NOTE: 确保两个ONTAP集群之间的复制关系中使用的SVM名称是唯一
 === 用于SnapMirror复制的Trident / ONTAP配置
 
 Trident Protect要求您至少配置一个存储后端、以便为源集群和目标集群同时支持复制。如果源集群和目标集群相同、则目标应用程序应使用与源应用程序不同的存储后端、以获得最佳故障恢复能力。
-
-
-
-=== 使用KubeVirt时的注意事项
-
-如果您计划将虚拟机与SnapMirror复制结合使用 https://kubevirt.io/["KubeVirt"^]、则需要设置虚拟化、以便可以冻结和取消冻结SVM。设置虚拟化后、您部署的SVM将包括冻结和取消冻结所需的工具。要了解有关设置虚拟化的详细信息，请参见 https://docs.openshift.com/container-platform/4.17/virt/install/installing-virt.html["安装OpenShift虚拟化"^]。
