@@ -34,7 +34,7 @@ helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-he
 +
 [source, console]
 ----
-helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.0 --create-namespace --namespace trident-protect
+helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.1 --create-namespace --namespace trident-protect
 ----
 . 使用Helm通过以下命令之一安装Trident Protect。替换 `<name_of_cluster>`为集群名称、此名称将分配给集群并用于标识集群的备份和快照：
 +
@@ -42,13 +42,13 @@ helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.1 --create-namespace --namespace trident-protect
 ----
 ** 安装Trident Protect并禁用计划的每日Trident Protect AutoSupport支持包上传：
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set autoSupport.enabled=false --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect
+helm install trident-protect netapp-trident-protect/trident-protect --set autoSupport.enabled=false --set clusterName=<name_of_cluster> --version 100.2410.1 --create-namespace --namespace trident-protect
 ----
 
 
@@ -64,14 +64,14 @@ helm install trident-protect netapp-trident-protect/trident-protect --set autoSu
 +
 [source, console]
 ----
-netapp/controller:24.10.0
-netapp/restic:24.10.0
-netapp/kopia:24.10.0
+netapp/controller:24.10.1
+netapp/restic:24.10.1
+netapp/kopia:24.10.1
 netapp/trident-autosupport:24.10.0
-netapp/exechook:24.10.0
-netapp/resourcebackup:24.10.0
-netapp/resourcerestore:24.10.0
-netapp/resourcedelete:24.10.0
+netapp/exechook:24.10.1
+netapp/resourcebackup:24.10.1
+netapp/resourcerestore:24.10.1
+netapp/resourcedelete:24.10.1
 bitnami/kubectl:1.30.2
 kubebuilder/kube-rbac-proxy:v0.16.0
 ----
@@ -81,17 +81,17 @@ kubebuilder/kube-rbac-proxy:v0.16.0
 +
 [source, console]
 ----
-docker pull netapp/controller:24.10.0
+docker pull netapp/controller:24.10.1
 ----
 +
 [source, console]
 ----
-docker tag netapp/controller:24.10.0 <private-registry-url>/controller:24.10.0
+docker tag netapp/controller:24.10.1 <private-registry-url>/controller:24.10.1
 ----
 +
 [source, console]
 ----
-docker push <private-registry-url>/controller:24.10.0
+docker push <private-registry-url>/controller:24.10.1
 ----
 . 创建Trident Protect系统命名空间：
 +
@@ -142,7 +142,7 @@ webhooksCleanup:
 +
 [source, console]
 ----
-helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.0 --create-namespace --namespace trident-protect
+helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2410.1 --create-namespace --namespace trident-protect
 ----
 . 使用Helm通过以下命令之一安装Trident Protect。替换 `<name_of_cluster>`为集群名称、此名称将分配给集群并用于标识集群的备份和快照：
 +
@@ -150,13 +150,13 @@ helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect -f protectValues.yaml
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2410.1 --create-namespace --namespace trident-protect -f protectValues.yaml
 ----
 ** 安装Trident Protect并禁用计划的每日Trident Protect AutoSupport支持包上传：
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set autoSupport.enabled=false --set clusterName=<name_of_cluster> --version 100.2410.0 --create-namespace --namespace trident-protect -f protectValues.yaml
+helm install trident-protect netapp-trident-protect/trident-protect --set autoSupport.enabled=false --set clusterName=<name_of_cluster> --version 100.2410.1 --create-namespace --namespace trident-protect -f protectValues.yaml
 ----
 
 
