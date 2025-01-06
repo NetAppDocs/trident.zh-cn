@@ -4489,13 +4489,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="33dc1feba43183f93ade318576611f4a" category="list-text">*。spec.namespaceMapping*:还原操作的源命名空间到目标命名空间的映射。将和<block ref="2cfb071d6be7d4cf9e297100f62858fe" prefix=" " category="inline-code"></block>替换<block ref="a6f7f0a873c27a67ee3194949076866b" prefix=" " category="inline-code"></block>为您环境中的信息。</block>
   <block id="12ed8140e585382bd7caee15c2ebb002" category="list-text">(可选)如果您只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：</block>
   <block id="15212a55e2108abef019ef0de4a2d413" category="list-text">*resourceFilter.resourceSourcesionCriteri*：(筛选时需要)<block ref="0daf9ee05d33b85e4cfc7be473c64e9b" prefix=" " category="inline-code"></block>用于包含或排除在resourceMatchers中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：</block>
-  <block id="1ca8ced6065c9f465611bb5ff24699bc" category="list-text">* resourceMatchers.group*:(_可 选_)要筛选的资源组。</block>
-  <block id="1abc2ced311814dde4619aba0c0ae69d" category="list-text">*resourceMatcher.KENT*：(_可 选_)要筛选的资源种类。</block>
-  <block id="f2afaee5bf5a6e08b3f94e1fe23f9ddf" category="list-text">*resourceMatcher.version*：(_可 选_)要筛选的资源版本。</block>
-  <block id="cd7c33fdac590384c71373183085354e" category="list-text">要筛选的资源的Kubnetes metadata.name字段中的*。resourceMatchers.names*:(_可 选_)名称。</block>
-  <block id="bcf62d122b3627832ee25e9e69aa4701" category="list-text">要筛选的资源的resourceMatchers.namespaces*:(_可 选_) Kubenetes metadata.name字段中的命名区域。</block>
   <block id="d9348d075dc7b3c91cff99d56dfc327b" category="inline-link">Kubernetes 文档</block>
-  <block id="c436fdf7e5393ae3a8821f5bd3058215" category="list-text">*resourceMatcher.labelSources*：(_可 选_)资源的Kubernetes metadata.name字段中的标签选择器字符串，如中所定义<block ref="d4ce3da8407a7d8e148bb1287288e778" category="inline-link-rx"></block>。例如：<block ref="6ea45baf659f1f35e51c8dc9005eac03" prefix=" " category="inline-code"></block>。</block>
   <block id="bca1b1b2b1a229dc37dffa4f7012c02d" category="list-text">使用正确的值填充文件后<block ref="fac6dff7f801a4983f4a536dbcbd40d7" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="ffe607ccb2c74bd77fcfcd7f0ff7691e" category="open-title">使用命令行界面还原快照</block>
   <block id="a77b4ff586cfbf08c54732a1ced52e4f" category="list-text">将快照还原到其他命名空间、将括号中的值替换为环境中的信息。</block>
@@ -4629,7 +4623,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="3f1db1c30ba33e5d04499f000ed77f97" category="list-text">*spec.appVaultRef*：(_required_)存储备份内容的AppVault的名称。</block>
   <block id="3e209c1619d0c38cf60c13838ca4cf72" category="list-text">*spec.storageClassMapping*：还原操作的源存储类到目标存储类的映射。将和<block ref="cb3a1d54728d178b537383d31afb4b53" prefix=" " category="inline-code"></block>替换<block ref="6d4164a2db4b8f123f2f4666f47d1304" prefix=" " category="inline-code"></block>为您环境中的信息。</block>
   <block id="a5085953f7b15a312b4e12827abc66e5" category="list-text">(_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：</block>
-  <block id="792236c6092ad20b208a284b7be14046" category="list-text">*resourceFilter.resourceMatcher*：resourceMatcher对象数组。</block>
   <block id="be16b6e14200639734fb9694e3c0f655" category="list-text">*resourceMatcher[].group*：(_可 选_)要筛选的资源的组。</block>
   <block id="2162d9f0c97d87c37f838ea27ecb393a" category="list-text">*resourceMatcher[].KIND*：(_可 选_)要筛选的资源种类。</block>
   <block id="862dca1a77422225d13abda4b7bf539b" category="list-text">*resourceMatcher[].version*：(_可 选_)要筛选的资源版本。</block>
@@ -5026,4 +5019,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="a16ec228f0e3336de76f224b11d860d9" category="list-text">升级Trident Protect：</block>
   <block id="08810911e9a818361e28207072354bd4" category="list-text">如果适用、会发生文件系统冻结。<block ref="d0a15703ee89b8fa8b780fb2dbace2bd" category="inline-link-macro-rx"></block>(英文)</block>
   <block id="caf47630bbafdc416f6b6ecdb585e83e" category="list-text">如果适用、冻结的文件系统将被解除冻结。</block>
+  <block id="2d9c57bbe7c29718be24410f0c38688e" category="list-text">*resourceFilter.resourceMatcher*：resourceMatcher对象数组。如果在此数组中定义多个元素，它们将作为OR操作进行匹配，每个元素(组、种类、版本)中的字段将作为AND操作进行匹配。</block>
 </blocks>
