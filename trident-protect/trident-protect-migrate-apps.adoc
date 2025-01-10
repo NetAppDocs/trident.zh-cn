@@ -50,22 +50,15 @@ NOTE: 迁移应用程序时、为该应用程序配置的所有执行挂钩都�
 
 === 克隆到其他集群
 
-要将应用程序克隆到其他集群(执行跨集群克隆)、请创建快照或备份并将数据还原到其他集群。确保目标集群上已安装Trident Protect。
+要将应用程序克隆到其他集群(执行跨集群克隆)、请在源集群上创建备份、然后将备份还原到其他集群。确保目标集群上已安装Trident Protect。
+
+
+NOTE: 您可以使用在不同集群之间复制应用程序link:trident-protect-use-snapmirror-replication.html["SnapMirror 复制"]。
 
 .步骤
-. 执行以下操作之一：
-+
-.. link:trident-protect-protect-apps.html#create-an-on-demand-snapshot["创建快照"](英文)
-.. link:trident-protect-protect-apps.html#create-an-on-demand-backup["创建备份"](英文)
-
-
-. 确保已在目标集群上为包含备份或快照的对象存储分段配置AppVault CR。
-. 在目标集群上、根据您创建的是快照还是备份、执行以下操作之一：
-+
-.. link:trident-protect-restore-apps.html#restore-from-a-snapshot-to-a-different-namespace["从快照还原数据"](英文)
-.. link:trident-protect-restore-apps.html#restore-from-a-backup-to-a-different-namespace["从备份还原数据"](英文)
-
-
+. link:trident-protect-protect-apps.html#create-an-on-demand-backup["创建备份"](英文)
+. 确保已在目标集群上为包含备份的对象存储分段配置AppVault CR。
+. 在目标集群上，link:trident-protect-restore-apps.html#restore-from-a-backup-to-a-different-namespace["从备份还原数据"]。
 
 
 

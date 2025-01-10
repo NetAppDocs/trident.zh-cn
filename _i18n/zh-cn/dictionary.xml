@@ -4473,9 +4473,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="1c7b9a68982aa2ad5f1d69eeb5bdf99e" category="inline-link-macro">从备份还原数据</block>
   <block id="e27031b9d0bffffcf2abd2136eed21f5" category="list-text"><block ref="71bc4096317f8eb78a9951851bc1165b" category="inline-link-macro-rx"></block>(英文)</block>
   <block id="403ecb1db6fa0f1bb20e787bb5f5dacd" category="section-title">克隆到其他集群</block>
-  <block id="1fe732d5921038b3ec81023b7a5d8068" category="paragraph">要将应用程序克隆到其他集群(执行跨集群克隆)、请创建快照或备份并将数据还原到其他集群。确保目标集群上已安装Trident Protect。</block>
-  <block id="884bacf23a56346ab0468809c6cb7145" category="list-text">确保已在目标集群上为包含备份或快照的对象存储分段配置AppVault CR。</block>
-  <block id="f5c64bf182766988d3561488bae5bf83" category="list-text">在目标集群上、根据您创建的是快照还是备份、执行以下操作之一：</block>
   <block id="181aa092ab965b34bcee90e25056f876" category="section-title">将应用程序从一个存储类迁移到另一个存储类</block>
   <block id="97a1f17d0c2154050e8ba2ecfd07ecf4" category="paragraph">您可以通过将快照还原到不同的目标存储类来将应用程序从一个存储类迁移到另一个存储类。</block>
   <block id="f1ad7bca566917ee78958caa78fab3f5" category="paragraph">例如(从还原CR中排除密钥)：</block>
@@ -5017,4 +5014,10 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="f266533c568f7d6d2cb55d3ef8fa6b5b" category="list-text">在*配置选定的附加项设置*页上，执行以下操作：</block>
   <block id="effa92215c770083617150adc291c130" category="list-text">展开*可选配置设置*并根据需要进行修改。</block>
   <block id="c44618c9f0d840029b691a1dee65b927" category="paragraph"><block ref="7111ba434e6642bb1d25b7f45b940c41" prefix="" category="inline-code"></block></block>
+  <block id="fd8585ec0c8ba7001713251f9ab9c69e" category="paragraph">要将应用程序克隆到其他集群(执行跨集群克隆)、请在源集群上创建备份、然后将备份还原到其他集群。确保目标集群上已安装Trident Protect。</block>
+  <block id="a1f41e52e9ddbd9f87ecd032c237b1c0" category="inline-link-macro">SnapMirror 复制</block>
+  <block id="f6acb98f21e25882aaaa267339abcc92" category="admonition">您可以使用在不同集群之间复制应用程序<block ref="69314cba6d14bf88b8e850c978056766" category="inline-link-macro-rx"></block>。</block>
+  <block id="fe961357dbe4b6bf8b5503f4919ea35c" category="list-text">确保已在目标集群上为包含备份的对象存储分段配置AppVault CR。</block>
+  <block id="baafbccab17d07f9ba18e7becb7c76d2" category="inline-link-macro">从备份还原数据</block>
+  <block id="878bbf0662ed19ef900e4e06bfad92d2" category="list-text">在目标集群上，<block ref="11860f9f3ec51316f8ebc9805806b6cd" category="inline-link-macro-rx"></block>。</block>
 </blocks>
