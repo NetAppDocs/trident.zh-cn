@@ -4773,7 +4773,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="ad47c31cec730ddef75893f6207a8350" category="list-text">*。spec.namespaceMapping*:(_required__)目标和源命名空间必须与相应应用程序CR中定义的应用程序命名空间匹配。</block>
   <block id="0d2f17f43053f85c97752c575bb2af3e" category="list-text">*spec.sourceAppVaultRef*：(_required_)此值必须与源应用程序的AppVault名称匹配。</block>
   <block id="5c0044cad9c27e4f4742c4a031edd6eb" category="list-text">*spec.sourceApplicationName*:(_required_)此值必须与您在源应用程序CR中定义的源应用程序的名称匹配。</block>
-  <block id="be4ed18b3b9c2261b9f3966d0d80e6c4" category="list-text">*spec.storageClassName*：(_required_)选择集群上有效存储类的名称。存储类必须与部署源应用程序的源集群上正在使用的存储类建立对等关系。</block>
   <block id="e1e70c108ffb369c9c05ac65820562c3" category="list-text">使用正确的值填充文件后<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="d4c94febe4f13411fa761de57ad6cce6" category="open-title">使用命令行界面创建App镜像 关系</block>
   <block id="1d29e9d9da5d097b90cc18a976fa591c" category="list-text">创建并应用App镜像 关系对象、将括号中的值替换为环境中的信息。例如：</block>
@@ -5021,4 +5020,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="baafbccab17d07f9ba18e7becb7c76d2" category="inline-link-macro">从备份还原数据</block>
   <block id="878bbf0662ed19ef900e4e06bfad92d2" category="list-text">在目标集群上，<block ref="11860f9f3ec51316f8ebc9805806b6cd" category="inline-link-macro-rx"></block>。</block>
   <block id="4a0207b6a74b63dcaaa4d58fe75ec431" category="list-text">*resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用<block ref="f4d72a64acd8929c0cc9ed96a7a336cc" prefix=" " category="inline-code"></block>或包含或<block ref="843f2812f595e7ec7c5036e89fde02d6" prefix=" " category="inline-code"></block>排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：</block>
+  <block id="5e77ee724e7a9c6f34c1fd6a65b3f3b5" category="list-text">*spec.storageClassName*：(_required_)选择集群上有效存储类的名称。存储类必须链接到与源环境建立对等关系的ONTAP Storage VM。</block>
 </blocks>
