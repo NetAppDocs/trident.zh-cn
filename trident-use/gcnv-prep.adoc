@@ -24,7 +24,7 @@ summary: 在配置Google Cloud NetApp Volumes后端之前、您需要确保满�
 
 * 配置有Google Cloud NetApp卷服务的Google Cloud帐户。请参阅 link:https://cloud.google.com/netapp-volumes["Google Cloud NetApp卷"^]。
 * 您的Google Cloud帐户的项目编号。请参阅 link:https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects["确定项目"^]。
-* 具有NetApp卷管理员角色的Google Cloud服务帐户 (`netappcloudvolumes.admin`。请参阅 link:https://cloud.google.com/netapp/volumes/docs/get-started/configure-access/iam#roles_and_permissions["身份和访问管理角色和权限"^]。
+* 具有NetApp卷管理员角色的Google Cloud服务帐户 (`roles/netapp.admin`。请参阅 link:https://cloud.google.com/netapp/volumes/docs/get-started/configure-access/iam#roles_and_permissions["身份和访问管理角色和权限"^]。
 * 您的GCNV帐户的API密钥文件。请参见 link:https://cloud.google.com/iam/docs/keys-create-delete#creating["创建服务帐户密钥"^]
 * 存储池。请参阅 link:https://cloud.google.com/netapp/volumes/docs/configure-and-use/storage-pools/overview["存储池概述"^]。
 

@@ -43,7 +43,7 @@ summary: 了解适用于Google Cloud NetApp卷的NFS和NFS后端配置选项并�
 | `位置` | Trident创建GCNV卷的Google Cloud位置。创建跨区域Kubnetes集群时、在中创建的卷 `location` 可用于在多个Google Cloud区域的节点上计划的工作负载。跨区域流量会产生额外成本。 |  
 
 
-| `apiKey` | 具有角色的Google Cloud服务帐户的API密钥 `netappcloudvolumes.admin` 。它包括 Google Cloud 服务帐户专用密钥文件的 JSON 格式的内容（逐字复制到后端配置文件）。 `apiKey`必须包括以下键的键值对： `type`、 `project_id`、 `client_email`、、 `client_id` `auth_uri` `token_uri` `auth_provider_x509_cert_url`和 `client_x509_cert_url`。 |  
+| `apiKey` | 具有角色的Google Cloud服务帐户的API密钥 `netapp.admin` 。它包括 Google Cloud 服务帐户专用密钥文件的 JSON 格式的内容（逐字复制到后端配置文件）。 `apiKey`必须包括以下键的键值对： `type`、 `project_id`、 `client_email`、、 `client_id` `auth_uri` `token_uri` `auth_provider_x509_cert_url`和 `client_x509_cert_url`。 |  
 
 
 | `nfsMountOptions` | 精细控制 NFS 挂载选项。 | "nfsvers=3" 
