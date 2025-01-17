@@ -24,19 +24,64 @@ summary: '用于Trident Protect的存储分段自定义资源(CR)称为AppVault�
 
 
 
-=== Google Cloud
+=== 密钥生成示例
 
-密钥生成示例：
-
-[source, console]
-----
-kubectl create secret generic gcp-creds --from-file=credentials=<mycreds-file.json> -n trident-protect
-----
-以下AppVault定义示例以CR的形式提供、您可以使用和修改、或者以Trident Protect命令行界面命令的示例形式为您生成AppVault CR：
+您可以使用以下示例为每个云提供商的凭据创建密钥。
 
 [role="tabbed-block"]
 ====
-.AppVault CR示例
+.Google Cloud
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-file=credentials=<mycreds-file.json> -n trident-protect
+----
+--
+.Amazon S3 (AWS)
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accessKeyID=<objectstorage-accesskey> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret> -n trident-protect
+----
+--
+.Microsoft Azure
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accountKey=<secret-name> -n trident-protect
+----
+--
+.通用 S3
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accessKeyID=<objectstorage-accesskey> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret> -n trident-protect
+----
+--
+.ONTAP S3
+--
+[source, console]
+----
+kubectl create secret generic <secret-name> --from-literal=accessKeyID=<objectstorage-accesskey> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret> -n trident-protect
+----
+--
+.StorageGRID S3
+--
+[source, console]
+----
+kubectl create secret generic  <secret-name> --from-literal=accessKeyID=<objectstorage-accesskey> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret> -n trident-protect
+----
+--
+====
+
+
+=== AppVault CR示例
+
+您可以使用以下CR示例为每个云提供程序创建AppVault对象。
+
+[role="tabbed-block"]
+====
+.Google Cloud
 --
 [source, yaml]
 ----
@@ -58,29 +103,7 @@ spec:
         name: gcp-trident-protect-src-bucket-secret
 ----
 --
-.使用Trident Protect命令行界面创建AppVault CR的示例
---
-[source, console]
-----
-tridentctl protect create vault gcp my-new-vault --bucket mybucket --project my-gcp-project --secret <gcp-creds>/<credentials>
-----
---
-====
-
-
-=== Amazon S3
-
-密钥生成示例：
-
-[source, console]
-----
-kubectl create secret generic -n trident-protect s3 --from-literal=accessKeyID=<secret-name> --from-literal=secretAccessKey=<generic-s3-trident-protect-src-bucket-secret>
-----
-以下AppVault定义示例以CR的形式提供、您可以使用和修改、或者以Trident Protect命令行界面命令的示例形式为您生成AppVault CR：
-
-[role="tabbed-block"]
-====
-.AppVault CR示例
+.Amazon S3 (AWS)
 --
 [source, yaml]
 ----
@@ -106,29 +129,7 @@ spec:
         name: s3
 ----
 --
-.使用命令行界面创建AppVault的示例
---
-[source, console]
-----
-tridentctl protect create vault GenericS3 s3vault --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
-----
---
-====
-
-
-=== Microsoft Azure
-
-密钥生成示例：
-
-[source, console]
-----
-kubectl create secret generic <secret-name> --from-literal=accountKey=<secret-name> -n trident-protect
-----
-以下AppVault定义示例以CR的形式提供、您可以使用和修改、或者以Trident Protect命令行界面命令的示例形式为您生成AppVault CR：
-
-[role="tabbed-block"]
-====
-.AppVault CR示例
+.Microsoft Azure
 --
 [source, yaml]
 ----
@@ -150,42 +151,136 @@ spec:
         name: azure-trident-protect-src-bucket-secret
 ----
 --
-.使用命令行界面创建AppVault的示例
+.通用 S3
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: generic-s3-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: GenericS3
+  providerConfig:
+    s3:
+      bucketName: trident-protect-src-bucket
+      endpoint: s3.example.com
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: s3
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: s3
+----
+--
+.ONTAP S3
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: ontap-s3-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: OntapS3
+  providerConfig:
+    s3:
+      bucketName: trident-protect-src-bucket
+      endpoint: s3.example.com
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: s3
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: s3
+----
+--
+.StorageGRID S3
+--
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: storagegrid-s3-trident-protect-src-bucket-b643cc50-0429-4ad5-971f-ac4a83621922
+  namespace: trident-protect
+spec:
+  providerType: StorageGridS3
+  providerConfig:
+    s3:
+      bucketName: trident-protect-src-bucket
+      endpoint: s3.example.com
+  providerCredentials:
+    accessKeyID:
+      valueFromSecret:
+        key: accessKeyID
+        name: s3
+    secretAccessKey:
+      valueFromSecret:
+        key: secretAccessKey
+        name: s3
+----
+--
+====
+
+
+=== 使用Trident Protect命令行界面创建AppVault的示例
+
+您可以使用以下命令行界面命令示例为每个提供程序创建AppVault CRS。
+
+[role="tabbed-block"]
+====
+.Google Cloud
+--
+[source, console]
+----
+tridentctl protect create vault GCP my-new-vault --bucket mybucket --project my-gcp-project --secret <gcp-creds>/<credentials>
+----
+--
+.Amazon S3 (AWS)
+--
+[source, console]
+----
+tridentctl protect create vault AWS <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
+.Microsoft Azure
 --
 [source, console]
 ----
 tridentctl protect create vault Azure <vault-name> --account <account-name> --bucket <bucket-name> --secret <secret-name>
 ----
 --
+.通用 S3
+--
+[source, console]
+----
+tridentctl protect create vault GenericS3 <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
+.ONTAP S3
+--
+[source, console]
+----
+tridentctl protect create vault OntapS3 <vault-name> --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
+.StorageGRID S3
+--
+[source, console]
+----
+tridentctl protect create vault StorageGridS3 s3vault --bucket <bucket-name> --secret  <secret-name>  --endpoint <s3-endpoint>
+----
+--
 ====
-
-
-=== 支持的配置程序类型和配置程序配置值
-
- `providerType`AppVault CR中的和 `providerConfig`键需要特定值。下表列出了支持的密钥值 `providerType`以及需要与每个值结合使用的关联 `providerConfig`密钥 `providerType`。
-
-[cols="2,2"]
-|===
-| 支持的 `providerType`值 | 关联 `providerConfig`密钥 
-
-
-| AWS | s3 
-
-
-| Azure | azure 
-
-
-| GCP | GCP 
-
-
-| GenericS3 | s3 
-
-
-| OntapS3 | s3 
-
-
-| StorageGridS3 | s3 
-|===
 
 
 == 使用AppVault浏览器查看AppVault信息
