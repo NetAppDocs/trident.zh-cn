@@ -19,6 +19,10 @@ summary: 如果您的环境符合要求、则可以按照以下步骤安装Tride
 
 NOTE: 默认情况下、Trident Protect会收集有助于处理您可能创建的任何NetApp支持案例的支持信息、包括有关集群和托管应用程序的日志、指标和拓扑信息。Trident Protect会按每日计划将这些支持包发送给NetApp。在安装Trident Protect时、您可以选择禁用此支持包收集。您可以随时手动link:trident-protect-generate-support-bundle.html["生成支持包"]执行此操作。
 
+
+
+== 安装Trident Protect
+
 [role="tabbed-block"]
 ====
 .安装Trident Protect from NetApp
@@ -117,14 +121,15 @@ kubectl create secret docker-registry regcred --docker-username=<registry-userna
 ----
 helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-helm-chart
 ----
-. 创建一个名为的文件 `protectValues.yaml`、其中包含以下Trident保护设置：
+. 创建一个名为的文件 `protectValues.yaml`。确保它包含以下Trident保护设置：
 +
 [source, yaml]
 ----
+---
 image:
   registry: <private-registry-url>
 imagePullSecrets:
-- name: regcred
+  - name: regcred
 controller:
   image:
     registry: <private-registry-url>
@@ -133,10 +138,10 @@ rbacProxy:
     registry: <private-registry-url>
 crCleanup:
   imagePullSecrets:
-  - name: regcred
+    - name: regcred
 webhooksCleanup:
   imagePullSecrets:
-  - name: regcred
+    - name: regcred
 ----
 . 安装Trident Protect CRD：
 +
@@ -164,3 +169,73 @@ helm install trident-protect netapp-trident-protect/trident-protect --set autoSu
 
 --
 ====
+
+
+== 指定Trident Protect容器资源限制
+
+安装Trident Protect后、您可以使用配置文件为Trident Protect容器指定资源限制。通过设置资源限制、您可以控制Trident Protect操作占用的集群资源量。
+
+.步骤
+. 创建一个名为的文件 `resourceLimits.yaml`。
+. 根据您的环境需求、使用Trident Protect容器的资源限制选项填充文件。
++
+以下示例配置文件显示了可用设置、并包含每个资源限制的默认vaule：
+
++
+[source, yaml]
+----
+---
+jobResources:
+  defaults:
+    limits:
+      cpu: 8000m
+      memory: 10000Mi
+      ephemeralStorage: ""
+    requests:
+      cpu: 100m
+      memory: 100Mi
+      ephemeralStorage: ""
+  resticVolumeBackup:
+    limits:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+    requests:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+  resticVolumeRestore:
+    limits:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+    requests:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+  kopiaVolumeBackup:
+    limits:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+    requests:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+  kopiaVolumeRestore:
+    limits:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+    requests:
+      cpu: ""
+      memory: ""
+      ephemeralStorage: ""
+----
+. 应用文件中的值 `resourceLimits.yaml`：
++
+[source, console]
+----
+helm update trident-protect -n trident-protect -f <resourceLimits.yaml>
+----
+

@@ -4421,7 +4421,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="2dcd4437dbff8aff3bc16ac15a71b74d" category="list-text">创建Trident Protect系统命名空间：</block>
   <block id="e0f6b701766eb28d805d7ba1e820f582" category="list-text">登录到注册表：</block>
   <block id="814565bb5d7e7359fff967986fd4195a" category="list-text">创建用于私人注册表身份验证的拉机密：</block>
-  <block id="9fd6c1e403ca347a1528f0f6688f6a06" category="list-text">创建一个名为的文件<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block>、其中包含以下Trident保护设置：</block>
   <block id="86e8b34710172d33dcae839e1f4dd07e" category="summary">您可以通过创建应用程序CR和关联的Trident Vault CR来使AppProtect能够识别要管理的应用程序。</block>
   <block id="80b940e5c68d020c06f9dc2f188d2169" category="doc">定义要管理的应用程序</block>
   <block id="1e10d655f5307ce7f79aeee68a9e72f3" category="paragraph">您可以通过创建应用程序CR和关联的Trident Vault CR来定义要使用AppProtect管理的应用程序。</block>
@@ -5014,4 +5013,11 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="d05c8b60cfd355fccac41017c33ca892" category="paragraph">您可以使用以下CR示例为每个云提供程序创建AppVault对象。</block>
   <block id="59264d37bdf7f6cbf4f94ad00dacdce1" category="section-title">使用Trident Protect命令行界面创建AppVault的示例</block>
   <block id="4db09810b323e73b4041a65c99bb14f8" category="paragraph">您可以使用以下命令行界面命令示例为每个提供程序创建AppVault CRS。</block>
+  <block id="c8dac6733f0c00d0b3b8b239841a0255" category="list-text">创建一个名为的文件<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block>。确保它包含以下Trident保护设置：</block>
+  <block id="d9802724acbde7ce7749f0884262496a" category="section-title">指定Trident Protect容器资源限制</block>
+  <block id="723ff7c28b60307db94ddb35dd6cc517" category="paragraph">安装Trident Protect后、您可以使用配置文件为Trident Protect容器指定资源限制。通过设置资源限制、您可以控制Trident Protect操作占用的集群资源量。</block>
+  <block id="45d7099b61647936da59ccfbaa49ca5c" category="list-text">创建一个名为的文件<block ref="e66ad8c89b28dc43a24e6e1689a79cdc" prefix=" " category="inline-code"></block>。</block>
+  <block id="9f83417f7d6c999c56b0dcc3b274be23" category="list-text">根据您的环境需求、使用Trident Protect容器的资源限制选项填充文件。</block>
+  <block id="816f46c4a8435f7f0f1498054f254865" category="paragraph">以下示例配置文件显示了可用设置、并包含每个资源限制的默认vaule：</block>
+  <block id="956fe3fe2ad4f9cb1b569d66b4ff1db5" category="list-text">应用文件中的值<block ref="e66ad8c89b28dc43a24e6e1689a79cdc" prefix=" " category="inline-code"></block>：</block>
 </blocks>
