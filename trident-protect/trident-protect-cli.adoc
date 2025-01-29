@@ -104,7 +104,7 @@ cp ./tridentctl-protect ~/bin/
 +
 [source, console]
 ----
-tridentctl protect help
+tridentctl-protect help
 ----
 
 
@@ -178,4 +178,4 @@ source ~/.zsh/completions/tridentctl-completion.zsh
 --
 ====
 .结果
-下次shell登录时、您可以将命令自动完成与trdentctrL保护插件结合使用。
+下次shell登录时、您可以使用带有trdentcd-protect插件的命令自动完成。
