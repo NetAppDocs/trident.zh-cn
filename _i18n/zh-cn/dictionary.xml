@@ -4588,7 +4588,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="ff29014f3961a30f52557df7142d1a65" category="doc">还原应用程序</block>
   <block id="f346d32ba5d9c332bf8577bf1bacda07" category="admonition">还原应用程序时、为该应用程序配置的所有执行挂钩都会随该应用程序还原。如果存在还原后执行挂钩、则它会在还原操作中自动运行。</block>
   <block id="a082effb2d23d4eb077129001a77582f" category="section-title">从备份还原到其他命名空间</block>
-  <block id="80a8842041758f0012a710677ab91939" category="paragraph">使用BackupRestore CR将备份还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、但还原后的应用程序不会自动受Trident Protect保护。要保护已还原的应用程序、您需要为已还原的应用程序创建应用程序CR、以使其受到Trident Protect的保护。</block>
   <block id="5a3a68cc2fb27d13057472b4869353f1" category="open-title">使用CR</block>
   <block id="0334c5d881452d9144d4edf93d44ff85" category="list-text">创建自定义资源(CR)文件并将其命名为<block ref="aa3356b96c40153ef83fe9854ede7a70" prefix=" " category="inline-code"></block>。</block>
   <block id="8ebefb3e84a05b2e3bf54824870d776d" category="list-text">*spec.appArchivePath*：AppVault中存储备份内容的路径。您可以使用以下命令查找此路径：</block>
@@ -4610,7 +4609,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="349d4c53fe9d2e740d60f7ce8094c294" category="list-text">使用正确的值填充文件后<block ref="59a09233aaa2a2c9e25fc46650bd6dee" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="11d13ce9542ccbfd1e47138c96b125a1" category="list-text">将备份还原到原始命名空间、将括号中的值替换为环境中的信息。<block ref="402051f4be0cc3aad33bcf3ac3d6532b" prefix=" " category="inline-code"></block>参数使用格式为的命名空间和备份名称<block ref="7310980de32cd5ca687291f4b01b2e19" prefix=" " category="inline-code"></block>。例如：</block>
   <block id="db4c6bfd26488f4d6ab2ec6129b067d8" category="section-title">从快照还原到其他命名空间</block>
-  <block id="9abe0b166b3dc77e35a8be1d062ece32" category="paragraph">您可以使用自定义资源(CR)文件从快照将数据还原到其他命名空间或原始源命名空间。使用SnapshotRestore CR将快照还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、但还原后的应用程序不会自动受Trident Protect保护。要保护已还原的应用程序、您需要为已还原的应用程序创建应用程序CR、以使其受到Trident Protect的保护。</block>
   <block id="941a76112ae80457a7a22ae552218be9" category="section-title">从快照还原到原始命名空间</block>
   <block id="a392e5395f0751460dc460cd6ec5e89d" category="paragraph">您可以随时将快照还原到原始命名空间。</block>
   <block id="4d18dba9a79fbe92e2bb99f0a9300df3" category="list-text">创建自定义资源(CR)文件并将其命名为<block ref="620b0dae36dbe6aeaae5d993f961c634" prefix=" " category="inline-code"></block>。</block>
@@ -5020,4 +5018,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="a4af4e386bb379977acdb5a465780149" category="open-title">使用Trident Protect命令行界面删除AppVault</block>
   <block id="7bbf9a1a0bbcbeb6a4fef133c3975079" category="paragraph">下次shell登录时、您可以使用带有trdentcd-protect插件的命令自动完成。</block>
   <block id="0708d6413707329d6051a0456f0810ac" category="admonition">您可以使用<block ref="deb04333ae980bc0147681e476e1941c" prefix=" " category="inline-code"></block>查看此命令的详细帮助信息。</block>
+  <block id="b0e7049d5aeb967991b6b3a21db08de3" category="paragraph">使用BackupRestore CR将备份还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、并为还原的应用程序创建应用程序CR。要保护已还原的应用程序、请创建按需备份或快照、或者制定保护计划。</block>
+  <block id="4b405223d9feceac91c5ef8df77b1961" category="paragraph">您可以使用自定义资源(CR)文件从快照将数据还原到其他命名空间或原始源命名空间。使用SnapshotRestore CR将快照还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、并为还原的应用程序创建应用程序CR。要保护已还原的应用程序、请创建按需备份或快照、或者制定保护计划。</block>
 </blocks>
