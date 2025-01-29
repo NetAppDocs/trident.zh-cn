@@ -4379,7 +4379,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="b64b2077b896969e7810dbb0a2de2f1a" category="open-title">下载适用于Linux ARM64 CPU的插件</block>
   <block id="d58e744bd40cf0f8373ee5b2c7d11387" category="open-title">下载适用于Mac amd64 CPU的插件</block>
   <block id="fd3e558ef6c1af851bddabf0eb1945d7" category="open-title">下载适用于Mac ARM64 CPU的插件</block>
-  <block id="412a5def83fe5329b38679035cfea675" category="list-text">为二进制文件启用执行权限：</block>
   <block id="b23c395acc963a69b0a5f06a20bb4887" category="section-title">查看Trident命令行界面插件帮助</block>
   <block id="305f79cb740685921820521a57e525e5" category="paragraph">您可以使用内置插件的帮助功能获取有关插件功能的详细帮助：</block>
   <block id="09b4818c610e8f967a9f5257455a3a2a" category="list-text">使用帮助功能查看使用指南：</block>
@@ -4911,7 +4910,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="aa2fd96b8dfdeb6aaaf2bb11da1413aa" category="list-text">克隆现有FC-PVC。</block>
   <block id="de35bb06ba09c90d091b31450c61efd7" category="list-text">调整已部署卷的大小。</block>
   <block id="15286900a0d0667ffc4d515aeec6a1d2" category="list-text">将插件二进制文件复制到路径变量中定义的位置。例如、<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block>或<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block>(您可能需要提升Privileges)：</block>
-  <block id="b3062a04e26d499596575c6767c02c16" category="list-text">您也可以将二进制文件复制到主目录中的某个位置。在这种情况下、您可能需要将位置添加到路径变量中：</block>
   <block id="cff063350a0daf1b0ee4c6c97eb2e2de" category="admonition">将备份还原到具有现有资源的其他命名空间不会更改与备份中的资源共享名称的任何资源。要还原备份中的所有资源、请删除并重新创建目标命名空间、或者将备份还原到新命名空间。</block>
   <block id="e8e7bb3124435135f9fc5dab713148e1" category="list-text">如果将运行RHE/RedHat Core-OS的工作节点与FC PV结合使用、请在StorageClass中指定<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block>mountOption以执行实时空间回收。请参阅<block ref="cef8948c7b8e90d5be591e67d93555a7" category="inline-link-rx"></block>。</block>
   <block id="0ac202e458490a734271522fcedf4876" category="list-text">确保<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>正在运行：</block>
@@ -5020,4 +5018,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="0708d6413707329d6051a0456f0810ac" category="admonition">您可以使用<block ref="deb04333ae980bc0147681e476e1941c" prefix=" " category="inline-code"></block>查看此命令的详细帮助信息。</block>
   <block id="b0e7049d5aeb967991b6b3a21db08de3" category="paragraph">使用BackupRestore CR将备份还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、并为还原的应用程序创建应用程序CR。要保护已还原的应用程序、请创建按需备份或快照、或者制定保护计划。</block>
   <block id="4b405223d9feceac91c5ef8df77b1961" category="paragraph">您可以使用自定义资源(CR)文件从快照将数据还原到其他命名空间或原始源命名空间。使用SnapshotRestore CR将快照还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、并为还原的应用程序创建应用程序CR。要保护已还原的应用程序、请创建按需备份或快照、或者制定保护计划。</block>
+  <block id="375efef64643c8aa6bb8e0ba2159a82a" category="list-text">为插件二进制文件启用执行权限：</block>
+  <block id="eefd51253afc93c1ad54658882a65dec" category="list-text">您也可以将插件二进制文件复制到主目录中的某个位置。在这种情况下、建议确保此位置属于您的路径变量：</block>
+  <block id="75b0e724fe59ed9d6eda0fcd4679bfee" category="admonition">通过将插件复制到路径变量中的某个位置、您可以通过在任意位置键入或<block ref="e89ec374c6edc886ea12d28524834e68" prefix=" " category="inline-code"></block>来使用此插件<block ref="d4845d5856667a10aee97f3404a35627" prefix=" " category="inline-code"></block>。</block>
 </blocks>
