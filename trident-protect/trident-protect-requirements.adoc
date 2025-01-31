@@ -18,7 +18,7 @@ summary: 首先验证您的操作环境、应用程序集群、应用程序和�
 
 
 
-== Trident Protect Kubbernetes兼容性
+== Trident Protect Kubbernetes集群兼容性
 
 Trident Protect与各种完全托管和自行管理的Kubernetes产品兼容、其中包括：
 
@@ -30,6 +30,9 @@ Trident Protect与各种完全托管和自行管理的Kubernetes产品兼容、�
 * VMware Tanzu产品组合
 * 上游Kubernetes
 
+
+
+NOTE: 确保为安装Trident Protect的集群配置了正在运行的快照控制器以及相关的CRD。要安装快照控制器，请参见 https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["这些说明"]。
 
 
 

@@ -4537,7 +4537,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="77c9498d5c74a08af1c5918bd5fd8ee1" category="paragraph">如果未启用快照目录、Trident Protect将选择常规备份功能、此功能会在备份过程中临时占用容量池中的空间。在这种情况下、请确保容量池中有足够的可用空间来创建与要备份的卷大小相同的临时卷。</block>
   <block id="2efd4c8775ce47d6aa29183091d2a4e2" category="paragraph">此应用程序已准备好使用Trident Protect进行备份和还原。每个PVC还可供其他应用程序用于备份和恢复。</block>
   <block id="697f51e8965440d487236d46d469510d" category="summary">首先验证您的操作环境、应用程序集群、应用程序和许可证是否已准备就绪。确保您的环境满足这些要求、才能部署和运行Trident Protect。</block>
-  <block id="f52842953ff751bb11c3849b84337de2" category="section-title">Trident Protect Kubbernetes兼容性</block>
   <block id="c8f91050b5ec3e677d9c7e16e424f9bc" category="paragraph">Trident Protect与各种完全托管和自行管理的Kubernetes产品兼容、其中包括：</block>
   <block id="480c9b5f979d1ce95ea2a58b09826d1b" category="list-text">Amazon Elelic Kubelnetes Service (EKS)</block>
   <block id="974030a30a48754684d05541fd5e96c9" category="list-text">Google Kubernetes Engine （ GKEE ）</block>
@@ -5021,4 +5020,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="375efef64643c8aa6bb8e0ba2159a82a" category="list-text">为插件二进制文件启用执行权限：</block>
   <block id="eefd51253afc93c1ad54658882a65dec" category="list-text">您也可以将插件二进制文件复制到主目录中的某个位置。在这种情况下、建议确保此位置属于您的路径变量：</block>
   <block id="75b0e724fe59ed9d6eda0fcd4679bfee" category="admonition">通过将插件复制到路径变量中的某个位置、您可以通过在任意位置键入或<block ref="e89ec374c6edc886ea12d28524834e68" prefix=" " category="inline-code"></block>来使用此插件<block ref="d4845d5856667a10aee97f3404a35627" prefix=" " category="inline-code"></block>。</block>
+  <block id="dc5b2d9ecd49d3e5ee37059e2d80512f" category="section-title">Trident Protect Kubbernetes集群兼容性</block>
+  <block id="9ac0dd27d420b7b48ca72e463ae95e18" category="inline-link">这些说明</block>
+  <block id="664d28801abc192d5c7dfd7bfa758e98" category="admonition">确保为安装Trident Protect的集群配置了正在运行的快照控制器以及相关的CRD。要安装快照控制器，请参见<block ref="5d66944a2971d1b9b5f332812a6e737b" category="inline-link-rx"></block>。</block>
 </blocks>
