@@ -44,8 +44,9 @@ Rwo、ROX、rwx、RWOP
 要在Google Cloud中利用云身份、您必须：
 
 * 使用GKE部署的Kubbernetes集群。
-* 在GKE集群上配置的工作负载标识和oidc-uIssuer。
-* 已安装Trident、其中包括 `cloudProvider`用于指定 `"GCP"`和 `cloudIdentity`指定工作负载标识的。
+* 在GKE集群上配置的工作负载标识以及在节点池上配置的GKE元数据服务器。
+* 具有Google Cloud NetApp卷管理员(角色/GCP .admin)角色或自定义角色的NetApp服务帐户。
+* 已安装Trident、其中包括用于指定"gcp"的云提供程序和用于指定新GCP服务帐户的云标识。下面给出了一个示例。
 +
 [role="tabbed-block"]
 ====

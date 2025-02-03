@@ -311,7 +311,8 @@ NOTE: Docker Swarm 目前不支持 `ontap-nas-economy-经济` 驱动程序，因
 
 . 为Trident用户创建用户名：
 +
-`security login create -username <user_name\> -application ontapi -authmethod <password\> -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+`security login create -username <user_name\> -application ontapi -authmethod password -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
+`security login create -username <user_name\> -application http -authmethod password -role <name_of_role_in_step_1\> –vserver <svm_name\> -comment "user_description"`
 
 . 将角色映射到用户：
 +
