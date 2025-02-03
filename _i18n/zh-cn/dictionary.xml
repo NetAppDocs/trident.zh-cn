@@ -5023,4 +5023,164 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="dc5b2d9ecd49d3e5ee37059e2d80512f" category="section-title">Trident Protect Kubbernetes集群兼容性</block>
   <block id="9ac0dd27d420b7b48ca72e463ae95e18" category="inline-link">这些说明</block>
   <block id="664d28801abc192d5c7dfd7bfa758e98" category="admonition">确保为安装Trident Protect的集群配置了正在运行的快照控制器以及相关的CRD。要安装快照控制器，请参见<block ref="5d66944a2971d1b9b5f332812a6e737b" category="inline-link-rx"></block>。</block>
+  <block id="9560d298aea880d389acf56a45410c4b" category="summary">您可以配置加密以保护Trident与存储后端之间的流量。</block>
+  <block id="c994f1e00d22f7d8d4e7b3e7f50f8002" category="doc">Kerberos传输中加密</block>
+  <block id="c8ea4672c0efc6fee26c8648f609a829" category="paragraph">通过使用Kerberos传输中加密、您可以对受管集群和存储后端之间的流量启用加密、从而提高数据访问安全性。</block>
+  <block id="420bac2406e93da0c7c791aca209017d" category="paragraph">Trident支持将ONTAP用作存储后端的Kerberos加密：</block>
+  <block id="796f801ad41f96aeb2e1a1950ed629e4" category="list-text">*内部部署Kubernet*—Trident支持通过从ONTAP OpenShift和上游Kubernetes集群到内部部署ONTAP卷的NFS3和NFSv4连接进行Kerberos加密。</block>
+  <block id="0a710c309a5f6dc65b056833a5208521" category="paragraph">您可以创建、删除、调整大小、创建快照、克隆、 只读克隆、并导入使用NFS加密的卷。</block>
+  <block id="2aff02c8ceb99a9445937af9d4d8f286" category="section-title">使用内部ONTAP卷配置传输中的Kerberos加密</block>
+  <block id="330282591e8caa9814eb88ec524b89cf" category="paragraph">您可以对受管集群与内部ONTAP存储后端之间的存储流量启用Kerberos加密。</block>
+  <block id="daf34fb0fcb74d9bcf85abcebcc8e1f2" category="admonition">只有使用存储驱动程序、才支持对使用内部ONTAP存储后端的NFS流量进行Kerberos加密<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>。</block>
+  <block id="0ff02d27ae5cac1a12c6c403fd55443c" category="list-text">确保您可以访问该<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 实用程序。</block>
+  <block id="bef890ed7cc869346d4b483cd3e3ab00" category="list-text">确保您对ONTAP存储后端具有管理员访问权限。</block>
+  <block id="160b05c1b85ce34d702a3568614baec1" category="list-text">确保您知道要从ONTAP存储后端共享的一个或多个卷的名称。</block>
+  <block id="1a69d38f7b46901c58e85d024e87b034" category="inline-link">在数据 LIF 上启用 Kerberos</block>
+  <block id="d4a594e9e05807f063e76ba8e5520ce8" category="list-text">确保已准备好ONTAP Storage VM以支持NFS卷的Kerberos加密。有关说明、请参见<block ref="6585cfb6b510f588abb97add305c4508" category="inline-link-rx"></block> 。</block>
+  <block id="9fe985de654739fa6f48edb0d49059b4" category="inline-link">《NetApp NFSv4增强功能和最佳实践指南》</block>
+  <block id="9c6a0d551d50340cca48e6cfa4355566" category="list-text">确保已正确配置使用Kerberos加密的任何NFSv4卷。请参阅的“NetApp NFSv4域配置”一节(第13页)<block ref="fcbfe3012009d21ef9ba8407142f85b6" category="inline-link-rx"></block>。</block>
+  <block id="7c67bfc9153da2055f6d09209f9853c7" category="section-title">添加或修改ONTAP导出策略</block>
+  <block id="3afa4a2a4546fcf1b9a361d1bff9763b" category="paragraph">您需要向现有ONTAP导出策略添加规则、或者创建新的导出策略、以便对ONTAP Storage VM根卷以及与上游Kubornetes集群共享的任何ONTAP卷支持Kerberos加密。您添加的导出策略规则或创建的新导出策略需要支持以下访问协议和访问权限：</block>
+  <block id="e21233a7f0d7fedb5883aea1dfed27cf" category="paragraph-title">访问协议</block>
+  <block id="e10f51f4d0eb1b58929237c03db4b832" category="paragraph">使用NFS、NFSv3和NFSv4访问协议配置导出策略。</block>
+  <block id="baedff73fdfff23f65e8b80727cd3088" category="paragraph-title">访问详细信息</block>
+  <block id="892969be437eb53b05f372cc0ae74d6c" category="paragraph">您可以根据卷的需求配置以下三种不同版本的Kerberos加密之一：</block>
+  <block id="fda32d078836aa6e69a3497be5f9cdca" category="list-text">*Kerberos 5*-(身份验证和加密)</block>
+  <block id="7d55fc39e32469f330297f866ec40e41" category="list-text">*Kerberos 5i*-(身份验证和加密与身份保护)</block>
+  <block id="ec7a355c2dad88f01ddce6c662ff507f" category="list-text">*Kerberos 5p*-(身份验证和加密、具有身份和隐私保护功能)</block>
+  <block id="43c969c43b32e3dd3bcf607fcbe4eb43" category="paragraph">使用适当的访问权限配置ONTAP导出策略规则。例如、如果集群要挂载混合使用Kerberos 5i和Kerberos 5p加密的NFS卷、请使用以下访问设置：</block>
+  <block id="0370275db54735bcb50d5bfce36de4e6" category="cell">只读访问</block>
+  <block id="dbdb2754b99a3cb725e62ef04c72ee06" category="cell">读/写访问</block>
+  <block id="a3a9521b6675631e988004e7b8ffe7b4" category="cell">超级用户访问</block>
+  <block id="15395d0642f86c5992abbca5e56e2b29" category="cell">UNIX</block>
+  <block id="00d23a76e43b46dae9ec7aa9dcbebb32" category="cell">已启用</block>
+  <block id="f22873ba6efee4accc10bd5a3d3ca9eb" category="cell">Kerberos 5i</block>
+  <block id="a98fd9001be872cb9763c171625ee881" category="cell">Kerberos 5p</block>
+  <block id="9a83b6e7170a551799b737b273fde5e1" category="paragraph">有关如何创建ONTAP导出策略和导出策略规则、请参见以下文档：</block>
+  <block id="bb53c6c29f127a298da7dd86bf00bb89" category="inline-link">创建导出策略</block>
+  <block id="2065c7b470f4d228b592158785fc8c0b" category="list-text"><block ref="2065c7b470f4d228b592158785fc8c0b" category="inline-link-rx"></block></block>
+  <block id="8c47b652d31bca921bb367b0e3c5ec6d" category="inline-link">向导出策略添加规则</block>
+  <block id="249db3ace916cc1363d388978a8b6c5e" category="list-text"><block ref="249db3ace916cc1363d388978a8b6c5e" category="inline-link-rx"></block></block>
+  <block id="c21c2b66c343dfe9db6298e59c2cc767" category="section-title">创建存储后端</block>
+  <block id="449396632614b1e0731c51704890f8bd" category="paragraph">您可以创建包含Kerberos加密功能的Trident存储后端配置。</block>
+  <block id="0848c0a5d21711a3f8967a344553c492" category="paragraph">在创建用于配置Kerberos加密的存储后端配置文件时、您可以使用参数指定以下三种不同版本的Kerberos加密之一<block ref="21f59c061af833af5de20556ce76052d" prefix=" " category="inline-code"></block> ：</block>
+  <block id="619885da64e4ba4b0df04a00d78079b7" category="list-text"><block ref="47587c842cb0a2574a5a4c7c644b006d" prefix="" category="inline-code"></block> (身份验证和加密)</block>
+  <block id="aa734ef649b1255faccfc198980bf49a" category="list-text"><block ref="600550ee922e257041b75142ddab2319" prefix="" category="inline-code"></block> (身份验证和加密以及身份保护)</block>
+  <block id="4197df0e0ac8f9480069ee1e0dc22543" category="list-text"><block ref="b148e7f5a01830ae530070588af5e9e6" prefix="" category="inline-code"></block> (身份验证和加密以及身份和隐私保护)</block>
+  <block id="c99e9f5ade1b20705438ad6882d112c2" category="paragraph">请仅指定一个Kerberos级别。如果在参数列表中指定多个Kerberos加密级别、则仅会使用第一个选项。</block>
+  <block id="926a7d5402fb3ed0da8fcd630e3a8f8c" category="list-text">在受管集群上、使用以下示例创建存储后端配置文件。将括号&lt;&gt;中的值替换为您环境中的信息：</block>
+  <block id="2cd636101227e18554e5c5351bf5bbe3" category="list-text">使用您在上一步中创建的配置文件创建后端：</block>
+  <block id="3204b0a88f0c8e6cb89ef2653173ddf1" category="paragraph">您可以创建存储类来配置采用Kerberos加密的卷。</block>
+  <block id="03111bbdda72125f143e084557265c1c" category="paragraph">创建存储类对象时、可以使用参数指定以下三种不同版本的Kerberos加密之一<block ref="e1d3d66c5926aa7fbc3186da8f9b476b" prefix=" " category="inline-code"></block> ：</block>
+  <block id="85eee746a5d30d5149d419a3dfd2fe4e" category="list-text"><block ref="ebd2fabd7ee9d78e670334fba38c5a6b" prefix="" category="inline-code"></block> (身份验证和加密)</block>
+  <block id="24dac19871e9929a42267b538a60ebe5" category="list-text"><block ref="82f5845550ca9ab77ce797c16bd7bca1" prefix="" category="inline-code"></block> (身份验证和加密以及身份保护)</block>
+  <block id="c36d9d41da2e174bfa8b3338450fb45c" category="list-text"><block ref="7a1dedb8f6c22fd4833b45267ad3b01a" prefix="" category="inline-code"></block> (身份验证和加密以及身份和隐私保护)</block>
+  <block id="4a2e7c9ecf75ac18d4daec2783256280" category="paragraph">请仅指定一个Kerberos级别。如果在参数列表中指定多个Kerberos加密级别、则仅会使用第一个选项。如果您在存储后端配置中指定的加密级别与您在存储类对象中指定的加密级别不同、则存储类对象优先。</block>
+  <block id="0bae6577bb0c45b6f2d82896713df9f9" category="list-text">使用以下示例创建StorageClass Kubenetes对象：</block>
+  <block id="bd9c5e9bd5f130a6fbdbcaeb04656652" category="list-text">创建存储类：</block>
+  <block id="2472867b1c2b8a486fe64cfc08afeba5" category="list-text">确保已创建存储类：</block>
+  <block id="0a44f30bac4e15e0464a80627bef5882" category="section-title">配置卷</block>
+  <block id="37bd6ab74d66efd877ea77c0e69e593c" category="paragraph">创建存储后端和存储类后、您现在可以配置卷。有关说明，请参阅<block ref="70405bfb2744633a336a6c9abdd1df6e" category="inline-link-rx"></block>。</block>
+  <block id="fe10ad21eb1ce607c403a8d609d5ab3e" category="section-title">为Azure NetApp Files卷配置传输中的Kerberos加密</block>
+  <block id="cd21e25bc313d3805456542eac624499" category="paragraph">您可以对受管集群与单个Azure NetApp Files存储后端或Azure NetApp Files存储后端虚拟池之间的存储流量启用Kerberos加密。</block>
+  <block id="04379b5e9a5ec6b970752d2b8d0341c8" category="list-text">确保已在受管Red Hat OpenShift集群上启用Trident。</block>
+  <block id="6c32a3d0f1a665987b98dde5a0f96d7d" category="inline-link">Azure NetApp Files 文档</block>
+  <block id="aa63a31f222305a4ce10d8c1020ab1fd" category="list-text">请注意要求并按照中的说明，确保已为Kerberos加密准备好Azure NetApp Files存储后端<block ref="54b351b1767d2d50eb8c87e19c20164c" category="inline-link-rx"></block>。</block>
+  <block id="4f07c8d51fef64025d4b746305177733" category="paragraph">您可以创建包含Kerberos加密功能的Azure NetApp Files存储后端配置。</block>
+  <block id="5c6eaa8dd4c4134f6ad836e97ffdee13" category="paragraph">在创建配置Kerberos加密的存储后端配置文件时、您可以对其进行定义、使其应用于以下两个可能的级别之一：</block>
+  <block id="bc0557be41ea94e344d7ece1f311b7d4" category="list-text">使用字段的*存储后端级别*<block ref="6a60a6d9955ef9fce24cf4e86efed7af" prefix=" " category="inline-code"></block></block>
+  <block id="e30ee9a2b9976217a5fe28b412fe04d6" category="list-text">使用字段的*虚拟池级别*<block ref="533988f6253fcffab6270c1aafb50970" prefix=" " category="inline-code"></block></block>
+  <block id="64864cec765a0e5c421369098904873c" category="paragraph">在虚拟池级别定义配置时、系统会使用存储类中的标签来选择该池。</block>
+  <block id="082ccae8192fda90d271d92200b3a7dd" category="paragraph">在任一级别、您都可以指定以下三种不同版本的Kerberos加密之一：</block>
+  <block id="853434fc4aabccb1e3341f56ef2a9424" category="list-text"><block ref="9ce0da43b8420d1a89f0d00da04312a2" prefix="" category="inline-code"></block> (身份验证和加密)</block>
+  <block id="44ea74e03aa9994870273996b8770ef6" category="list-text"><block ref="6bbaa5deea5e26abf8837d31bd265b6f" prefix="" category="inline-code"></block> (身份验证和加密以及身份保护)</block>
+  <block id="e22427c81cd5155061fad66ed3f13f52" category="list-text"><block ref="42b55bed7d0514cd2e2189a3edc9d87b" prefix="" category="inline-code"></block> (身份验证和加密以及身份和隐私保护)</block>
+  <block id="c51fc706f0eb21d747d3ff2e2bb6c38b" category="list-text">在受管集群上、根据需要定义存储后端的位置(存储后端级别或虚拟池级别)、使用以下示例之一创建存储后端配置文件。将括号&lt;&gt;中的值替换为您环境中的信息：</block>
+  <block id="d51a5db438981d465f8fecc7ecbeb054" category="open-title">存储后端级别示例</block>
+  <block id="83aab9b6ffc8c65b79350e009c49e5f4" category="open-title">虚拟池级别示例</block>
+  <block id="1738a6ff1f0b418ce16cf74aabdceff1" category="section-title">从快照原位还原卷</block>
+  <block id="f29961e077241efec95d259658aa48f1" category="paragraph">Trident可使用(TSR) CR从快照快速原位还原卷<block ref="2aabb3b01d0d54317a9eeef910e001f6" prefix=" " category="inline-code"></block>。此CR用作要务Kubbernetes操作、在操作完成后不会持久保留。</block>
+  <block id="0219777660eb822cd45c74808c60e5e6" category="paragraph">Trident支持在<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>、、<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block><block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>、<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block><block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block>、、<block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block><block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>和<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block>驱动程序。</block>
+  <block id="e0bc0596a7d966cd8dab3ee0e924c9b5" category="paragraph">您必须具有绑定的PVC和可用的卷快照。</block>
+  <block id="d785d18f53979794a4ef9e08d186e3c4" category="list-text">验证PVC状态是否已绑定。</block>
+  <block id="d0f2b7254060d8a37c98c1eb4289586d" category="list-text">确认卷快照已准备就绪、可以使用。</block>
+  <block id="da6aadede1bc870c9042c660fdf93f25" category="list-text">创建TSR CR。此示例将为PVC和卷快照创建CR<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block><block ref="06f2874897d3ec8426ec85e0ffda5544" prefix=" " category="inline-code"></block>。</block>
+  <block id="68fb76b60d3c1f9302a04ef3eb761c08" category="admonition">TSR CR必须位于PVC和VS所在的命名空间中。</block>
+  <block id="0c9991859e53bf37c58a2fd1233eb478" category="list-text">应用CR以从快照还原。此示例将从Snapshot恢复<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block>。</block>
+  <block id="5dfd751b8f6ed15f558be3e46812461b" category="paragraph">Trident将从快照还原数据。您可以验证快照还原状态。</block>
+  <block id="91f853f4fc1dc83a1a2f28c65af59d28" category="list-text">在大多数情况下、如果出现故障、Trident不会自动重试此操作。您需要再次执行此操作。</block>
+  <block id="c83b74c2020dd836f5b401ecda0da78c" category="list-text">没有管理员访问权限的Kubbernetes用户可能必须获得管理员授予的权限、才能在其应用程序命名空间中创建TSR CR。</block>
+  <block id="cff310c77e35cf2f693ebbb39c78e89f" category="summary">Trident支持在源卷和目标卷之间创建镜像关系、以复制卷以实现灾难恢复。</block>
+  <block id="50e2eea9ba53d70147772db1c5d25f79" category="doc">使用SnapMirror复制卷</block>
+  <block id="4f29610afffeab1dca63a82a40791008" category="paragraph">Trident支持在一个集群上的源卷与对等集群上的目标卷之间建立镜像关系、以便为灾难恢复复制数据。您可以使用具有名称流的自定义资源定义(CRD)执行以下操作：</block>
+  <block id="a682d8ef86abcae6c5a1db6186c5f02b" category="list-text">在卷之间创建镜像关系(PVC)</block>
+  <block id="31a8f98d3378661a5b8abf15438f0bca" category="list-text">删除卷之间的镜像关系</block>
+  <block id="a6349012892be516e5729d501a9649a7" category="list-text">中断镜像关系</block>
+  <block id="2597cb6d27f572bb6d7d2fd15f414795" category="list-text">在灾难情况下提升二级卷(故障转移)</block>
+  <block id="40f7c55be912a395aed2502927d3fcfa" category="list-text">在集群之间执行应用程序无中断过渡(在计划内故障转移或迁移期间)</block>
+  <block id="d193cd9a2432eca22e5cf0d06dcee1e6" category="section-title">复制前提条件</block>
+  <block id="55be807bf2be012ff44a04449cc5e8a8" category="paragraph">开始之前、请确保满足以下前提条件：</block>
+  <block id="3404cce75db90acf6a9d52860721a139" category="list-title">ONTAP 集群</block>
+  <block id="fbcc2a3b7506e5e36eb6f61b69bb75da" category="list-text">*Kubernet*：使用ONTAP作为后端的源和目标Trident集群上必须存在Trident版本22.10或更高版本。</block>
+  <block id="5cc8ada79224d850ecd22fd22e550c47" category="list-title">对等</block>
+  <block id="02b05cdd8f0a8c426f307085cc1004f7" category="list-text">*集群和SVM*：ONTAP存储后端必须建立对等状态。有关详细信息、请参见<block ref="60333a598df416e49fbceb5a88dce370" category="inline-link-rx"></block> 。</block>
+  <block id="792f00dfd96560df18fe1c6b56861893" category="list-text">* Trident和SVM*：对等远程SVM必须可供目标集群上的Trident使用。</block>
+  <block id="0c5e1b5bc54261ccadd2a72af1047ded" category="list-title">支持的驱动程序</block>
+  <block id="57601c13c06c6ac6e23efaab44ced427" category="list-text">ONTAP -NAS和ONTAP SAN驱动程序支持卷复制。</block>
+  <block id="3ce5b83f8896ef0d2e356d3972ec8898" category="section-title">创建镜像PVC</block>
+  <block id="427a1ab7f39ee4f2dd7a0b7e35f572da" category="paragraph">按照以下步骤并使用CRD示例在主卷和二级卷之间创建镜像关系。</block>
+  <block id="4dc69f665f0d76c17a577a352dd15b25" category="list-text">在主Kubbernetes集群上执行以下步骤：</block>
+  <block id="cffc5263be00a76539edeeff72190d54" category="list-text">使用参数创建StorageClass对象<block ref="23041ca302bab724a5a0a4ee923c745d" prefix=" " category="inline-code"></block> 。</block>
+  <block id="f1fe26832c26eb686c85bd72da8a62f1" category="list-text">使用先前创建的StorageClass创建PVC。</block>
+  <block id="a306778c7affcc4dd2329c7f1e9a6389" category="list-text">使用本地信息创建镜像关系CR。</block>
+  <block id="12551ccb4392cf7715384812c34ff7dc" category="paragraph">Trident会提取卷的内部信息以及卷的当前数据保护(DP)状态、然后填充镜像关系的状态字段。</block>
+  <block id="7e36329a511f28054ceb0cb2aba7de3a" category="list-text">获取TridentMirorRelationship CR以获取PVC的内部名称和SVM。</block>
+  <block id="ce01c03f932076e82348fc5aaefacc7d" category="list-text">在二级Kubbernetes集群上执行以下步骤：</block>
+  <block id="dbe7fac150e57be9bc0d8e046792f4c3" category="list-text">使用trident.netapp.io/replication: true参数创建StorageClass。</block>
+  <block id="01d68e0f9630c032dc8a33358e46e65b" category="list-text">使用目标和源信息创建镜像关系CR。</block>
+  <block id="b4dcd7f617380594be36d544e6823841" category="paragraph">Trident将使用配置的关系策略名称(或ONTAP的默认策略)创建SnapMirror关系并对其进行初始化。</block>
+  <block id="4ba5d2a91c95149a7ad924ebd0d9503d" category="list-text">使用先前创建的StorageClass创建一个PVC以用作二级(SnapMirror目标)。</block>
+  <block id="14c271d9e62dcf6baaab0fde456f080f" category="paragraph">Trident将检查是否存在TridentMirorRelationship CRD、如果此关系不存在、则无法创建卷。如果存在此关系、Trident将确保将新FlexVol volume放置到与镜像关系中定义的远程SVM建立对等关系的SVM上。</block>
+  <block id="e71d1a5cbaac30e63ed507e4b62c705f" category="section-title">卷复制状态</block>
+  <block id="d802b3b47bb3c6b52714c9817598fcb8" category="paragraph">三级镜像关系(TCR)是一种CRD、表示PVC之间复制关系的一端。目标T关系 管理器具有一个状态、此状态会告知Trident所需的状态。目标T关系 管理器具有以下状态：</block>
+  <block id="546afd3b22376f948ae8d790e441d7da" category="list-text">*已建立*：本地PVC是镜像关系的目标卷、这是一个新关系。</block>
+  <block id="724cfb5ec8bac42a80699bb79c4eccb9" category="list-text">*提升*：本地PVC可读写并可挂载、当前未建立任何有效的镜像关系。</block>
+  <block id="d323366aa32e60d08a0f93bda543af47" category="list-text">*重新建立*：本地PVC是镜像关系的目标卷、以前也位于该镜像关系中。</block>
+  <block id="4c3cd5b62a43e82e03fffa6b238ed918" category="list-text">如果目标卷曾经与源卷建立关系、因为它会覆盖目标卷的内容、则必须使用重新建立的状态。</block>
+  <block id="b2e7dc07859cd924ca5706b299986e57" category="list-text">如果卷之前未与源建立关系、则重新建立的状态将失败。</block>
+  <block id="93f9c6ccc7d85e709509db31891ae5eb" category="section-title">在计划外故障转移期间提升辅助PVC</block>
+  <block id="4a76c8d930ec18b5aedc26b5d8e5246f" category="paragraph">在二级Kubbernetes集群上执行以下步骤：</block>
+  <block id="78ac02218b5a9367bdcb4881538477cc" category="list-text">将TridentMirorRelationship的_spec.state_字 段更新到<block ref="1fe57d6202c7cfbb0ee344b1e0a6fb37" prefix=" " category="inline-code"></block>。</block>
+  <block id="ffe4cfc202d643b50342b93a4a11a82f" category="section-title">在计划内故障转移期间提升辅助PVC</block>
+  <block id="1d60b89a076d7f30b8efdef50e842f68" category="paragraph">在计划内故障转移(迁移)期间、执行以下步骤以提升二级PVC：</block>
+  <block id="3310d9a60c164accb7c262ab6e9fbc65" category="list-text">在主Kubbernetes集群上、创建PVC的快照、并等待创建快照。</block>
+  <block id="8b17b79902950942165541a8ab704363" category="list-text">在主Kubnetes集群上、创建SnapshotInfo CR以获取内部详细信息。</block>
+  <block id="678346d79faaa65b2da52e6d7ddce845" category="list-text">在二级Kubernetes集群上、将_TridentMirorRelationship_ CR的_spec.state_字 段更新为_promoted_和_spec.promotedSnapshotHandle_、以成为快照的内部名称。</block>
+  <block id="7b007b14980acd66e9301e02a5670f47" category="list-text">在二级Kubernetes集群上、确认Trident镜像 关系的状态(stats.state字段)为已提升。</block>
+  <block id="f69101c0107c4bbf8f0ccc9141beb68b" category="section-title">在故障转移后还原镜像关系</block>
+  <block id="9a023cbe1d3be933d8edb6228f9901ce" category="paragraph">在还原镜像关系之前、请选择要用作新主卷的那一端。</block>
+  <block id="1c7011adbcc0afa258396aff4f10266b" category="list-text">在二级Kubernetes集群上、确保已更新TundentMirorRelationship上的_spic.netVolumeHandle_字段的值。</block>
+  <block id="ffb25f01fda2538ae98bc0c4b4d465a6" category="list-text">在二级Kubernetes集群上，将Trident镜像 关系的_spec.mirector_字段更新到<block ref="036bbe13de7250844b100bc381b59214" prefix=" " category="inline-code"></block>。</block>
+  <block id="41a593c0bede63aac2726a18e4599087" category="section-title">其他操作</block>
+  <block id="567147b40ff26562a6dfcddbde29e62e" category="paragraph">Trident支持对主卷和二级卷执行以下操作：</block>
+  <block id="253093d00b66ff2357df5085c04b2758" category="section-title">将主PVC复制到新的二级PVC</block>
+  <block id="301dcece9e67241c29ebbbac8a94274e" category="paragraph">确保您已有一个主PVC和一个次要PVC。</block>
+  <block id="7f1c32cba6b98d1db7f3dfda1df76189" category="list-text">从已建立的二级(目标)集群中删除PerbestentVolumeClaim和TridentMirorRelationship CRD。</block>
+  <block id="e655fd5342cff178f54ae5f5b2a3b7b6" category="list-text">从主(源)集群中删除TridentMirorRelationship CRD。</block>
+  <block id="3eb69a135044d3f308d140dccb1dbe5e" category="list-text">在主(源)集群上为要建立的新二级(目标) PVC创建新的TridentMirorRelationship CRD。</block>
+  <block id="92c650dfb6284b5d24ed0e83a2338fa0" category="section-title">调整镜像、主PVC或二级PVC的大小</block>
+  <block id="66990a43216d28b5b6818b021d397574" category="paragraph">可以正常调整PVC的大小、如果数据量超过当前大小、ONTAP将自动扩展任何目标flevxvol。</block>
+  <block id="4e2626fed5da19a4be8255f16a331609" category="section-title">从PVC中删除复制</block>
+  <block id="e1abf7fa65d845d34c33d593ed070453" category="paragraph">要删除复制、请对当前二级卷执行以下操作之一：</block>
+  <block id="b3dd2c563dffb09f03c72bc16a72be62" category="list-text">删除次要PVC上的镜像关系。此操作将中断复制关系。</block>
+  <block id="413ab8e64d0d4ccb3f08ef2a8653a525" category="list-text">或者、将spec.state字段更新为_promoted_。</block>
+  <block id="c00cff9971607d7a0409066a0ecc3bcd" category="section-title">删除PVC (之前已镜像)</block>
+  <block id="e52ffc7f9894586bbf7c4260d92073c4" category="paragraph">Trident会检查是否存在复制的PVC、并在尝试删除卷之前释放复制关系。</block>
+  <block id="8ec9c60105332c1be8facc42b496e14b" category="section-title">删除TTr</block>
+  <block id="a956a14d229badbbde1032651b3586fd" category="paragraph">删除镜像关系一端的T磁 还原会导致剩余的T磁 还原在Trident完成删除之前过渡到_promoted _状态。如果选择删除的TMirror已处于_Promved"状态、则不存在现有镜像关系、此时TMirror将被删除、Trident会将本地PVC提升为_ReadWrite_。此删除操作将释放ONTAP中本地卷的SnapMirror元数据。如果此卷将来要在镜像关系中使用、则在创建新镜像关系时、它必须使用具有_re设立_卷复制状态的新TMirror。</block>
+  <block id="d41660149eb8930ad76a1dfe3dc5f2e3" category="section-title">在ONTAP联机时更新镜像关系</block>
+  <block id="7079164c5ba86439b0719782591106dd" category="paragraph">建立镜像关系后、可以随时更新这些关系。您可以使用<block ref="abb3a949c6d70e3e5d92f4ad2bf143a3" prefix=" " category="inline-code"></block> 或<block ref="ff0b4e3d4dfe8f6074b6943947345d4d" prefix=" " category="inline-code"></block> 字段更新关系。将目标卷提升为常规ReadWrite卷时、可以使用_promotedSnapshotHandle_指定要将当前卷还原到的特定快照。</block>
+  <block id="4eecab048a7c90cfb92e0f04884686e8" category="section-title">在ONTAP脱机时更新镜像关系</block>
+  <block id="e782fcb9f3e7e8fa8b5ccdb3169c0e42" category="paragraph">您可以使用CRD执行SnapMirror更新、而无需Trident直接连接到ONTAP集群。请参阅以下TridentAction镜像 更新的示例格式：</block>
+  <block id="bc08468157c4a9e3a30eed7ba64cc309" category="paragraph"><block ref="1f9dfae8a369525bce4996df40963532" prefix="" category="inline-code"></block> 反映TridentAction镜像 更新CRD的状态。它可以从_suced_、_in Progress _或_failed中获取值。</block>
 </blocks>

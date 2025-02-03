@@ -242,6 +242,98 @@ NOTE: 还原Snapshot副本时、现有卷配置将被覆盖。创建Snapshot副�
 
 
 
+== 从快照原位还原卷
+
+Trident可使用(TSR) CR从快照快速原位还原卷 `TridentActionSnapshotRestore`。此CR用作要务Kubbernetes操作、在操作完成后不会持久保留。
+
+Trident支持在 `ontap-san`、、 `ontap-san-economy` `ontap-nas`、 `ontap-nas-flexgroup` `azure-netapp-files`、、 `gcp-cvs` `google-cloud-netapp-volumes`和 `solidfire-san`驱动程序。
+
+.开始之前
+您必须具有绑定的PVC和可用的卷快照。
+
+* 验证PVC状态是否已绑定。
++
+[listing]
+----
+kubectl get pvc
+----
+* 确认卷快照已准备就绪、可以使用。
++
+[listing]
+----
+kubectl get vs
+----
+
+
+.步骤
+. 创建TSR CR。此示例将为PVC和卷快照创建CR `pvc1` `pvc1-snapshot`。
++
+
+NOTE: TSR CR必须位于PVC和VS所在的命名空间中。
+
+
+
+[listing]
+----
+cat tasr-pvc1-snapshot.yaml
+
+apiVersion: trident.netapp.io/v1
+kind: TridentActionSnapshotRestore
+metadata:
+  name: trident-snap
+  namespace: trident
+spec:
+  pvcName: pvc1
+  volumeSnapshotName: pvc1-snapshot
+----
+. 应用CR以从快照还原。此示例将从Snapshot恢复 `pvc1`。
++
+[listing]
+----
+kubectl create -f tasr-pvc1-snapshot.yaml
+
+tridentactionsnapshotrestore.trident.netapp.io/trident-snap created
+----
+
+
+.结果
+Trident将从快照还原数据。您可以验证快照还原状态。
+
+[listing]
+----
+kubectl get tasr -o yaml
+
+apiVersion: trident.netapp.io/v1
+items:
+- apiVersion: trident.netapp.io/v1
+  kind: TridentActionSnapshotRestore
+  metadata:
+    creationTimestamp: "2023-04-14T00:20:33Z"
+    generation: 3
+    name: trident-snap
+    namespace: trident
+    resourceVersion: "3453847"
+    uid: <uid>
+  spec:
+    pvcName: pvc1
+    volumeSnapshotName: pvc1-snapshot
+  status:
+    startTime: "2023-04-14T00:20:34Z"
+    completionTime: "2023-04-14T00:20:37Z"
+    state: Succeeded
+kind: List
+metadata:
+  resourceVersion: ""
+----
+[NOTE]
+====
+* 在大多数情况下、如果出现故障、Trident不会自动重试此操作。您需要再次执行此操作。
+* 没有管理员访问权限的Kubbernetes用户可能必须获得管理员授予的权限、才能在其应用程序命名空间中创建TSR CR。
+
+
+====
+
+
 == 删除具有关联快照的PV
 
 删除具有关联快照的永久性卷时，相应的 Trident 卷将更新为 " 正在删除 " 状态。删除卷快照以删除Trident卷。

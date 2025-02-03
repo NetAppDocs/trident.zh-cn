@@ -16,3 +16,5 @@ entries:
     url: "/trident-reco/security-reco.html"
   - title: Linux统一密钥设置(LUKS)
     url: "/trident-reco/security-luks.html"
+  - title: Kerberos传输中加密
+    url: "/trident-reco/kerberos-inflight-encryption.html"

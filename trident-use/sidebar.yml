@@ -91,6 +91,8 @@ entries:
     url: "/trident-use/vol-custom-name.html"
   - title: 在命名空间之间共享NFS卷
     url: "/trident-use/volume-share.html"
+  - title: 使用SnapMirror复制卷
+    url: "/trident-use/vol-volume-replicate.html"
   - title: 使用 CSI 拓扑
     url: "/trident-use/csi-topology.html"
   - title: 使用快照
