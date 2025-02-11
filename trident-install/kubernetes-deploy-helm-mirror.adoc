@@ -25,7 +25,7 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 ====
 []
 =====
-* 现在、在Trident中支持Kubnetes 1.31。在升级Kubernetes之前升级Trident。
+* 现在、在Trident中支持Kubnetes 1.32。在升级Kubernetes之前升级Trident。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。

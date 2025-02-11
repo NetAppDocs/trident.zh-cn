@@ -3586,17 +3586,14 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="0fe713481395212a8eb358f4cb188c04" category="section-title">有关Trident的关键信息</block>
   <block id="8e7cb3d16dbeb8a9289495de8b479d1f" category="paragraph">*您必须阅读以下有关Trident的重要信息。*</block>
   <block id="04dc1d4246222d48d4348b40baef0aac" category="example-title">&lt;strong&gt;与Trident &lt;/strong&gt;相关的信息</block>
-  <block id="09a48eb36bc4152ed8fe5c428d4ece05" category="list-text">现在、在Trident中支持Kubnetes 1.31。在升级Kubernetes之前升级Trident。</block>
   <block id="5e25fae885baef0275d27a764979b289" category="list-text">Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值<block ref="db729c5c8df447087e5a84b961df14f6" prefix=" " category="inline-code"></block>。</block>
   <block id="710f95d40d121f27f89b0faa6e178133" category="paragraph">Trident支持多个容器引擎和流程编排程序、其中包括：</block>
-  <block id="c3524924959417328a5c2d4797b71b8f" category="list-text">Kubbernetes 1.25 - 1.31</block>
   <block id="76073f246cf758836f21035e15541803" category="list-text">R能 手Kubernetes Engine 2 (RKE2) v1.28.5+rke2r1</block>
   <block id="e42907190e2666646d57ade5c061e6e2" category="paragraph">Trident还可以与许多其他完全托管和自行管理的Kubernetes产品配合使用、包括Google Kubernetes Engine (GKE)、Amazon Elatic Kubernetes Services (EKS)、Azure Kubernetes Service (AKS)、MiranT斯Kubernetes Engine (MKE)和VMware Tanzu产品组合。</block>
   <block id="4cb56edacf6f40b0077e559878cb88a1" category="paragraph">Trident和ONTAP可用作的存储提供程序<block ref="98ab68800979b414641691275d2b9c15" category="inline-link-macro-rx"></block>。</block>
   <block id="029f0e10fd529e4a0fd06a03bd5b1eaf" category="admonition">在将安装了Trident的Kubernetes集群从1.24升级到1.25或更高版本之前，请参见<block ref="1b428bb9b9fe27db6cd8932526864634" category="inline-link-macro-rx"></block>。</block>
   <block id="90e5d592b7e0b2afb122e69c00372ddf" category="paragraph">要使用Trident、您需要使用以下一个或多个受支持的后端：</block>
   <block id="6116c21c42b3138e811999de6433a0a6" category="paragraph">下表总结了此版本的Trident及其支持的Kubernetes版本提供的功能。</block>
-  <block id="cb6fdbc23b7af9715334e1bb04d2c4ac" category="paragraph">1.25 - 1.31</block>
   <block id="29fce9ae0f476afd36cf3ebf4de1d2a8" category="paragraph">虽然Trident不正式支持特定操作系统、但已知以下操作系统可以正常工作：</block>
   <block id="779639a0216e7a8fd164ee8a7266d8b8" category="paragraph">默认情况下、Trident在容器中运行、因此将在任何Linux工作器上运行。但是、根据您使用的后端、这些员工需要能够使用标准NFS客户端或iSCSI启动程序挂载Trident提供的卷。</block>
   <block id="ac65d911a6a42e3244db78a534db815a" category="paragraph">Trident可能需要先对存储系统进行更改、然后后端配置才能使用它。</block>
@@ -3604,7 +3601,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="31ae62dfe6cb254d32d0f67deda8d9ad" category="paragraph">Trident需要访问特定端口才能进行通信。</block>
   <block id="2e442c7238666f1b73934ff5c2034b82" category="paragraph"><block ref="2e442c7238666f1b73934ff5c2034b82" category="inline-link-macro-rx"></block></block>
   <block id="ce8468ce4398f1403e56c8d07fbfbdff" category="paragraph">对于气隙安装、以下列表是安装Trident所需容器映像的参考。使用<block ref="4ebf280824868255c952dc529072ecb9" prefix=" " category="inline-code"></block>命令验证所需容器映像的列表。</block>
-  <block id="ecfc1eb0b20cc5ae8492fc90fcbf996d" category="cell">v1.25.0、v1.26.0、v1.27.0、v1.28.0、v1.29.0、 v1.30.0、v1.31.0</block>
   <block id="84164a090d4c4deb277c3eaee7be8933" category="list-text">dDocker。io/NetApp/trdent：24.10.0</block>
   <block id="d32e454f258700e2a7e9bd38093759e7" category="list-text">docer.io/NetApp/trdent-autostsupport：24.10</block>
   <block id="2008e365da289d546b62489addab8fe9" category="list-text">注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.1.0</block>
@@ -5183,4 +5179,8 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="1d5144e260d8c4ece3c5d47a77d84c11" category="section-title">更新Trident EKS加载项</block>
   <block id="ccab466451ff5a867710cce1b28c33a0" category="section-title">卸载/删除Trident EKS加载项</block>
   <block id="e75af04fb72882c1d735055059f1a557" category="list-text">单击*Add-ons*选项卡，然后单击Trident by NetApp．*</block>
+  <block id="71daa7e0f7c4240ad5aa4024c97bafae" category="list-text">现在、在Trident中支持Kubnetes 1.32。在升级Kubernetes之前升级Trident。</block>
+  <block id="58830b43d96c301076f2636c9bb946d5" category="list-text">Kubbernetes 1.25 - 1.32</block>
+  <block id="2d95fd2a9f3bf1dcac56e3de82d288ad" category="paragraph">1.25 - 1.32</block>
+  <block id="2ec43b8882dfc130c999d1ebfae88d87" category="cell">v1.25.0、v1.26.0、v1.27.0、v1.28.0、v1.29.0、 v1.30.0、v1.31.0、v1.32.0</block>
 </blocks>
