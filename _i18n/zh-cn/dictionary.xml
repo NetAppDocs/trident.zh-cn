@@ -5183,4 +5183,17 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="58830b43d96c301076f2636c9bb946d5" category="list-text">Kubbernetes 1.25 - 1.32</block>
   <block id="2d95fd2a9f3bf1dcac56e3de82d288ad" category="paragraph">1.25 - 1.32</block>
   <block id="2ec43b8882dfc130c999d1ebfae88d87" category="cell">v1.25.0、v1.26.0、v1.27.0、v1.28.0、v1.29.0、 v1.30.0、v1.31.0、v1.32.0</block>
+  <block id="d1548585dadda37a28905a23e22cf65d" category="section-title">从备份还原到其他集群</block>
+  <block id="7fa8874b1f645ca2af9d81b51985b8fb" category="paragraph">如果原始集群出现问题、您可以将备份还原到其他集群。</block>
+  <block id="17e2d63e3b45ecbfe13bcc32fec929d0" category="paragraph">* 开始之前 *</block>
+  <block id="dd4ee610bd1d035c73bc0cbcd80e46da" category="paragraph">确保满足以下前提条件：</block>
+  <block id="1d6028c560c8f6dbee841737e60a3d9d" category="list-text">目标集群已安装Trident Protect。</block>
+  <block id="b20f8883edb9068c67a2faeb3c083d38" category="list-text">目标集群可以访问与存储备份的源集群相同的AppVault的分段路径。</block>
+  <block id="0425d0358a4cba7a7cce5ddd727ab6a2" category="list-text">使用Trident Protect命令行界面插件检查目标集群上AppVault CR的可用性：</block>
+  <block id="1ff83a5266e9e025c2984e0c10dea90e" category="admonition">确保目标集群上存在用于应用程序还原的命名空间。</block>
+  <block id="8d433ae9a21c49e9e5433ebd408605c0" category="list-text">从目标集群查看可用AppVault的备份内容：</block>
+  <block id="378e6f0ba7080535a4462b5311befb40" category="paragraph">运行此命令可显示AppVault中的可用备份、包括其原始集群、相应的应用程序名称、时间戳和归档路径。</block>
+  <block id="053aba80de03f3fdf626d1c858342330" category="list-text">使用AppVault名称和归档路径将应用程序还原到目标集群：</block>
+  <block id="fceebbe32c1f7b24c54d6a4e8a0fa776" category="admonition">如果BackupRestore CR不可用、您可以使用步骤2中提到的命令查看备份内容。</block>
+  <block id="4ef55c1fec2de9218af40d16cbc021a4" category="list-text">使用以下命令还原应用程序、将括号中的值替换为环境中的信息。命名空间映射参数使用冒号分隔的命名空间将源命名空间映射到正确的目标命名空间、格式为SOURCE1：dest1、Source2：dest2。例如：</block>
 </blocks>
