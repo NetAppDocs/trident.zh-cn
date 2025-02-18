@@ -1889,7 +1889,6 @@
   <block id="dd341f866eaefb939dc86608773c909d" category="section-title">在安装方法之间移动</block>
   <block id="84dfae02381a00cf11d01c571e3e3e0f" category="paragraph">您可以决定更改安装方法。在执行此操作之前、请考虑以下事项：</block>
   <block id="e77325ac6e155cf5d14c756f1d64333f" category="list-text">如果您使用的是基于操作员的手动部署、并且要使用基于Helm的Trident操作员部署、则应先手动卸载此操作员、然后再执行Helm安装。这样， Helm 就可以使用所需的标签和标注来部署 Trident 操作员。如果不执行此操作，则基于 Helm 的 Trident 操作员部署将失败，并显示标签验证错误和标注验证错误。如果您有<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>基于部署、您可以使用基于Helm的部署、而不会遇到问题。</block>
-  <block id="0ffed9ae8c0b8e64c5dc8cba81c4fe34" category="list-text">FAS/AFF/Select 9.5或更高版本</block>
   <block id="f36d25716a4b2c466ddcb8065bef3ae6" category="paragraph"><block ref="f36d25716a4b2c466ddcb8065bef3ae6" category="inline-link-macro-rx"></block></block>
   <block id="50823ee9226376c44bfb71c334ee2f3f" category="paragraph"><block ref="50823ee9226376c44bfb71c334ee2f3f" category="inline-link-macro-rx"></block></block>
   <block id="44e21d73aa8bd7200fceac6671723524" category="doc">手动部署Trident操作员(脱机模式)</block>
@@ -5196,4 +5195,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="053aba80de03f3fdf626d1c858342330" category="list-text">使用AppVault名称和归档路径将应用程序还原到目标集群：</block>
   <block id="fceebbe32c1f7b24c54d6a4e8a0fa776" category="admonition">如果BackupRestore CR不可用、您可以使用步骤2中提到的命令查看备份内容。</block>
   <block id="4ef55c1fec2de9218af40d16cbc021a4" category="list-text">使用以下命令还原应用程序、将括号中的值替换为环境中的信息。命名空间映射参数使用冒号分隔的命名空间将源命名空间映射到正确的目标命名空间、格式为SOURCE1：dest1、Source2：dest2。例如：</block>
+  <block id="e0020bd4ebab101e8b128426eb7025bd" category="list-text">FAS / AFF /选择</block>
+  <block id="fcabe507223b9ffe86d4048df99d8ee5" category="paragraph">基于FC的iSCSI SCSI (Trident 24.10中的技术预览)</block>
 </blocks>

@@ -71,7 +71,7 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.24升级到1.25或更高�
 * Azure NetApp Files
 * Cloud Volumes ONTAP
 * Google Cloud NetApp卷
-* FAS/AFF/Select 9.5或更高版本
+* FAS / AFF /选择
 * NetApp 全 SAN 阵列（ ASA ）
 * NetApp HCI/ Element软件11或更高版本
 
