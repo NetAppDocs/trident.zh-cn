@@ -40,21 +40,36 @@ summary: 您可以通过创建应用程序CR和关联的Trident Vault CR来使Ap
 +
 *** *metadata.name*:(_required__)应用程序自定义资源的名称。请注意您选择的名称、因为保护操作所需的其他CR文件会引用此值。
 *** *。spec.includedNamespaces*:(_required__)使用命名空间标签或命名空间名称来指定应用程序资源所在的命名空间。应用程序命名空间必须属于此列表。
+*** *。metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*:(_可 选_)此标注仅适用于从虚拟机定义的应用程序、例如在KubeVirt环境中、文件系统在快照之前冻结。指定此应用程序是否可以在快照期间写入文件系统。如果设置为true、则应用程序将忽略全局设置、并可在快照期间写入文件系统。如果设置为false、则应用程序将忽略全局设置、并且文件系统会在快照期间冻结。如果指定了此参数、但应用程序定义中没有虚拟机、则会忽略此标注。如果未指定，则应用程序将遵循link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["全局Trident保护冻结设置"]。
++
+[NOTE]
+====
+如果您需要在创建应用程序后应用此标注、可以使用以下命令：
+
+[source, console]
+----
+kubectl annotate application -n <application CR namespace> <application CR name> protect.trident.netapp.io/skip-vm-freeze="true"
+----
+====
 +
 YAML示例：
 
 +
 [source, yaml]
 ----
----
 apiVersion: protect.trident.netapp.io/v1
 kind: Application
 metadata:
-  name: maria
+  annotations:
+    protect.trident.netapp.io/skip-vm-freeze: "false"
+  name: my-app-name
   namespace: my-app-namespace
 spec:
   includedNamespaces:
-    - namespace: my-app-namespace
+  - labelSelector: {}
+    namespace: namespace-1
+  - labelSelector: {}
+    namespace: namespace-2
 ----
 
 
@@ -72,12 +87,28 @@ kubectl apply -f maria-app.yaml
 .使用命令行界面添加应用程序
 --
 .步骤
-. 创建并应用应用应用程序定义、将括号中的值替换为您环境中的信息。您可以使用逗号分隔列表和以下示例中所示的参数在应用程序定义中包括名称和资源：
+. 使用以下示例之一创建并应用应用程序定义、将括号中的值替换为您环境中的信息。您可以使用逗号分隔列表和示例中显示的参数在应用程序定义中包括名称和资源。
++
+您可以选择在创建应用程序时使用标注来指定应用程序是否可以在快照期间写入文件系统。这仅适用于从虚拟机定义的应用程序、例如在KubeVirt环境中、文件系统在快照之前冻结。如果将标注设置为 `true`，则应用程序将忽略全局设置，并可在快照期间写入文件系统。如果将其设置为 `false`，则应用程序将忽略全局设置，并且文件系统会在快照期间冻结。如果使用标注、但应用程序定义中没有虚拟机、则会忽略标注。如果不使用标注，则应用程序将遵循link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["全局Trident保护冻结设置"]。
+
++
+要在使用命令行界面创建应用程序时指定标注、可以使用标志。 `--annotation`
+
++
+** 创建应用程序并使用文件系统冻结行为的全局设置：
 +
 [source, console]
 ----
 tridentctl-protect create application <my_new_app_cr_name> --namespaces <namespaces_to_include> --csr <cluster_scoped_resources_to_include> --namespace <my-app-namespace>
 ----
+** 创建应用程序并为文件系统冻结行为配置本地应用程序设置：
++
+[source, console]
+----
+tridentctl-protect create application <my_new_app_cr_name> --namespaces <namespaces_to_include> --csr <cluster_scoped_resources_to_include> --namespace <my-app-namespace> --annotation protect.trident.netapp.io/skip-vm-freeze=<"true"|"false">
+----
+
+
 
 
 --

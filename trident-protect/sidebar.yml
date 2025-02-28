@@ -12,6 +12,8 @@ entries:
     url: "/trident-protect/trident-protect-installation.html"
   - title: 安装Trident Protect命令行界面插件
     url: "/trident-protect/trident-protect-cli.html"
+  - title: 自定义Trident Protect安装
+    url: "/trident-protect/trident-protect-customize-installation.html"
 - title: 管理Trident Protect
   entries:
   - title: 管理授权和访问控制

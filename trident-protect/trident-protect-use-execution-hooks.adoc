@@ -58,6 +58,9 @@ NOTE: 只有在运行不使用现有快照的备份时、上述顺序示例才�
 NOTE: 在生产环境中启用执行钩脚本之前，应始终对其进行测试。您可以使用 "kubectl exec" 命令方便地测试脚本。在生产环境中启用执行挂钩后、请测试生成的快照和备份、以确保它们一致。为此、您可以将应用程序克隆到临时命名空间、还原快照或备份、然后测试应用程序。
 
 
+NOTE: 如果快照前执行挂钩添加、更改或删除了Kubornetes资源、则这些更改将包括在快照或备份以及任何后续还原操作中。
+
+
 
 == 有关自定义执行挂钩的重要注意事项
 
@@ -196,4 +199,178 @@ tridentctl-protect create exechook <my_exec_hook_name> --action <action_type> --
 
 
 --
+====
+
+
+== 手动运行执行挂钩
+
+您可以手动运行执行挂钩以进行测试、或者在发生故障后需要手动重新运行挂钩。要手动运行执行挂钩、您需要具有所有者、管理员或成员权限。
+
+手动运行执行挂钩包含两个基本步骤：
+
+. 创建资源备份、此备份用于收集资源并为其创建备份、从而确定挂钩的运行位置
+. 对备份运行执行挂钩
+
+
+.第1步：创建资源备份
+[%collapsible]
+====
+[role="tabbed-block"]
+=====
+.使用CR
+--
+.步骤
+. 创建自定义资源(CR)文件并将其命名为 `trident-protect-resource-backup.yaml`。
+. 根据您的Trident Protect环境和集群配置配置以下属性：
++
+** *。metadata.name*:(_required__)此自定义资源的名称；请为您的环境选择一个唯一且合理的名称。
+** *spec.applicationRef*：(_required_)要为其创建备份资源的应用程序的Kubernetes名称。
+** *spec.appVaultRef*：(_required_)存储备份内容的AppVault的名称。
+** *spec.appArchivePath*：AppVault中存储备份内容的路径。您可以使用以下命令查找此路径：
++
+[source, console]
+----
+kubectl get backups <BACKUP_NAME> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
+----
++
+YAML示例：
+
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: ResourceBackup
+metadata:
+  name: example-resource-backup
+spec:
+  applicationRef: my-app-name
+  appVaultRef: my-appvault-name
+  appArchivePath: example-resource-backup
+----
+
+
+. 使用正确的值填充CR文件后、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-resource-backup.yaml
+----
+
+
+--
+.使用命令行界面
+--
+.步骤
+. 创建备份、将括号中的值替换为您环境中的信息。例如：
++
+[source, console]
+----
+tridentctl protect create resourcebackup <my_backup_name> --app <my_app_name> --appvault <my_appvault_name> -n <my_app_namespace> --app-archive-path <app_archive_path>
+----
+. 查看备份状态。您可以重复使用以下示例命令、直到操作完成：
++
+[source, console]
+----
+tridentctl protect get resourcebackup -n <my_app_namespace> <my_backup_name>
+----
+. 验证备份是否成功：
++
+[source, console]
+----
+kubectl describe resourcebackup <my_backup_name>
+----
+
+
+--
+=====
+====
+.第2步：运行执行挂钩
+[%collapsible]
+====
+[role="tabbed-block"]
+=====
+.使用CR
+--
+.步骤
+. 创建自定义资源(CR)文件并将其命名为 `trident-protect-hook-run.yaml`。
+. 根据您的Trident Protect环境和集群配置配置以下属性：
++
+** *。metadata.name*:(_required__)此自定义资源的名称；请为您的环境选择一个唯一且合理的名称。
+** *spec.applicationRef*：(_required_)确保此值与您在步骤1中创建的ResourceBackup CR中的应用程序名称匹配。
+** *spec.appVaultRef*：(_required_)确保此值与您在步骤1中创建的ResourceBackup CR中的appVaultRef匹配。
+** *spec.appArchivePath*：确保此值与您在步骤1中创建的ResourceBackup CR中的appArchivePath匹配。
++
+[source, console]
+----
+kubectl get backups <BACKUP_NAME> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
+----
+** *spec.action*：(_required_)一个字符串，指示执行挂钩将执行的操作，假设指定的任何执行挂钩过滤器都匹配。可能值：
++
+*** Snapshot
+*** 备份
+*** 还原
+*** 故障转移
+
+
+** *spec.stage *：(_required_)一个字符串，指示执行挂钩应在操作期间的哪个阶段运行。此挂钩运行不会在任何其他阶段运行挂钩。可能值：
++
+*** 预
+*** 发布
++
+YAML示例：
+
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: ExecHooksRun
+metadata:
+  name: example-hook-run
+spec:
+  applicationRef: my-app-name
+  appVaultRef: my-appvault-name
+  appArchivePath: example-resource-backup
+  stage: Post
+  action: Failover
+----
+
+
+
+
+. 使用正确的值填充CR文件后、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-hook-run.yaml
+----
+
+
+--
+.使用命令行界面
+--
+.步骤
+. 创建手动执行挂钩运行请求：
++
+[source, console]
+----
+tridentctl protect create exechooksrun <my_exec_hook_run_name> -n <my_app_namespace> --action snapshot --stage <pre_or_post> --app <my_app_name> --appvault <my_appvault_name> --path <my_backup_name>
+----
+. 检查执行挂钩运行的状态。您可以重复运行此命令、直到操作完成：
++
+[source, console]
+----
+tridentctl protect get exechooksrun -n <my_app_namespace> <my_exec_hook_run_name>
+----
+. 描述exech本 运行对象以查看最终详细信息和状态：
++
+[source, console]
+----
+kubectl -n <my_app_namespace> describe exechooksrun <my_exec_hook_run_name>
+----
+
+
+--
+=====
 ====
