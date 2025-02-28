@@ -28,16 +28,27 @@ summary: 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。�
 | `ve版本` |  | 始终为 1 
 
 
-| `storageDriverName` | 存储驱动程序的名称 | `ontap-nas`， `ontap-nas-economy`， `ontap-nas-flexgroup`， `ontap-san`， `ontap-san-economy` 
+| `storageDriverName` | 存储驱动程序的名称 | `ontap-san`或 `ontap-san-economy` 
 
 
 | `backendName` | 自定义名称或存储后端 | 驱动程序名称+"_"+ dataLIF 
 
 
-| `m年` 月 日 | 集群或SVM管理LIF的IP地址。可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`。有关无缝MetroCluster切换的信息，请参见<<mcc-best>>。 | "10.0.0.1 " ， "2001 ： 1234 ： abcd ：：： fefe] " 
+| `m年` 月 日  a| 
+集群或SVM管理LIF的IP地址。
+
+可以指定完全限定域名(FQDN)。
+
+如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`。
+
+有关无缝MetroCluster切换的信息，请参见<<mcc-best>>。
 
 
-| `dataLIF` | 协议 LIF 的 IP 地址。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`。*不指定iSCSI。*Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iCI LUN。如果明确定义、则会生成警告 `dataLIF`。*省略MetroCluster。*请参见<<mcc-best>>。 | 由SVM派生 
+NOTE: 如果您使用的是"vsadmin"凭据、 `managementLIF`则必须是SVM的凭据；如果使用的是"admin"凭据、则必须是集群的凭据 `managementLIF`。
+| "10.0.0.1 " ， "2001 ： 1234 ： abcd ：：： fefe] " 
+
+
+| `dataLIF` | 协议 LIF 的 IP 地址。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如 `[28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]`。*不指定iSCSI。*Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iSCSI LUN。如果明确定义、则会生成警告 `dataLIF`。*省略MetroCluster。*请参见<<mcc-best>>。 | 由SVM派生 
 
 
 | `sVM` | 要使用的 Storage Virtual Machine
@@ -89,12 +100,14 @@ summary: 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。�
 
 
 NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法是轮询SVM、而无需重新启动Trident控制器。在Trident中配置了特定聚合以配置卷后、如果将该聚合重命名或移出SVM、则在轮询SVM聚合时、后端将在Trident中变为故障状态。您必须将聚合更改为SVM上的聚合、或者将其全部删除、以使后端恢复联机。
+
+*请勿为ASA R2*指定。
  a| 
 ""
 
 
 
-| `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。如果您使用的是Amazon FSx for NetApp ONTAP后端，请勿指定 `limitAggregateUsage`。提供的和 `vsadmin`不包含使用Trident检索聚合使用情况并对其进行限制所需的 `fsxadmin`权限。 | "" （默认情况下不强制实施） 
+| `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。如果您使用的是Amazon FSx for NetApp ONTAP后端，请勿指定 `limitAggregateUsage`。提供的和 `vsadmin`不包含使用Trident检索聚合使用情况并对其进行限制所需的 `fsxadmin`权限。*请勿为ASA R2*指定。 | "" （默认情况下不强制实施） 
 
 
 | `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为LUN管理的卷的大小上限。 | ""(默认情况下不强制实施) 
@@ -109,14 +122,14 @@ NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法�
 
 
 | `useREST` | 用于使用 ONTAP REST API 的布尔参数。
-`useREST`设置为时 `true`，Trident使用ONTAP REST API与后端通信；设置为时 `false`，Trident使用ONTAP ZAPI调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontap` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Trident 24.06版和ZAPI.151或更高版本开始、默认情况下会设置为 `true`；更
-`useREST`改为 `false`以使用ONTAP 9 `userREST` ONTAP调用。
-`useREST` 完全符合NVMe/TCP要求。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
+`useREST`设置为时 `true`，Trident使用ONTAP REST API与后端通信；设置为时 `false`，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontap` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会 `userREST`设置为 `true`；更
+`useREST`改为 `false`以使用ONTAPI (ZAPI)调用。
+`useREST` 完全符合NVMe/TCP要求。*如果指定，则ASA R2*始终设置为 `true`。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
 
 
  a| 
 `sanType`
-| 用于为iSCSI、 `nvme`NVMe/TCP或基于光纤通道的 `fcp`SCSI (FC)选择 `iscsi`。*"FCP"(基于FC的SCSI)是Trident 24.10版本中的一项技术预览功能。* | `iscsi` 如果为空 
+| 用于为iSCSI、 `nvme`NVMe/TCP或基于光纤通道的 `fcp`SCSI (FC)选择 `iscsi`。 | `iscsi` 如果为空 
 
 
 | `formatOptions`  a| 
@@ -154,13 +167,13 @@ Trident建议使用以下选项来加快格式化过程：
 | 参数 | Description | Default 
 
 
-| `spaceAllocation` | LUN 的空间分配 | "正确" 
+| `spaceAllocation` | LUN 的空间分配 | "TRUE"*如果指定，请将ASA R2*的设置为 `true`。 
 
 
-| `s页面预留` | 空间预留模式；"无"(精简)或"卷"(厚) | "无" 
+| `s页面预留` | 空间预留模式；"无"(精简)或"卷"(厚)。*对于ASA R2*，设置为 `none`。 | "无" 
 
 
-| `sSnapshot 策略` | 要使用的 Snapshot 策略 | "无" 
+| `sSnapshot 策略` | 要使用的Snapshot策略。*对于ASA R2*，设置为 `none`。 | "无" 
 
 
 | `qosPolicy` | 要为创建的卷分配的 QoS 策略组。选择每个存储池 / 后端的 qosPolicy 或 adaptiveQosPolicy 之一。将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。 | "" 
@@ -169,24 +182,21 @@ Trident建议使用以下选项来加快格式化过程：
 | `adaptiveQosPolicy` | 要为创建的卷分配的自适应 QoS 策略组。选择每个存储池 / 后端的 qosPolicy 或 adaptiveQosPolicy 之一 | "" 
 
 
-| `sSnapshot 预留` | 为快照预留的卷百分比 | 如果为"0"、则为"0" `snapshotPolicy` 为"none"、否则为"" 
+| `sSnapshot 预留` | 为快照预留的卷百分比。*请勿为ASA R2*指定。 | 如果为"0"、则为"0" `snapshotPolicy` 为"none"、否则为"" 
 
 
 | `splitOnClone` | 创建克隆时，从其父级拆分该克隆 | false 
 
 
-| `加密` | 在新卷上启用NetApp卷加密(NVE)；默认为 `false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | false 
+| `加密` | 在新卷上启用NetApp卷加密(NVE)；默认为 `false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | "false"*如果指定，请将ASA R2*的设置为 `true`。 
 
 
 | `luksEncryption` | 启用LUKS加密。请参见 link:../trident-reco/security-luks.html["使用Linux统一密钥设置(LUKS)"]。
 
-NVMe/TCP不支持使用此类数据加密。 | "" 
+NVMe/TCP不支持使用此类数据加密。 | 对于ASA R2、将""设置为 `false`。 
 
 
-| `securityStyle` | 新卷的安全模式 | `unix` 
-
-
-| `分层策略` | 使用"无"的层策略 | 对于ONTAP 9.5 SVM-DR之前的配置、为"仅快照" 
+| `分层策略` | 使用"none"的分层策略*请勿为ASA R2*指定。 |  
 
 
 | `nameTemplate` | 用于创建自定义卷名称的模板。 | "" 
@@ -243,7 +253,7 @@ image::../media/vol-show-san.png[显示了 volume show 命令的输出。]
 以下示例显示了将大多数参数保留为默认值的基本配置。这是定义后端的最简单方法。
 
 
-NOTE: 如果您将Amazon FSx on NetApp ONTAP与结合使用、建议您为Trident指定DNS名称、而不是IP地址。
+NOTE: 如果您在NetApp ONTAP上使用Amazon FSx和、NetApp建议您为Trident指定DNS名称、而不是IP地址。
 
 .ONTAP SAN示例
 [%collapsible]
@@ -264,38 +274,33 @@ username: vsadmin
 password: <password>
 ----
 ====
+.MetroCluster示例
+[#mcc-best%collapsible]
+====
+您可以对后端进行配置、以避免在切换和切回后手动更新后端定义 link:../trident-reco/backup.html#svm-replication-and-recovery["SVM复制和恢复"]。
+
+要进行无缝切换和切回、请使用指定SVM `managementLIF`、并省略这些 `svm`参数。例如：
+
+[listing]
+----
+version: 1
+storageDriverName: ontap-san
+managementLIF: 192.168.1.66
+username: vsadmin
+password: password
+----
+====
 .ONTAP SAN经济性示例
 [%collapsible]
 ====
 [listing]
 ----
----
 version: 1
 storageDriverName: ontap-san-economy
 managementLIF: 10.0.0.1
 svm: svm_iscsi_eco
 username: vsadmin
 password: <password>
-----
-====
-[[mcc-best]]
-. 示例
-
-
-[]
-====
-您可以对后端进行配置、以避免在切换和切回后手动更新后端定义 link:../trident-reco/backup.html#svm-replication-and-recovery["SVM复制和恢复"]。
-
-要进行无缝切换和切回、请使用指定SVM `managementLIF` 并省略 `dataLIF` 和 `svm` parameters例如：
-
-[listing]
-----
----
-version: 1
-storageDriverName: ontap-san
-managementLIF: 192.168.1.66
-username: vsadmin
-password: password
 ----
 ====
 .基于证书的身份验证示例
@@ -381,6 +386,25 @@ sanType: nvme
 useREST: true
 ----
 ====
+.基于FC的SCSI (FCP)示例
+[%collapsible]
+====
+您必须在ONTAP后端为SVM配置FC。这是FC的基本后端配置。
+
+[listing]
+----
+---
+version: 1
+backendName: fcp-backend
+storageDriverName: ontap-san
+managementLIF: 10.0.0.1
+svm: svm_fc
+username: vsadmin
+password: password
+sanType: fcp
+useREST: true
+----
+====
 .使用nameTemplate的后端配置示例
 [%collapsible]
 ====
@@ -400,7 +424,7 @@ defaults: {
 "labels": {"cluster": "ClusterA", "PVC": "{{.volume.Namespace}}_{{.volume.RequestName}}"}
 ----
 ====
-.formatOptions <code> ONTAP－san－</code>驱动程序示例
+.formatOptions的ONTAP SAN经济驱动程序示例
 [%collapsible]
 ====
 [listing]
@@ -425,7 +449,7 @@ defaults:
 
 在这些示例后端定义文件中、为所有存储池设置了特定默认值、例如 `spaceReserve` 无、 `spaceAllocation` 为false、和 `encryption` 为false。虚拟池在存储部分中进行定义。
 
-Trident会在"Comments"字段中设置配置标签。注释在FlexVol 上设置。配置时、Trident会将虚拟池上的所有标签复制到存储卷。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。
+Trident会在"Comments"字段中设置配置标签。在配置时、FlexVol volume Trident会将虚拟池上的所有标签复制到存储卷上、从而设置注释。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。
 
 在这些示例中、某些存储池会自行设置 `spaceReserve`， `spaceAllocation`，和 `encryption` 值、而某些池会覆盖默认值。
 

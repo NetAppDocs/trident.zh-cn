@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/vol-expansion.html 
 keywords: volumes, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion 
-summary: Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展 iSCSI 和 NFS 卷所需配置的信息。 
+summary: Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展iSCSI、FC和NFS卷所需配置的信息。 
 ---
 = 展开卷
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: Trident使Kubnetes用户能够在创建卷后对其进行扩展。查�
 
 
 [role="lead"]
-Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展 iSCSI 和 NFS 卷所需配置的信息。
+Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展iSCSI、NFS和FC卷所需配置的信息。
 
 
 
@@ -82,6 +82,160 @@ pvc-8a814d62-bd58-4253-b0d1-82f2885db671   1Gi        RWO            Delete     
 === 第 3 步：定义连接 PVC 的 POD
 
 将PV连接到POD以调整大小。调整 iSCSI PV 大小时，有两种情况：
+
+* 如果PV连接到Pod、则Trident会扩展存储后端的卷、重新扫描设备并重新设置文件系统大小。
+* 尝试调整未连接PV的大小时、Trident会扩展存储后端的卷。将 PVC 绑定到 Pod 后， Trident 会重新扫描设备并调整文件系统大小。然后， Kubernetes 会在扩展操作成功完成后更新 PVC 大小。
+
+
+在此示例中，创建了一个使用 `san-PVC` 的 Pod 。
+
+[listing]
+----
+ kubectl get pod
+NAME         READY   STATUS    RESTARTS   AGE
+ubuntu-pod   1/1     Running   0          65s
+
+ kubectl describe pvc san-pvc
+Name:          san-pvc
+Namespace:     default
+StorageClass:  ontap-san
+Status:        Bound
+Volume:        pvc-8a814d62-bd58-4253-b0d1-82f2885db671
+Labels:        <none>
+Annotations:   pv.kubernetes.io/bind-completed: yes
+               pv.kubernetes.io/bound-by-controller: yes
+               volume.beta.kubernetes.io/storage-provisioner: csi.trident.netapp.io
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:      1Gi
+Access Modes:  RWO
+VolumeMode:    Filesystem
+Mounted By:    ubuntu-pod
+----
+
+
+=== 第 4 步：展开 PV
+
+要将已创建的 PV 从 1Gi 调整为 2Gi ，请编辑 PVC 定义并将 `sPec.resources.requests.storage` 更新为 2Gi 。
+
+[listing]
+----
+kubectl edit pvc san-pvc
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    pv.kubernetes.io/bind-completed: "yes"
+    pv.kubernetes.io/bound-by-controller: "yes"
+    volume.beta.kubernetes.io/storage-provisioner: csi.trident.netapp.io
+  creationTimestamp: "2019-10-10T17:32:29Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: san-pvc
+  namespace: default
+  resourceVersion: "16609"
+  selfLink: /api/v1/namespaces/default/persistentvolumeclaims/san-pvc
+  uid: 8a814d62-bd58-4253-b0d1-82f2885db671
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+ ...
+----
+
+
+=== 第 5 步：验证扩展
+
+您可以通过检查PVC、PV和Trident卷的大小来验证扩展是否正常：
+
+[listing]
+----
+kubectl get pvc san-pvc
+NAME      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+san-pvc   Bound    pvc-8a814d62-bd58-4253-b0d1-82f2885db671   2Gi        RWO            ontap-san      11m
+kubectl get pv
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM             STORAGECLASS   REASON   AGE
+pvc-8a814d62-bd58-4253-b0d1-82f2885db671   2Gi        RWO            Delete           Bound    default/san-pvc   ontap-san               12m
+tridentctl get volumes -n trident
++------------------------------------------+---------+---------------+----------+--------------------------------------+--------+---------+
+|                   NAME                   |  SIZE   | STORAGE CLASS | PROTOCOL |             BACKEND UUID             | STATE  | MANAGED |
++------------------------------------------+---------+---------------+----------+--------------------------------------+--------+---------+
+| pvc-8a814d62-bd58-4253-b0d1-82f2885db671 | 2.0 GiB | ontap-san     | block    | a9b7bfff-0505-4e31-b6c5-59f492e02d33 | online | true    |
++------------------------------------------+---------+---------------+----------+--------------------------------------+--------+---------+
+----
+
+
+== 展开 FC 卷
+
+您可以使用CSI配置程序扩展FC持久卷(PV)。
+
+
+NOTE: 驱动程序支持FC卷扩展 `ontap-san`、并且需要Kubernetes 1.16及更高版本。
+
+
+
+=== 第 1 步：配置 StorageClass 以支持卷扩展
+
+编辑StorageClass定义以设置 `allowVolumeExpansion` 字段设置为 `true`。
+
+[listing]
+----
+cat storageclass-ontapsan.yaml
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-san
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-san"
+allowVolumeExpansion: True
+----
+对于已存在的 StorageClass ，请对其进行编辑，使其包含 `allowVolumeExpansion` 参数。
+
+
+
+=== 第 2 步：使用您创建的 StorageClass 创建 PVC
+
+编辑PVC定义并更新 `spec.resources.requests.storage` 以反映新需要的大小、该大小必须大于原始大小。
+
+[listing]
+----
+cat pvc-ontapsan.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: san-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: ontap-san
+----
+Trident会创建一个永久性卷(PV)并将其与此永久性卷请求(PVC)相关联。
+
+[listing]
+----
+kubectl get pvc
+NAME      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+san-pvc   Bound    pvc-8a814d62-bd58-4253-b0d1-82f2885db671   1Gi        RWO            ontap-san      8s
+
+kubectl get pv
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM             STORAGECLASS   REASON   AGE
+pvc-8a814d62-bd58-4253-b0d1-82f2885db671   1Gi        RWO            Delete           Bound    default/san-pvc   ontap-san               10s
+----
+
+
+=== 第 3 步：定义连接 PVC 的 POD
+
+将PV连接到POD以调整大小。调整FC PV大小有两种情形：
 
 * 如果PV连接到Pod、则Trident会扩展存储后端的卷、重新扫描设备并重新设置文件系统大小。
 * 尝试调整未连接PV的大小时、Trident会扩展存储后端的卷。将 PVC 绑定到 Pod 后， Trident 会重新扫描设备并调整文件系统大小。然后， Kubernetes 会在扩展操作成功完成后更新 PVC 大小。

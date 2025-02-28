@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/ontap-san-prep.html 
-keywords: trident backend, ontap san, ontap-san, ontap-san-economy 
+keywords: trident backend, ontap san, ontap-san, ontap-san-economy, asa r2 
 summary: 了解如何准备使用 ONTAP SAN 驱动程序配置 ONTAP 后端。 
 ---
 = 准备使用ONTAP SAN驱动程序配置后端
@@ -14,11 +14,16 @@ summary: 了解如何准备使用 ONTAP SAN 驱动程序配置 ONTAP 后端。
 [role="lead"]
 了解使用ONTAP SAN驱动程序配置ONTAP后端的要求和身份验证选项。
 
+从25.02版开始、Trident会自动检测9.16.1 9.161或更高版本的ASA R2特性、并通过iSCSI协议在ASA R2上配置和使用存储。
+
 
 
 == 要求
 
 对于所有ONTAP后端、Trident要求至少为SVM分配一个聚合。
+
+
+NOTE: Trident要求向SVM分配一个或多个聚合。使用ASA R2时、只有在模式下使用ONTAP命令行界面时、才能执行此操作 `diag`。
 
 请记住，您还可以运行多个驱动程序，并创建指向其中一个驱动程序的存储类。例如，您可以配置使用 `ontap-san` 驱动程序的 `san-dev` 类和使用 `ontap-san-economy-one` 的 `san-default` 类。
 
@@ -306,7 +311,7 @@ WARNING: `useCHAP` 参数是一个布尔选项，只能配置一次。默认情�
 您可以通过更新 `backend.json` 文件中的 CHAP 参数来更新 CHAP 凭据。这需要更新 CHAP 密码并使用 `tridentctl update` 命令反映这些更改。
 
 
-WARNING: 更新后端的CHAP密码时、必须使用 `tridentctl`更新后端。请勿通过CLI/RAID ONTAP UI更新存储集群上的凭据、因为Trident将无法接受这些更改。
+WARNING: 更新后端的CHAP密码时、必须使用 `tridentctl`更新后端。请勿使用ONTAP命令行界面或ONTAP系统管理器更新存储集群上的凭据、因为Trident将无法接受这些更改。
 
 [listing]
 ----

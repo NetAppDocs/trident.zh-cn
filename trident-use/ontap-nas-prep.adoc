@@ -280,9 +280,6 @@ Trident使用NFS导出策略控制对其配置的卷的访问。
 NOTE: 使用动态导出策略时、请勿使用网络地址转换(Network Address Translation、NAT)。使用NAT时、存储控制器会看到前端NAT地址、而不是实际IP主机地址、因此、如果在导出规则中找不到匹配项、则会拒绝访问。
 
 
-NOTE: 在Trident 24.10中、 `ontap-nas`存储驱动程序将继续与早期版本一样工作；ONTAP NAS驱动程序未进行任何更改。在Trident 24.10中、只有 `ontap-nas-economy`存储驱动程序具有基于卷的粒度访问控制。
-
-
 
 ==== 示例
 
@@ -307,7 +304,7 @@ NOTE: 使用此功能时、您必须确保SVM中的根接合具有先前创建�
 
 以下是使用上述示例对此功能的工作原理进行的说明：
 
-* `autoExportPolicy`设置为 `true`。这表示Trident会为SVM的使用此后端配置的每个卷创建一个导出策略 `svm1`、并使用地址块处理规则的添加和删除 `autoexportCIDRs`。在将卷连接到节点之前、此卷会使用一个空导出策略、此策略不带任何规则来防止对该卷进行不必要的访问。将卷发布到节点后、Trident会创建一个与指定CIDR块中包含节点IP的底层qtree同名的导出策略。这些IP也会添加到父FlexVol使用的导出策略中。
+* `autoExportPolicy`设置为 `true`。这表示Trident会为SVM的使用此后端配置的每个卷创建一个导出策略 `svm1`、并使用地址块处理规则的添加和删除 `autoexportCIDRs`。在将卷连接到节点之前、此卷会使用一个空导出策略、此策略不带任何规则来防止对该卷进行不必要的访问。将卷发布到节点后、Trident会创建一个与指定CIDR块中包含节点IP的底层qtree同名的导出策略。这些IP也会添加到父FlexVol volume使用的导出策略中
 +
 ** 例如：
 +
@@ -369,7 +366,7 @@ NOTE: 删除具有自动管理导出策略的后端将删除动态创建的导�
 只需稍作准备、您就可以使用配置SMB卷 `ontap-nas` 驱动程序。
 
 
-WARNING: 要创建、您必须在SVM上同时配置NFS和SMB/CCIFS协议 `ontap-nas-economy` 适用于内部ONTAP 的SMB卷。如果未能配置其中任一协议、则发生原因 SMB卷创建将失败。
+WARNING: 您必须在SVM上同时配置NFS和SMB/CCIFS协议、才能为ONTAP内部集群创建 `ontap-nas-economy`SMB卷。如果未能配置其中任一协议、则发生原因 SMB卷创建将失败。
 
 
 NOTE: `autoExportPolicy`SMB卷不支持。

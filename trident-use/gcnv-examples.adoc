@@ -12,7 +12,7 @@ summary: 了解适用于Google Cloud NetApp卷的NFS和NFS后端配置选项并�
 
 
 [role="lead"]
-了解适用于Google Cloud NetApp卷的NFS后端配置选项并查看配置示例。
+了解Google Cloud NetApp卷的后端配置选项并查看配置示例。
 
 
 
@@ -59,6 +59,9 @@ summary: 了解适用于Google Cloud NetApp卷的NFS和NFS后端配置选项并�
 
 
 | `debugTraceFlags` | 故障排除时要使用的调试标志。例如， `{"api":false, "method":true}`。除非您正在进行故障排除并需要详细的日志转储，否则请勿使用此功能。 | 空 
+
+
+| `nasType` | 配置NFS或SMB卷创建。选项包括 `nfs`， `smb` 或为空。默认情况下、将设置为空会将NFS卷设置为空。 | `nfs` 
 
 
 | `supportedTopologies` | 表示此后端支持的区域和区域的列表。有关详细信息，请参阅 link:../trident-use/csi-topology.html["使用 CSI 拓扑"]。例如：
@@ -165,6 +168,38 @@ spec:
     client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/myproject-prod%40my-gcnv-project.iam.gserviceaccount.com
   credentials:
     name: backend-tbc-gcnv-secret
+----
+====
+.SMB卷的配置
+[%collapsible]
+====
+[listing]
+----
+
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-gcnv1
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: google-cloud-netapp-volumes
+  projectNumber: '123456789'
+  location: asia-east1
+  serviceLevel: flex
+  nasType: smb
+  apiKey:
+    type: service_account
+    project_id: cloud-native-data
+    client_email: trident-sample@cloud-native-data.iam.gserviceaccount.com
+    client_id: '123456789737813416734'
+    auth_uri: https://accounts.google.com/o/oauth2/auth
+    token_uri: https://oauth2.googleapis.com/token
+    auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
+    client_x509_cert_url: https://www.googleapis.com/robot/v1/metadata/x509/trident-sample%40cloud-native-data.iam.gserviceaccount.com
+  credentials:
+    name: backend-tbc-gcnv-secret
+
 ----
 ====
 .使用StoragePools筛选器的配置
@@ -400,11 +435,7 @@ tridentctl logs
 
 
 
-== 更多示例
-
-
-
-=== 存储类定义示例
+== 存储类定义
 
 下面是有关上述后端的基本 `StorageClass` 定义。
 
@@ -454,6 +485,67 @@ parameters:
 
 ----
 有关存储类的详细信息，请参见 link:../trident-use/create-stor-class.html["创建存储类。"^]。
+
+
+
+=== SMB卷的示例定义
+
+使用 `nasType`， `node-stage-secret-name`，和  `node-stage-secret-namespace`、您可以指定SMB卷并提供所需的Active Directory凭据。
+
+.默认命名空间上的基本配置
+[%collapsible]
+====
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gcnv-sc-smb
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "google-cloud-netapp-volumes"
+  trident.netapp.io/nasType: "smb"
+  csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
+  csi.storage.k8s.io/node-stage-secret-namespace: "default"
+
+----
+====
+.每个命名空间使用不同的密钥
+[%collapsible]
+====
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gcnv-sc-smb
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "google-cloud-netapp-volumes"
+  trident.netapp.io/nasType: "smb"
+  csi.storage.k8s.io/node-stage-secret-name: "smbcreds"
+  csi.storage.k8s.io/node-stage-secret-namespace: ${pvc.namespace}
+----
+====
+.每个卷使用不同的密钥
+[%collapsible]
+====
+[listing]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gcnv-sc-smb
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "google-cloud-netapp-volumes"
+  trident.netapp.io/nasType: "smb"
+  csi.storage.k8s.io/node-stage-secret-name: ${pvc.name}
+  csi.storage.k8s.io/node-stage-secret-namespace: ${pvc.namespace}
+----
+====
+
+NOTE: `nasType: smb` 支持SMB卷的池的筛选器。 `nasType: nfs` 或 `nasType: null` NFS池的筛选器。
 
 
 

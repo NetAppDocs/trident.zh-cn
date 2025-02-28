@@ -16,7 +16,7 @@ summary: '您可以使用安装Trident `tridentctl`。此过程适用于Trident�
 
 
 
-== 有关Trident 24.10的重要信息
+== 有关Trident 25.02的重要信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -75,8 +75,8 @@ Trident安装程序包会创建Trident Pod、配置用于保持其状态的CRD�
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v24.10.0/trident-installer-24.10.0.tar.gz
-tar -xf trident-installer-24.10.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v25.02.0/trident-installer-25.02.0.tar.gz
+tar -xf trident-installer-25.02.0.tar.gz
 cd trident-installer
 ----
 
@@ -98,14 +98,14 @@ cd trident-installer
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:24.10 --trident-image <your-registry>/trident:24.10.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.02 --trident-image <your-registry>/trident:25.02.0
 ----
 --
 .不同注册表中的映像
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:24.10 --trident-image <your-registry>/trident:24.10.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.02 --trident-image <your-registry>/trident:25.02.0
 ----
 --
 ====
@@ -126,7 +126,7 @@ INFO Created Trident daemonset.
 INFO Waiting for Trident pod to start.
 INFO Trident pod started.                          namespace=trident pod=trident-controller-679648bd45-cv2mx
 INFO Waiting for Trident REST interface.
-INFO Trident REST interface is up.                 version=24.10.0
+INFO Trident REST interface is up.                 version=25.02.0
 INFO Trident installation succeeded.
 ....
 ----
@@ -166,7 +166,7 @@ NOTE: 如果安装程序未成功完成或 `trident-controller-<generated id>` (
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 24.10.0        | 24.10.0        |
+| 25.02.0        | 25.02.0        |
 +----------------+----------------+
 ----
 

@@ -46,7 +46,7 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 | `debug` | 为Trident启用调试 | `false` 
 
 
-| `enableForceDetach` | `ontap-san` `ontap-san-economy`仅限、和 `ontap-nas-economy`。可与Kubnetes非正常节点关闭(NGN)结合使用、使集群管理员能够在节点运行状况不正常时将已挂载卷的工作负载安全地迁移到新节点。 | `false` 
+| `enableForceDetach` | `ontap-san` `ontap-san-economy`仅限、、 `ontap-nas`和 `ontap-nas-economy`。可与Kubnetes非正常节点关闭(NGN)结合使用、使集群管理员能够在节点运行状况不正常时将已挂载卷的工作负载安全地迁移到新节点。 | `false` 
 
 
 | `windows` | 设置为 `true` 启用在Windows工作节点上的安装。 | `false` 
@@ -68,7 +68,7 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 自动 | `false` 
 
 
-| `autosupport 映像` | AutoSupport 遥测的容器映像 | `"netapp/trident-autosupport:24.10"` 
+| `autosupport 映像` | AutoSupport 遥测的容器映像 | `"netapp/trident-autosupport:25.02"` 
 
 
 | `autosupport 代理` | 用于发送AutoSupport的代理的地址/端口
@@ -81,7 +81,7 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 | `logFormat` | 要使用的Trident日志记录格式[text,json] | `"text"` 
 
 
-| `TridentImage` | 要安装的Trident映像 | `"netapp/trident:24.10"` 
+| `TridentImage` | 要安装的Trident映像 | `"netapp/trident:25.02"` 
 
 
 | `imageRegistry` | 内部注册表的路径、格式
@@ -116,6 +116,9 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 
 
 | `nodePrep` | 使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。* |  
+
+
+| `enableAutoBackendConfig` | 启用自动后端配置、从而根据输入参数无缝创建后端和存储类。 | 无默认值；可选 
 |===
 
 NOTE: 有关格式化POD参数的详细信息、请参阅 link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["将 Pod 分配给节点"^]。
@@ -124,10 +127,10 @@ NOTE: 有关格式化POD参数的详细信息、请参阅 link:https://kubernete
 
 === 有关强制断开的详细信息
 
-强制分离仅适用于 `ontap-san`、和 `onatp-nas-economy`。 `ontap-san-economy`在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。有关详细信息，请参阅 link:https://kubernetes.io/docs/concepts/architecture/nodes/#non-graceful-node-shutdown["Kubnetes：节点非正常关闭"^]。
+强制分离仅适用于 `ontap-san`、、 `ontap-san-economy`和 `onatp-nas-economy`。 `onatp-nas`在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。默认情况下、对于Kubbernetes 1.28及更高版本、NGN处于启用状态。有关详细信息，请参阅 link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubnetes：节点非正常关闭"^]。
 
 
-NOTE: 使用驱动程序时 `ontap-nas-economy`、您需要将后端配置中的参数设置 `autoExportPolicy`为 `true`、以便Trident可以限制通过受管导出策略应用了此内容的Kubbernetes节点的访问。
+NOTE: 使用或驱动程序时 `ontap-nas`、您需要将后端配置中的参数设置 `autoExportPolicy`为 `true`、以便Trident可以限制通过受管导出策略应用了此内容的Kubornetes `ontap-nas-economy`节点的访问。
 
 
 WARNING: 由于Trident依赖于Kubbernetes NGN、因此在重新计划所有不可允许的工作负载之前、请勿从运行状况不正常的节点中删除 `out-of-service`污点。不负责任地应用或删除该问题可能会危及后端数据保护。

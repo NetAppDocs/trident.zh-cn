@@ -190,3 +190,76 @@ sudo modprobe nvme-tcp
 ----
 --
 ====
+
+
+== FC工具
+
+使用适用于您的操作系统的命令安装FC工具。
+
+* 如果将运行RHE/RedHat Core-OS的工作节点与FC PV结合使用、请在StorageClass中指定 `discard`mountOption以执行实时空间回收。请参阅 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Red Hat 文档"^]。
+
+
+[role="tabbed-block"]
+====
+.RHEL 8+
+--
+. 安装以下系统软件包：
++
+[listing]
+----
+sudo yum install -y lsscsi device-mapper-multipath
+----
+. 启用多路径：
++
+[listing]
+----
+sudo mpathconf --enable --with_multipathd y --find_multipaths n
+----
++
+
+NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults `.
+
+. 确保 `multipathd`正在运行：
++
+[listing]
+----
+sudo systemctl enable --now multipathd
+----
+
+
+--
+.Ubuntu
+--
+. 安装以下系统软件包：
++
+[listing]
+----
+sudo apt-get install -y lsscsi sg3-utils multipath-tools scsitools
+----
+. 启用多路径：
++
+[listing]
+----
+sudo tee /etc/multipath.conf <<-EOF
+defaults {
+    user_friendly_names yes
+    find_multipaths no
+}
+EOF
+sudo systemctl enable --now multipath-tools.service
+sudo service multipath-tools restart
+----
++
+
+NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults `.
+
+. 确保 `multipath-tools`已启用且正在运行：
++
+[listing]
+----
+sudo systemctl status multipath-tools
+----
+
+
+--
+====

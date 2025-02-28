@@ -18,7 +18,7 @@ summary: '您可以启用Linux统一密钥设置(Unified Key Setup、LKS)来对T
 
 .开始之前
 * 工作节点必须安装加密设置2.1或更高版本(但低于3.0)。有关详细信息，请访问 link:https://gitlab.com/cryptsetup/cryptsetup["Gitlab：密码设置"^]。
-* 出于性能原因、我们建议员工节点支持高级加密标准新指令(AES-NI)。要验证AES-NI支持、请运行以下命令：
+* 出于性能原因、NetApp建议工作节点支持高级加密标准新指令(AES-NI)。要验证AES-NI支持、请运行以下命令：
 +
 [listing]
 ----

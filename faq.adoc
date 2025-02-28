@@ -98,7 +98,7 @@ Trident从Kubednetes API服务器读取数据、以确定应用程序何时请�
 
 === 对于两个单独的Kubnetes集群的两个单独的Trident实例、我是否可以共享同一个ONTAP后端SVM？
 
-尽管不建议这样做、但您可以对两个Trident实例使用相同的后端SVM。在安装期间为每个实例指定一个唯一的卷名称和/或在文件中指定一个唯一的 `StoragePrefix`参数 `setup/backend.json`。这是为了确保不会对这两个实例使用相同的 FlexVol 。
+尽管不建议这样做、但您可以对两个Trident实例使用相同的后端SVM。在安装期间为每个实例指定一个唯一的卷名称和/或在文件中指定一个唯一的 `StoragePrefix`参数 `setup/backend.json`。这是为了确保不会对这两个实例使用相同的FlexVol volume。
 
 
 
@@ -207,7 +207,7 @@ NetApp支持将Trident从一个主要版本升级到下一个即时主要版本�
 管理LIF为必填项。数据LIF因情况而异：
 
 * ONTAP SAN：不为iSCSI指定。Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iCI LUN。如果明确定义、则会生成警告 `dataLIF`。有关详细信息、请参见 link:trident-use/ontap-san-examples.html["ONTAP SAN配置选项和示例"] 。
-* ONTAP NAS：建议指定 `dataLIF`。如果不提供此参数、则Trident将从SVM提取数据LUN。您可以指定用于NFS挂载操作的完全限定域名(FQDN)、从而可以创建循环DNS、以便在多个数据LIF之间实现负载平衡。有关详细信息、请参见link:trident-use/ontap-nas-examples.html["ONTAP NAS配置选项和示例"]
+* ONTAP NAS：NetApp建议指定 `dataLIF`。如果不提供此参数、则Trident将从SVM提取数据LUN。您可以指定用于NFS挂载操作的完全限定域名(FQDN)、从而可以创建循环DNS、以便在多个数据LIF之间实现负载平衡。有关详细信息、请参见link:trident-use/ontap-nas-examples.html["ONTAP NAS配置选项和示例"]
 
 
 
@@ -286,7 +286,7 @@ Trident将后端凭据存储为Kubnetes密码。
 
 === Trident如何在ONTAP卷上部署qtrees？一个卷可以部署多少个 qtree ？
 
-`ontap-nas-economy` 驱动程序可在同一个 FlexVol 中创建多达 200 个 qtree （可在 50 到 300 之间配置），每个集群节点创建 100 ， 000 个 qtree ，每个集群创建 2.4 M 个 qtree 。当您输入由经济型驱动程序提供服务的新的 `PersistentVolumeClaim` 时，驱动程序将查看是否已存在可为新的 qtree 提供服务的 FlexVol 。如果不存在可为 qtree 提供服务的 FlexVol ，则会创建一个新的 FlexVol 。
+该驱动程序可 `ontap-nas-economy`在同一个FlexVol volume中创建多达200个qtrees (可在50到300之间配置)、每个集群节点创建100、000个qtrees、每个集群创建240万个qtrees。当您输入由经济型驱动程序提供服务的新 `PersistentVolumeClaim`时、驱动程序将查看是否已存在可为新qtree提供服务的FlexVol volume。如果不存在可为qtree提供服务的FlexVol volume、则会创建一个新的FlexVol volume。
 
 
 
@@ -375,7 +375,7 @@ Make sure to remove the DP mode or put the volume online before importing the vo
 
 此功能可从 `ontap-nas` ， `ontap-san` 和 `ontap-nas-flexgroup` 驱动程序获得。您也可以在 FlexVol 级别为 `ontap-san-economy` 驱动程序指定 `snapshotPolicy` 。
 
-此功能也适用于 `ontap-nas-economy`驱动程序、但适用于FlexVol级别粒度、而不适用于qtree级别粒度。要为Trident配置的卷创建快照、请将backend参数选项设置为ONTAP后端 `snapshotPolicy`上定义的所需快照策略。Trident无法识别存储控制器创建的任何快照。
+此功能也适用于 `ontap-nas-economy`驱动程序、但适用于FlexVol volume级别粒度、而不适用于qtree级别粒度。要为Trident配置的卷创建快照、请将backend参数选项设置为ONTAP后端 `snapshotPolicy`上定义的所需快照策略。Trident无法识别存储控制器创建的任何快照。
 
 
 

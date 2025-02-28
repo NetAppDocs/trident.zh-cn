@@ -28,10 +28,10 @@ Trident使用Kubnetes CRD存储和管理自己的状态、并使用Kubnetes集�
 
 .步骤
 . 使用备份Kubenetes集群etcd  link:https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/#backing-up-an-etcd-cluster["Kubenetes：备份etcd集群"^]。
-. 将备份项目放在FlexVol上。
+. 将备份项目放在FlexVol volume上
 +
 
-NOTE: 建议您保护FlexVol所在的SVM、并将其与另一个SVM建立SnapMirror关系。
+NOTE: NetApp建议您保护与另一个SVM具有SnapMirror关系的FlexVol所在的SVM。
 
 
 

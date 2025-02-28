@@ -86,7 +86,7 @@ Trident还提供 `cloneFromPVC` 和 `splitOnClone` 用于创建克隆的标注�
 
 请考虑以下几点：
 
-* 建议克隆空闲卷。
+* NetApp建议克隆空闲卷。
 * 一个 PVC 及其克隆应位于同一个 Kubernetes 命名空间中，并具有相同的存储类。
 * 使用 `ontap-nas` 和 `ontap-san` 驱动程序时，可能需要将 PVC 标注 `trident.netapp.io/splitOnClone` 与 `trident.netapp.io/cloneFromPVC` 结合使用。当 `trident.netapp.io/splitOnClone` 设置为 `true` 时， Trident 会将克隆的卷与父卷拆分，从而将克隆的卷与其父卷的生命周期完全分离，从而降低存储效率。如果不设置 `trident.netapp.io/splitOnClone` 或将其设置为 `false` ，则会减少后端的空间占用，而会在父卷和克隆卷之间创建依赖关系，因此除非先删除克隆，否则无法删除父卷。拆分克隆是有意义的一种情形，即克隆空数据库卷时，该卷及其克隆会发生很大的差异，无法从 ONTAP 提供的存储效率中受益。
 
@@ -334,7 +334,7 @@ NOTE: 这是您自己创建和管理的两种对象类型之一。另一个是 K
 
 == Trident `Volume`对象
 
-卷是基本配置单元，由后端端点组成，例如 NFS 共享和 iSCSI LUN 。在 Kubernetes 中，这些卷直接对应于 `PersistentVolumes` 。创建卷时，请确保其具有存储类，此类可确定可配置该卷的位置以及大小。
+卷是基本配置单元、由后端端端点(例如NFS共享以及iSCSI和FC LUN)组成。在Kubnetes中，这些直接对应于 `PersistentVolumes`。创建卷时，请确保其具有存储类，此类可确定可配置该卷的位置以及大小。
 
 [NOTE]
 ====

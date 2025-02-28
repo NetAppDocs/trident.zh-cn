@@ -16,7 +16,7 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 
 
 
-== 有关Trident 24.10的重要信息
+== 有关Trident 25.02的重要信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -56,7 +56,7 @@ helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 +
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2410.0 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 100.2502.0 --create-namespace --namespace <trident-namespace>
 ----
 +
 
@@ -86,11 +86,11 @@ NOTE: 如果已为Trident创建命名空间、则`-create-namespace`参数不会
 在命令行上指定覆盖。
 
 |===
-例如，要更改的默认值 `debug`，请运行以下命令，其中 `100.2410.0`是要安装的Trident版本：
+例如，要更改的默认值 `debug`，请运行以下命令，其中 `100.2502.0`是要安装的Trident版本：
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2410.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 100.2502.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 
 
@@ -241,6 +241,13 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 
 
 | `nodePrep` | 使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。* |  
+
+
+| `ontapConfigurator`  a| 
+启用或禁用自动配置Trident后端和Amazon FSx存储类。使用以下参数和 `ontapConfigurator`启用自动后端配置：：
+`enabled`设置为 `true`启用自动后端配置。
+`svms`:包含将为其创建自动后端配置的文件系统ID列表。- `authType`:设置SVM身份验证的身份验证类型。对于AWS、目前支持基于arn的身份验证("awsarn")。- `fsxnID`：设置AWS FSx的文件系统ID。示例："fs-0dfeuda884a68b1cab"。- `protocols`-指定支持自动后端配置的协议列表；"NFS"、"iSCSI"或两者。
+|  
 |===
 
 

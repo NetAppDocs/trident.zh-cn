@@ -68,7 +68,7 @@ vserver modify -vserver <svm_name> -max-volumes <num_of_volumes>
 
 `max-volumes` 值是在 ONTAP 集群中的所有节点上配置的总卷数，而不是在单个 ONTAP 节点上配置的总卷数。因此，在某些情况下， ONTAP 集群节点所配置的 Trident 卷可能远远多于或少于其他节点。
 
-例如，一个双节点 ONTAP 集群最多可以托管 2000 个 FlexVolume 。将最大卷数设置为 1250 似乎非常合理。但是，如果只是 https://library.netapp.com/ecmdocs/ECMP1368859/html/GUID-3AC7685D-B150-4C1F-A408-5ECEB3FF0011.html["聚合"^] 从一个节点分配给 SVM ，或者从一个节点分配的聚合无法配置（例如，由于容量），则另一个节点将成为所有 Trident 配置卷的目标。这意味着，在达到 `max-volumes` 值之前，可能会达到该节点的卷限制，从而影响使用该节点的 Trident 和其他卷操作。* 您可以通过确保将集群中每个节点的聚合分配给 Trident 使用的 SVM 来避免这种情况。 *
+例如、双节点ONTAP集群最多可托管2000个FlexVol卷。将最大卷数设置为 1250 似乎非常合理。但是、如果仅 https://library.netapp.com/ecmdocs/ECMP1368859/html/GUID-3AC7685D-B150-4C1F-A408-5ECEB3FF0011.html["聚合"^]从一个节点分配给SVM、或者无法配置从一个节点分配的聚合(例如、由于容量原因)、则另一个节点将成为所有Trident配置的卷的目标。这意味着、在达到此值之前、可能会达到该节点的卷限制 `max-volumes`、从而影响使用该节点的Trident和其他卷操作。* 您可以通过确保将集群中每个节点的聚合分配给 Trident 使用的 SVM 来避免这种情况。 *
 
 
 
@@ -159,13 +159,13 @@ storage:
 * 您应该对每个卷应用策略组，以便每个卷都获得策略组指定的整个吞吐量。不支持共享策略组。
 
 
-有关QoS策略组的详细信息、请参阅 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-cmpr-980/TOC__qos.html["ONTAP 9.8 QoS 命令"^]。
+有关QoS策略组的详细信息，请参见 https://docs.netapp.com/us-en/ontap/concepts/manual-pages.html["ONTAP命令参考"^]。
 
 
 
 === 将存储资源访问限制为 Kubernetes 集群成员
 
-限制对 Trident 创建的 NFS 卷和 iSCSI LUN 的访问是 Kubernetes 部署安全状况的重要组成部分。这样可以防止不属于 Kubernetes 集群的主机访问卷并可能意外修改数据。
+限制对Trident创建的NFS卷、iSCSI LUN和FC LUN的访问是Kubbernetes部署安全防护的一个重要组成部分。这样可以防止不属于 Kubernetes 集群的主机访问卷并可能意外修改数据。
 
 请务必了解命名空间是 Kubernetes 中资源的逻辑边界。假设同一命名空间中的资源可以共享，但重要的是，没有跨命名空间功能。这意味着，即使 PV 是全局对象，但在绑定到 PVC 时，它们只能由同一命名空间中的 Pod 访问。* 请务必确保使用命名空间在适当时提供分隔。 *
 
@@ -289,7 +289,7 @@ NOTE: 具有增强型 CSI 配置程序的 Trident 支持使用 CHAP 身份验证
 * ONTAP *
 
 * https://www.netapp.com/pdf.html?item=/media/10720-tr-4067.pdf["NFS 最佳实践和实施指南"^]
-* http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanag/home.html["《 SAN 管理指南》"^] （对于 iSCSI ）
+* http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sanag/home.html["SAN管理"^](适用于iSCSI)
 * http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-iscsi-rhel-cg/home.html["适用于 RHEL 的 iSCSI 快速配置"^]
 
 

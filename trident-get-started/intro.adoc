@@ -18,7 +18,7 @@ Trident 是由 NetApp 维护的一个受全面支持的开源项目。它旨在�
 
 == 什么是Trident？
 
-NetApp Trident支持在公有云或内部环境中的所有常见NetApp存储平台上使用和管理存储资源、包括ONTAP (AFF、FAS、Select、云、Amazon FSx for NetApp ONTAP)、Element软件(NetApp HCI、SolidFire)、Azure NetApp Files服务和Google Cloud上的Cloud Volumes Service。
+NetApp Trident支持在公有云或内部环境中的所有常见NetApp存储平台上使用和管理存储资源、包括内部ONTAP集群(AFF、FAS和ASA)、ONTAP Select、Cloud Volumes ONTAP、Element软件(NetApp HCI、SolidFire)、Azure NetApp Files、Amazon FSx for NetApp ONTAP以及Google Cloud上的Cloud Volumes Service。
 
 Trident是一款与本机集成的符合容器存储接口(CI)的动态存储流程编排程序link:https://kubernetes.io/["Kubernetes"^]。Trident在集群中的每个工作节点上作为一个控制器Pod加一个节点Pod运行。有关详细信息、请参见 link:../trident-get-started/architecture.html["Trident架构"] 。
 
@@ -76,6 +76,6 @@ Trident 可以直接在底层 NetApp HCI 存储平台上为容器化应用程序
 ====
 link:https://docs.netapp.com/us-en/ontap/index.html["NetApp ONTAP"^] 是NetApp多协议统一存储操作系统、可为任何应用程序提供高级数据管理功能。
 
-ONTAP 系统采用全闪存，混合或全 HDD 配置，并提供多种不同的部署模式，包括专门设计的硬件（ FAS 和 AFF ），白盒（ ONTAP Select ）和纯云（ Cloud Volumes ONTAP ）。Trident支持这些ONTAP部署模式。
+ONTAP系统具有全闪存、混合或纯HDD配置、并提供许多不同的部署模式：内部FAS、AFA和ASA集群、ONTAP Select和Cloud Volumes ONTAP。Trident支持这些ONTAP部署模式。
 
 ====

@@ -49,7 +49,7 @@ ONTAP 后端驱动程序可通过所使用的协议以及在存储系统上配�
 | `ontap-NAS` | 是的。 | 是的。 | 是脚注： 5[] | 是的。 | 是脚注： 1[] | 是的。 | 是脚注： 1[] 
 
 
-| `ontap-nas-economy.` | 是脚注： 3[] | 是脚注： 3[] | 是脚注： 5[] | 是的。 | 是脚注： 3[] | 是的。 | 是脚注： 3[] 
+| `ontap-nas-economy.` | 注：3[] | 注：3[] | 是脚注： 5[] | 是的。 | 注：3[] | 是的。 | 注：3[] 
 
 
 | `ontap-nas-flexgroup` | 是脚注： 1[] | 否 | 是脚注： 5[] | 是的。 | 是脚注： 1[] | 是的。 | 是脚注： 1[] 
@@ -64,10 +64,10 @@ Trident为ONTAP提供了2个SAN驱动程序、其功能如下所示。
 | `ontap-san` | 是的。 | 是的。 | 是脚注： 4[] | 是的。 | 是脚注： 1[] | 是的。 | 是脚注： 1[] 
 
 
-| `ontap-san-economy.` | 是的。 | 是的。 | 是脚注： 4[] | 是的。 | 是脚注： 3[] | 是的。 | 是脚注： 3[] 
+| `ontap-san-economy.` | 是的。 | 是的。 | 是脚注： 4[] | 是的。 | 注：3[] | 是的。 | 注：3[] 
 |===
 [verse]
-上表的脚注：是脚注：1[]：不受Trident管理是脚注：2[]：受Trident管理、但不受PV粒度脚注：3[]：不受Trident管理、而不是PV粒度是脚注：4[]：支持原始块卷脚注：5[]：受Trident支持
+上表的脚注：是脚注：1[]：不受Trident管理是脚注：2[]：受Trident管理、但不受PV粒度注：3[]：不受Trident管理、不受PV粒度是是脚注：4[]：支持原始块卷脚注：5[]：受Trident支持
 
 非 PV 粒度功能将应用于整个 FlexVolume ，而所有 PV （即共享 FlexVol 中的 qtree 或 LUN ）将共享一个通用计划。
 
@@ -247,7 +247,7 @@ Trident 将尝试与根据下表指定的访问方法所使用的存储协议匹
 除了两个例外，永久性卷是 Kubernetes 中不可变的对象。创建后，可以修改回收策略和大小。但是、这并不会阻止在Kubnetes之外修改卷的某些方面。为了针对特定应用程序自定义卷，确保容量不会意外占用，或者出于任何原因将卷移动到其他存储控制器，这一点可能是理想的。
 
 
-NOTE: 目前， Kubernetes 树中配置程序不支持对 NFS 或 iSCSI PV 执行卷大小调整操作。Trident 支持扩展 NFS 和 iSCSI 卷。
+NOTE: Kubernetes树内配置程序目前不支持对NFS、iSCSI或FC PVs执行卷大小调整操作。Trident支持扩展NFS、iSCSI和FC卷。
 
 创建 PV 后，无法修改其连接详细信息。
 
@@ -277,7 +277,7 @@ Trident 还支持从卷快照创建 PersistentVolumes 。为此、只需创建�
 
 === 展开卷
 
-Trident支持调整NFS和iSCSI PVs的大小。这样，用户就可以直接通过 Kubernetes 层调整其卷的大小。所有主要 NetApp 存储平台均可进行卷扩展，包括 ONTAP ， SolidFire/NetApp HCI 和 Cloud Volumes Service 后端。要允许稍后进行扩展、请在与卷关联的StorageClass中将设置 `allowVolumeExpansion`为 `true`。每当需要调整永久性卷的大小时、都可以将永久性卷声明中的标注编辑 `spec.resources.requests.storage`为所需的卷大小。Trident会自动调整存储集群上卷的大小。
+Trident支持调整NFS、iSCSI和FC PVs的大小。这样，用户就可以直接通过 Kubernetes 层调整其卷的大小。所有主要 NetApp 存储平台均可进行卷扩展，包括 ONTAP ， SolidFire/NetApp HCI 和 Cloud Volumes Service 后端。要允许稍后进行扩展、请在与卷关联的StorageClass中将设置 `allowVolumeExpansion`为 `true`。每当需要调整永久性卷的大小时、都可以将永久性卷声明中的标注编辑 `spec.resources.requests.storage`为所需的卷大小。Trident会自动调整存储集群上卷的大小。
 
 
 
@@ -292,12 +292,6 @@ Trident支持调整NFS和iSCSI PVs的大小。这样，用户就可以直接通�
 执行上述命令后， Trident 将在后端找到卷并读取其大小。它会自动添加(并在必要时覆盖)已配置的PVC卷大小。然后， Trident 会创建新的 PV ， Kubernetes 会将 PVC 绑定到 PV 。
 
 如果部署的容器需要特定的导入 PVC ，则容器将保持待定状态，直到通过卷导入过程绑定 PVC/PV 对为止。在绑定 PVC/PV 对后，如果没有其他问题，应启动容器。
-
-
-
-== 部署 OpenShift 服务
-
-OpenShift 增值集群服务为集群管理员和要托管的应用程序提供了重要功能。这些服务使用的存储可以使用节点本地资源进行配置，但这通常会限制服务的容量，性能，可恢复性和可持续性。利用企业级存储阵列为这些服务提供容量可以显著改善服务，但是，与所有应用程序一样， OpenShift 和存储管理员应密切合作，为每个服务确定最佳选项。应大量利用 Red Hat 文档来确定要求并确保满足规模估算和性能需求。
 
 
 

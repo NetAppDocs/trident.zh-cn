@@ -12,7 +12,7 @@ summary:
 
 
 [role="lead"]
-现在、您可以将Google Cloud NetApp卷配置为Trident的后端。您可以使用Google Cloud NetApp卷后端连接NFS卷。
+现在、您可以将Google Cloud NetApp卷配置为Trident的后端。您可以使用Google Cloud NetApp卷后端连接NFS和SMB卷。
 
 
 
@@ -27,12 +27,13 @@ Trident提供了 `google-cloud-netapp-volumes`用于与集群通信的驱动程�
 
 | `google-cloud-netapp-volumes`  a| 
 NFS
+SMB
  a| 
 文件系统
  a| 
 Rwo、ROX、rwx、RWOP
  a| 
-`nfs`
+`nfs`， `smb`
 
 |===
 

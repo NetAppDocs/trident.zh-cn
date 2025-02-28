@@ -20,7 +20,7 @@ summary: 每个存储驱动程序都有一组不同的选项，您可以在创�
 
 == ONTAP 卷选项
 
-NFS 和 iSCSI 的卷创建选项包括以下内容：
+NFS、iSCSI和FC的卷创建选项包括以下内容：
 
 [cols="2*"]
 |===
@@ -151,7 +151,7 @@ docker volume create -d netapp --name my_vol --opt snapshotPolicy=none --opt sna
 ----
 docker volume create -d netapp --name my_vol --opt snapshotPolicy=myPolicy --opt snapshotReserve=10
 ----
-* 使用快照策略创建卷，并接受 ONTAP 的默认快照预留（通常为 5% ）：
+* 使用Snapshot策略创建卷、并接受ONTAP的默认Snapshot预留(通常为5%)：
 +
 [listing]
 ----

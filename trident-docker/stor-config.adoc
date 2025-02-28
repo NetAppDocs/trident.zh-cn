@@ -54,7 +54,7 @@ summary: 请参见适用于您的Trident配置的配置选项。
 
 |===
 
-TIP: 请勿对元素后端使用 `storagePrefix` （包括默认值）。默认情况下， `solidfire-san` 驱动程序将忽略此设置，而不使用前缀。我们建议使用特定的租户 ID 进行 Docker 卷映射，或者在可能已使用任何名称的情况下使用 Docker 中填充的 Docker 版本，驱动程序信息和原始名称的属性数据。
+TIP: 不要对元素后端使用 `storagePrefix`(包括默认值)。默认情况下， `solidfire-san`驱动程序将忽略此设置，而不使用前缀。NetApp建议对Docker卷映射使用特定的租户ID、或者在可能已使用任何名称创建的情况下使用由Docker版本、驱动程序信息和原始名称填充的属性数据。
 
 您可以使用默认选项来避免在创建的每个卷上指定这些选项。`s` 选项适用于所有控制器类型。有关如何设置默认卷大小的示例，请参见 ONTAP 配置一节。
 
@@ -90,9 +90,9 @@ ONTAP 管理 LIF 的 IP 地址。您可以指定完全限定域名（ FQDN ）�
 | `dataLIF`  a| 
 协议 LIF 的 IP 地址。
 
-*NAS ONTAP驱动程序*:我们建议指定 `dataLIF`。如果不提供此参数、则Trident将从SVM提取数据LUN。您可以指定用于NFS挂载操作的完全限定域名(FQDN)、从而可以创建循环DNS、以便在多个数据LIF之间实现负载平衡。
+* ONTAP NAS驱动程序*：NetApp建议指定 `dataLIF`。如果不提供此参数、则Trident将从SVM提取数据LUN。您可以指定用于NFS挂载操作的完全限定域名(FQDN)、从而可以创建循环DNS、以便在多个数据LIF之间实现负载平衡。
 
-* ONTAP SAN驱动程序*：不为iSCSI指定。Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iCI LUN。如果明确定义、则会生成警告 `dataLIF`。
+*SAN ONTAP驱动程序*:不指定用于iSCSI或FC。Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iSCSI或FC LUN。如果明确定义、则会生成警告 `dataLIF`。
  a| 
 `10.0.0.2`
 
@@ -169,7 +169,7 @@ Trident会将每个节点创建和管理 `igroups`为 `netappdvp`。
 
  a| 
 `sanType`
-| *仅支持 `ontap-san`驱动程序。*用于为iSCSI、 `nvme`NVMe/TCP或基于光纤通道的 `fcp`SCSI (FC)选择 `iscsi`。*"FCP"(基于FC的SCSI)是Trident 24.10版本中的一项技术预览功能。* | `iscsi` 如果为空 
+| *仅支持 `ontap-san`驱动程序。*用于为iSCSI、 `nvme`NVMe/TCP或基于光纤通道的 `fcp`SCSI (FC)选择 `iscsi`。 | `iscsi` 如果为空 
 
 
 | `limitVolumePoolSize` | * `ontap-san-economy` `ontap-san-economy`仅支持和驱动程序。*限制ONTAP ONTAP经济型和ONTAP经济型驱动程序中的FlexVol大小。  a| 
@@ -260,7 +260,7 @@ SAN选项要选择文件系统类型、默认为 `ext4`
 
 
 | `分层策略`  a| 
-要使用的分层策略、默认为 `none`； `snapshot-only` 适用于ONTAP 9.5 SVM-DR之前的配置
+要使用的分层策略，默认为 `none`。
  a| 
 `无`
 
@@ -269,16 +269,16 @@ SAN选项要选择文件系统类型、默认为 `ext4`
 
 === 扩展选项
 
-`ontap-nas` 和 `ontap-san` 驱动程序会为每个 Docker 卷创建一个 ONTAP FlexVol 。对于每个集群节点， ONTAP 最多支持 1000 个 FlexVol ，而集群最多支持 12 ， 000 个 FlexVol 。如果您的 Docker 卷要求符合此限制，则由于 Flexvol 提供的其他功能（例如 Docker 卷粒度快照和克隆）， `ontap-NAS` 驱动程序是首选的 NAS 解决方案。
+ `ontap-nas`和 `ontap-san`驱动程序会为每个Docker卷创建一个ONTAP FlexVol。ONTAP支持每个集群节点多达1000个FlexVol、集群最多12、000个FlexVol卷如果您的Docker卷要求符合此限制、则该驱动程序是首选NAS解决方案、因为它 `ontap-nas`具有FlexVol提供的其他功能、例如Docker卷粒度快照和克隆。
 
 如果所需的 Docker 卷数超出 FlexVol 限制所能容纳的范围，请选择 `ontap-nas-economy"` 或 `ontap-san-economy"` 驱动程序。
 
-`ontap-nas-economy` 驱动程序可在自动管理的 ONTAP 卷池中创建 Docker 卷作为 qtree 。qtree 的扩展能力远高于此，每个集群节点最多可扩展 100 ， 000 个，每个集群最多可扩展 2 ， 400 ， 000 个，但某些功能会受到影响。`ontap-nas-economy` 驱动程序不支持 Docker 卷粒度快照或克隆。
+该 `ontap-nas-economy`驱动程序会在自动管理的FlexVol卷qtrees池中将Docker卷创建为ONTAP qtrees qtrees、其扩展能力要大得多、每个集群节点最多可扩展100、000个、每个集群最多可扩展2、400、000个、但这会牺牲一些功能。该 `ontap-nas-economy`驱动程序不支持Docker卷粒度快照或克隆。
 
 
 NOTE: Docker Swarm 目前不支持 `ontap-nas-economy-经济` 驱动程序，因为 Swarm 不会在多个节点之间协调卷创建。
 
-`ontap-san-economy-driver` 可在一个由自动管理的 FlexVol 构成的共享池中将 Docker 卷创建为 ONTAP LUN 。这样，每个 FlexVol 就不会仅限于一个 LUN ，并且可以为 SAN 工作负载提供更好的可扩展性。根据存储阵列的不同， ONTAP 每个集群最多支持 16384 个 LUN 。由于卷是下面的 LUN ，因此此驱动程序支持 Docker 卷粒度快照和克隆。
+此 `ontap-san-economy`驱动程序会在自动管理的FlexVol卷共享池中将Docker卷创建为ONTAP LUN、这样、每个FlexVol就不会仅限于一个LUN、而且可以为SAN工作负载提供更好的可扩展性。根据存储阵列的不同， ONTAP 每个集群最多支持 16384 个 LUN 。由于卷是下面的 LUN ，因此此驱动程序支持 Docker 卷粒度快照和克隆。
 
 选择 `ontap-nas-flexgroup`一个驱动程序来提高单个卷的并行处理能力、该卷可能会增长到包含数十亿个文件的PB级范围。FlexGroup 的一些理想用例包括 AI/ML/DL ，大数据和分析，软件构建，流式传输，文件存储库等。配置FlexGroup卷时、Trident会使用分配给SVM的所有聚合。Trident 中的 FlexGroup 支持还需要注意以下事项：
 
@@ -467,6 +467,24 @@ NOTE: Docker Swarm 目前不支持 `ontap-nas-economy-经济` 驱动程序，因
   "username":"vsadmin",
   "password":"password",
   "sanType": "nvme",
+  "useREST": true
+}
+----
+====
+.<code> ONTAP－</code>驱动程序的基于FC的SCSI示例
+[%collapsible]
+====
+[listing]
+----
+{
+  "version": 1,
+  "backendName": "ontap-san-backend",
+  "storageDriverName": "ontap-san",
+  "managementLIF": "10.0.0.1",
+  "sanType": "fcp",
+  "svm": "trident_svm",
+  "username":"vsadmin",
+  "password":"password",
   "useREST": true
 }
 ----

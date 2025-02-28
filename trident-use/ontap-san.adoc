@@ -26,7 +26,7 @@ Trident提供了以下SAN存储驱动程序来与ONTAP集群进行通信。支�
 
 
 | `ontap-san`  a| 
-基于FC的iSCSI SCSI (Trident 24.10中的技术预览)
+基于FC的iSCSI SCSI
  a| 
 块
  a| 
@@ -37,7 +37,7 @@ Rwo、ROX、rwx、RWOP
 
 
 | `ontap-san`  a| 
-基于FC的iSCSI SCSI (Trident 24.10中的技术预览)
+基于FC的iSCSI SCSI
  a| 
 文件系统
  a| 

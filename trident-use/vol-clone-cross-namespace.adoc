@@ -1,0 +1,124 @@
+---
+sidebar: sidebar 
+permalink: trident-use/vol-clone-cross-namespace.html 
+keywords: volref, volume reference, clone, pvc, pv, nfs, namespace, cvna, cross-namespace, sharing, volumesnapshots 
+summary: 使用Trident、您可以使用同一个K8s集群中不同命名空间的现有卷或卷快照创建新卷。 
+---
+= 跨命名空间克隆卷
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+通过使用Trident、您可以使用同一个Kubornetes集群中不同命名空间的现有卷或卷快照创建新卷。
+
+
+
+== 前提条件
+
+克隆卷之前、请确保源后端和目标后端的类型相同、并且具有相同的存储类。
+
+
+
+== 快速入门
+
+只需几个步骤即可设置NFS卷克隆。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["一个"]配置源PVC以克隆卷
+[role="quick-margin-para"]
+源命名空间所有者授予访问源PVC中数据的权限。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["两个"] 授予在目标命名空间中创建CR的权限
+[role="quick-margin-para"]
+集群管理员向目标命名空间的所有者授予创建TridentVolumeReference CR的权限。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["三个"] 在目标命名空间中创建TridentVolumeReference
+[role="quick-margin-para"]
+目标命名空间的所有者将创建TridentVolumeReference CR以引用源PVC。
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png["四个"]在目标命名空间中创建克隆PVC
+[role="quick-margin-para"]
+目标命名空间的所有者创建PVC以从源命名空间克隆PVC。
+
+
+
+== 配置源和目标命名空间
+
+为确保安全性、跨命名空间克隆卷需要源命名空间所有者、集群管理员和目标命名空间所有者进行协作并采取相应操作。每个步骤都会指定用户角色。
+
+.步骤
+. *Source命名空间owner:*(`pvc1`在源命名空间中创建PVC(`namespace1`)，用于(`namespace2`使用标注授予与目标命名空间共享的权限。 `cloneToNamespace`
++
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc1
+  namespace: namespace1
+  annotations:
+    trident.netapp.io/cloneToNamespace: namespace2
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: trident-csi
+  resources:
+    requests:
+      storage: 100Gi
+----
++
+Trident将创建PV及其后端NFS存储卷。
+
++
+[NOTE]
+====
+** 您可以使用逗号分隔列表将PVC共享给多个命名空间。例如， `trident.netapp.io/cloneToNamespace: namespace2,namespace3,namespace4`。
+** 您可以使用共享到所有 `*`的文件。例如、 `trident.netapp.io/cloneToNamespace: *`
+** 您可以随时更新PVC以包含 `cloneToNamespace`标注。
+
+
+====
+. *Cluster admin:*创建自定义角色和kubeconfig,以向目标命名空间所有者授予在目标命名空间中创建Trident卷 参考CR的权限(`namespace2`)。
+. *目标命名空间所有者：*在目标命名空间中创建引用源命名空间的TridentVolumeReference CR `pvc1`。
++
+[listing]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentVolumeReference
+metadata:
+  name: my-first-tvr
+  namespace: namespace2
+spec:
+  pvcName: pvc1
+  pvcNamespace: namespace1
+----
+. *Destination命名空间owner:*(`pvc2`在目标命名空间中创建PVC(`namespace2`)，使用 `cloneFromPVC`或 `cloneFromSnapshot`和 `cloneFromNamespace`标注指定源PVC。
++
+[listing]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  annotations:
+    trident.netapp.io/cloneFromPVC: pvc1
+    trident.netapp.io/cloneFromNamespace: namespace1
+  name: pvc2
+  namespace: namespace2
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: trident-csi
+  resources:
+    requests:
+      storage: 100Gi
+----
++
+=限制
+
++
+** 对于使用PV-NAS经济型驱动程序配置的ONTAP、不支持只读克隆。
+
+
+

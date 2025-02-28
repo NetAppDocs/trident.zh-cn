@@ -41,7 +41,7 @@ summary: 在安装Trident之前、您应查看这些常规系统要求。特定�
 Trident支持多个容器引擎和流程编排程序、其中包括：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
-* Kubbernetes 1.25 - 1.32
+* Kubbernetes 1.26 - 1.32
 * OpenShift 4.10 - 4.17
 * R能 手Kubernetes Engine 2 (RKE2) v1.28.5+rke2r1
 
@@ -49,7 +49,7 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 以下版本支持 Trident 操作符：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
-* Kubbernetes 1.25 - 1.32
+* Kubbernetes 1.26 - 1.32
 * OpenShift 4.10 - 4.17
 * R能 手Kubernetes Engine 2 (RKE2) v1.28.5+rke2r1
 
@@ -59,7 +59,7 @@ Trident还可以与许多其他完全托管和自行管理的Kubernetes产品配
 Trident和ONTAP可用作的存储提供程序link:https://kubevirt.io/["KubeVirt"]。
 
 
-WARNING: 在将安装了Trident的Kubernetes集群从1.24升级到1.25或更高版本之前，请参见link:../trident-managing-k8s/upgrade-operator.html#upgrade-a-helm-installation["升级Helm安装"]。
+WARNING: 在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高版本之前，请参见link:../trident-managing-k8s/upgrade-operator.html#upgrade-a-helm-installation["升级Helm安装"]。
 
 
 
@@ -71,9 +71,35 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.24升级到1.25或更高�
 * Azure NetApp Files
 * Cloud Volumes ONTAP
 * Google Cloud NetApp卷
-* FAS / AFF /选择
 * NetApp 全 SAN 阵列（ ASA ）
+* 运行ONTAP 9.6或更高版本的内部FAS、AFF或ASA集群
 * NetApp HCI/ Element软件11或更高版本
+
+
+
+
+== Trident支持KubeVirt和OpenShift虚拟化
+
+.支持的存储驱动程序：
+对于KubeVirt和OpenShift虚拟化、Trident支持以下ONTAP驱动程序：
+
+* ontap-NAS
+* ONTAP—NAS—经济型
+* NVMe-SAN (iSCSI、FCP、基于的ONTAP)
+* ONTAP—SAN经济型(仅限iSCSI)
+
+
+.注意事项：
+* 在OpenShift虚拟化环境中更新存储类以使用 `fsType`参数(例如： `fsType: "ext4"`)。如果需要、可使用中的参数 `dataVolumeTemplates`将卷模式明确设置为阻止 `volumeMode=Block`、以通知数据卷创建者。
+* _rwx块存储驱动程序访问模式_：只有"volumemode：block"(原始设备)才支持ONTAP SAN (iSCSI、NVMe/TCP、FC)和ONTAP SAN经济型(iSCSI)驱动程序。对于这些驱动程序、 `fstype`无法使用参数、因为卷是在原始设备模式下提供的。
+* 对于需要rwx访问模式的实时迁移工作流、支持以下组合：
++
+** NFS + `volumeMode=Filesystem`
+** iSCSI + `volumeMode=Block`(原始设备)
+** NVMe/TCP + `volumeMode=Block`(原始设备)
+** FC + `volumeMode=Block`(原始设备)
+
+
 
 
 
@@ -88,56 +114,56 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.24升级到1.25或更高�
 
 
 | Trident  a| 
-1.25 - 1.32
+1.26 - 1.32
  a| 
 否
 
 
 
 | 卷快照  a| 
-1.25 - 1.32
+1.26 - 1.32
  a| 
 否
 
 
 
 | 卷快照中的 PVC  a| 
-1.25 - 1.32
+1.26 - 1.32
  a| 
 否
 
 
 
 | iSCSI PV 调整大小  a| 
-1.25 - 1.32
+1.26 - 1.32
  a| 
 否
 
 
 
 | ONTAP 双向 CHAP  a| 
-1.25 - 1.32
+1.26 - 1.32
  a| 
 否
 
 
 
 | 动态导出策略  a| 
-1.25 - 1.32
+1.26 - 1.32
  a| 
 否
 
 
 
 | Trident 运算符  a| 
-1.25 - 1.32
+1.26 - 1.32
  a| 
 否
 
 
 
 | CSI 拓扑  a| 
-1.25 - 1.32
+1.26 - 1.32
  a| 
 否
 
@@ -197,15 +223,15 @@ link:../trident-reference/ports.html["Trident端口"]
 | Kubernetes版本 | 容器映像 
 
 
-| v1.25.0、v1.26.0、v1.27.0、v1.28.0、v1.29.0、 v1.30.0、v1.31.0、v1.32.0  a| 
-* dDocker。io/NetApp/trdent：24.10.0
-* docer.io/NetApp/trdent-autostsupport：24.10
-* 注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.1.0
-* 注册表.k8s.io/sig-storage/CsI-Attacher：v4.7.0
-* 注册表.k8s.io/sig-storage/CsI-s不同：v1.12.0
-* 注册表.k8s.io/sig-storage/CsI-snapshotter：v8.1.0
-* 注册表.k8s.io/sig-storage/CsI-N节点 驱动程序注册器：v2.12.0
-* dDocker .io/NetApp/trdent操作员：24.10.0 (可选)
+| v1.26.0、v1.27.0、v1.28.0、v1.29.0、v1.30.0、 v1.31.0、v1.32.0  a| 
+* dDocker。io/NetApp/trdent：25.02.0
+* docer.io/NetApp/trdent-autostsupport：25.02
+* 注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.2.0
+* 注册表.k8s.io/sig-storage/CsI-Attacher：v4.8.0
+* 注册表.k8s.io/sig-storage/CsI-s不同：v1.13.0
+* 注册表.k8s.io/sig-storage/CsI-snapshotter：v8.2.0
+* 注册表.k8s.io/sig-storage/CsI-N节点 驱动程序注册器：v2.13.0
+* dDocker .io/NetApp/trdent操作员：25.02.0 (可选)
 
 
 |===
