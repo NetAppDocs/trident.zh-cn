@@ -26,7 +26,7 @@ summary: '用于Trident Protect的存储分段自定义资源(CR)称为AppVault�
 
 === 数据移动工具存储库密码
 
-在使用CRS或Trident Protect命令行界面插件创建AppVault对象时、您可以选择指示Trident Protect使用包含用于Restic和Koria存储库加密的自定义密码的Kubernetes机密。如果不指定密钥、Trident Protect将使用 `password`这两个密码。
+在使用CRS或Trident Protect命令行界面插件创建AppVault对象时、您可以选择指示Trident Protect使用包含用于Restic和Koria存储库加密的自定义密码的Kubernetes机密。如果未指定密钥、Trident Protect将使用默认密码。
 
 * 手动创建AppVault CRS时、您可以使用*。spec.properties.dataMoverPasswordSecretRef*字段指定密钥。
 * 使用Trident Protect命令行界面创建AppVault对象时、您可以使用 `--data-mover-password-secret-ref`参数指定密钥。
