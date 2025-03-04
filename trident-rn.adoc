@@ -69,7 +69,6 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 ** 修复了后端配置凭据，以支持所有可用的AWS ARN分区link:https://github.com/NetApp/trident/issues/913["问题描述#913"]()。
 ** 增加了在Trident运算符中禁用自动配置器协调的选项link:https://github.com/NetApp/trident/issues/924["问题描述#924"]()。
 ** 增加了CSI -非标准容器的SecurityContextlink:https://github.com/NetApp/trident/issues/976["问题描述#976"] ()。
-** 删除了在iSCSI自我修复期间因非CHAP门户间歇性运行状况不正常而注销的问题link:https://github.com/NetApp/trident/issues/961["问题描述#961"]()。
 
 
 
