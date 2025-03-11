@@ -4224,7 +4224,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="eb5dcb495342ee5285be31fb17267ccc" category="section-title">删除AppVault</block>
   <block id="086d4622dbc50dc37c51fc80568681a2" category="paragraph">您可以随时删除AppVault对象。</block>
   <block id="79f2a1cdb1287644a5d3176157cc43c4" category="admonition">在删除AppVault对象之前、请勿<block ref="276c63528ef3085f91fb1bc80a3febc0" prefix=" " category="inline-code"></block>删除AppVault CR中的密钥。如果这样做、可能会导致AppVault存储分段中有残留数据、集群中会出现孤立资源。</block>
-  <block id="49e2b1aa2d6325460e3268f3fac8fd30" category="paragraph">确保已删除存储在关联存储分段中的所有快照和备份。</block>
   <block id="33850d305da8c5eb949c81e70e40a54d" category="open-title">使用Kubbernetes命令行界面删除AppVault</block>
   <block id="1921311333af338cd3327c59e3b9a4ab" category="list-text">删除AppVault对象、替换<block ref="c57e6773097b6f688f96a88c56c16d47" prefix=" " category="inline-code"></block>为要删除的AppVault对象的名称：</block>
   <block id="6c4ae71603666b23d3e05193118a3147" category="summary">您可以使用protect c结合 命令创建Trident Protect自定义资源并与之进行交互。</block>
@@ -5129,7 +5128,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="50da178eec9235ba0a85999374d51cba" category="list-text">增加了在Trident运算符中禁用自动配置器协调的选项<block ref="95579fcabb606a95f307c6ba89588c08" category="inline-link-macro-rx"></block>()。</block>
   <block id="16aa6756a13a48723b3d2bc4bf50c104" category="inline-link-macro">问题描述#976</block>
   <block id="60b04b91abae29736bd23b21579be5cb" category="list-text">增加了CSI -非标准容器的SecurityContext<block ref="a97be45bfcdf3eeaee81dc9917811f8f" category="inline-link-macro-rx"></block> ()。</block>
-  <block id="eeda04a5133a10ebd4956c7d83dfd389" category="list-text">删除了在iSCSI自我修复期间因非CHAP门户间歇性运行状况不正常而注销的问题<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>()。</block>
   <block id="cb1f1e88b6db83dc715d1cb1d8733445" category="section-title">Trident Protect</block>
   <block id="b094c3f306a844e9e49992f69a84cfa4" category="paragraph">NetApp Trident Protect提供高级应用程序数据管理功能、可增强由NetApp ONTAP存储系统和NetApp Trident CSI存储配置程序提供支持的有状态Kubbernetes应用程序的功能和可用性。</block>
   <block id="38fc414fc29442833eb9eb53cc2e1d14" category="list-text">增加了对两个卷模式(文件和卷模式：块(原始设备)存储)的KubeVirt / OpenShift虚拟化VM的备份和还原支持、可通过App镜像 关系复制到已可用的存储。</block>
@@ -5331,11 +5329,9 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="7fc5875d06887df5109a87a0ada90eca" category="section-title">配置AppVault身份验证和密码</block>
   <block id="27d0259b1ba2ddf3e1540b7e284626ca" category="paragraph">在创建AppVault对象之前、您需要确保所选的AppVault和数据移动工具可以向提供程序和任何相关资源进行身份验证。</block>
   <block id="8e2c4d33f50c044b257a84cd65ff1c79" category="section-title">数据移动工具存储库密码</block>
-  <block id="821c1dc7cb99d19026af83809b8224a2" category="list-text">手动创建AppVault CRS时、您可以使用*。spec.properties.dataMoverPasswordSecretRef*字段指定密钥。</block>
   <block id="12ae6793b05f84758a85b289757c4f34" category="list-text">使用Trident Protect命令行界面创建AppVault对象时、您可以使用<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block>参数指定密钥。</block>
   <block id="e64d157c7a9e337d525d51f62d9d0809" category="section-title">创建数据移动工具存储库密码密钥</block>
   <block id="fc114cb2ee6c7bff559d58e2a7454cab" category="paragraph">使用以下示例创建密码密钥。创建AppVault对象时、您可以指示Trident Protect使用此密钥向数据移动工具存储库进行身份验证。</block>
-  <block id="b041b65d4425445c68140c454aca2a99" category="open-title">使用Trident Protect命令行界面</block>
   <block id="571768fad7edd9c4f57173c592c1f86c" category="section-title">云提供商的AppVault密钥生成示例</block>
   <block id="4d813fb6887e4d4533c00424efc22903" category="paragraph">定义AppVault CR时、您需要包含凭据才能访问由提供程序托管的资源。根据提供程序的不同、为凭据生成密钥的方式也会有所不同。以下是多个提供程序的命令行密钥生成示例。您可以使用以下示例为每个云提供商的凭据创建密钥。</block>
   <block id="3e2db83ddd4087c64413cfd7c14100b6" category="section-title">AppVault创建示例</block>
@@ -5419,4 +5415,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="8430f2c56dfc9e79fcaf741392d54499" category="list-text">描述exech本 运行对象以查看最终详细信息和状态：</block>
   <block id="b343abb76f62f4eef4afa255e885eee4" category="paragraph">从Trident 25.02开始、新增功能摘要提供了有关Trident和Trident Protect版本的增强功能、修复和弃用的详细信息。</block>
   <block id="5674eb46caea5efcff5615daf30ab92d" category="paragraph">在使用CRS或Trident Protect命令行界面插件创建AppVault对象时、您可以选择指示Trident Protect使用包含用于Restic和Koria存储库加密的自定义密码的Kubernetes机密。如果未指定密钥、Trident Protect将使用默认密码。</block>
+  <block id="3703eceb9535f8a68e38a00f0ed1092d" category="list-text">手动创建AppVault CRS时，可以使用*spec.dataMoverPassword" SecretRef*字段指定密钥。</block>
+  <block id="4fc9faf161c64ed80d0fb8ca9aa0882e" category="admonition">根据所使用的数据移动工具、您只需包含该数据移动工具的相应密码即可。例如、如果您正在使用Restic、并且将来不打算使用KONIA、则在创建密钥时只能包含Restic密码。</block>
+  <block id="6a346946ba0777d650b6e41a4c30c7b6" category="paragraph">确保已删除要删除的AppVault正在使用的所有快照和备份CRS。</block>
 </blocks>
