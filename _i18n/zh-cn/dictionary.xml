@@ -5418,4 +5418,47 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="3703eceb9535f8a68e38a00f0ed1092d" category="list-text">手动创建AppVault CRS时，可以使用*spec.dataMoverPassword" SecretRef*字段指定密钥。</block>
   <block id="4fc9faf161c64ed80d0fb8ca9aa0882e" category="admonition">根据所使用的数据移动工具、您只需包含该数据移动工具的相应密码即可。例如、如果您正在使用Restic、并且将来不打算使用KONIA、则在创建密钥时只能包含Restic密码。</block>
   <block id="6a346946ba0777d650b6e41a4c30c7b6" category="paragraph">确保已删除要删除的AppVault正在使用的所有快照和备份CRS。</block>
+  <block id="b00fc94596cde685c68e0bedddb72ec6" category="summary">您可以使用Kube-state-metrics和Prometheus监控Trident Protect资源的状态。这样、您就可以获得有关部署、节点和Pod的运行状况信息。</block>
+  <block id="9f496d568415fb10daa1a69c18a27d52" category="doc">监控Trident保护资源</block>
+  <block id="c3815bcedc348a572c0e7310d70e426d" category="paragraph">您可以使用Kube-state-metrics、Prometheus和智能管理器开源工具来监控受Trident Protect保护的资源的运行状况。</block>
+  <block id="57d16d79ebb62eb467b490200f5f3191" category="paragraph">Kube-state-metrics服务可通过Kuber-netes API通信生成指标。将其与Trident Protect结合使用可提供有关环境中资源状态的有用信息。</block>
+  <block id="0e68741139605975f01bc532098ea92c" category="paragraph">Prometheus是一个工具包、可用于读取由Kube-state-metrics生成的数据、并将其呈现为有关这些对象的易读信息。Kube-state-metrics和Prometheus共同为您提供了一种监控使用Trident Protect管理的资源的运行状况和状态的方法。</block>
+  <block id="6d0450323deb4880d88d2da4155d7c76" category="paragraph">警报管理器是一项服务、可接收Prometheus等工具发送的警报、并将其路由到您配置的目标。</block>
+  <block id="45501c075fe75338b712d61db6d82f54" category="paragraph">这些步骤中包含的配置和指导仅为示例；您需要对其进行自定义以符合您的环境。有关具体说明和支持、请参见以下官方文档：</block>
+  <block id="d9bdb1d7869cec3eaa75aaa48b414845" category="inline-link">Kube-state-metrics 文档</block>
+  <block id="28b29a811fcff582b069060bb6104048" category="list-text"><block ref="28b29a811fcff582b069060bb6104048" category="inline-link-rx"></block></block>
+  <block id="695c33d174e4ad444d82403015632550" category="inline-link">Prometheus文档</block>
+  <block id="94fa5821707b81f95ad49b7f10d2d4d6" category="list-text"><block ref="94fa5821707b81f95ad49b7f10d2d4d6" category="inline-link-rx"></block></block>
+  <block id="853d2b8407eda505e00a8014afdb0ddf" category="inline-link">记录</block>
+  <block id="e23d8cb1d9d009a1aa298e95526efcd3" category="list-text"><block ref="e23d8cb1d9d009a1aa298e95526efcd3" category="inline-link-rx"></block></block>
+  <block id="b246a1443f359b6da345c33e0b25f47a" category="section-title">第1步：安装监控工具</block>
+  <block id="08d75478cbb19385a09620acc4f7a148" category="paragraph">要在Trident Protect中启用资源监控、您需要安装和配置Kube-state-metrics、Prometus和智能管理器。</block>
+  <block id="2a2c51a8db12ee75c90da4a3fb0e1a0b" category="section-title">安装Kube-state-metrics</block>
+  <block id="016aa0f0550f5a0506cb61b61568e043" category="paragraph">您可以使用Helm安装Kube-state-metrics。</block>
+  <block id="ea6a84ebff4515f07a0f260b7cce7b83" category="list-text">添加Kube-state-metrics Helm图表。例如：</block>
+  <block id="d6cff887be77b3dc5c6f689b93bb9b32" category="list-text">为Helm图表创建配置文件(例如<block ref="1da0bbdfeb5bb05830055a1515d9e2a9" prefix=" " category="inline-code"></block>)。您可以根据您的环境自定义以下示例配置：</block>
+  <block id="cf5cf09f9422112814f7fa967e303283" category="listing-title">metrics-config.yaml：Kube-state-metrics Helm图表配置</block>
+  <block id="eca99dda7e2a747b75c232f5c3e314a0" category="list-text">通过部署Helm图表来安装Kube-state-metrics。例如：</block>
+  <block id="1b61aa1e4c2991758aa9c5bea0047156" category="inline-link">Kube-state-metrics自定义资源文档</block>
+  <block id="6c21207c2c29ab5841100bb2ca67480f" category="list-text">按照中的说明配置Kube-state-metrics，以便为Trident Protect使用的自定义资源生成度量指标<block ref="0c2d96c77ebc80eb4f9df846c2904f4c" category="inline-link-rx"></block>。</block>
+  <block id="88b8613d339947a37e41b1f514dcc42c" category="section-title">安装 Prometheus</block>
+  <block id="6cfabcb4c640f9570382e21ec242a3c0" category="paragraph">您可以按照中的说明安装Prometheus<block ref="9c3dd7b31d363d10addc1dc55a338e01" category="inline-link-rx"></block>。</block>
+  <block id="7d512717b3f318d83bbce6f09e891a6f" category="section-title">安装活动管理器</block>
+  <block id="ee3b7d497a79c10fe3b10cda25267876" category="paragraph">您可以按照中的说明安装提示管理器<block ref="34c399dcb7431f049905523dd168baa8" category="inline-link-rx"></block>。</block>
+  <block id="9147f13af253be263e759a06097eea20" category="section-title">第2步：配置监控工具以协同工作</block>
+  <block id="73be38664a808318efe65c02c4ce747c" category="paragraph">安装监控工具后、您需要将其配置为协同工作。</block>
+  <block id="f7c326ea0f47e0df6c4d60c67fc92de6" category="list-text">将Kube-state-metrics与Prometheus集成。编辑Prometheus配置文件<block ref="c3d29ac8b40407b824f83a7f7db6e6bb" prefix="(" category="inline-code"></block>)并添加Kube-state-metrics服务信息。例如：</block>
+  <block id="653d37cbed9ac789942fa035d0ae62cf" category="listing-title">Prometheus.yml：Kube-state-metrics服务与Prometheus的集成</block>
+  <block id="3e7ba607c96ae11da56a66f77a490380" category="list-text">配置Prometheus以将警报路由到警报管理器。编辑Prometheus配置文件<block ref="c3d29ac8b40407b824f83a7f7db6e6bb" prefix="(" category="inline-code"></block>)并添加以下部分：</block>
+  <block id="40e966a8a619ecdcdef18e581c1551d5" category="listing-title">Prometheus.yml：向警报管理器发送警报</block>
+  <block id="68f04b43068f22f98aaa6513240dd2b5" category="paragraph">Prometheus现在可以从Kube-state-metrics收集指标、并可向警报管理器发送警报。现在、您可以配置触发警报的条件以及警报的发送位置。</block>
+  <block id="a42cb9abdbaf69f90fba5592304008cd" category="section-title">第3步：配置警报和警报目标</block>
+  <block id="1138a7ff5cea0f83ce07834c8e02315c" category="paragraph">将这些工具配置为协同工作后、您需要配置触发警报的信息类型以及警报的发送位置。</block>
+  <block id="917045fa08d9c44ee88951e8cdb4023b" category="section-title">警报示例：备份失败</block>
+  <block id="2e894935b55591ae58c162389bf0e25d" category="paragraph">以下示例定义了备份自定义资源的状态设置为5秒或更长时间时触发的严重警报<block ref="902b0d55fddef6f8d651fe1035b7d4bd" prefix=" " category="inline-code"></block>。您可以自定义此示例以匹配您的环境、并将此YAML段包含在您的配置文件中<block ref="c3d29ac8b40407b824f83a7f7db6e6bb" prefix=" " category="inline-code"></block>：</block>
+  <block id="588eb18cd09fd92471ac447d156515e2" category="listing-title">R则.yml：为失败的备份定义Promeheus警报</block>
+  <block id="e8665bc518bf7a6d63332be811e8f6cb" category="section-title">将警报管理器配置为向其他通道发送警报</block>
+  <block id="502a9d29b17b7f6331b5a1d5325855ac" category="paragraph">通过在文件中指定相应的配置、您可以将警报管理器配置为向其他通道发送通知、例如电子邮件、PagerDty、Microsoft团队或其他通知服务<block ref="3a4637925a72e08829320dd2ed20aa17" prefix=" " category="inline-code"></block>。</block>
+  <block id="c9272f0d68fac2055ba2d71be6c87b1b" category="paragraph">以下示例将配置警报管理器、以便向Sl延 时信道发送通知。要根据您的环境自定义此示例、请将此密钥的值替换<block ref="aa8106611bcfe43fec48e6d1d371de52" prefix=" " category="inline-code"></block>为您的环境中使用的Slackwebhook URL：</block>
+  <block id="4b437b03cad5e359b0e810e6dc330afc" category="listing-title">alerts manager.yml：将警报发送到备用信道</block>
 </blocks>

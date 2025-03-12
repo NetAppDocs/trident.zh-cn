@@ -18,6 +18,8 @@ entries:
   entries:
   - title: 管理授权和访问控制
     url: "/trident-protect/manage-authorization-access-control.html"
+  - title: 监控Trident保护资源
+    url: "/trident-protect/monitor-trident-protect-resources.html"
   - title: 生成Trident Protect支持包
     url: "/trident-protect/trident-protect-generate-support-bundle.html"
   - title: 升级Trident Protect

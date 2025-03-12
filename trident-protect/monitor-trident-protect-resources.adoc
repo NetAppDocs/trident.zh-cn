@@ -1,0 +1,214 @@
+---
+permalink: trident-protect/monitor-trident-protect-resources.html 
+sidebar: sidebar 
+keywords: manage, authentication, rbac 
+summary: 您可以使用Kube-state-metrics和Prometheus监控Trident Protect资源的状态。这样、您就可以获得有关部署、节点和Pod的运行状况信息。 
+---
+= 监控Trident保护资源
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以使用Kube-state-metrics、Prometheus和智能管理器开源工具来监控受Trident Protect保护的资源的运行状况。
+
+Kube-state-metrics服务可通过Kuber-netes API通信生成指标。将其与Trident Protect结合使用可提供有关环境中资源状态的有用信息。
+
+Prometheus是一个工具包、可用于读取由Kube-state-metrics生成的数据、并将其呈现为有关这些对象的易读信息。Kube-state-metrics和Prometheus共同为您提供了一种监控使用Trident Protect管理的资源的运行状况和状态的方法。
+
+警报管理器是一项服务、可接收Prometheus等工具发送的警报、并将其路由到您配置的目标。
+
+[NOTE]
+====
+这些步骤中包含的配置和指导仅为示例；您需要对其进行自定义以符合您的环境。有关具体说明和支持、请参见以下官方文档：
+
+* https://github.com/kubernetes/kube-state-metrics/tree/main["Kube-state-metrics 文档"^]
+* https://prometheus.io/docs/introduction/overview/["Prometheus文档"^]
+* https://github.com/prometheus/alertmanager["记录"^]
+
+
+====
+
+
+== 第1步：安装监控工具
+
+要在Trident Protect中启用资源监控、您需要安装和配置Kube-state-metrics、Prometus和智能管理器。
+
+
+
+=== 安装Kube-state-metrics
+
+您可以使用Helm安装Kube-state-metrics。
+
+.步骤
+. 添加Kube-state-metrics Helm图表。例如：
++
+[source, console]
+----
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+----
+. 为Helm图表创建配置文件(例如 `metrics-config.yaml`)。您可以根据您的环境自定义以下示例配置：
++
+.metrics-config.yaml：Kube-state-metrics Helm图表配置
+[source, yaml]
+----
+---
+extraArgs:
+  # Collect only custom metrics
+  - --custom-resource-state-only=true
+
+customResourceState:
+  enabled: true
+  config:
+    kind: CustomResourceStateMetrics
+    spec:
+      resources:
+      - groupVersionKind:
+          group: astra.netapp.io
+          kind: "Backup"
+          version: "v1"
+        labelsFromPath:
+          backup_uid: [metadata, uid]
+          backup_name: [metadata, name]
+          creation_time: [metadata, creationTimestamp]
+        metrics:
+        - name: backup_info
+          help: "Exposes details about the Backup state"
+          each:
+            type: Info
+            info:
+              labelsFromPath:
+                appVaultReference: ["spec", "appVaultRef"]
+                appReference: ["spec", "applicationRef"]
+rbac:
+  extraRules:
+  - apiGroups: ["backups.protect.trident.netapp.io"]
+    resources: ["backups"]
+    verbs: ["list", "watch"]
+
+# Collect metrics from all namespaces
+namespaces: ""
+
+# Ensure that the metrics are collected by Prometheus
+prometheus:
+  monitor:
+    enabled: true
+----
+. 通过部署Helm图表来安装Kube-state-metrics。例如：
++
+[source, console]
+----
+helm install custom-resource -f metrics-config.yaml prometheus-community/kube-state-metrics --version 5.21.0
+----
+. 按照中的说明配置Kube-state-metrics，以便为Trident Protect使用的自定义资源生成度量指标 https://github.com/kubernetes/kube-state-metrics/blob/main/docs/metrics/extend/customresourcestate-metrics.md#custom-resource-state-metrics["Kube-state-metrics自定义资源文档"^]。
+
+
+
+
+=== 安装 Prometheus
+
+您可以按照中的说明安装Prometheus https://prometheus.io/docs/prometheus/latest/installation/["Prometheus文档"^]。
+
+
+
+=== 安装活动管理器
+
+您可以按照中的说明安装提示管理器 https://github.com/prometheus/alertmanager?tab=readme-ov-file#install["记录"^]。
+
+
+
+== 第2步：配置监控工具以协同工作
+
+安装监控工具后、您需要将其配置为协同工作。
+
+.步骤
+. 将Kube-state-metrics与Prometheus集成。编辑Prometheus配置文件(`prometheus.yml`)并添加Kube-state-metrics服务信息。例如：
++
+.Prometheus.yml：Kube-state-metrics服务与Prometheus的集成
+[source, yaml]
+----
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: astra-connector
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'kube-state-metrics'
+        static_configs:
+          - targets: ['kube-state-metrics.astra-connector.svc:8080']
+----
+. 配置Prometheus以将警报路由到警报管理器。编辑Prometheus配置文件(`prometheus.yml`)并添加以下部分：
++
+.Prometheus.yml：向警报管理器发送警报
+[source, yaml]
+----
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager.astra-connector.svc:9093
+----
+
+
+.结果
+Prometheus现在可以从Kube-state-metrics收集指标、并可向警报管理器发送警报。现在、您可以配置触发警报的条件以及警报的发送位置。
+
+
+
+== 第3步：配置警报和警报目标
+
+将这些工具配置为协同工作后、您需要配置触发警报的信息类型以及警报的发送位置。
+
+
+
+=== 警报示例：备份失败
+
+以下示例定义了备份自定义资源的状态设置为5秒或更长时间时触发的严重警报 `Error`。您可以自定义此示例以匹配您的环境、并将此YAML段包含在您的配置文件中 `prometheus.yml`：
+
+.R则.yml：为失败的备份定义Promeheus警报
+[source, yaml]
+----
+rules.yml: |
+  groups:
+    - name: fail-backup
+        rules:
+          - alert: BackupFailed
+            expr: kube_customresource_backup_info{status="Error"}
+            for: 5s
+            labels:
+              severity: critical
+            annotations:
+              summary: "Backup failed"
+              description: "A backup has failed."
+----
+
+
+=== 将警报管理器配置为向其他通道发送警报
+
+通过在文件中指定相应的配置、您可以将警报管理器配置为向其他通道发送通知、例如电子邮件、PagerDty、Microsoft团队或其他通知服务 `alertmanager.yml`。
+
+以下示例将配置警报管理器、以便向Sl延 时信道发送通知。要根据您的环境自定义此示例、请将此密钥的值替换 `api_url`为您的环境中使用的Slackwebhook URL：
+
+.alerts manager.yml：将警报发送到备用信道
+[source, yaml]
+----
+data:
+  alertmanager.yml: |
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: 'slack-notifications'
+    receivers:
+      - name: 'slack-notifications'
+        slack_configs:
+          - api_url: '<your-slack-webhook-url>'
+            channel: '#failed-backups-channel'
+            send_resolved: false
+----
