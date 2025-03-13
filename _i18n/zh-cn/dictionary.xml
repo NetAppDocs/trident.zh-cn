@@ -5462,4 +5462,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="c9272f0d68fac2055ba2d71be6c87b1b" category="paragraph">以下示例将配置警报管理器、以便向Sl延 时信道发送通知。要根据您的环境自定义此示例、请将此密钥的值替换<block ref="aa8106611bcfe43fec48e6d1d371de52" prefix=" " category="inline-code"></block>为您的环境中使用的Slackwebhook URL：</block>
   <block id="4b437b03cad5e359b0e810e6dc330afc" category="listing-title">alerts manager.yml：将警报发送到备用信道</block>
   <block id="792d490e884279c961aba837ccd9b67a" category="admonition">Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。</block>
+  <block id="d110d36251c4dd04b7da5ef237ac6063" category="inline-link">文档</block>
+  <block id="2cd3acbff016f03ffcfe72208e450647" category="admonition">在使用Koria作为数据移动工具还原备份时、您可以选择在CR中指定标注、也可以使用命令行界面控制Koria使用的主存储的行为。有关可配置选项的详细信息、请参见<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block>。有关使用Trident Protect命令行界面指定标注的详细信息、请使用<block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>命令。</block>
 </blocks>
