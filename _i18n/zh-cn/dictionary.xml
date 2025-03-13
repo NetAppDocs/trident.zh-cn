@@ -5461,4 +5461,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="502a9d29b17b7f6331b5a1d5325855ac" category="paragraph">通过在文件中指定相应的配置、您可以将警报管理器配置为向其他通道发送通知、例如电子邮件、PagerDty、Microsoft团队或其他通知服务<block ref="3a4637925a72e08829320dd2ed20aa17" prefix=" " category="inline-code"></block>。</block>
   <block id="c9272f0d68fac2055ba2d71be6c87b1b" category="paragraph">以下示例将配置警报管理器、以便向Sl延 时信道发送通知。要根据您的环境自定义此示例、请将此密钥的值替换<block ref="aa8106611bcfe43fec48e6d1d371de52" prefix=" " category="inline-code"></block>为您的环境中使用的Slackwebhook URL：</block>
   <block id="4b437b03cad5e359b0e810e6dc330afc" category="listing-title">alerts manager.yml：将警报发送到备用信道</block>
+  <block id="792d490e884279c961aba837ccd9b67a" category="admonition">Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。</block>
 </blocks>

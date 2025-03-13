@@ -153,6 +153,10 @@ spec:
 
 . (_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：
 +
+
+NOTE: Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。
+
++
 ** *resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用 `Include`或包含或 `Exclude`排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：
 +
 *** *resourceFilter.resourceMatcher*：resourceMatcher对象数组。如果在此数组中定义多个元素，它们将作为OR操作进行匹配，每个元素(组、种类、版本)中的字段将作为AND操作进行匹配。
@@ -262,6 +266,10 @@ spec:
 
 
 . (_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：
++
+
+NOTE: Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。
+
 +
 ** *resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用 `Include`或包含或 `Exclude`排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：
 +
@@ -490,6 +498,10 @@ spec:
 
 . (_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：
 +
+
+NOTE: Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。
+
++
 ** *resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用 `Include`或包含或 `Exclude`排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：
 +
 *** *resourceFilter.resourceMatcher*：resourceMatcher对象数组。如果在此数组中定义多个元素，它们将作为OR操作进行匹配，每个元素(组、种类、版本)中的字段将作为AND操作进行匹配。
@@ -604,6 +616,10 @@ spec:
 
 
 . (_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：
++
+
+NOTE: Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。
+
 +
 ** *resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用 `Include`或包含或 `Exclude`排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：
 +
