@@ -37,11 +37,11 @@ helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-he
 ----
 helm install trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2502.0 --create-namespace --namespace trident-protect
 ----
-. 使用Helm安装Trident Protect。替换 `<name_of_cluster>`为集群名称、此名称将分配给集群并用于标识集群的备份和快照：
+. 使用Helm安装Trident Protect。替换 `<name-of-cluster>`为集群名称、此名称将分配给集群并用于标识集群的备份和快照：
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2502.0 --create-namespace --namespace trident-protect
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --version 100.2502.0 --create-namespace --namespace trident-protect
 ----
 
 

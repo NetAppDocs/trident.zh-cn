@@ -152,7 +152,7 @@ kubectl create secret generic <secret-name> \
 [NOTE]
 ====
 * 您可以选择指定一个包含用于Restic和Koria存储库加密的自定义密码的Kubernetes密钥。有关详细信息、请参见 <<数据移动工具存储库密码>> 。
-* 对于S3 AppVault对象、您可以选择指定sSession令牌、如果使用单点登录(Single sign-On、SSO)进行身份验证、则此令牌非常有用。此令牌是在中为提供程序生成密钥时创建的<<云提供商的AppVault密钥生成示例>>。
+* 对于Amazon S3 (AWS) AppVault对象、您可以选择指定sSession令牌、如果使用单点登录(SSO)进行身份验证、则此令牌非常有用。此令牌是在中为提供程序生成密钥时创建的<<云提供商的AppVault密钥生成示例>>。
 * 对于S3 AppVault对象、您可以选择使用密钥为出站S3流量指定出口代理URL `spec.providerConfig.S3.proxyURL`。
 
 
@@ -204,15 +204,15 @@ spec:
     accessKeyID:
       valueFromSecret:
         key: accessKeyID
-        name: s3_secret
+        name: s3-secret
     secretAccessKey:
       valueFromSecret:
         key: secretAccessKey
-        name: s3_secret
+        name: s3-secret
     sessionToken:
       valueFromSecret:
         key: sessionToken
-        name: s3_secret
+        name: s3-secret
 ----
 --
 .Microsoft Azure
@@ -259,15 +259,11 @@ spec:
     accessKeyID:
       valueFromSecret:
         key: accessKeyID
-        name: s3_secret
+        name: s3-secret
     secretAccessKey:
       valueFromSecret:
         key: secretAccessKey
-        name: s3_secret
-    sessionToken:
-      valueFromSecret:
-        key: sessionToken
-        name: s3_secret
+        name: s3-secret
 ----
 --
 .ONTAP S3
@@ -291,15 +287,11 @@ spec:
     accessKeyID:
       valueFromSecret:
         key: accessKeyID
-        name: s3_secret
+        name: s3-secret
     secretAccessKey:
       valueFromSecret:
         key: secretAccessKey
-        name: s3_secret
-    sessionToken:
-      valueFromSecret:
-        key: sessionToken
-        name: s3_secret
+        name: s3-secret
 ----
 --
 .StorageGRID S3
@@ -323,15 +315,11 @@ spec:
     accessKeyID:
       valueFromSecret:
         key: accessKeyID
-        name: s3_secret
+        name: s3-secret
     secretAccessKey:
       valueFromSecret:
         key: secretAccessKey
-        name: s3_secret
-    sessionToken:
-      valueFromSecret:
-        key: sessionToken
-        name: s3_secret
+        name: s3-secret
 ----
 --
 ====
@@ -481,11 +469,11 @@ NOTE: 在删除AppVault对象之前、请勿 `finalizers`删除AppVault CR中的
 ====
 .使用Kubbernetes命令行界面删除AppVault
 --
-. 删除AppVault对象、替换 `appvault_name`为要删除的AppVault对象的名称：
+. 删除AppVault对象、替换 `appvault-name`为要删除的AppVault对象的名称：
 +
 [source, console]
 ----
-kubectl delete appvault <appvault_name> \
+kubectl delete appvault <appvault-name> \
 -n trident-protect
 ----
 
@@ -493,11 +481,11 @@ kubectl delete appvault <appvault_name> \
 --
 .使用Trident Protect命令行界面删除AppVault
 --
-. 删除AppVault对象、替换 `appvault_name`为要删除的AppVault对象的名称：
+. 删除AppVault对象、替换 `appvault-name`为要删除的AppVault对象的名称：
 +
 [source, console]
 ----
-tridentctl-protect delete appvault <appvault_name> \
+tridentctl-protect delete appvault <appvault-name> \
 -n trident-protect
 ----
 

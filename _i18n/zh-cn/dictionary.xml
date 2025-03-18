@@ -4225,7 +4225,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="086d4622dbc50dc37c51fc80568681a2" category="paragraph">您可以随时删除AppVault对象。</block>
   <block id="79f2a1cdb1287644a5d3176157cc43c4" category="admonition">在删除AppVault对象之前、请勿<block ref="276c63528ef3085f91fb1bc80a3febc0" prefix=" " category="inline-code"></block>删除AppVault CR中的密钥。如果这样做、可能会导致AppVault存储分段中有残留数据、集群中会出现孤立资源。</block>
   <block id="33850d305da8c5eb949c81e70e40a54d" category="open-title">使用Kubbernetes命令行界面删除AppVault</block>
-  <block id="1921311333af338cd3327c59e3b9a4ab" category="list-text">删除AppVault对象、替换<block ref="c57e6773097b6f688f96a88c56c16d47" prefix=" " category="inline-code"></block>为要删除的AppVault对象的名称：</block>
   <block id="6c4ae71603666b23d3e05193118a3147" category="summary">您可以使用protect c结合 命令创建Trident Protect自定义资源并与之进行交互。</block>
   <block id="40e0842217cf3fc8b760cbd68cc14a76" category="doc">安装Trident Protect命令行界面插件</block>
   <block id="bd0df34f0c12fe6faae3a05dde47f3a9" category="paragraph">您可以使用Trident Protect命令行插件(Trident实用程序的扩展)创建Trident Protect<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>自定义资源(CRS)并与之交互。</block>
@@ -5337,7 +5336,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="3e2db83ddd4087c64413cfd7c14100b6" category="section-title">AppVault创建示例</block>
   <block id="80b938565b2e1ff14bd06e780149b085" category="paragraph">以下是每个提供程序的AppVault定义示例。</block>
   <block id="dd180e899bea0f9a0eb538e256c19673" category="list-text">您可以选择指定一个包含用于Restic和Koria存储库加密的自定义密码的Kubernetes密钥。有关详细信息、请参见 <block ref="7bf3b37360a9f432b37d8ac6c9f10cd4" category="inline-xref-macro-rx"></block> 。</block>
-  <block id="df714665058b96c7ac972b841e5d1c15" category="list-text">对于S3 AppVault对象、您可以选择指定sSession令牌、如果使用单点登录(Single sign-On、SSO)进行身份验证、则此令牌非常有用。此令牌是在中为提供程序生成密钥时创建的<block ref="cd932e77bb3df9634d58b2fd34398b6f" category="inline-xref-macro-rx"></block>。</block>
   <block id="2b7c7776f596f179d63bae82e841e9fe" category="list-text">对于S3 AppVault对象、您可以选择使用密钥为出站S3流量指定出口代理URL<block ref="ea739eb21b9424ad95fb5cd1b3ee7d1c" prefix=" " category="inline-code"></block>。</block>
   <block id="99313bdb05c30c161eb80ae8dc89265f" category="list-text">对于S3 AppVault对象、您可以选择使用参数为出站S3流量指定出口代理URL<block ref="c0b36cdbc2185c1fe6ee0b0c177312da" prefix=" " category="inline-code"></block>。</block>
   <block id="aafdbe511f8dcfce152fe32eec4b84a8" category="section-title">查看AppVault信息</block>
@@ -5464,4 +5462,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="792d490e884279c961aba837ccd9b67a" category="admonition">Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。</block>
   <block id="d110d36251c4dd04b7da5ef237ac6063" category="inline-link">文档</block>
   <block id="2cd3acbff016f03ffcfe72208e450647" category="admonition">在使用Koria作为数据移动工具还原备份时、您可以选择在CR中指定标注、也可以使用命令行界面控制Koria使用的主存储的行为。有关可配置选项的详细信息、请参见<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block>。有关使用Trident Protect命令行界面指定标注的详细信息、请使用<block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>命令。</block>
+  <block id="7491b3d3a4aa89a2dd6445477c6b6e0a" category="list-text">对于Amazon S3 (AWS) AppVault对象、您可以选择指定sSession令牌、如果使用单点登录(SSO)进行身份验证、则此令牌非常有用。此令牌是在中为提供程序生成密钥时创建的<block ref="cd932e77bb3df9634d58b2fd34398b6f" category="inline-xref-macro-rx"></block>。</block>
+  <block id="620026f954fdad541c9d19554476345c" category="list-text">删除AppVault对象、替换<block ref="bf09cf3bd2a9288a0bdf3d1b89b770a1" prefix=" " category="inline-code"></block>为要删除的AppVault对象的名称：</block>
+  <block id="35d393329a969d87338f26cd6fe42238" category="list-text">使用Helm安装Trident Protect。替换<block ref="ecc79c99c4f86f0db5cc7f200415205f" prefix=" " category="inline-code"></block>为集群名称、此名称将分配给集群并用于标识集群的备份和快照：</block>
 </blocks>
