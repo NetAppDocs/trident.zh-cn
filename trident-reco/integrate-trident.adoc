@@ -331,7 +331,7 @@ NOTE: 下表仅包含与日志记录服务相关的存储配置相关的变量�
 | `OpenShift_logging_storage_kind` | 设置为 `NFS` ，以使安装程序为日志记录服务创建 NFS PV 。 
 
 
-| `OpenShift_logging_storage_host` | NFS 主机的主机名或 IP 地址。此值应设置为虚拟机的数据 LIF 。 
+| `OpenShift_logging_storage_host` | NFS 主机的主机名或 IP 地址。此值应设置为虚拟机的dataLIF。 
 
 
 | `OpenShift_logging_storage_nfs_directory` | NFS 导出的挂载路径。例如，如果卷接合为 ` /OpenShift_logging` ，则应使用该路径作为此变量。 
@@ -399,7 +399,7 @@ NOTE: 下表仅包含与存储配置相关的变量，因为这些变量与指�
 | `OpenShift_metrics_storage_kind` | 设置为 `NFS` ，以使安装程序为日志记录服务创建 NFS PV 。 
 
 
-| `OpenShift_metrics_storage_host` | NFS 主机的主机名或 IP 地址。此值应设置为 SVM 的数据 LIF 。 
+| `OpenShift_metrics_storage_host` | NFS 主机的主机名或 IP 地址。此值应设置为SVM的dataLIF。 
 
 
 | `OpenShift_metrics_storage_nfs_directory` | NFS 导出的挂载路径。例如，如果卷接合为 ` /OpenShift_metrics` ，则您将使用该路径作为此变量。 

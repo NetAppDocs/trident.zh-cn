@@ -37,7 +37,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 | `m年` 月 日 | 集群或SVM管理LIF的IP地址可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义、例如：[28e8：d9fb：a825：b7bf：69a8：d02f：9e7b：3555]。 | "10.0.0.1 " ， "2001 ： 1234 ： abcd ：：： fefe] " 
 
 
-| `dataLIF` | 协议 LIF 的 IP 地址。* ONTAP NAS驱动程序*：NetApp建议指定dataLIF。如果不提供此参数、则Trident将从SVM提取数据LUN。您可以指定用于NFS挂载操作的完全限定域名(FQDN)、从而可以创建循环DNS、以便在多个数据LIF之间实现负载平衡。可以在初始设置后更改。请参阅 。* ONTAP SAN驱动程序*：不为iSCSI指定。Trident使用ONTAP选择性LUN映射来发现建立多路径会话所需的iSCI LI。如果明确定义了dataLIF、则会生成警告。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义、例如：[28e8：d9fb：a825：b7bf：69a8：d02f：9e7b：3555]。 |  
+| `dataLIF` | 协议 LIF 的 IP 地址。* ONTAP NAS驱动程序*：NetApp建议指定dataLIF。如果未提供此参数、则Trident将从SVM提取数据LIF。您可以指定要用于NFS挂载操作的完全限定域名(FQDN)、以便创建轮叫DNS来在多个dataLIF之间进行负载平衡。可以在初始设置后更改。请参阅 。* ONTAP SAN驱动程序*：不为iSCSI指定。Trident使用ONTAP选择性LUN映射来发现建立多路径会话所需的iSCI LI。如果明确定义了dataLIF、则会生成警告。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义、例如：[28e8：d9fb：a825：b7bf：69a8：d02f：9e7b：3555]。 |  
 
 
 | `autosExportPolicy` | 启用自动创建和更新导出策略[布尔值]。使用 `autoExportPolicy`和 `autoExportCIDRs`选项、Trident可以自动管理导出策略。 | `false` 
@@ -94,7 +94,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 | `smbShare` | 您可以指定以下选项之一：使用Microsoft管理控制台或ONTAP命令行界面创建的SMB共享的名称、或者允许Trident创建SMB共享的名称。对于Amazon FSx for ONTAP后端、此参数是必需的。 | `smb-share` 
 
 
-| `useREST` | 用于使用 ONTAP REST API 的布尔参数。 `useREST`设置为时 `true`，Trident使用ONTAP REST API与后端通信；设置为时 `false`，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontap` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会 `userREST`设置为 `true`；更 `useREST`改为 `false`以使用ONTAPI (ZAPI)调用。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
+| `useREST` | 用于使用 ONTAP REST API 的布尔参数。 `useREST`设置为时 `true`，Trident使用ONTAP REST API与后端通信；设置为时 `false`，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontap` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会 `useREST`设置为 `true`；更 `useREST`改为 `false`以使用ONTAPI (ZAPI)调用。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
 
 
 | `aws` | 您可以在AWS FSx for ONTAP的配置文件中指定以下内容：
@@ -119,14 +119,14 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 
 === 更新 `dataLIF` 初始配置后
 
-您可以在初始配置后更改数据LIF、方法是运行以下命令、为新的后端JSON文件提供更新的数据LIF。
+您可以在初始配置后更改dataLIF、方法是运行以下命令、为新的后端JSON文件提供更新后的dataLIF。
 
 [listing]
 ----
 tridentctl update backend <backend-name> -f <path-to-backend-json-file-with-updated-dataLIF>
 ----
 
-NOTE: 如果PVC连接到一个或多个Pod、则必须关闭所有对应Pod、然后将其恢复到、新数据LIF才能生效。
+NOTE: 如果一个或多个Pod连接了PVC、则必须先关闭所有相应的Pod、然后再将其重新启动、以使新的dataLIF生效。
 
 
 

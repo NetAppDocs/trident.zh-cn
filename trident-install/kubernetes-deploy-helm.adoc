@@ -52,7 +52,7 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. 使用 `helm install`并指定部署名称、如以下示例所示、其中 `100.2404.0`是要安装的Trident版本。
+. 使用 `helm install`并指定部署名称、如以下示例所示、其中 `100.2502.0`是要安装的Trident版本。
 +
 [listing]
 ----

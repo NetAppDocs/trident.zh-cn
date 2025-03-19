@@ -34,7 +34,7 @@ NOTE: 只有使用存储驱动程序、才支持对使用内部ONTAP存储后端
 * 确保您可以访问该 `tridentctl` 实用程序。
 * 确保您对ONTAP存储后端具有管理员访问权限。
 * 确保您知道要从ONTAP存储后端共享的一个或多个卷的名称。
-* 确保已准备好ONTAP Storage VM以支持NFS卷的Kerberos加密。有关说明、请参见 https://docs.netapp.com/us-en/ontap/nfs-config/create-kerberos-config-task.html["在数据 LIF 上启用 Kerberos"^] 。
+* 确保已准备好ONTAP Storage VM以支持NFS卷的Kerberos加密。有关说明、请参见 https://docs.netapp.com/us-en/ontap/nfs-config/create-kerberos-config-task.html["在dataLIF上启用Kerberos"^] 。
 * 确保已正确配置使用Kerberos加密的任何NFSv4卷。请参阅的“NetApp NFSv4域配置”一节(第13页) https://www.netapp.com/media/16398-tr-3580.pdf["《NetApp NFSv4增强功能和最佳实践指南》"^]。
 
 

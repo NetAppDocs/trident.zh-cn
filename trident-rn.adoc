@@ -492,7 +492,7 @@ IMPORTANT: 现在、在Trident中支持Kubnetes 1.27。请先升级Trident、然
 === 已弃用
 
 * Kubernetes：已将支持的最低Kubernetes更新为1.21。
-* 配置时、不应再指定数据LIF `ontap-san` 或 `ontap-san-economy` 驱动程序。
+* 配置或 `ontap-san-economy`驱动程序时、不应再指定DataLIF `ontap-san`。
 
 
 
@@ -518,7 +518,7 @@ IMPORTANT: 现在、在Trident中支持Kubnetes 1.27。请先升级Trident、然
 
 * 已修复使用创建的ONTAP 后端专用的问题描述 `credentials` 字段在22.07.0升级期间无法联机(link:https://github.com/NetApp/trident/issues/759["问题描述 #759"^]）。
 * "** Docker："*修复了导致Docker卷插件在某些环境中无法启动的问题描述 (link:https://github.com/NetApp/trident/issues/548["问题描述 #548"^] 和 link:https://github.com/NetApp/trident/issues/760["问题描述 760"^]）。
-* 修复了ONTAP SAN后端专用的SLM问题描述 、以确保仅发布属于报告节点的部分数据LIF。
+* 修复了ONTAP SAN后端特有的SLM问题、以确保仅发布属于报告节点的部分数据LIF。
 * 修复了连接卷时发生不必要的iSCSI LUN扫描的性能问题描述。
 * 删除了Trident iSCSI工作流中的细粒度重试、以快速失败并缩短外部重试间隔。
 * 修复了问题描述 、在刷新iSCSI设备时、如果已刷新相应的多路径设备、则会返回错误。
@@ -665,7 +665,7 @@ IMPORTANT: 如果要从先前的任何 Trident 版本升级并使用 Azure NetAp
 
 * * Kubernetes ： * 增加大型集群的节点注册回退重试时间。
 * 修复了问题描述 ，其中 azure-netapp-files 驱动程序可能会被同名的多个资源混淆。
-* 如果使用括号指定 ONTAP SAN IPv6 数据 LIF ，则此 LIF 现在可以正常工作。
+* 如果使用方括号指定ONTAP SAN IPv6数据LIF、则这些LIF现在可以正常工作。
 * 修复的问题描述 ，尝试导入已导入的卷时，返回的 EOF 将使 PVC 处于待定状态。（link:https://github.com/NetApp/trident/issues/489["GitHub 问题描述 489"]）
 * 修复了在SolidFire卷上创建32个快照时Trident性能降低的问题。
 * 在创建 SSL 证书时将 SHA-1 替换为 SHA-256 。

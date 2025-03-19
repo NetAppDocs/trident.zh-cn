@@ -195,7 +195,7 @@ storage:
 
 === 禁用 `showmount` 用于应用程序SVM
 
-通过 `showmount` 功能， NFS 客户端可以向 SVM 查询可用 NFS 导出列表。部署到 Kubernetes 集群的 Pod 可以对数据 LIF 执行问题描述 `showmount -e` 命令，并接收可用挂载列表，包括其无权访问的挂载。虽然这本身并不会影响安全，但它确实会提供不必要的信息，可能有助于未经授权的用户连接到 NFS 导出。
+通过此 `showmount`功能、NFS客户端可以向SVM查询可用NFS导出的列表。部署到Kubnetes集群的Pod可以对发出 `showmount -e`命令、并接收可用挂载列表、包括其无权访问的挂载。虽然这本身并不会影响安全，但它确实会提供不必要的信息，可能有助于未经授权的用户连接到 NFS 导出。
 
 您应使用 SVM 级别的 ONTAP 命令行界面命令禁用 `showmount` ：
 

@@ -202,12 +202,12 @@ NetApp支持将Trident从一个主要版本升级到下一个即时主要版本�
 
 
 
-=== 是否需要在 ONTAP 后端定义文件中同时定义管理和数据 LIF ？
+=== 是否需要在ONTAP后端定义文件中同时定义管理和数据LIF？
 
-管理LIF为必填项。数据LIF因情况而异：
+管理LIF为必填项。DataLIF因情况而异：
 
 * ONTAP SAN：不为iSCSI指定。Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iCI LUN。如果明确定义、则会生成警告 `dataLIF`。有关详细信息、请参见 link:trident-use/ontap-san-examples.html["ONTAP SAN配置选项和示例"] 。
-* ONTAP NAS：NetApp建议指定 `dataLIF`。如果不提供此参数、则Trident将从SVM提取数据LUN。您可以指定用于NFS挂载操作的完全限定域名(FQDN)、从而可以创建循环DNS、以便在多个数据LIF之间实现负载平衡。有关详细信息、请参见link:trident-use/ontap-nas-examples.html["ONTAP NAS配置选项和示例"]
+* ONTAP NAS：NetApp建议指定 `dataLIF`。如果未提供此参数、则Trident将从SVM提取数据LIF。您可以指定要用于NFS挂载操作的完全限定域名(FQDN)、以便创建轮叫DNS来在多个dataLIF之间进行负载平衡。有关详细信息、请参见link:trident-use/ontap-nas-examples.html["ONTAP NAS配置选项和示例"]
 
 
 
@@ -224,7 +224,7 @@ NetApp支持将Trident从一个主要版本升级到下一个即时主要版本�
 
 
 
-=== IPv6 地址是否可用于管理和数据 LIF ？
+=== IPv6地址是否可用于管理和DataLIF？
 
 Trident支持为以下项定义IPv6地址：
 
@@ -242,9 +242,9 @@ Trident支持为以下项定义IPv6地址：
 
 
 
-=== 是否可以更新后端的数据 LIF ？
+=== 是否可以更新后端的DataLIF？
 
-您可以更新上的数据LIF `ontap-nas` 和 `ontap-nas-economy` 仅限。
+您只能在和 `ontap-nas-economy`上更新DataLIF `ontap-nas`。
 
 
 

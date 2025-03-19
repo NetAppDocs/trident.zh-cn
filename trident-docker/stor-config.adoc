@@ -90,7 +90,7 @@ ONTAP 管理 LIF 的 IP 地址。您可以指定完全限定域名（ FQDN ）�
 | `dataLIF`  a| 
 协议 LIF 的 IP 地址。
 
-* ONTAP NAS驱动程序*：NetApp建议指定 `dataLIF`。如果不提供此参数、则Trident将从SVM提取数据LUN。您可以指定用于NFS挂载操作的完全限定域名(FQDN)、从而可以创建循环DNS、以便在多个数据LIF之间实现负载平衡。
+* ONTAP NAS驱动程序*：NetApp建议指定 `dataLIF`。如果未提供此参数、则Trident将从SVM提取数据LIF。您可以指定要用于NFS挂载操作的完全限定域名(FQDN)、以便创建轮叫DNS来在多个dataLIF之间进行负载平衡。
 
 *SAN ONTAP驱动程序*:不指定用于iSCSI或FC。Trident使用link:https://docs.netapp.com/us-en/ontap/san-admin/selective-lun-map-concept.html["ONTAP 选择性LUN映射"^]发现建立多路径会话所需的iSCSI或FC LUN。如果明确定义、则会生成警告 `dataLIF`。
  a| 

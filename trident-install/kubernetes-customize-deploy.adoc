@@ -52,10 +52,14 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 | `windows` | 设置为 `true` 启用在Windows工作节点上的安装。 | `false` 
 
 
-| `cloudProvider` | 设置为 `"Azure"` 在AKS集群上使用托管身份或云身份时。如果在EKS集群上使用云标识、请设置为"Aws"。 | `""` 
+| `cloudProvider`  a| 
+如果在AKS集群上使用托管身份或云身份、请设置为 `"Azure"`。如果在EKS集群上使用云标识、请设置为 `"AWS"`。在GKE集群上使用云标识时、将设置为 `"GCP"`。
+| `""` 
 
 
-| `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe")。 | `""` 
+| `cloudIdentity`  a| 
+在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe"")。在GKE集群上使用云标识时、请设置为云标识("iam.GKE.IO/GCP-service-account：xxxx@mygcpproject.iam.gserviceaccount.com ")。
+| `""` 
 
 
 | `IPv6` | 安装基于IPv6的Trident | false 

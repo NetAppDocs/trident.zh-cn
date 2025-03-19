@@ -76,13 +76,13 @@ spec:
 使用以下环境变量设置*云提供程序(CP)*和*云身份(CI)*标志的值：
 
 `export CP="GCP"`
-`export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
+`export ANNOTATION="'iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com'"`
 
 以下示例将安装Trident并使用环境变量将设置 `cloudProvider`为GCP `$CP`，并使用环境变量 `$ANNOTATION`设置 `cloudIdentity`：
 
 [listing]
 ----
-helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --set cloudIdentity="$ANNOTATION"
+helm install trident trident-operator-100.2502.0.tgz --set cloudProvider=$CP --set cloudIdentity="$ANNOTATION"
 ----
 --
 .<code>tridentctl</code>
@@ -90,7 +90,7 @@ helm install trident trident-operator-100.2406.0.tgz --set cloudProvider=$CP --s
 使用以下环境变量设置*云提供程序*和*云身份*标志的值：
 
 `export CP="GCP"`
-`export ANNOTATION="iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com"`
+`export ANNOTATION="'iam.gke.io/gcp-service-account: \cloudvolumes-admin-sa@mygcpproject.iam.gserviceaccount.com'"`
 
 以下示例将安装Trident并将标志设置 `cloud-provider`为 `$CP`、和 `cloud-identity` `$ANNOTATION`：
 
