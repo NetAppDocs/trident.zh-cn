@@ -94,7 +94,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 | `smbShare` | 您可以指定以下选项之一：使用Microsoft管理控制台或ONTAP命令行界面创建的SMB共享的名称、或者允许Trident创建SMB共享的名称。对于Amazon FSx for ONTAP后端、此参数是必需的。 | `smb-share` 
 
 
-| `useREST` | 用于使用 ONTAP REST API 的布尔参数。 `useREST`设置为时 `true`，Trident使用ONTAP REST API与后端通信；设置为时 `false`，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontap` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会 `useREST`设置为 `true`；更 `useREST`改为 `false`以使用ONTAPI (ZAPI)调用。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
+| `useREST` | 用于使用 ONTAP REST API 的布尔参数。 `useREST`设置为时 `true`，Trident使用ONTAP REST API与后端通信；设置为时 `false`，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontapi` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会 `useREST`设置为 `true`；更 `useREST`改为 `false`以使用ONTAPI (ZAPI)调用。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
 
 
 | `aws` | 您可以在AWS FSx for ONTAP的配置文件中指定以下内容：

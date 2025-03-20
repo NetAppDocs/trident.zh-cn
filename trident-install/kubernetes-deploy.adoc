@@ -49,7 +49,7 @@ summary: '您可以使用Trident操作员(手动或使用Helm)或与一起安装
 
 
 
-TIP: 如果您尚未熟悉 link:../trident-concepts/intro.html["基本概念"^]，现在是一个实现这一目标的好时机。
+TIP: 如果您还没有熟悉link:../trident-get-started/intro.html["基本概念"^]，现在是一个好时机。
 
 
 

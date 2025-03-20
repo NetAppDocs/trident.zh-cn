@@ -30,7 +30,7 @@ summary: 在使用Trident运算符升级Trident之前、您应了解升级期间
 
 
 
-TIP: 有关Kubnetes集群上Trident架构的详细信息，请参阅link:trident-concepts/intro.html#trident-architecture["Trident架构"]。
+TIP: 有关Kubnetes集群上Trident架构的详细信息，请参阅link:../trident-get-started/architecture.html["Trident架构"^]。
 
 
 
