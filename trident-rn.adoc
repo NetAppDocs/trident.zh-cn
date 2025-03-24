@@ -83,7 +83,7 @@ NetApp Trident Protect提供高级应用程序数据管理功能、可增强由N
 
 ==== 增强功能
 
-* 增加了对两个卷模式(文件和卷模式：块(原始设备)存储)的KubeVirt / OpenShift虚拟化VM的备份和还原支持、可通过App镜像 关系复制到已可用的存储。
+* 为两个卷模式(文件和卷模式：块(原始设备)存储)增加了对KubeVirt / OpenShift虚拟化VM的备份和恢复支持。此支持与所有Trident驱动程序兼容、并可增强使用NetApp SnapMirror和Trident Protect复制存储时的现有保护功能。
 * 增加了在Kubevirt环境的应用程序级别控制冻结行为的功能。
 * 增加了对配置AutoSupport代理连接的支持。
 * 增加了为数据移动程序加密(Kerberos / Restic)定义密钥的功能。

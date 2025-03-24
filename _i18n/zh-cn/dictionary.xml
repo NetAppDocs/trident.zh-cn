@@ -5103,7 +5103,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="60b04b91abae29736bd23b21579be5cb" category="list-text">增加了CSI -非标准容器的SecurityContext<block ref="a97be45bfcdf3eeaee81dc9917811f8f" category="inline-link-macro-rx"></block> ()。</block>
   <block id="cb1f1e88b6db83dc715d1cb1d8733445" category="section-title">Trident Protect</block>
   <block id="b094c3f306a844e9e49992f69a84cfa4" category="paragraph">NetApp Trident Protect提供高级应用程序数据管理功能、可增强由NetApp ONTAP存储系统和NetApp Trident CSI存储配置程序提供支持的有状态Kubbernetes应用程序的功能和可用性。</block>
-  <block id="38fc414fc29442833eb9eb53cc2e1d14" category="list-text">增加了对两个卷模式(文件和卷模式：块(原始设备)存储)的KubeVirt / OpenShift虚拟化VM的备份和还原支持、可通过App镜像 关系复制到已可用的存储。</block>
   <block id="7df125a00671c08a40e0225c8e7bfe51" category="list-text">增加了在Kubevirt环境的应用程序级别控制冻结行为的功能。</block>
   <block id="bde8e1e3de96ead9884d920004bad3bf" category="list-text">增加了对配置AutoSupport代理连接的支持。</block>
   <block id="3a3a7f688efad3284b8088de98d9c990" category="list-text">增加了为数据移动程序加密(Kerberos / Restic)定义密钥的功能。</block>
@@ -5466,4 +5465,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="29faa5f5c2de3c7a4ab9c78562616cdd" category="admonition">如果您使用RedHat OpenShift、请务必注意命名空间标注在OpenShift环境中的关键作用。命名空间标注可确保还原的Pod遵循OpenShift安全上下文约束(SCC)定义的适当权限和安全配置、并可在没有权限问题的情况下访问卷。有关详细信息，请参阅<block ref="9c33d4f1fa6e1f731baeaf3a5fe229cd" category="inline-link-rx"></block>。</block>
   <block id="d858eab1cb0b74aa1e6d052d7c06bd76" category="list-text">OpenShift 4.10 - 4.18</block>
   <block id="42113cf11e30b764619d3a98db65262d" category="list-text">R润 彻Kubernetes Engine 2 (RKE2) v1.26.7+rke2r1、v1.28.5+rke2r1</block>
+  <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">为两个卷模式(文件和卷模式：块(原始设备)存储)增加了对KubeVirt / OpenShift虚拟化VM的备份和恢复支持。此支持与所有Trident驱动程序兼容、并可增强使用NetApp SnapMirror和Trident Protect复制存储时的现有保护功能。</block>
 </blocks>
