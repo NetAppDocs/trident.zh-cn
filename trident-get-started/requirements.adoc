@@ -72,7 +72,7 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高�
 * Cloud Volumes ONTAP
 * Google Cloud NetApp卷
 * NetApp 全 SAN 阵列（ ASA ）
-* 运行ONTAP 9.6或更高版本的内部FAS、AFF或ASA集群
+* 受NetApp有限支持的内部FAS、AFF或ASA R2集群版本。请参阅。 link:https://mysupport.netapp.com/site/info/version-support["软件版本支持"]
 * NetApp HCI/ Element软件11或更高版本
 
 

@@ -46,6 +46,10 @@ NOTE: Trident创建的卷不与任何卷访问组关联。
 NetApp ONTAP 提供空闲数据加密、可在磁盘被盗、退回或重新利用时保护敏感数据。有关详细信息，请参见 link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/configure-netapp-volume-encryption-concept.html["配置 NetApp 卷加密概述"^]。
 
 * 如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。
++
+** 您可以将NVE加密平面设置为 `""`、以创建启用了NAE的卷。
+
+
 * 如果未在后端启用NAE、则在Trident中配置的任何卷都将启用NVE、除非您在后端配置中将NVE加密标志设置为 `false`。
 
 

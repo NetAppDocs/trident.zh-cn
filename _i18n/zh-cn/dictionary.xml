@@ -5004,7 +5004,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="90de0fd1d09f4fc27d99667555a8a12f" category="paragraph">ONTAP系统具有全闪存、混合或纯HDD配置、并提供许多不同的部署模式：内部FAS、AFA和ASA集群、ONTAP Select和Cloud Volumes ONTAP。Trident支持这些ONTAP部署模式。</block>
   <block id="30712450d512dae0e7becb73c6a439fb" category="list-text">Kubbernetes 1.26 - 1.32</block>
   <block id="bde4e01f8df98626e0dc1c36a8e06a5a" category="admonition">在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高版本之前，请参见<block ref="1b428bb9b9fe27db6cd8932526864634" category="inline-link-macro-rx"></block>。</block>
-  <block id="2322d8185ec207b8d8522a92de761c94" category="list-text">运行ONTAP 9.6或更高版本的内部FAS、AFF或ASA集群</block>
   <block id="4cd3b50237790ab53e31a7a9fbd28583" category="section-title">Trident支持KubeVirt和OpenShift虚拟化</block>
   <block id="8f323a9e5c0c5162cc6e0d48e0cb1850" category="paragraph-title">支持的存储驱动程序：</block>
   <block id="0c30a28f9129b866c1d3cdcfa8c2fe15" category="paragraph">对于KubeVirt和OpenShift虚拟化、Trident支持以下ONTAP驱动程序：</block>
@@ -5466,4 +5465,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="d858eab1cb0b74aa1e6d052d7c06bd76" category="list-text">OpenShift 4.10 - 4.18</block>
   <block id="42113cf11e30b764619d3a98db65262d" category="list-text">R润 彻Kubernetes Engine 2 (RKE2) v1.26.7+rke2r1、v1.28.5+rke2r1</block>
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">为两个卷模式(文件和卷模式：块(原始设备)存储)增加了对KubeVirt / OpenShift虚拟化VM的备份和恢复支持。此支持与所有Trident驱动程序兼容、并可增强使用NetApp SnapMirror和Trident Protect复制存储时的现有保护功能。</block>
+  <block id="fc1d748db1b5b488ce7af7d17ea15d55" category="inline-link-macro">软件版本支持</block>
+  <block id="ee19283e867cf4e5840d2811a74b89e5" category="list-text">受NetApp有限支持的内部FAS、AFF或ASA R2集群版本。请参阅。 <block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block></block>
+  <block id="8456fc955091af12a31da6fc68123005" category="list-text">您可以将NVE加密平面设置为<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block>、以创建启用了NAE的卷。</block>
 </blocks>
