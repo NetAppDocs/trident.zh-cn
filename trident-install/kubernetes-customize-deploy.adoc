@@ -89,7 +89,7 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 
 
 | `imageRegistry` | 内部注册表的路径、格式
-`<registry FQDN>[:port][/subpath]` | `"k8s.gcr.io"`(Kubornetes 1.19+)或 `"quay.io/k8scsi"` 
+`<registry FQDN>[:port][/subpath]` | `"registry.k8s.io"` 
 
 
 | `kubeletDir` | 主机上的 kubelet 目录的路径 | `"/var/lib/kubelet"` 
