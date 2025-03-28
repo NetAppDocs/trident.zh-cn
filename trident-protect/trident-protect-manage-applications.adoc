@@ -39,7 +39,13 @@ summary: 您可以通过创建应用程序CR和关联的Trident Vault CR来使Ap
 .. 配置以下属性：
 +
 *** *metadata.name*:(_required__)应用程序自定义资源的名称。请注意您选择的名称、因为保护操作所需的其他CR文件会引用此值。
-*** *。spec.includedNamespaces*:(_required__)使用命名空间标签或命名空间名称来指定应用程序资源所在的命名空间。应用程序命名空间必须属于此列表。
+*** *。spec.includedNamespaces*:(_required__)使用命名空间和标签选择器指定应用程序使用的命名空间和资源。应用程序命名空间必须属于此列表。标签选择器是可选的、可用于筛选每个指定命名空间中的资源。
+*** *。spec.includedClusterScopedResources*:(_可 选_)使用此属性指定要包含在应用程序定义中的集群范围资源。此属性允许您根据资源的组、版本、种类和标签来选择这些资源。
++
+**** *groupVersionKind*：(_required_)指定集群范围资源的API组、版本和类型。
+**** *labelSelecter*：(_可 选_)根据集群范围的资源的标签对其进行筛选。
+
+
 *** *。metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*:(_可 选_)此标注仅适用于从虚拟机定义的应用程序、例如在KubeVirt环境中、文件系统在快照之前冻结。指定此应用程序是否可以在快照期间写入文件系统。如果设置为true、则应用程序将忽略全局设置、并可在快照期间写入文件系统。如果设置为false、则应用程序将忽略全局设置、并且文件系统会在快照期间冻结。如果指定了此参数、但应用程序定义中没有虚拟机、则会忽略此标注。如果未指定，则应用程序将遵循link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["全局Trident保护冻结设置"]。
 +
 [NOTE]
@@ -66,10 +72,23 @@ metadata:
   namespace: my-app-namespace
 spec:
   includedNamespaces:
-  - labelSelector: {}
-    namespace: namespace-1
-  - labelSelector: {}
-    namespace: namespace-2
+    - namespace: namespace-1
+      labelSelector:
+        matchLabels:
+          app: example-app
+    - namespace: namespace-2
+      labelSelector:
+        matchLabels:
+          app: another-example-app
+  includedClusterScopedResources:
+    - groupVersionKind:
+        group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        version: v1
+      labelSelector:
+        matchLabels:
+          mylabel: test
+
 ----
 
 
