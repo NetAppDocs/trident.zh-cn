@@ -12,7 +12,7 @@ summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以
 
 
 [role="lead"]
-配置Kubnetes StorageClass对象并创建存储类、以指示Trident如何配置卷。创建一个使用已配置的Kubernetes StorageClass来请求对PV的访问的永久性卷(PV)和永久性卷克莱姆(PVC)。然后、您可以将PV挂载到POD。
+配置Kubnetes StorageClass对象并创建存储类、以指示Trident如何配置卷。创建一个使用已配置的Kubernetes StorageClass来请求PV访问权限的永久性卷请求(PVC)。然后、您可以将PV挂载到POD。
 
 
 
@@ -80,13 +80,13 @@ basic-csi    csi.trident.netapp.io   15h
 
 
 
-== 创建PV和PVC
+== 创建PVC
 
-答 link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/["_PersigentVolume_"^] (PV)是由集群管理员在Kubbernetes集群上配置的物理存储资源。。 https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersigentVolumeClaim_"^] (PVC)是对集群上的永久卷的访问请求。
+A https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersigentVolumeClaim_"^] (PVC)是指请求访问集群上的永久卷。
 
 可以将PVC配置为请求特定大小的存储或访问模式。通过使用关联的StorageClass，集群管理员可以控制不限于持续卷大小和访问模式(例如性能或服务级别)。
 
-创建PV和PVC后、您可以将卷挂载到Pod中。
+创建PVC后、您可以将卷挂载到Pod中。
 
 
 
@@ -161,20 +161,6 @@ storageClassName: protection-gold
 === 创建PV和PVC
 
 .步骤
-. 创建PV。
-+
-[listing]
-----
-kubectl create -f pv.yaml
-----
-. 验证PV状态。
-+
-[listing]
-----
-kubectl get pv
-NAME        CAPACITY  ACCESS MODES  RECLAIM POLICY  STATUS    CLAIM  STORAGECLASS  REASON  AGE
-pv-storage  4Gi       RWO           Retain          Available                              7s
-----
 . 创建 PVC 。
 +
 [listing]
@@ -186,11 +172,14 @@ kubectl create -f pvc.yaml
 [listing]
 ----
 kubectl get pvc
-NAME        STATUS VOLUME     CAPACITY ACCESS MODES STORAGECLASS AGE
-pvc-storage Bound  pv-name 2Gi      RWO                       5m
 ----
 
 
+[listing]
+----
+NAME        STATUS VOLUME     CAPACITY ACCESS MODES STORAGECLASS AGE
+pvc-storage Bound  pv-name 2Gi      RWO                       5m
+----
 有关存储类如何与和参数交互以控制Trident如何配置卷的详细信息 `PersistentVolumeClaim`、请参见link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"]。
 
 
