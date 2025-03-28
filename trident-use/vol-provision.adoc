@@ -12,45 +12,70 @@ summary: '创建一个使用已配置的Kubernetes StorageClass来请求对PV的
 
 
 [role="lead"]
-创建一个使用已配置的Kubernetes StorageClass来请求对PV的访问的永久性卷(PV)和永久性卷克莱姆(PVC)。然后、您可以将PV挂载到POD。
+创建一个使用已配置的Kubernetes StorageClass来请求PV访问权限的永久性卷请求(PVC)。然后、您可以将PV挂载到POD。
 
 
 
 == 概述
 
-答 link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/["_PersigentVolume_"^] (PV)是由集群管理员在Kubbernetes集群上配置的物理存储资源。。 https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersigentVolumeClaim_"^] (PVC)是对集群上的永久卷的访问请求。
+A https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersigentVolumeClaim_"^] (PVC)是指请求访问集群上的永久卷。
 
 可以将PVC配置为请求特定大小的存储或访问模式。通过使用关联的StorageClass，集群管理员可以控制不限于持续卷大小和访问模式(例如性能或服务级别)。
 
-创建PV和PVC后、您可以将卷挂载到Pod中。
+创建PVC后、您可以将卷挂载到Pod中。
+
+
+
+== 创建PVC
+
+.步骤
+. 创建 PVC 。
++
+[listing]
+----
+kubectl create -f pvc.yaml
+----
+. 验证PVC状态。
++
+[listing]
+----
+kubectl get pvc
+----
+
+
+[listing]
+----
+NAME        STATUS  VOLUME     CAPACITY   ACCESS MODES  STORAGECLASS AGE
+pvc-storage Bound   pv-name    1Gi        RWO                  5m
+----
+. 将卷挂载到Pod中。
++
+[listing]
+----
+kubectl create -f pv-pod.yaml
+----
++
+
+NOTE: 您可以使用监控进度 `kubectl get pod --watch`。
+
+. 验证卷是否已挂载到上 `/my/mount/path`。
++
+[listing]
+----
+kubectl exec -it task-pv-pod -- df -h /my/mount/path
+----
+. 现在、您可以删除Pod。Pod应用程序将不再存在、但卷将保留。
++
+[listing]
+----
+kubectl delete pod pv-pod
+----
+
 
 
 
 === 示例清单
 
-.PerfsentVolume示例清单
-[%collapsible]
-====
-此示例清单显示了与StorageClass关联的10gi的基本PV `basic-csi`。
-
-[listing]
-----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-storage
-  labels:
-    type: local
-spec:
-  storageClassName: basic-csi
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/my/host/path"
-----
-====
 .PersentVolumeClaim示例清单
 [%collapsible]
 ====
@@ -78,7 +103,6 @@ spec:
 
 [listing]
 ----
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -106,9 +130,9 @@ metadata:
   name: pv-pod
 spec:
   volumes:
-    - name: pv-storage
+    - name: storage
       persistentVolumeClaim:
-       claimName: basic
+       claimName: pvc-storage
   containers:
     - name: pv-container
       image: nginx
@@ -117,90 +141,26 @@ spec:
           name: "http-server"
       volumeMounts:
         - mountPath: "/my/mount/path"
-          name: pv-storage
+          name: storage
 ----
 .基本NVMe/TCP配置
 [listing]
 ----
----
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    run: nginx
-  name: nginx
+  name: pod-nginx
 spec:
-  containers:
-    - image: nginx
-      name: nginx
-      resources: {}
-      volumeMounts:
-        - mountPath: "/usr/share/nginx/html"
-          name: task-pv-storage
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
   volumes:
-    - name: task-pv-storage
+    - name: basic-pvc
       persistentVolumeClaim:
-      claimName: pvc-san-nvme
+        claimName: pvc-san-nvme
+  containers:
+    - name: task-pv-container
+      image: nginx
+      volumeMounts:
+        - mountPath: "/my/mount/path"
+          name: basic-pvc
 ----
 ====
-
-
-== 创建PV和PVC
-
-.步骤
-. 创建PV。
-+
-[listing]
-----
-kubectl create -f pv.yaml
-----
-. 验证PV状态。
-+
-[listing]
-----
-kubectl get pv
-NAME        CAPACITY  ACCESS MODES  RECLAIM POLICY  STATUS    CLAIM  STORAGECLASS  REASON  AGE
-pv-storage  4Gi       RWO           Retain          Available                              7s
-----
-. 创建 PVC 。
-+
-[listing]
-----
-kubectl create -f pvc.yaml
-----
-. 验证PVC状态。
-+
-[listing]
-----
-kubectl get pvc
-NAME        STATUS VOLUME     CAPACITY ACCESS MODES STORAGECLASS AGE
-pvc-storage Bound  pv-name 2Gi      RWO                       5m
-----
-. 将卷挂载到Pod中。
-+
-[listing]
-----
-kubectl create -f pv-pod.yaml
-----
-+
-
-NOTE: 您可以使用监控进度 `kubectl get pod --watch`。
-
-. 验证卷是否已挂载到上 `/my/mount/path`。
-+
-[listing]
-----
-kubectl exec -it task-pv-pod -- df -h /my/mount/path
-----
-. 现在、您可以删除Pod。Pod应用程序将不再存在、但卷将保留。
-+
-[listing]
-----
-kubectl delete pod pv-pod
-----
-
-
 有关存储类如何与和参数交互以控制Trident如何配置卷的详细信息 `PersistentVolumeClaim`、请参见link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"]。

@@ -5492,4 +5492,8 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="8d8a8010684a930aa7760c829cad4141" category="list-text">*labelSelecter*：(_可 选_)根据集群范围的资源的标签对其进行筛选。</block>
   <block id="47edbb9e6d6e6e874eb40c274a0e2e0f" category="sidebar">博客文章</block>
   <block id="4a5fadb6b0890cea5e8d53c37411aaf0" category="cell"><block ref="bc35d038baf172a19349f289d31fbf9d" prefix="" category="inline-code"></block></block>
+  <block id="022571ee546e1a953d857961a8cd0442" category="paragraph">创建一个使用已配置的Kubernetes StorageClass来请求PV访问权限的永久性卷请求(PVC)。然后、您可以将PV挂载到POD。</block>
+  <block id="f79367bddbaecd3962f7c740a1b2178f" category="paragraph">A<block ref="b1b93f46fc69df9fe663c091f4d6c2b4" category="inline-link-rx"></block> (PVC)是指请求访问集群上的永久卷。</block>
+  <block id="79a251ee7369fdcdb0847d35254afcf8" category="paragraph">创建PVC后、您可以将卷挂载到Pod中。</block>
+  <block id="a305c8fb2137d8a4a767905590079e89" category="section-title">创建PVC</block>
 </blocks>
