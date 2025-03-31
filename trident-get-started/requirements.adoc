@@ -228,7 +228,7 @@ link:../trident-reference/ports.html["Trident端口"]
 * docer.io/NetApp/trdent-autostsupport：25.02
 * 注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.2.0
 * 注册表.k8s.io/sig-storage/CsI-Attacher：v4.8.0
-* 注册表.k8s.io/sig-storage/CsI-s不同：v1.13.0
+* 注册表.k8s.io/sig-storage/CsI-s不同：v1.13.2
 * 注册表.k8s.io/sig-storage/CsI-snapshotter：v8.2.0
 * 注册表.k8s.io/sig-storage/CsI-N节点 驱动程序注册器：v2.13.0
 * dDocker .io/NetApp/trdent操作员：25.02.0 (可选)

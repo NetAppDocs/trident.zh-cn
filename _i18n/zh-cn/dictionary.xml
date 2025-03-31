@@ -5017,7 +5017,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="78cd2bf2aaf1655ef471d7da97aa4ef9" category="list-text">docer.io/NetApp/trdent-autostsupport：25.02</block>
   <block id="b55333d21cb50b1d1d34c529c999482f" category="list-text">注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.2.0</block>
   <block id="c9341ee9faa017471dec7dabe41bf3e4" category="list-text">注册表.k8s.io/sig-storage/CsI-Attacher：v4.8.0</block>
-  <block id="8185908867d5a8954eddf078ff1f303e" category="list-text">注册表.k8s.io/sig-storage/CsI-s不同：v1.13.0</block>
   <block id="f174408325f6885e97fc18e213950cb7" category="list-text">注册表.k8s.io/sig-storage/CsI-snapshotter：v8.2.0</block>
   <block id="7e8b00e8f801232796015a8859867e55" category="list-text">注册表.k8s.io/sig-storage/CsI-N节点 驱动程序注册器：v2.13.0</block>
   <block id="7abdbff8f015a0a5e1ca6bcf8e7a955c" category="list-text">dDocker .io/NetApp/trdent操作员：25.02.0 (可选)</block>
@@ -5492,4 +5491,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="a305c8fb2137d8a4a767905590079e89" category="section-title">创建PVC</block>
   <block id="06034bca671a3028021f1a722aac7b41" category="paragraph">配置Kubnetes StorageClass对象并创建存储类、以指示Trident如何配置卷。创建一个使用已配置的Kubernetes StorageClass来请求PV访问权限的永久性卷请求(PVC)。然后、您可以将PV挂载到POD。</block>
   <block id="5de805965faeb85a54098223ea3a3334" category="paragraph">创建PVC后、您可以将卷挂载到Pod中。</block>
+  <block id="06489d7f99c3b214c8b9a539006a642c" category="list-text">注册表.k8s.io/sig-storage/CsI-s不同：v1.13.2</block>
 </blocks>
