@@ -3159,40 +3159,27 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="77f6e3db9b70538186091595d9c8c9e8" category="list-text">EKS附加项</block>
   <block id="e477faed39be08642267684bb501d931" category="open-title">管理控制台</block>
   <block id="e8d532dbf6904e2793dbda6fd0d03818" category="list-text">打开Amazon EKS控制台，网址为<block ref="c4765fcd1a0f97cf67c0365ddc45d563" category="inline-link-rx"></block>。</block>
-  <block id="8d1588a59bc508adad8a62ccaaa1c610" category="list-text">在左侧导航窗格中，单击*群集*。</block>
-  <block id="32d9b71b3fc3fad1385ba62a9bf6bf46" category="list-text">单击要为其配置NetApp Trident CSI加载项的集群的名称。</block>
-  <block id="91e45a55d3dd23153429aac3c45c53ae" category="list-text">单击*Add-ones*，然后单击*Get more add-ones*。</block>
-  <block id="5a378b18f7bf0c4cabc6c655cd2f535e" category="list-text">单击 * 下一步 * 。</block>
   <block id="cacc1ddf612923b1c73b0a9a76659f42" category="list-text">在“*配置选定的附加项*设置”页面上，执行以下操作：</block>
   <block id="149e81257342cd05b0256d010b0b4a37" category="list-text">选择要使用的*版本*。</block>
   <block id="1df543472a35a3acfd632037832987f6" category="list-text">对于*Select IAM Role*，保留为*not set*。</block>
-  <block id="e873d41466e1383d951643c07a043d80" category="list-text">展开*可选配置设置*，遵循*附加配置架构*，并将*配置值*部分中的configurationvalues*参数设置为您在上一步中创建的roole-arn (值格式应为：<block ref="ee1eb31b5aebe5472fc52cb0ae20b077" prefix=" " category="inline-code"></block>)。如果您为冲突解决方法选择覆盖、则可以使用Amazon EKS附加设置覆盖现有附加项的一个或多个设置。如果未启用此选项、并且与现有设置存在冲突、则操作将失败。您可以使用生成的错误消息来解决冲突。在选择此选项之前、请确保Amazon EKS附加组件未管理您需要自行管理的设置。</block>
   <block id="dfe4bfc5bd8b8d180411468fbdbb4033" category="list-text">选择“*下一步*”。</block>
   <block id="fbadf292f84bef20d7678936dbe4c4ce" category="list-text">在*Review and add*页上，选择*Cree*。</block>
   <block id="46bfc11fb8f185d278ea910b0052a317" category="paragraph">加载项安装完成后、您将看到已安装的加载项。</block>
   <block id="7820fdb5d8b3ebe0c69c86cf8bd2d0cf" category="open-title">AWS命令行界面</block>
   <block id="375fe5880d846c5b389735de8ae80b0a" category="list-text">创建<block ref="feef18acfb11dc53b7100577c6d640c4" prefix=" " category="inline-code"></block> 文件：</block>
-  <block id="e907c98f301b06586956529abca9e22c" category="paragraph"><block ref="f9c32cfc7736c461770afa4dd4053bda" prefix="" category="inline-code"></block></block>
   <block id="41c9d4e34cce02a882f325b51fa9d2f4" category="list-text">检查FSxN Trident CSI加载项的当前版本。请替换<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block> 为您的集群名称。<block ref="7b5be2809a3021f978155d101cf059cf" prefix=" " category="inline-code"></block></block>
   <block id="52b5830420efb96c3a91beb52bac3b23" category="paragraph">*示例输出：*</block>
   <block id="b3f252777a69b110667756babe83a98f" category="inline-link-macro">插件</block>
   <block id="25626757a73152ece7fdadb90ede4b7c" category="inline-link-macro">Kubbernetes现场管理</block>
   <block id="751f793ade8de1ed590e0f90ac05d8e1" category="paragraph">如果您删除了该<block ref="c23ab3adaec8ca15ff3ffd0971be6152" prefix=" " category="inline-code"></block> 选项、并且任何Amazon EKS附加设置与您的现有设置冲突、则更新Amazon EKS附加设置将失败；您将收到一条错误消息、以帮助您解决冲突。在指定此选项之前、请确保Amazon EKS附加组件不会管理您需要管理的设置、因为这些设置会被此选项覆盖。有关此设置的其他选项的详细信息，请参见 <block ref="aea621f0e078efb8367c5d5e894674cd" category="inline-link-macro-rx"></block>。有关Amazon EKS Kubenetes字段管理的详细信息，请参阅 <block ref="97bdcfd76d2ff3e4855f6b36ebad236e" category="inline-link-macro-rx"></block>。</block>
   <block id="b0c6845b636be8c810182f985c930fed" category="list-text">打开Amazon EKS控制台<block ref="c4765fcd1a0f97cf67c0365ddc45d563" category="inline-link-rx"></block>。</block>
-  <block id="69bd32cd7d6c3b5f9de30250cec1b478" category="list-text">单击要更新的NetApp Trident CSI加载项的集群的名称。</block>
-  <block id="a02487427219ab03773fe3c66fa96556" category="list-text">单击*Add-ones*选项卡。</block>
-  <block id="3dca1b912e3d43e2a746fbcde32a6018" category="list-text">单击 * 保存更改 * 。</block>
   <block id="5f06738a5749e735a4681f5c09e2bafc" category="paragraph">以下示例将更新EKS加载项：</block>
   <block id="d8c918c170a0768203b4c2a6218e22bf" category="paragraph">您可以通过两种方式删除Amazon EKS附加项：</block>
   <block id="577a7d77fb14f745abf0c5ee04b72879" category="admonition">如果此附加项具有关联的IAM帐户、则不会删除此IAM帐户。</block>
-  <block id="ae7c26e7d90f669e27bf9a36527336ec" category="list-text">在左侧导航窗格中，单击*群集*。</block>
-  <block id="99e7173540f126412137b25a0caaf2d1" category="list-text">单击要删除的NetApp Trident CSI加载项的集群的名称。</block>
-  <block id="03b194a23dcb353466fbfb7acff64363" category="list-text">单击 * 删除 * 。</block>
   <block id="c8e9b5ea2470965edac225c56a879d07" category="list-text">在*Remove NetApp_trdent-operator con確 認*对话框中，执行以下操作：</block>
   <block id="10aba138eb518a0cc15662934a1f6e18" category="list-text">如果您希望Amazon EKS停止管理此附加组件的设置、请选择*保留集群*。如果要在集群上保留附加软件、以便您可以自行管理附加软件的所有设置、请执行此操作。</block>
   <block id="ecca191ac54751ba8120816fbe45777e" category="list-text">输入*NetApp_trdent-operator*。</block>
   <block id="bb7c6bde1fc26965ada02923bac65350" category="paragraph">请使用集群的名称进行替换<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block> 、然后运行以下命令。</block>
-  <block id="3f0c01bb690234ddb3284c5ce5c26da2" category="paragraph"><block ref="c2f1a783b03bad400b0ebf4321b8a171" prefix="" category="inline-code"></block></block>
   <block id="23e0e5bfdd7b1fef2ab4d932aae742e5" category="doc">配置存储后端</block>
   <block id="c3e86b30fe8148143701324ae1595af8" category="list-text"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block>：配置的每个PV都是其自身Amazon FSx for NetApp ONTAP卷中的一个LUN。建议用于块存储。</block>
   <block id="3878a0c92e55dbd3cdd9458330c2f1c3" category="list-text"><block ref="8321592ce24c8a122ecf26a63cfca407" prefix="" category="inline-code"></block>：配置的每个PV都是一个完整的Amazon FSx for NetApp ONTAP卷。建议用于NFS和SMB。</block>
@@ -4945,7 +4932,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="b70329a4cd0d7e433e8af087eebce89a" category="list-text">已安装Trident、其中包括用于指定"gcp"的云提供程序和用于指定新GCP服务帐户的云标识。下面给出了一个示例。</block>
   <block id="73a8d79444c307e1446b60eb6a9ba8f1" category="paragraph">在配置适用于AWS EKS的Trident加载项之前、请确保满足以下条件：</block>
   <block id="5c48b2cb013af0c5d292d6bc5659074c" category="section-title">使用命令行界面安装/卸载Trident EKS加载项</block>
-  <block id="a241de540e9d861e242ac606150f4f07" category="paragraph">以下命令将卸载Trident EKS加载项：<block ref="09a3e9c644b219341aa6e2e8a8922e59" prefix=" " category="inline-code"></block></block>
   <block id="1095f7331744c1accf45762c2da50a60" category="paragraph">Trident简化了Kubelnetes中适用于NetApp ONTAP的Amazon FSx存储管理、使开发人员和管理员能够专注于应用程序部署。</block>
   <block id="aa9c9ff1836c624104eb3a256a7b8b69" category="section-title">通过舵安装Trident</block>
   <block id="b3dc88ff9246a994ccb2a892f1ad7486" category="list-text">下载Trident安装程序包</block>
@@ -5190,15 +5176,12 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="bc04665b1c712547a7dcc87033ae7152" category="paragraph">您可以使用以下方法之一安装Trident：</block>
   <block id="a01b2c45a64c7d0c2a2aa3ce418eaa04" category="inline-link-macro">为CSI卷启用快照功能</block>
   <block id="9adc02aa546c3838bddb73a67ebaa4e2" category="paragraph">如果要使用快照功能、请安装CSI快照控制器加载项。有关详细信息、请参见 <block ref="d2fce68a585fb4c517040885fb7393e9" category="inline-link-macro-rx"></block> 。</block>
-  <block id="6ba41cf97f4e906d09aa6843f1ed9454" category="paragraph">Trident安装程序包包含部署Trident Operator和安装Trident所需的一切。从GitHub上的"Assets"部分下载并提取最新版本的Trident安装程序。<block ref="e8c87a263e5870f710a0a586ca803df2" prefix=" " category="inline-code"></block><block ref="b58dc755603e4aae34e32d22a572af73" prefix=" " category="inline-code"></block><block ref="1600ccf6988d672a315af82be4e93709" prefix=" " category="inline-code"></block></block>
   <block id="cae9d6c5ad1015a95a7e9dd5e473837a" category="list-text">从25.02版开始、Trident支持自动后端配置。安装Trident后、Trident将无缝创建后端和存储类。要启用自动后端配置，请<block ref="66203c461b36a2af573149f0aa6164ff" prefix=" " category="inline-code"></block>在安装期间添加<block ref="4c65cbb4d2559a68fba50cf196427b85" prefix=" " category="inline-code"></block>参数并指定<block ref="280fa711b12d488436b7cdcbfb2543fc" prefix=" " category="inline-code"></block>、<block ref="ac590318582c1d8275a50180aba8a35c" prefix=" " category="inline-code"></block>。</block>
   <block id="df5baf46554bffd06bf1e8e9ae5e6b52" category="paragraph">以下示例命令将安装Trident EKS加载项：</block>
   <block id="9149c64ca750a0bdd666354b3bbb7170" category="list-text">在AWS Marketplace EKS-addons部分中、选中* Trident by NetApp *复选框。</block>
   <block id="9c41f50f85f97003fc3d5010449c3a08" category="list-text">安装Trident EKS附加软件。</block>
-  <block id="33a60a0cdf016b1736b4b0ea747bcb0f" category="list-text">单击Trident by NetApp，然后单击*Edit*。</block>
   <block id="87d54c3153674640af4f36dd72f8953a" category="list-text">在“*按NetApp配置Trident”页上，执行以下操作：</block>
   <block id="7d91a8c58620fc2b878600d5ab834bda" category="list-text">*从集群中完全删除附加软件*–NetApp建议您仅在集群中没有依赖于此附加软件的资源时、才从集群中删除此附加软件。从命令中删除<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> 此选项<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block> 以删除此加载项。</block>
-  <block id="8d86b9c4fd938269229a9ccc306de933" category="list-text">单击*Add-ons*选项卡，然后单击Trident by NetApp．*</block>
   <block id="996d0bc5ff30cfbcef97caeaf2c6b353" category="paragraph">要创建存储后端、您需要创建JSON或YAML格式的配置文件。该文件需要指定所需的存储类型(NAS或SAN)、文件系统和用于获取该文件的SVM以及如何向其进行身份验证。以下示例显示了如何定义基于NAS的存储以及如何使用AWS密钥将凭据存储到要使用的SVM：</block>
   <block id="301909df91f724e7a48b15a1b5d05fa2" category="paragraph">运行以下命令以创建和验证Trident后端配置(TBC)：</block>
   <block id="d072ff8aa34f8a629a86f50ed8e738e5" category="list-text">从YAML文件创建Trident后端配置(TBC)并运行以下命令：</block>
@@ -5492,4 +5475,18 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="06034bca671a3028021f1a722aac7b41" category="paragraph">配置Kubnetes StorageClass对象并创建存储类、以指示Trident如何配置卷。创建一个使用已配置的Kubernetes StorageClass来请求PV访问权限的永久性卷请求(PVC)。然后、您可以将PV挂载到POD。</block>
   <block id="5de805965faeb85a54098223ea3a3334" category="paragraph">创建PVC后、您可以将卷挂载到Pod中。</block>
   <block id="06489d7f99c3b214c8b9a539006a642c" category="list-text">注册表.k8s.io/sig-storage/CsI-s不同：v1.13.2</block>
+  <block id="65fec8b0751214bea1821a56ae85cf6b" category="paragraph">Trident安装程序包包含部署Trident Operator和安装Trident所需的一切。从GitHub上的"Assets"部分下载并提取最新版本的Trident安装程序。</block>
+  <block id="89fb75fa5ae260c326092b78970469ed" category="list-text">在左侧导航窗格中，选择*群集*。</block>
+  <block id="abdaa0762abc2037a71287c94bceae14" category="list-text">选择要为其配置NetApp Trident CSI加载项的集群的名称。</block>
+  <block id="691da62871e09bf9c944f36b9de07889" category="list-text">选择*Add-ones*，然后选择*Get more add-ones*。</block>
+  <block id="e6cd86d61f4639c8a27006c6c29b3e9f" category="list-text">选择 * 下一步 * 。</block>
+  <block id="156546d6235c5f4068fefc5cac8a5068" category="list-text">展开*可选配置设置*，遵循*附加配置架构*，并将*配置值*部分中的configurationvalues*参数设置为您在上一步中创建的ro-arn (该值应采用以下格式：<block ref="2830f9a9af39ef8725d6362f632214e1" prefix=" " category="inline-code"></block>)。如果您为冲突解决方法选择覆盖、则可以使用Amazon EKS附加设置覆盖现有附加项的一个或多个设置。如果未启用此选项、并且与现有设置存在冲突、则操作将失败。您可以使用生成的错误消息来解决冲突。在选择此选项之前、请确保Amazon EKS附加组件未管理您需要自行管理的设置。</block>
+  <block id="ce7f62393ec7cbcc106793e2c9ab41e8" category="list-text">选择要更新NetApp Trident CSI加载项的集群的名称。</block>
+  <block id="f90a2b79ab21cae46f34d96bb4501334" category="list-text">选择*Add-ones*选项卡。</block>
+  <block id="38b15bc2ab2d3588a9a19b123eaec1b5" category="list-text">选择* Trident按NetApp显示*，然后选择*编辑*。</block>
+  <block id="302ef561e28f7d7cd13d1042cece78e1" category="list-text">选择 * 保存更改 * 。</block>
+  <block id="b7cd6be51eaf277b357ed1c976d66d06" category="list-text">在左侧导航窗格中，选择*群集*。</block>
+  <block id="1ca28d22337393f531c7c8028230ed76" category="list-text">选择要删除的NetApp Trident CSI加载项的集群名称。</block>
+  <block id="85f27397ddcaf9ec996f312d1d89ecf9" category="list-text">选择*Add-ons*选项卡，然后选择Trident by NetApp。*</block>
+  <block id="6f99fa9b2e1f4893851a8aeb82d171f9" category="list-text">选择 * 删除 * 。</block>
 </blocks>
