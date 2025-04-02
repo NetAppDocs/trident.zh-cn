@@ -17,7 +17,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 .步骤
 . 将卷挂载到Pod中。
 +
-[listing]
+[source, console]
 ----
 kubectl create -f pv-pod.yaml
 ----
@@ -25,7 +25,7 @@ kubectl create -f pv-pod.yaml
 以下示例显示了将PVC连接到POD的基本配置：*基本配置*：
 
 +
-[listing]
+[source, console]
 ----
 kind: Pod
 apiVersion: v1
@@ -52,7 +52,7 @@ NOTE: 您可以使用监控进度 `kubectl get pod --watch`。
 
 . 验证卷是否已挂载到上 `/my/mount/path`。
 +
-[listing]
+[source, console]
 ----
 kubectl exec -it pv-pod -- df -h /my/mount/path
 ----
@@ -65,7 +65,7 @@ Filesystem                                                        Size  Used  Av
 ----
 现在、您可以删除Pod。Pod应用程序将不再存在、但卷将保留。
 
-[listing]
+[source, console]
 ----
 kubectl delete pod pv-pod
 ----

@@ -21,7 +21,7 @@ summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以
 ====
 .YAML
 --
-[listing]
+[source, YAML]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -42,7 +42,7 @@ spec:
 --
 .JSON
 --
-[listing]
+[source, JSON]
 ----
 {
   "apiVersion": "trident.netapp.io/v1",
@@ -74,7 +74,7 @@ spec:
 
 * 从YAML文件创建Trident后端配置(TBC)并运行以下命令：
 +
-[listing]
+[source, console]
 ----
 kubectl create -f backendconfig.yaml -n trident
 ----
@@ -85,7 +85,7 @@ tridentbackendconfig.trident.netapp.io/backend-tbc-ontap-nas created
 ----
 * 验证是否已成功创建Trident后端配置(TBC)：
 +
-[listing]
+[source, console]
 ----
 Kubectl get tbc -n trident
 ----
@@ -115,13 +115,13 @@ backend-tbc-ontap-nas        tbc-ontap-nas        933e0071-66ce-4324-b9ff-f96d91
 
 创建配置文件后、运行此命令在EKS中创建该文件：
 
-[listing]
+[source, console]
 ----
 kubectl create -f configuration_file
 ----
 要验证状态、请运行以下命令：
 
-[listing]
+[source, console]
 ----
 kubectl get tbc -n trident
 ----
@@ -226,10 +226,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 `""` 
 
 
-| `credentials` | 指定要存储在AWS机密管理器中的FSx SVM凭据。
-- `name`：密钥的Amazon资源名称(ARN)、其中包含SVM的凭据。
-- `type`：设置为 `awsarn`。
-请参见 link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["创建AWS机密管理器密钥"^] 有关详细信息 ... |  
+| `credentials` | 指定要存储在AWS密码管理器中的FSx SVM凭据。- `name`：密钥的Amazon资源名称(ARN)、其中包含SVM的凭据。- `type`：设置为 `awsarn`。有关详细信息、请参见 link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["创建AWS机密管理器密钥"^] 。 |  
 |===
 
 
@@ -289,7 +286,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 * 一个Kubernetes集群、其中包含一个Linux控制器节点以及至少一个运行Windows Server 2019的Windows工作节点。Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。
 * 至少一个包含Active Directory凭据的Trident密钥。生成密钥 `smbcreds`：
 +
-[listing]
+[source, console]
 ----
 kubectl create secret generic smbcreds --from-literal username=user --from-literal password='password'
 ----
@@ -305,13 +302,13 @@ kubectl create secret generic smbcreds --from-literal username=user --from-liter
 
 .. 创建与指定SVM关联的SMB共享：
 +
-[listing]
+[source, console]
 ----
 vserver cifs share create -vserver vserver_name -share-name share_name -path path [-share-properties share_properties,...] [other_attributes] [-comment text]
 ----
 .. 验证是否已创建共享：
 +
-[listing]
+[source, console]
 ----
 vserver cifs share show -share-name share_name
 ----

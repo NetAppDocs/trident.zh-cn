@@ -24,7 +24,7 @@ summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以
 
  https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubnetes StorageClass对象"^]将Trident标识为用于该类的配置程序、并指示Trident如何配置卷。例如：
 
-[listing]
+[source, YAML]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -38,7 +38,7 @@ parameters:
 ----
 要在AWS Bottler套 件上配置NFS3卷、请将所需添加 `mountOptions`到存储类：
 
-[listing]
+[source, YAML]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -63,21 +63,24 @@ mountOptions:
 .步骤
 . 这是一个Kubbernetes对象、因此请使用 `kubectl` 以在Kubernetes中创建。
 +
-[listing]
+[source, console]
 ----
 kubectl create -f storage-class-ontapnas.yaml
 ----
 . 现在，Kubernetes和Trident中都应显示一个*BASIC－Csi*存储类，并且Trident应已发现后端的池。
 +
-[listing]
+[source, console]
 ----
 kubectl get sc basic-csi
+----
+
+
+[listing]
+----
 NAME         PROVISIONER             AGE
 basic-csi    csi.trident.netapp.io   15h
 
 ----
-
-
 
 
 == 创建PVC
@@ -97,7 +100,7 @@ A https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersigentVolu
 ====
 此示例清单显示了与StorageClass关联的10gi的基本PV `basic-csi`。
 
-[listing]
+[source, YAML]
 ----
 apiVersion: v1
 kind: PersistentVolume
@@ -123,7 +126,7 @@ spec:
 .PVC、可接入rwx
 此示例显示了一个具有rwx访问权限的基本PVC，该PVC与名为的StorageClass关联 `basic-csi`。
 
-[listing]
+[source, YAML]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -140,9 +143,8 @@ spec:
 .采用NVMe/TCP的PVC
 此示例显示了具有rwx访问权限且与名为的StorageClass关联的NVMe/TCP的基本PVC `protection-gold`。
 
-[listing]
+[source, YAML]
 ----
----
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -163,13 +165,13 @@ storageClassName: protection-gold
 .步骤
 . 创建 PVC 。
 +
-[listing]
+[source, console]
 ----
 kubectl create -f pvc.yaml
 ----
 . 验证PVC状态。
 +
-[listing]
+[source, console]
 ----
 kubectl get pvc
 ----

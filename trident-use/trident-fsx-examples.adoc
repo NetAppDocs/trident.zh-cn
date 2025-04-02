@@ -110,10 +110,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 `""` 
 
 
-| `credentials` | 指定要存储在AWS机密管理器中的FSx SVM凭据。
-- `name`：密钥的Amazon资源名称(ARN)、其中包含SVM的凭据。
-- `type`：设置为 `awsarn`。
-请参见 link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["创建AWS机密管理器密钥"^] 有关详细信息 ... |  
+| `credentials` | 指定要存储在AWS密码管理器中的FSx SVM凭据。- `name`：密钥的Amazon资源名称(ARN)、其中包含SVM的凭据。- `type`：设置为 `awsarn`。有关详细信息、请参见 link:https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html["创建AWS机密管理器密钥"^] 。 |  
 |===
 
 
@@ -121,7 +118,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 
 您可以在初始配置后更改dataLIF、方法是运行以下命令、为新的后端JSON文件提供更新后的dataLIF。
 
-[listing]
+[source, console]
 ----
 tridentctl update backend <backend-name> -f <path-to-backend-json-file-with-updated-dataLIF>
 ----
@@ -183,7 +180,7 @@ NOTE: 如果一个或多个Pod连接了PVC、则必须先关闭所有相应的Po
 ====
 使用 `nasType`， `node-stage-secret-name`，和 `node-stage-secret-namespace`、您可以指定SMB卷并提供所需的Active Directory凭据。SMB卷支持使用 `ontap-nas` 仅限驱动程序。
 
-[listing]
+[source, console]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -197,10 +194,10 @@ parameters:
   csi.storage.k8s.io/node-stage-secret-namespace: "default"
 ----
 ====
-.使用密钥管理器配置AWS FSx for ONTAP
+.配置AWS FSx for ONTAP和"一切 管理器"
 [%collapsible]
 ====
-[listing]
+[source, console]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig

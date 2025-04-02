@@ -37,7 +37,6 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 ** 增加了对在非正常节点关闭情况下强制断开ONTAP NAS卷的支持。现在、新的ONTAP NAS卷将使用Trident管理的每个卷导出策略。为现有卷提供了一个升级路径、以便在取消发布时过渡到新的导出策略模型、而不会影响活动工作负载。
 ** 已添加cloneFronSnapshot标注。
 ** 增加了对跨命名空间卷克隆的支持。
-** 为Amazon FSx for NetApp ONTAP的基于EKS插件和Helm的安装添加了自动后端配置。
 ** 增强了iSCSI自我修复扫描修复功能、可按确切的主机、通道、目标和LUN ID启动重新扫描。
 ** 增加了对Kubnetes 1.32的支持。
 

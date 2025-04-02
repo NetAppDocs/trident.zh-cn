@@ -52,38 +52,16 @@ image::../media/aws-eks-03.png[AWS EKS 03]
 +
 image::../media/aws-eks-04.png[AWS EKS 04]
 
-. 根据需要配置任何可选配置设置，然后选择*Next*。
+. 遵循*附加配置模式*，并将*配置值*部分中的配置值参数设置为您在上一步(步骤1)中创建的ro-arn。
 +
-遵循*附加配置模式*，并将*配置值*部分中的配置值参数设置为您在上一步(步骤1)中创建的ro-arn (值格式应为：)。 `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`注意：如果您为冲突解决方法选择覆盖、则现有加载项的一个或多个设置可能会被Amazon EKS加载项设置覆盖。如果未启用此选项、并且与现有设置存在冲突、则操作将失败。您可以使用生成的错误消息来解决冲突。在选择此选项之前、请确保Amazon EKS附加组件未管理您需要自行管理的设置。
+值应采用以下格式： `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`。
+
++
+
+NOTE: 如果您为冲突解决方法选择覆盖、则可以使用Amazon EKS附加设置覆盖现有附加项的一个或多个设置。如果未启用此选项、并且与现有设置存在冲突、则操作将失败。您可以使用生成的错误消息来解决冲突。在选择此选项之前、请确保Amazon EKS附加组件未管理您需要自行管理的设置。
 
 +
 image::../media/aws-eks-06.png[AWS EKS 06]
-
-+
-** 从25.02版开始、Trident支持自动后端配置。安装Trident后、Trident将无缝创建后端和存储类。要启用自动后端配置，请添加 `ontapConfigurator`参数，并在安装期间在附加配置架构中 `cloudIdentity`指定 `authType`、、 `fsxnID`和和 `protocols`。
-+
-[listing]
-----
-"ontapConfigurator": {
-        "enabled": true,
-        "svms": [
-          {
-            "authType": "awsarn",
-            "fsxnID": "fs-0dfeaa884a68b1cab",
-            "protocols": [
-              "nfs",
-              "iscsi"
-            ]
-          }
-        ]
-      }}"
-
-----
-+
-
-NOTE: 要禁用自动后端配置，请升级Trident发行版并将*ontapConfigurator*设置为*false*。
-
-
 
 . 选择 * 创建 * 。
 . 验证此加载项的状态是否为_Active_.
