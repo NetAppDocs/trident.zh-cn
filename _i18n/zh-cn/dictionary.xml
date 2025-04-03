@@ -5480,4 +5480,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="fa1c8065dc4d2b862bfba881472c0aac" category="admonition">替换<block ref="2befb7722283d545949c6220c6548fe4" prefix=" " category="inline-code"></block>为上一步中创建的角色的ARN。</block>
   <block id="44308ffe82692c268b99d3caefca907e" category="list-text">检查FSxN Trident CSI加载项的当前版本。请替换<block ref="e2eb89f0ffaf521a0d2eeaffca04d117" prefix=" " category="inline-code"></block>为您的集群名称。</block>
   <block id="a1dc4a2136ed260b34021d64aaa6980a" category="list-text">将此加载项更新到上一步输出中的update下返回的版本。</block>
+  <block id="0ca34892a0e67f37b07d196ec272007d" category="list-text">NetApp不建议在所有ONTAP驱动程序中使用FlexVol自动增长、但ONTAP SAN除外。解决方法是、Trident支持使用快照预留并相应地扩展FlexVol卷。</block>
 </blocks>

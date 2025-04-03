@@ -105,6 +105,7 @@ Rox和rwx在文件系统卷模式下不可用。
 * 使用 ... `ontap-san-economy` 只有当永久性卷使用量计数预期高于时、才会显示此值 link:https://docs.netapp.com/us-en/ontap/volumes/storage-limits-reference.html["支持的ONTAP卷限制"^]。
 * 使用 ... `ontap-nas-economy` 只有当永久性卷使用量计数预期高于时、才会显示此值 link:https://docs.netapp.com/us-en/ontap/volumes/storage-limits-reference.html["支持的ONTAP卷限制"^] 和 `ontap-san-economy` 无法使用驱动程序。
 * 请勿使用 `ontap-nas-economy` 预测数据保护、灾难恢复或移动性的需求。
+* NetApp不建议在所有ONTAP驱动程序中使用FlexVol自动增长、但ONTAP SAN除外。解决方法是、Trident支持使用快照预留并相应地扩展FlexVol卷。
 
 
 ====
