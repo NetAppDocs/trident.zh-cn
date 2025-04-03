@@ -33,9 +33,11 @@ link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nvm
 NOTE: NetApp建议对NVMe/TCP使用ONTAP 9.12或更高版本。
 
 .基于FC的SCSI工具
+请参见link:https://docs.netapp.com/us-en/ontap/san-config/configure-fc-nvme-hosts-ha-pairs-reference.html["配置FC和FC-NVMe SAN主机的方式()"]有关配置FC和FC-NVMe SAN主机的详细信息、。
+
 link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#install-the-fc-tools["安装FC工具"]如果您使用的是 `ontap-san`sanType `fcp` (基于FC的SCSI)。
 
-有关详细信息、请参见 link:https://docs.netapp.com/us-en/ontap/san-config/configure-fc-nvme-hosts-ha-pairs-reference.html["配置FC和FC-NVMe SAN主机的方式()"] 。
+*注意事项*：* OpenShift和KubeVirt环境支持基于FC的SCSI。* Docker不支持基于FC的SCSI。* iSCSI自我修复不适用于基于FC的SCSI。
 
 
 
@@ -165,7 +167,7 @@ sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
 +
 
-NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults `.
+NOTE: 确保 `/etc/multipath.conf`包含 `find_multipaths no`在下 `defaults`。
 
 . 确保 `iscsid` 和 `multipathd` 正在运行：
 +
@@ -217,7 +219,7 @@ sudo service multipath-tools restart
 ----
 +
 
-NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults `.
+NOTE: 确保 `/etc/multipath.conf`包含 `find_multipaths no`在下 `defaults`。
 
 . 确保已启用并运行 `open-iscsi` 和 `multipath-tools` ：
 +
@@ -386,7 +388,7 @@ sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
 +
 
-NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults `.
+NOTE: 确保 `/etc/multipath.conf`包含 `find_multipaths no`在下 `defaults`。
 
 . 确保 `multipathd`正在运行：
 +
@@ -420,7 +422,7 @@ sudo service multipath-tools restart
 ----
 +
 
-NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults `.
+NOTE: 确保 `/etc/multipath.conf`包含 `find_multipaths no`在下 `defaults`。
 
 . 确保 `multipath-tools`已启用且正在运行：
 +
