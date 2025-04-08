@@ -15,6 +15,9 @@ summary: 使用此处提供的指针解决您在安装和使用Trident时可能�
 使用此处提供的指针解决您在安装和使用Trident时可能遇到的问题。
 
 
+NOTE: 要获得有关Trident的帮助、请使用创建支持包 `tridentctl logs -a -n trident`并将其发送给NetApp支持部门。
+
+
 
 == 常规故障排除
 

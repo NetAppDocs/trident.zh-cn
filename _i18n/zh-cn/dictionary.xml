@@ -5483,4 +5483,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="67ed8fb72dc668ae9c7c1114df8f02ed" category="paragraph">请参见<block ref="ee9d56c9130a1d3814c95b35eb7c82a4" category="inline-link-macro-rx"></block>有关配置FC和FC-NVMe SAN主机的详细信息、。</block>
   <block id="1b9fede0aad66dda6d8b01b66280fff4" category="paragraph">*注意事项*：* OpenShift和KubeVirt环境支持基于FC的SCSI。* Docker不支持基于FC的SCSI。* iSCSI自我修复不适用于基于FC的SCSI。</block>
   <block id="5e6c49c79d451ce5d17472c430c69454" category="admonition">确保<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>包含<block ref="2a81b35478c9ccb4f9392dcc40edb8e6" prefix=" " category="inline-code"></block>在下<block ref="a4a918a45181164207929d52aec36aec" prefix=" " category="inline-code"></block>。</block>
+  <block id="ce3d3f85c4d1d4dd7826863d9428b4e5" category="admonition">要获得有关Trident的帮助、请使用创建支持包<block ref="1d41e2024c69110ad6054ffc785ca8e0" prefix=" " category="inline-code"></block>并将其发送给NetApp支持部门。</block>
 </blocks>
