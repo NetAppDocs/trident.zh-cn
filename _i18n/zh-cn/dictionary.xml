@@ -5417,7 +5417,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">为两个卷模式(文件和卷模式：块(原始设备)存储)增加了对KubeVirt / OpenShift虚拟化VM的备份和恢复支持。此支持与所有Trident驱动程序兼容、并可增强使用NetApp SnapMirror和Trident Protect复制存储时的现有保护功能。</block>
   <block id="fc1d748db1b5b488ce7af7d17ea15d55" category="inline-link-macro">软件版本支持</block>
   <block id="ee19283e867cf4e5840d2811a74b89e5" category="list-text">受NetApp有限支持的内部FAS、AFF或ASA R2集群版本。请参阅。 <block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block></block>
-  <block id="8456fc955091af12a31da6fc68123005" category="list-text">您可以将NVE加密平面设置为<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block>、以创建启用了NAE的卷。</block>
   <block id="1906137ea73af1894fec1becb00e0aee" category="summary">您可以找到一些出色的NetApp Trident和Trident Protect博客。</block>
   <block id="0db80d8cadbd011f12ade006191e47b0" category="doc">Trident和Trident保护博客</block>
   <block id="c5497cf98d8e6141ba38e1421502c2d4" category="paragraph">您可以在以下位置找到一些出色的NetApp Trident和Trident Protect博客：</block>
@@ -5484,4 +5483,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="1b9fede0aad66dda6d8b01b66280fff4" category="paragraph">*注意事项*：* OpenShift和KubeVirt环境支持基于FC的SCSI。* Docker不支持基于FC的SCSI。* iSCSI自我修复不适用于基于FC的SCSI。</block>
   <block id="5e6c49c79d451ce5d17472c430c69454" category="admonition">确保<block ref="dd5ff67ba72768d33f75e645aa2b8e56" prefix=" " category="inline-code"></block>包含<block ref="2a81b35478c9ccb4f9392dcc40edb8e6" prefix=" " category="inline-code"></block>在下<block ref="a4a918a45181164207929d52aec36aec" prefix=" " category="inline-code"></block>。</block>
   <block id="ce3d3f85c4d1d4dd7826863d9428b4e5" category="admonition">要获得有关Trident的帮助、请使用创建支持包<block ref="1d41e2024c69110ad6054ffc785ca8e0" prefix=" " category="inline-code"></block>并将其发送给NetApp支持部门。</block>
+  <block id="8ef3114bf1395e8f04d7b3404982499e" category="list-text">您可以将NVE加密标志设置为<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block>、以创建启用了NAE的卷。</block>
 </blocks>
