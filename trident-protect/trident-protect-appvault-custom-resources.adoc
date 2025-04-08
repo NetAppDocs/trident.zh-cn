@@ -16,11 +16,13 @@ summary: '用于Trident Protect的存储分段自定义资源(CR)称为AppVault�
 [role="lead"]
 用于Trident Protect的存储分段自定义资源(CR)称为AppVault。AppVault对象是存储分段的声明性Kubarnetes工作流表示形式。AppVault CR包含在备份、快照、还原操作和SnapMirror复制等保护操作中使用存储分段所需的配置。只有管理员才能创建AppVault。
 
+在对应用程序执行数据保护操作时、您需要手动或使用命令行创建AppVault CR、并且AppVault CR需要驻留在安装了Trident Protect的集群上。AppVault CR特定于您的环境；您可以使用此页面上的示例作为创建AppVault CRS的指南。
+
 
 
 == 配置AppVault身份验证和密码
 
-在创建AppVault对象之前、您需要确保所选的AppVault和数据移动工具可以向提供程序和任何相关资源进行身份验证。
+在创建AppVault CR之前、您需要确保所选的AppVault和数据移动工具可以向提供程序和任何相关资源进行身份验证。
 
 
 

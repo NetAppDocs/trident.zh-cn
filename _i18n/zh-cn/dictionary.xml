@@ -5243,7 +5243,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="dd298b4e9bfcd54db2048c92819679ad" category="section-title">还原大型文件的Restic备份可能会失败</block>
   <block id="beca1b1ae9141eb4cf9a371088911e0f" category="paragraph">从使用Restic创建的Amazon S3备份还原30 GB或更大的文件时、还原操作可能会失败。解决方法是、使用Koria作为数据移动工具备份数据(Koria是备份的默认数据移动工具)。有关说明、请参见<block ref="1e108e5c10b0ba51ea4cfaf507765efb" category="inline-link-rx"></block> 。</block>
   <block id="7fc5875d06887df5109a87a0ada90eca" category="section-title">配置AppVault身份验证和密码</block>
-  <block id="27d0259b1ba2ddf3e1540b7e284626ca" category="paragraph">在创建AppVault对象之前、您需要确保所选的AppVault和数据移动工具可以向提供程序和任何相关资源进行身份验证。</block>
   <block id="8e2c4d33f50c044b257a84cd65ff1c79" category="section-title">数据移动工具存储库密码</block>
   <block id="12ae6793b05f84758a85b289757c4f34" category="list-text">使用Trident Protect命令行界面创建AppVault对象时、您可以使用<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block>参数指定密钥。</block>
   <block id="e64d157c7a9e337d525d51f62d9d0809" category="section-title">创建数据移动工具存储库密码密钥</block>
@@ -5484,4 +5483,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="ce3d3f85c4d1d4dd7826863d9428b4e5" category="admonition">要获得有关Trident的帮助、请使用创建支持包<block ref="1d41e2024c69110ad6054ffc785ca8e0" prefix=" " category="inline-code"></block>并将其发送给NetApp支持部门。</block>
   <block id="8ef3114bf1395e8f04d7b3404982499e" category="list-text">您可以将NVE加密标志设置为<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block>、以创建启用了NAE的卷。</block>
   <block id="351e2b20bd9ea864b69cd832f3a4a5df" category="list-text">如果未在后端启用NAE、则在Trident中配置的任何卷都将启用NVE、除非在后端配置中NVE加密标志设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>(默认值)。</block>
+  <block id="39fb9551310e8e28d64d0e2b94913f7a" category="paragraph">在对应用程序执行数据保护操作时、您需要手动或使用命令行创建AppVault CR、并且AppVault CR需要驻留在安装了Trident Protect的集群上。AppVault CR特定于您的环境；您可以使用此页面上的示例作为创建AppVault CRS的指南。</block>
+  <block id="8b70987187655cedeb971520a2170b2d" category="paragraph">在创建AppVault CR之前、您需要确保所选的AppVault和数据移动工具可以向提供程序和任何相关资源进行身份验证。</block>
 </blocks>
