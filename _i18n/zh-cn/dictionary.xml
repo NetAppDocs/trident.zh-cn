@@ -3142,7 +3142,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="b9a641d903e611a87a5e68ac7fdb0b84" category="list-text">Trident AutoSupport 不会收集或传输个人身份信息（ PiII ）或个人信息。它附带的<block ref="173a360b412944768c2ab13e6c8fd1c7" category="inline-link-rx"></block> 不适用于三端存储容器映像本身。您可以详细了解NetApp对数据安全和信任的承诺<block ref="d3cc55401bc8303e01c6b0c43ba0733f" category="inline-link-rx"></block>。</block>
   <block id="5ff83dbc70e496ea22b38ea61bb69f05" category="list-text">观看上的演示 <block ref="c27441bbbe62adf51ae6ecec41fde8bd" category="inline-link-macro-rx"></block>。</block>
   <block id="533a7baf9026dddae6baef47ea605b08" category="doc">部署示例应用程序</block>
-  <block id="fae865e1123e24de7eca1790ec73dc32" category="paragraph">部署示例应用程序。</block>
   <block id="c09ee63e688125cf9517a66bb5a0a5a6" category="paragraph">以下示例显示了将PVC连接到POD的基本配置：*基本配置*：</block>
   <block id="f477db05998ad8420119de646e2ff290" category="doc">创建IAM角色和AWS机密</block>
   <block id="98c3c9acd444d11890d48438db3c165e" category="paragraph">您可以通过作为AWS IAM角色进行身份验证(而不是提供显式AWS凭据)来配置Kubbernetes Pod以访问AWS资源。</block>
@@ -5494,4 +5493,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="9355f48a9876fcaefe0351294df4e05c" category="list-text">使用正确的值填充文件后<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="1bd9850ddb901f0e741293ec737c5de6" category="list-text">创建备份计划、将括号中的值替换为您环境中的信息。例如：</block>
   <block id="ab5807fb06fd654f730a4ed5a02bb950" category="paragraph">您可以将此标志设置为<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block>以实现持续完整备份、也可以<block ref="61df7cc86eb24ab1300f0e74e74bb50c" prefix=" " category="inline-code"></block>根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。例如、使用<block ref="d416cce9d6bcb838c8958b9fbb84dffa" prefix=" " category="inline-code"></block>计划在星期一和星期四进行完整备份。</block>
+  <block id="a346cffc17b34fc56f3020d8b33d30c3" category="paragraph">创建存储类和PVC后、您可以将PV挂载到Pod。本节列出了将PV连接到POD的示例命令和配置。</block>
 </blocks>

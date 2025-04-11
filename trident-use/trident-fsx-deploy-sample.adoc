@@ -12,7 +12,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 
 
 [role="lead"]
-部署示例应用程序。
+创建存储类和PVC后、您可以将PV挂载到Pod。本节列出了将PV连接到POD的示例命令和配置。
 
 .步骤
 . 将卷挂载到Pod中。
