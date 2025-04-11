@@ -53,7 +53,7 @@ IMPORTANT: 在私有存储库中安装Trident时、如果 `imageRegistry`使用�
 +
 [listing]
 ----
-helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
+helm repo add netapp-trident https://artifacthub.io/packages/helm/netapp-trident/trident-operator
 ----
 . 使用 `helm install` 并指定部署和映像注册表位置的名称。您的 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident和CSI映像"] 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。在示例中、 `100.2502.0`是要安装的Trident版本。
 +
