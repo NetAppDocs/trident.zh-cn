@@ -118,7 +118,7 @@ Kubernetes `StorageClass` 对象在 `PersistentVolumeClass` 中按名称指定�
 
 使用 Trident 的 Kubernetes `StorageClass` 对象如下所示：
 
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -126,8 +126,7 @@ metadata:
   name: <Name>
 provisioner: csi.trident.netapp.io
 mountOptions: <Mount Options>
-parameters:
-  <Trident Parameters>
+parameters: <Trident Parameters>
 allowVolumeExpansion: true
 volumeBindingMode: Immediate
 ----
@@ -245,7 +244,7 @@ Kubernetes `VolumeSnapshotClass` 对象类似于 `StorageClasses` 。它们有�
 
 要创建快照，管理员应定义 `VolumeSnapshotClass` 。此时将使用以下定义创建卷快照类：
 
-[listing]
+[source, yaml]
 ----
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshotClass
@@ -452,7 +451,7 @@ Trident守护进程使用优先级类(KubeNet中可用的最高优先级类)、�
 
 以下是一个`ResourceQuota`对象的示例、该对象会优先处理Trident子集。
 
-[listing]
+[source, yaml]
 ----
 apiVersion: <version>
 kind: ResourceQuota
@@ -462,10 +461,11 @@ metadata:
     app: node.csi.trident.netapp.io
 spec:
   scopeSelector:
-     matchExpressions:
-       - operator : In
-         scopeName: PriorityClass
-         values: ["system-node-critical"]
+    matchExpressions:
+      - operator: In
+        scopeName: PriorityClass
+        values:
+          - system-node-critical
 ----
 有关资源配额的详细信息、请参见 link:https://kubernetes.io/docs/concepts/policy/resource-quotas/["Kubernetes：资源配额"^]。
 

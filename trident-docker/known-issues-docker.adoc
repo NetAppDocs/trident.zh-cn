@@ -21,19 +21,19 @@ summary: 查找有关将Trident与Docker结合使用时的已知问题的信息�
 .临时解决策
 . 禁用插件。
 +
-[listing]
+[source, console]
 ----
 docker plugin disable -f netapp:latest
 ----
 . 删除此插件。
 +
-[listing]
+[source, console]
 ----
 docker plugin rm -f netapp:latest
 ----
 . 通过提供额外的 `config` 参数来重新安装插件。
 +
-[listing]
+[source, console]
 ----
 docker plugin install netapp/trident-plugin:20.10 --alias netapp --grant-all-permissions config=config.json
 ----
@@ -55,7 +55,7 @@ NOTE: 这是 Docker 客户端的限制。客户端会将单个字符名称解释
 * 卷插件(包括Trident)必须在Swarm集群中的每个节点上单独运行。由于ONTAP的工作方式以及和 `ontap-san`驱动程序的工作方式 `ontap-nas`、它们是唯一能够在这些限制下运行的驱动程序。
 
 
-其余驱动程序可能会受到诸如争用情况等问题的影响，这些问题可能会导致为单个请求创建大量卷，而无需明确的 " 赢家 " ；例如， Element 具有一项功能，允许卷具有相同的名称，但 ID 不同。
+其余驱动程序会受到争用条件等问题的影响、这些条件可能会导致为单个请求创建大量卷、而没有明确的"获奖者"；例如、Element的一项功能允许卷具有相同的名称但ID不同。
 
 NetApp 已向 Docker 团队提供反馈，但没有任何迹象表明将来可以采用。
 

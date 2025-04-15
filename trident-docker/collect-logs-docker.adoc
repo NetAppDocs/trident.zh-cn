@@ -21,9 +21,13 @@ summary: 您可以收集日志以帮助进行故障排除。收集日志的方�
 .步骤
 . 如果您正在使用建议的托管插件方法(即使用命令)运行Trident、请按如下所示查看这些插件 `docker plugin`：
 +
-[listing]
+[source, console]
 ----
 docker plugin ls
+----
++
+[listing]
+----
 ID                  NAME                DESCRIPTION                          ENABLED
 4fb97d2b956b        netapp:latest       nDVP - NetApp Docker Volume Plugin   false
 journalctl -u docker | grep 4fb97d2b956b
@@ -33,7 +37,7 @@ journalctl -u docker | grep 4fb97d2b956b
 
 . 要启用调试日志记录，请安装启用了调试日志记录的插件：
 +
-[listing]
+[source, console]
 ----
 docker plugin install netapp/trident-plugin:<version> --alias <alias> debug=true
 ----
@@ -41,10 +45,18 @@ docker plugin install netapp/trident-plugin:<version> --alias <alias> debug=true
 或者，在已安装插件的情况下启用调试日志记录：
 
 +
-[listing]
+[source, console]
 ----
 docker plugin disable <plugin>
+----
++
+[source, console]
+----
 docker plugin set <plugin> debug=true
+----
++
+[source, console]
+----
 docker plugin enable <plugin>
 ----
 . 如果您在主机上运行二进制文件本身、则主机的中会显示日志 `/var/log/netappdvp` 目录。要启用调试日志记录、请指定 `-debug` 运行插件时。

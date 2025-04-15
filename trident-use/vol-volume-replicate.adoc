@@ -54,7 +54,7 @@ IMPORTANT: 确保两个ONTAP集群之间的复制关系中使用的SVM名称是�
 .. 使用参数创建StorageClass对象 `trident.netapp.io/replication: true` 。
 +
 .示例
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -69,7 +69,7 @@ parameters:
 .. 使用先前创建的StorageClass创建PVC。
 +
 .示例
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -86,7 +86,7 @@ spec:
 .. 使用本地信息创建镜像关系CR。
 +
 .示例
-[listing]
+[source, yaml]
 ----
 kind: TridentMirrorRelationship
 apiVersion: trident.netapp.io/v1
@@ -107,7 +107,7 @@ Trident会提取卷的内部信息以及卷的当前数据保护(DP)状态、然
 kubectl get tmr csi-nas
 ----
 +
-[listing]
+[source, yaml]
 ----
 kind: TridentMirrorRelationship
 apiVersion: trident.netapp.io/v1
@@ -132,7 +132,7 @@ status:
 .. 使用trident.netapp.io/replication: true参数创建StorageClass。
 +
 .示例
-[listing]
+[source, yaml]
 ----
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -145,7 +145,7 @@ parameters:
 .. 使用目标和源信息创建镜像关系CR。
 +
 .示例
-[listing]
+[source, yaml]
 ----
 kind: TridentMirrorRelationship
 apiVersion: trident.netapp.io/v1
@@ -163,7 +163,7 @@ Trident将使用配置的关系策略名称(或ONTAP的默认策略)创建SnapMi
 .. 使用先前创建的StorageClass创建一个PVC以用作二级(SnapMirror目标)。
 +
 .示例
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -222,7 +222,7 @@ Trident将检查是否存在TridentMirorRelationship CRD、如果此关系不存
 . 在主Kubnetes集群上、创建SnapshotInfo CR以获取内部详细信息。
 +
 .示例
-[listing]
+[source, yaml]
 ----
 kind: SnapshotInfo
 apiVersion: trident.netapp.io/v1
@@ -305,7 +305,7 @@ Trident会检查是否存在复制的PVC、并在尝试删除卷之前释放复�
 您可以使用CRD执行SnapMirror更新、而无需Trident直接连接到ONTAP集群。请参阅以下TridentAction镜像 更新的示例格式：
 
 .示例
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentActionMirrorUpdate

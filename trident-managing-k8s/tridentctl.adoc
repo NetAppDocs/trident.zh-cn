@@ -260,14 +260,14 @@ WARNING: 可以将 Trident REST 接口配置为仅以 127.0.0.1 （对于 IPv4 �
 [listing]
 ----
 {
-    "version": 1,
-    "storageDriverName": "ontap-nas",
-    "managementLIF": "<redacted>",
-    "svm": "nas-svm",
-    "backendName": "customBackend",
-    "username": "<redacted>",
-    "password": "<redacted>",
-    "userState": "suspended",
+  "version": 1,
+  "storageDriverName": "ontap-nas",
+  "managementLIF": "<redacted>",
+  "svm": "nas-svm",
+  "backendName": "customBackend",
+  "username": "<redacted>",
+  "password": "<redacted>",
+  "userState": "suspended"
 }
 
 ----
@@ -276,7 +276,7 @@ WARNING: 可以将 Trident REST 接口配置为仅以 127.0.0.1 （对于 IPv4 �
 --
 您可以在使用命令应用tbc后对其进行编辑 `kubectl edit <tbc-name> -n <namespace>` 。以下示例使用选项将后端状态更新为暂停 `userState: suspended` ：
 
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
@@ -288,7 +288,7 @@ spec:
   storageDriverName: ontap-nas
   managementLIF: <redacted>
   svm: nas-svm
-userState: suspended
+  userState: suspended
   credentials:
     name: backend-tbc-ontap-nas-secret
 ----

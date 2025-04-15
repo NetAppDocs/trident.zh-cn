@@ -147,10 +147,10 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 | `storageDriverName` | 存储驱动程序的名称 | `ontap-nas`， `ontap-nas-economy`， `ontap-nas-flexgroup`， `ontap-san`， `ontap-san-economy` 
 
 
-| `backendName` | 自定义名称或存储后端 | 驱动程序名称 + "_" + dataLIF 
+| `backendName` | 自定义名称或存储后端 | 驱动程序名称+"_"+ dataLIF 
 
 
-| `m年` 月 日 | 集群或SVM管理LIF的IP地址可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义、例如：[28e8：d9fb：a825：b7bf：69a8：d02f：9e7b：3555]。如果在字段下 `aws`提供 `fsxFilesystemID`、则无需提供、 `managementLIF`因为Trident会从AWS检索SVM `managementLIF`信息。因此、您必须提供SVM下某个用户的凭据(例如vsadmin)、并且该用户必须具有此 `vsadmin` 角色。 | "10.0.0.1 " ， "2001 ： 1234 ： abcd ：：： fefe] " 
+| `m年` 月 日 | 集群或SVM管理LIF的IP地址可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义、例如：[28e8：d9fb：a825：b7bf：69a8：d02f：9e7b：3555]。如果在字段下 `aws`提供 `fsxFilesystemID`、则无需提供、 `managementLIF`因为Trident会从AWS检索SVM `managementLIF`信息。因此、您必须提供SVM下某个用户的凭据(例如vsadmin)、并且该用户必须具有此 `vsadmin` 角色。 | "10.0.0.1"、"[2001：1234：abc：：：fefe]" 
 
 
 | `dataLIF` | 协议 LIF 的 IP 地址。* ONTAP NAS驱动程序*：NetApp建议指定dataLIF。如果未提供此参数、则Trident将从SVM提取数据LIF。您可以指定要用于NFS挂载操作的完全限定域名(FQDN)、以便创建轮叫DNS来在多个dataLIF之间进行负载平衡。可以在初始设置后更改。请参阅 。* ONTAP SAN驱动程序*：不为iSCSI指定。Trident使用ONTAP选择性LUN映射来发现建立多路径会话所需的iSCI LI。如果明确定义了dataLIF、则会生成警告。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义、例如：[28e8：d9fb：a825：b7bf：69a8：d02f：9e7b：3555]。 |  
@@ -159,7 +159,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 | `autosExportPolicy` | 启用自动创建和更新导出策略[布尔值]。使用 `autoExportPolicy`和 `autoExportCIDRs`选项、Trident可以自动管理导出策略。 | `false` 
 
 
-| `autosExportCIDR` | 用于筛选KubeNet节点IP的CIDR列表(启用时)。 `autoExportPolicy`使用 `autoExportPolicy`和 `autoExportCIDRs`选项、Trident可以自动管理导出策略。 | "["0.0.0.0/0 "、"：：/0 "]" 
+| `autosExportCIDR` | 用于筛选KubeNet节点IP的CIDR列表(启用时)。 `autoExportPolicy`使用 `autoExportPolicy`和 `autoExportCIDRs`选项、Trident可以自动管理导出策略。 | "["0.0.0.0/0、"：：：/0"]" 
 
 
 | `标签` | 要应用于卷的一组任意 JSON 格式的标签 | "" 
@@ -189,13 +189,15 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 | `limitAggregateUsage` | *请勿指定Amazon FSx for NetApp ONTAP。*提供的和 `vsadmin`不包含使用Trident检索聚合使用情况并对其进行限制所需的 `fsxadmin`权限。 | 请勿使用。 
 
 
-| `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为qtrees和FlexVol volume管理的卷的大小上限、并且此选项允许自定义每个LUN `qtreesPerFlexvol`的qtrees的最大数量 | " （默认情况下不强制实施） 
+| `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为qtrees和FlexVol volume管理的卷的大小上限、并且此选项允许自定义每个LUN `qtreesPerFlexvol`的qtrees的最大数量 | "" （默认情况下不强制实施） 
 
 
 | `lunsPerFlexvol` | 每个FlexVol volume的最大LUN数必须在[50、200]范围内。仅SAN。 | "`100`" 
 
 
-| `debugTraceFlags` | 故障排除时要使用的调试标志。例如、｛"api"：false、"method "：true｝不使用 `debugTraceFlags` 除非您正在进行故障排除并需要详细的日志转储。 | 空 
+| `debugTraceFlags` | 故障排除时要使用的调试标志。例如、｛"api"：false、"METHO"：true｝
+
+请勿使用 `debugTraceFlags` 除非您正在进行故障排除并需要详细的日志转储。 | 空 
 
 
 | `nfsMountOptions` | NFS挂载选项的逗号分隔列表。通常会在存储类中为Kubnetes-永久性 卷指定挂载选项、但如果在存储类中未指定挂载选项、则Trident将回退到使用存储后端配置文件中指定的挂载选项。如果在存储类或配置文件中未指定挂载选项、则Trident不会在关联的永久性卷上设置任何挂载选项。 | "" 
@@ -242,19 +244,19 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 | `spaceAllocation` | LUN 的空间分配 | `true` 
 
 
-| `s页面预留` | 空间预留模式； " 无 " （精简）或 " 卷 " （厚） | `无` 
+| `s页面预留` | 空间预留模式；"无"(精简)或"卷"(厚) | `无` 
 
 
 | `sSnapshot 策略` | 要使用的 Snapshot 策略 | `无` 
 
 
-| `qosPolicy` | 要为创建的卷分配的 QoS 策略组。选择每个存储池或后端的qosPolicy或adaptiveQosPolicy之一。将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。 | " 
+| `qosPolicy` | 要为创建的卷分配的 QoS 策略组。选择每个存储池或后端的qosPolicy或adaptiveQosPolicy之一。将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。 | "" 
 
 
-| `adaptiveQosPolicy` | 要为创建的卷分配的自适应 QoS 策略组。选择每个存储池或后端的qosPolicy或adaptiveQosPolicy之一。不受 ontap-nas-economy. | " 
+| `adaptiveQosPolicy` | 要为创建的卷分配的自适应 QoS 策略组。选择每个存储池或后端的qosPolicy或adaptiveQosPolicy之一。不受 ontap-nas-economy. | "" 
 
 
-| `sSnapshot 预留` | 为快照预留的卷百分比为 "0" | 条件 `snapshotPolicy` 为 `none`， `else` " 
+| `sSnapshot 预留` | 为快照"0"预留的卷百分比 | 如果 `snapshotPolicy`为 `none`， `else`“” 
 
 
 | `splitOnClone` | 创建克隆时，从其父级拆分该克隆 | `false` 

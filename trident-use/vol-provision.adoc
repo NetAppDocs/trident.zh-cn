@@ -84,7 +84,7 @@ kubectl delete pod pv-pod
 .PVC、带读取器
 此示例显示了一个具有读取权限的基本PVC、该PVC与名为的StorageClass关联 `basic-csi`。
 
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -101,7 +101,7 @@ spec:
 .采用NVMe/TCP的PVC
 此示例显示了一个与名为的StorageClass关联的具有读取权限的NVMe/TCP的基本PVC `protection-gold`。
 
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -122,7 +122,7 @@ storageClassName: protection-gold
 这些示例显示了将PVC连接到POD的基本配置。
 
 .基本配置
-[listing]
+[source, yaml]
 ----
 kind: Pod
 apiVersion: v1
@@ -144,7 +144,7 @@ spec:
           name: storage
 ----
 .基本NVMe/TCP配置
-[listing]
+[source, yaml]
 ----
 apiVersion: v1
 kind: Pod

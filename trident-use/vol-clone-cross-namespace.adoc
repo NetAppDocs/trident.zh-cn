@@ -51,7 +51,7 @@ summary: 使用Trident、您可以使用同一个K8s集群中不同命名空间�
 .步骤
 . *Source命名空间owner:*(`pvc1`在源命名空间中创建PVC(`namespace1`)，用于(`namespace2`使用标注授予与目标命名空间共享的权限。 `cloneToNamespace`
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -83,7 +83,7 @@ Trident将创建PV及其后端NFS存储卷。
 . *Cluster admin:*创建自定义角色和kubeconfig,以向目标命名空间所有者授予在目标命名空间中创建Trident卷 参考CR的权限(`namespace2`)。
 . *目标命名空间所有者：*在目标命名空间中创建引用源命名空间的TridentVolumeReference CR `pvc1`。
 +
-[listing]
+[source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
 kind: TridentVolumeReference
@@ -96,7 +96,7 @@ spec:
 ----
 . *Destination命名空间owner:*(`pvc2`在目标命名空间中创建PVC(`namespace2`)，使用 `cloneFromPVC`或 `cloneFromSnapshot`和 `cloneFromNamespace`标注指定源PVC。
 +
-[listing]
+[source, yaml]
 ----
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -114,11 +114,11 @@ spec:
     requests:
       storage: 100Gi
 ----
-+
-=限制
-
-+
-** 对于使用PV-NAS经济型驱动程序配置的ONTAP、不支持只读克隆。
 
 
+
+
+== 限制
+
+* 对于使用PV-NAS经济型驱动程序配置的ONTAP、不支持只读克隆。
 

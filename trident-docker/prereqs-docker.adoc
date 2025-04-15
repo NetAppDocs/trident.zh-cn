@@ -21,7 +21,7 @@ summary: 您必须先在主机上安装和配置必要的协议前提条件、�
 * 验证您的部署是否满足所有要求 link:../trident-get-started/requirements.html["要求"]。
 * 验证您是否安装了受支持的 Docker 版本。如果您的 Docker 版本已过时， https://docs.docker.com/engine/install/["安装或更新它"^]。
 +
-[listing]
+[source, console]
 ----
 docker --version
 ----
@@ -38,14 +38,14 @@ docker --version
 ====
 .RHEL 8+
 --
-[listing]
+[source, console]
 ----
 sudo yum install -y nfs-utils
 ----
 --
 .Ubuntu
 --
-[listing]
+[source, console]
 ----
 sudo apt-get install -y nfs-common
 ----
@@ -66,25 +66,25 @@ WARNING: 安装NFS工具后重新启动工作节点、以防止在将卷连接�
 --
 . 安装以下系统软件包：
 +
-[listing]
+[source, console]
 ----
 sudo yum install -y lsscsi iscsi-initiator-utils sg3_utils device-mapper-multipath
 ----
 . 检查 iscsi-initiator-utils 版本是否为 6.2.0.877-2.el7 或更高版本：
 +
-[listing]
+[source, console]
 ----
 rpm -q iscsi-initiator-utils
 ----
 . 将扫描设置为手动：
 +
-[listing]
+[source, console]
 ----
 sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
 ----
 . 启用多路径：
 +
-[listing]
+[source, console]
 ----
 sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
@@ -94,13 +94,13 @@ NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults 
 
 . 确保 `iscsid` 和 `multipathd` 正在运行：
 +
-[listing]
+[source, console]
 ----
 sudo systemctl enable --now iscsid multipathd
 ----
 . 启用并启动 `iSCSI` ：
 +
-[listing]
+[source, console]
 ----
 sudo systemctl enable --now iscsi
 ----
@@ -111,25 +111,25 @@ sudo systemctl enable --now iscsi
 --
 . 安装以下系统软件包：
 +
-[listing]
+[source, console]
 ----
 sudo apt-get install -y open-iscsi lsscsi sg3-utils multipath-tools scsitools
 ----
 . 检查 open-iscsi 版本是否为 2.0.877-5ubuntu2.10 或更高版本（对于双子系统）或 2.0.877-7.1ubuntu6.1 或更高版本（对于 Focal ）：
 +
-[listing]
+[source, console]
 ----
 dpkg -l open-iscsi
 ----
 . 将扫描设置为手动：
 +
-[listing]
+[source, console]
 ----
 sudo sed -i 's/^\(node.session.scan\).*/\1 = manual/' /etc/iscsi/iscsid.conf
 ----
 . 启用多路径：
 +
-[listing]
+[source, console]
 ----
 sudo tee /etc/multipath.conf <<-EOF
 defaults {
@@ -146,7 +146,7 @@ NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults 
 
 . 确保已启用并运行 `open-iscsi` 和 `multipath-tools` ：
 +
-[listing]
+[source, console]
 ----
 sudo systemctl status multipath-tools
 sudo systemctl enable --now open-iscsi.service
@@ -173,7 +173,7 @@ sudo systemctl status open-iscsi
 ====
 .RHEL 9
 --
-[listing]
+[source, console]
 ----
 sudo yum install nvme-cli
 sudo yum install linux-modules-extra-$(uname -r)
@@ -182,7 +182,7 @@ sudo modprobe nvme-tcp
 --
 .Ubuntu
 --
-[listing]
+[source, console]
 ----
 sudo apt install nvme-cli
 sudo apt -y install linux-modules-extra-$(uname -r)
@@ -205,13 +205,13 @@ sudo modprobe nvme-tcp
 --
 . 安装以下系统软件包：
 +
-[listing]
+[source, console]
 ----
 sudo yum install -y lsscsi device-mapper-multipath
 ----
 . 启用多路径：
 +
-[listing]
+[source, console]
 ----
 sudo mpathconf --enable --with_multipathd y --find_multipaths n
 ----
@@ -221,7 +221,7 @@ NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults 
 
 . 确保 `multipathd`正在运行：
 +
-[listing]
+[source, console]
 ----
 sudo systemctl enable --now multipathd
 ----
@@ -232,13 +232,13 @@ sudo systemctl enable --now multipathd
 --
 . 安装以下系统软件包：
 +
-[listing]
+[source, console]
 ----
 sudo apt-get install -y lsscsi sg3-utils multipath-tools scsitools
 ----
 . 启用多路径：
 +
-[listing]
+[source, console]
 ----
 sudo tee /etc/multipath.conf <<-EOF
 defaults {
@@ -255,7 +255,7 @@ NOTE: 确保 `detc/multipath.conf` contains `find_multipaths no` under` efaults 
 
 . 确保 `multipath-tools`已启用且正在运行：
 +
-[listing]
+[source, console]
 ----
 sudo systemctl status multipath-tools
 ----
