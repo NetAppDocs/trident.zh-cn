@@ -4459,7 +4459,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="cc37bc9830a1edb8e50e296af8ade03b" category="list-text">选择复制计划(包括Kubbernetes资源以及永久性卷数据)</block>
   <block id="55960a396448d8f19fb182dfd2b04d90" category="list-text">设置创建快照的时间</block>
   <block id="7fe804bb721f10861ae38239b332f774" category="inline-link-macro">AppVault自定义资源</block>
-  <block id="38886c5d59d709a7506113ab8fa737eb" category="list-text">在源集群上为源应用程序创建AppVault。根据您的存储提供程序、修改中的示例<block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>以适合您的环境：</block>
   <block id="bb557baccf285d1ab6b4cdc32daf5848" category="open-title">使用CR创建AppVault</block>
   <block id="32429298e62d70d6afc71defdbdd3c42" category="list-text">创建自定义资源(CR)文件并将其命名(例如<block ref="0992b18d0f3771479838d4ddbaa2b097" prefix=" " category="inline-code"></block>)。</block>
   <block id="4b60a832776a25dfdf74d5dac3d3111f" category="list-text">* metadata.name*:(_required__) AppVault自定义资源的名称。请记下您选择的名称、因为复制关系所需的其他CR文件会引用此值。</block>
@@ -4477,7 +4476,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="8af3a24bfad8f2e7a06abec1e5bc710e" category="list-text">使用正确的值填充文件后<block ref="0992b18d0f3771479838d4ddbaa2b097" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="65b1402ebaf9b35766ab033225a55f41" category="open-title">使用命令行界面创建AppVault</block>
   <block id="d686d91628b89b1ba45ca8bf5274eece" category="list-text">创建AppVault、将括号中的值替换为您环境中的信息：</block>
-  <block id="c244d23f9be6389c5ac873426253b152" category="list-text">创建源应用程序CR：</block>
   <block id="93b7f025ad50fefb3f6b0c5ee86d6162" category="open-title">使用CR创建源应用程序</block>
   <block id="793bc477cba966a8d3771d018030c3c4" category="list-text">创建自定义资源(CR)文件并将其命名(例如<block ref="3e2c6ff026eba99761434b4f79aaa782" prefix=" " category="inline-code"></block>)。</block>
   <block id="3bf6684ac69fda7ed549f87ecb72678d" category="list-text">*metadata.name*:(_required__)应用程序自定义资源的名称。请记下您选择的名称、因为复制关系所需的其他CR文件会引用此值。</block>
@@ -4486,8 +4484,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="948be8a05d305f0b3dece0e8dcaf4546" category="list-text">使用正确的值填充文件后<block ref="3e2c6ff026eba99761434b4f79aaa782" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="677aa747b5e08444532c7cc040384124" category="open-title">使用命令行界面创建源应用程序</block>
   <block id="feaddb5b204f8f8f1226cc6f02275f5c" category="list-text">创建源应用程序。例如：</block>
-  <block id="2111432c46f82ea9d065a1168a7bca3d" category="list-text">(可选)为源应用程序创建快照。此快照将用作目标集群上应用程序的基础。如果跳过此步骤、则需要等待运行下一个计划快照、以便获得最新快照。</block>
-  <block id="84caf200e79d5962bc7f3516e9ad328c" category="open-title">使用CR创建快照</block>
   <block id="929d5ad53cad5d51ead7578004e2d5e5" category="list-text">为源应用程序创建复制计划：</block>
   <block id="57cc31c4785dfe52bb22cc8d375a3b67" category="list-text">创建自定义资源(CR)文件并将其命名(例如<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block>)。</block>
   <block id="87918fdbe5607aeceec3ec53bc40a2f8" category="list-text">* metadata.name*:(_required__)计划自定义资源的名称。</block>
@@ -4499,14 +4495,10 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="8c33ed4b89c2cd001ffad0203fe3c3b6" category="list-text">*spec.rec发 规则*：定义UTC时间的开始日期和重复间隔。</block>
   <block id="35ef995e5b9fe2ba99491ff849d63302" category="list-text">*spec.snapshot놣 쇴*：必须设置为2。</block>
   <block id="7c6d1c687b69c90909ec8375ac84883e" category="list-text">使用正确的值填充文件后<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block> 、应用CR：</block>
-  <block id="3feb4a62c8b59cd52ae22845d363c901" category="open-title">使用命令行界面创建快照</block>
-  <block id="a1e2bc47f1a3bfef13f10398ea862ec3" category="list-text">在目标集群上创建一个与源集群上应用的AppVault CR相同的源应用程序AppVault CR，并将其命名为(例如<block ref="3ad9e8b652d0a9a977e2534bf143ea29" prefix=" " category="inline-code"></block>)。</block>
   <block id="04a53b4d2f7e20d9df207bfb6beb6ee7" category="list-text">应用CR：</block>
-  <block id="b90466d65b799b761b892272fec2c528" category="list-text">在目标集群上为目标应用程序创建AppVault。根据您的存储提供程序、修改中的示例<block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>以适合您的环境：</block>
   <block id="d5ab09bc69c7800783bce2e14f2e456f" category="list-text">创建自定义资源(CR)文件并将其命名(例如<block ref="b851e4210e3875aa9242df636b0b3068" prefix=" " category="inline-code"></block>)。</block>
   <block id="7fab67e3c762a0a044dd84f11a740dd7" category="list-text">*。spec.providerConfig*:(_required__)存储使用指定提供程序访问AppVault所需的配置。为您的提供商选择<block ref="070a97dcde31faecac1fc843e205039c" prefix=" " category="inline-code"></block>以及任何其他必要的详细信息。请记下所选的值、因为复制关系所需的其他CR文件会引用这些值。有关其他提供商的AppVault CRS示例、请参见<block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>。</block>
   <block id="4758f7c104e1f75364dadc9f8310e51d" category="list-text">使用正确的值填充文件后<block ref="b851e4210e3875aa9242df636b0b3068" prefix=" " category="inline-code"></block> 、应用CR：</block>
-  <block id="852c44e158b3265857137f38ef65ac49" category="list-text">创建App镜像 关系CR文件：</block>
   <block id="15e5c4ea8565e669f02393ab1d7b1021" category="open-title">使用CR创建App镜像 关系</block>
   <block id="3ca407ea70946200511f8d2e1008f20f" category="list-text">创建自定义资源(CR)文件并将其命名(例如<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>)。</block>
   <block id="52e868ab750f66344086c9bc5d6dadeb" category="list-text">* metadata.name:*(必需) App镜像 关系自定义资源的名称。</block>
@@ -4520,26 +4512,20 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="86d47ead9019d8e9c93c863f7ab4e41b" category="list-text">(_可 选_)检查复制关系的状态：</block>
   <block id="70cc2bec279e168711b67e789468c45c" category="section-title">故障转移到目标集群</block>
   <block id="196c4df78e5add7c9590d6a1c18367ec" category="paragraph">使用Trident Protect、您可以将复制的应用程序故障转移到目标集群。此操作步骤 将停止复制关系并使应用程序在目标集群上联机。如果源集群上的应用程序正常运行、则Trident Protect不会停止该应用程序。</block>
-  <block id="ffb2e8a8e2a97e36799531c053229941" category="list-text">打开AppMirectorRelationship CR文件(例如<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>)，并将*。spec.desiredState*的值更改为<block ref="2c42d7d277f63fcbe64b041b997ceaed" prefix=" " category="inline-code"></block>。</block>
   <block id="2d258c624d61d2388efacfc246d2439e" category="list-text">保存 CR 文件。</block>
   <block id="66ccf267a388b1a30a7530a93ea5ce18" category="list-text">(_可 选_)在故障转移应用程序上创建所需的任何保护计划。</block>
   <block id="ea7117a895b98283737d3855ef6a2adc" category="section-title">重新同步故障转移复制关系</block>
   <block id="c91dda18aff454993264381ffa25993f" category="paragraph">重新同步操作将重新建立复制关系。执行重新同步操作后、原始源应用程序将成为正在运行的应用程序、对目标集群上正在运行的应用程序所做的任何更改将被丢弃。</block>
   <block id="86e073f24d64b270ed8fd6bac00280eb" category="paragraph">此过程会先停止目标集群上的应用程序、然后再重新建立复制。</block>
   <block id="63a5fb6889ac843fec3c274399995a88" category="admonition">故障转移期间写入目标应用程序的所有数据都将丢失。</block>
-  <block id="40b77bd147004d34167c59a33489e3ca" category="list-text">创建源应用程序的快照。</block>
-  <block id="b0952495915865cc8c4cee9f26959545" category="list-text">打开AppMirectorRelationship CR文件(例如<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>)，并将spec.desiredState的值更改为<block ref="072f9734fceb02f516b50d4174ac0f18" prefix=" " category="inline-code"></block>。</block>
   <block id="c7e41946fafafcb541aaa5a67635b607" category="list-text">如果您在目标集群上创建了任何保护计划来保护故障转移应用程序、请将其删除。任何保留的计划都会导致卷快照失败。</block>
   <block id="6e81bcb9e218ada350c173457300a0ed" category="section-title">反向重新同步故障转移复制关系</block>
   <block id="b29e882c5e41f060c9261101cb1cab06" category="paragraph">反向重新同步故障转移复制关系时、目标应用程序将成为源应用程序、而源将成为目标。在故障转移期间对目标应用程序所做的更改将保留下来。</block>
-  <block id="6916d76a20f4ca4fffa219680ae6e418" category="list-text">删除初始目标集群上的App镜像 关系CR。这会使目标成为源。如果新目标集群上仍有任何保护计划、请将其删除。</block>
   <block id="3c890586eb43d0d71cdcb47011358420" category="list-text">通过将最初用于设置复制关系的CR文件应用于对等集群来设置复制关系。</block>
-  <block id="e4d13c88dbb2196550655288d4cf351a" category="list-text">确保每个集群上的AppVault CRS均已准备就绪。</block>
   <block id="8a427fa57d96e74516c008754320b521" category="list-text">在另一个集群上设置复制关系、并配置反向值。</block>
   <block id="792322eb4a0bf1a122100fc009041d9b" category="section-title">反转应用程序复制方向</block>
   <block id="eb89cf8a1850f41e41a65f7b65ec9c87" category="paragraph">反向复制方向时、Trident Protect会将应用程序移至目标存储后端、同时继续复制回原始源存储后端。Trident Protect会先停止源应用程序并将数据复制到目标、然后再故障转移到目标应用程序。</block>
   <block id="4625c1e6ccf2351ad9a08dcee33270c8" category="paragraph">在这种情况下、您将交换源和目标。</block>
-  <block id="06275f61faab68bc1c01a07a41aadfed" category="list-text">创建关闭快照：</block>
   <block id="4f902591d45de06985f0af6d869c8a04" category="open-title">使用CR创建关闭快照</block>
   <block id="1f6c30c2bcecec90eda54cd7038f326b" category="list-text">禁用源应用程序的保护策略计划。</block>
   <block id="4a4cfa535eb9cd705b5999ffaa6a738b" category="list-text">创建Sh关机Snapshot CR文件：</block>
@@ -4549,9 +4535,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="4390dd9bb73a0c56ac3c54b54b1fe51a" category="list-text">使用正确的值填充文件后<block ref="9bab8384d1fd26e8737f71771039462f" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="f450395b52edc310f6e53fe1a9e24477" category="open-title">使用命令行界面创建关闭快照</block>
   <block id="01eb7f0adf446989c265a6179909de7b" category="list-text">创建关闭快照、将括号中的值替换为环境中的信息。例如：</block>
-  <block id="5c29a32288e71f1820e4af984e4616d6" category="list-text">快照完成后、获取快照的状态：</block>
-  <block id="eae3a231fcdd07328a039c0bd1b3ebdf" category="list-text">使用以下命令查找*shutdownSnapshot．statues.appArchivePath*的值，并记录文件路径的最后一部分(也称为基本名称；这将是最后一个斜杠后面的所有内容)：</block>
-  <block id="9facdd349a186c792ec6a26f5b938472" category="list-text">执行从目标集群到源集群的故障转移、并进行以下更改：</block>
   <block id="bdd0666b03fe73dd725c0376fdb435e0" category="admonition">在故障转移过程的第2步中、将字段包含<block ref="60464bee8fcac84cb209df68a2b05fba" prefix=" " category="inline-code"></block>在App镜像 关系CR文件中、并将其值设置为您在上述第3步中记录的基本名称。</block>
   <block id="ab486212bb19e45c8e71532739574a22" category="list-text">在新的源集群上启用保护计划。</block>
   <block id="aea4fd534bd3152673956c6bbd7c115c" category="paragraph">反向复制会导致以下操作：</block>
@@ -4567,7 +4550,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="9cbd7771b861e31b5edb23d83de4758c" category="list-text">从故障转移状态开始。</block>
   <block id="39d2beed854377dcad2ea22fe9e58477" category="section-title">删除复制关系</block>
   <block id="a6c87e2b66308cd117a39af0fdac9885" category="paragraph">您可以随时删除复制关系。删除应用程序复制关系后、会导致两个单独的应用程序之间没有关系。</block>
-  <block id="146012b834b7d1f68305ff2495a1beb7" category="list-text">删除App镜像 关系CR：</block>
   <block id="c4407b1cc5192fe600872654a5ffe223" category="list-text">为KubeNet本机工作流添加了新的Trident功能：</block>
   <block id="7e7397a7b79323762c61941fc0e6b5f9" category="list-text">数据保护</block>
   <block id="5866b98c049a53ea6dc7f50f9349f434" category="list-text">数据迁移</block>
@@ -5488,4 +5470,23 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="5a71b77feca506fc8eba218b4e65048b" category="paragraph">Trident将从快照还原数据。您可以验证快照还原状态：</block>
   <block id="9d577c00c4cbb5d99e7a8a6589113669" category="paragraph">删除具有关联快照的永久性卷时、相应的Trident卷将更新为"正在删除"状态。删除卷快照以删除Trident卷。</block>
   <block id="27e9bd9989c090489f69126b9910d7d8" category="list-text">您还可以通过在后端定义中包含来获取每个后端的调试日志<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block>。例如、include<block ref="825a719baa5b5b7445c98535815fac39" prefix=" " category="inline-code"></block>可在Trident日志中获取API调用和方法迁移。现有后端可以<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block>配置<block ref="ad782b779edfd8199198bed41b3e3b6b" prefix=" " category="inline-code"></block>。</block>
+  <block id="1e8493e925b9f37d24c0573c08c6643a" category="list-text">在源集群上、为源应用程序创建AppVault。根据您的存储提供程序、修改中的示例<block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>以适合您的环境：</block>
+  <block id="a42a308559809e0fc20b13ea51d5d3d4" category="list-text">在源集群上、创建源应用程序CR：</block>
+  <block id="75ffc8eca312c20c922ba2b9df1fde04" category="list-text">(可选)在源集群上、为源应用程序创建关闭快照。此快照将用作目标集群上应用程序的基础。如果跳过此步骤、则需要等待运行下一个计划快照、以便获得最新快照。</block>
+  <block id="663f822dd7baf35b6905a0333070ed81" category="open-title">使用CR创建关闭快照</block>
+  <block id="15b08a67c1cea1e1d7463ca2d0c98610" category="open-title">使用命令行界面创建关闭快照</block>
+  <block id="85d88f09b637997959adc6d50a42d56f" category="list-text">在目标集群上，创建一个与您在源集群上应用的AppVault CR完全相同的源应用程序AppVault CR，并将其命名为(例如<block ref="3ad9e8b652d0a9a977e2534bf143ea29" prefix=" " category="inline-code"></block>)。</block>
+  <block id="8af8219e9797756f7e348dd40e365632" category="list-text">在目标集群上为目标应用程序创建目标AppVault CR。根据您的存储提供程序、修改中的示例<block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>以适合您的环境：</block>
+  <block id="f454fc9c64d31c07a352c043fe184940" category="list-text">在目标集群上、创建App镜像 关系CR文件：</block>
+  <block id="3d9dc864aeb5b914422a6a665c53ceeb" category="list-text">(_可 选_)在目标集群上、检查复制关系的状态：</block>
+  <block id="fe07abfd92e0d0809a7eb71ce3f79b4b" category="list-text">在目标集群上，编辑AppMirorRelationship CR文件(例如<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>)，并将*spec.desiredState*的值更改为<block ref="2c42d7d277f63fcbe64b041b997ceaed" prefix=" " category="inline-code"></block>。</block>
+  <block id="2ebd442ba9080ba8f10b660fd69bb379" category="list-text">可选：在源集群上、创建源应用程序的快照。这样可确保捕获源集群的最新更改。</block>
+  <block id="4d77fef9f6bd1f87593e41a1d32a7ea4" category="list-text">在目标集群上，编辑AppMirorRelationship CR文件(例如<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block>)，并将spec.desiredState的值更改为<block ref="072f9734fceb02f516b50d4174ac0f18" prefix=" " category="inline-code"></block>。</block>
+  <block id="cd7eea117bba074d0250983f81bb10e4" category="list-text">在初始目标集群上、删除App镜像 关系CR。这会使目标成为源。如果新目标集群上仍有任何保护计划、请将其删除。</block>
+  <block id="5ca8234bb17898bdaa8421e9bab83a0b" category="list-text">确保为新目标(初始源集群)配置了两个AppVault CRS。</block>
+  <block id="e319bd320145e358af8fd5dbada2d800" category="list-text">在源集群上、创建一个关闭快照：</block>
+  <block id="47d8460d4aa2253d733ecb9b355e4319" category="list-text">在源集群上、关闭快照完成后、获取关闭快照的状态：</block>
+  <block id="00e7f88da8b7690738f8546262d2fe54" category="list-text">在源集群上，使用以下命令查找*shutdownfapp.statues.appArchivePath*的值，并记录文件路径的最后一部分(也称为基本名称；这将是最后一个斜杠之后的所有内容)：</block>
+  <block id="579f2feb3d9edaa336d3ccb69c3fb855" category="list-text">执行从新目标集群到新源集群的故障转移、并进行以下更改：</block>
+  <block id="23b4dec181e41ab3962cf73b28ffe58c" category="list-text">在当前目标集群上、删除App镜像 关系CR：</block>
 </blocks>
