@@ -52,10 +52,16 @@ image::../media/aws-eks-03.png[AWS EKS 03]
 +
 image::../media/aws-eks-04.png[AWS EKS 04]
 
-. 遵循*附加配置模式*，并将*配置值*部分中的配置值参数设置为您在上一步(步骤1)中创建的ro-arn。
+. 遵循*附加配置模式*，并将*配置值*部分中的配置值参数设置为您在上一步(步骤1)中创建的ro-arn。值应采用以下格式：
 +
-值应采用以下格式： `eks.amazonaws.com/role-arn: arn:aws:iam::464262061435:role/AmazonEKS_FSXN_CSI_DriverRole`。
+[source, JSON]
+----
+{
 
+  "cloudIdentity": "'eks.amazonaws.com/role-arn: <role ARN>'"
+
+}
+----
 +
 
 NOTE: 如果您为冲突解决方法选择覆盖、则可以使用Amazon EKS附加设置覆盖现有附加项的一个或多个设置。如果未启用此选项、并且与现有设置存在冲突、则操作将失败。您可以使用生成的错误消息来解决冲突。在选择此选项之前、请确保Amazon EKS附加组件未管理您需要自行管理的设置。
@@ -83,7 +89,7 @@ kubectl get pods -n trident
 
 .使用命令行界面安装NetApp Trident EKS加载项：
 以下命令示例将安装Trident EKS加载项：
-`eksctl create addon --cluster clusterName --name netapp_trident-operator --version v24.10.0-eksbuild.1`(使用专用版本)
+`eksctl create addon --cluster clusterName --name netapp_trident-operator --version v25.02.1-eksbuild.1`(使用专用版本)
 
 .使用命令行界面卸载NetApp Trident EKS加载项：
 以下命令将卸载Trident EKS加载项：
