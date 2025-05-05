@@ -5144,7 +5144,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="fc61af20b92225aae2a169587940eb14" category="doc">跨命名空间克隆卷</block>
   <block id="7d3b4ba16dd9908f0a9572976f62cb92" category="paragraph">通过使用Trident、您可以使用同一个Kubornetes集群中不同命名空间的现有卷或卷快照创建新卷。</block>
   <block id="12bf911acc3865647e24aa6cc61fad9d" category="paragraph">克隆卷之前、请确保源后端和目标后端的类型相同、并且具有相同的存储类。</block>
-  <block id="0338234dde0d63169da560597ab080e5" category="paragraph">只需几个步骤即可设置NFS卷克隆。</block>
   <block id="9e556d1188a1d7d3f911546d9c8f70f1" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block>配置源PVC以克隆卷</block>
   <block id="4f371bbe8ba542b2ca00eb9f3a3a2716" category="paragraph-title"><block ref="beadfa85a2fdca06b91edc1131c603e6" category="inline-image-macro-rx" type="image"></block>在目标命名空间中创建克隆PVC</block>
   <block id="a77fe76c8980416f14767484ab56a324" category="paragraph">目标命名空间的所有者创建PVC以从源命名空间克隆PVC。</block>
@@ -5511,4 +5510,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="0e9e7400617f4a815b5ec92f2030b580" category="sidebar">使用OpenShift认证操作员进行安装</block>
   <block id="93e4eff1c01241084bfc9427074bacea" category="sidebar">使用OpenShift OperatorHub安装Trident</block>
   <block id="c9e3d6c8fc80db4773cf69e205f2b571" category="sidebar">从Trident社区运营商切换到OpenShift认证运营商</block>
+  <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">只需几个步骤即可设置卷克隆。</block>
+  <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">Trident将创建PV及其后端存储卷。</block>
 </blocks>

@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/vol-clone-cross-namespace.html 
-keywords: volref, volume reference, clone, pvc, pv, nfs, namespace, cvna, cross-namespace, sharing, volumesnapshots 
+keywords: volref, volume reference, clone, pvc, pv, namespace, cvna, cross-namespace, sharing, volumesnapshots 
 summary: 使用Trident、您可以使用同一个K8s集群中不同命名空间的现有卷或卷快照创建新卷。 
 ---
 = 跨命名空间克隆卷
@@ -24,7 +24,7 @@ summary: 使用Trident、您可以使用同一个K8s集群中不同命名空间�
 
 == 快速入门
 
-只需几个步骤即可设置NFS卷克隆。
+只需几个步骤即可设置卷克隆。
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["一个"]配置源PVC以克隆卷
 [role="quick-margin-para"]
@@ -69,7 +69,7 @@ spec:
       storage: 100Gi
 ----
 +
-Trident将创建PV及其后端NFS存储卷。
+Trident将创建PV及其后端存储卷。
 
 +
 [NOTE]
