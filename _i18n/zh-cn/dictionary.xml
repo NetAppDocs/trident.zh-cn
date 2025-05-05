@@ -5424,15 +5424,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="351e2b20bd9ea864b69cd832f3a4a5df" category="list-text">如果未在后端启用NAE、则在Trident中配置的任何卷都将启用NVE、除非在后端配置中NVE加密标志设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>(默认值)。</block>
   <block id="39fb9551310e8e28d64d0e2b94913f7a" category="paragraph">在对应用程序执行数据保护操作时、您需要手动或使用命令行创建AppVault CR、并且AppVault CR需要驻留在安装了Trident Protect的集群上。AppVault CR特定于您的环境；您可以使用此页面上的示例作为创建AppVault CRS的指南。</block>
   <block id="8b70987187655cedeb971520a2170b2d" category="paragraph">在创建AppVault CR之前、您需要确保所选的AppVault和数据移动工具可以向提供程序和任何相关资源进行身份验证。</block>
-  <block id="329e129e6c733f5d2b0f685c631d5254" category="list-text">*。metadata.annotations.protect.trident.netapp.io/full-backup-rule*：(_可 选_)此标注用于指定备份是否应为非增量备份。默认情况下、所有备份均为增量备份。但是，如果此标注设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，则备份将变为非增量备份。如果未指定、则备份将采用默认增量备份设置。最佳做法是、定期执行完整备份、然后在两次完整备份之间执行增量备份、以最大程度地降低与还原相关的风险。</block>
-  <block id="93b1107cde6ba041513cd9ccf7b4bae0" category="paragraph">您可以选择使用<block ref="53f5240b338c91a0568f15e2562a35de" prefix=" " category="inline-code"></block>标志来指定备份是否应为非增量备份。默认情况下、所有备份均为增量备份。使用此标志时、备份将变为非增量备份。最佳做法是、定期执行完整备份、然后在两次完整备份之间执行增量备份、以最大程度地降低与还原相关的风险。</block>
-  <block id="99cd57e28c97c0577c8e6d701de91b88" category="section-title">创建备份计划</block>
-  <block id="46773fe21c0cf6451e8de9f6a18da51f" category="paragraph">您可以计划非增量完整备份。默认情况下、所有备份均为增量备份。定期执行完整备份以及其间的增量备份有助于降低与还原相关的风险。</block>
-  <block id="2c26e9a03dd91b6eafe57094f8245ad8" category="list-text">创建自定义资源(CR)文件并将其命名为<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block>。</block>
-  <block id="1770a13eba6600496a86d2f1cf357813" category="list-text">*。metadata.annotations.protect.trident.netapp.io/full-backup-rule*:(_可 选_)此标注用于指定计划完整备份的规则。您可以将其设置为以实现持续完整备份、也可以<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block>根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。</block>
-  <block id="9355f48a9876fcaefe0351294df4e05c" category="list-text">使用正确的值填充文件后<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block> 、应用CR：</block>
-  <block id="1bd9850ddb901f0e741293ec737c5de6" category="list-text">创建备份计划、将括号中的值替换为您环境中的信息。例如：</block>
-  <block id="ab5807fb06fd654f730a4ed5a02bb950" category="paragraph">您可以将此标志设置为<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block>以实现持续完整备份、也可以<block ref="61df7cc86eb24ab1300f0e74e74bb50c" prefix=" " category="inline-code"></block>根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。例如、使用<block ref="d416cce9d6bcb838c8958b9fbb84dffa" prefix=" " category="inline-code"></block>计划在星期一和星期四进行完整备份。</block>
   <block id="a346cffc17b34fc56f3020d8b33d30c3" category="paragraph">创建存储类和PVC后、您可以将PV挂载到Pod。本节列出了将PV连接到POD的示例命令和配置。</block>
   <block id="f253a45a33bc62e467efd426699d9025" category="paragraph">启动守护进程后、您可以使用Docker命令行界面创建和管理卷。</block>
   <block id="a0ba0b0d751124c646a352594c7e9d7b" category="paragraph">其余驱动程序会受到争用条件等问题的影响、这些条件可能会导致为单个请求创建大量卷、而没有明确的"获奖者"；例如、Element的一项功能允许卷具有相同的名称但ID不同。</block>
@@ -5488,4 +5479,36 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="90abe2b6c39f51adea4c5aabff2df094" category="list-text">遵循*附加配置模式*，并将*配置值*部分中的配置值参数设置为您在上一步(步骤1)中创建的ro-arn。值应采用以下格式：</block>
   <block id="be88c7e0502cadac6eccdbb309610a77" category="paragraph">以下命令示例将安装Trident EKS加载项：<block ref="a5b33d95c2beda5bdc154ff0b946fffe" prefix=" " category="inline-code"></block>(使用专用版本)</block>
   <block id="23773f4cc30b766e1a2846ff0e0ec8ba" category="list-text">遵循*附加配置模式*，并将*配置值*部分中的configurationvalues*参数设置为您在上一步中创建的roole-arn (值格式应为：</block>
+  <block id="6935ea1d99a0c26f0e4cddb80f444849" category="summary">如果使用Red Hat OpenShift、则可以使用操作员安装Trident。</block>
+  <block id="c282cc9924716a0ecdcc1864c8821950" category="doc">从Trident社区运营商切换到OpenShift认证运营商</block>
+  <block id="92da9bfce4b6635fcf5d3f3725accbbc" category="paragraph">要从NetApp社区Trident操作员切换到Red Hat OpenShift认证Trident操作员、您需要卸载社区操作员、然后使用OperatorHub安装认证操作员。</block>
+  <block id="cec1c482e499b4748371d5e19359dacd" category="inline-link-macro">准备安装Trident的环境</block>
+  <block id="32bc521a76f74eeb913f8006ab760ef5" category="paragraph">开始安装之前，<block ref="77baaa0182ec347ebf1b91f8f0f5fa8c" category="inline-link-macro-rx"></block>。</block>
+  <block id="82c3da1e712e572f424c3b7bf7dafcaf" category="section-title">卸载NetApp Trident社区操作员</block>
+  <block id="ae76609b28371ddbc9f46be837040994" category="list-text">使用OpenShift控制台导航到OperatorHub。</block>
+  <block id="349838fb1d851d3e2014b9fe39203275" category="image-alt">安装</block>
+  <block id="2d8d10c295f87a1f17d2f37a4df9688d" category="list-text">查找NetApp Trident社区操作员。</block>
+  <block id="e1b3a07c6ba67335c1564ff539f1f885" category="admonition">不要选择*从该操作符中删除所有操作数实例*。</block>
+  <block id="615da270425b5ecb4fe6ddeed9358880" category="list-text">单击 * 卸载 * 。</block>
+  <block id="c7afcce8432c7e249a80e803d2a81180" category="section-title">安装OpenShift认证操作员</block>
+  <block id="6eaf33f9c2387a07f89fc20e19acffaa" category="list-text">导航到Red Hat OperatorHub。</block>
+  <block id="cccebca328e4674a8888d5dc22f61e0d" category="list-text">搜索并选择NetApp Trident操作员。</block>
+  <block id="9872de8cf3e5ac67cae81e5c17eaa5cc" category="list-text">按照屏幕上的说明安装操作员。</block>
+  <block id="52b8ffce119fe77b28034f2fdd35eb5f" category="section-title">验证</block>
+  <block id="ba8b537f098a607b7119fc78961300eb" category="list-text">检查控制台中的OperatorHub、确保已成功安装新的认证操作员。</block>
+  <block id="838483eae18a7bca44c25a90dc7f55c3" category="doc">使用OpenShift OperatorHub安装Trident</block>
+  <block id="d569da5fb14cad502f71e232cdfcb4e4" category="paragraph">如果您使用的是Red Hat OpenShift、则可以通过Red Hat认证操作员安装NetApp Trident。使用此过程从Red Hat OpenShift容器平台安装Trident。</block>
+  <block id="516a493e6df274ac5512ffaab7234ebf" category="section-title">找到并安装Trident运算符</block>
+  <block id="7a200e69eab0d67b215ea6e3c6081797" category="list-text">导航到OpenShift OperatorHub并搜索NetApp Trident。</block>
+  <block id="f19e5d93360a2cdbfe64b6c513e8d263" category="list-text">单击 * 安装 * 。</block>
+  <block id="86499c179913093d38f20a089bb4967f" category="list-text">选择所需选项，然后单击*Install*。</block>
+  <block id="301a8f7d2ea6785da5f183d668f629b2" category="list-text">安装完成后、操作员将显示在已安装操作员列表中。</block>
+  <block id="daf49607bdd50d5294748814ce67ed21" category="list-text">创建类似于operator软件包安装的Torc。</block>
+  <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">卸载Trident Operator</block>
+  <block id="9838ab5306db947832d94d1cd49a486a" category="list-text">从已安装操作员列表中选择Trident操作员。</block>
+  <block id="b5a7424a278ddd01fa4e381b58d1e00d" category="list-text">选择是否要从操作符中删除所有操作数实例。</block>
+  <block id="28ed84868f638999e59e306d6b87b07c" category="admonition">如果未选中“*从该运算符中删除所有操作数实例*”复选框，则不会卸载Trident。</block>
+  <block id="0e9e7400617f4a815b5ec92f2030b580" category="sidebar">使用OpenShift认证操作员进行安装</block>
+  <block id="93e4eff1c01241084bfc9427074bacea" category="sidebar">使用OpenShift OperatorHub安装Trident</block>
+  <block id="c9e3d6c8fc80db4773cf69e205f2b571" category="sidebar">从Trident社区运营商切换到OpenShift认证运营商</block>
 </blocks>

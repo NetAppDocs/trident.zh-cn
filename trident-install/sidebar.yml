@@ -22,3 +22,9 @@ entries:
     url: "/trident-get-started/kubernetes-deploy-tridentctl.html"
   - title: 自定义tridentctl安装
     url: "/trident-get-started/kubernetes-customize-deploy-tridentctl.html"
+- title: 使用OpenShift认证操作员进行安装
+  entries:
+  - title: 使用OpenShift OperatorHub安装Trident
+    url: "/trident-get-started/openshift-operator-deploy.html"
+  - title: 从Trident社区运营商切换到OpenShift认证运营商
+    url: "/trident-get-started/openshift-certified-operator-deploy.html"
