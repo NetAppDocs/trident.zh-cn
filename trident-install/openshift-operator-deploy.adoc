@@ -15,7 +15,7 @@ summary: 如果使用Red Hat OpenShift、则可以使用操作员安装Trident�
 如果您使用的是Red Hat OpenShift、则可以通过Red Hat认证操作员安装NetApp Trident。使用此过程从Red Hat OpenShift容器平台安装Trident。
 
 .开始之前
-开始安装之前，link:../trident-get-started/requirements.html/["准备安装Trident的环境"]。
+开始安装之前，link:../trident-get-started/requirements.html["准备安装Trident的环境"]。
 
 
 

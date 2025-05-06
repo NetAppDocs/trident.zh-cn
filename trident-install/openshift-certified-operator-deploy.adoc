@@ -15,7 +15,7 @@ summary: 如果使用Red Hat OpenShift、则可以使用操作员安装Trident�
 要从NetApp社区Trident操作员切换到Red Hat OpenShift认证Trident操作员、您需要卸载社区操作员、然后使用OperatorHub安装认证操作员。
 
 .开始之前
-开始安装之前，link:../trident-get-started/requirements.html/["准备安装Trident的环境"]。
+开始安装之前，link:../trident-get-started/requirements.html["准备安装Trident的环境"]。
 
 
 

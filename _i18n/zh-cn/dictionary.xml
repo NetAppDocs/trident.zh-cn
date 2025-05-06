@@ -5482,7 +5482,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="c282cc9924716a0ecdcc1864c8821950" category="doc">从Trident社区运营商切换到OpenShift认证运营商</block>
   <block id="92da9bfce4b6635fcf5d3f3725accbbc" category="paragraph">要从NetApp社区Trident操作员切换到Red Hat OpenShift认证Trident操作员、您需要卸载社区操作员、然后使用OperatorHub安装认证操作员。</block>
   <block id="cec1c482e499b4748371d5e19359dacd" category="inline-link-macro">准备安装Trident的环境</block>
-  <block id="32bc521a76f74eeb913f8006ab760ef5" category="paragraph">开始安装之前，<block ref="77baaa0182ec347ebf1b91f8f0f5fa8c" category="inline-link-macro-rx"></block>。</block>
   <block id="82c3da1e712e572f424c3b7bf7dafcaf" category="section-title">卸载NetApp Trident社区操作员</block>
   <block id="ae76609b28371ddbc9f46be837040994" category="list-text">使用OpenShift控制台导航到OperatorHub。</block>
   <block id="349838fb1d851d3e2014b9fe39203275" category="image-alt">安装</block>
@@ -5512,4 +5511,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="c9e3d6c8fc80db4773cf69e205f2b571" category="sidebar">从Trident社区运营商切换到OpenShift认证运营商</block>
   <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">只需几个步骤即可设置卷克隆。</block>
   <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">Trident将创建PV及其后端存储卷。</block>
+  <block id="9f965f02f635b760a84c43d43aba854f" category="paragraph">开始安装之前，<block ref="a24ee29cd883cbf52de58a68b0fed1a7" category="inline-link-macro-rx"></block>。</block>
 </blocks>
