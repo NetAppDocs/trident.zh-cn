@@ -19,7 +19,27 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 
 
-== 25.02中的新增功能
+== 25.02.1中的新增功能
+
+
+
+=== Trident
+
+
+
+==== 修复
+
+* *Kubernetes*：
++
+** 修复了使用非默认图像注册表()时Trident运算符错误填充的侧向图像名称和版本的问题link:https://github.com/NetApp/trident/issues/983["问题描述#983"]。
+** 修复了在ONTAP故障转移恢复()期间多路径会话无法恢复的问题link:https://github.com/NetApp/trident/issues/961["问题描述#961"]。
+
+
+
+
+
+
+== 25.02中的变化
 
 从Trident 25.02开始、新增功能摘要提供了有关Trident和Trident Protect版本的增强功能、修复和弃用的详细信息。
 
@@ -103,6 +123,28 @@ NetApp Trident Protect提供高级应用程序数据管理功能、可增强由N
 * SCC标注现在恢复为原始值。
 * 通过支持并行操作提高了恢复效率。
 * 增强了对大型应用程序执行挂接超时的支持。
+
+
+
+
+== 24.10.1中的变更
+
+
+
+=== 增强功能
+
+* *Kubernetes*：增加了对Kubernetes 1.32的支持。
+* 添加了iSCSI连接状态发现和日志记录(iSCSI会话应登录但不应登录)link:https://github.com/NetApp/trident/issues/961["问题描述#961"]。
+
+
+
+
+=== 修复
+
+* 修复了自动导出策略()中缺少的节点IP地址link:https://github.com/NetApp/trident/issues/965["问题描述#965"]。
+* 修复了自动导出策略在ONTAP NAS经济环境中过早切换到每个卷策略的问题。
+* 更新了Trident和Trident CVE-ASUP的依赖关系、以解决CVE-2024-45337和CVE-2024-45310。
+* 删除了在iSCSI自我修复期间因非CHAP门户间歇性运行状况不正常而注销的问题link:https://github.com/NetApp/trident/issues/961["问题描述#961"]()。
 
 
 

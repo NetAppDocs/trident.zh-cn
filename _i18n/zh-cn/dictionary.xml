@@ -4983,7 +4983,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="cd2793aaeed5e7f0429f516ecf5eb130" category="list-text"><block ref="8a4b824281db82475bec9857f32bde41" category="inline-link-rx"></block>(适用于iSCSI)</block>
   <block id="23db1fababbb1ae99bf5bf19e6f6f47b" category="list-text">NetApp建议克隆空闲卷。</block>
   <block id="3ca0a694ceba360e6f67566a611b37fb" category="paragraph">卷是基本配置单元、由后端端端点(例如NFS共享以及iSCSI和FC LUN)组成。在Kubnetes中，这些直接对应于<block ref="3f91308865b7567ae097573f6d0519e9" prefix=" " category="inline-code"></block>。创建卷时，请确保其具有存储类，此类可确定可配置该卷的位置以及大小。</block>
-  <block id="5a8746628add05005005c4b1b98f52a6" category="section-title">25.02中的新增功能</block>
   <block id="f732fd09d1f97b63aaad6d5a80382f0c" category="list-text">增加了对适用于iSCSI的ONTAP ASA R2的支持。</block>
   <block id="87959ecf0c52ae4baca9f7e962286ec1" category="list-text">增加了对在非正常节点关闭情况下强制断开ONTAP NAS卷的支持。现在、新的ONTAP NAS卷将使用Trident管理的每个卷导出策略。为现有卷提供了一个升级路径、以便在取消发布时过渡到新的导出策略模型、而不会影响活动工作负载。</block>
   <block id="09abe7a508b1461d2b42cd082e9680aa" category="list-text">已添加cloneFronSnapshot标注。</block>
@@ -5512,4 +5511,13 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">只需几个步骤即可设置卷克隆。</block>
   <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">Trident将创建PV及其后端存储卷。</block>
   <block id="9f965f02f635b760a84c43d43aba854f" category="paragraph">开始安装之前，<block ref="a24ee29cd883cbf52de58a68b0fed1a7" category="inline-link-macro-rx"></block>。</block>
+  <block id="c9611d3f195e70e59294887ffd815bd1" category="section-title">25.02.1中的新增功能</block>
+  <block id="d72c3d84865c2955b89cbf6e0ec00ada" category="inline-link-macro">问题描述#983</block>
+  <block id="ac76c3fcac41a10bd5f709108875e6c6" category="list-text">修复了使用非默认图像注册表()时Trident运算符错误填充的侧向图像名称和版本的问题<block ref="524f95fe3800e5d3ef82e615d679c539" category="inline-link-macro-rx"></block>。</block>
+  <block id="7bc2d7846b2e95d3f64a4d4f4b53cc3c" category="list-text">修复了在ONTAP故障转移恢复()期间多路径会话无法恢复的问题<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>。</block>
+  <block id="212dff1a74c955a52357c5a67478720d" category="section-title">25.02中的变化</block>
+  <block id="ef5363598e9b6f09c42a4f11b7798e31" category="section-title">24.10.1中的变更</block>
+  <block id="fe28e2a5f749261aca15de7b9e5841d0" category="list-text">*Kubernetes*：增加了对Kubernetes 1.32的支持。</block>
+  <block id="3da21bcb163e7e142caada3e22ac014f" category="list-text">更新了Trident和Trident CVE-ASUP的依赖关系、以解决CVE-2024-45337和CVE-2024-45310。</block>
+  <block id="eeda04a5133a10ebd4956c7d83dfd389" category="list-text">删除了在iSCSI自我修复期间因非CHAP门户间歇性运行状况不正常而注销的问题<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>()。</block>
 </blocks>
