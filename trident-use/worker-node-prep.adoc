@@ -18,7 +18,7 @@ Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷�
 
 == 选择合适的工具
 
-如果您使用的是驱动程序组合、则应安装驱动程序所需的所有工具。默认情况下、最新版本的RedHat CoreTM OS已安装这些工具。
+如果您使用的是驱动程序组合、则应安装驱动程序所需的所有工具。默认情况下、最新版本的Red Hat Enterprise Linux CoreTM OS (RHCOS)已安装这些工具。
 
 .NFS工具
 link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nfs-volumes["安装NFS工具"] 如果您使用的是： `ontap-nas`， `ontap-nas-economy`， `ontap-nas-flexgroup`， `azure-netapp-files`， `gcp-cvs`。
@@ -140,7 +140,7 @@ NOTE: 例如、如果在存储控制器上轮换了CHAP密钥、而网络断开�
 ----
 sudo sed -i 's/^\(node.session.auth.chap_algs\).*/\1 = MD5/' /etc/iscsi/iscsid.conf
 ----
-* 使用运行RHEL/RedHat CoreOS和iSCSI PV的工作节点时、请指定 `discard` StorageClass中的mountOption、用于执行实时空间回收。请参见 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Red Hat 文档"^]。
+* 如果将运行RHL/Red Hat Enterprise Linux Core-OS (RHOS)的工作节点与iSCSI PVs结合使用、请在StorageClass中指定 `discard`mountOption以执行实时空间回收。请参阅 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Red Hat 文档"^]。
 
 
 [role="tabbed-block"]
@@ -367,7 +367,7 @@ WARNING: Trident会修改此 `ctrl_device_tmo`值、以确保NVMe在路径发生
 
 使用适用于您的操作系统的命令安装FC工具。
 
-* 如果将运行RHE/RedHat Core-OS的工作节点与FC PV结合使用、请在StorageClass中指定 `discard`mountOption以执行实时空间回收。请参阅 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Red Hat 文档"^]。
+* 如果将运行RHL/Red Hat Enterprise Linux Core-OS (RHOS)的工作节点与FC PVs结合使用、请在StorageClass中指定 `discard`mountOption以执行实时空间回收。请参阅 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Red Hat 文档"^]。
 
 
 [role="tabbed-block"]

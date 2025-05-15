@@ -425,7 +425,6 @@
   <block id="57cad4852c9c2e439f61728e0391fe7b" category="paragraph">如果您选择将 NFS 与日志记录服务结合使用，则需要将 Ansible 变量 `OpenShift_enable_unsupported _configurations` 设置为 `true` ，以防止安装程序失败。</block>
   <block id="be11c74c1dd7f307bb80183a90dc2067" category="section-title">入门</block>
   <block id="16e90b2336fdfec64b19194247422194" category="paragraph">可以选择为这两个应用程序以及 OpenShift 集群本身的核心操作部署日志记录服务。如果选择部署操作日志记录，则通过将变量 `OpenShift_logging_use_ops` 指定为 `true` ，将创建两个服务实例。控制操作日志记录实例的变量包含 "ops" ，而应用程序实例则不包含 "ops" 。</block>
-  <block id="c5c09113a6a6ae4b75868a9e96ea3cc3" category="inline-link-macro">RedHat OpenShift 日志记录文档</block>
   <block id="02098b11f876fe10c40b6106bd9864da" category="paragraph">下表中的变量将导致 Ansible 攻略手册使用提供的详细信息为日志记录服务创建 PV 和 PVC 。与在 OpenShift 安装后使用组件安装攻略手册相比，此方法的灵活性明显降低，但是，如果您有可用的现有卷，则可以选择此方法。</block>
   <block id="47c14840d8e15331fa420b9b2f757cd9" category="cell">变量</block>
   <block id="3ec365dd533ddb7ef3d1c111186ce872" category="cell">详细信息</block>
@@ -457,8 +456,6 @@
   <block id="2a8f254749a466654f556c6466051133" category="cell">操作实例 PVC 的前缀。</block>
   <block id="e1b2d0d3228c29c069bcd139de306709" category="section-title">部署日志记录堆栈</block>
   <block id="0409a0cfdfa4f3b3033503b8309442ff" category="paragraph">如果要在初始 OpenShift 安装过程中部署日志记录，则只需遵循标准部署过程即可。Ansible 将配置和部署所需的服务和 OpenShift 对象，以便在 Ansible 完成后立即提供此服务。</block>
-  <block id="210ecadaccb6088b0dfbd2e6a0b5d0a0" category="inline-link-macro">RedHat OpenShift Container Platform 3.11 文档</block>
-  <block id="67f3e99678cc7c568f4ed29074cdc41c" category="paragraph">但是，如果在初始安装后进行部署，则 Ansible 需要使用组件攻略手册。此过程可能会因 OpenShift 的不同版本而略有变化，因此请务必阅读并遵循 <block ref="a2226808e95b8487c66dd3b8cbea118e" category="inline-link-macro-rx"></block> 适用于您的版本。</block>
   <block id="3dbf527ac3caf41ab150ec99a1737217" category="section-title">指标服务</block>
   <block id="69aa4440020e49c654aeb910f38c6bb9" category="admonition">下表仅包含与存储配置相关的变量，因为这些变量与指标服务相关。文档中还有许多其他选项，应根据您的部署情况进行查看，配置和使用。</block>
   <block id="4f692d78f978a73b157571022c1d1ba7" category="cell">`OpenShift_metrics_storage_kind`</block>
@@ -477,8 +474,6 @@
   <block id="460aaf3805271ec2e5dc35755fe317b1" category="cell">`OpenShift_metrics_cassanda_vc_storage_class_name`</block>
   <block id="0c55ca33e89539cd67eb0be3796547c5" category="cell">要使用的存储类的名称。</block>
   <block id="6c13e62eb53f29e7794d3807369299d2" category="section-title">部署指标服务</block>
-  <block id="bf1cadd7aa4e541e255df26af5451d85" category="inline-link-macro">RedHat 的 OpenShift 部署指南</block>
-  <block id="eb502d6483a644e9b6f61ca4719276d8" category="paragraph">上述变量以及部署过程可能会随 OpenShift 的每个版本而发生变化。确保您查看并遵循 <block ref="5ad72ffc1eda2c257c8947a0ad66dddb" category="inline-link-macro-rx"></block> 为您的版本配置，以便为您的环境进行配置。</block>
   <block id="f3a29486bed19a90f2da6d007818b427" category="list-title">步骤</block>
   <block id="db5eb84117d06047c97c9a0191b5fffe" category="doc">支持</block>
   <block id="5ff3faebb0ff710340bdbee89a4667ad" category="doc">使用操作员升级</block>
@@ -636,7 +631,6 @@
   <block id="40e41fb2db11266b8f751c0d5c67cba0" category="inline-link">NetApp 知识库（需要登录）</block>
   <block id="163fb9eb00818e2c7109900db1a3cc82" category="section-title">常规故障排除</block>
   <block id="f504c27d1ad305a988958b64f34468cb" category="list-text">如果 Trident Pod 无法正常启动（例如，当 Trident Pod 停留在 `ContainerCreating` 阶段且已准备好的容器少于两个时），则运行 `kubectl -n trident describe deployment trident` and `kubectl -n trident describe pod trident -%%.%.%.* -***` 可以提供更多见解。获取 kubelet 日志（例如，通过 `jlogalctl -xeu kubelet` ）也会很有帮助。</block>
-  <block id="6cc37a0664d7f97f87d34eadef23dbad" category="list-text">使用 RedHat CoreOS 时，请确保在工作节点上启用了 `iscsid` 并默认启动。可以使用 OpenShift MachineConfigs 或修改点燃模板来完成此操作。</block>
   <block id="7f0ecdfa510b31b01d331c2760643b83" category="list-text">如果在将 PV 挂载到容器时出现问题，请确保 `rpcbind` 已安装并正在运行。对主机操作系统使用所需的软件包管理器，并检查 `rpcbind` 是否正在运行。您可以通过运行 `systemctl status rpcbind` 或其等效项来检查 `rpcbind` 服务的状态。</block>
   <block id="78aeadc89feb4cf244398a7d35a0d656" category="list-text">如果 Trident 后端报告其处于 `Failed` 状态，尽管之前已正常工作，但这可能是由于更改了与后端关联的 SVM/ 管理员凭据所致。使用 `tridentctl update backend` 更新后端信息或放弃 Trident Pod 将修复此问题描述。</block>
   <block id="b851cfc28cd6e5cb9aaf87bdb59a68aa" category="list-text">如果在容器运行时安装 Trident 时遇到权限问题，请使用 ` -in cluster=false` 标志尝试安装 Trident 。这不会使用安装程序 POD ，并可避免因 `trident 安装程序` 用户而出现权限问题。</block>
@@ -1092,7 +1086,6 @@
   <block id="95dc0391ce7b396d7dd5622284e8fc3e" category="section-title">已知问题</block>
   <block id="64a8f71bee95a6635e88bce00f1a2d3c" category="paragraph">已知问题用于确定可能会阻止您成功使用本产品的问题。</block>
   <block id="6d791d3b45515fd8619e489b938f39e8" category="inline-link">挂载选项</block>
-  <block id="a5c785ee36f0f2d14349653f744c8e3b" category="list-text">要对 iSCSI PV 执行联机空间回收，工作节点上的底层操作系统可能需要将挂载选项传递到卷。这一点适用于需要 `discard` 的 RHEL/RedHat CoreOS 实例<block ref="2ee633fb26bfccf07d490458d29f92a2" category="inline-link-rx"></block>；确保中包含 Discard mountOption<block ref="b44436f062a8f5a535d8cafcffeb70b2" category="inline-link-rx"></block> 支持联机块丢弃。</block>
   <block id="0821431aba133adbfa7fa0ca1781eedd" category="list-text">ONTAP 不能同时配置多个 FlexGroup ，除非聚合集对于每个配置请求是唯一的。</block>
   <block id="ba09ee47d11962c1ccd13d7e1f10e6c5" category="doc">文档的早期版本</block>
   <block id="89bcbd8e4ba49b7310e9fa748e878c4b" category="inline-link-macro">部署的前提条件</block>
@@ -2201,7 +2194,6 @@
   <block id="1dedbfd605df8b562acc8f759a8e9acc" category="list-text">运行的Kubernetes集群 <block ref="229e1052bb9ecd8cf2680d6f44691174" category="inline-link-macro-rx"></block></block>
   <block id="17c5eeb01739643b5aef94fe18b6c849" category="paragraph">您可以使用版本选择器在最新版本和以前的四个版本之间导航、也可以使用以下链接。</block>
   <block id="2122a8acb599837078e6b76436e892c4" category="list-text">现在、在Trident中支持Kubnetes 1.27。在升级Kubernetes之前升级Trident。</block>
-  <block id="362997bacf08e019288e372d8ae1f070" category="list-text">OpenShift容器平台(AMD64和ARM64)支持的RedHat CorEOS (RHCOS)版本</block>
   <block id="a3460163c4a2854c79a419dda57ac917" category="list-text">RHEL 8+(AMD64和ARM64)</block>
   <block id="f51a58a0cffb9f9953edce6411578b53" category="list-text">Ubuntu 22.04或更高版本(AMD64和ARM64)</block>
   <block id="c5b5b00ff1b3a892c8694ab932cbf9ca" category="paragraph">有关强制断开的详细信息、请参见 <block ref="63cac71755fb6ef1f1fea34cf4037121" category="inline-link-macro-rx"></block>。</block>
@@ -2595,7 +2587,6 @@ SMB</block>
   <block id="62486fa65fc31c383ace8989549632ad" category="sidebar">使用快照</block>
   <block id="475fb21c20bb54ea8ac6cb1756aba565" category="inline-link-macro">知识库文章：无法在备用后端创建从三端PVC Snapshot创建PVC</block>
   <block id="18051638f30f342b517379b11f0442f9" category="admonition">PVC将与源卷在同一后端创建。请参见 <block ref="0d4d7e7a69b413699039bc9b916a37d5" category="inline-link-macro-rx"></block>。</block>
-  <block id="cd9179614936afe6f50612f0cf8c5615" category="inline-link">Red Hat 文档</block>
   <block id="7ba8d326bd3ffe1308f04d8ab5bf3d1a" category="paragraph">创建一个机密，其中包含后端的访问凭据。这是每个存储服务 / 平台所特有的。以下是一个示例：</block>
   <block id="afad9414d1bc420e58e3a72442b8f495" category="list-text"><block ref="685d1f2146dd079015e81918414e8971" prefix="" category="inline-code"></block>：<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> CR与后端关联、后端包含<block ref="217026e5af08bfde5815657113dbfc82" prefix=" " category="inline-code"></block> 设置为<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> CR的uid。</block>
   <block id="5008913e7135c645ebbfbd67112d3184" category="list-text"><block ref="ffbb410a55bb31f801dea6387e2745ac" prefix="" category="inline-code"></block>：<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> CR<block ref="98e7d6463271d7848db255ae6467817a" prefix=" " category="inline-code"></block> 已设置为delete。当<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> CR将被删除、它将过渡到Deleting状态。</block>
@@ -2616,7 +2607,6 @@ SMB</block>
   <block id="7439c9a99660382e94c16c5272b9bfb0" category="paragraph">除了两个例外，永久性卷是 Kubernetes 中不可变的对象。创建后，可以修改回收策略和大小。但是、这并不会阻止在Kubnetes之外修改卷的某些方面。为了针对特定应用程序自定义卷，确保容量不会意外占用，或者出于任何原因将卷移动到其他存储控制器，这一点可能是理想的。</block>
   <block id="3e01fdf7f18117c92347492814d988ee" category="admonition">自 Red Hat OpenShift 3.9 版开始，官方文档出于对数据损坏的担忧，建议不要对日志记录服务使用 NFS 。这是基于 Red Hat 对其产品的测试得出的。ONTAP NFS服务器不存在这些问题、可以轻松地备份日志记录部署。最终，您可以选择日志记录服务的协议，只需了解这两种协议在使用 NetApp 平台时都能很好地发挥作用，如果您愿意，也没有理由避免使用 NFS 。</block>
   <block id="643f15e2581a728cb2a6d66953a357d7" category="paragraph">要确保底层服务使用正确的存储、请务必根据部署方法配置Ansensant变量。让我们来看看每种部署方法的选项。</block>
-  <block id="00b454d2ba2e8d34f65f8a714304a598" category="admonition">下表仅包含与日志记录服务相关的存储配置相关的变量。您可以在中找到其他选项 <block ref="e81826ec3b15492352776daada114990" category="inline-link-macro-rx"></block> 应根据您的部署情况查看，配置和使用。</block>
   <block id="b8e4ea2ed30f2f3a9f05ef8e1cc243db" category="paragraph">与日志记录服务和 OpenShift 作为一个整体一样， Ansible 用于部署指标服务。此外、与日志记录服务一样、指标服务也可以在集群初始设置期间或集群运行后使用组件安装方法进行部署。下表包含在为指标服务配置永久性存储时非常重要的变量。</block>
   <block id="8198f2a0f41303e214bcb5ab7d9e9ef4" category="section-title">ONTAP NAS驱动程序详细信息</block>
   <block id="2b5fc47d5a68b6070472f3a239fc77f3" category="paragraph">""、<block ref="2521ef5d58fc027d3121662b7d8f9ac2" prefix=" " category="inline-code"></block>，<block ref="79e0f325804dafbdaef73b3b17c0fd8d" prefix=" " category="inline-code"></block></block>
@@ -2741,7 +2731,6 @@ SMB</block>
   <block id="e80aabfb35c98e66a71baf6a3c90a7df" category="paragraph">启动dataLIF以恢复完整功能。</block>
   <block id="5afe86ac983ac04ac6d9268beb2bc024" category="section-title">已删除命名空间映射</block>
   <block id="9b0dbff182f270b33423b281f92bddc2" category="paragraph">添加<block ref="a564a902c12941efa27c1d2ea4a19f8e" prefix=" " category="inline-code"></block> 返回到子系统。</block>
-  <block id="2994aa6a94d7af57a2fb9663129866a9" category="paragraph">如果您使用的是驱动程序组合、则应安装驱动程序所需的所有工具。默认情况下、最新版本的RedHat CoreTM OS已安装这些工具。</block>
   <block id="4771a9c521a7d39c2dcf6ee71d0ef032" category="section-title">NVMe/TCP卷</block>
   <block id="b15a013c4977a2a96afedafe316664b2" category="section-title">验证安装</block>
   <block id="d777ba5e4b1ff43d3668b14ef7200bad" category="paragraph">安装后、使用命令验证Kubenetes集群中的每个节点是否都具有唯一的NQN：</block>
@@ -2980,7 +2969,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="919b714a25b423ceadcf231ff05b607b" category="paragraph">使用以下环境变量设置*云提供程序(CP)*和*云身份(CI)*标志的值：</block>
   <block id="91a7e225ea23690e36a162b9c8a45058" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="a5f4eea4d47cf2db58f43a66329ecf1e" prefix=" " category="inline-code"></block></block>
   <block id="d7e54271baba05c2253c5c79a6155965" category="list-text">所有Kubernetes工作节点都必须安装适当的NFS工具。请参见 <block ref="f1f954e59a21e3ffe189e77dd2ee9f86" category="inline-link-macro-rx"></block> 有关详细信息：</block>
-  <block id="65a83523719e1f7b2daf393eda16321a" category="list-text">使用运行RHEL/RedHat CoreOS和iSCSI PV的工作节点时、请指定<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> StorageClass中的mountOption、用于执行实时空间回收。请参见<block ref="cef8948c7b8e90d5be591e67d93555a7" category="inline-link-rx"></block>。</block>
   <block id="d1b5b194ace83d9f896d8f8b6765def5" category="list-text">所有 Kubernetes 工作节点都应安装适当的 iSCSI 工具。请参见 <block ref="073953144b84efd85603bb3d49521e06" category="inline-link-macro-rx"></block>。</block>
   <block id="5c0a5e9c97099065874a650cf8c67a66" category="list-text"><block ref="bc54592d6183695b841c6d1880ec0bf8" prefix="" category="inline-code"></block>，<block ref="93c5bebdea9c94a0740fe6fd9bb250f0" prefix=" " category="inline-code"></block>，和<block ref="2b53761249254ce6b502f521e5cc0683" prefix=" " category="inline-code"></block> 在AKS集群上使用云标识时可选。</block>
   <block id="9837781971083d3fe119b0217014d301" category="list-text">Azure<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> 至少包含一个<block ref="c5f14b2142014dc234282a513132bad4" category="inline-link-rx"></block>。自Trident 22.01日开始<block ref="d5189de027922f81005951e6efe0efd5" prefix=" " category="inline-code"></block> 参数是后端配置文件顶层的必填字段。在虚拟池中指定的位置值将被忽略。</block>
@@ -4609,7 +4597,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="0d28255dc96cb23d422741096c09ce8e" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="bd5ed83ae12ddcfe924a6af54a0be554" prefix=" " category="inline-code"></block></block>
   <block id="15286900a0d0667ffc4d515aeec6a1d2" category="list-text">将插件二进制文件复制到路径变量中定义的位置。例如、<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block>或<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block>(您可能需要提升Privileges)：</block>
   <block id="cff063350a0daf1b0ee4c6c97eb2e2de" category="admonition">将备份还原到具有现有资源的其他命名空间不会更改与备份中的资源共享名称的任何资源。要还原备份中的所有资源、请删除并重新创建目标命名空间、或者将备份还原到新命名空间。</block>
-  <block id="e8e7bb3124435135f9fc5dab713148e1" category="list-text">如果将运行RHE/RedHat Core-OS的工作节点与FC PV结合使用、请在StorageClass中指定<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block>mountOption以执行实时空间回收。请参阅<block ref="cef8948c7b8e90d5be591e67d93555a7" category="inline-link-rx"></block>。</block>
   <block id="0ac202e458490a734271522fcedf4876" category="list-text">确保<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>正在运行：</block>
   <block id="69eeaf73fccab6d6abcba46bd6a3a3bf" category="list-text">确保<block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block>已启用且正在运行：</block>
   <block id="00ea3f7016d7b9a4ad023b106cc1e6d3" category="paragraph"><block ref="7e7b7908484dc2cebc13ec93d8042bd0" category="inline-link-macro-rx"></block>如果您使用的是<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>sanType<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block> (基于FC的SCSI)。</block>
@@ -4918,15 +4905,12 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="90de0fd1d09f4fc27d99667555a8a12f" category="paragraph">ONTAP系统具有全闪存、混合或纯HDD配置、并提供许多不同的部署模式：内部FAS、AFA和ASA集群、ONTAP Select和Cloud Volumes ONTAP。Trident支持这些ONTAP部署模式。</block>
   <block id="30712450d512dae0e7becb73c6a439fb" category="list-text">Kubbernetes 1.26 - 1.32</block>
   <block id="bde4e01f8df98626e0dc1c36a8e06a5a" category="admonition">在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高版本之前，请参见<block ref="1b428bb9b9fe27db6cd8932526864634" category="inline-link-macro-rx"></block>。</block>
-  <block id="4cd3b50237790ab53e31a7a9fbd28583" category="section-title">Trident支持KubeVirt和OpenShift虚拟化</block>
   <block id="8f323a9e5c0c5162cc6e0d48e0cb1850" category="paragraph-title">支持的存储驱动程序：</block>
-  <block id="0c30a28f9129b866c1d3cdcfa8c2fe15" category="paragraph">对于KubeVirt和OpenShift虚拟化、Trident支持以下ONTAP驱动程序：</block>
   <block id="8321592ce24c8a122ecf26a63cfca407" category="list-text">ontap-NAS</block>
   <block id="caafdf62a2c609bfa5316118231a1007" category="list-text">ONTAP—NAS—经济型</block>
   <block id="188c0d870c5f930d042bdaa1f1fc3573" category="list-text">NVMe-SAN (iSCSI、FCP、基于的ONTAP)</block>
   <block id="1bbe28a8ef9b1c85d07b013af0628d36" category="list-text">ONTAP—SAN经济型(仅限iSCSI)</block>
   <block id="db526afc657fdfec1ca176eb9d281f89" category="list-title">注意事项：</block>
-  <block id="749d892e342a5e3346877c1b76b9d9ee" category="list-text">在OpenShift虚拟化环境中更新存储类以使用<block ref="7cfbb6f07899c8071ff38e69dca190e2" prefix=" " category="inline-code"></block>参数(例如：<block ref="6db865adcb81b7cf881ff9839476f850" prefix=" " category="inline-code"></block>)。如果需要、可使用中的参数<block ref="c6dda2fd1e6d70d582099348cfe6c847" prefix=" " category="inline-code"></block>将卷模式明确设置为阻止<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block>、以通知数据卷创建者。</block>
   <block id="f97169869bcbff98d85a1b7ec1d7b5f8" category="list-text">对于需要rwx访问模式的实时迁移工作流、支持以下组合：</block>
   <block id="d3701dd5a7c831a74d496a90c3a65f13" category="list-text">NFS +<block ref="7f5db5e0500761cacd6f89838e2ebdc5" prefix=" " category="inline-code"></block></block>
   <block id="42c7d371004c0674ae717618c4a08508" category="list-text">iSCSI +<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block>(原始设备)</block>
@@ -4991,7 +4975,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="c2653fd16e9e4da4d4d738616dcb956a" category="list-text">增加了对Kubnetes 1.32的支持。</block>
   <block id="2e110255627afe2fff57458d9bb2205b" category="list-text">*OpenShift*：</block>
   <block id="ddbeca6e89eb34fdc94eeec79b9f6a43" category="list-text">增加了对ROSA集群上的RHCOS自动iSCSI节点准备的支持。</block>
-  <block id="e372f544148934d9aa953a8a14719875" category="list-text">增加了对ONTAP驱动程序OpenShift虚拟化的支持。</block>
   <block id="e5f47a8bc4c6e320936843808b4b8392" category="list-text">在ONTAP驱动程序上增加了光纤通道支持。</block>
   <block id="00a0b47f2d2eb76897798a0b983daf88" category="list-text">增加了NVMe Ks支持。</block>
   <block id="890fc08a388302375744ade0476c1409" category="list-text">已切换到所有基本映像的暂存映像。</block>
@@ -5349,7 +5332,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="50a4fd89cedf0068776b972ce96fcceb" category="cell">用于使用 ONTAP REST API 的布尔参数。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为时<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，Trident使用ONTAP REST API与后端通信；设置为时<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block> 应用程序。预定义的和角色可以满足这一<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 要求<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>；更<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>改为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>以使用ONTAPI (ZAPI)调用。</block>
   <block id="43086d9a7f35d289c190a6d377be9418" category="paragraph">对于 snapshotReserve = 50% ， PVC 请求 = 5GiB ，卷总大小为 5/.5 = 10GiB ，可用大小为 5GiB ，这是用户在 PVC 请求中请求的大小。此<block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block>命令应显示类似于以下示例的结果：</block>
   <block id="01f46441d2a65849d403adec609ee5fb" category="cell">用于使用 ONTAP REST API 的布尔参数。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为时<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，Trident使用ONTAP REST API与后端通信；设置为时<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block> 应用程序。预定义的和角色可以满足这一<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 要求<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>；更<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>改为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>以使用ONTAPI (ZAPI)调用。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block> 完全符合NVMe/TCP要求。*如果指定，则ASA R2*始终设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。</block>
-  <block id="29faa5f5c2de3c7a4ab9c78562616cdd" category="admonition">如果您使用RedHat OpenShift、请务必注意命名空间标注在OpenShift环境中的关键作用。命名空间标注可确保还原的Pod遵循OpenShift安全上下文约束(SCC)定义的适当权限和安全配置、并可在没有权限问题的情况下访问卷。有关详细信息，请参阅<block ref="9c33d4f1fa6e1f731baeaf3a5fe229cd" category="inline-link-rx"></block>。</block>
   <block id="d858eab1cb0b74aa1e6d052d7c06bd76" category="list-text">OpenShift 4.10 - 4.18</block>
   <block id="42113cf11e30b764619d3a98db65262d" category="list-text">R润 彻Kubernetes Engine 2 (RKE2) v1.26.7+rke2r1、v1.28.5+rke2r1</block>
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">为两个卷模式(文件和卷模式：块(原始设备)存储)增加了对KubeVirt / OpenShift虚拟化VM的备份和恢复支持。此支持与所有Trident驱动程序兼容、并可增强使用NetApp SnapMirror和Trident Protect复制存储时的现有保护功能。</block>
@@ -5520,4 +5502,22 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="fe28e2a5f749261aca15de7b9e5841d0" category="list-text">*Kubernetes*：增加了对Kubernetes 1.32的支持。</block>
   <block id="3da21bcb163e7e142caada3e22ac014f" category="list-text">更新了Trident和Trident CVE-ASUP的依赖关系、以解决CVE-2024-45337和CVE-2024-45310。</block>
   <block id="eeda04a5133a10ebd4956c7d83dfd389" category="list-text">删除了在iSCSI自我修复期间因非CHAP门户间歇性运行状况不正常而注销的问题<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>()。</block>
+  <block id="93898a0aff94da797ef263a35d0ba2f8" category="admonition">如果您使用Red Hat OpenShift、请务必注意命名空间标注在OpenShift环境中的关键作用。命名空间标注可确保还原的Pod遵循OpenShift安全上下文约束(SCC)定义的适当权限和安全配置、并可在没有权限问题的情况下访问卷。有关详细信息，请参阅<block ref="9c33d4f1fa6e1f731baeaf3a5fe229cd" category="inline-link-rx"></block>。</block>
+  <block id="78937357687a7b0292ed689d4e420485" category="inline-link">Red Hat 文档</block>
+  <block id="89e30b0f2c0e48835ff872a994fc749c" category="list-text">如果将运行RHL/Red Hat Enterprise Linux Core-OS (RHOS)的工作节点与FC PVs结合使用、请在StorageClass中指定<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block>mountOption以执行实时空间回收。请参阅<block ref="65c95aeda8cb0b26307f9839dd3fefbf" category="inline-link-rx"></block>。</block>
+  <block id="e80b6a304e29d5dfcb9150f47d69db94" category="section-title">Trident支持KubeVirt和OpenShift虚拟化</block>
+  <block id="cffd29fb8e17cb30625130ee24cd667d" category="paragraph">Trident支持以下用于KubeVirt和OpenShift虚拟化的ONTAP驱动程序：</block>
+  <block id="0ae326ef84f2a6bc4be48951f88c0162" category="list-text">在OpenShift虚拟化环境中更新存储类以使用<block ref="7cfbb6f07899c8071ff38e69dca190e2" prefix=" " category="inline-code"></block>参数(例如：<block ref="6db865adcb81b7cf881ff9839476f850" prefix=" " category="inline-code"></block>)。如果需要、可使用中的参数<block ref="c6dda2fd1e6d70d582099348cfe6c847" prefix=" " category="inline-code"></block>将卷模式明确设置为阻止<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block>、以通知数据卷创建者。</block>
+  <block id="daa6a182f8035711e9635994f572c7bc" category="list-text">OpenShift容器平台(amd64和ARM64)支持的Red Hat Enterprise Linux CoreTM OS (RHCOS)版本</block>
+  <block id="2bf380408feee0a9443f217c907f0681" category="inline-link-macro">Red Hat OpenShift日志记录文档</block>
+  <block id="796814ebd3d324fe438f0c699c37c89e" category="admonition">下表仅包含与日志记录服务相关的存储配置相关的变量。您可以找到其他选项、应根据您的部署查看、配置和使用这些选项<block ref="202ad309c67a74272d432350a2d0cf76" category="inline-link-macro-rx"></block>。</block>
+  <block id="3a298688c4d78e1b7532d3859cd16a57" category="inline-link-macro">Red Hat OpenShift Container Platform 3.11文档</block>
+  <block id="620fb6046d1af07a3df48b291902887c" category="paragraph">但是，如果在初始安装后进行部署，则 Ansible 需要使用组件攻略手册。此过程可能会随OpenShift的不同版本略有不同、因此请务必阅读并遵循<block ref="87091f5bcd27af3d8592e461d451be85" category="inline-link-macro-rx"></block>您的版本。</block>
+  <block id="95c7854cff26589ad1555baa8672c001" category="inline-link-macro">Red Hat的OpenShift部署指南</block>
+  <block id="757eaf1f1a551aabeb24f57705261f85" category="paragraph">上述变量以及部署过程可能会随 OpenShift 的每个版本而发生变化。请务必查看并遵循<block ref="1b29818189b1aff318eccaee960b09cb" category="inline-link-macro-rx"></block>您的版本、以便为您的环境配置此版本。</block>
+  <block id="4e602d306baa843baf9ed9bd9ce452b1" category="list-text">增加了对ONTAP驱动程序OpenShift虚拟化的支持。</block>
+  <block id="814077b936b9bc9d2731d0f5fd50fde3" category="list-text">要对 iSCSI PV 执行联机空间回收，工作节点上的底层操作系统可能需要将挂载选项传递到卷。这一点适用于RERL/Red Hat Enterprise Linux CoreTM OS (RHCOS)实例、此实例需要<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block><block ref="2ee633fb26bfccf07d490458d29f92a2" category="inline-link-rx"></block>；请确保在n ü^中包含discard mountOption、以支持联机块丢弃<block ref="15699dd651c6fec3ed329f2bf55d54b4" category="inline-link-rx"></block><block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix="[" category="inline-code"></block>。</block>
+  <block id="de6d7aa94730ba882f7284ac8e07a0d1" category="paragraph">如果您使用的是驱动程序组合、则应安装驱动程序所需的所有工具。默认情况下、最新版本的Red Hat Enterprise Linux CoreTM OS (RHCOS)已安装这些工具。</block>
+  <block id="ce557c2f93da665463decf7b19e61b7b" category="list-text">如果将运行RHL/Red Hat Enterprise Linux Core-OS (RHOS)的工作节点与iSCSI PVs结合使用、请在StorageClass中指定<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block>mountOption以执行实时空间回收。请参阅<block ref="65c95aeda8cb0b26307f9839dd3fefbf" category="inline-link-rx"></block>。</block>
+  <block id="3992b498f2510c20f4dc0df9804e6038" category="list-text">使用Red Hat Enterprise Linux CoreTM OS (RHCOS)时、请确保<block ref="3fe4dc8de876aca2c78fa0cd9c6d0b65" prefix=" " category="inline-code"></block>已在工作节点上启用并默认启动。可以使用 OpenShift MachineConfigs 或修改点燃模板来完成此操作。</block>
 </blocks>

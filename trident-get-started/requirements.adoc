@@ -81,7 +81,7 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高�
 == Trident支持KubeVirt和OpenShift虚拟化
 
 .支持的存储驱动程序：
-对于KubeVirt和OpenShift虚拟化、Trident支持以下ONTAP驱动程序：
+Trident支持以下用于KubeVirt和OpenShift虚拟化的ONTAP驱动程序：
 
 * ontap-NAS
 * ONTAP—NAS—经济型
@@ -174,7 +174,7 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高�
 
 虽然Trident不正式支持特定操作系统、但已知以下操作系统可以正常工作：
 
-* OpenShift容器平台(AMD64和ARM64)支持的RedHat CorEOS (RHCOS)版本
+* OpenShift容器平台(amd64和ARM64)支持的Red Hat Enterprise Linux CoreTM OS (RHCOS)版本
 * RHEL 8+(AMD64和ARM64)
 +
 

@@ -196,7 +196,7 @@ sudo modprobe nvme-tcp
 
 使用适用于您的操作系统的命令安装FC工具。
 
-* 如果将运行RHE/RedHat Core-OS的工作节点与FC PV结合使用、请在StorageClass中指定 `discard`mountOption以执行实时空间回收。请参阅 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Red Hat 文档"^]。
+* 如果将运行RHL/Red Hat Enterprise Linux Core-OS (RHOS)的工作节点与FC PVs结合使用、请在StorageClass中指定 `discard`mountOption以执行实时空间回收。请参阅 https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["Red Hat 文档"^]。
 
 
 [role="tabbed-block"]
