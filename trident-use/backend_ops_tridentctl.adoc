@@ -53,7 +53,7 @@ tridentctl delete backend <backend-name> -n trident
 
 
 
-NOTE: 如果Trident从此后端配置了仍存在的卷和快照、则删除后端将阻止其配置新卷。后端将继续处于"Deleting"状态、Trident将继续管理这些卷和快照、直到将其删除为止。
+NOTE: 如果Trident从此后端配置了仍存在的卷和快照、则删除后端将阻止其配置新卷。后端将继续处于"正在删除"状态。
 
 
 
