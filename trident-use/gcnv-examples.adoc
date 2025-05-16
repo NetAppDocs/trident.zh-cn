@@ -418,7 +418,7 @@ parameters:
 
 === SMB卷的示例定义
 
-使用 `nasType`， `node-stage-secret-name`，和  `node-stage-secret-namespace`、您可以指定SMB卷并提供所需的Active Directory凭据。
+使用 `nasType`、 `node-stage-secret-name`和 `node-stage-secret-namespace`，您可以指定SMB卷并提供所需的Active Directory凭据。任何具有任何/无权限的Active Directory用户/密码均可用作节点阶段密钥。
 
 .默认命名空间上的基本配置
 [%collapsible]
