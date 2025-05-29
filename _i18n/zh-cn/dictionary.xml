@@ -2421,7 +2421,6 @@ SMB</block>
   <block id="9d384cd22f1c9bc6a23136fe35d2a51c" category="paragraph">将PV连接到POD以调整大小。调整 iSCSI PV 大小时，有两种情况：</block>
   <block id="a22a8450047f7b7aea2c76b348f6ba43" category="summary">您可以查看现有存储类、设置默认存储类、确定存储类后端以及删除存储类。</block>
   <block id="e372af4ebeb99af557aa13609f47f47c" category="admonition">集群中一次只能有一个默认存储类。Kubernetes 在技术上不会阻止您拥有多个存储类，但其行为就像根本没有默认存储类一样。</block>
-  <block id="ab12af74f48620acb3eaeb14535b6d02" category="paragraph">支持卷快照<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>，<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>，<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>，<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>，<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block>，<block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block>，和<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> 驱动程序。</block>
   <block id="c1ec7161e63fe862aeb30466f8f3f3b8" category="paragraph">要使用快照、您必须具有外部快照控制器和自定义资源定义(CRD)。这是Kubernetes流程编排程序(例如：Kubeadm、GKE、OpenShift)的职责。</block>
   <block id="d0838c5cbd45cca11f4f53eb773d017d" category="paragraph">如果您的Kubernetes分发版不包含快照控制器和CRD、请参见 <block ref="048c22f74eff12037af96b48becdf135" category="inline-xref-macro-rx"></block>。</block>
   <block id="c4f5303a406f47eb87bf815d986165ee" category="section-title">创建卷快照</block>
@@ -5284,20 +5283,12 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="ee3b7d497a79c10fe3b10cda25267876" category="paragraph">您可以按照中的说明安装提示管理器<block ref="34c399dcb7431f049905523dd168baa8" category="inline-link-rx"></block>。</block>
   <block id="9147f13af253be263e759a06097eea20" category="section-title">第2步：配置监控工具以协同工作</block>
   <block id="73be38664a808318efe65c02c4ce747c" category="paragraph">安装监控工具后、您需要将其配置为协同工作。</block>
-  <block id="f7c326ea0f47e0df6c4d60c67fc92de6" category="list-text">将Kube-state-metrics与Prometheus集成。编辑Prometheus配置文件<block ref="c3d29ac8b40407b824f83a7f7db6e6bb" prefix="(" category="inline-code"></block>)并添加Kube-state-metrics服务信息。例如：</block>
-  <block id="653d37cbed9ac789942fa035d0ae62cf" category="listing-title">Prometheus.yml：Kube-state-metrics服务与Prometheus的集成</block>
-  <block id="3e7ba607c96ae11da56a66f77a490380" category="list-text">配置Prometheus以将警报路由到警报管理器。编辑Prometheus配置文件<block ref="c3d29ac8b40407b824f83a7f7db6e6bb" prefix="(" category="inline-code"></block>)并添加以下部分：</block>
-  <block id="40e966a8a619ecdcdef18e581c1551d5" category="listing-title">Prometheus.yml：向警报管理器发送警报</block>
   <block id="68f04b43068f22f98aaa6513240dd2b5" category="paragraph">Prometheus现在可以从Kube-state-metrics收集指标、并可向警报管理器发送警报。现在、您可以配置触发警报的条件以及警报的发送位置。</block>
   <block id="a42cb9abdbaf69f90fba5592304008cd" category="section-title">第3步：配置警报和警报目标</block>
   <block id="1138a7ff5cea0f83ce07834c8e02315c" category="paragraph">将这些工具配置为协同工作后、您需要配置触发警报的信息类型以及警报的发送位置。</block>
   <block id="917045fa08d9c44ee88951e8cdb4023b" category="section-title">警报示例：备份失败</block>
-  <block id="2e894935b55591ae58c162389bf0e25d" category="paragraph">以下示例定义了备份自定义资源的状态设置为5秒或更长时间时触发的严重警报<block ref="902b0d55fddef6f8d651fe1035b7d4bd" prefix=" " category="inline-code"></block>。您可以自定义此示例以匹配您的环境、并将此YAML段包含在您的配置文件中<block ref="c3d29ac8b40407b824f83a7f7db6e6bb" prefix=" " category="inline-code"></block>：</block>
-  <block id="588eb18cd09fd92471ac447d156515e2" category="listing-title">R则.yml：为失败的备份定义Promeheus警报</block>
   <block id="e8665bc518bf7a6d63332be811e8f6cb" category="section-title">将警报管理器配置为向其他通道发送警报</block>
-  <block id="502a9d29b17b7f6331b5a1d5325855ac" category="paragraph">通过在文件中指定相应的配置、您可以将警报管理器配置为向其他通道发送通知、例如电子邮件、PagerDty、Microsoft团队或其他通知服务<block ref="3a4637925a72e08829320dd2ed20aa17" prefix=" " category="inline-code"></block>。</block>
   <block id="c9272f0d68fac2055ba2d71be6c87b1b" category="paragraph">以下示例将配置警报管理器、以便向Sl延 时信道发送通知。要根据您的环境自定义此示例、请将此密钥的值替换<block ref="aa8106611bcfe43fec48e6d1d371de52" prefix=" " category="inline-code"></block>为您的环境中使用的Slackwebhook URL：</block>
-  <block id="4b437b03cad5e359b0e810e6dc330afc" category="listing-title">alerts manager.yml：将警报发送到备用信道</block>
   <block id="792d490e884279c961aba837ccd9b67a" category="admonition">Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。</block>
   <block id="d110d36251c4dd04b7da5ef237ac6063" category="inline-link">文档</block>
   <block id="2cd3acbff016f03ffcfe72208e450647" category="admonition">在使用Koria作为数据移动工具还原备份时、您可以选择在CR中指定标注、也可以使用命令行界面控制Koria使用的主存储的行为。有关可配置选项的详细信息、请参见<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block>。有关使用Trident Protect命令行界面指定标注的详细信息、请使用<block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>命令。</block>
@@ -5521,4 +5512,13 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="3992b498f2510c20f4dc0df9804e6038" category="list-text">使用Red Hat Enterprise Linux CoreTM OS (RHCOS)时、请确保<block ref="3fe4dc8de876aca2c78fa0cd9c6d0b65" prefix=" " category="inline-code"></block>已在工作节点上启用并默认启动。可以使用 OpenShift MachineConfigs 或修改点燃模板来完成此操作。</block>
   <block id="aaa0c40b2c8011bdffe750a1ba36c398" category="paragraph">使用<block ref="296026821ada2ab8aebcf13547a63df5" prefix=" " category="inline-code"></block>、<block ref="e12fdd044232e643620eed06bf33c7af" prefix=" " category="inline-code"></block>和<block ref="1ad68a6a046942b7c1666aed825df70a" prefix=" " category="inline-code"></block>，您可以指定SMB卷并提供所需的Active Directory凭据。任何具有任何/无权限的Active Directory用户/密码均可用作节点阶段密钥。</block>
   <block id="1e0e0f35966b4297310419e9023a837b" category="admonition">如果Trident从此后端配置了仍存在的卷和快照、则删除后端将阻止其配置新卷。后端将继续处于"正在删除"状态。</block>
+  <block id="e441c0f153e5f2e8328aa8c2e9badf45" category="list-text">将Kube-state-metrics与Prometheus集成。编辑Prometheus配置文件<block ref="aacdd9a7e2029a243488dbd0c49c5bbb" prefix="(" category="inline-code"></block>)并添加Kube-state-metrics服务信息。例如：</block>
+  <block id="ce813b4c1248ec7e0f14b08f1a037497" category="listing-title">prometheus.yaml：kube-state-metrics 服务与 Prometheus 的集成</block>
+  <block id="934a401d15e7226d8cb60e2a12f28611" category="list-text">配置Prometheus以将警报路由到警报管理器。编辑Prometheus配置文件<block ref="aacdd9a7e2029a243488dbd0c49c5bbb" prefix="(" category="inline-code"></block>)并添加以下部分：</block>
+  <block id="2a88bf2582239d12cc0700d3c6857519" category="listing-title">prometheus.yaml：向 Alertmanager 发送警报</block>
+  <block id="ae9aa1ddb34419c7b7b7f49feba7fb45" category="paragraph">以下示例定义了备份自定义资源的状态设置为5秒或更长时间时触发的严重警报<block ref="902b0d55fddef6f8d651fe1035b7d4bd" prefix=" " category="inline-code"></block>。您可以自定义此示例以匹配您的环境、并将此YAML段包含在您的配置文件中<block ref="aacdd9a7e2029a243488dbd0c49c5bbb" prefix=" " category="inline-code"></block>：</block>
+  <block id="62c242d2e7dfd83a58d8ccf60227d68f" category="listing-title">rules.yaml：定义失败备份的 Prometheus 警报</block>
+  <block id="70694773feb2b23c45e7ff7a6a3c3c8b" category="paragraph">通过在文件中指定相应的配置、您可以将警报管理器配置为向其他通道发送通知、例如电子邮件、PagerDty、Microsoft团队或其他通知服务<block ref="9001eaececb0884cbeb80659e81340ad" prefix=" " category="inline-code"></block>。</block>
+  <block id="965357e3c90ccf3fba01174c6508d562" category="listing-title">alertmanager.yaml：向 Slack 频道发送警报</block>
+  <block id="fb72ca78c839cefc52d39ebcecaf6827" category="paragraph">卷快照支持<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ， <block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> ， <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ， <block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> ， <block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> ， <block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block> ， <block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> ， 和<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>司机。</block>
 </blocks>

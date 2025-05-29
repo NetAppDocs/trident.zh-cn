@@ -18,7 +18,7 @@ summary: '持久卷(PVs)的Kubbernetes卷快照支持卷的时间点副本。您
 
 == 概述
 
-支持卷快照 `ontap-nas`， `ontap-nas-flexgroup`， `ontap-san`， `ontap-san-economy`， `solidfire-san`， `gcp-cvs`，和 `azure-netapp-files` 驱动程序。
+卷快照支持 `ontap-nas` ，  `ontap-nas-flexgroup` ，  `ontap-san` ，  `ontap-san-economy` ，  `solidfire-san` ，  `gcp-cvs` ，  `azure-netapp-files` ， 和 `google-cloud-netapp-volumes`司机。
 
 .开始之前
 要使用快照、您必须具有外部快照控制器和自定义资源定义(CRD)。这是Kubernetes流程编排程序(例如：Kubeadm、GKE、OpenShift)的职责。

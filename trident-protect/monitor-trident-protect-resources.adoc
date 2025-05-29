@@ -66,7 +66,7 @@ customResourceState:
     spec:
       resources:
       - groupVersionKind:
-          group: astra.netapp.io
+          group: protect.trident.netapp.io
           kind: "Backup"
           version: "v1"
         labelsFromPath:
@@ -84,7 +84,7 @@ customResourceState:
                 appReference: ["spec", "applicationRef"]
 rbac:
   extraRules:
-  - apiGroups: ["backups.protect.trident.netapp.io"]
+  - apiGroups: ["protect.trident.netapp.io"]
     resources: ["backups"]
     verbs: ["list", "watch"]
 
@@ -124,9 +124,9 @@ helm install custom-resource -f metrics-config.yaml prometheus-community/kube-st
 安装监控工具后、您需要将其配置为协同工作。
 
 .步骤
-. 将Kube-state-metrics与Prometheus集成。编辑Prometheus配置文件(`prometheus.yml`)并添加Kube-state-metrics服务信息。例如：
+. 将Kube-state-metrics与Prometheus集成。编辑Prometheus配置文件(`prometheus.yaml`)并添加Kube-state-metrics服务信息。例如：
 +
-.Prometheus.yml：Kube-state-metrics服务与Prometheus的集成
+.prometheus.yaml：kube-state-metrics 服务与 Prometheus 的集成
 [source, yaml]
 ----
 ---
@@ -134,26 +134,26 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: prometheus-config
-  namespace: astra-connector
+  namespace: trident-protect
 data:
-  prometheus.yml: |
+  prometheus.yaml: |
     global:
       scrape_interval: 15s
     scrape_configs:
       - job_name: 'kube-state-metrics'
         static_configs:
-          - targets: ['kube-state-metrics.astra-connector.svc:8080']
+          - targets: ['kube-state-metrics.trident-protect.svc:8080']
 ----
-. 配置Prometheus以将警报路由到警报管理器。编辑Prometheus配置文件(`prometheus.yml`)并添加以下部分：
+. 配置Prometheus以将警报路由到警报管理器。编辑Prometheus配置文件(`prometheus.yaml`)并添加以下部分：
 +
-.Prometheus.yml：向警报管理器发送警报
+.prometheus.yaml：向 Alertmanager 发送警报
 [source, yaml]
 ----
 alerting:
   alertmanagers:
     - static_configs:
         - targets:
-            - alertmanager.astra-connector.svc:9093
+            - alertmanager.trident-protect.svc:9093
 ----
 
 
@@ -170,12 +170,12 @@ Prometheus现在可以从Kube-state-metrics收集指标、并可向警报管理�
 
 === 警报示例：备份失败
 
-以下示例定义了备份自定义资源的状态设置为5秒或更长时间时触发的严重警报 `Error`。您可以自定义此示例以匹配您的环境、并将此YAML段包含在您的配置文件中 `prometheus.yml`：
+以下示例定义了备份自定义资源的状态设置为5秒或更长时间时触发的严重警报 `Error`。您可以自定义此示例以匹配您的环境、并将此YAML段包含在您的配置文件中 `prometheus.yaml`：
 
-.R则.yml：为失败的备份定义Promeheus警报
+.rules.yaml：定义失败备份的 Prometheus 警报
 [source, yaml]
 ----
-rules.yml: |
+rules.yaml: |
   groups:
     - name: fail-backup
         rules:
@@ -192,15 +192,15 @@ rules.yml: |
 
 === 将警报管理器配置为向其他通道发送警报
 
-通过在文件中指定相应的配置、您可以将警报管理器配置为向其他通道发送通知、例如电子邮件、PagerDty、Microsoft团队或其他通知服务 `alertmanager.yml`。
+通过在文件中指定相应的配置、您可以将警报管理器配置为向其他通道发送通知、例如电子邮件、PagerDty、Microsoft团队或其他通知服务 `alertmanager.yaml`。
 
 以下示例将配置警报管理器、以便向Sl延 时信道发送通知。要根据您的环境自定义此示例、请将此密钥的值替换 `api_url`为您的环境中使用的Slackwebhook URL：
 
-.alerts manager.yml：将警报发送到备用信道
+.alertmanager.yaml：向 Slack 频道发送警报
 [source, yaml]
 ----
 data:
-  alertmanager.yml: |
+  alertmanager.yaml: |
     global:
       resolve_timeout: 5m
     route:
