@@ -5166,7 +5166,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="beca1b1ae9141eb4cf9a371088911e0f" category="paragraph">从使用Restic创建的Amazon S3备份还原30 GB或更大的文件时、还原操作可能会失败。解决方法是、使用Koria作为数据移动工具备份数据(Koria是备份的默认数据移动工具)。有关说明、请参见<block ref="1e108e5c10b0ba51ea4cfaf507765efb" category="inline-link-rx"></block> 。</block>
   <block id="7fc5875d06887df5109a87a0ada90eca" category="section-title">配置AppVault身份验证和密码</block>
   <block id="8e2c4d33f50c044b257a84cd65ff1c79" category="section-title">数据移动工具存储库密码</block>
-  <block id="12ae6793b05f84758a85b289757c4f34" category="list-text">使用Trident Protect命令行界面创建AppVault对象时、您可以使用<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block>参数指定密钥。</block>
   <block id="e64d157c7a9e337d525d51f62d9d0809" category="section-title">创建数据移动工具存储库密码密钥</block>
   <block id="fc114cb2ee6c7bff559d58e2a7454cab" category="paragraph">使用以下示例创建密码密钥。创建AppVault对象时、您可以指示Trident Protect使用此密钥向数据移动工具存储库进行身份验证。</block>
   <block id="571768fad7edd9c4f57173c592c1f86c" category="section-title">云提供商的AppVault密钥生成示例</block>
@@ -5251,7 +5250,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="8430f2c56dfc9e79fcaf741392d54499" category="list-text">描述exech本 运行对象以查看最终详细信息和状态：</block>
   <block id="b343abb76f62f4eef4afa255e885eee4" category="paragraph">从Trident 25.02开始、新增功能摘要提供了有关Trident和Trident Protect版本的增强功能、修复和弃用的详细信息。</block>
   <block id="5674eb46caea5efcff5615daf30ab92d" category="paragraph">在使用CRS或Trident Protect命令行界面插件创建AppVault对象时、您可以选择指示Trident Protect使用包含用于Restic和Koria存储库加密的自定义密码的Kubernetes机密。如果未指定密钥、Trident Protect将使用默认密码。</block>
-  <block id="3703eceb9535f8a68e38a00f0ed1092d" category="list-text">手动创建AppVault CRS时，可以使用*spec.dataMoverPassword" SecretRef*字段指定密钥。</block>
   <block id="4fc9faf161c64ed80d0fb8ca9aa0882e" category="admonition">根据所使用的数据移动工具、您只需包含该数据移动工具的相应密码即可。例如、如果您正在使用Restic、并且将来不打算使用KONIA、则在创建密钥时只能包含Restic密码。</block>
   <block id="6a346946ba0777d650b6e41a4c30c7b6" category="paragraph">确保已删除要删除的AppVault正在使用的所有快照和备份CRS。</block>
   <block id="b00fc94596cde685c68e0bedddb72ec6" category="summary">您可以使用Kube-state-metrics和Prometheus监控Trident Protect资源的状态。这样、您就可以获得有关部署、节点和Pod的运行状况信息。</block>
@@ -5522,4 +5520,10 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="fb72ca78c839cefc52d39ebcecaf6827" category="paragraph">卷快照支持<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ， <block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> ， <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ， <block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> ， <block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> ， <block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block> ， <block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> ， 和<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>司机。</block>
   <block id="173f808fc086ccd7ca8b43512be2cd48" category="admonition">这<block ref="e28ab870e47892fbd81eca8fc84c45ac" prefix=" " category="inline-code"></block>属性仅在原始属性和新属性都有效时<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block>使用相同的存储后端。如果您尝试恢复到<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block>如果使用不同的存储后端，则恢复操作将失败。</block>
   <block id="a42f76d82e8a868d79d9c1663c081ae0" category="list-text">注册表.k8s.io/sig-storage/CsI-s不同：v1.13.1</block>
+  <block id="02c19b7bc038d2af238bbd729bc3d9c4" category="list-text">手动创建 AppVault CR 时，使用 *spec.dataMoverPasswordSecretRef* 字段指定密钥。</block>
+  <block id="0a636ed0406fe1d7ddf9db59b32011b3" category="list-text">使用 Trident Protect CLI 创建 AppVault 对象时，使用<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block>参数来指定秘密。</block>
+  <block id="d2a7dc5804ec844f3f7bfb903e97693f" category="section-title">S3 兼容存储 IAM 权限</block>
+  <block id="48f73146a4944adc8ee8fb44ba954d59" category="paragraph">当您访问与 S3 兼容的存储（例如 Amazon S3、Generic S3）时， <block ref="3d0b4c23d9ed62ec7d7cd16273ca2521" category="inline-link-rx"></block> ， 或者<block ref="3a31dfad8c316380b9a5542d694c5833" category="inline-link-rx"></block>使用 Trident 保护时，您需要确保您提供的用户凭证具有访问存储桶所需的权限。以下是一个策略示例，该策略授予使用 Trident 保护访问所需的最低权限。您可以将此策略应用于管理与 S3 兼容的存储桶策略的用户。</block>
+  <block id="d9b7f314625fb7dcf35c741afe65b676" category="inline-link">Amazon S3 文档</block>
+  <block id="51ef32359424209f7163e58a5b1ab92e" category="paragraph">有关 Amazon S3 策略的更多信息，请参阅<block ref="61017e44ea21b481e69f04f8ac510768" category="inline-link-rx"></block> 。</block>
 </blocks>
