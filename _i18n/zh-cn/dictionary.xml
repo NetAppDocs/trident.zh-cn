@@ -3917,7 +3917,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="04475efebba67943de12a2269d2e0a7b" category="paragraph">此示例介绍如何指示Trident使用动态导出策略自动创建和管理导出策略。这对于和<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>驱动程序是相同的<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>。</block>
   <block id="917b750655d8fd1d6c961e661535fa99" category="paragraph">Trident会在"Comments"字段中设置配置标签。注释在FlexVol for或FlexGroup<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> for上设置<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>。配置时、Trident会将虚拟池上的所有标签复制到存储卷。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。</block>
   <block id="fb66862ac33cf61ecc10382c3a42dee3" category="paragraph">Trident将决定选择哪个虚拟池、并确保满足存储要求。</block>
-  <block id="05a22e6a579b05ed202716e4f439d475" category="list-text">对于所有ONTAP后端、Trident要求至少为SVM分配一个聚合。</block>
   <block id="3791349e449ca2bc9a8b7b7ed4c843de" category="list-text">Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。有关详细信息、请参见 <block ref="688177e6b45c5d27a545463079c58d82" category="inline-xref-macro-rx"></block> 。</block>
   <block id="bef1bdf06ff1fb19147e51880974a6c5" category="paragraph">Trident提供了两种对ONTAP后端进行身份验证的模式。</block>
   <block id="c3ac6347a688cffd729947263e3387fb" category="list-text">基于证书：此模式需要在后端安装证书、Trident才能与ONTAP集群进行通信。此处，后端定义必须包含客户端证书，密钥和可信 CA 证书的 Base64 编码值（如果使用）（建议）。</block>
@@ -5045,8 +5044,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="aecb281656d93e34b85fc03341498ff2" category="paragraph">您必须在ONTAP后端为SVM配置FC。这是FC的基本后端配置。</block>
   <block id="d502f4db20ef2dbccab335781e870976" category="example-title">formatOptions的ONTAP SAN经济驱动程序示例</block>
   <block id="54ed52257df13a4cb85caecc569dfeff" category="paragraph">Trident会在"Comments"字段中设置配置标签。在配置时、FlexVol volume Trident会将虚拟池上的所有标签复制到存储卷上、从而设置注释。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。</block>
-  <block id="4e18c1645b4b67b418a76a6692256f62" category="paragraph">从25.02版开始、Trident会自动检测9.16.1 9.161或更高版本的ASA R2特性、并通过iSCSI协议在ASA R2上配置和使用存储。</block>
-  <block id="4e759832f9d60e8c80e9d392f33b28c9" category="admonition">Trident要求向SVM分配一个或多个聚合。使用ASA R2时、只有在模式下使用ONTAP命令行界面时、才能执行此操作<block ref="776e6c3d14fd9df9fc13e130d598c448" prefix=" " category="inline-code"></block>。</block>
   <block id="684e3a49585228dba75783996b7b6fe7" category="admonition">更新后端的CHAP密码时、必须使用<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>更新后端。请勿使用ONTAP命令行界面或ONTAP系统管理器更新存储集群上的凭据、因为Trident将无法接受这些更改。</block>
   <block id="1f04e6944e16311a300b742aa0cfb55c" category="paragraph">基于FC的iSCSI SCSI</block>
   <block id="acb2e9160652c3e412ead9e870d11c9b" category="summary">将Trident EKS加载项添加到Kubenetes集群。</block>
@@ -5526,4 +5523,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="48f73146a4944adc8ee8fb44ba954d59" category="paragraph">当您访问与 S3 兼容的存储（例如 Amazon S3、Generic S3）时， <block ref="3d0b4c23d9ed62ec7d7cd16273ca2521" category="inline-link-rx"></block> ， 或者<block ref="3a31dfad8c316380b9a5542d694c5833" category="inline-link-rx"></block>使用 Trident 保护时，您需要确保您提供的用户凭证具有访问存储桶所需的权限。以下是一个策略示例，该策略授予使用 Trident 保护访问所需的最低权限。您可以将此策略应用于管理与 S3 兼容的存储桶策略的用户。</block>
   <block id="d9b7f314625fb7dcf35c741afe65b676" category="inline-link">Amazon S3 文档</block>
   <block id="51ef32359424209f7163e58a5b1ab92e" category="paragraph">有关 Amazon S3 策略的更多信息，请参阅<block ref="61017e44ea21b481e69f04f8ac510768" category="inline-link-rx"></block> 。</block>
+  <block id="46d663191f16f782a681e5f6702a09d4" category="list-text">对于所有 ONTAP 后端，Trident 要求至少将一个聚合分配给 SVM。</block>
+  <block id="46e450e4589332ce4a9f5ac86fea49f4" category="inline-link-macro">SVM 管理员使用 CLI 创建存储单元失败，并显示错误“没有可用于存储服务的候选聚合”</block>
+  <block id="aa20618193df98acd225cc1003a906ff" category="paragraph">请参阅此知识库文章，了解如何在 ASA r2 系统中将聚合分配给 SVM： <block ref="537835ac1ae737799b9c1a1bff131746" category="inline-link-macro-rx"></block> 。</block>
 </blocks>

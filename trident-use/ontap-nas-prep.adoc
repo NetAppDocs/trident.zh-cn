@@ -18,7 +18,7 @@ summary: 了解使用ONTAP NAS驱动程序配置ONTAP后端的要求、身份验
 
 == 要求
 
-* 对于所有ONTAP后端、Trident要求至少为SVM分配一个聚合。
+* 对于所有 ONTAP 后端，Trident 要求至少将一个聚合分配给 SVM。
 * 您可以运行多个驱动程序，并创建指向其中一个驱动程序的存储类。例如、您可以配置一个使用的黄金类 `ontap-nas` 驱动程序和使用的铜牌类 `ontap-nas-economy` 一个。
 * 所有Kubernetes工作节点都必须安装适当的NFS工具。请参见 link:worker-node-prep.html["此处"] 有关详细信息：
 * Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。有关详细信息、请参见 <<准备配置SMB卷>> 。

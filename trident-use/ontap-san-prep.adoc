@@ -14,16 +14,13 @@ summary: 了解如何准备使用 ONTAP SAN 驱动程序配置 ONTAP 后端。
 [role="lead"]
 了解使用ONTAP SAN驱动程序配置ONTAP后端的要求和身份验证选项。
 
-从25.02版开始、Trident会自动检测9.16.1 9.161或更高版本的ASA R2特性、并通过iSCSI协议在ASA R2上配置和使用存储。
-
 
 
 == 要求
 
-对于所有ONTAP后端、Trident要求至少为SVM分配一个聚合。
+对于所有 ONTAP 后端，Trident 要求至少将一个聚合分配给 SVM。
 
-
-NOTE: Trident要求向SVM分配一个或多个聚合。使用ASA R2时、只有在模式下使用ONTAP命令行界面时、才能执行此操作 `diag`。
+请参阅此知识库文章，了解如何在 ASA r2 系统中将聚合分配给 SVM： link:https://kb.netapp.com/on-prem/ASAr2/ASAr2_KBs/su_create_by_SVM_admin_using_CLI_fails_with_error_No_candidate_aggregates_are_available_for_storage_services["SVM 管理员使用 CLI 创建存储单元失败，并显示错误“没有可用于存储服务的候选聚合”"^] 。
 
 请记住，您还可以运行多个驱动程序，并创建指向其中一个驱动程序的存储类。例如，您可以配置使用 `ontap-san` 驱动程序的 `san-dev` 类和使用 `ontap-san-economy-one` 的 `san-default` 类。
 
