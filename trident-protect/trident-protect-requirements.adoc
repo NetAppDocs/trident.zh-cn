@@ -49,12 +49,9 @@ Trident Protect支持以下存储后端：
 
 确保存储后端满足以下要求：
 
-* 确保连接到集群的NetApp存储使用的是Astra Trident 24.02或更高版本(建议使用Trident 24.10)。
-+
-** 如果Astra Trident的版本低于24.06.1、而您计划使用NetApp SnapMirror灾难恢复功能、则需要手动启用Astra Control配置程序。
+* 确保连接到集群的 NetApp 存储使用 Trident 24.02 或更新版本（建议使用 Trident 24.10）。
 
 
-* 确保已安装最新的Astra控件配置程序(从Astra Trident 24.06.1开始、默认情况下已安装并启用)。
 * 确保您有一个NetApp ONTAP存储后端。
 * 确保已配置用于存储备份的对象存储分段。
 * 创建您计划用于应用程序或应用程序数据管理操作的任何应用程序卷。Trident Protect不会为您创建这些命名空间；如果在自定义资源中指定不存在的命名空间、则操作将失败。
@@ -90,6 +87,9 @@ NOTE: 通过将Trident后端配置选项设置为，您可以默认为 `true`新
 
 保护在KubeVirt VM上运行的应用程序时、Trident Protect 24.10 24.10.1及更高版本的行为会有所不同。对于这两个版本、您都可以在数据保护操作期间启用或禁用文件系统冻结和解除冻结。
 
+
+NOTE: 在恢复操作期间，任何 `VirtualMachineSnapshots`为虚拟机 (VM) 创建的数据不会被恢复。
+
 .Trident智能驭领保障24.10
 Trident Protect 24.10不会在数据保护操作期间自动确保KubeVirt VM文件系统的状态一致。如果要使用Trident Protect 24.10保护KubeVirt VM数据、则需要在执行数据保护操作之前手动为文件系统启用冻结/取消冻结功能。这样可确保文件系统处于一致状态。
 
@@ -124,13 +124,22 @@ NetApp SnapMirror复制可用于以下ONTAP解决方案的Trident Protect：
 
 如果您计划使用SnapMirror复制、请确保ONTAP集群满足以下要求：
 
-* *Astra控件配置程序或*：Astra控件配置程序或Trident必须同时位于使用ONTAP作为后端的源和目标Trident集群上。Trident Protect支持使用以下驱动程序支持的存储类通过NetApp SnapMirror技术进行复制：
+* *NetApp Trident*：NetApp Trident 必须存在于使用 ONTAP 作为后端的源 Kubernetes 集群和目标 Kubernetes 集群上。Trident Protect支持使用以下驱动程序支持的存储类通过NetApp SnapMirror技术进行复制：
 +
-** `ontap-NAS`
-** `ontap-san`
+** `ontap-nas` ：NFS
+** `ontap-san` ：iSCSI
+** `ontap-san` ：足球俱乐部
+** `ontap-san` ：NVMe/TCP（要求最低 ONTAP 版本 9.15.1）
 
 
 * *许可证*：必须在源和目标ONTAP集群上启用使用数据保护包的ONTAP SnapMirror异步许可证。有关详细信息、请参见 https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html["ONTAP 中的SnapMirror许可概述"^] 。
++
+从ONTAP 9.10.1开始、所有许可证均以NetApp许可证文件(NLG)的形式提供、NLG是一个支持多项功能的文件。有关详细信息、请参见 link:https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html#licenses-included-with-ontap-one["ONTAP One附带的许可证"^] 。
+
++
+
+NOTE: 仅支持 SnapMirror 异步保护。
+
 
 
 
@@ -144,9 +153,8 @@ NetApp SnapMirror复制可用于以下ONTAP解决方案的Trident Protect：
 
 NOTE: 确保两个ONTAP集群之间的复制关系中使用的SVM名称是唯一的。
 
-* *Astra控件配置程序或Trident和SVM*：对等远程SVM必须可供目标集群上的Astra控件配置程序或Trident使用。
+* *NetApp Trident 和 SVM*：对等远程 SVM 必须可供目标集群上的 NetApp Trident 使用。
 * *托管后端*：您需要在Trident Protect中添加和管理ONTAP存储后端、才能创建复制关系。
-* *基于TCP的NVMe*：对于使用基于TCP协议的Trident的存储后端、NVMe保护不支持NetApp SnapMirror复制。
 
 
 

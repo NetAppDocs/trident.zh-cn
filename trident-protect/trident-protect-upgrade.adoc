@@ -16,6 +16,13 @@ summary: 您可以将Trident Protect升级到最新版本、以利用新功能�
 [role="lead"]
 您可以将Trident Protect升级到最新版本、以利用新功能或错误修复。
 
+[NOTE]
+====
+从版本 24.10 升级时，升级期间运行的快照可能会失败。此失败不会阻止将来创建快照（无论是手动快照还是计划快照）。如果升级期间快照失败，您可以手动创建新快照以确保应用程序受到保护。
+
+为避免潜在的故障，您可以在升级前禁用所有快照计划，然后在升级后重新启用。但是，这会导致升级期间丢失所有计划的快照。
+
+====
 要升级Trident Protect、请执行以下步骤。
 
 .步骤
@@ -27,14 +34,32 @@ helm repo update
 ----
 . 升级Trident Protect CRD：
 +
+
+NOTE: 如果您从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在包含在 Trident Protect Helm 图表中。
+
++
+.. 运行此命令将 CRD 的管理从 `trident-protect-crds`到 `trident-protect` ：
++
 [source, console]
 ----
-helm upgrade trident-protect-crds netapp-trident-protect/trident-protect-crds --version 100.2502.0  --namespace trident-protect
+kubectl get crd | grep protect.trident.netapp.io | awk '{print $1}' | xargs -I {} kubectl patch crd {} --type merge -p '{"metadata":{"annotations":{"meta.helm.sh/release-name": "trident-protect"}}}'
 ----
+.. 运行此命令删除 `trident-protect-crds`图表：
++
+
+NOTE: 不要卸载 `trident-protect-crds`图表使用 Helm，因为这可能会删除您的 CRD 和任何相关数据。
+
++
+[source, console]
+----
+kubectl delete secret -n trident-protect -l name=trident-protect-crds,owner=helm
+----
+
+
 . 升级Trident Protect：
 +
 [source, console]
 ----
-helm upgrade trident-protect netapp-trident-protect/trident-protect --version 100.2502.0 --namespace trident-protect
+helm upgrade trident-protect netapp-trident-protect/trident-protect --version 100.2506.0 --namespace trident-protect
 ----
 

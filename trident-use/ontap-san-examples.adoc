@@ -14,6 +14,13 @@ summary: 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。�
 [role="lead"]
 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了将后端映射到StorageClasses的后端配置示例和详细信息。
 
+link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2系统"^]与其他 ONTAP 系统（ASA、AFF 和 FAS）在存储层实现方面有所不同。这些差异会影响某些参数的使用，具体如下。link:https://docs.netapp.com/us-en/asa-r2/learn-more/hardware-comparison.html["详细了解 ASA r2 系统与其他 ONTAP 系统之间的差异"^](英文)
+
+
+NOTE: 只有 `ontap-san` ASA r2 系统支持驱动程序（带有 iSCSI 和 NVMe/TCP 协议）。
+
+在 Trident 后端配置中，您无需指定系统是 ASA r2。当您选择 `ontap-san`作为 `storageDriverName` Trident 会自动检测 ASA r2 或传统 ONTAP 系统。某些后端配置参数不适用于 ASA r2 系统，如下表所示。
+
 
 
 == 后端配置选项
@@ -56,7 +63,7 @@ NOTE: 如果您使用的是"vsadmin"凭据、 `managementLIF`则必须是SVM的�
 *对于MetroCluster省略。*请参见 <<mcc-best>>。 | 如果指定了 SVM `managementLIF` ，则派生 
 
 
-| `使用 CHAP` | 使用CHAP对iSCSI的ONTAP SAN驱动程序进行身份验证[布尔值]。将设置为 `true`、以便Trident配置双向CHAP并将其用作后端中给定SVM的默认身份验证。有关详细信息、请参见 link:ontap-san-prep.html["准备使用ONTAP SAN驱动程序配置后端"] 。 | `false` 
+| `使用 CHAP` | 使用CHAP对iSCSI的ONTAP SAN驱动程序进行身份验证[布尔值]。将设置为 `true`、以便Trident配置双向CHAP并将其用作后端中给定SVM的默认身份验证。有关详细信息、请参见 link:ontap-san-prep.html["准备使用ONTAP SAN驱动程序配置后端"] 。*不支持 FCP 或 NVMe/TCP。* | `false` 
 
 
 | `chapInitiatorSecret` | CHAP 启动程序密钥。如果为 `useCHAP=true` ，则为必需项 | "" 
@@ -101,13 +108,13 @@ NOTE: 如果您使用的是"vsadmin"凭据、 `managementLIF`则必须是SVM的�
 
 NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法是轮询SVM、而无需重新启动Trident控制器。在Trident中配置了特定聚合以配置卷后、如果将该聚合重命名或移出SVM、则在轮询SVM聚合时、后端将在Trident中变为故障状态。您必须将聚合更改为SVM上的聚合、或者将其全部删除、以使后端恢复联机。
 
-*请勿为ASA R2*指定。
+*不要指定 ASA r2 系统*。
  a| 
 ""
 
 
 
-| `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。如果您使用的是Amazon FSx for NetApp ONTAP后端，请勿指定 `limitAggregateUsage`。提供的和 `vsadmin`不包含使用Trident检索聚合使用情况并对其进行限制所需的 `fsxadmin`权限。*请勿为ASA R2*指定。 | "" （默认情况下不强制实施） 
+| `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。如果您使用的是Amazon FSx for NetApp ONTAP后端，请勿指定 `limitAggregateUsage`。提供的和 `vsadmin`不包含使用Trident检索聚合使用情况并对其进行限制所需的 `fsxadmin`权限。*不要指定 ASA r2 系统*。 | "" （默认情况下不强制实施） 
 
 
 | `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为LUN管理的卷的大小上限。 | ""(默认情况下不强制实施) 
@@ -125,7 +132,7 @@ NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法�
 `useREST`设置为时 `true`，Trident使用ONTAP REST API与后端通信；设置为时 `false`，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontapi` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会
 `useREST`设置为 `true`；更
 `useREST`改为 `false`以使用ONTAPI (ZAPI)调用。
-`useREST` 完全符合NVMe/TCP要求。*如果指定，则ASA R2*始终设置为 `true`。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
+`useREST` 完全符合NVMe/TCP要求。*如果指定，则始终设置为 `true`适用于 ASA r2 系统*。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
 
 
  a| 
@@ -136,7 +143,7 @@ NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法�
 | `formatOptions`  a| 
  `formatOptions`用于指定命令的命令行参数、每当对卷进行格式化时、都会应用这些参数 `mkfs`。这样、您可以根据偏好格式化卷。请确保指定与mkfs命令选项类似的格式选项，但不包括设备路径。示例："-E nobdiscard"
 
-* `ontap-san` `ontap-san-economy`仅支持和驱动程序。*
+*支持 `ontap-san`和 `ontap-san-economy`带有 iSCSI 协议的驱动程序。**此外，在使用 iSCSI 和 NVMe/TCP 协议时，支持 ASA r2 系统。*
  a| 
 
 
@@ -168,13 +175,13 @@ Trident建议使用以下选项来加快格式化过程：
 | 参数 | Description | Default 
 
 
-| `spaceAllocation` | LUN 的空间分配 | "TRUE"*如果指定，请将ASA R2*的设置为 `true`。 
+| `spaceAllocation` | LUN 的空间分配 | "true" *如果指定，则设置为 `true`适用于 ASA r2 系统*。 
 
 
-| `s页面预留` | 空间预留模式；"无"(精简)或"卷"(厚)。*对于ASA R2*，设置为 `none`。 | "无" 
+| `s页面预留` | 空间预留模式；"无"(精简)或"卷"(厚)。*设置为 `none`适用于 ASA r2* 系统。 | "无" 
 
 
-| `sSnapshot 策略` | 要使用的Snapshot策略。*对于ASA R2*，设置为 `none`。 | "无" 
+| `sSnapshot 策略` | 要使用的Snapshot策略。*设置为 `none`适用于 ASA r2 系统*。 | "无" 
 
 
 | `qosPolicy` | 要为创建的卷分配的 QoS 策略组。选择每个存储池 / 后端的 qosPolicy 或 adaptiveQosPolicy 之一。将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。 | "" 
@@ -183,21 +190,21 @@ Trident建议使用以下选项来加快格式化过程：
 | `adaptiveQosPolicy` | 要为创建的卷分配的自适应 QoS 策略组。选择每个存储池 / 后端的 qosPolicy 或 adaptiveQosPolicy 之一 | "" 
 
 
-| `sSnapshot 预留` | 为快照预留的卷百分比。*请勿为ASA R2*指定。 | 如果为"0"、则为"0" `snapshotPolicy` 为"none"、否则为"" 
+| `sSnapshot 预留` | 为快照预留的卷百分比。*不要为 ASA r2 系统指定*。 | 如果为"0"、则为"0" `snapshotPolicy` 为"none"、否则为"" 
 
 
 | `splitOnClone` | 创建克隆时，从其父级拆分该克隆 | false 
 
 
-| `加密` | 在新卷上启用NetApp卷加密(NVE)；默认为 `false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | "false"*如果指定，请将ASA R2*的设置为 `true`。 
+| `加密` | 在新卷上启用NetApp卷加密(NVE)；默认为 `false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | “false” *如果指定，则设置为 `true`适用于 ASA r2 系统*。 
 
 
 | `luksEncryption` | 启用LUKS加密。请参见 link:../trident-reco/security-luks.html["使用Linux统一密钥设置(LUKS)"]。
 
-NVMe/TCP不支持使用此类数据加密。 | 对于ASA R2、将""设置为 `false`。 
+NVMe/TCP不支持使用此类数据加密。 | "" *设置为 `false`适用于 ASA r2 系统*。 
 
 
-| `分层策略` | 使用"none"的分层策略*请勿为ASA R2*指定。 |  
+| `分层策略` | 分层策略使用“无” *不要为 ASA r2 系统指定*。 |  
 
 
 | `nameTemplate` | 用于创建自定义卷名称的模板。 | "" 

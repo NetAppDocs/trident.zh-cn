@@ -122,7 +122,18 @@ NOTE: 如果在应用程序定义中明确引用了集群范围的资源、或�
 *** `Retain` (默认)
 
 
-** *Spec.snapshotRef*：(_可 选_)：要用作备份源的快照的名称。如果不提供此参数、则会创建和备份临时快照。
+** *spec.snapshotRef*：（可选）：用作备份源的快照的名称。如果不提供此参数、则会创建和备份临时快照。
+** *metadata.annotations.protect.trident.netapp.io/full-backup*：（可选）此注释用于指定备份是否应该是非增量的。默认情况下、所有备份均为增量备份。但是，如果此标注设置为 `true`，则备份将变为非增量备份。如果未指定、则备份将采用默认增量备份设置。最佳做法是、定期执行完整备份、然后在两次完整备份之间执行增量备份、以最大程度地降低与还原相关的风险。
++
+[NOTE]
+====
+如果您需要在创建应用程序后应用此标注、可以使用以下命令：
+
+[source, console]
+----
+kubectl annotate backup -n <backup CR namespace> <backup CR name> protect.trident.netapp.io/full-backup="true"
+----
+====
 +
 YAML示例：
 
@@ -135,6 +146,8 @@ kind: Backup
 metadata:
   namespace: my-app-namespace
   name: my-cr-name
+  annotations:
+    protect.trident.netapp.io/full-backup: "true"
 spec:
   applicationRef: my-application
   appVaultRef: appvault-name
@@ -160,6 +173,111 @@ kubectl apply -f trident-protect-backup-cr.yaml
 ----
 tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --app <name_of_app_to_back_up> --data-mover <Kopia_or_Restic> -n <application_namespace>
 ----
++
+您可以选择使用 `--full-backup`标志来指定备份是否应为非增量备份。默认情况下、所有备份均为增量备份。使用此标志时、备份将变为非增量备份。最佳做法是、定期执行完整备份、然后在两次完整备份之间执行增量备份、以最大程度地降低与还原相关的风险。
+
+
+
+--
+====
+
+
+== 创建备份计划
+
+您可以计划非增量完整备份。默认情况下、所有备份均为增量备份。定期执行完整备份以及其间的增量备份有助于降低与还原相关的风险。
+
+
+NOTE: 如果在应用程序定义中明确引用了集群范围的资源、或者这些资源引用了任何应用程序命名源、则会将这些资源包括在备份、快照或克隆中。
+
+.开始之前
+确保AWS会话令牌到期时间足以执行任何长时间运行的S3备份操作。如果令牌在备份操作期间过期、则操作可能会失败。
+
+* 有关检查当前会话令牌到期时间的详细信息、请参见 https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["AWS API文档"^]。
+* 有关AWS资源凭据的详细信息、请参见 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html["AWS IAM文档"^]。
+
+
+[role="tabbed-block"]
+====
+.使用CR创建计划
+--
+.步骤
+. 创建自定义资源(CR)文件并将其命名为 `trident-backup-schedule-cr.yaml`。
+. 在创建的文件中、配置以下属性：
++
+** *。metadata.name*:(_required__)此自定义资源的名称；请为您的环境选择一个唯一且合理的名称。
+** *spec.dataMover*：(_可 选_)一个字符串，指示用于备份操作的备份工具。可能值(区分大小写)：
++
+*** `Restic`
+*** `Kopia` (默认)
+
+
+** *spec.applicationRef*：要备份的应用程序的Kubernetes名称。
+** *spec.appVaultRef*：(_required_)应存储备份内容的AppVault的名称。
+** *spec.backupretention *：要保留的备份数。零表示不应创建任何备份。
+** *spec.snapshotretention *：要保留的快照数。零表示不应创建任何快照。
+** *。spec.granularity*:计划的运行频率。可能值以及必需的关联字段：
++
+*** `hourly` (要求您指定 `spec.minute`)
+*** `daily` (要求您指定 `spec.minute` 和 `spec.hour`)
+*** `weekly`(要求您指定 `spec.minute, spec.hour`、和 `spec.dayOfWeek`)
+*** `monthly`(要求您指定 `spec.minute, spec.hour`、和 `spec.dayOfMonth`)
+
+
+** *spec.dayOfMonth*：(_可 选_)计划应运行的日期(1 - 31)。如果粒度设置为，则需要此字段 `monthly`。
+** *spec.dayOfWeek*：(_可 选_)计划应运行的日期(0到7)。值0或7表示星期日。如果粒度设置为，则需要此字段 `weekly`。
+** *spec.hour *：(_可 选_)计划应运行的时间(0 - 23)。如果粒度设置为、或，则需要此字段 `daily` `weekly` `monthly`。
+** *spec.minute：(_可 选_)计划应运行的分钟(0 - 59)。如果粒度设置为、、或，则需要此字段 `hourly` `daily` `weekly` `monthly`。
+** *。metadata.annotations.protect.trident.netapp.io/full-backup-rule*:(_可 选_)此标注用于指定计划完整备份的规则。您可以将其设置为以实现持续完整备份、也可以 `always`根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: Schedule
+metadata:
+  namespace: my-app-namespace
+  name: my-cr-name
+  annotations:
+    protect.trident.netapp.io/full-backup-rule: "Monday,Thursday"
+spec:
+  dataMover: Kopia
+  applicationRef: my-application
+  appVaultRef: appvault-name
+  backupRetention: "15"
+  snapshotRetention: "15"
+  granularity: daily
+  dayOfMonth: "1"
+  dayOfWeek: "0"
+  hour: "0"
+  minute: "0"
+----
+
+
+. 使用正确的值填充文件后 `trident-backup-schedule-cr.yaml` 、应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-backup-schedule-cr.yaml
+----
+
+
+--
+.使用命令行界面创建计划
+--
+.步骤
+. 创建备份计划、将括号中的值替换为您环境中的信息。例如：
++
+
+NOTE: 您可以使用 `tridentctl-protect create schedule --help`查看此命令的详细帮助信息。
+
++
+[source, console]
+----
+tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace> --full-backup-rule <string>
+----
++
+您可以将此标志设置为 `always`以实现持续完整备份、也可以 `--full-backup-rule`根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。例如、使用 `--full-backup-rule "Monday,Thursday"`计划在星期一和星期四进行完整备份。
+
 
 
 --
@@ -280,6 +398,9 @@ kubectl delete snapshot <snapshot_name> -n my-app-namespace
 == 删除备份
 
 删除不再需要的计划备份或按需备份。
+
+
+NOTE: 确保回收策略设置为 `Delete`从对象存储中删除所有备份数据。该策略的默认设置是 `Retain`以避免意外数据丢失。如果政策没有改变 `Delete` ，备份数据将保留在对象存储中，需要手动删除。
 
 .步骤
 . 删除与备份关联的备份CR：

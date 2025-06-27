@@ -12,14 +12,117 @@ summary: NetApp 不断改进和完善其产品和服务。下面是最新版本�
 
 
 [role="lead"]
-发行说明提供了有关最新版本Trident中新增功能、增强功能和错误修复的信息。
+发行说明提供有关 NetApp Trident 最新版本中的新功能、增强功能和错误修复的信息。
 
 
 WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经过测试且受支持的版本。请注意， zip 文件的 ` 或 Extras` 部分中提供的 `macos` 二进制文件未经过测试或不受支持。
 
 
 
-== 25.02.1中的新增功能
+== 25.06中的新增功能
+
+新功能摘要提供了有关 Trident 和 Trident 保护版本的增强、修复和弃用的详细信息。
+
+
+
+=== Trident
+
+
+
+==== 增强功能
+
+* *Kubernetes*：
++
+** 增加了对 CSI 卷组快照的支持 `v1beta1`适用于 ONTAP-SAN iSCSI 驱动程序的卷组快照 Kubernetes API。请参阅。 link:../trident-use/vol-group-snapshots.html["使用卷组快照"^]
+** 除了 iSCSI 之外，还增加了对 NVMe/TCP 的 ONTAP ASA r2 的支持。请参阅。 link:../trident-use/ontap-san-examples.html["ONTAP SAN配置选项和示例"^]
+** 为 ONTAP-NAS 和 ONTAP-NAS-Economy 卷添加了安全的 SMB 支持。ActiveDirectory 用户和组现在可以与 SMB 卷一起使用，以增强安全性。请参阅。 link:../trident-use/ontap-nas-prep.html#enable-secure-smb["启用安全 SMB"^]
+** 增强 Trident 节点并发性，以提高 iSCSI 卷节点操作的可扩展性。
+** 额外 `--allow-discards`打开 LUKS 卷时允许丢弃/TRIM 命令以回收空间。
+** 格式化 LUKS 加密卷时的性能增强。
+** 增强了对失败但部分格式化的 LUKS 设备的 LUKS 清理。
+** 增强了 Trident 节点幂等性，用于 NVMe 卷的连接和分离。
+** 额外 `internalID`字段到 ONTAP-SAN-Economy 驱动程序的 Trident 卷配置。
+** 增加了对使用 SnapMirror 对 NVMe 后端进行卷复制的支持。请参阅。 link:../trident-use/vol-volume-replicate.html["使用SnapMirror复制卷"^]
+
+
+
+
+
+
+==== 试验性增强功能
+
+
+NOTE: 不适用于生产环境。
+
+* [技术预览] 通过以下方式启用并发 Trident 控制器操作 `--enable-concurrency`功能标志。这允许控制器操作并行运行，从而提高繁忙或大型环境中的性能。
++
+
+NOTE: 此功能尚处于实验阶段，目前支持使用 ONTAP-SAN 驱动程序（iSCSI 和 FCP 协议）的有限并行工作流程。
+
+* [技术预览] 使用 ANF 驱动程序添加了手动 QOS 支持。
+
+
+
+
+==== 修复
+
+* *Kubernetes*：
++
+** 修复了 CSI NodeExpandVolume 的问题，当底层 SCSI 磁盘不可用时，多路径设备可能会出现大小不一致的情况。
+** 修复了无法清理 ONTAP-NAS 和 ONTAP-NAS-Economy 驱动程序的重复导出策略的问题。
+** 修复了 GCNV 卷默认为 NFSv3 的问题 `nfsMountOptions`未设置；现在 NFSv3 和 NFSv4 协议均受支持。如果 `nfsMountOptions`如果未提供，则将使用主机的默认 NFS 版本（NFSv3 或 NFSv4）。
+** 修复了使用 Kustomize 安装 Trident 时出现的部署问题（ link:https://github.com/NetApp/trident/issues/831["问题描述#831"] ）。
+** 修复了从快照创建的 PVC 缺少导出策略的问题（ link:https://github.com/NetApp/trident/issues/1016["问题描述#1016"] ）。
+** 修复了 ANF 卷大小未自动与 1 GiB 增量对齐的问题。
+** 修复了将 NFSv3 与 Bottlerocket 结合使用时的问题。
+
+
+* 修复使用 SolidFire 后端克隆卷时出现超时的问题（ link:https://github.com/NetApp/trident/issues/1008["问题描述#1008"] ）。
+* 修复了 ONTAP-NAS-Economy 卷尽管调整大小失败但仍可扩展至 300 TB 的问题。
+* 修复了使用 ONTAP REST API 时克隆拆分操作同步完成的问题。
+
+
+
+
+==== 弃用：
+
+* *Kubernetes*：将最低支持的 Kubernetes 更新至 v1.27。
+
+
+
+
+=== 三叉戟保护
+
+NetApp Trident Protect提供高级应用程序数据管理功能、可增强由NetApp ONTAP存储系统和NetApp Trident CSI存储配置程序提供支持的有状态Kubbernetes应用程序的功能和可用性。
+
+
+
+==== 增强功能
+
+* 改善了恢复时间，提供了进行更频繁的完整备份的选项。
+* 通过 Group-Version-Kind (GVK) 过滤提高了应用程序定义和选择性恢复的粒度。
+* 将 AppMirrorRelationship (AMR) 与 NetApp SnapMirror 结合使用时可实现高效的重新同步和反向复制，以避免完整的 PVC 复制。
+* 增加了使用 EKS Pod Identity 创建 AppVault 存储桶的功能，无需使用 EKS 集群的存储桶凭证指定机密。
+* 如果需要，添加了在恢复命名空间中跳过恢复标签和注释的功能。
+* AppMirrorRelationship (AMR) 现在将检查源 PVC 扩展并根据需要对目标 PVC 执行适当的扩展。
+
+
+
+
+==== 修复
+
+* 修复了先前快照的快照注释值被应用到新快照的错误。现在所有快照注释均已正确应用。
+* 如果未定义，则默认定义数据移动器加密（Kopia / Restic）的秘密。
+* 为 S3 appvault 创建添加了改进的验证和错误消息。
+* AppMirrorRelationship (AMR) 现在仅复制处于 Bound 状态的 PV，以避免尝试失败。
+* 修复了在具有大量备份的 AppVault 上获取 AppVaultContent 时显示错误的问题。
+* KubeVirt VMSnapshots 被排除在恢复和故障转移操作之外，以避免故障。
+* 修复了 Kopia 的问题：由于 Kopia 默认保留计划覆盖了用户在计划中设置的计划，导致快照被过早删除。
+
+
+
+
+== 25.02.1 中的变化
 
 
 

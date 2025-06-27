@@ -72,7 +72,7 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 自动 | `false` 
 
 
-| `autosupport 映像` | AutoSupport 遥测的容器映像 | `"netapp/trident-autosupport:25.02"` 
+| `autosupport 映像` | AutoSupport 遥测的容器映像 | `"netapp/trident-autosupport:25.06"` 
 
 
 | `autosupport 代理` | 用于发送AutoSupport的代理的地址/端口
@@ -85,7 +85,7 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 | `logFormat` | 要使用的Trident日志记录格式[text,json] | `"text"` 
 
 
-| `TridentImage` | 要安装的Trident映像 | `"netapp/trident:25.02"` 
+| `TridentImage` | 要安装的Trident映像 | `"netapp/trident:25.06"` 
 
 
 | `imageRegistry` | 内部注册表的路径、格式

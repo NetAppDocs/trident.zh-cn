@@ -168,7 +168,6 @@
   <block id="879cd061c6bf448cd6fc39dd56947611" category="paragraph">`driver` 指定给 Kubernetes ，由 Trident 处理对 `csI-snapclass` 类的卷快照请求。`deeltionPolicy` 指定必须删除快照时要执行的操作。如果将 `deletionPolicy` 设置为 `Delete` ，则在删除快照时，卷快照对象以及存储集群上的底层快照将被删除。或者，如果将其设置为 `Retain` ，则表示保留 `VolumeSnapshotContent` 和物理快照。</block>
   <block id="7ba558df52a052235cf288011e5d667c" category="paragraph">Kubernetes `VolumeSnapshot` 对象是创建卷快照的请求。就像 PVC 代表用户对卷发出的请求一样，卷快照也是用户为现有 PVC 创建快照的请求。</block>
   <block id="f67af493d1fd83b472d5f27307b2f3d9" category="paragraph">收到卷快照请求后， Trident 会自动管理在后端为卷创建快照的操作，并通过创建唯一的 `VolumeSnapshotContent` 对象公开快照。您可以从现有 PVC 创建快照，并在创建新 PVC 时将这些快照用作 DataSource 。</block>
-  <block id="53847015682974d066a919b1b45a44a5" category="admonition">VolumeSnapshot 的生命周期与源 PVC 无关：即使删除了源 PVC ，快照也会持续存在。删除具有关联快照的 PVC 时， Trident 会将此 PVC 的后备卷标记为 " 正在删除 " 状态，但不会将其完全删除。删除所有关联快照后，卷将被删除。</block>
   <block id="e562bdcf97dce6973a736651f45eb054" category="paragraph">Kubernetes `VolumeSnapshotContent` 对象表示从已配置的卷创建的快照。它类似于 `PersistentVolume` ，表示存储集群上配置的快照。与 `PersistentVolumeClaim` 和 `PersistentVolume` 对象类似，创建快照时， `VolumeSnapshotContent` 对象会与请求创建快照的 `VolumeSnapshot` 对象保持一对一映射。</block>
   <block id="af741aec1c66e51c00d35a38f92471de" category="paragraph">`VolumeSnapshotContent` 对象包含用于唯一标识快照的详细信息，例如 `snapshotHandle` 。此 `snapshotHandle` 是 PV 名称和 `VolumeSnapshotContent` 对象名称的唯一组合。</block>
   <block id="b22c73e808eef321ee9941ec2e58b64f" category="paragraph">收到快照请求后， Trident 会在后端创建快照。创建快照后， Trident 会配置一个 `VolumeSnapshotContent` 对象，从而将快照公开到 Kubernetes API 。</block>
@@ -733,13 +732,10 @@
   <block id="8d36e570f1edac5ae19e6733e3fbb4d5" category="list-text">使用从上一步获得的值创建后端。</block>
   <block id="2ab8ad0fce083cd02635b9126cf4353c" category="section-title">更新身份验证方法或轮换凭据</block>
   <block id="5e36c3d66bd47ae551071244dc48df17" category="admonition">轮换密码时，存储管理员必须先在 ONTAP 上更新用户的密码。然后进行后端更新。轮换证书时，可以向用户添加多个证书。之后，后端将更新以使用新证书，然后可以从 ONTAP 集群中删除旧证书。</block>
-  <block id="42f93278b0d15c8d0f6613813bf586d5" category="section-title">使用双向 CHAP 对连接进行身份验证</block>
   <block id="12dd7bfa072b5a1eecf975f6a5a6eaa7" category="admonition">`useCHAP` 参数是一个布尔选项，只能配置一次。默认情况下，此参数设置为 false 。将其设置为 true 后，无法将其设置为 false 。</block>
   <block id="bc601528678aeeb582101ed205a054bc" category="paragraph">除了 `useCHAP=true` 之外，后端定义还必须包括 `chapInitiatorSecret` ， `chapTargetInitiatorSecret` ， `chapTargetUsername` 和 `chapUsername` 字段。通过运行 `tridentctl update` 创建后端，可以更改这些密钥。</block>
-  <block id="9ffdb95250e26c7a6b468126ac7c75b0" category="section-title">工作原理</block>
   <block id="29b4db879e4cc96a6b71bc763367624b" category="list-text">在 SVM 上设置 CHAP ：</block>
   <block id="13e0c564d5e1fbd33279fb276166653d" category="list-text">配置 CHAP 启动程序以及目标用户名和密码；必须在后端配置中指定这些选项（如上所示）。</block>
-  <block id="81f2df0265026a1a04bda5484798a10d" category="section-title">轮换凭据并更新后端</block>
   <block id="a7fe005c9f49619f4438aac8932fb361" category="paragraph">您可以通过更新 `backend.json` 文件中的 CHAP 参数来更新 CHAP 凭据。这需要更新 CHAP 密码并使用 `tridentctl update` 命令反映这些更改。</block>
   <block id="ef81b740be2293b7e3c41047afe98764" category="cell">"100 克 "</block>
   <block id="15d79b565b148caa23e6f2b53813413d" category="section-title">展开 iSCSI 卷</block>
@@ -2017,7 +2013,6 @@
   <block id="c632eed28bf53466df8b8a33aedab3af" category="list-text">虚拟池(如果存在)必须与原始后端的顺序相同。</block>
   <block id="87a522ecb9df14bf978f6f1da8a654a8" category="list-text">您不能通过删除来撤消对源PVC的访问<block ref="287f26e3328f9ac0f3f4da2cdaddd3e2" prefix=" " category="inline-code"></block> 或<block ref="11650d25d20af47978d85fd6e19c89aa" prefix=" " category="inline-code"></block> 标注或删除<block ref="d6995f631b22fb3f8e94aad1b40d1280" prefix=" " category="inline-code"></block> CR.要撤消访问、必须删除从属PVC。</block>
   <block id="ae8df8316f5c485b7db4e7141e899701" category="cell">指定的地址或派生自SVM (如果未指定)(不建议)</block>
-  <block id="82530dd92610570d634788e7fac29c1b" category="cell">如果使用量超过此百分比，则配置失败。* 不适用于适用于 ONTAP 的 Amazon FSx *</block>
   <block id="0275de02c3bba722f4540469d23cc535" category="paragraph">此示例显示了<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block> 使用IPv6地址。</block>
   <block id="0bd54df5242a2a2e9eca045fc695b41f" category="section-title">更新<block ref="ea76b2438eb5996eb2c347e7341ed59a" prefix=" " category="inline-code"></block> 初始配置后</block>
   <block id="76b4586b7207f884c66397194b773e14" category="summary">了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供了后端配置示例。</block>
@@ -2391,7 +2386,6 @@
   <block id="7f7041fc0ca0e00f3d3e39e4ce4a5149" category="paragraph">您可以使用以下两种方式之一创建SMB管理共享 <block ref="364bc251e9c8cfbf6ce258767d17d682" category="inline-link-macro-rx"></block> 共享文件夹管理单元或使用ONTAP 命令行界面。要使用ONTAP 命令行界面创建SMB共享、请执行以下操作：</block>
   <block id="7d159230ccaa721872f31bf9be31afeb" category="paragraph">虽然可以在ONTAP中创建一个可以由三端驱动程序使用的限制性更强的角色、但我们不建议这样做。大多数新版本的 Trident 都会调用需要考虑的其他 API ，从而使升级变得困难且容易出错。</block>
   <block id="37a679c38162162811d93d22ba8f5b4a" category="paragraph">了解使用ONTAP SAN驱动程序配置ONTAP后端的要求和身份验证选项。</block>
-  <block id="7fbe6e40125b7d1b2f5c5c05044e7526" category="section-title">启用基于证书的身份验证</block>
   <block id="3262251091b863054cfabf046c0e3493" category="paragraph">NFS
 SMB</block>
   <block id="e8a058c8c47f6e4976a9fc5b5c00ec92" category="summary">创建一个使用已配置的Kubernetes StorageClass来请求对PV的访问的永久性卷(PV)和永久性卷克莱姆(PVC)。然后、您可以将PV挂载到POD。</block>
@@ -2570,8 +2564,6 @@ SMB</block>
   <block id="b321f6c1ada34a3fa850996d673e01ca" category="inline-link-macro">22.07.</block>
   <block id="295e1f077ca9f1e68f56c558741bad74" category="paragraph"><block ref="295e1f077ca9f1e68f56c558741bad74" category="inline-link-macro-rx"></block></block>
   <block id="cfab1ba8c67c7c838db98d666f02a132" category="cell">--</block>
-  <block id="e764fe6b8f8825a307a87cedbef45678" category="inline-link-macro">22.04.</block>
-  <block id="865d5fc74524e198b7d4edc0b0f93cd6" category="paragraph"><block ref="865d5fc74524e198b7d4edc0b0f93cd6" category="inline-link-macro-rx"></block></block>
   <block id="1cf7168782187634fbc408c66b895dbc" category="section-title">社区支持</block>
   <block id="965b11d07d6acceebc9efec23e5e74a9" category="section-title">NetApp技术支持</block>
   <block id="8f4c1b75985ff2903107b7115115ea58" category="list-text"><block ref="8f4c1b75985ff2903107b7115115ea58" category="inline-link-macro-rx"></block></block>
@@ -3219,8 +3211,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="e4c5c8d195d27f073639195f80da50a2" category="list-text"><block ref="e4c5c8d195d27f073639195f80da50a2" category="inline-link-rx"></block></block>
   <block id="42b023f127a09218e58c2611e2e34ce2" category="inline-link">Trident 22.07</block>
   <block id="7f7bdec4905ccd8d5a077969d0b77fd5" category="list-text"><block ref="7f7bdec4905ccd8d5a077969d0b77fd5" category="inline-link-rx"></block></block>
-  <block id="9a2104188f6d4c4f4017d0a90afb46bb" category="inline-link">Trident 22.04</block>
-  <block id="e05235b09b873e8bf42c62638e354702" category="list-text"><block ref="e05235b09b873e8bf42c62638e354702" category="inline-link-rx"></block></block>
   <block id="c48696f9d5a5a881f7f2f08fd40ce424" category="summary">查找有关Trident安装、配置、升级和故障排除的常见问题解答。</block>
   <block id="d9aca3de44ae0828dd89d53663e6e4c8" category="section-title">Trident的发布频率如何？</block>
   <block id="d68e1eab03012de1cfe733b0e5a56e0a" category="paragraph">从24.02版开始、Trident每四个月发布一次：2月、6月和10月。</block>
@@ -3724,7 +3714,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="33649eaebf2b1cded3cfe2ae660b3db8" category="paragraph">Trident为Trident流程编排程序提供了多个命令行选项。您可以使用这些选项修改部署。</block>
   <block id="df659a37411eac4669a05e25173aa8b7" category="list-text">使用此选项或启用Kubornetes<block ref="4012723fd7948507761ae4f00f8a6ce5" prefix=" " category="inline-code"></block>支持。指定后， Trident 将使用提供的不安全地址和端口连接到 Kubernetes API 服务器。这样、Trident便可部署在POD之外；但是、它仅支持与API服务器的不安全连接。要安全连接、请使用选项在POD中部署Trident<block ref="4012723fd7948507761ae4f00f8a6ce5" prefix=" " category="inline-code"></block>。</block>
   <block id="e3ab8ff46f9c86474b01bf93b504507e" category="summary">NetApp 不断改进和完善其产品和服务。下面是最新版本的Trident中的一些最新功能、增强功能和错误修复。</block>
-  <block id="5aa6bd6e3240756e77e7955fb21d42b8" category="paragraph">发行说明提供了有关最新版本Trident中新增功能、增强功能和错误修复的信息。</block>
   <block id="f219960762ce1ea892bf48746515e583" category="list-text">Google Cloud NetApp卷驱动程序现已广泛适用于NFS卷、并支持区域感知型配置。</block>
   <block id="09dc81fef04f949a006210deaff2f205" category="list-text">GCP工作负载标识将用作具有GKE的Google Cloud NetApp卷的云标识。</block>
   <block id="179837f123bf751c03460e6d2e0927c2" category="list-text">向ONTAP－SAN和LUN－SAN－Economy驱动程序中添加了<block ref="ef225248e79c14501d51a4941b5ae5d1" prefix=" " category="inline-code"></block>配置参数，以允许用户指定ONTAP格式选项。</block>
@@ -3949,10 +3938,8 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="6e82d09aa274380adf21d56aaa3b0413" category="admonition">如果使用<block ref="d57551b1efacf8a7be84b4d10c5a6e99" prefix=" " category="inline-code"></block>参数、则需要集群管理员权限。将Amazon FSx for NetApp ONTAP与Trident结合使用时、<block ref="d57551b1efacf8a7be84b4d10c5a6e99" prefix=" " category="inline-code"></block>参数不适用于<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block>和<block ref="679500f227997b45be97e3ca8115c678" prefix=" " category="inline-code"></block>用户帐户。如果指定此参数，配置操作将失败。</block>
   <block id="8dbaef294ecadfe828f5bab1ae097d46" category="summary">了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。</block>
   <block id="55fd4fb7ce66d950d3136fb6613ab770" category="paragraph">了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了将后端映射到StorageClasses的后端配置示例和详细信息。</block>
-  <block id="e81d7c283c204ab68b6d4090be2ce196" category="cell">使用CHAP对iSCSI的ONTAP SAN驱动程序进行身份验证[布尔值]。将设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>、以便Trident配置双向CHAP并将其用作后端中给定SVM的默认身份验证。有关详细信息、请参见 <block ref="866e591dc2a03ecc454dad25a664ca86" category="inline-link-macro-rx"></block> 。</block>
   <block id="c59bb4e25695c195dbaa360d34c9795e" category="cell"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix="" category="inline-code"></block></block>
   <block id="091b358e8a9ea5e6b1137fbd4c18372f" category="paragraph"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix=" " category="inline-code"></block>用于指定命令的命令行参数、每当对卷进行格式化时、都会应用这些参数<block ref="899da842f7d2c1db0e3f8c88ad72507f" prefix=" " category="inline-code"></block>。这样、您可以根据偏好格式化卷。请确保指定与mkfs命令选项类似的格式选项，但不包括设备路径。示例："-E nobdiscard"</block>
-  <block id="c100e4ee26f081be59768793a4577208" category="paragraph">*<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>仅支持和驱动程序。*</block>
   <block id="18eb1633594b2436e83e73071958b960" category="section-title">有关使用formatOptions的建议</block>
   <block id="d9ec468a8922eca17349404c59b7659c" category="paragraph">Trident建议使用以下选项来加快格式化过程：</block>
   <block id="ee8d7eb9cc1e43184ed6a64abb3255f6" category="paragraph">*-E NODiscard：*</block>
@@ -4249,7 +4236,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="2baffe938961bfb9edd7d7ddfd52e2e1" category="list-text"><block ref="5f1c05bdfa0fa9da52e78fce65f0891a" prefix="" category="inline-code"></block></block>
   <block id="02c4383beef4fc06361dc4ef7bd9762a" category="list-text"><block ref="d112b025f416527f157666baac7d0ff7" prefix="" category="inline-code"></block> (默认)</block>
   <block id="5a848fb25ba88be36b674bded99badbd" category="list-text">*spic.relaimPolicy*：(_可 选_)定义了从备份申请中释放备份时会发生什么情况。可能值：</block>
-  <block id="731a2e076f0d59b6593efc1178b86131" category="list-text">*Spec.snapshotRef*：(_可 选_)：要用作备份源的快照的名称。如果不提供此参数、则会创建和备份临时快照。</block>
   <block id="e3cdcd12b4f53ac42049007406401d18" category="list-text">使用正确的值填充文件后<block ref="a130741c8dff3b771a616715e2390607" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="4dd48cffc8290e0b33e5c4ee6ddc6dbb" category="open-title">使用命令行界面创建备份</block>
   <block id="25ccf268b4f889fe28d3f3de94aace02" category="list-text">创建备份、将括号中的值替换为您环境中的信息。例如：</block>
@@ -4307,9 +4293,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="dc754c1df3be627f8c83600f4c69aade" category="paragraph">Trident Protect支持以下存储后端：</block>
   <block id="ca3930511e1c5997e851e891e33190ab" category="list-text">ONTAP存储阵列</block>
   <block id="e254891423d193d0e614eaf948880de5" category="paragraph">确保存储后端满足以下要求：</block>
-  <block id="79a749f4efd0990a7c186a6c8b0b8f85" category="list-text">确保连接到集群的NetApp存储使用的是Astra Trident 24.02或更高版本(建议使用Trident 24.10)。</block>
-  <block id="f230e68f84bd24699c72ae6e8b9b926c" category="list-text">如果Astra Trident的版本低于24.06.1、而您计划使用NetApp SnapMirror灾难恢复功能、则需要手动启用Astra Control配置程序。</block>
-  <block id="46a6a1c4196079f75ce0891927733cf0" category="list-text">确保已安装最新的Astra控件配置程序(从Astra Trident 24.06.1开始、默认情况下已安装并启用)。</block>
   <block id="1efa9b79a24750278cc3058eaf2ead00" category="list-text">确保您有一个NetApp ONTAP存储后端。</block>
   <block id="c9a524733ac9eb25fbf1980538b5437d" category="list-text">确保已配置用于存储备份的对象存储分段。</block>
   <block id="953216b11f9b494b0b28bcec605cbea1" category="list-text">创建您计划用于应用程序或应用程序数据管理操作的任何应用程序卷。Trident Protect不会为您创建这些命名空间；如果在自定义资源中指定不存在的命名空间、则操作将失败。</block>
@@ -4323,7 +4306,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="0f0b99ea2f70cd363c2c6a279f74e760" category="list-text">NetApp Cloud Volumes ONTAP</block>
   <block id="9f91d52d37c43ec162560596ac851ec9" category="section-title">SnapMirror复制的ONTAP集群要求</block>
   <block id="6ed8f95cb1dcd3baff756120151793a9" category="paragraph">如果您计划使用SnapMirror复制、请确保ONTAP集群满足以下要求：</block>
-  <block id="48d3e1a20815766a05a0edaac0e45679" category="list-text">*Astra控件配置程序或*：Astra控件配置程序或Trident必须同时位于使用ONTAP作为后端的源和目标Trident集群上。Trident Protect支持使用以下驱动程序支持的存储类通过NetApp SnapMirror技术进行复制：</block>
   <block id="ba84728ffba482ceb12371a53be2f636" category="inline-link">ONTAP 中的SnapMirror许可概述</block>
   <block id="b677eb65f7f869d18b845725a133a8d5" category="list-text">*许可证*：必须在源和目标ONTAP集群上启用使用数据保护包的ONTAP SnapMirror异步许可证。有关详细信息、请参见<block ref="a7b9425cefc4a3715b38951f4b2b6b35" category="inline-link-rx"></block> 。</block>
   <block id="ed097f5d093bf5311313c62bfb2f2d5a" category="section-title">SnapMirror复制的对等注意事项</block>
@@ -4331,9 +4313,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="9fecd08b776fdfca7b33426363edf913" category="inline-link">集群和 SVM 对等概述</block>
   <block id="ddae31913091b421eaff815ed1e19b4f" category="list-text">*集群和SVM*：ONTAP存储后端必须建立对等状态。有关详细信息、请参见<block ref="36ecaf21e9ca81a83e736deb4ff5c657" category="inline-link-rx"></block> 。</block>
   <block id="94ac6b3955eab183cb88ab17c91000eb" category="admonition">确保两个ONTAP集群之间的复制关系中使用的SVM名称是唯一的。</block>
-  <block id="ab44b8630d7609691da158960d9b30b6" category="list-text">*Astra控件配置程序或Trident和SVM*：对等远程SVM必须可供目标集群上的Astra控件配置程序或Trident使用。</block>
   <block id="e05c29680eacd6a4c163eefe138ff9fd" category="list-text">*托管后端*：您需要在Trident Protect中添加和管理ONTAP存储后端、才能创建复制关系。</block>
-  <block id="1000954a94920c8ffd3752b548978ccf" category="list-text">*基于TCP的NVMe*：对于使用基于TCP协议的Trident的存储后端、NVMe保护不支持NetApp SnapMirror复制。</block>
   <block id="57fe82c052fea1c269ca2b14e92e80d3" category="section-title">用于SnapMirror复制的Trident / ONTAP配置</block>
   <block id="59292a70a610fc937685ef1c3a3b5cb1" category="paragraph">Trident Protect要求您至少配置一个存储后端、以便为源集群和目标集群同时支持复制。如果源集群和目标集群相同、则目标应用程序应使用与源应用程序不同的存储后端、以获得最佳故障恢复能力。</block>
   <block id="4b92c534580865d96f1efb9f86289249" category="summary">您可以使用Trident Protect从快照或备份还原应用程序。将应用程序还原到同一集群时，从现有快照进行还原的速度会更快。</block>
@@ -4569,7 +4549,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="07337191562a62a775a853d9901903a6" category="list-text">测试用户是否可以获取他们现在有权访问的AppVault信息：</block>
   <block id="e7165fc51f62031fcae1d793899febaa" category="paragraph">您为其授予了AppVault权限的用户应该能够使用授权的AppVault对象执行应用程序数据管理操作、并且不能访问分配的命名区之外的任何资源、也不能创建他们无权访问的新资源。</block>
   <block id="a268a576db3133de464aad1cd81ab3e1" category="inline-link-macro">生成支持包</block>
-  <block id="76d9687f27080e6c2da9c8a0d64fbd42" category="list-text">安装Trident Protect CRD：</block>
   <block id="753f99fdafabdea1282917a0d7df52d4" category="list-text">执行中的反向重新同步步骤<block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>。</block>
   <block id="fe411ea35c29677771dcaad52985fc08" category="list-text">反向重新同步复制关系。</block>
   <block id="eb10e971ec83f13f35beb8166ae8958b" category="admonition">请勿执行正常的重新同步操作、因为这会丢弃在故障转移过程中写入目标集群的数据。</block>
@@ -4779,7 +4758,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="c83b74c2020dd836f5b401ecda0da78c" category="list-text">没有管理员访问权限的Kubbernetes用户可能必须获得管理员授予的权限、才能在其应用程序命名空间中创建TSR CR。</block>
   <block id="cff310c77e35cf2f693ebbb39c78e89f" category="summary">Trident支持在源卷和目标卷之间创建镜像关系、以复制卷以实现灾难恢复。</block>
   <block id="50e2eea9ba53d70147772db1c5d25f79" category="doc">使用SnapMirror复制卷</block>
-  <block id="4f29610afffeab1dca63a82a40791008" category="paragraph">Trident支持在一个集群上的源卷与对等集群上的目标卷之间建立镜像关系、以便为灾难恢复复制数据。您可以使用具有名称流的自定义资源定义(CRD)执行以下操作：</block>
   <block id="a682d8ef86abcae6c5a1db6186c5f02b" category="list-text">在卷之间创建镜像关系(PVC)</block>
   <block id="31a8f98d3378661a5b8abf15438f0bca" category="list-text">删除卷之间的镜像关系</block>
   <block id="a6349012892be516e5729d501a9649a7" category="list-text">中断镜像关系</block>
@@ -4793,7 +4771,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="02b05cdd8f0a8c426f307085cc1004f7" category="list-text">*集群和SVM*：ONTAP存储后端必须建立对等状态。有关详细信息、请参见<block ref="60333a598df416e49fbceb5a88dce370" category="inline-link-rx"></block> 。</block>
   <block id="792f00dfd96560df18fe1c6b56861893" category="list-text">* Trident和SVM*：对等远程SVM必须可供目标集群上的Trident使用。</block>
   <block id="0c5e1b5bc54261ccadd2a72af1047ded" category="list-title">支持的驱动程序</block>
-  <block id="57601c13c06c6ac6e23efaab44ced427" category="list-text">ONTAP -NAS和ONTAP SAN驱动程序支持卷复制。</block>
   <block id="3ce5b83f8896ef0d2e356d3972ec8898" category="section-title">创建镜像PVC</block>
   <block id="427a1ab7f39ee4f2dd7a0b7e35f572da" category="paragraph">按照以下步骤并使用CRD示例在主卷和二级卷之间创建镜像关系。</block>
   <block id="4dc69f665f0d76c17a577a352dd15b25" category="list-text">在主Kubbernetes集群上执行以下步骤：</block>
@@ -4863,7 +4840,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="16a9eb0d1ef7d37ab7459bc9a67a8102" category="section-title">启用适用于AWS的Trident加载项</block>
   <block id="1d5144e260d8c4ece3c5d47a77d84c11" category="section-title">更新Trident EKS加载项</block>
   <block id="ccab466451ff5a867710cce1b28c33a0" category="section-title">卸载/删除Trident EKS加载项</block>
-  <block id="71daa7e0f7c4240ad5aa4024c97bafae" category="list-text">现在、在Trident中支持Kubnetes 1.32。在升级Kubernetes之前升级Trident。</block>
   <block id="d1548585dadda37a28905a23e22cf65d" category="section-title">从备份还原到其他集群</block>
   <block id="7fa8874b1f645ca2af9d81b51985b8fb" category="paragraph">如果原始集群出现问题、您可以将备份还原到其他集群。</block>
   <block id="dd4ee610bd1d035c73bc0cbcd80e46da" category="paragraph">确保满足以下前提条件：</block>
@@ -4876,18 +4852,14 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="053aba80de03f3fdf626d1c858342330" category="list-text">使用AppVault名称和归档路径将应用程序还原到目标集群：</block>
   <block id="fceebbe32c1f7b24c54d6a4e8a0fa776" category="admonition">如果BackupRestore CR不可用、您可以使用步骤2中提到的命令查看备份内容。</block>
   <block id="4ef55c1fec2de9218af40d16cbc021a4" category="list-text">使用以下命令还原应用程序、将括号中的值替换为环境中的信息。命名空间映射参数使用冒号分隔的命名空间将源命名空间映射到正确的目标命名空间、格式为SOURCE1：dest1、Source2：dest2。例如：</block>
-  <block id="5033a002aed583e44998634bf4fc13ad" category="paragraph">如果您未运行Trident 25.02，则可从获取以前版本的文档<block ref="6d47e9235a19453f00cf246917b9e162" category="inline-link-macro-rx"></block>。</block>
   <block id="41ee1e1e674f49a8e3c78fc5517b1b83" category="inline-link">Trident 24.10</block>
   <block id="330905133ec61fb32dbdb0593cf466a2" category="list-text"><block ref="330905133ec61fb32dbdb0593cf466a2" category="inline-link-rx"></block></block>
   <block id="14151311f8b442ecc7db1533868dccd9" category="paragraph">尽管不建议这样做、但您可以对两个Trident实例使用相同的后端SVM。在安装期间为每个实例指定一个唯一的卷名称和/或在文件中指定一个唯一的<block ref="641b2675465e765661450709e2351a8e" prefix=" " category="inline-code"></block>参数<block ref="57a3822fdb39e72cdc47d89fd04ce467" prefix=" " category="inline-code"></block>。这是为了确保不会对这两个实例使用相同的FlexVol volume。</block>
   <block id="c45e7f5f358ba554413458272da37266" category="paragraph">该驱动程序可<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>在同一个FlexVol volume中创建多达200个qtrees (可在50到300之间配置)、每个集群节点创建100、000个qtrees、每个集群创建240万个qtrees。当您输入由经济型驱动程序提供服务的新<block ref="2b3f8e4d49589c4452db0a07d619d824" prefix=" " category="inline-code"></block>时、驱动程序将查看是否已存在可为新qtree提供服务的FlexVol volume。如果不存在可为qtree提供服务的FlexVol volume、则会创建一个新的FlexVol volume。</block>
   <block id="53f6fbaa0c2bc4ebb4fc98f8a0337c54" category="paragraph">此功能也适用于<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>驱动程序、但适用于FlexVol volume级别粒度、而不适用于qtree级别粒度。要为Trident配置的卷创建快照、请将backend参数选项设置为ONTAP后端<block ref="0a236e7685e50a59df980d0a30929d6c" prefix=" " category="inline-code"></block>上定义的所需快照策略。Trident无法识别存储控制器创建的任何快照。</block>
   <block id="68d4b8621bcc2d9eae1a68dc27dfa485" category="inline-link-macro">25.02</block>
-  <block id="1676619d4dd52daef210f03d3647b9ee" category="paragraph"><block ref="1676619d4dd52daef210f03d3647b9ee" category="inline-link-macro-rx"></block></block>
   <block id="eaaf7bd308bf6f27888c8d18ba11417d" category="cell">2028年2月</block>
   <block id="5956c33dbd8c8ed6e363f54092a9d544" category="paragraph"><block ref="5956c33dbd8c8ed6e363f54092a9d544" category="inline-link-macro-rx"></block></block>
-  <block id="a955d61a08cad762892eacca8af5f4b3" category="summary">Trident是由NetApp维护的开源存储配置程序和编排程序。通过它，您可以为 Docker 和 Kubernetes 管理的容器化应用程序创建存储卷。**阅读发行说明，了解有关升级到Trident 25.02的重要信息。**</block>
-  <block id="e8394d2be1ba9a293c13641636917cf2" category="doc">Trident 25.02文档</block>
   <block id="29a2e5ba987103c3a239ad6ec13b96a2" category="list-text">对于<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>、、<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block><block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block>和<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block>驱动程序，每个永久性卷(PV)都会映射到FlexVol volume，因此，会将卷快照创建为NetApp快照。与竞争对手的快照技术相比、NetApp快照技术可提供更高的稳定性、可扩展性、可恢复性和性能。无论是在创建 Snapshot 副本所需的时间还是在存储空间中，这些 Snapshot 副本都极为高效。</block>
   <block id="9574cb59de58a7e6882179620abd42fd" category="list-text">对于<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>驱动程序、PVs映射到在共享FlexVol卷上创建的LUN PVs的Snapshot可通过对关联LUN执行FlexClone来实现。借助ONTAP FlexClone技术、即使是最大的数据集、也可以近乎瞬时地创建副本。副本与其父级共享数据块，除了元数据所需的存储之外，不会占用任何存储。</block>
   <block id="20215ca4c00abcf8fb731d0f856d0e91" category="section-title">FC工具</block>
@@ -4901,7 +4873,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="72291962244c35e29a2e95cd6bd139bf" category="list-text">使用Snapshot策略创建卷、并接受ONTAP的默认Snapshot预留(通常为5%)：</block>
   <block id="5e62a96ba0adfc3472a925ff92c33174" category="paragraph">NetApp Trident支持在公有云或内部环境中的所有常见NetApp存储平台上使用和管理存储资源、包括内部ONTAP集群(AFF、FAS和ASA)、ONTAP Select、Cloud Volumes ONTAP、Element软件(NetApp HCI、SolidFire)、Azure NetApp Files、Amazon FSx for NetApp ONTAP以及Google Cloud上的Cloud Volumes Service。</block>
   <block id="90de0fd1d09f4fc27d99667555a8a12f" category="paragraph">ONTAP系统具有全闪存、混合或纯HDD配置、并提供许多不同的部署模式：内部FAS、AFA和ASA集群、ONTAP Select和Cloud Volumes ONTAP。Trident支持这些ONTAP部署模式。</block>
-  <block id="30712450d512dae0e7becb73c6a439fb" category="list-text">Kubbernetes 1.26 - 1.32</block>
   <block id="bde4e01f8df98626e0dc1c36a8e06a5a" category="admonition">在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高版本之前，请参见<block ref="1b428bb9b9fe27db6cd8932526864634" category="inline-link-macro-rx"></block>。</block>
   <block id="8f323a9e5c0c5162cc6e0d48e0cb1850" category="paragraph-title">支持的存储驱动程序：</block>
   <block id="8321592ce24c8a122ecf26a63cfca407" category="list-text">ontap-NAS</block>
@@ -4914,39 +4885,17 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="42c7d371004c0674ae717618c4a08508" category="list-text">iSCSI +<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block>(原始设备)</block>
   <block id="e031968b595722f16da97146c3a92c69" category="list-text">NVMe/TCP +<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block>(原始设备)</block>
   <block id="381edc20137f75d1e418981c1361fd2c" category="list-text">FC +<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block>(原始设备)</block>
-  <block id="24493d2fad9ccf981611c84f3d863eb4" category="paragraph">1.26 - 1.32</block>
-  <block id="d14770b30eb9f7db4088f360204c02b5" category="cell">v1.26.0、v1.27.0、v1.28.0、v1.29.0、v1.30.0、 v1.31.0、v1.32.0</block>
-  <block id="ab5b520e06e8f60c2eb43897deda1dd9" category="list-text">dDocker。io/NetApp/trdent：25.02.0</block>
-  <block id="78cd2bf2aaf1655ef471d7da97aa4ef9" category="list-text">docer.io/NetApp/trdent-autostsupport：25.02</block>
   <block id="b55333d21cb50b1d1d34c529c999482f" category="list-text">注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.2.0</block>
-  <block id="c9341ee9faa017471dec7dabe41bf3e4" category="list-text">注册表.k8s.io/sig-storage/CsI-Attacher：v4.8.0</block>
-  <block id="f174408325f6885e97fc18e213950cb7" category="list-text">注册表.k8s.io/sig-storage/CsI-snapshotter：v8.2.0</block>
   <block id="7e8b00e8f801232796015a8859867e55" category="list-text">注册表.k8s.io/sig-storage/CsI-N节点 驱动程序注册器：v2.13.0</block>
-  <block id="7abdbff8f015a0a5e1ca6bcf8e7a955c" category="list-text">dDocker .io/NetApp/trdent操作员：25.02.0 (可选)</block>
   <block id="0915385df687d0c4a0afb57a61f02af3" category="cell"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>仅限、、<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>和<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>。可与Kubnetes非正常节点关闭(NGN)结合使用、使集群管理员能够在节点运行状况不正常时将已挂载卷的工作负载安全地迁移到新节点。</block>
-  <block id="da566f5563315a47bcead8a7cc71b337" category="cell"><block ref="5eed2041bd0a2b5bc4d24f2635313d93" prefix="" category="inline-code"></block></block>
-  <block id="0276297a23c90658805984c414151740" category="cell"><block ref="0302774e7a67490f4ceafc4a303104aa" prefix="" category="inline-code"></block></block>
   <block id="abef2fa5ff95ef0fcfa0688ea6bcb3a9" category="cell"><block ref="c257f92937b246af1d65825bab674c3b" prefix="" category="inline-code"></block></block>
   <block id="abd94f25c6f83f31232f41e2c03a17c1" category="cell">启用自动后端配置、从而根据输入参数无缝创建后端和存储类。</block>
   <block id="584255a02e82c085a6eee64514bf791a" category="paragraph">强制分离仅适用于<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>、、<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>和<block ref="bc63092df841150cda2e4fd2992a38d1" prefix=" " category="inline-code"></block>。<block ref="c9cdb62835ea4d8965a6e946dc9826f0" prefix=" " category="inline-code"></block>在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。默认情况下、对于Kubbernetes 1.28及更高版本、NGN处于启用状态。有关详细信息，请参阅 <block ref="a0c86c823d7e699cfc277c93de351a2d" category="inline-link-macro-rx"></block>。</block>
   <block id="97949d2167cfb02925ebeb5fbc18e41c" category="admonition">使用或驱动程序时<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>、您需要将后端配置中的参数设置<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>、以便Trident可以限制通过受管导出策略应用了此内容的Kubornetes<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>节点的访问。</block>
-  <block id="01fbdb41fb6e8862657e5964c0d83d5c" category="section-title">有关Trident 25.02的重要信息</block>
-  <block id="ad79fab3578052458197aab6d24bfe59" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block> 并指定部署和映像注册表位置的名称。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。在示例中、<block ref="87461046c6ec9763bd053db47929a550" prefix=" " category="inline-code"></block>是要安装的Trident版本。</block>
-  <block id="3f3e593431120b4e7967086f371759ec" category="paragraph">例如，要更改的默认值<block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>，请运行以下命令，其中<block ref="87461046c6ec9763bd053db47929a550" prefix=" " category="inline-code"></block>是要安装的Trident版本：</block>
   <block id="6e8d58237141258ce4818d1462b0a37a" category="cell"><block ref="4c65cbb4d2559a68fba50cf196427b85" prefix="" category="inline-code"></block></block>
   <block id="084302fa0b21538a6a87278579b36fc1" category="paragraph">启用或禁用自动配置Trident后端和Amazon FSx存储类。使用以下参数和<block ref="4c65cbb4d2559a68fba50cf196427b85" prefix=" " category="inline-code"></block>启用自动后端配置：：<block ref="a10311459433adf322f2590a4987c423" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>启用自动后端配置。<block ref="aa34e5d130d1fc91b3c5fdc4d2d5d1cb" prefix=" " category="inline-code"></block>:包含将为其创建自动后端配置的文件系统ID列表。-<block ref="280fa711b12d488436b7cdcbfb2543fc" prefix=" " category="inline-code"></block>:设置SVM身份验证的身份验证类型。对于AWS、目前支持基于arn的身份验证("awsarn")。-<block ref="ac590318582c1d8275a50180aba8a35c" prefix=" " category="inline-code"></block>：设置AWS FSx的文件系统ID。示例："fs-0dfeuda884a68b1cab"。-<block ref="66203c461b36a2af573149f0aa6164ff" prefix=" " category="inline-code"></block>-指定支持自动后端配置的协议列表；"NFS"、"iSCSI"或两者。</block>
-  <block id="c94d920764ad698b13fce1cb196b9024" category="paragraph">在中<block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>，更新<block ref="1fe5f971601e99892ccca0bab9417b46" prefix=" " category="inline-code"></block> 以反映映像注册表的位置。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。例如：</block>
-  <block id="6ae8b4d0824581ee647b76f4c280d448" category="list-text"><block ref="924da433dbb17a774e14d7e96aadf82b" prefix="" category="inline-code"></block> 如果您的所有映像都位于一个注册表中。</block>
-  <block id="eeaef6c64dc748ffbdde45aca9bc297e" category="list-text"><block ref="d8c6fb75574d23773bf61dd46d1871c0" prefix="" category="inline-code"></block> 如果您的三端映像与CSI映像位于不同的注册表中。</block>
   <block id="f27e6cf95381139bd9916c64f178d212" category="list-text">对于运行Kubbernetes 1.24的集群，请使用 <block ref="ccef28639b5a7d8b851d32c1ca719ce3" category="inline-link-macro-rx"></block>。</block>
   <block id="b9f6abf28d1518cdaae0ed7e29a5727e" category="list-text">对于运行Kubernetes 1.25或更高版本的集群，请使用 <block ref="d1039b29d019902f70f499d65ede99cb" category="inline-link-macro-rx"></block>。</block>
-  <block id="3400180ce33fb4cdbacf913f74762c80" category="list-text">使用适用于您的环境的正确捆绑包YAML文件安装Trident、其中_是 或<block ref="5a02ebff4889c2de0379a0fb10bed282" prefix=" " category="inline-code"></block>基于您的&lt;bundle.yaml&gt;<block ref="bd2cc8575fe69c7f775292759380c838" prefix=" " category="inline-code"></block>版本。例如、如果要安装Trident 25.02、请运行以下命令：</block>
-  <block id="45704b85cd553abc7bb155ed39079447" category="list-text">如果您 <block ref="538f4beb16c8502421a8389e199d34ce" category="inline-link-macro-rx"></block>使用，则可以使用<block ref="a41424cebfa52515a314b72e665266e4" prefix=" " category="inline-code"></block> 一步升级。如果您未添加Helm repo或无法使用它进行升级：</block>
-  <block id="8d75608553a80cfba7f2a9ec5063ac93" category="list-text">使用<block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 命令、其中<block ref="68ee3d4bbc2ec55c7f0d56670846e258" prefix=" " category="inline-code"></block> 反映了要升级到的版本。</block>
-  <block id="c7d995e7509045b8a607d5617142e96f" category="list-text">您可以直接升级到已安装版本的四个版本窗口中的任何目标版本。例如、您可以直接从24.06 (或任何24.06 DOT版本)升级到25.02。</block>
-  <block id="8291c32fd69eb23998f9dd514080fcf0" category="list-text">如果要从四个版本窗口之外的版本进行升级、请执行多步骤升级。按照您要升级的的升级说明升级到适合四个版本窗口的 <block ref="a799aa6eaf3a5192b34ea19f24bb716f" category="inline-link-macro-rx"></block> 最新版本。例如、如果您运行的是23.01并希望升级到25.02：</block>
-  <block id="766b4e501c7ef35a36bb4462cc8ecbd6" category="list-text">首次从23.01升级到24.02。</block>
-  <block id="c2ae87f41a9ce7486445080462c1edb3" category="list-text">然后从24.02升级到25.02。</block>
   <block id="572a8b759ae44dd81571fb9d11e9932b" category="paragraph">NetApp SnapMirror复制可用于以下ONTAP解决方案的Trident Protect：</block>
   <block id="701fc71f0daf0d596d98b3af41d195dd" category="list-text">内部NetApp FAS、AFF和ASA集群</block>
   <block id="405c5315f2ee81c7d907857a97bc9ccc" category="list-text">将备份项目放在FlexVol volume上</block>
@@ -5028,16 +4977,7 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="fcc539559cb740199f02074f11b246c3" category="paragraph">如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如<block ref="33e9328e92e3ef05629093b4693b3925" prefix=" " category="inline-code"></block>。</block>
   <block id="3b4dab2ec7635dde859482b32c23ab9f" category="paragraph">有关无缝MetroCluster切换的信息，请参见<block ref="41195e18a4a81a05f5c5a6be365a5602" category="inline-xref-macro-rx"></block>。</block>
   <block id="2c8c9fb51502e9a1b2d2539b4d21a27b" category="cell">协议 LIF 的 IP 地址。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如<block ref="33e9328e92e3ef05629093b4693b3925" prefix=" " category="inline-code"></block>。*不指定iSCSI。*Trident使用<block ref="2de2f329c45219df280af5a70ed7a17c" category="inline-link-macro-rx"></block>发现建立多路径会话所需的iSCSI LUN。如果明确定义、则会生成警告<block ref="ea76b2438eb5996eb2c347e7341ed59a" prefix=" " category="inline-code"></block>。*省略MetroCluster。*请参见<block ref="41195e18a4a81a05f5c5a6be365a5602" category="inline-xref-macro-rx"></block>。</block>
-  <block id="d9d5eb3e1685b0777734571c976f8936" category="paragraph">*请勿为ASA R2*指定。</block>
-  <block id="d4dfda5be5dacb3c750decba30037a4b" category="cell">如果使用量超过此百分比，则配置失败。如果您使用的是Amazon FSx for NetApp ONTAP后端，请勿指定<block ref="d57551b1efacf8a7be84b4d10c5a6e99" prefix=" " category="inline-code"></block>。提供的和<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block>不包含使用Trident检索聚合使用情况并对其进行限制所需的<block ref="679500f227997b45be97e3ca8115c678" prefix=" " category="inline-code"></block>权限。*请勿为ASA R2*指定。</block>
   <block id="1f5f7f2866fe3a2c557b2ea38e4c2137" category="cell">用于为iSCSI、<block ref="eac89e2640666fd1076a776e4b748fae" prefix=" " category="inline-code"></block>NVMe/TCP或基于光纤通道的<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block>SCSI (FC)选择<block ref="39eea648dab96b0ee6022dabb38bc420" prefix=" " category="inline-code"></block>。</block>
-  <block id="c54795c562b1a54ac8671f794a71745e" category="cell">"TRUE"*如果指定，请将ASA R2*的设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。</block>
-  <block id="3530cb01cd660f315ec6bb3da8c04fd1" category="cell">空间预留模式；"无"(精简)或"卷"(厚)。*对于ASA R2*，设置为<block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block>。</block>
-  <block id="67068393009acb6b46e3ab91ab6e8945" category="cell">要使用的Snapshot策略。*对于ASA R2*，设置为<block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block>。</block>
-  <block id="df50ace1b0cd34d5240a9eb1f53b810d" category="cell">为快照预留的卷百分比。*请勿为ASA R2*指定。</block>
-  <block id="b414f77491b337ef4f2181d2e6a210b3" category="cell">"false"*如果指定，请将ASA R2*的设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。</block>
-  <block id="f50abf25c5eef34d11b26eb12f993fca" category="cell">对于ASA R2、将""设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。</block>
-  <block id="00f7c04dee401ca096a84ce3ce7cb61d" category="cell">使用"none"的分层策略*请勿为ASA R2*指定。</block>
   <block id="b1b6ee25d859768bce6271cfb4265c37" category="admonition">如果您在NetApp ONTAP上使用Amazon FSx和、NetApp建议您为Trident指定DNS名称、而不是IP地址。</block>
   <block id="d5be4c1bab384a780d2912d10b295308" category="paragraph">要进行无缝切换和切回、请使用指定SVM<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block>、并省略这些<block ref="924ff83ff1e671bacfb07ff12b845703" prefix=" " category="inline-code"></block>参数。例如：</block>
   <block id="c905ec8a79a58aa12ad3c7ae35e3127d" category="example-title">基于FC的SCSI (FCP)示例</block>
@@ -5299,7 +5239,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="50738c79b08f93cc8be7f7ee1a3ac387" category="paragraph">* ONTAP NAS驱动程序*：NetApp建议指定<block ref="ea76b2438eb5996eb2c347e7341ed59a" prefix=" " category="inline-code"></block>。如果未提供此参数、则Trident将从SVM提取数据LIF。您可以指定要用于NFS挂载操作的完全限定域名(FQDN)、以便创建轮叫DNS来在多个dataLIF之间进行负载平衡。</block>
   <block id="2455735b04a718daf96631c95e2d2d2c" category="paragraph">如果在AKS集群上使用托管身份或云身份、请设置为<block ref="71d36c46e340ad9137b2691e267f5ecd" prefix=" " category="inline-code"></block>。如果在EKS集群上使用云标识、请设置为<block ref="907695ffaef2806fea589c7d8d044679" prefix=" " category="inline-code"></block>。在GKE集群上使用云标识时、将设置为<block ref="9856712fdf7563a4074fc130ed9f0755" prefix=" " category="inline-code"></block>。</block>
   <block id="d73f3637b8d6ba73db2eed6c626bb0f7" category="paragraph">在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe"")。在GKE集群上使用云标识时、请设置为云标识("iam.GKE.IO/GCP-service-account：xxxx@mygcpproject.iam.gserviceaccount.com ")。</block>
-  <block id="67030ed661231310ad83b95178c3f9df" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署名称、如以下示例所示、其中<block ref="87461046c6ec9763bd053db47929a550" prefix=" " category="inline-code"></block>是要安装的Trident版本。</block>
   <block id="f39a4edd3567c3db7a288d4b8203dbee" category="cell">NFS 主机的主机名或 IP 地址。此值应设置为虚拟机的dataLIF。</block>
   <block id="7a6f34ea0b1eec52267ce30c62d910ba" category="cell">NFS 主机的主机名或 IP 地址。此值应设置为SVM的dataLIF。</block>
   <block id="65066f84c75170b9c4abad6591a73548" category="inline-link">在dataLIF上启用Kerberos</block>
@@ -5317,12 +5256,10 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="f54758d5b91452d3103cc1017fa70d71" category="admonition">有关Kubnetes集群上Trident架构的详细信息，请参阅<block ref="2e4686c52a7aa47e7bc2aa3cfa953fbe" category="inline-link-macro-rx"></block>。</block>
   <block id="50a4fd89cedf0068776b972ce96fcceb" category="cell">用于使用 ONTAP REST API 的布尔参数。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为时<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，Trident使用ONTAP REST API与后端通信；设置为时<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block> 应用程序。预定义的和角色可以满足这一<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 要求<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>；更<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>改为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>以使用ONTAPI (ZAPI)调用。</block>
   <block id="43086d9a7f35d289c190a6d377be9418" category="paragraph">对于 snapshotReserve = 50% ， PVC 请求 = 5GiB ，卷总大小为 5/.5 = 10GiB ，可用大小为 5GiB ，这是用户在 PVC 请求中请求的大小。此<block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block>命令应显示类似于以下示例的结果：</block>
-  <block id="01f46441d2a65849d403adec609ee5fb" category="cell">用于使用 ONTAP REST API 的布尔参数。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为时<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，Trident使用ONTAP REST API与后端通信；设置为时<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block> 应用程序。预定义的和角色可以满足这一<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 要求<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>；更<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>改为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>以使用ONTAPI (ZAPI)调用。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block> 完全符合NVMe/TCP要求。*如果指定，则ASA R2*始终设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。</block>
   <block id="d858eab1cb0b74aa1e6d052d7c06bd76" category="list-text">OpenShift 4.10 - 4.18</block>
   <block id="42113cf11e30b764619d3a98db65262d" category="list-text">R润 彻Kubernetes Engine 2 (RKE2) v1.26.7+rke2r1、v1.28.5+rke2r1</block>
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">为两个卷模式(文件和卷模式：块(原始设备)存储)增加了对KubeVirt / OpenShift虚拟化VM的备份和恢复支持。此支持与所有Trident驱动程序兼容、并可增强使用NetApp SnapMirror和Trident Protect复制存储时的现有保护功能。</block>
   <block id="fc1d748db1b5b488ce7af7d17ea15d55" category="inline-link-macro">软件版本支持</block>
-  <block id="ee19283e867cf4e5840d2811a74b89e5" category="list-text">受NetApp有限支持的内部FAS、AFF或ASA R2集群版本。请参阅。 <block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block></block>
   <block id="1906137ea73af1894fec1becb00e0aee" category="summary">您可以找到一些出色的NetApp Trident和Trident Protect博客。</block>
   <block id="0db80d8cadbd011f12ade006191e47b0" category="doc">Trident和Trident保护博客</block>
   <block id="c5497cf98d8e6141ba38e1421502c2d4" category="paragraph">您可以在以下位置找到一些出色的NetApp Trident和Trident Protect博客：</block>
@@ -5423,9 +5360,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="27e9bd9989c090489f69126b9910d7d8" category="list-text">您还可以通过在后端定义中包含来获取每个后端的调试日志<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block>。例如、include<block ref="825a719baa5b5b7445c98535815fac39" prefix=" " category="inline-code"></block>可在Trident日志中获取API调用和方法迁移。现有后端可以<block ref="effa2d809c72dcb6cce15a1e0b040e63" prefix=" " category="inline-code"></block>配置<block ref="ad782b779edfd8199198bed41b3e3b6b" prefix=" " category="inline-code"></block>。</block>
   <block id="1e8493e925b9f37d24c0573c08c6643a" category="list-text">在源集群上、为源应用程序创建AppVault。根据您的存储提供程序、修改中的示例<block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>以适合您的环境：</block>
   <block id="a42a308559809e0fc20b13ea51d5d3d4" category="list-text">在源集群上、创建源应用程序CR：</block>
-  <block id="75ffc8eca312c20c922ba2b9df1fde04" category="list-text">(可选)在源集群上、为源应用程序创建关闭快照。此快照将用作目标集群上应用程序的基础。如果跳过此步骤、则需要等待运行下一个计划快照、以便获得最新快照。</block>
-  <block id="663f822dd7baf35b6905a0333070ed81" category="open-title">使用CR创建关闭快照</block>
-  <block id="15b08a67c1cea1e1d7463ca2d0c98610" category="open-title">使用命令行界面创建关闭快照</block>
   <block id="85d88f09b637997959adc6d50a42d56f" category="list-text">在目标集群上，创建一个与您在源集群上应用的AppVault CR完全相同的源应用程序AppVault CR，并将其命名为(例如<block ref="3ad9e8b652d0a9a977e2534bf143ea29" prefix=" " category="inline-code"></block>)。</block>
   <block id="8af8219e9797756f7e348dd40e365632" category="list-text">在目标集群上为目标应用程序创建目标AppVault CR。根据您的存储提供程序、修改中的示例<block ref="789b31b0a5cabea5de04107e65439f53" category="inline-link-macro-rx"></block>以适合您的环境：</block>
   <block id="f454fc9c64d31c07a352c043fe184940" category="list-text">在目标集群上、创建App镜像 关系CR文件：</block>
@@ -5477,7 +5411,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">只需几个步骤即可设置卷克隆。</block>
   <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">Trident将创建PV及其后端存储卷。</block>
   <block id="9f965f02f635b760a84c43d43aba854f" category="paragraph">开始安装之前，<block ref="a24ee29cd883cbf52de58a68b0fed1a7" category="inline-link-macro-rx"></block>。</block>
-  <block id="c9611d3f195e70e59294887ffd815bd1" category="section-title">25.02.1中的新增功能</block>
   <block id="d72c3d84865c2955b89cbf6e0ec00ada" category="inline-link-macro">问题描述#983</block>
   <block id="ac76c3fcac41a10bd5f709108875e6c6" category="list-text">修复了使用非默认图像注册表()时Trident运算符错误填充的侧向图像名称和版本的问题<block ref="524f95fe3800e5d3ef82e615d679c539" category="inline-link-macro-rx"></block>。</block>
   <block id="7bc2d7846b2e95d3f64a4d4f4b53cc3c" category="list-text">修复了在ONTAP故障转移恢复()期间多路径会话无法恢复的问题<block ref="0939f851f18acedadb7fdffdec6d140b" category="inline-link-macro-rx"></block>。</block>
@@ -5516,14 +5449,261 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="965357e3c90ccf3fba01174c6508d562" category="listing-title">alertmanager.yaml：向 Slack 频道发送警报</block>
   <block id="fb72ca78c839cefc52d39ebcecaf6827" category="paragraph">卷快照支持<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ， <block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> ， <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ， <block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> ， <block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> ， <block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block> ， <block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> ， 和<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>司机。</block>
   <block id="173f808fc086ccd7ca8b43512be2cd48" category="admonition">这<block ref="e28ab870e47892fbd81eca8fc84c45ac" prefix=" " category="inline-code"></block>属性仅在原始属性和新属性都有效时<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block>使用相同的存储后端。如果您尝试恢复到<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block>如果使用不同的存储后端，则恢复操作将失败。</block>
-  <block id="a42f76d82e8a868d79d9c1663c081ae0" category="list-text">注册表.k8s.io/sig-storage/CsI-s不同：v1.13.1</block>
   <block id="02c19b7bc038d2af238bbd729bc3d9c4" category="list-text">手动创建 AppVault CR 时，使用 *spec.dataMoverPasswordSecretRef* 字段指定密钥。</block>
   <block id="0a636ed0406fe1d7ddf9db59b32011b3" category="list-text">使用 Trident Protect CLI 创建 AppVault 对象时，使用<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block>参数来指定秘密。</block>
   <block id="d2a7dc5804ec844f3f7bfb903e97693f" category="section-title">S3 兼容存储 IAM 权限</block>
   <block id="48f73146a4944adc8ee8fb44ba954d59" category="paragraph">当您访问与 S3 兼容的存储（例如 Amazon S3、Generic S3）时， <block ref="3d0b4c23d9ed62ec7d7cd16273ca2521" category="inline-link-rx"></block> ， 或者<block ref="3a31dfad8c316380b9a5542d694c5833" category="inline-link-rx"></block>使用 Trident 保护时，您需要确保您提供的用户凭证具有访问存储桶所需的权限。以下是一个策略示例，该策略授予使用 Trident 保护访问所需的最低权限。您可以将此策略应用于管理与 S3 兼容的存储桶策略的用户。</block>
   <block id="d9b7f314625fb7dcf35c741afe65b676" category="inline-link">Amazon S3 文档</block>
-  <block id="51ef32359424209f7163e58a5b1ab92e" category="paragraph">有关 Amazon S3 策略的更多信息，请参阅<block ref="61017e44ea21b481e69f04f8ac510768" category="inline-link-rx"></block> 。</block>
   <block id="46d663191f16f782a681e5f6702a09d4" category="list-text">对于所有 ONTAP 后端，Trident 要求至少将一个聚合分配给 SVM。</block>
-  <block id="46e450e4589332ce4a9f5ac86fea49f4" category="inline-link-macro">SVM 管理员使用 CLI 创建存储单元失败，并显示错误“没有可用于存储服务的候选聚合”</block>
-  <block id="aa20618193df98acd225cc1003a906ff" category="paragraph">请参阅此知识库文章，了解如何在 ASA r2 系统中将聚合分配给 SVM： <block ref="537835ac1ae737799b9c1a1bff131746" category="inline-link-macro-rx"></block> 。</block>
+  <block id="782b4a6bf31d7d564f002ed80e56a970" category="doc">数据移动器超时注释</block>
+  <block id="2cf4114566459ea3b3a5ac507cb86fd9" category="paragraph">在备份和恢复操作期间，您可以使用注释<block ref="f49fa3f76b2a4fcdf04dff369d417d84" prefix=" " category="inline-code"></block>配置数据移动操作的超时时间。此注解指定数据移动器在超时前等待特定操作完成的最长时间（以秒为单位）。这在网络问题或其他因素可能导致数据移动操作停滞的情况下尤其有用。它有助于检测和处理停滞的操作，而不是为整个过程设置通用超时。例如，如果由于网络问题导致卷数据恢复没有进展，则该操作将根据指定的时长超时。</block>
+  <block id="c2b7f24f4ddbaedb4e3d9e19f77eebac" category="paragraph">您可以在 YAML 文件中使用此注释，如下所示：</block>
+  <block id="14a0e26cbe187a4754f8b523ffba6073" category="paragraph">在此示例中，注释失败<block ref="ec2a2895b09b6030ec8cc1b3c43ddc4d" prefix=" " category="inline-code"></block>如果恢复操作在 2 秒内没有进展，则停止操作。</block>
+  <block id="c49aaf233c16f1193a8d683c17866eea" category="admonition">如果注释值小于或等于0，则操作将立即失败。</block>
+  <block id="5ac5b84505fffb8149e9d0cb84ddedbe" category="admonition">在恢复操作期间，任何<block ref="890b633d48ac6398f14ae722463da08b" prefix=" " category="inline-code"></block>为虚拟机 (VM) 创建的数据不会被恢复。</block>
+  <block id="4d1a32c0e466ff9011c60655b98dbf71" category="inline-link-macro">使用 Amazon EKS 插件自动为 FSx for ONTAP 配置 Trident 后端</block>
+  <block id="751ccca2e7c6e085455cc5d721ff8b39" category="list-text">2925年5月9日： <block ref="86b6d8d044348a051fe7477baf34debb" category="inline-link-macro-rx"></block></block>
+  <block id="607ed18429282657fb3f6b377df32f8c" category="inline-link-macro">NetApp Trident 与 Google Cloud NetApp Volumes 的 SMB 协议</block>
+  <block id="9455e2bd0c8a4dfe041579b6feac6833" category="list-text">2025年4月15日： <block ref="1d74efb61b1c97b9032a1222a24185b1" category="inline-link-macro-rx"></block></block>
+  <block id="ee031d295c711ed3119e4ca1bf2829b1" category="inline-link-macro">释放 NetApp ASA r2 系统对 Kubernetes 块存储的强大功能</block>
+  <block id="9ff2ac23d0ac11c688af59d453e16970" category="list-text">2025年4月14日： <block ref="e28ddf0afaf73832b19731c7248b6de5" category="inline-link-macro-rx"></block></block>
+  <block id="a3148578e6ffde89485954832ff9be37" category="paragraph">如果您未运行Trident 25.06，则可从获取以前版本的文档<block ref="6d47e9235a19453f00cf246917b9e162" category="inline-link-macro-rx"></block>。</block>
+  <block id="a1862e00d8111386cdf238bd23bb97db" category="inline-link">Trident 25.02</block>
+  <block id="25bdd2f6eb0ca7663bf4152396a74a09" category="list-text"><block ref="25bdd2f6eb0ca7663bf4152396a74a09" category="inline-link-rx"></block></block>
+  <block id="e26bc895e5bb00237e35bd08e101a228" category="inline-link-macro">25.06</block>
+  <block id="512754259e832a6faaee7e55aa2a0641" category="paragraph"><block ref="512754259e832a6faaee7e55aa2a0641" category="inline-link-macro-rx"></block></block>
+  <block id="e388180fa8946253a28286d92fcbc393" category="cell">2028年6月</block>
+  <block id="61a3094d46fa14bffb9067eeb8d3405a" category="paragraph"><block ref="61a3094d46fa14bffb9067eeb8d3405a" category="inline-link-macro-rx"></block></block>
+  <block id="dfd4fd2ff3f0bcabea8bfd811d0db9b4" category="summary">Trident是由NetApp维护的开源存储配置程序和编排程序。通过它，您可以为 Docker 和 Kubernetes 管理的容器化应用程序创建存储卷。**阅读发行说明，了解有关升级到Trident 25.06的重要信息。**</block>
+  <block id="1c14876f05b759f9c9be73a49c84ddd4" category="doc">Trident 25.06文档</block>
+  <block id="7b64f90c10ba527f2f6b6f1e6fb0c9fe" category="list-text">现在、在Trident中支持Kubnetes 1.33。在升级Kubernetes之前升级Trident。</block>
+  <block id="f39d8c359b3284c30097b65ae4e0dccf" category="list-text">Kubbernetes 1.27 - 1.33</block>
+  <block id="d84962dc87f0a0b8de6c8bcc166c1868" category="list-text">NetApp 有限支持下的本地 FAS、AFF 或 ASA r2（iSCSI 和 NVMe/TCP）集群版本。请参阅。 <block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block></block>
+  <block id="7fd491fc924e37e18dfff84e51b4174f" category="paragraph"><block ref="cad7374655e88af90db66aa882800d31" category="inline-xref-macro-rx"></block></block>
+  <block id="9f7ace1a0a4d64a8dfa14012ff8f7e8c" category="paragraph">1.27 - 1.33</block>
+  <block id="006871bfbb54929c1e2b37d3ce36b37f" category="cell">v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、 v1.32.0、v1.33.0</block>
+  <block id="3e711dbc16f3de48b46eca5b86572321" category="list-text">dDocker。io/NetApp/trdent：25.06.0</block>
+  <block id="d010f8bd4e6cede4d3e51de4419c09aa" category="list-text">docer.io/NetApp/trdent-autostsupport：25.06</block>
+  <block id="3b72fba0c67a9cb87151e878d3ba37f9" category="list-text">注册表.k8s.io/sig-storage/CsI-Attacher：v4.8.1</block>
+  <block id="06489d7f99c3b214c8b9a539006a642c" category="list-text">注册表.k8s.io/sig-storage/CsI-s不同：v1.13.2</block>
+  <block id="5b892dce2351df7e1f21d1004bc2cb19" category="list-text">注册表.k8s.io/sig-storage/CsI-snapshotter：v8.2.1</block>
+  <block id="5647d06b79232a09c66557bdfc379908" category="list-text">dDocker .io/NetApp/trdent操作员：25.06.0 (可选)</block>
+  <block id="d59cb19805caf164811cd6ff7d71da51" category="cell"><block ref="2a096ce9ce9c58c91575ae3f40daa915" prefix="" category="inline-code"></block></block>
+  <block id="fcd7f4cc8a01becf1cfddb538266578c" category="cell"><block ref="f6ac10a5549303d8f00a11f375963f9b" prefix="" category="inline-code"></block></block>
+  <block id="b59305925bb6ffc962ea48351db964e8" category="section-title">有关Trident 25.06的重要信息</block>
+  <block id="d7ccfdca42aadc41314f5df3ed2e4cbf" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block> 并指定部署和映像注册表位置的名称。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。在示例中、<block ref="5c9befb508998ce21883733ce6ab129f" prefix=" " category="inline-code"></block>是要安装的Trident版本。</block>
+  <block id="9632d6ad86670e70a32c6b93e85ad9f4" category="paragraph">例如，要更改的默认值<block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>，请运行以下命令，其中<block ref="5c9befb508998ce21883733ce6ab129f" prefix=" " category="inline-code"></block>是要安装的Trident版本：</block>
+  <block id="b34ad03c5088f36033c20b21d9aae4c2" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署名称、如以下示例所示、其中<block ref="5c9befb508998ce21883733ce6ab129f" prefix=" " category="inline-code"></block>是要安装的Trident版本。</block>
+  <block id="afae3127cfc01ae0c8de038b447062f9" category="section-title">有关Trident 25.05的重要信息</block>
+  <block id="287d9354cd0e889ca3c170f1a20060ce" category="paragraph">在中<block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>，更新<block ref="ff1ea91c85a440ad216d6d8dafdb2b4a" prefix=" " category="inline-code"></block> 以反映映像注册表的位置。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。例如：</block>
+  <block id="3ce13997cacbb7668e6636ffb21ba04a" category="list-text"><block ref="a5ad704b64900183c3e85fea9edad0f0" prefix="" category="inline-code"></block> 如果您的所有映像都位于一个注册表中。</block>
+  <block id="b6e3b64ea99d65462c313d10936507a1" category="list-text"><block ref="f5f5dab4b39c35c32ac8846470b513ad" prefix="" category="inline-code"></block> 如果您的三端映像与CSI映像位于不同的注册表中。</block>
+  <block id="3821e533e08e97c63527fb3e1ab72017" category="list-text">使用适用于您的环境的正确捆绑包YAML文件安装Trident、其中_是 或<block ref="5a02ebff4889c2de0379a0fb10bed282" prefix=" " category="inline-code"></block>基于您的&lt;bundle.yaml&gt;<block ref="bd2cc8575fe69c7f775292759380c838" prefix=" " category="inline-code"></block>版本。例如、如果要安装Trident 25.06、请运行以下命令：</block>
+  <block id="d180bc23594b2a81a598da69af7136af" category="list-text">如果您 <block ref="538f4beb16c8502421a8389e199d34ce" category="inline-link-macro-rx"></block>使用，则可以使用<block ref="9ba27131bd1269499334744b89769fac" prefix=" " category="inline-code"></block> 一步升级。如果您未添加Helm repo或无法使用它进行升级：</block>
+  <block id="19edaf19feadf74a38c5b3da24fd64bd" category="list-text">使用<block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 命令、其中<block ref="c49c0910ea156a14c49e617b509b605a" prefix=" " category="inline-code"></block> 反映了要升级到的版本。</block>
+  <block id="843e8c92f2887fa83e4564f86e6a7ca0" category="list-text">您可以直接升级到已安装版本的四个版本窗口中的任何目标版本。例如、您可以直接从24.06 (或任何24.06 DOT版本)升级到25.06。</block>
+  <block id="d4ea8129c0158e8c6ac0b3bb00a333e5" category="list-text">如果要从四个版本窗口之外的版本进行升级、请执行多步骤升级。按照您要升级的的升级说明升级到适合四个版本窗口的 <block ref="a799aa6eaf3a5192b34ea19f24bb716f" category="inline-link-macro-rx"></block> 最新版本。例如、如果您运行的是23.07并希望升级到25.06：</block>
+  <block id="96643a0b653f3484db440bd905d8e591" category="list-text">首次从23.07升级到24.06。</block>
+  <block id="0d5f6bd4062e1e564fa83bfc5eb6a64c" category="list-text">然后从24.06升级到25.06。</block>
+  <block id="bc08c4a5eed12311fe8187fb000dd58a" category="paragraph">有关 Amazon S3 策略的更多信息，请参阅<block ref="61017e44ea21b481e69f04f8ac510768" category="inline-link-rx"></block> 。</block>
+  <block id="2508b93e69f47b3a094284dbdc9a09de" category="list-text">（可选）添加包含或排除标有特定标签的资源的过滤：</block>
+  <block id="b4d332d25d8164d8387707934254781d" category="admonition">当两者<block ref="a25777d0a6883efb33950a7cd7a8f9b9" prefix=" " category="inline-code"></block>和<block ref="2021b5ec814a388ca04af6c6d6c2d16f" prefix=" " category="inline-code"></block>被使用， <block ref="a25777d0a6883efb33950a7cd7a8f9b9" prefix=" " category="inline-code"></block>首先运行，然后<block ref="2021b5ec814a388ca04af6c6d6c2d16f" prefix=" " category="inline-code"></block>应用于结果资源。</block>
+  <block id="6b556cca1436ef5909ccaa59f5aae989" category="paragraph">您可以使用<block ref="e80c5db95c437e3b5acee80112bd1f1a" prefix=" " category="inline-code"></block>和<block ref="484f02b530e920abf065e3f27b7a6d80" prefix=" " category="inline-code"></block>用于包含或排除资源的标志<block ref="303a9ae359153efd5b4c1067cd875175" prefix=" " category="inline-code"></block>例如组、种类、版本、标签、名称和命名空间，如下例所示：</block>
+  <block id="13001655f60b86601d45076ffb7e8cb4" category="list-text">*spec.snapshotRef*：（可选）：用作备份源的快照的名称。如果不提供此参数、则会创建和备份临时快照。</block>
+  <block id="ba2af206b00fb98d583a5fe7908af2cc" category="list-text">*metadata.annotations.protect.trident.netapp.io/full-backup*：（可选）此注释用于指定备份是否应该是非增量的。默认情况下、所有备份均为增量备份。但是，如果此标注设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，则备份将变为非增量备份。如果未指定、则备份将采用默认增量备份设置。最佳做法是、定期执行完整备份、然后在两次完整备份之间执行增量备份、以最大程度地降低与还原相关的风险。</block>
+  <block id="93b1107cde6ba041513cd9ccf7b4bae0" category="paragraph">您可以选择使用<block ref="53f5240b338c91a0568f15e2562a35de" prefix=" " category="inline-code"></block>标志来指定备份是否应为非增量备份。默认情况下、所有备份均为增量备份。使用此标志时、备份将变为非增量备份。最佳做法是、定期执行完整备份、然后在两次完整备份之间执行增量备份、以最大程度地降低与还原相关的风险。</block>
+  <block id="99cd57e28c97c0577c8e6d701de91b88" category="section-title">创建备份计划</block>
+  <block id="46773fe21c0cf6451e8de9f6a18da51f" category="paragraph">您可以计划非增量完整备份。默认情况下、所有备份均为增量备份。定期执行完整备份以及其间的增量备份有助于降低与还原相关的风险。</block>
+  <block id="2c26e9a03dd91b6eafe57094f8245ad8" category="list-text">创建自定义资源(CR)文件并将其命名为<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block>。</block>
+  <block id="1770a13eba6600496a86d2f1cf357813" category="list-text">*。metadata.annotations.protect.trident.netapp.io/full-backup-rule*:(_可 选_)此标注用于指定计划完整备份的规则。您可以将其设置为以实现持续完整备份、也可以<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block>根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。</block>
+  <block id="9355f48a9876fcaefe0351294df4e05c" category="list-text">使用正确的值填充文件后<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block> 、应用CR：</block>
+  <block id="1bd9850ddb901f0e741293ec737c5de6" category="list-text">创建备份计划、将括号中的值替换为您环境中的信息。例如：</block>
+  <block id="ab5807fb06fd654f730a4ed5a02bb950" category="paragraph">您可以将此标志设置为<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block>以实现持续完整备份、也可以<block ref="61df7cc86eb24ab1300f0e74e74bb50c" prefix=" " category="inline-code"></block>根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。例如、使用<block ref="d416cce9d6bcb838c8958b9fbb84dffa" prefix=" " category="inline-code"></block>计划在星期一和星期四进行完整备份。</block>
+  <block id="396e0c641a3eb6083fa0ba7badcff8ac" category="admonition">确保回收策略设置为<block ref="f2a6c498fb90ee345d997f888fce3b18" prefix=" " category="inline-code"></block>从对象存储中删除所有备份数据。该策略的默认设置是<block ref="afece4245269582cb2f1009d4fb52047" prefix=" " category="inline-code"></block>以避免意外数据丢失。如果政策没有改变<block ref="f2a6c498fb90ee345d997f888fce3b18" prefix=" " category="inline-code"></block> ，备份数据将保留在对象存储中，需要手动删除。</block>
+  <block id="28b0a2e1fa7af6d4a2a83bc61c130c0f" category="list-text">确保连接到集群的 NetApp 存储使用 Trident 24.02 或更新版本（建议使用 Trident 24.10）。</block>
+  <block id="089456655f37605dd109f3d8c7ece010" category="list-text">*NetApp Trident*：NetApp Trident 必须存在于使用 ONTAP 作为后端的源 Kubernetes 集群和目标 Kubernetes 集群上。Trident Protect支持使用以下驱动程序支持的存储类通过NetApp SnapMirror技术进行复制：</block>
+  <block id="070b998f5495f2da2fb3ac5053772d1e" category="list-text"><block ref="8321592ce24c8a122ecf26a63cfca407" prefix="" category="inline-code"></block> ：NFS</block>
+  <block id="48af35aa41f6c14dcd31a429e161cd45" category="list-text"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block> ：iSCSI</block>
+  <block id="af09466318992e13530265625ea96e63" category="list-text"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block> ：足球俱乐部</block>
+  <block id="53b96f55224c3a6f51becdf09ad8ffe6" category="list-text"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block> ：NVMe/TCP（要求最低 ONTAP 版本 9.15.1）</block>
+  <block id="a167444fdea2847400372052380975f2" category="inline-link-macro">ONTAP One附带的许可证</block>
+  <block id="e25ea621e214708b88885c09ed9b5b9b" category="paragraph">从ONTAP 9.10.1开始、所有许可证均以NetApp许可证文件(NLG)的形式提供、NLG是一个支持多项功能的文件。有关详细信息、请参见 <block ref="99e347051ec17074ee747e0bde509d7d" category="inline-link-macro-rx"></block> 。</block>
+  <block id="afafd0e230868b7ce6a0a4fcf57ee6d2" category="admonition">仅支持 SnapMirror 异步保护。</block>
+  <block id="39741179a069c04c2421056e0f2b56fa" category="list-text">*NetApp Trident 和 SVM*：对等远程 SVM 必须可供目标集群上的 NetApp Trident 使用。</block>
+  <block id="961ce5b35a999d2dc3f7e386f74eb614" category="list-text">对于 qtree 卷，支持从备份还原到其他命名空间或原始命名空间。但是，对于 qtree 卷，不支持从快照还原到其他命名空间或原始命名空间。</block>
+  <block id="ffbfa7c1456b1cb991affd8a76d54fd1" category="section-title">支持的注释</block>
+  <block id="738d4e5947ef1239f584cd47619cf356" category="paragraph">本节列出了系统中支持配置各种行为的注解。如果用户未明确设置注解，系统将使用默认值。</block>
+  <block id="f49fa3f76b2a4fcdf04dff369d417d84" category="cell">protected.trident.netapp.io/data-mover-timeout-sec</block>
+  <block id="a666ad37acca2b6a0ee400d7b2acf088" category="cell">允许数据移动设备操作停止的最长时间（以秒为单位）。</block>
+  <block id="94f6d7e04a4d452035300f18b984988c" category="cell">300</block>
+  <block id="3b2f6f0bb673ee02e8aafe624e2e971f" category="cell">protected.trident.netapp.io/kopia-content-cache-size-limit-mb</block>
+  <block id="157db7df530023575515d366c9b672e8" category="cell">整数</block>
+  <block id="f044e4dc5e5fdde631180451c25a973c" category="cell">Kopia 内容缓存的最大大小限制（以兆字节为单位）。</block>
+  <block id="a9b7ba70783b617e9998dc4dd82eb3c5" category="cell">1000</block>
+  <block id="0ae48837f8ebc5da6e90828852d02027" category="admonition">25.06 及更高版本不需要此步骤。</block>
+  <block id="ed98e5c2a168d1606df0370fe371df28" category="paragraph">从版本 24.10 升级时，升级期间运行的快照可能会失败。此失败不会阻止将来创建快照（无论是手动快照还是计划快照）。如果升级期间快照失败，您可以手动创建新快照以确保应用程序受到保护。</block>
+  <block id="756accba0f305693c47126f932bd7ac6" category="paragraph">为避免潜在的故障，您可以在升级前禁用所有快照计划，然后在升级后重新启用。但是，这会导致升级期间丢失所有计划的快照。</block>
+  <block id="814a37dc29d2671dd3cdbf3982ee4a85" category="admonition">如果您从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在包含在 Trident Protect Helm 图表中。</block>
+  <block id="8e903b2b577c535f6f70248f34e61228" category="list-text">运行此命令将 CRD 的管理从<block ref="23901a54edbcff97a89483ac3112545c" prefix=" " category="inline-code"></block>到<block ref="9a82c7a4099124e5bfaa83e7c5997bd4" prefix=" " category="inline-code"></block> ：</block>
+  <block id="da4df818678014568aed9623276fd9f5" category="list-text">运行此命令删除<block ref="23901a54edbcff97a89483ac3112545c" prefix=" " category="inline-code"></block>图表：</block>
+  <block id="aeea10a9d4e3d29e20b749a201f0ae46" category="admonition">不要卸载<block ref="23901a54edbcff97a89483ac3112545c" prefix=" " category="inline-code"></block>图表使用 Helm，因为这可能会删除您的 CRD 和任何相关数据。</block>
+  <block id="685db7ca1bcc71c55d1592c71e464158" category="section-title">故障转移和反向操作期间的执行挂钩</block>
+  <block id="bfc5a6b94bc23ccc51c85a2aa1cb71b4" category="paragraph">当使用 AppMirror 关系保护您的应用程序时，您应该在故障转移和反转操作期间注意与执行挂钩相关的特定行为。</block>
+  <block id="3d11bc959173dddd2997400e7bdf4d67" category="list-text">在故障转移期间，执行挂钩会自动从源集群复制到目标集群。您无需手动重新创建它们。故障转移后，执行挂钩仍存在于应用程序中，并将在任何相关操作期间执行。</block>
+  <block id="ba9dd6212c2e02686051fbf28e548584" category="list-text">在反向同步或反向重新同步期间，应用程序上所有现有的执行钩子都将被移除。当源应用程序成为目标应用程序时，这些执行钩子将失效，并会被删除以阻止其执行。</block>
+  <block id="98b9f287abe5860abcc3ab5364313188" category="paragraph">要了解有关执行钩子的更多信息，请参阅<block ref="d0f7adc5528355d3ba6ac91271095c29" category="inline-link-macro-rx"></block> 。</block>
+  <block id="f815c45e5a618fe75ef3a716b30b711d" category="list-text">或者，在源集群上，拍摄源应用程序的快照。此快照将用作目标集群上应用程序的基础。如果跳过此步骤、则需要等待运行下一个计划快照、以便获得最新快照。</block>
+  <block id="9399bd959f53d5a7d8671b597df92df2" category="paragraph">除了下面提供的计划外，建议创建一个单独的每日快照计划，保留期为 7 天，以便在对等 ONTAP 集群之间维护通用快照。这可确保快照最多可用 7 天，但保留期可根据用户需求自定义。</block>
+  <block id="bd8250ba3a5ac73f1ca0ba8c92937c5a" category="paragraph">如果发生故障转移，系统可以使用这些快照最多 7 天进行反向操作。这种方法使反向过程更快、更高效，因为只会传输自上次快照以来所做的更改，而不是所有数据。</block>
+  <block id="af22b57fbc1d302d6a0b83cb06ce9e6a" category="paragraph">如果应用程序的现有计划已经满足所需的保留要求，则不需要额外的计划。</block>
+  <block id="84caf200e79d5962bc7f3516e9ad328c" category="open-title">使用CR创建快照</block>
+  <block id="3feb4a62c8b59cd52ae22845d363c901" category="open-title">使用命令行界面创建快照</block>
+  <block id="e995d56efd9e31d97825dd79be4d1383" category="inline-link-macro">了解ASA R2存储系统</block>
+  <block id="19bf8687ff63071d6f6661c290cba7c2" category="admonition">ASA r2 系统不支持 LUKS 加密。有关 ASA r2 系统的信息，请参阅<block ref="40f055dd42976ff294174231df35e37e" category="inline-link-macro-rx"></block> 。</block>
+  <block id="8e1b080c70f6bd5a6a7f2755f82fb95b" category="paragraph">NetApp Trident 支持使用<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ， <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ， <block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> ， 和<block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block>存储驱动程序。使用或<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>驱动程序时<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>、不支持克隆。从现有卷创建新卷将创建新快照。</block>
+  <block id="9470f4768dd90ef0be0fb76cb2f6e04b" category="admonition">避免克隆与其他 StorageClass 关联的 PVC。请在同一 StorageClass 内执行克隆操作，以确保兼容性并防止出现意外行为。</block>
+  <block id="0f3fb6e27b9de1539a220130039ade03" category="admonition">VolumeSnapshot 的生命周期与源 PVC 无关：即使源 PVC 被删除，快照仍然存在。删除具有关联快照的 PVC 时， Trident 会将此 PVC 的后备卷标记为 " 正在删除 " 状态，但不会将其完全删除。删除所有关联快照后，卷将被删除。</block>
+  <block id="24cf288d698c32f6be78d78ed4ae2da4" category="section-title">Kubbernetes<block ref="b05416d74805ad470e82fbd185a80f60" prefix=" " category="inline-code"></block>对象</block>
+  <block id="03925a5c554c5613d08fccbd8b32b9f8" category="paragraph">Kubbernetes<block ref="b05416d74805ad470e82fbd185a80f60" prefix=" " category="inline-code"></block>对象类似于<block ref="19476662cd814e0aa085eca121de89b8" prefix=" " category="inline-code"></block>。它们有助于定义多种存储类别，并被卷组快照引用，以将快照与所需的快照类别关联。每个卷组快照都与单个卷组快照类别相关联。</block>
+  <block id="fff4777b7ca5b9c8c8cf5e2bcba4f07c" category="paragraph">一个<block ref="b05416d74805ad470e82fbd185a80f60" prefix=" " category="inline-code"></block>应由管理员定义，以便创建快照组。卷组快照类使用以下定义创建：</block>
+  <block id="8245adeb076e6d9db9f6ac77dfb4c7e3" category="paragraph">由 Trident 处理。<block ref="98e7d6463271d7848db255ae6467817a" prefix=" " category="inline-code"></block>指定必须删除组快照时要采取的操作。当<block ref="98e7d6463271d7848db255ae6467817a" prefix=" " category="inline-code"></block>设置为<block ref="f2a6c498fb90ee345d997f888fce3b18" prefix=" " category="inline-code"></block> ，删除快照时，卷组快照对象以及存储集群上的底层快照也将被删除。或者、将其设置为<block ref="afece4245269582cb2f1009d4fb52047" prefix=" " category="inline-code"></block>表示将<block ref="4a238bd658ede8bc190a54f7df8c3483" prefix=" " category="inline-code"></block>保留和物理快照。</block>
+  <block id="0eb0a72ef062acee4c89d5b3ff32da7f" category="section-title">Kubbernetes<block ref="7afb2b9a0abcf6292858fe2f3450e700" prefix=" " category="inline-code"></block>对象</block>
+  <block id="94d3b435d2b11531835e041026e7588f" category="paragraph">Kubernetes <block ref="7afb2b9a0abcf6292858fe2f3450e700" prefix=" " category="inline-code"></block>对象是创建多个卷快照的请求。正如 PVC 代表用户对卷的请求一样，卷组快照是用户为现有 PVC 创建快照的请求。</block>
+  <block id="317c0b5a54de9fa8dd62802a550228c3" category="paragraph">当卷组快照请求到达时，Trident 会自动管理后端卷的组快照的创建，并通过创建唯一的<block ref="4a238bd658ede8bc190a54f7df8c3483" prefix=" " category="inline-code"></block>目的。您可以从现有 PVC 创建快照，并在创建新 PVC 时将这些快照用作 DataSource 。</block>
+  <block id="3edcdec1ed853ba69f1224c7c43702c5" category="admonition">VolumeGroupSnapshot 的生命周期与源 PVC 无关：即使源 PVC 被删除，快照仍然有效。删除具有关联快照的 PVC 时， Trident 会将此 PVC 的后备卷标记为 " 正在删除 " 状态，但不会将其完全删除。当所有关联的快照都被删除时，卷组快照也会被移除。</block>
+  <block id="8ea50d112474393280399a928479890a" category="section-title">Kubbernetes<block ref="4a238bd658ede8bc190a54f7df8c3483" prefix=" " category="inline-code"></block>对象</block>
+  <block id="bf0839da8b1efda893b043a219a1630e" category="paragraph">Kubernetes <block ref="4a238bd658ede8bc190a54f7df8c3483" prefix=" " category="inline-code"></block>对象表示从已配置的卷中获取的组快照。它类似于<block ref="858e55ea2e6429120a862313c50a9f5f" prefix=" " category="inline-code"></block>、表示存储集群上已配置的快照。与和<block ref="858e55ea2e6429120a862313c50a9f5f" prefix=" " category="inline-code"></block>对象类似<block ref="2b3f8e4d49589c4452db0a07d619d824" prefix=" " category="inline-code"></block>、创建快照时、<block ref="d6a1ae997b76c43d7aaf3b22e620401e" prefix=" " category="inline-code"></block>对象会与请求创建快照的对象保持一对一映射<block ref="310a3378435f31620fbc3e7831ac7286" prefix=" " category="inline-code"></block>。</block>
+  <block id="85cb66a45776909e333f8847ee91255d" category="paragraph">这<block ref="4a238bd658ede8bc190a54f7df8c3483" prefix=" " category="inline-code"></block>对象包含识别快照组的详细信息，例如<block ref="e8dbdd2405d28658285ebd383044be1a" prefix=" " category="inline-code"></block>以及存储系统上现有的各个volumeSnapshotHandles。</block>
+  <block id="a4314d759b2ba28d3d385366f2595052" category="paragraph">当快照请求到达时，Trident 会在后端创建卷组快照。创建卷组快照后，Trident 会配置一个<block ref="4a238bd658ede8bc190a54f7df8c3483" prefix=" " category="inline-code"></block>对象，从而将快照公开给 Kubernetes API。</block>
+  <block id="fc679dfce4052095eac6de2f7f86cd16" category="paragraph">发行说明提供有关 NetApp Trident 最新版本中的新功能、增强功能和错误修复的信息。</block>
+  <block id="d8789e2b2a964b430285afd098847d7e" category="section-title">25.06中的新增功能</block>
+  <block id="08f1535b065719df5968364b00b95026" category="paragraph">新功能摘要提供了有关 Trident 和 Trident 保护版本的增强、修复和弃用的详细信息。</block>
+  <block id="b73e3aa94514d51e32ca4c9fa306ce1e" category="inline-link-macro">使用卷组快照</block>
+  <block id="80ac93976d2619f3f309ef5bc482d2c7" category="list-text">增加了对 CSI 卷组快照的支持<block ref="ee21100dace47d83bcefcb7dea09cdd3" prefix=" " category="inline-code"></block>适用于 ONTAP-SAN iSCSI 驱动程序的卷组快照 Kubernetes API。请参阅。 <block ref="fd476c7303c38c20a34c94b791c3665b" category="inline-link-macro-rx"></block></block>
+  <block id="f4d7441ee86cf8ef89cc31b8d13be595" category="list-text">除了 iSCSI 之外，还增加了对 NVMe/TCP 的 ONTAP ASA r2 的支持。请参阅。 <block ref="a13549ce70a240751f16cafbcac6ef24" category="inline-link-macro-rx"></block></block>
+  <block id="d5bb517310bc551b239857e32401ac1f" category="inline-link-macro">启用安全 SMB</block>
+  <block id="54c4f7fee9982c2ea03f1e81bbea3182" category="list-text">为 ONTAP-NAS 和 ONTAP-NAS-Economy 卷添加了安全的 SMB 支持。ActiveDirectory 用户和组现在可以与 SMB 卷一起使用，以增强安全性。请参阅。 <block ref="85df2556237eff5f1420974cc8e4c414" category="inline-link-macro-rx"></block></block>
+  <block id="6bcdf917188bd0a976b410952a796d4b" category="list-text">增强 Trident 节点并发性，以提高 iSCSI 卷节点操作的可扩展性。</block>
+  <block id="03384ffa27aceef186890eaae584f3c4" category="list-text">额外<block ref="b5073479eb6368548b299ea4d08aa8b7" prefix=" " category="inline-code"></block>打开 LUKS 卷时允许丢弃/TRIM 命令以回收空间。</block>
+  <block id="f216940dceac21552e55089b0f450059" category="list-text">格式化 LUKS 加密卷时的性能增强。</block>
+  <block id="aca9eafb022610d731f3f94197f227fd" category="list-text">增强了对失败但部分格式化的 LUKS 设备的 LUKS 清理。</block>
+  <block id="fdba6fb56d2b6fb4d3d2af782f7f8e33" category="list-text">增强了 Trident 节点幂等性，用于 NVMe 卷的连接和分离。</block>
+  <block id="ab129514c6ec5bf9326f9283a0c4b73d" category="list-text">额外<block ref="93e2011fcb40991e51f3f8427fdcfb82" prefix=" " category="inline-code"></block>字段到 ONTAP-SAN-Economy 驱动程序的 Trident 卷配置。</block>
+  <block id="ba26d8e397328f11256ee207903c8de7" category="list-text">增加了对使用 SnapMirror 对 NVMe 后端进行卷复制的支持。请参阅。 <block ref="5f7d1407f1097c01ae271299992a9584" category="inline-link-macro-rx"></block></block>
+  <block id="78eb403f568b0e64b07699199ebc4992" category="admonition">不适用于生产环境。</block>
+  <block id="3dd4403c2b5ea69ecfbe030e29eee853" category="list-text">[技术预览] 通过以下方式启用并发 Trident 控制器操作<block ref="663f61c1cf47f8a531c8d769e8bf59f4" prefix=" " category="inline-code"></block>功能标志。这允许控制器操作并行运行，从而提高繁忙或大型环境中的性能。</block>
+  <block id="8a54b5275af086a6a2bb3983856d3f56" category="admonition">此功能尚处于实验阶段，目前支持使用 ONTAP-SAN 驱动程序（iSCSI 和 FCP 协议）的有限并行工作流程。</block>
+  <block id="969ab4db9d9d63b4573cc75a0b550b21" category="list-text">[技术预览] 使用 ANF 驱动程序添加了手动 QOS 支持。</block>
+  <block id="fa420d9ecbb50720fc93ab14f7943b42" category="list-text">修复了 CSI NodeExpandVolume 的问题，当底层 SCSI 磁盘不可用时，多路径设备可能会出现大小不一致的情况。</block>
+  <block id="69e0fec3be54a3b91103c8c7b788339f" category="list-text">修复了无法清理 ONTAP-NAS 和 ONTAP-NAS-Economy 驱动程序的重复导出策略的问题。</block>
+  <block id="6e02211c85412fa0d990bce8af9e671f" category="list-text">修复了 GCNV 卷默认为 NFSv3 的问题<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block>未设置；现在 NFSv3 和 NFSv4 协议均受支持。如果<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block>如果未提供，则将使用主机的默认 NFS 版本（NFSv3 或 NFSv4）。</block>
+  <block id="aaa014969ef27003313b67f83fe7091d" category="inline-link-macro">问题描述#831</block>
+  <block id="cd620e798a4bbf9171d504843ebb70d0" category="list-text">修复了使用 Kustomize 安装 Trident 时出现的部署问题（ <block ref="ae3bb668f87d2aa74a2bfe43dedc0001" category="inline-link-macro-rx"></block> ）。</block>
+  <block id="81a9708305846c55b26ba31f647ab071" category="inline-link-macro">问题描述#1016</block>
+  <block id="11cdedcfa10c010ee258407d4a2535c9" category="list-text">修复了从快照创建的 PVC 缺少导出策略的问题（ <block ref="dfbabc79dc25039e80d49a5ce74702bc" category="inline-link-macro-rx"></block> ）。</block>
+  <block id="1e655d3e31833883db169632edf4c07d" category="list-text">修复了 ANF 卷大小未自动与 1 GiB 增量对齐的问题。</block>
+  <block id="c2c862a452feb157ea36fc61c62cb6d5" category="list-text">修复了将 NFSv3 与 Bottlerocket 结合使用时的问题。</block>
+  <block id="d3c869af5d0f4ee5e35def393587ffea" category="inline-link-macro">问题描述#1008</block>
+  <block id="21a4addc7283b0fef748a52987809884" category="list-text">修复使用 SolidFire 后端克隆卷时出现超时的问题（ <block ref="ff387119bc332768d9a3831513d005d5" category="inline-link-macro-rx"></block> ）。</block>
+  <block id="1d85be817e7793c5b5423dbe7a618b9b" category="list-text">修复了 ONTAP-NAS-Economy 卷尽管调整大小失败但仍可扩展至 300 TB 的问题。</block>
+  <block id="9bfdfc993711fd8c92649ae6040af106" category="list-text">修复了使用 ONTAP REST API 时克隆拆分操作同步完成的问题。</block>
+  <block id="d7061136425214e6ed7ba38910be5772" category="section-title">弃用：</block>
+  <block id="eb0a31990fe8d3afbb4177136e0a9c3b" category="list-text">*Kubernetes*：将最低支持的 Kubernetes 更新至 v1.27。</block>
+  <block id="9b6a034e6854c5f27feb3ac185829f8d" category="section-title">三叉戟保护</block>
+  <block id="df6370ee6ad8bc05b4c28dc223a119ea" category="list-text">改善了恢复时间，提供了进行更频繁的完整备份的选项。</block>
+  <block id="6d133839389fad9d044a57e7cd98852e" category="list-text">通过 Group-Version-Kind (GVK) 过滤提高了应用程序定义和选择性恢复的粒度。</block>
+  <block id="d22659d02ebeb222423ac210fcf66e17" category="list-text">将 AppMirrorRelationship (AMR) 与 NetApp SnapMirror 结合使用时可实现高效的重新同步和反向复制，以避免完整的 PVC 复制。</block>
+  <block id="9f36be3db329921235443aaf292d3420" category="list-text">增加了使用 EKS Pod Identity 创建 AppVault 存储桶的功能，无需使用 EKS 集群的存储桶凭证指定机密。</block>
+  <block id="608712f29e31abc332f5d43892969412" category="list-text">如果需要，添加了在恢复命名空间中跳过恢复标签和注释的功能。</block>
+  <block id="6d520f4b800d8a65184cb0662edd01eb" category="list-text">AppMirrorRelationship (AMR) 现在将检查源 PVC 扩展并根据需要对目标 PVC 执行适当的扩展。</block>
+  <block id="68782d548164f602a09d8cf18a70a1a6" category="list-text">修复了先前快照的快照注释值被应用到新快照的错误。现在所有快照注释均已正确应用。</block>
+  <block id="dec377bcea0a22bcf50bcfa52f5bd102" category="list-text">如果未定义，则默认定义数据移动器加密（Kopia / Restic）的秘密。</block>
+  <block id="2b587d6f0a98259d243f20158ba733b9" category="list-text">为 S3 appvault 创建添加了改进的验证和错误消息。</block>
+  <block id="38ada36ef84c3af0ce6c4562c412938e" category="list-text">AppMirrorRelationship (AMR) 现在仅复制处于 Bound 状态的 PV，以避免尝试失败。</block>
+  <block id="e06ab528ad98b563963e366c18280c8d" category="list-text">修复了在具有大量备份的 AppVault 上获取 AppVaultContent 时显示错误的问题。</block>
+  <block id="8009158785ac016dca3550bd3aadcf47" category="list-text">KubeVirt VMSnapshots 被排除在恢复和故障转移操作之外，以避免故障。</block>
+  <block id="96c54179d89a7223d86e09ea0181939b" category="list-text">修复了 Kopia 的问题：由于 Kopia 默认保留计划覆盖了用户在计划中设置的计划，导致快照被过早删除。</block>
+  <block id="ccc6e323e1b274244c3180ae807ca261" category="section-title">25.02.1 中的变化</block>
+  <block id="09d5dcc1026143b7c8b97aead4ec1396" category="cell">如果使用量超过此百分比，则配置失败。*不适用于 Amazon FSx for ONTAP*。</block>
+  <block id="6830d19c259617eba954cda2aa1d541d" category="cell"><block ref="c860a3f92e27bd5d0798ef97b9454101" prefix="" category="inline-code"></block></block>
+  <block id="3c26595dc5f4e2d90bc81b000429b6a7" category="cell">具有 SMB 共享完全访问权限的 Active Directory 管理员用户或用户组。使用此参数可为 SMB 共享提供具有完全控制权的管理员权限。</block>
+  <block id="007eb2831357fc17158f683f6dcff454" category="section-title">安全 SMB 示例</block>
+  <block id="d31bd17463bbf5861b916a74d031385b" category="section-title">使用 ontap-nas 驱动程序的后端配置</block>
+  <block id="0f4ec0551cca9ca01494fc00becd7670" category="section-title">使用 ontap-nas-economy 驱动程序的后端配置</block>
+  <block id="423fe93aaec50040bb6be02e84f7efdf" category="section-title">具有存储池的后端配置</block>
+  <block id="932c29a089501176987cc43435fb9490" category="section-title">采用 ontap-nas 驱动程序的存储类示例</block>
+  <block id="6710620e6b99c9d38a3eae8738824721" category="admonition">确保添加<block ref="4ab6864fc58ecd8b598ee10dfe2ac311" prefix=" " category="inline-code"></block>启用安全 SMB。如果没有注释，安全 SMB 就无法工作，无论后端或 PVC 中设置了什么配置。</block>
+  <block id="df600c813a46f3b822f7e5f064845591" category="section-title">采用 ontap-nas-economy 驱动程序的存储类示例</block>
+  <block id="14026c1ce10412c2adbe88758af8fecd" category="section-title">具有单个 AD 用户的 PVC 示例</block>
+  <block id="6588dbd33e470b3f0858ad0b7d2075c2" category="section-title">具有多个 AD 用户的 PVC 示例</block>
+  <block id="353061699a2e052736b77ea68a2871e3" category="paragraph">从 25.06 版本开始，NetApp Trident 支持使用以下方式创建的 SMB 卷的安全配置<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>和<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>后端。启用安全 SMB 后，您可以使用访问控制列表 (ACL) 为 Active Directory (AD) 用户和用户组提供对 SMB 共享的受控访问。</block>
+  <block id="fad725216d945a6443f15949ae73b316" category="list-title">需要记住的要点</block>
+  <block id="fc531b442f38e267ff561d8bd20a3d71" category="list-text">输入<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>不支持卷。</block>
+  <block id="ae588b4a9791f58d2c577c52692f45d9" category="list-text">仅支持只读克隆<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>卷。</block>
+  <block id="250a0cf82016b0cf28e3072852df48ed" category="list-text">如果启用了安全 SMB，Trident 将忽略后端提到的 SMB 共享。</block>
+  <block id="87275c5e346f7178346f0399a6ceb9de" category="list-text">更新 PVC 注释、存储类注释和后端字段不会更新 SMB 共享 ACL。</block>
+  <block id="972efd467b8594821be7b5680a32c911" category="list-text">克隆 PVC 注释中指定的 SMB 共享 ACL 将优先于源 PVC 中的 ACL。</block>
+  <block id="a3a338c1a9eb99aaf1ddaad940b0c906" category="list-text">启用安全 SMB 时，请确保提供有效的 AD 用户。无效用户将不会被添加到 ACL。</block>
+  <block id="4dcf9ab5a157e5be3f0891588273273e" category="list-text">如果您在后端、存储类和 PVC 中为同一个 AD 用户提供不同的权限，则权限优先级为：PVC、存储类、后端。</block>
+  <block id="e56268d5a3bb9869b9e76613edc53128" category="list-text">安全 SMB 支持<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>托管卷导入，不适用于非托管卷导入。</block>
+  <block id="315910c69a0b41f8011b0ed2cbf00430" category="list-text">在 TridentBackendConfig 中指定 adAdminUser，如以下示例所示：</block>
+  <block id="73f6ef8943a1983b789b024c7bfecf20" category="list-text">在存储类中添加注释。</block>
+  <block id="f89369f9c30ff9c8236b833fb1b96aef" category="paragraph">添加<block ref="b85be3102972ffc22dfe9101b510b6f3" prefix=" " category="inline-code"></block>注释到存储类，以启用安全 SMB 而不会失败。为注释指定的用户值<block ref="b85be3102972ffc22dfe9101b510b6f3" prefix=" " category="inline-code"></block>应该与<block ref="e47a193687dde960f6b6f80d394142a3" prefix=" " category="inline-code"></block>秘密。您可以选择以下之一<block ref="5fd754a88e37f6a57427226bb237f59b" prefix=" " category="inline-code"></block> ： <block ref="f28185d762af16471070289c69f72331" prefix=" " category="inline-code"></block> ， <block ref="eb399bcaca686f8609137153307eecf1" prefix=" " category="inline-code"></block> ， 或者<block ref="ecae13117d6f0584c25a9da6c8f8415e" prefix=" " category="inline-code"></block> 。默认权限是<block ref="f28185d762af16471070289c69f72331" prefix=" " category="inline-code"></block> 。</block>
+  <block id="79731e026bd64a3983c4d0a2b46c0516" category="list-text">创建 PVC。</block>
+  <block id="151c5a9798f5c6d94a52ac5bce7f9436" category="paragraph">以下示例创建 PVC：</block>
+  <block id="fde1abb5537b55c34521d414267b3f70" category="inline-link-macro">ASA r2系统</block>
+  <block id="3cc22aeaf9742834647a32871fcf9142" category="inline-link-macro">详细了解 ASA r2 系统与其他 ONTAP 系统之间的差异</block>
+  <block id="1fb5039067c7374148ef72425e995a96" category="paragraph"><block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block>与其他 ONTAP 系统（ASA、AFF 和 FAS）在存储层实现方面有所不同。这些差异会影响某些参数的使用，具体如下。<block ref="54401c26bff345016bccb2761388f645" category="inline-link-macro-rx"></block>(英文)</block>
+  <block id="e6a4a47ba933fc66b26212913912ce7d" category="admonition">只有<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ASA r2 系统支持驱动程序（带有 iSCSI 和 NVMe/TCP 协议）。</block>
+  <block id="c8863c7edb3430d82345fb2d429904cc" category="paragraph">在 Trident 后端配置中，您无需指定系统是 ASA r2。当您选择<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block> Trident 会自动检测 ASA r2 或传统 ONTAP 系统。某些后端配置参数不适用于 ASA r2 系统，如下表所示。</block>
+  <block id="ad622c65f52f8bde8780fec7bcab74a6" category="cell">使用CHAP对iSCSI的ONTAP SAN驱动程序进行身份验证[布尔值]。将设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>、以便Trident配置双向CHAP并将其用作后端中给定SVM的默认身份验证。有关详细信息、请参见 <block ref="866e591dc2a03ecc454dad25a664ca86" category="inline-link-macro-rx"></block> 。*不支持 FCP 或 NVMe/TCP。*</block>
+  <block id="8ecd39a3ee998e2e8b3b033dc8756c23" category="paragraph">*不要指定 ASA r2 系统*。</block>
+  <block id="e35a87c3115267331b4387f1e07a5e0a" category="cell">如果使用量超过此百分比，则配置失败。如果您使用的是Amazon FSx for NetApp ONTAP后端，请勿指定<block ref="d57551b1efacf8a7be84b4d10c5a6e99" prefix=" " category="inline-code"></block>。提供的和<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block>不包含使用Trident检索聚合使用情况并对其进行限制所需的<block ref="679500f227997b45be97e3ca8115c678" prefix=" " category="inline-code"></block>权限。*不要指定 ASA r2 系统*。</block>
+  <block id="fa4a1e6f7dd5c3ffb5522180ccb46f82" category="cell">用于使用 ONTAP REST API 的布尔参数。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为时<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，Trident使用ONTAP REST API与后端通信；设置为时<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block> 应用程序。预定义的和角色可以满足这一<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 要求<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>；更<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>改为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>以使用ONTAPI (ZAPI)调用。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block> 完全符合NVMe/TCP要求。*如果指定，则始终设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>适用于 ASA r2 系统*。</block>
+  <block id="3964653e783e46fb3a1ae3dc4aaa54ad" category="paragraph">*支持<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>和<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>带有 iSCSI 协议的驱动程序。**此外，在使用 iSCSI 和 NVMe/TCP 协议时，支持 ASA r2 系统。*</block>
+  <block id="bf1a2c4f1b2b258c38cce886d156e3c6" category="cell">"true" *如果指定，则设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>适用于 ASA r2 系统*。</block>
+  <block id="4ff68efad333313447b8808c20a63224" category="cell">空间预留模式；"无"(精简)或"卷"(厚)。*设置为<block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block>适用于 ASA r2* 系统。</block>
+  <block id="d5ff78b8f84bf2feac9559d3c4a5d31c" category="cell">要使用的Snapshot策略。*设置为<block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block>适用于 ASA r2 系统*。</block>
+  <block id="a75bcbe76d1f50305372e9c85d59b73c" category="cell">为快照预留的卷百分比。*不要为 ASA r2 系统指定*。</block>
+  <block id="c2ae626eaa4dcf2be1d158758d5f789a" category="cell">“false” *如果指定，则设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>适用于 ASA r2 系统*。</block>
+  <block id="317afded0cc22ff8de16ceec60d3e0ed" category="cell">"" *设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>适用于 ASA r2 系统*。</block>
+  <block id="d716a23a6e731bf750989a45cf32a804" category="cell">分层策略使用“无” *不要为 ASA r2 系统指定*。</block>
+  <block id="9e925e9341b490bfd3b4c4ca3b0c1ef2" category="inline-link-macro">这</block>
+  <block id="5a401de4946c2175a17ad6fda3a04781" category="admonition"><block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block>与其他 ONTAP 系统（ASA、AFF 和 FAS）在存储层实现方面有所不同。在 ASA r2 系统中，使用存储可用区而不是聚合。请参阅<block ref="261295ed43e7c9d663fb0a84ba5b2157" category="inline-link-macro-rx"></block>有关如何在 ASA r2 系统中将聚合分配给 SVM 的知识库文章。</block>
+  <block id="d3a94db6693be8414be239f55df31b37" category="paragraph">== 对 ONTAP 后端进行身份验证</block>
+  <block id="f16fbd9bb3dcbec83ca559e0320bc245" category="paragraph">=== 启用基于凭证的身份验证</block>
+  <block id="222449e5312c55d5a234569ae308041a" category="paragraph">=== 启用基于证书的身份验证</block>
+  <block id="9a86918a1cd754d4c3e7a1745efe18dc" category="paragraph">=== 更新身份验证方法或轮换凭证</block>
+  <block id="f33ff792ccf735be92ad60ca85333619" category="paragraph">=== 为 Trident 创建自定义 ONTAP 角色</block>
+  <block id="1e86eeb01cf8def6f697ea2c64e7df45" category="paragraph">== 使用双向 CHAP 验证连接</block>
+  <block id="1c47399fc1153044c4efc19db3115ddf" category="paragraph">=== 工作原理</block>
+  <block id="0cc88844e21c5adec6036d2a3e35f523" category="paragraph">=== 轮换凭证并更新后端</block>
+  <block id="6fddcf0bbb95fe4fb7de4f5f2e53ee74" category="paragraph">Kubernetes 持久卷 (PV) 卷组快照 NetApp Trident 提供了创建多个卷（一组卷快照）的功能。此卷组快照代表在同一时间点创建的多个卷的副本。</block>
+  <block id="9c3e7c7a7d7349669946d43b4988c3ed" category="admonition">VolumeGroupSnapshot 是 Kubernetes 中的一个 Beta 功能，包含 Beta 版 API。VolumeGroupSnapshot所需的最低版本为 Kubernetes 1.32。</block>
+  <block id="54100cbc57b96027d8dd74891c09bf53" category="section-title">创建卷组快照</block>
+  <block id="e5c9406711c4a7cf7784d95bdf1a2d03" category="paragraph">卷组快照支持<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>驱动程序，仅适用于 iSCSI 协议，尚不支持光纤通道 (FCP) 和 NVMe/TCP。开始之前</block>
+  <block id="5b01a9092d1abd7706608bb162c6b8b5" category="list-text">确保您的 Kubernetes 版本是 K8s 1.32 或更高版本。</block>
+  <block id="16a63a09f76aeddeabaee67b10b15b73" category="paragraph">如果您的 Kubernetes 发行版不包含外部快照控制器和 CRD，请参阅<block ref="048c22f74eff12037af96b48becdf135" category="inline-xref-macro-rx"></block> 。</block>
+  <block id="1f8b4b5fe121a8bf806f02d7e43e97b5" category="admonition">如果在 GKE 环境中创建按需卷组快照，请不要创建快照控制器。GKE-使用内置的隐藏快照控制器。</block>
+  <block id="651dc2c39783e984f4c34a8de9e5bdf1" category="list-text">在快照控制器 YAML 中，设置<block ref="ba99addb5e4a87e02dbb279026aee6f0" prefix=" " category="inline-code"></block>功能门控设置为“true”，以确保卷组快照已启用。</block>
+  <block id="8a30cbf1912a9801e2b44d7e46629b37" category="list-text">在创建卷组快照之前，创建所需的卷组快照类。</block>
+  <block id="044fa4af347bac1f72b867321db43dc5" category="list-text">确保所有 PVC/卷都在同一个 SVM 上，以便能够创建 VolumeGroupSnapshot。</block>
+  <block id="b05416d74805ad470e82fbd185a80f60" category="inline-link-macro">卷组快照类</block>
+  <block id="4142b8b09dc7a34d6ec584224ea12401" category="list-text">在创建 VolumeGroupSnapshot 之前创建一个 VolumeGroupSnapshotClass。有关详细信息，请参阅 <block ref="4379abd46d192befbb8bdad98f8a5d59" category="inline-link-macro-rx"></block>。</block>
+  <block id="62db7d93a1dcd7da96e447092fe6fc94" category="list-text">使用现有存储类创建具有所需标签的 PVC，或将这些标签添加到现有 PVC。</block>
+  <block id="e7593a56264dced725b58e1dcee9feba" category="paragraph">以下示例使用以下方式创建 PVC <block ref="75b2ada4942bd6bef7c0a52dd98f7481" prefix=" " category="inline-code"></block>作为数据源和标签<block ref="976d0352c3b3c8881b2f195b2b26322b" prefix=" " category="inline-code"></block> .根据您的要求定义标签键和值。</block>
+  <block id="88ee2eefee7a24d49764bba2f82da06c" category="list-text">创建具有相同标签的 VolumeGroupSnapshot <block ref="976d0352c3b3c8881b2f195b2b26322b" prefix="(" category="inline-code"></block> ) 在 PVC 中指定。</block>
+  <block id="9d802b9a265ada16030457d797e599c4" category="paragraph">此示例创建卷组快照：</block>
+  <block id="52d80f524a1f3e7aa3025bacef197f8a" category="section-title">使用组快照恢复卷数据</block>
+  <block id="ee9a128a343c337cf14116c1aecbb76c" category="paragraph">您可以使用作为卷组快照的一部分创建的各个快照来恢复各个持久卷。您无法将卷组快照作为一个整体进行恢复。</block>
+  <block id="76716637a3c3927e6595526c04493e52" category="paragraph">有关详细信息，请参见 <block ref="614ee046be6d137fe1c3eadbaba6d9fe" category="inline-link-macro-rx"></block>。</block>
+  <block id="8b278511419cd00303a31bff3e658d7b" category="section-title">删除与组快照关联的 PV</block>
+  <block id="3f0f9a5202405094b6d608bca6feef12" category="paragraph">删除组卷快照时：</block>
+  <block id="24c108ca3f67c96a3a0fc4a98ab3f465" category="list-text">您可以删除整个 VolumeGroupSnapshots，而不是删除组中的单个快照。</block>
+  <block id="f3a07fd55b2a15dd2fe4a64f0a2e01e1" category="list-text">如果在持久卷存在快照的情况下删除了该持久卷，Trident 会将该卷移至“删除”状态，因为必须先删除快照，然后才能安全删除该卷。</block>
+  <block id="982deda5497c5c5a268ba1212d419648" category="list-text">如果已使用分组快照创建了克隆，然后要删除该组，则会开始克隆拆分操作，并且在拆分完成之前无法删除该组。</block>
+  <block id="4379abd46d192befbb8bdad98f8a5d59" category="list-text"><block ref="4379abd46d192befbb8bdad98f8a5d59" category="inline-link-macro-rx"></block></block>
+  <block id="d075b47d76ffc95cce31e3ff1a3bf887" category="paragraph">Trident支持在一个集群上的源卷与对等集群上的目标卷之间建立镜像关系、以便为灾难恢复复制数据。  您可以使用名为 Trident 镜像关系 (TMR) 的命名空间自定义资源定义 (CRD) 来执行以下操作：</block>
+  <block id="2d78d4f2531b53f3a4980133900540f7" category="paragraph">NetApp Trident 支持使用 NetApp SnapMirror 技术进行卷复制，使用由以下驱动程序支持的存储类：** <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ：NFS** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ：iSCSI** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ： FC ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ：NVMe/TCP（要求最低 ONTAP 版本 9.15.1）</block>
+  <block id="a6d2a1b8501003e74309a1ac77e249d4" category="admonition">ASA r2 系统不支持使用 SnapMirror 进行卷复制。有关 ASA r2 系统的信息，请参阅<block ref="40f055dd42976ff294174231df35e37e" category="inline-link-macro-rx"></block> 。</block>
 </blocks>

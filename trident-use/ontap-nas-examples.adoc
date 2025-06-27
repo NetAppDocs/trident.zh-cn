@@ -87,7 +87,7 @@ NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法�
 
 
 
-| `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。* 不适用于适用于 ONTAP 的 Amazon FSx * | "" （默认情况下不强制实施） 
+| `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。*不适用于 Amazon FSx for ONTAP*。 | "" （默认情况下不强制实施） 
 
 
 | FlexgroupGroupGroupRegateList  a| 
@@ -125,6 +125,9 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 
 
 | `denyNewVolumePools` | 限制 `ontap-nas-economy`后端创建新的FlexVol卷以包含其qtrees。仅会使用已有的FlexVol配置新的PV. |  
+
+
+| `adAdminUser` | 具有 SMB 共享完全访问权限的 Active Directory 管理员用户或用户组。使用此参数可为 SMB 共享提供具有完全控制权的管理员权限。 |  
 |===
 
 
@@ -682,3 +685,185 @@ tridentctl update backend <backend-name> -f <path-to-backend-json-file-with-upda
 ----
 
 NOTE: 如果一个或多个Pod连接了PVC、则必须先关闭所有相应的Pod、然后再将其重新启动、以使新的dataLIF生效。
+
+
+
+== 安全 SMB 示例
+
+
+
+=== 使用 ontap-nas 驱动程序的后端配置
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  managementLIF: 10.0.0.1
+  svm: svm2
+  nasType: smb
+  defaults:
+    adAdminUser: tridentADtest
+  credentials:
+    name: backend-tbc-ontap-invest-secret
+----
+
+
+=== 使用 ontap-nas-economy 驱动程序的后端配置
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-nas-economy
+  managementLIF: 10.0.0.1
+  svm: svm2
+  nasType: smb
+  defaults:
+    adAdminUser: tridentADtest
+  credentials:
+    name: backend-tbc-ontap-invest-secret
+----
+
+
+=== 具有存储池的后端配置
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap-nas
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  managementLIF: 10.0.0.1
+  svm: svm0
+  useREST: false
+  storage:
+  - labels:
+      app: msoffice
+    defaults:
+      adAdminUser: tridentADuser
+  nasType: smb
+  credentials:
+    name: backend-tbc-ontap-invest-secret
+
+----
+
+
+=== 采用 ontap-nas 驱动程序的存储类示例
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-smb-sc
+  annotations:
+    trident.netapp.io/smbShareAdUserPermission: change
+    trident.netapp.io/smbShareAdUser: tridentADtest
+parameters:
+  backendType: ontap-nas
+  csi.storage.k8s.io/node-stage-secret-name: smbcreds
+  csi.storage.k8s.io/node-stage-secret-namespace: trident
+  trident.netapp.io/nasType: smb
+provisioner: csi.trident.netapp.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+----
+
+NOTE: 确保添加 `annotations`启用安全 SMB。如果没有注释，安全 SMB 就无法工作，无论后端或 PVC 中设置了什么配置。
+
+
+
+=== 采用 ontap-nas-economy 驱动程序的存储类示例
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-smb-sc
+  annotations:
+    trident.netapp.io/smbShareAdUserPermission: change
+    trident.netapp.io/smbShareAdUser: tridentADuser3
+parameters:
+  backendType: ontap-nas-economy
+  csi.storage.k8s.io/node-stage-secret-name: smbcreds
+  csi.storage.k8s.io/node-stage-secret-namespace: trident
+  trident.netapp.io/nasType: smb
+provisioner: csi.trident.netapp.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+----
+
+
+=== 具有单个 AD 用户的 PVC 示例
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc4
+  namespace: trident
+  annotations:
+    trident.netapp.io/smbShareAccessControl: |
+      change:
+        - tridentADtest
+      read:
+        - tridentADuser
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: ontap-smb-sc
+----
+
+
+=== 具有多个 AD 用户的 PVC 示例
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-test-pvc
+  annotations:
+    trident.netapp.io/smbShareAccessControl: |
+      full_control:
+        - tridentTestuser
+        - tridentuser
+        - tridentTestuser1
+        - tridentuser1
+      change:
+        - tridentADuser
+        - tridentADuser1
+        - tridentADuser4
+        - tridentTestuser2
+      read:
+        - tridentTestuser2
+        - tridentTestuser3
+        - tridentADuser2
+        - tridentADuser3
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+----

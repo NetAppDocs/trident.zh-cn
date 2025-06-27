@@ -25,7 +25,7 @@ summary: 在安装Trident之前、您应查看这些常规系统要求。特定�
 ====
 []
 =====
-* 现在、在Trident中支持Kubnetes 1.32。在升级Kubernetes之前升级Trident。
+* 现在、在Trident中支持Kubnetes 1.33。在升级Kubernetes之前升级Trident。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
@@ -41,7 +41,7 @@ summary: 在安装Trident之前、您应查看这些常规系统要求。特定�
 Trident支持多个容器引擎和流程编排程序、其中包括：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
-* Kubbernetes 1.26 - 1.32
+* Kubbernetes 1.27 - 1.33
 * OpenShift 4.10 - 4.18
 * R润 彻Kubernetes Engine 2 (RKE2) v1.26.7+rke2r1、v1.28.5+rke2r1
 
@@ -49,7 +49,7 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 以下版本支持 Trident 操作符：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
-* Kubbernetes 1.26 - 1.32
+* Kubbernetes 1.27 - 1.33
 * OpenShift 4.10 - 4.18
 * R润 彻Kubernetes Engine 2 (RKE2) v1.26.7+rke2r1、v1.28.5+rke2r1
 
@@ -72,7 +72,7 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高�
 * Cloud Volumes ONTAP
 * Google Cloud NetApp卷
 * NetApp 全 SAN 阵列（ ASA ）
-* 受NetApp有限支持的内部FAS、AFF或ASA R2集群版本。请参阅。 link:https://mysupport.netapp.com/site/info/version-support["软件版本支持"]
+* NetApp 有限支持下的本地 FAS、AFF 或 ASA r2（iSCSI 和 NVMe/TCP）集群版本。请参阅。 link:https://mysupport.netapp.com/site/info/version-support["软件版本支持"]
 * NetApp HCI/ Element软件11或更高版本
 
 
@@ -108,62 +108,64 @@ Trident支持以下用于KubeVirt和OpenShift虚拟化的ONTAP驱动程序：
 
 下表总结了此版本的Trident及其支持的Kubernetes版本提供的功能。
 
+<<check for 25.06>>
+
 [cols="3"]
 |===
 | 功能 | Kubernetes 版本 | 是否需要功能安全门？ 
 
 
 | Trident  a| 
-1.26 - 1.32
+1.27 - 1.33
  a| 
 否
 
 
 
 | 卷快照  a| 
-1.26 - 1.32
+1.27 - 1.33
  a| 
 否
 
 
 
 | 卷快照中的 PVC  a| 
-1.26 - 1.32
+1.27 - 1.33
  a| 
 否
 
 
 
 | iSCSI PV 调整大小  a| 
-1.26 - 1.32
+1.27 - 1.33
  a| 
 否
 
 
 
 | ONTAP 双向 CHAP  a| 
-1.26 - 1.32
+1.27 - 1.33
  a| 
 否
 
 
 
 | 动态导出策略  a| 
-1.26 - 1.32
+1.27 - 1.33
  a| 
 否
 
 
 
 | Trident 运算符  a| 
-1.26 - 1.32
+1.27 - 1.33
  a| 
 否
 
 
 
 | CSI 拓扑  a| 
-1.26 - 1.32
+1.27 - 1.33
  a| 
 否
 
@@ -218,20 +220,22 @@ link:../trident-reference/ports.html["Trident端口"]
 
 对于气隙安装、以下列表是安装Trident所需容器映像的参考。使用 `tridentctl images`命令验证所需容器映像的列表。
 
+<<check for 25.06>>
+
 [cols="2"]
 |===
 | Kubernetes版本 | 容器映像 
 
 
-| v1.26.0、v1.27.0、v1.28.0、v1.29.0、v1.30.0、 v1.31.0、v1.32.0  a| 
-* dDocker。io/NetApp/trdent：25.02.0
-* docer.io/NetApp/trdent-autostsupport：25.02
+| v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、 v1.32.0、v1.33.0  a| 
+* dDocker。io/NetApp/trdent：25.06.0
+* docer.io/NetApp/trdent-autostsupport：25.06
 * 注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.2.0
-* 注册表.k8s.io/sig-storage/CsI-Attacher：v4.8.0
-* 注册表.k8s.io/sig-storage/CsI-s不同：v1.13.1
-* 注册表.k8s.io/sig-storage/CsI-snapshotter：v8.2.0
+* 注册表.k8s.io/sig-storage/CsI-Attacher：v4.8.1
+* 注册表.k8s.io/sig-storage/CsI-s不同：v1.13.2
+* 注册表.k8s.io/sig-storage/CsI-snapshotter：v8.2.1
 * 注册表.k8s.io/sig-storage/CsI-N节点 驱动程序注册器：v2.13.0
-* dDocker .io/NetApp/trdent操作员：25.02.0 (可选)
+* dDocker .io/NetApp/trdent操作员：25.06.0 (可选)
 
 
 |===

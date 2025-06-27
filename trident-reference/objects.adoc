@@ -264,7 +264,7 @@ Kubernetes `VolumeSnapshot` 对象是创建卷快照的请求。就像 PVC 代�
 收到卷快照请求后， Trident 会自动管理在后端为卷创建快照的操作，并通过创建唯一的 `VolumeSnapshotContent` 对象公开快照。您可以从现有 PVC 创建快照，并在创建新 PVC 时将这些快照用作 DataSource 。
 
 
-NOTE: VolumeSnapshot 的生命周期与源 PVC 无关：即使删除了源 PVC ，快照也会持续存在。删除具有关联快照的 PVC 时， Trident 会将此 PVC 的后备卷标记为 " 正在删除 " 状态，但不会将其完全删除。删除所有关联快照后，卷将被删除。
+NOTE: VolumeSnapshot 的生命周期与源 PVC 无关：即使源 PVC 被删除，快照仍然存在。删除具有关联快照的 PVC 时， Trident 会将此 PVC 的后备卷标记为 " 正在删除 " 状态，但不会将其完全删除。删除所有关联快照后，卷将被删除。
 
 
 
@@ -278,6 +278,48 @@ Kubernetes `VolumeSnapshotContent` 对象表示从已配置的卷创建的快照
 
 
 NOTE: 通常、您不需要管理 `VolumeSnapshotContent`对象。但是、如果要在Trident外部创建、则会出现一个例外情况link:../trident-use/vol-snapshots.html#import-a-volume-snapshot["导入卷快照"]。
+
+
+
+== Kubbernetes `VolumeGroupSnapshotClass`对象
+
+Kubbernetes `VolumeGroupSnapshotClass`对象类似于 `VolumeSnapshotClass`。它们有助于定义多种存储类别，并被卷组快照引用，以将快照与所需的快照类别关联。每个卷组快照都与单个卷组快照类别相关联。
+
+一个 `VolumeGroupSnapshotClass`应由管理员定义，以便创建快照组。卷组快照类使用以下定义创建：
+
+[source, yaml]
+----
+apiVersion: groupsnapshot.storage.k8s.io/v1beta1
+kind: VolumeGroupSnapshotClass
+metadata:
+  name: csi-group-snap-class
+  annotations:
+    kubernetes.io/description: "Trident group snapshot class"
+driver: csi.trident.netapp.io
+deletionPolicy: Delete
+----
+由 Trident 处理。 `deletionPolicy`指定必须删除组快照时要采取的操作。当 `deletionPolicy`设置为 `Delete` ，删除快照时，卷组快照对象以及存储集群上的底层快照也将被删除。或者、将其设置为 `Retain`表示将 `VolumeGroupSnapshotContent`保留和物理快照。
+
+
+
+== Kubbernetes `VolumeGroupSnapshot`对象
+
+Kubernetes  `VolumeGroupSnapshot`对象是创建多个卷快照的请求。正如 PVC 代表用户对卷的请求一样，卷组快照是用户为现有 PVC 创建快照的请求。
+
+当卷组快照请求到达时，Trident 会自动管理后端卷的组快照的创建，并通过创建唯一的 `VolumeGroupSnapshotContent`目的。您可以从现有 PVC 创建快照，并在创建新 PVC 时将这些快照用作 DataSource 。
+
+
+NOTE: VolumeGroupSnapshot 的生命周期与源 PVC 无关：即使源 PVC 被删除，快照仍然有效。删除具有关联快照的 PVC 时， Trident 会将此 PVC 的后备卷标记为 " 正在删除 " 状态，但不会将其完全删除。当所有关联的快照都被删除时，卷组快照也会被移除。
+
+
+
+== Kubbernetes `VolumeGroupSnapshotContent`对象
+
+Kubernetes  `VolumeGroupSnapshotContent`对象表示从已配置的卷中获取的组快照。它类似于 `PersistentVolume`、表示存储集群上已配置的快照。与和 `PersistentVolume`对象类似 `PersistentVolumeClaim`、创建快照时、 `VolumeSnapshotContent`对象会与请求创建快照的对象保持一对一映射 `VolumeSnapshot`。
+
+这 `VolumeGroupSnapshotContent`对象包含识别快照组的详细信息，例如 `volumeGroupSnapshotHandle`以及存储系统上现有的各个volumeSnapshotHandles。
+
+当快照请求到达时，Trident 会在后端创建卷组快照。创建卷组快照后，Trident 会配置一个 `VolumeGroupSnapshotContent`对象，从而将快照公开给 Kubernetes API。
 
 
 

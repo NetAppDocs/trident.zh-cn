@@ -96,3 +96,5 @@ entries:
     url: "/trident-use/csi-topology.html"
   - title: 使用快照
     url: "/trident-use/vol-snapshots.html"
+  - title: 创建卷组快照
+    url: "/trident-use/vol-group-snapshots.html"

@@ -441,3 +441,92 @@ NOTE: 请参见 link:https://docs.netapp.com/us-en/ontap/smb-config/create-share
 | `unixPermissions` | 新卷的模式。对于SMB卷、*必须留空。* | "" 
 |===
 
+
+
+
+=== 启用安全 SMB
+
+从 25.06 版本开始，NetApp Trident 支持使用以下方式创建的 SMB 卷的安全配置 `ontap-nas`和 `ontap-nas-economy`后端。启用安全 SMB 后，您可以使用访问控制列表 (ACL) 为 Active Directory (AD) 用户和用户组提供对 SMB 共享的受控访问。
+
+.需要记住的要点
+* 输入 `ontap-nas-economy`不支持卷。
+* 仅支持只读克隆 `ontap-nas-economy`卷。
+* 如果启用了安全 SMB，Trident 将忽略后端提到的 SMB 共享。
+* 更新 PVC 注释、存储类注释和后端字段不会更新 SMB 共享 ACL。
+* 克隆 PVC 注释中指定的 SMB 共享 ACL 将优先于源 PVC 中的 ACL。
+* 启用安全 SMB 时，请确保提供有效的 AD 用户。无效用户将不会被添加到 ACL。
+* 如果您在后端、存储类和 PVC 中为同一个 AD 用户提供不同的权限，则权限优先级为：PVC、存储类、后端。
+* 安全 SMB 支持 `ontap-nas`托管卷导入，不适用于非托管卷导入。
+
+
+.步骤
+. 在 TridentBackendConfig 中指定 adAdminUser，如以下示例所示：
++
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-ontap
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: ontap-nas
+  managementLIF: 10.193.176.x
+  svm: svm0
+  useREST: true
+  defaults:
+    adAdminUser: tridentADtest
+  credentials:
+    name: backend-tbc-ontap-invest-secret
+----
+. 在存储类中添加注释。
++
+添加 `trident.netapp.io/smbShareAdUser`注释到存储类，以启用安全 SMB 而不会失败。为注释指定的用户值 `trident.netapp.io/smbShareAdUser`应该与 `smbcreds`秘密。您可以选择以下之一 `smbShareAdUserPermission` ：  `full_control` ，  `change` ， 或者 `read` 。默认权限是 `full_control` 。
+
+
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-smb-sc
+  annotations:
+    trident.netapp.io/smbShareAdUserPermission: change
+    trident.netapp.io/smbShareAdUser: tridentADuser
+parameters:
+  backendType: ontap-nas
+  csi.storage.k8s.io/node-stage-secret-name: smbcreds
+  csi.storage.k8s.io/node-stage-secret-namespace: trident
+  trident.netapp.io/nasType: smb
+provisioner: csi.trident.netapp.io
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+----
+. 创建 PVC。
++
+以下示例创建 PVC：
+
+
+
+[listing]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc4
+  namespace: trident
+  annotations:
+    trident.netapp.io/snapshotDirectory: "true"
+    trident.netapp.io/smbShareAccessControl: |
+      read:
+        - tridentADtest
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: ontap-smb-sc
+----

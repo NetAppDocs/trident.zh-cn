@@ -16,6 +16,9 @@ summary: '您可以启用Linux统一密钥设置(Unified Key Setup、LKS)来对T
 
 在Trident中，根据的建议，经过LUN加密的卷使用AES-XTS-PLAN 64 cypher和模式link:https://csrc.nist.gov/publications/detail/sp/800-38e/final["NIST"^]。
 
+
+NOTE: ASA r2 系统不支持 LUKS 加密。有关 ASA r2 系统的信息，请参阅link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["了解ASA R2存储系统"^] 。
+
 .开始之前
 * 工作节点必须安装加密设置2.1或更高版本(但低于3.0)。有关详细信息，请访问 link:https://gitlab.com/cryptsetup/cryptsetup["Gitlab：密码设置"^]。
 * 出于性能原因、NetApp建议工作节点支持高级加密标准新指令(AES-NI)。要验证AES-NI支持、请运行以下命令：

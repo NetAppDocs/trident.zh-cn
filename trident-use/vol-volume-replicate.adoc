@@ -9,7 +9,7 @@ summary: Trident支持在源卷和目标卷之间创建镜像关系、以复制�
 
 
 [role="lead"]
-Trident支持在一个集群上的源卷与对等集群上的目标卷之间建立镜像关系、以便为灾难恢复复制数据。您可以使用具有名称流的自定义资源定义(CRD)执行以下操作：
+Trident支持在一个集群上的源卷与对等集群上的目标卷之间建立镜像关系、以便为灾难恢复复制数据。  您可以使用名为 Trident 镜像关系 (TMR) 的命名空间自定义资源定义 (CRD) 来执行以下操作：
 
 * 在卷之间创建镜像关系(PVC)
 * 删除卷之间的镜像关系
@@ -27,6 +27,13 @@ Trident支持在一个集群上的源卷与对等集群上的目标卷之间建�
 .ONTAP 集群
 * *Kubernet*：使用ONTAP作为后端的源和目标Trident集群上必须存在Trident版本22.10或更高版本。
 * *许可证*：必须在源和目标ONTAP集群上启用使用数据保护包的ONTAP SnapMirror异步许可证。有关详细信息、请参见 https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html["ONTAP 中的SnapMirror许可概述"^] 。
++
+从ONTAP 9.10.1开始、所有许可证均以NetApp许可证文件(NLG)的形式提供、NLG是一个支持多项功能的文件。有关详细信息、请参见 link:https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html#licenses-included-with-ontap-one["ONTAP One附带的许可证"^] 。
+
++
+
+NOTE: 仅支持 SnapMirror 异步保护。
+
 
 
 .对等
@@ -39,8 +46,10 @@ IMPORTANT: 确保两个ONTAP集群之间的复制关系中使用的SVM名称是�
 
 
 .支持的驱动程序
-* ONTAP -NAS和ONTAP SAN驱动程序支持卷复制。
+NetApp Trident 支持使用 NetApp SnapMirror 技术进行卷复制，使用由以下驱动程序支持的存储类：**  `ontap-nas` ：NFS**  `ontap-san` ：iSCSI**  `ontap-san` ： FC **  `ontap-san` ：NVMe/TCP（要求最低 ONTAP 版本 9.15.1）
 
+
+NOTE: ASA r2 系统不支持使用 SnapMirror 进行卷复制。有关 ASA r2 系统的信息，请参阅link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["了解ASA R2存储系统"^] 。
 
 
 
