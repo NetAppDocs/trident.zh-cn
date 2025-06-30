@@ -75,14 +75,83 @@ aws iam create-policy --policy-name AmazonFSxNCSIDriverPolicy --policy-document 
 ----
 
 
-=== 为服务帐户创建IAM角色
+=== 为服务帐户关联 (IRSA) 创建 Pod Identity 或 IAM 角色
 
-创建策略后、请在创建要分配给运行Trident的服务帐户的角色时使用此策略：
+您可以使用 EKS Pod Identity 配置 Kubernetes 服务账户，使其代入 AWS Identity and Access Management (IAM) 角色，或使用 IAM 角色进行服务账户关联 (IRSA)。任何配置为使用该服务账户的 Pod 都可以访问该角色有权访问的任何 AWS 服务。
 
 [role="tabbed-block"]
 ====
-.AWS命令行界面
+.Pod 身份
 --
+Amazon EKS Pod Identity 关联提供了管理应用程序凭证的能力，类似于 Amazon EC2 实例配置文件向 Amazon EC2 实例提供凭证的方式。
+
+*在您的 EKS 集群上安装 Pod Identity*：
+
+您可以通过 AWS 控制台或使用以下 AWS CLI 命令创建 Pod 身份：
+
+[listing]
+----
+aws eks create-addon --cluster-name <EKS_CLUSTER_NAME> --addon-name eks-pod-identity-agent
+----
+更多信息请参阅link:https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html["设置 Amazon EKS Pod Identity Agent"] 。
+
+*创建 trust-relationship.json*：
+
+创建 trust-relationship.json 文件，使 EKS 服务主体能够承担 Pod Identity 的此角色。然后创建一个具有以下信任策略的角色：
+
+[listing]
+----
+aws iam create-role \
+  --role-name fsxn-csi-role --assume-role-policy-document file://trust-relationship.json \
+  --description "fsxn csi pod identity role"
+----
+*trust-relationship.json 文件*：
+
+[source, JSON]
+----
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "pods.eks.amazonaws.com"
+      },
+      "Action": [
+        "sts:AssumeRole",
+        "sts:TagSession"
+      ]
+    }
+  ]
+}
+----
+*将角色策略附加到 IAM 角色*：
+
+将上一步中的角色策略附加到创建的 IAM 角色：
+
+[listing]
+----
+aws iam attach-role-policy \
+  --policy-arn arn:aws:iam::aws:111122223333:policy/fsxn-csi-policy \
+  --role-name fsxn-csi-role
+----
+*创建 pod 身份关联*：
+
+在 IAM 角色和 Trident 服务帐户（trident-controller）之间创建 pod 身份关联
+
+[listing]
+----
+aws eks create-pod-identity-association \
+  --cluster-name <EKS_CLUSTER_NAME> \
+  --role-arn arn:aws:iam::111122223333:role/fsxn-csi-role \
+  --namespace trident --service-account trident-controller
+----
+--
+.服务帐户关联 (IRSA) 的 IAM 角色
+--
+*使用 AWS CLI*：
+
 [listing]
 ----
 aws iam create-role --role-name AmazonEKS_FSxN_CSI_DriverRole \
@@ -145,10 +214,7 @@ aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
 ----
 eksctl utils associate-iam-oidc-provider --cluster $cluster_name --approve
 ----
---
-.eksc
---
-以下示例将在EKS中为服务帐户创建IAM角色：
+*如果您使用 eksctl*，请使用以下示例为 EKS 中的服务账户创建 IAM 角色：
 
 [source, console]
 ----

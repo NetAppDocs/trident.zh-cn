@@ -77,7 +77,7 @@ WARNING: Trident应以SVM用户身份运行、或者以具有相同角色的其�
 
 == 测试过的Amazon计算机映像(AMI)
 
-EKS集群支持各种操作系统、但AWS已针对容器和EKS优化了某些Amazon计算机映像(AMI)。以下AMI已通过Trident 24.10的测试。
+EKS集群支持各种操作系统、但AWS已针对容器和EKS优化了某些Amazon计算机映像(AMI)。以下 AMI 已通过 NetApp Trident 25.02 测试。
 
 |===
 
@@ -85,33 +85,34 @@ EKS集群支持各种操作系统、但AWS已针对容器和EKS优化了某些Am
 | AMI | NAS | NAS经济型 | SAN | SAN经济型 
 
 
-| AL2023_x86_64_STANDARD | 是的。 | 是的。 | 是的。 | 是的。 
+| AL2023_x86_64_STANDARD | 是的。 | 是的。 | 是 * | 是 * 
 
 
 | AL2_x86_64 | 是的。 | 是的。 | 是** | 是** 
 
 
-| BOTTLEROCKET_x86_64 | 是 * | 是的。 | 不适用 | 不适用 
+| BOTTLEROCKET_x86_64 | 是的*** | 是的。 | 不适用 | 不适用 
 
 
-| AL2023_ARM_64_STANDARD | 是的。 | 是的。 | 是的。 | 是的。 
+| AL2023_ARM_64_STANDARD | 是的。 | 是的。 | 是 * | 是 * 
 
 
 | AL2_ARM_64 | 是的。 | 是的。 | 是** | 是** 
 
 
-| BOTTLEROCKET_ARM_64 | 是 * | 是的。 | 不适用 | 不适用 
+| BOTTLEROCKET_ARM_64 | 是的*** | 是的。 | 不适用 | 不适用 
 |===
-* *必须在挂载选项中使用"nolock"。
+* * 仅支持带有 iSCSI 的 nodePrep。
 * **在不重新启动节点的情况下，无法删除PV
+* *** 不支持 Trident 25.02 版的 NFSv3，但支持 24.10 版。NFSv4.1和 25.02 版均可兼容。
 
 
 
-NOTE: 如果此处未列出您所需的AMI、并不表示它不受支持、而只是表示它尚未经过测试。此列表可作为已知有效的AMI的指南。
+NOTE: 如果此处未列出您所需的AMI、并不表示它不受支持、而只是表示它尚未经过测试。此列表可作为已知可运行的 AMI 的指南。
 
 *使用以下项执行的测试*：
 
-* EKS版本：1.30
+* EKS版本：1.31
 * 安装方法：Helm和作为AWS插件
 * 对于NAS、我们同时测试了NFSv3和NFSv4.1。
 * 对于SAN、测试的是仅iSCSI、而不是NVMe-oF。

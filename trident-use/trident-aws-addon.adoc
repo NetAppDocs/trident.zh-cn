@@ -69,6 +69,13 @@ NOTE: 如果您为冲突解决方法选择覆盖、则可以使用Amazon EKS附�
 +
 image::../media/aws-eks-06.png[AWS EKS 06]
 
+
+
+
+NOTE: 如果您使用 Pod Identity 关联，请跳过此步骤。
+
++
+
 . 选择 * 创建 * 。
 . 验证此加载项的状态是否为_Active_.
 +
