@@ -33,9 +33,9 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 * *Kubernetes*：
 +
-** 增加了对 CSI 卷组快照的支持 `v1beta1`适用于 ONTAP-SAN iSCSI 驱动程序的卷组快照 Kubernetes API。请参阅。 link:../trident-use/vol-group-snapshots.html["使用卷组快照"^]
-** 除了 iSCSI 之外，还增加了对 NVMe/TCP 的 ONTAP ASA r2 的支持。请参阅。 link:../trident-use/ontap-san-examples.html["ONTAP SAN配置选项和示例"^]
-** 为 ONTAP-NAS 和 ONTAP-NAS-Economy 卷添加了安全的 SMB 支持。ActiveDirectory 用户和组现在可以与 SMB 卷一起使用，以增强安全性。请参阅。 link:../trident-use/ontap-nas-prep.html#enable-secure-smb["启用安全 SMB"^]
+** 增加了对 CSI 卷组快照的支持 `v1beta1`适用于 ONTAP-SAN iSCSI 驱动程序的卷组快照 Kubernetes API。请参阅。 link:https://docs.netapp.com/us-en/trident/trident-use/vol-group-snapshots.html["使用卷组快照"^]
+** 除了 iSCSI 之外，还增加了对 NVMe/TCP 的 ONTAP ASA r2 的支持。请参阅。 link:link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html["ONTAP SAN配置选项和示例"^]
+** 为 ONTAP-NAS 和 ONTAP-NAS-Economy 卷添加了安全的 SMB 支持。ActiveDirectory 用户和组现在可以与 SMB 卷一起使用，以增强安全性。请参阅。 link:https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-prep.html#enable-secure-smb["启用安全 SMB"^]
 ** 增强 Trident 节点并发性，以提高 iSCSI 卷节点操作的可扩展性。
 ** 额外 `--allow-discards`打开 LUKS 卷时允许丢弃/TRIM 命令以回收空间。
 ** 格式化 LUKS 加密卷时的性能增强。
