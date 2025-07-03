@@ -42,7 +42,7 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 ** 增强了对失败但部分格式化的 LUKS 设备的 LUKS 清理。
 ** 增强了 Trident 节点幂等性，用于 NVMe 卷的连接和分离。
 ** 额外 `internalID`字段到 ONTAP-SAN-Economy 驱动程序的 Trident 卷配置。
-** 增加了对使用 SnapMirror 对 NVMe 后端进行卷复制的支持。请参阅。 link:../trident-use/vol-volume-replicate.html["使用SnapMirror复制卷"^]
+** 增加了对使用 SnapMirror 对 NVMe 后端进行卷复制的支持。请参阅。 link:https://docs.netapp.com/us-en/trident/trident-use/vol-volume-replicate.html["使用SnapMirror复制卷"^]
 
 
 
