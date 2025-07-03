@@ -5527,7 +5527,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="0ae48837f8ebc5da6e90828852d02027" category="admonition">25.06 及更高版本不需要此步骤。</block>
   <block id="ed98e5c2a168d1606df0370fe371df28" category="paragraph">从版本 24.10 升级时，升级期间运行的快照可能会失败。此失败不会阻止将来创建快照（无论是手动快照还是计划快照）。如果升级期间快照失败，您可以手动创建新快照以确保应用程序受到保护。</block>
   <block id="756accba0f305693c47126f932bd7ac6" category="paragraph">为避免潜在的故障，您可以在升级前禁用所有快照计划，然后在升级后重新启用。但是，这会导致升级期间丢失所有计划的快照。</block>
-  <block id="814a37dc29d2671dd3cdbf3982ee4a85" category="admonition">如果您从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在包含在 Trident Protect Helm 图表中。</block>
   <block id="8e903b2b577c535f6f70248f34e61228" category="list-text">运行此命令将 CRD 的管理从<block ref="23901a54edbcff97a89483ac3112545c" prefix=" " category="inline-code"></block>到<block ref="9a82c7a4099124e5bfaa83e7c5997bd4" prefix=" " category="inline-code"></block> ：</block>
   <block id="da4df818678014568aed9623276fd9f5" category="list-text">运行此命令删除<block ref="23901a54edbcff97a89483ac3112545c" prefix=" " category="inline-code"></block>图表：</block>
   <block id="aeea10a9d4e3d29e20b749a201f0ae46" category="admonition">不要卸载<block ref="23901a54edbcff97a89483ac3112545c" prefix=" " category="inline-code"></block>图表使用 Helm，因为这可能会删除您的 CRD 和任何相关数据。</block>
@@ -5589,7 +5588,6 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="9bfdfc993711fd8c92649ae6040af106" category="list-text">修复了使用 ONTAP REST API 时克隆拆分操作同步完成的问题。</block>
   <block id="d7061136425214e6ed7ba38910be5772" category="section-title">弃用：</block>
   <block id="eb0a31990fe8d3afbb4177136e0a9c3b" category="list-text">*Kubernetes*：将最低支持的 Kubernetes 更新至 v1.27。</block>
-  <block id="9b6a034e6854c5f27feb3ac185829f8d" category="section-title">三叉戟保护</block>
   <block id="df6370ee6ad8bc05b4c28dc223a119ea" category="list-text">改善了恢复时间，提供了进行更频繁的完整备份的选项。</block>
   <block id="6d133839389fad9d044a57e7cd98852e" category="list-text">通过 Group-Version-Kind (GVK) 过滤提高了应用程序定义和选择性恢复的粒度。</block>
   <block id="d22659d02ebeb222423ac210fcf66e17" category="list-text">将 AppMirrorRelationship (AMR) 与 NetApp SnapMirror 结合使用时可实现高效的重新同步和反向复制，以避免完整的 PVC 复制。</block>
@@ -5731,4 +5729,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="5e93028f6e11493fcce0c15271413cc3" category="list-text">除了 iSCSI 之外，还增加了对 NVMe/TCP 的 ONTAP ASA r2 的支持。请参阅。 <block ref="0ffed2115293f61a0df2b3c8f01851e1" category="inline-link-macro-rx"></block></block>
   <block id="674d1c5daba14e57bb12199e316a830d" category="list-text">为 ONTAP-NAS 和 ONTAP-NAS-Economy 卷添加了安全的 SMB 支持。ActiveDirectory 用户和组现在可以与 SMB 卷一起使用，以增强安全性。请参阅。 <block ref="4f989a35378d98430cb4c4899de0cc08" category="inline-link-macro-rx"></block></block>
   <block id="68e904dfe8bbc558c556cc39aaca54b6" category="list-text">增加了对使用 SnapMirror 对 NVMe 后端进行卷复制的支持。请参阅。 <block ref="0837d9a30d067376d83aa60bb79334f8" category="inline-link-macro-rx"></block></block>
+  <block id="afce633f05d99c109d2b0429ee891495" category="admonition">如果您从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在包含在 Trident Protect Helm 图表中。</block>
 </blocks>

@@ -8,7 +8,7 @@ summary: NetApp 不断改进和完善其产品和服务。下面是最新版本�
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]
@@ -91,7 +91,7 @@ NOTE: 此功能尚处于实验阶段，目前支持使用 ONTAP-SAN 驱动程序
 
 
 
-=== 三叉戟保护
+=== Trident Protect
 
 NetApp Trident Protect提供高级应用程序数据管理功能、可增强由NetApp ONTAP存储系统和NetApp Trident CSI存储配置程序提供支持的有状态Kubbernetes应用程序的功能和可用性。
 

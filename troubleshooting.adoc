@@ -8,7 +8,7 @@ summary: 使用此处提供的指针解决您在安装和使用Trident时可能�
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]

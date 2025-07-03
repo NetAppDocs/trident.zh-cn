@@ -8,7 +8,7 @@ summary: 查找有关Trident安装、配置、升级和故障排除的常见问�
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]

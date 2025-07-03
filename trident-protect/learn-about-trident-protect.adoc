@@ -7,7 +7,7 @@ summary: 通过Trident Protect、您可以使用Trident保护应用程序和应�
 = 了解Trident Protect
 :allow-uri-read: 
 :icons: font
-:imagesdir: ./media/
+:imagesdir: ../media/
 
 
 [role="lead"]

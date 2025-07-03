@@ -8,7 +8,7 @@ summary: 您可以使用版本选择器在最新版本和以前的四个版本�
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]
