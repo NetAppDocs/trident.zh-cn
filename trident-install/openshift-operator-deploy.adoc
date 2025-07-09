@@ -14,6 +14,8 @@ summary: 如果使用Red Hat OpenShift、则可以使用操作员安装Trident�
 [role="lead"]
 如果您使用的是Red Hat OpenShift、则可以通过Red Hat认证操作员安装NetApp Trident。使用此过程从Red Hat OpenShift容器平台安装Trident。
 
+<<Updating screens on this page>>
+
 .开始之前
 开始安装之前，link:../trident-get-started/requirements.html["准备安装Trident的环境"]。
 
@@ -47,13 +49,7 @@ image::../media/openshift-operator-04.png[已安装]
 
 .步骤
 . 从已安装操作员列表中选择Trident操作员。
-+
-image::../media/openshift-operator-05.png[安装]
-
 . 选择是否要从操作符中删除所有操作数实例。
-+
-image::../media/openshift-operator-06.png[已安装]
-
 +
 
 WARNING: 如果未选中“*从该运算符中删除所有操作数实例*”复选框，则不会卸载Trident。

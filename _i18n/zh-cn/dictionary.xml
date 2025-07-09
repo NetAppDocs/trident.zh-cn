@@ -5730,4 +5730,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="674d1c5daba14e57bb12199e316a830d" category="list-text">为 ONTAP-NAS 和 ONTAP-NAS-Economy 卷添加了安全的 SMB 支持。ActiveDirectory 用户和组现在可以与 SMB 卷一起使用，以增强安全性。请参阅。 <block ref="4f989a35378d98430cb4c4899de0cc08" category="inline-link-macro-rx"></block></block>
   <block id="68e904dfe8bbc558c556cc39aaca54b6" category="list-text">增加了对使用 SnapMirror 对 NVMe 后端进行卷复制的支持。请参阅。 <block ref="0837d9a30d067376d83aa60bb79334f8" category="inline-link-macro-rx"></block></block>
   <block id="afce633f05d99c109d2b0429ee891495" category="admonition">如果您从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在包含在 Trident Protect Helm 图表中。</block>
+  <block id="78ba3dee1dfae1136825fa94b594e8b0" category="paragraph"><block ref="b370fec489f67cf82a40d70295a9ea9a" category="inline-xref-macro-rx"></block></block>
 </blocks>
