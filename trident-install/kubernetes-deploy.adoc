@@ -46,6 +46,7 @@ summary: '您可以使用Trident操作员(手动或使用Helm)或与一起安装
 * 具有的Linux主机 `kubectl` (或 `oc`(如果您使用的是OpenShift)已安装并配置为管理要使用的Kubernetes集群。
 * 。 `KUBECONFIG` 环境变量设置为指向您的Kubernetes集群配置。
 * 如果您将 Kubernetes 与 Docker Enterprise 结合使用， https://docs.docker.com/ee/ucp/user-access/cli/["按照其步骤启用 CLI 访问"^]。
+* 集群必须支持有权限的工作负载。
 
 
 
@@ -214,7 +215,6 @@ link:kubernetes-deploy-tridentctl.html["标准或脱机安装"]
 
 在VMware Tanzu产品组合上安装Trident时：
 
-* 集群必须支持有权限的工作负载。
 * ` -kubelet-dir` 标志应设置为 kubelet 目录的位置。默认情况下，此值为 ` /var/vcap/data/kubelet` 。
 +
 已知使用 ` -kubelet-dir` 指定 kubelet 位置适用于 Trident Operator ， Helm 和 `tridentctl` 部署。
