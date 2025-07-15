@@ -55,6 +55,9 @@ summary: 了解适用于Google Cloud NetApp卷的NFS和NFS后端配置选项并�
 | `s服务级别` | 存储池及其卷的服务级别。值为 `flex`、、 `standard` `premium`或 `extreme`。 |  
 
 
+| `标签` | 要应用于卷的一组任意 JSON 格式的标签 | "" 
+
+
 | `网络` | 用于GCNV卷的Google Cloud网络。 |  
 
 
