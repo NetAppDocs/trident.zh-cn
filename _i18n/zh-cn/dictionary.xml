@@ -2765,9 +2765,6 @@ SMB</block>
   <block id="15f15289009d52be4af3e9951853eee5" category="paragraph">这些示例显示了将PVC连接到POD的基本配置。</block>
   <block id="416206518e27ed2ec8b8e0876078af35" category="listing-title">基本配置</block>
   <block id="b9fa7c201e2dc76fe12c8bb436c212ee" category="listing-title">基本NVMe/TCP配置</block>
-  <block id="e29a6d196232b6cdf3ae52f871ba291b" category="cell">启用LUKS加密。请参见 <block ref="569f9f91cdcc19909b8acbf6f423daf7" category="inline-link-macro-rx"></block>。
-
-NVMe/TCP不支持使用此类数据加密。</block>
   <block id="a242dbcec09373d25c5fb582f9f2cfc6" category="example-title">NVMe/TCP示例</block>
   <block id="3a3347de03ef37c1eb5eb525619ff905" category="paragraph">您必须在ONTAP后端为SVM配置NVMe。这是NVMe/TCP的基本后端配置。</block>
   <block id="1b931baab9ca74be94af72763666c941" category="list-text">。<block ref="33aacad9b122abfdfadc06e3e7fa5f59" prefix=" " category="inline-code"></block> StorageClass将映射到<block ref="11e89beb13d19bf6e3ab7ed65673b27d" prefix=" " category="inline-code"></block> 中的虚拟池<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 驱动程序<block ref="6fa083b88d05083e680071073d06c3af" prefix=" " category="inline-code"></block>。这是唯一的池产品<block ref="5ca85ebb1d881fde490deaa5817c4ca5" prefix=" " category="inline-code"></block>。</block>
@@ -5731,4 +5728,5 @@ NVMe/TCP不支持使用此类数据加密。</block>
   <block id="68e904dfe8bbc558c556cc39aaca54b6" category="list-text">增加了对使用 SnapMirror 对 NVMe 后端进行卷复制的支持。请参阅。 <block ref="0837d9a30d067376d83aa60bb79334f8" category="inline-link-macro-rx"></block></block>
   <block id="afce633f05d99c109d2b0429ee891495" category="admonition">如果您从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在包含在 Trident Protect Helm 图表中。</block>
   <block id="78ba3dee1dfae1136825fa94b594e8b0" category="paragraph"><block ref="b370fec489f67cf82a40d70295a9ea9a" category="inline-xref-macro-rx"></block></block>
+  <block id="b71ccf1062cee8c376a7eb37e3c42603" category="cell">启用LUKS加密。请参阅 <block ref="569f9f91cdcc19909b8acbf6f423daf7" category="inline-link-macro-rx"></block>。</block>
 </blocks>
