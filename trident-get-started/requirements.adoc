@@ -108,8 +108,6 @@ Trident支持以下用于KubeVirt和OpenShift虚拟化的ONTAP驱动程序：
 
 下表总结了此版本的Trident及其支持的Kubernetes版本提供的功能。
 
-<<check for 25.06>>
-
 [cols="3"]
 |===
 | 功能 | Kubernetes 版本 | 是否需要功能安全门？ 
@@ -219,8 +217,6 @@ link:../trident-reference/ports.html["Trident端口"]
 == 容器映像以及相应的 Kubernetes 版本
 
 对于气隙安装、以下列表是安装Trident所需容器映像的参考。使用 `tridentctl images`命令验证所需容器映像的列表。
-
-<<check for 25.06>>
 
 [cols="2"]
 |===
