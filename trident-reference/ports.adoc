@@ -18,7 +18,7 @@ summary: 详细了解Trident通信所使用的端口。
 
 == Trident端口
 
-Trident通过以下端口进行通信：
+Trident使用以下端口在 Kubernetes 内部进行通信：
 
 [cols="2,4"]
 |===
