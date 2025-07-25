@@ -16,7 +16,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 
 
 
-== 有关Trident 25.05的重要信息
+== 有关Trident 25.06的重要信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
