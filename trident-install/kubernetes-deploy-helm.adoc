@@ -241,13 +241,6 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 
 
 | `nodePrep` | 使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。* |  
-
-
-| `ontapConfigurator`  a| 
-启用或禁用自动配置Trident后端和Amazon FSx存储类。使用以下参数和 `ontapConfigurator`启用自动后端配置：：
-`enabled`设置为 `true`启用自动后端配置。
-`svms`:包含将为其创建自动后端配置的文件系统ID列表。- `authType`:设置SVM身份验证的身份验证类型。对于AWS、目前支持基于arn的身份验证("awsarn")。- `fsxnID`：设置AWS FSx的文件系统ID。示例："fs-0dfeuda884a68b1cab"。- `protocols`-指定支持自动后端配置的协议列表；"NFS"、"iSCSI"或两者。
-|  
 |===
 
 
