@@ -109,13 +109,13 @@ NFS、iSCSI和FC的卷创建选项包括以下内容：
 
 请参见以下示例：
 
-* 创建 10 GiB 卷：
+* 创建一个 10 GiB 卷：
 +
 [listing]
 ----
 docker volume create -d netapp --name demo -o size=10G -o encryption=true
 ----
-* 创建具有快照的 100GiB 卷：
+* 创建一个带有快照的 100 GiB 卷：
 +
 [listing]
 ----
@@ -129,7 +129,7 @@ docker volume create -d netapp --name demo -o unixPermissions=4755
 ----
 
 
-最小卷大小为 20MiB 。
+最小卷大小为 20 MiB。
 
 如果未指定快照预留且快照策略为 `none`，则Trident将使用0%的快照预留。
 
@@ -175,7 +175,7 @@ Element 软件选项会显示与卷关联的大小和服务质量（ QoS ）策�
 
 
 | `s大小`  a| 
-卷的大小，默认为 1GiB 或配置条目 ... " 默认值 " ： ｛ "size" ： "5c" ｝ 。
+卷的大小，默认为 1 GiB 或配置条目...“defaults”：{“size”：“5G”}。
 
 
 
@@ -228,7 +228,7 @@ Element 软件选项会显示与卷关联的大小和服务质量（ QoS ）策�
 ----
 docker volume create -d solidfire --name sfGold -o type=Gold -o size=10G
 ----
-* 创建 100GiB 铜牌卷：
+* 创建 100 GiB 青铜卷：
 +
 [listing]
 ----

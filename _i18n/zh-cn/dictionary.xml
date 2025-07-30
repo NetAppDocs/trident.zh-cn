@@ -1146,10 +1146,7 @@
   <block id="56efcdcb9168adcb146b4d86bf55e99d" category="cell">设置用于格式化 iSCSI 卷的文件系统。默认值为 `ext4` 。有效值为 `ext3` ， `ext4` 和 `xfs` 。</block>
   <block id="ff7c0fcd6a31e735a61c001f75426961" category="section-title">示例</block>
   <block id="9e6d454a094b92b0132e48d2369debf5" category="paragraph">请参见以下示例：</block>
-  <block id="be1e1c94a5fc3bb66c2ae9425eeefbdb" category="list-text">创建 10 GiB 卷：</block>
-  <block id="a6490f19f59ecd8e4ed8634990ea366c" category="list-text">创建具有快照的 100GiB 卷：</block>
   <block id="297d0d2fcc555e5037c8d251daf5a620" category="list-text">创建启用了 setuid 位的卷：</block>
-  <block id="6e31a0481f4f7e423abcde0bf31025c8" category="paragraph">最小卷大小为 20MiB 。</block>
   <block id="8c05fd71822bf85c290cef86db959f68" category="list-text">创建无快照策略且无快照预留的卷：</block>
   <block id="d15d662af6e4417b0b7c134a84ed577c" category="list-text">创建一个无快照策略且自定义快照预留为 10% 的卷：</block>
   <block id="52a56a468f11c3298931c8e32c938e15" category="list-text">创建具有快照策略和 10% 自定义快照预留的卷：</block>
@@ -1157,19 +1154,15 @@
   <block id="a514753df071ac540af065b659d1c65c" category="paragraph">Element 软件选项会显示与卷关联的大小和服务质量（ QoS ）策略。创建卷时，将使用 ` -o type=service_level` 命名空间指定与其关联的 QoS 策略。</block>
   <block id="f201e088f13d93e3d12b3c0ef78dece3" category="paragraph">使用 Element 驱动程序定义 QoS 服务级别的第一步是至少创建一种类型，并指定与配置文件中的名称关联的最小，最大和突发 IOPS 。</block>
   <block id="5cb7e4a4b6a51af0b5b09cb230b83422" category="paragraph">其他 Element 软件卷创建选项包括：</block>
-  <block id="8730c4572b866ffc01a4aefebc896555" category="paragraph">卷的大小，默认为 1GiB 或配置条目 ... " 默认值 " ： ｛ "size" ： "5c" ｝ 。</block>
   <block id="d52146098b8ecd83b888289a86e26d19" category="cell">`块大小`</block>
   <block id="348ef18ccca06aa29547bd9ad87beebe" category="paragraph">使用 512 或 4096 ，默认为 512 或配置条目 DefaultBlockSize 。</block>
   <block id="1daf1c12549d6d3ae75c4d8d5f59d532" category="paragraph">请参见以下包含 QoS 定义的示例配置文件：</block>
   <block id="7afe0c73e341cee7c90b4d4dda4600d9" category="paragraph">在上述配置中，我们有三个策略定义：铜牌，银牌和金牌。这些名称是任意的。</block>
-  <block id="cb5b68dacb07bd02a5152bf4ad1de8c6" category="list-text">创建 10 GiB 黄金卷：</block>
-  <block id="89014c611c13195dc852587ef9d2bb16" category="list-text">创建 100GiB 铜牌卷：</block>
   <block id="feabbbf9b5afb31194daf0d8e3ff75dc" category="doc">使用卷</block>
   <block id="dc88dce8ec264777b2f90ec0af744f43" category="section-title">创建卷</block>
   <block id="a32b09b1335e0afbb640a9412690680d" category="list-text">使用默认名称创建包含驱动程序的卷：</block>
   <block id="93da65a9fd0004d9477aeac024e08e15" category="inline-link-macro">选项</block>
   <block id="593e5c95e1adc19e8d81719c16b57bc1" category="admonition">如果未指定任何 <block ref="3a0a40f90bfa29e0eb23418c553e5ef5" category="inline-link-macro-rx"></block>，将使用驱动程序的默认值。</block>
-  <block id="1e1e2461d5dfd51f1ebd0eadcba142f4" category="list-text">覆盖默认卷大小。要使用驱动程序创建 20GiB 卷，请参见以下示例：</block>
   <block id="5149eec9d959a54cf392efaa710541d1" category="admonition">卷大小以字符串表示，该字符串包含一个包含可选单元的整数值（例如： 10 G ， 20 GB ， 3 TiB ）。如果未指定单位，则默认值为 G大小单位可以表示为 2 的幂（ B ， KiB ， MIB ， GiB ， TiB ）或 10 的幂（ B ， KB ， MB ， GB ， TB ）。速率单位使用 2 的电流（ G = GiB ， T = TiB ，…）。</block>
   <block id="9bc129eac7adf7ea5d8ed1c021fab2dc" category="section-title">删除卷</block>
   <block id="281a0f40363a276c6ec125244c784112" category="list-text">像删除任何其他 Docker 卷一样删除此卷：</block>
@@ -2895,7 +2888,6 @@ SMB</block>
   <block id="4301e504ec5591a4c51fe93e446a7a35" category="paragraph"><block ref="dca46ba7b3ffeb9b51e10f54acbd826d" prefix="" category="inline-code"></block></block>
   <block id="e6e32acf4d56921ac92540101fe00fc9" category="list-text"><block ref="db0e9588c0d46e16e0aea5c50287a54f" prefix="" category="inline-code"></block>：仅限客户端版本(不需要服务器)。<block ref="60072fc2fad0d30fc656850e04c7433f" prefix=" " category="inline-code"></block>：版本帮助。</block>
   <block id="34c5f2f84f16f23213713a6adc11c319" category="admonition">如果您在初始安装期间设置了自定义选项(例如、为三端映像和CSI映像指定专用、镜像注册表)、请附加<block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 命令<block ref="8b5806248570dbb13e7d3bc5e6c0ee37" prefix=" " category="inline-code"></block> 为了确保这些选项包含在upgrade命令中、否则这些值将重置为默认值。</block>
-  <block id="20a385c1dc7ef65425669840055b5330" category="list-text">建议的最小FlexGroup成员/卷大小为100 GiB。</block>
   <block id="ee68e5b99222bbc29a480fcb0d1d6ee2" category="section-title">前提条件</block>
   <block id="56ae1c25c84da104d5678975802dd9b7" category="list-text">具有附加订阅的Amazon EKS集群帐户</block>
   <block id="3f597c2b0d86deed94c99ef3d5fa4932" category="list-text">AWS对AWS Marketplace的权限：<block ref="8047af5c1ca81290342558a545113f6e" prefix=" " category="inline-code"></block></block>
@@ -2912,7 +2904,6 @@ SMB</block>
   <block id="bf18811faac9b8e4fcaebab51afd1113" category="list-text">选择 * 创建 * 。</block>
   <block id="fa883f8fcd252ea2995457cd82515d03" category="list-text">验证此加载项的状态是否为_Active_.</block>
   <block id="2af6474930eac7fe47a45b3658bef5bf" category="image-alt">AWS EKS 05</block>
-  <block id="f825c914a8659f5b0de8a9219ab365b6" category="paragraph">要将新创建的20MiB PV调整为1GiB、请编辑PVC并进行设置<block ref="02b011e6fe36e26e5f7365ba08bf5a48" prefix=" " category="inline-code"></block> 到1 GiB：</block>
   <block id="f3554362e5b550c58586036685aca0f6" category="list-text">基于凭据：此模式需要对ONTAP后端具有足够的权限。建议使用与预定义安全登录角色关联的帐户、例如<block ref="21232f297a57a5a743894a0e4a801fc3" prefix=" " category="inline-code"></block> 或<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 以确保与ONTAP 版本的最大兼容性。</block>
   <block id="ad8deb3ead6fe765f774fdb1b4d51494" category="list-text">增加了对云身份的支持。</block>
   <block id="1ed2e28ed5e329359ed11fa6b3213f12" category="list-text">带有ANF的AK—Azure工作负载标识将用作云标识。</block>
@@ -3051,7 +3042,6 @@ SMB</block>
   <block id="d2e65e05e52ae58b1bc83b9f92667bc4" category="list-text">修复了忽略来自Kubbernetes ()的警告消息的trdentcdc<block ref="74b3b54ef301f7904eaa2691276657ad" category="inline-link-macro-rx"></block>。</block>
   <block id="6d20ebb6924fd1c28927afadfd523477" category="inline-link-macro">问题描述#887</block>
   <block id="e0d3d678b5ec46031ee8c6afb7413c9e" category="inline-link-macro">问题[#883.</block>
-  <block id="2d7e2b9397eede29137512c835ab6774" category="list-text">ONTAP驱动程序现在接受低于20MiB的卷大小<block ref="91ddf20e925712134071a4cc83fc66a3" category="inline-link-macro-rx"></block>()。</block>
   <block id="62a3f40ae48e77863d3e5bdef59c1adb" category="list-text">修复了NFS v4.1中ANF卷导入失败的问题。</block>
   <block id="6a89b6f002954f791e28c8dd2f2afcc8" category="section-title">24.02中的变化</block>
   <block id="4487bf4a5d2565e471a4ac1e0bba9af6" category="cell"><block ref="1f2a94e142bf020b1f7c6297ec12413f" prefix="" category="inline-code"></block></block>
@@ -3647,7 +3637,6 @@ SMB</block>
   <block id="452de30c1a2630700e271baac21f9ff5" category="paragraph"><block ref="c614017642b6cfd9e6a25c7df122d917" prefix=" " category="inline-code"></block>参数可帮助将存储限制为与任何指定属性匹配的池集。<block ref="145d1b89a9f9ed8bdc16d1f7a814cace" prefix=" " category="inline-code"></block>参数用于扩展Trident用于配置的池集以及通过属性和参数选择的池集<block ref="c614017642b6cfd9e6a25c7df122d917" prefix=" " category="inline-code"></block>。您可以单独使用参数，也可以同时使用这两个参数，以确保选择适当的存储池集。</block>
   <block id="e2dcff5242641fe99e5de74fa1bfd61c" category="paragraph">所有Trident后端均可使用虚拟池。您可以使用Trident提供的任何驱动程序为任何后端定义虚拟池。</block>
   <block id="976ae934688a6ffde1862ea50e00d6f9" category="paragraph">通过虚拟池、管理员可以在后端创建一个抽象级别、并可通过存储类进行引用、从而提高卷在后端的灵活性和效率。可以使用相同的服务类定义不同的后端。此外、可以在同一后端创建多个存储池、但其特征不同。如果为存储类配置了具有特定标签的选择器、则Trident会选择一个与所有选择器标签匹配的后端来放置卷。如果存储类选择器标签与多个存储池匹配、则Trident将选择其中一个存储池来配置卷。</block>
-  <block id="7c8b5a1db3d2eb7f3d2e4fe76042fb2b" category="paragraph">创建后端时，通常可以指定一组参数。管理员无法使用相同的存储凭据和一组不同的参数创建另一个后端。随着虚拟池的推出、此问题描述 得以缓解。虚拟池是在后端和Kubernetes存储类之间引入的级别抽象、因此管理员可以定义参数以及标签、这些参数和标签可以通过Kubernetes存储类作为选择器进行引用、并且与后端无关。可以使用Trident为所有受支持的NetApp后端定义虚拟池。该列表包括 SolidFire/NetApp HCI ， ONTAP ， GCP 上的 Cloud Volumes Service 以及 Azure NetApp Files 。</block>
   <block id="fb241a03678f7f6dbc815840b0eb275b" category="paragraph">创建PVC时、请求的存储类以外的某些参数可能会影响Trident配置决策过程。</block>
   <block id="d0652515edf18bae4abe8c32cbada535" category="paragraph">Trident 将尝试与根据下表指定的访问方法所使用的存储协议匹配。这独立于底层存储平台。</block>
   <block id="5778c34e2378296c943901d6fc399424" category="paragraph">Trident 支持按需创建卷快照，并使用 CSI 框架从快照创建 PVC 。快照提供了一种维护数据时间点副本的便捷方法，并且生命周期独立于 Kubernetes 中的源 PV 。这些快照可用于克隆 PVC 。</block>
@@ -3713,7 +3702,6 @@ SMB</block>
   <block id="b500d40dfa3ea14369fdaf59d3b1c835" category="list-text">已将Azure NetApp Files最小卷大小减少到50 GiB。Azure新的最小大小预计将于11月全面上市。</block>
   <block id="2e6f95101e443ed93c211c35457a90e6" category="list-text">添加了<block ref="80fd16da9d17abac4374b362f2e409fe" prefix=" " category="inline-code"></block>配置参数、用于将ONTAP－NAS－经济型和ONTAP－SAN经济型驱动程序限制为原有的FlexVol池。</block>
   <block id="bf300dbe4f3e7fba7ef23cdf029d7f54" category="list-text">增加了对在所有ONTAP驱动程序中从SVM添加、删除或重命名聚合的检测功能。</block>
-  <block id="9528c4a630c0b90815b8626d441c3d22" category="list-text">为LUKS LUN增加了18MiB开销、以确保报告的PVC大小可用。</block>
   <block id="b0587c4582678977a894feccef58eb73" category="list-text">改进了ONTAP - SAN和ONTAP - SAN经济型节点阶段和取消暂存错误处理、以便在出现故障阶段后取消暂存以删除设备。</block>
   <block id="914e332f78206303c5897d6de3d31dc4" category="list-text">添加了一个自定义角色生成器、允许客户在ONTAP中为Trident创建一个精简角色。</block>
   <block id="54a5a20d9182724aeda126c68ff2d500" category="inline-link-macro">问题描述#792</block>
@@ -3772,7 +3760,6 @@ SMB</block>
   <block id="2e62261179042a713555c66362bf55b6" category="list-text"><block ref="2e62261179042a713555c66362bf55b6" category="inline-link-rx"></block></block>
   <block id="fd898492f5f83a18091a5e6c78cf2276" category="list-text"><block ref="fd898492f5f83a18091a5e6c78cf2276" category="inline-link-rx"></block></block>
   <block id="7afa2d89ddb38b52ee6c828cd75c06c9" category="paragraph">Trident可使用您的后端配置(子网、虚拟网络、服务级别和位置)在请求位置可用的容量池上创建Azure NetApp Files卷、并与请求的服务级别和子网匹配。</block>
-  <block id="47696c1242682d2928198892a193df8f" category="admonition">Trident不支持手动QoS容量池。</block>
   <block id="e9acc9c9f9c15bdc3abfff747835f188" category="paragraph">这是绝对的最低后端配置。使用此配置时、Trident会发现在所配置位置委派给Azure NetApp Files的所有NetApp帐户、容量池和子网、并随机将新卷放置在其中一个池和子网上。由于<block ref="296026821ada2ab8aebcf13547a63df5" prefix=" " category="inline-code"></block> 省略了、因此会<block ref="2521ef5d58fc027d3121662b7d8f9ac2" prefix=" " category="inline-code"></block> 应用默认设置、后端将为NFS卷配置。</block>
   <block id="c23ef0ddbc293eb69087843f50a25be6" category="paragraph">此后端配置会将卷放置在Azure的<block ref="6356111305f5daab178fa6051b7a8ae7" prefix=" " category="inline-code"></block>容量池中<block ref="7057376a419b3334cc7b8b7a9f064abb" prefix=" " category="inline-code"></block>。Trident会自动发现该位置委派给Azure NetApp Files的所有子网、并随机在其中一个子网上放置一个新卷。</block>
   <block id="fefaa3b6dca112cc6521c571cfc3803d" category="paragraph">Trident可以根据区域和可用性区域为工作负载配置卷。<block ref="1f2a94e142bf020b1f7c6297ec12413f" prefix=" " category="inline-code"></block>此后端配置中的块用于提供每个后端的区域和分区列表。此处指定的区域和分区值必须与每个Kubnetes集群节点上标签中的区域和分区值匹配。这些区域和分区表示可在存储类中提供的允许值列表。对于包含后端提供的部分区域和区域的存储类、Trident会在上述区域和区域中创建卷。有关详细信息，请参阅 <block ref="a735758eec435cad1c5672b75bd657c0" category="inline-link-macro-rx"></block>。</block>
@@ -3894,8 +3881,6 @@ SMB</block>
   <block id="8f0dd7b65e6130f3f55d984ebc34bbdb" category="cell">您可以指定以下选项之一：使用Microsoft管理控制台或ONTAP命令行界面创建的SMB共享的名称；允许Trident创建SMB共享的名称；或者、您可以将参数留空以防止对卷进行通用共享访问。对于内部ONTAP、此参数是可选的。此参数对于Amazon FSx for ONTAP后端为必填项、不能为空。</block>
   <block id="760f7a1b05bc9d3d50c534dc491c07d4" category="cell">在新卷上启用NetApp卷加密(NVE)；默认为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：<block ref="5113a2fb1642ecd23870711ba25c4ad7" category="inline-link-macro-rx"></block>。</block>
   <block id="9cae9ee80bd5bcfdc5aefb0ffdbdf25b" category="admonition">将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。</block>
-  <block id="a70620fd8360d045b82ff1bd1d0c3df5" category="paragraph">对于<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>和<block ref="10be922aa0fd75bc53ab71eda9229763" prefix=" " category="inline-code"></block>，Trident现在使用新的计算方法来确保使用snapshotReserve百分比和pvc正确调整FlexVol的大小。当用户请求PVC时、Trident会使用新计算方法创建具有更多空间的原始FlexVol。此计算可确保用户在 PVC 中收到所请求的可写空间，而不是小于所请求的空间。在 v21.07 之前，如果用户请求 PVC （例如， 5GiB ），并且 snapshotReserve 为 50% ，则只会获得 2.5 GiB 的可写空间。这是因为用户请求的是整个卷、并且<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block>是其中的一个百分比。在Trident 21.07中、用户请求的是可写空间、Trident将该数字定义<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block>为整个卷的百分比。这不适用于<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>。请参见以下示例以了解其工作原理：</block>
-  <block id="22924e617739cd9c383b969f041801fd" category="paragraph">先前安装的现有后端将在升级Trident时按照上文所述配置卷。对于在升级之前创建的卷，您应调整其卷的大小，以便观察到所做的更改。例如、使用较早版本的2GiB PVC<block ref="01d8e11bde220373533705ed26796e25" prefix=" " category="inline-code"></block>会导致卷提供1GiB的可写空间。例如，将卷大小调整为 3GiB 可为应用程序在一个 6 GiB 卷上提供 3GiB 的可写空间。</block>
   <block id="04475efebba67943de12a2269d2e0a7b" category="paragraph">此示例介绍如何指示Trident使用动态导出策略自动创建和管理导出策略。这对于和<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>驱动程序是相同的<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>。</block>
   <block id="917b750655d8fd1d6c961e661535fa99" category="paragraph">Trident会在"Comments"字段中设置配置标签。注释在FlexVol for或FlexGroup<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> for上设置<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>。配置时、Trident会将虚拟池上的所有标签复制到存储卷。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。</block>
   <block id="fb66862ac33cf61ecc10382c3a42dee3" category="paragraph">Trident将决定选择哪个虚拟池、并确保满足存储要求。</block>
@@ -3941,7 +3926,6 @@ SMB</block>
   <block id="a5b88f2b14a5b0fa1aa2bbed9eb87602" category="cell">限制<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>后端创建新的FlexVol卷以包含其LUN。仅会使用已有的FlexVol配置新的PV.</block>
   <block id="e78c177a9e5dfcf995756c1f03c48529" category="admonition">对于使用驱动程序创建的所有卷<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>、Trident会向FlexVol额外添加10%的容量、以容纳LUN元数据。LUN 将使用用户在 PVC 中请求的确切大小进行配置。Trident会将10%的空间添加到FlexVol中(在ONTAP中显示为可用大小)。用户现在将获得所请求的可用容量。此更改还可防止 LUN 变为只读状态，除非已充分利用可用空间。这不适用于 ontap-san-economy.</block>
   <block id="2d4fda186ee0e99d76ee82d9cd36b908" category="paragraph">对于定义的后端<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block>，Trident将按如下所示计算卷的大小：</block>
-  <block id="da726af8694451874b7c47ae0ed223c6" category="paragraph">1.1是Trident为容纳LUN元数据而向FlexVol额外增加的10%。对于<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block>= 5%、PVC请求= 5 GiB、则卷总大小为5.79 GiB、可用大小为5.5 GiB。此<block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block>命令应显示类似于以下示例的结果：</block>
   <block id="83e850c97b7044397eba3d214682be5b" category="list-text">基于证书：Trident还可以使用后端安装的证书与ONTAP集群进行通信。此处，后端定义必须包含客户端证书，密钥和可信 CA 证书的 Base64 编码值（如果使用）（建议）。</block>
   <block id="14bc1b6d66d79a6242106075078d6a75" category="paragraph">Trident可以使用和<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>驱动程序的双向CHAP对iSCSI会话进行身份验证<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>。这需要在后端定义中启用此<block ref="099cb468880f266cba40b49391fa46bc" prefix=" " category="inline-code"></block>选项。设置为时<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，Trident会将SVM的默认启动程序安全性配置为双向CHAP，并设置后端文件中的用户名和密钥。NetApp 建议使用双向 CHAP 对连接进行身份验证。请参见以下配置示例：</block>
   <block id="a3101deed09a2c98e2dc3f8d302ef2ec" category="paragraph">如果将设置<block ref="099cb468880f266cba40b49391fa46bc" prefix=" " category="inline-code"></block>为true、则存储管理员将指示Trident在存储后端配置CHAP。其中包括：</block>
@@ -3983,7 +3967,6 @@ SMB</block>
   <block id="8870cc012f196366d720ebdad2f5632f" category="list-text">尝试调整未连接PV的大小时、Trident会扩展存储后端的卷。将 PVC 绑定到 Pod 后， Trident 会重新扫描设备并调整文件系统大小。然后， Kubernetes 会在扩展操作成功完成后更新 PVC 大小。</block>
   <block id="026f69e8eb7faab2f07a68365843746d" category="paragraph">您可以通过检查PVC、PV和Trident卷的大小来验证扩展是否正常：</block>
   <block id="d8fc21061998f01679cbbabd9102ec8c" category="paragraph">Trident支持对、<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>、<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>、<block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block>和<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block>后端配置的NFS PV进行卷扩展<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>。</block>
-  <block id="8b09849d996182780fe1a4bd0fdc1d6d" category="paragraph">Trident应为此PVC创建一个20MiB NFS PV：</block>
   <block id="36941664e357e5e47a63d528d3ff49b5" category="paragraph">您可以通过检查PVC、PV和Trident卷的大小来验证调整大小是否正常：</block>
   <block id="822f23137373a7a374fd33ef3863c2de" category="paragraph">您可以将卷导入到Trident中、以便：</block>
   <block id="15309597fffd67488a7a5dde3591144d" category="list-text">Trident只能导入RW (读写)类型的ONTAP卷。DP (数据保护)类型的卷是SnapMirror目标卷。在将卷导入Trident之前、应先中断镜像关系。</block>
@@ -4883,8 +4866,6 @@ SMB</block>
   <block id="abd94f25c6f83f31232f41e2c03a17c1" category="cell">启用自动后端配置、从而根据输入参数无缝创建后端和存储类。</block>
   <block id="584255a02e82c085a6eee64514bf791a" category="paragraph">强制分离仅适用于<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>、、<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>和<block ref="bc63092df841150cda2e4fd2992a38d1" prefix=" " category="inline-code"></block>。<block ref="c9cdb62835ea4d8965a6e946dc9826f0" prefix=" " category="inline-code"></block>在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。默认情况下、对于Kubbernetes 1.28及更高版本、NGN处于启用状态。有关详细信息，请参阅 <block ref="a0c86c823d7e699cfc277c93de351a2d" category="inline-link-macro-rx"></block>。</block>
   <block id="97949d2167cfb02925ebeb5fbc18e41c" category="admonition">使用或驱动程序时<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>、您需要将后端配置中的参数设置<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>、以便Trident可以限制通过受管导出策略应用了此内容的Kubornetes<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>节点的访问。</block>
-  <block id="6e8d58237141258ce4818d1462b0a37a" category="cell"><block ref="4c65cbb4d2559a68fba50cf196427b85" prefix="" category="inline-code"></block></block>
-  <block id="084302fa0b21538a6a87278579b36fc1" category="paragraph">启用或禁用自动配置Trident后端和Amazon FSx存储类。使用以下参数和<block ref="4c65cbb4d2559a68fba50cf196427b85" prefix=" " category="inline-code"></block>启用自动后端配置：：<block ref="a10311459433adf322f2590a4987c423" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>启用自动后端配置。<block ref="aa34e5d130d1fc91b3c5fdc4d2d5d1cb" prefix=" " category="inline-code"></block>:包含将为其创建自动后端配置的文件系统ID列表。-<block ref="280fa711b12d488436b7cdcbfb2543fc" prefix=" " category="inline-code"></block>:设置SVM身份验证的身份验证类型。对于AWS、目前支持基于arn的身份验证("awsarn")。-<block ref="ac590318582c1d8275a50180aba8a35c" prefix=" " category="inline-code"></block>：设置AWS FSx的文件系统ID。示例："fs-0dfeuda884a68b1cab"。-<block ref="66203c461b36a2af573149f0aa6164ff" prefix=" " category="inline-code"></block>-指定支持自动后端配置的协议列表；"NFS"、"iSCSI"或两者。</block>
   <block id="f27e6cf95381139bd9916c64f178d212" category="list-text">对于运行Kubbernetes 1.24的集群，请使用 <block ref="ccef28639b5a7d8b851d32c1ca719ce3" category="inline-link-macro-rx"></block>。</block>
   <block id="b9f6abf28d1518cdaae0ed7e29a5727e" category="list-text">对于运行Kubernetes 1.25或更高版本的集群，请使用 <block ref="d1039b29d019902f70f499d65ede99cb" category="inline-link-macro-rx"></block>。</block>
   <block id="572a8b759ae44dd81571fb9d11e9932b" category="paragraph">NetApp SnapMirror复制可用于以下ONTAP解决方案的Trident Protect：</block>
@@ -5240,7 +5221,6 @@ SMB</block>
   <block id="a0c3ccd8e55dd8a4f5f5ad3a5269e331" category="admonition">如果您还没有熟悉<block ref="13aad4b6f98e790ff55e578921fa5ede" category="inline-link-macro-rx"></block>，现在是一个好时机。</block>
   <block id="f54758d5b91452d3103cc1017fa70d71" category="admonition">有关Kubnetes集群上Trident架构的详细信息，请参阅<block ref="2e4686c52a7aa47e7bc2aa3cfa953fbe" category="inline-link-macro-rx"></block>。</block>
   <block id="50a4fd89cedf0068776b972ce96fcceb" category="cell">用于使用 ONTAP REST API 的布尔参数。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为时<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，Trident使用ONTAP REST API与后端通信；设置为时<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block> 应用程序。预定义的和角色可以满足这一<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 要求<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>；更<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>改为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>以使用ONTAPI (ZAPI)调用。</block>
-  <block id="43086d9a7f35d289c190a6d377be9418" category="paragraph">对于 snapshotReserve = 50% ， PVC 请求 = 5GiB ，卷总大小为 5/.5 = 10GiB ，可用大小为 5GiB ，这是用户在 PVC 请求中请求的大小。此<block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block>命令应显示类似于以下示例的结果：</block>
   <block id="42113cf11e30b764619d3a98db65262d" category="list-text">R润 彻Kubernetes Engine 2 (RKE2) v1.26.7+rke2r1、v1.28.5+rke2r1</block>
   <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">为两个卷模式(文件和卷模式：块(原始设备)存储)增加了对KubeVirt / OpenShift虚拟化VM的备份和恢复支持。此支持与所有Trident驱动程序兼容、并可增强使用NetApp SnapMirror和Trident Protect复制存储时的现有保护功能。</block>
   <block id="fc1d748db1b5b488ce7af7d17ea15d55" category="inline-link-macro">软件版本支持</block>
@@ -5728,4 +5708,30 @@ SMB</block>
   <block id="af4e755c6284fa61e563c93320e97aaa" category="paragraph">Trident使用以下端口在 Kubernetes 内部进行通信：</block>
   <block id="8a783a7c53eca16c3e7092da50957c1e" category="list-text">OpenShift 4.14 - 4.18</block>
   <block id="ef46cb32ba76d79fbc7bfb7586fff578" category="list-text">确保您已升级到最新版本<block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block> 。</block>
+  <block id="aa56a1d260c6089f006323437ab5613f" category="list-text">建议的最小FlexGroup成员/卷大小为 100 GiB。</block>
+  <block id="006ae665d682a3f9a5488cf901070b36" category="list-text">创建一个 10 GiB 卷：</block>
+  <block id="865cd97dd9f832e1d9213d79b236a1ab" category="list-text">创建一个带有快照的 100 GiB 卷：</block>
+  <block id="6c374189e15747b9b59cf004c2d1d7f2" category="paragraph">最小卷大小为 20 MiB。</block>
+  <block id="32ba3ea0fdfbd643c0ee55450e506969" category="paragraph">卷的大小，默认为 1 GiB 或配置条目...“defaults”：{“size”：“5G”}。</block>
+  <block id="fb489bd0bae5618bdc73d177f2d64e38" category="list-text">创建 10 GiB 黄金卷：</block>
+  <block id="81271f59b907de8227da8c807392b336" category="list-text">创建 100 GiB 青铜卷：</block>
+  <block id="e19486e0f435d5132bb0d59bf69d3994" category="list-text">覆盖默认卷大小。请参阅以下示例，使用驱动程序创建 20 GiB 的卷：</block>
+  <block id="47d9ed5ad2795e2453dc7725d8fdeadc" category="paragraph">创建后端时，通常可以指定一组参数。管理员无法创建具有相同存储凭据和不同参数集的另一个后端。随着虚拟池的引入，这个问题得到了缓解。虚拟池是在后端和 Kubernetes 存储类之间引入的级别抽象，以便管理员可以定义参数以及可以通过 Kubernetes 存储类作为选择器引用的标签，以与后端无关的方式。可以使用Trident为所有受支持的NetApp后端定义虚拟池。该列表包括SolidFire/ NetApp HCI、 ONTAP、GCP 上的Cloud Volumes Service以及Azure NetApp Files。</block>
+  <block id="193dc4f3e19f36ad5c6f2ad43ea53a42" category="list-text">向 LUKS LUN 添加了 18 MiB 开销，以确保报告的 PVC 大小可用。</block>
+  <block id="85034b8ca1df8fbc112b8206cf773406" category="list-text">ONTAP驱动程序现在接受低于 20 MiB 的卷大小（ <block ref="91ddf20e925712134071a4cc83fc66a3" category="inline-link-macro-rx"></block> ）。</block>
+  <block id="fcc2bb4278d843dbf9fdbcf83a214131" category="admonition">* 从NetApp Trident 25.06 版本开始，手动 QoS 容量池作为技术预览版受到支持。*</block>
+  <block id="b4d452ddff320a381a09f71d2351e4c6" category="cell"><block ref="d6f0e0bdb2f24a4f559dd8f512235cb3" prefix="" category="inline-code"></block></block>
+  <block id="669b3bc77d6c32aa7e2c1bfe7cc9b452" category="cell">表示 QoS 类型：自动或手动。* Trident 25.06 技术预览版*</block>
+  <block id="06b9281e396db002010bde1de57262eb" category="cell">自动</block>
+  <block id="ae4d8eab27ac4c80edb95b30fc583854" category="cell"><block ref="08566efed9fdb13392ea1b11d6b533a4" prefix="" category="inline-code"></block></block>
+  <block id="dd71c14df42fdb8389de90b03536c45f" category="cell">设置允许的最大吞吐量。仅支持手动 QoS 容量池。* Trident 25.06 技术预览版*</block>
+  <block id="3eef9a5398f4b353f217625ca5768cc0" category="cell"><block ref="60f649f49ce41c3f0123ddceb5c9f688" prefix="" category="inline-code"></block></block>
+  <block id="b70d8bcceb91e3665bafe307a5b97682" category="example-title">具有手动 QoS 容量池的后端示例</block>
+  <block id="3ffc8f9f72c24f82c0703e3b5a78db96" category="paragraph">此后端配置将卷放置在 Azure 的<block ref="6356111305f5daab178fa6051b7a8ae7" prefix=" " category="inline-code"></block>具有手动 QoS 容量池的位置。* NetApp Trident 25.06 中的技术预览*。</block>
+  <block id="8c63942428249eaa15437c7e07b3dd1e" category="paragraph">为了<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>和<block ref="10be922aa0fd75bc53ab71eda9229763" prefix=" " category="inline-code"></block> Trident现在使用新的计算方法，以确保FlexVol 的大小与快照预留百分比和 PVC 的百分比相符。当用户请求 PVC 时， Trident会使用新的计算方法创建具有更多空间的原始FlexVol 。此计算方法可确保用户在 PVC 中获得其请求的可写空间，而不是少于其请求的空间。在 v21.07 之前，当用户请求 PVC（例如 5 GiB）时，如果快照预留百分比为 50%，则只能获得 2.5 GiB 的可写空间。这是因为用户请求的是整个卷，并且<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block>是其中的百分比。在Trident 21.07 中，用户请求的是可写空间，而Trident定义了<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block>占总体积的百分比。这不适用于<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 。请参阅以下示例了解其工作原理：</block>
+  <block id="a9d0225032890b6fff6306b9c33e2cc9" category="paragraph">对于快照预留 = 50% 且 PVC 请求 = 5 GiB 的情况，总卷大小为 5/.5 = 10 GiB，可用大小为 5 GiB，这正是用户在 PVC 请求中请求的大小。 <block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block>命令应显示与此示例类似的结果：</block>
+  <block id="b2badedae3a2fdd602b26112668ed612" category="paragraph">升级Trident时，先前安装的现有后端将按上述方式配置卷。对于升级前创建的卷，您应该调整其大小才能观察到更改。例如，一个 2 GiB 的 PVC 包含<block ref="01d8e11bde220373533705ed26796e25" prefix=" " category="inline-code"></block>之前的结果是卷提供了 1 GiB 的可写空间。例如，将卷大小调整为 3 GiB，将在 6 GiB 的卷上为应用程序提供 3 GiB 的可写空间。</block>
+  <block id="d3b60a0dd59d810307a1e694f1de96a1" category="paragraph">1.1 是Trident为容纳 LUN 元数据而额外添加到FlexVol 的10%。对于<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block> = 5%，PVC 请求 = 5 GiB，则总卷大小为 5.79 GiB，可用大小为 5.5 GiB。 <block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block>命令应显示与此示例类似的结果：</block>
+  <block id="d16fccbbd08210b8ff7b8b31329268bb" category="paragraph">Trident应该为该 PVC 创建一个 20 MiB 的 NFS PV：</block>
+  <block id="59dd268b21bd1a23faa29555b52ba22b" category="paragraph">要将新创建的 20 MiB PV 调整为 1 GiB，请编辑 PVC 并设置<block ref="02b011e6fe36e26e5f7365ba08bf5a48" prefix=" " category="inline-code"></block>至 1 GiB：</block>
 </blocks>

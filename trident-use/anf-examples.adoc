@@ -21,7 +21,7 @@ summary: 了解适用于Azure NetApp Files的NFS和SMB后端配置选项并查�
 Trident可使用您的后端配置(子网、虚拟网络、服务级别和位置)在请求位置可用的容量池上创建Azure NetApp Files卷、并与请求的服务级别和子网匹配。
 
 
-NOTE: Trident不支持手动QoS容量池。
+NOTE: * 从NetApp Trident 25.06 版本开始，手动 QoS 容量池作为技术预览版受到支持。*
 
 Azure NetApp Files后端提供了这些配置选项。
 
@@ -98,6 +98,12 @@ Azure NetApp Files后端提供了这些配置选项。
 
 
 | `supportedTopologies` | 表示此后端支持的区域和区域的列表。有关详细信息，请参阅 link:../trident-use/csi-topology.html["使用 CSI 拓扑"]。 |  
+
+
+| `qosType` | 表示 QoS 类型：自动或手动。* Trident 25.06 技术预览版* | 自动 
+
+
+| `maxThroughput` | 设置允许的最大吞吐量。仅支持手动 QoS 容量池。* Trident 25.06 技术预览版* | `4 MiB/sec` 
 |===
 
 NOTE: 有关网络功能的详细信息、请参见 link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/configure-network-features["配置Azure NetApp Files 卷的网络功能"^]。
@@ -256,6 +262,42 @@ serviceLevel: Ultra
 capacityPools:
   - application-group-1/account-1/ultra-1
   - application-group-1/account-1/ultra-2
+----
+====
+.具有手动 QoS 容量池的后端示例
+[%collapsible]
+====
+此后端配置将卷放置在 Azure 的 `eastus`具有手动 QoS 容量池的位置。* NetApp Trident 25.06 中的技术预览*。
+
+[source, yaml]
+----
+---
+version: 1
+storageDriverName: azure-netapp-files
+backendName: anf1
+location: eastus
+labels:
+  clusterName: test-cluster-1
+  cloud: anf
+  nasType: nfs
+defaults:
+  qosType: Manual
+storage:
+  - serviceLevel: Ultra
+    labels:
+      performance: gold
+    defaults:
+      maxThroughput: 10
+  - serviceLevel: Premium
+    labels:
+      performance: silver
+    defaults:
+      maxThroughput: 5
+  - serviceLevel: Standard
+    labels:
+      performance: bronze
+    defaults:
+      maxThroughput: 3
 ----
 ====
 .高级配置

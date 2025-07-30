@@ -246,7 +246,7 @@ NOTE: 对于使用驱动程序创建的所有卷 `ontap-san`、Trident会向Flex
 ----
 Total volume size = [(PVC requested size) / (1 - (snapshotReserve percentage) / 100)] * 1.1
 ----
-1.1是Trident为容纳LUN元数据而向FlexVol额外增加的10%。对于 `snapshotReserve`= 5%、PVC请求= 5 GiB、则卷总大小为5.79 GiB、可用大小为5.5 GiB。此 `volume show`命令应显示类似于以下示例的结果：
+1.1 是Trident为容纳 LUN 元数据而额外添加到FlexVol 的10%。对于 `snapshotReserve` = 5%，PVC 请求 = 5 GiB，则总卷大小为 5.79 GiB，可用大小为 5.5 GiB。  `volume show`命令应显示与此示例类似的结果：
 
 image::../media/vol-show-san.png[显示了 volume show 命令的输出。]
 

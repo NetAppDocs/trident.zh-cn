@@ -268,7 +268,7 @@ NetApp Trident Protect提供高级应用程序数据管理功能、可增强由N
 * 已将Azure NetApp Files最小卷大小减少到50 GiB。Azure新的最小大小预计将于11月全面上市。
 * 添加了 `denyNewVolumePools`配置参数、用于将ONTAP－NAS－经济型和ONTAP－SAN经济型驱动程序限制为原有的FlexVol池。
 * 增加了对在所有ONTAP驱动程序中从SVM添加、删除或重命名聚合的检测功能。
-* 为LUKS LUN增加了18MiB开销、以确保报告的PVC大小可用。
+* 向 LUKS LUN 添加了 18 MiB 开销，以确保报告的 PVC 大小可用。
 * 改进了ONTAP - SAN和ONTAP - SAN经济型节点阶段和取消暂存错误处理、以便在出现故障阶段后取消暂存以删除设备。
 * 添加了一个自定义角色生成器、允许客户在ONTAP中为Trident创建一个精简角色。
 * 添加了用于故障排除的其他日志记录 `lsscsi`link:https://github.com/NetApp/trident/issues/792["问题描述#792"]()。
@@ -374,7 +374,7 @@ link:./trident-protect/learn-about-trident-protect.html["详细了解Trident Pro
 * 修复了因事务陈旧而导致的Trident安装失败问题。
 * 修复了忽略来自Kubbernetes ()的警告消息的trdentcdclink:https://github.com/NetApp/trident/issues/892["问题描述#892"]。
 * 已将Trident控制器优先级更 `SecurityContextConstraint`改为 `0`link:https://github.com/NetApp/trident/issues/887["问题描述#887"]()。
-* ONTAP驱动程序现在接受低于20MiB的卷大小link:https://github.com/NetApp/trident/issues/885["问题[#883."]()。
+* ONTAP驱动程序现在接受低于 20 MiB 的卷大小（ link:https://github.com/NetApp/trident/issues/885["问题[#883."] ）。
 * 修复了Trident、以防止在对ONTAP驱动程序执行调整大小操作期间缩减FlexVol卷。
 * 修复了NFS v4.1中ANF卷导入失败的问题。
 

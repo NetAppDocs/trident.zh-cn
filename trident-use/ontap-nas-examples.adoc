@@ -217,7 +217,7 @@ defaults:
   snapshotPolicy: default
   snapshotReserve: "10"
 ----
-对于 `ontap-nas`和 `ontap-nas-flexgroups`，Trident现在使用新的计算方法来确保使用snapshotReserve百分比和pvc正确调整FlexVol的大小。当用户请求PVC时、Trident会使用新计算方法创建具有更多空间的原始FlexVol。此计算可确保用户在 PVC 中收到所请求的可写空间，而不是小于所请求的空间。在 v21.07 之前，如果用户请求 PVC （例如， 5GiB ），并且 snapshotReserve 为 50% ，则只会获得 2.5 GiB 的可写空间。这是因为用户请求的是整个卷、并且 `snapshotReserve`是其中的一个百分比。在Trident 21.07中、用户请求的是可写空间、Trident将该数字定义 `snapshotReserve`为整个卷的百分比。这不适用于 `ontap-nas-economy`。请参见以下示例以了解其工作原理：
+为了 `ontap-nas`和 `ontap-nas-flexgroups` Trident现在使用新的计算方法，以确保FlexVol 的大小与快照预留百分比和 PVC 的百分比相符。当用户请求 PVC 时， Trident会使用新的计算方法创建具有更多空间的原始FlexVol 。此计算方法可确保用户在 PVC 中获得其请求的可写空间，而不是少于其请求的空间。在 v21.07 之前，当用户请求 PVC（例如 5 GiB）时，如果快照预留百分比为 50%，则只能获得 2.5 GiB 的可写空间。这是因为用户请求的是整个卷，并且 `snapshotReserve`是其中的百分比。在Trident 21.07 中，用户请求的是可写空间，而Trident定义了 `snapshotReserve`占总体积的百分比。这不适用于 `ontap-nas-economy` 。请参阅以下示例了解其工作原理：
 
 计算方法如下：
 
@@ -225,11 +225,11 @@ defaults:
 ----
 Total volume size = (PVC requested size) / (1 - (snapshotReserve percentage) / 100)
 ----
-对于 snapshotReserve = 50% ， PVC 请求 = 5GiB ，卷总大小为 5/.5 = 10GiB ，可用大小为 5GiB ，这是用户在 PVC 请求中请求的大小。此 `volume show`命令应显示类似于以下示例的结果：
+对于快照预留 = 50% 且 PVC 请求 = 5 GiB 的情况，总卷大小为 5/.5 = 10 GiB，可用大小为 5 GiB，这正是用户在 PVC 请求中请求的大小。  `volume show`命令应显示与此示例类似的结果：
 
 image::../media/volume-show-nas.png[显示了 volume show 命令的输出。]
 
-先前安装的现有后端将在升级Trident时按照上文所述配置卷。对于在升级之前创建的卷，您应调整其卷的大小，以便观察到所做的更改。例如、使用较早版本的2GiB PVC `snapshotReserve=50`会导致卷提供1GiB的可写空间。例如，将卷大小调整为 3GiB 可为应用程序在一个 6 GiB 卷上提供 3GiB 的可写空间。
+升级Trident时，先前安装的现有后端将按上述方式配置卷。对于升级前创建的卷，您应该调整其大小才能观察到更改。例如，一个 2 GiB 的 PVC 包含 `snapshotReserve=50`之前的结果是卷提供了 1 GiB 的可写空间。例如，将卷大小调整为 3 GiB，将在 6 GiB 的卷上为应用程序提供 3 GiB 的可写空间。
 
 
 

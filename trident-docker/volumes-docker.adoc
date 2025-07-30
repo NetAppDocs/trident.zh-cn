@@ -34,7 +34,7 @@ docker volume create -d ntap_bronze --name bronzeVolume
 
 NOTE: 如果未指定任何 link:volume-driver-options.html["选项"^]，将使用驱动程序的默认值。
 
-* 覆盖默认卷大小。要使用驱动程序创建 20GiB 卷，请参见以下示例：
+* 覆盖默认卷大小。请参阅以下示例，使用驱动程序创建 20 GiB 的卷：
 +
 [source, console]
 ----
