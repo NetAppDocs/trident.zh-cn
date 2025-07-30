@@ -5152,7 +5152,6 @@ SMB</block>
   <block id="42e563c466d27e9d4943ef1acd3703b7" category="list-text">检查执行挂钩运行的状态。您可以重复运行此命令、直到操作完成：</block>
   <block id="8430f2c56dfc9e79fcaf741392d54499" category="list-text">描述exech本 运行对象以查看最终详细信息和状态：</block>
   <block id="b343abb76f62f4eef4afa255e885eee4" category="paragraph">从Trident 25.02开始、新增功能摘要提供了有关Trident和Trident Protect版本的增强功能、修复和弃用的详细信息。</block>
-  <block id="5674eb46caea5efcff5615daf30ab92d" category="paragraph">在使用CRS或Trident Protect命令行界面插件创建AppVault对象时、您可以选择指示Trident Protect使用包含用于Restic和Koria存储库加密的自定义密码的Kubernetes机密。如果未指定密钥、Trident Protect将使用默认密码。</block>
   <block id="4fc9faf161c64ed80d0fb8ca9aa0882e" category="admonition">根据所使用的数据移动工具、您只需包含该数据移动工具的相应密码即可。例如、如果您正在使用Restic、并且将来不打算使用KONIA、则在创建密钥时只能包含Restic密码。</block>
   <block id="6a346946ba0777d650b6e41a4c30c7b6" category="paragraph">确保已删除要删除的AppVault正在使用的所有快照和备份CRS。</block>
   <block id="b00fc94596cde685c68e0bedddb72ec6" category="summary">您可以使用Kube-state-metrics和Prometheus监控Trident Protect资源的状态。这样、您就可以获得有关部署、节点和Pod的运行状况信息。</block>
@@ -5228,9 +5227,7 @@ SMB</block>
   <block id="0db80d8cadbd011f12ade006191e47b0" category="doc">Trident和Trident保护博客</block>
   <block id="c5497cf98d8e6141ba38e1421502c2d4" category="paragraph">您可以在以下位置找到一些出色的NetApp Trident和Trident Protect博客：</block>
   <block id="897b6a6a21c73524107071aff80ed94e" category="inline-link-macro">解锁无缝iSCSI存储集成：适用于AWS的ROSA集群上的FSxN指南</block>
-  <block id="7e03dec1558430aac74331cea427e6fa" category="list-text">2025年3月5日：<block ref="c5953f971a0752feeb8ffbf7d9258789" category="inline-link-macro-rx"></block></block>
   <block id="6dc79a8e11fda729083bb4e518de411f" category="inline-link-macro">介绍Trident中的光纤通道支持</block>
-  <block id="b81f0a113de47ddee93e4aea79f4231f" category="list-text">2024年12月12日：<block ref="5c3a9e150bc491524071eb191093dabe" category="inline-link-macro-rx"></block></block>
   <block id="767cfc132547de728a22c9fa992eabfc" category="section-title">Trident Protect博客</block>
   <block id="a706b02fe1ef4870ecc8b588cbe37989" category="inline-link-macro">为OpenShift虚拟化VM执行崩溃状态一致的备份和还原操作</block>
   <block id="938cab8cf5785dfe0cd9ba76b4cae8f0" category="list-text">2025年3月13日：<block ref="94b3904630a42c759a6ceb844d104a7a" category="inline-link-macro-rx"></block></block>
@@ -5286,8 +5283,6 @@ SMB</block>
   <block id="ce3d3f85c4d1d4dd7826863d9428b4e5" category="admonition">要获得有关Trident的帮助、请使用创建支持包<block ref="1d41e2024c69110ad6054ffc785ca8e0" prefix=" " category="inline-code"></block>并将其发送给NetApp支持部门。</block>
   <block id="8ef3114bf1395e8f04d7b3404982499e" category="list-text">您可以将NVE加密标志设置为<block ref="9d4568c009d203ab10e33ea9953a0264" prefix=" " category="inline-code"></block>、以创建启用了NAE的卷。</block>
   <block id="351e2b20bd9ea864b69cd832f3a4a5df" category="list-text">如果未在后端启用NAE、则在Trident中配置的任何卷都将启用NVE、除非在后端配置中NVE加密标志设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>(默认值)。</block>
-  <block id="39fb9551310e8e28d64d0e2b94913f7a" category="paragraph">在对应用程序执行数据保护操作时、您需要手动或使用命令行创建AppVault CR、并且AppVault CR需要驻留在安装了Trident Protect的集群上。AppVault CR特定于您的环境；您可以使用此页面上的示例作为创建AppVault CRS的指南。</block>
-  <block id="8b70987187655cedeb971520a2170b2d" category="paragraph">在创建AppVault CR之前、您需要确保所选的AppVault和数据移动工具可以向提供程序和任何相关资源进行身份验证。</block>
   <block id="a346cffc17b34fc56f3020d8b33d30c3" category="paragraph">创建存储类和PVC后、您可以将PV挂载到Pod。本节列出了将PV连接到POD的示例命令和配置。</block>
   <block id="f253a45a33bc62e467efd426699d9025" category="paragraph">启动守护进程后、您可以使用Docker命令行界面创建和管理卷。</block>
   <block id="a0ba0b0d751124c646a352594c7e9d7b" category="paragraph">其余驱动程序会受到争用条件等问题的影响、这些条件可能会导致为单个请求创建大量卷、而没有明确的"获奖者"；例如、Element的一项功能允许卷具有相同的名称但ID不同。</block>
@@ -5423,9 +5418,7 @@ SMB</block>
   <block id="5ac5b84505fffb8149e9d0cb84ddedbe" category="admonition">在恢复操作期间，任何<block ref="890b633d48ac6398f14ae722463da08b" prefix=" " category="inline-code"></block>为虚拟机 (VM) 创建的数据不会被恢复。</block>
   <block id="4d1a32c0e466ff9011c60655b98dbf71" category="inline-link-macro">使用 Amazon EKS 插件自动为 FSx for ONTAP 配置 Trident 后端</block>
   <block id="607ed18429282657fb3f6b377df32f8c" category="inline-link-macro">NetApp Trident 与 Google Cloud NetApp Volumes 的 SMB 协议</block>
-  <block id="9455e2bd0c8a4dfe041579b6feac6833" category="list-text">2025年4月15日： <block ref="1d74efb61b1c97b9032a1222a24185b1" category="inline-link-macro-rx"></block></block>
   <block id="ee031d295c711ed3119e4ca1bf2829b1" category="inline-link-macro">释放 NetApp ASA r2 系统对 Kubernetes 块存储的强大功能</block>
-  <block id="9ff2ac23d0ac11c688af59d453e16970" category="list-text">2025年4月14日： <block ref="e28ddf0afaf73832b19731c7248b6de5" category="inline-link-macro-rx"></block></block>
   <block id="a3148578e6ffde89485954832ff9be37" category="paragraph">如果您未运行Trident 25.06，则可从获取以前版本的文档<block ref="6d47e9235a19453f00cf246917b9e162" category="inline-link-macro-rx"></block>。</block>
   <block id="a1862e00d8111386cdf238bd23bb97db" category="inline-link">Trident 25.02</block>
   <block id="25bdd2f6eb0ca7663bf4152396a74a09" category="list-text"><block ref="25bdd2f6eb0ca7663bf4152396a74a09" category="inline-link-rx"></block></block>
@@ -5734,4 +5727,45 @@ SMB</block>
   <block id="d3b60a0dd59d810307a1e694f1de96a1" category="paragraph">1.1 是Trident为容纳 LUN 元数据而额外添加到FlexVol 的10%。对于<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block> = 5%，PVC 请求 = 5 GiB，则总卷大小为 5.79 GiB，可用大小为 5.5 GiB。 <block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block>命令应显示与此示例类似的结果：</block>
   <block id="d16fccbbd08210b8ff7b8b31329268bb" category="paragraph">Trident应该为该 PVC 创建一个 20 MiB 的 NFS PV：</block>
   <block id="59dd268b21bd1a23faa29555b52ba22b" category="paragraph">要将新创建的 20 MiB PV 调整为 1 GiB，请编辑 PVC 并设置<block ref="02b011e6fe36e26e5f7365ba08bf5a48" prefix=" " category="inline-code"></block>至 1 GiB：</block>
+  <block id="55b94ed9b78fb336b981481557e7d219" category="list-text">2025年4月15日： <block ref="1d74efb61b1c97b9032a1222a24185b1" category="inline-link-macro-rx"></block></block>
+  <block id="38873c8c72328929e064d07375c3bb64" category="inline-link-macro">利用Trident 25.02 的光纤通道协议实现 Kubernetes 上的持久存储</block>
+  <block id="c6fc47f295f8e48564562b41d6234e74" category="list-text">2025年4月14日： <block ref="519219109d85923b9dfc4c314bbb8b20" category="inline-link-macro-rx"></block></block>
+  <block id="f752aa3cc1916f79a2806e72dfc8b4b5" category="list-text">2025年4月14日： <block ref="e28ddf0afaf73832b19731c7248b6de5" category="inline-link-macro-rx"></block></block>
+  <block id="e828b47619f791883b7abff60a3529bc" category="inline-link-macro">使用新的认证操作员简化 Red Hat OpenShift 上的Trident安装</block>
+  <block id="02062222c04c114bc7fc20acf792eca9" category="list-text">2025年3月31日： <block ref="20f7b4cad613435492a1b3cb3c26a028" category="inline-link-macro-rx"></block></block>
+  <block id="7259adf488b8a65d6f49febc93ff44f1" category="inline-link-macro">使用Google Cloud NetApp Volumes为 SMB 配置Trident</block>
+  <block id="1759bd5240df424d309ad71c96b867f8" category="list-text">2025年3月27日： <block ref="90bc67f83290246dad8f0bc76fd49c2c" category="inline-link-macro-rx"></block></block>
+  <block id="b6bbcc8be7319fca806d894645c63253" category="list-text">2025年3月5日： <block ref="c5953f971a0752feeb8ffbf7d9258789" category="inline-link-macro-rx"></block></block>
+  <block id="469a8897f90d7e07ede75ff9b199e586" category="inline-link-macro">使用Trident、GKE 和Google Cloud NetApp Volumes部署云身份</block>
+  <block id="cb2e2f8e2789874710f34e485efc824e" category="list-text">2025年2月27日： <block ref="46c84c372fb557e16383c0494f1255f5" category="inline-link-macro-rx"></block></block>
+  <block id="869493e7a782c2bac6bf8778d6bf749e" category="list-text">2024年12月12日： <block ref="5c3a9e150bc491524071eb191093dabe" category="inline-link-macro-rx"></block></block>
+  <block id="afd55df73a814282b1a34c79040d709a" category="inline-link-macro">Trident 25.01：通过新功能和增强功能增强 Kubernetes 存储体验</block>
+  <block id="13c401b1f27132099b945b95025ca748" category="list-text">2024年11月26日： <block ref="4a1bf3162dde1793089483cf7682fb86" category="inline-link-macro-rx"></block></block>
+  <block id="0d5eeacaefc73b7986c8f85945c72129" category="inline-link-macro">NetApp Trident与Google Cloud NetApp Volumes</block>
+  <block id="76227bcfad23cc6957b8b7e9357c9269" category="list-text">2024年11月11日： <block ref="8701d0c1e4315119a2dc9de106eb2681" category="inline-link-macro-rx"></block></block>
+  <block id="02104a16ef3fcf06a78872f4f5aea5d2" category="inline-link-macro">使用Trident在 AWS 上将Amazon FSx for NetApp ONTAP与 Red Hat OpenShift 服务 (ROSA) 结合使用</block>
+  <block id="e2218d0205cdf02ed15039a9eb215920" category="list-text">2024年10月29日： <block ref="ecf88162cd631914aa447c7edeaa2e6e" category="inline-link-macro-rx"></block></block>
+  <block id="e7eb7f68cb5a04d95a6152e9d6ab37ec" category="inline-link-macro">使用 ROSA 上的 OpenShift 虚拟化和Amazon FSx for NetApp ONTAP实时迁移虚拟机</block>
+  <block id="96788723465bd45962aba2ba495bac79" category="list-text">2024年10月29日： <block ref="231a583c773a423673d617a1071353b9" category="inline-link-macro-rx"></block></block>
+  <block id="c5b6456f211505596899eb36c3ee09e4" category="inline-link-macro">使用 NVMe/TCP 在 Amazon EKS 上为现代容器化应用程序使用ONTAP存储</block>
+  <block id="3373d53eb859a1fef914c3f5ca7b306d" category="list-text">2024年7月8日： <block ref="0549a17fef857ef2806f9656f7495ac5" category="inline-link-macro-rx"></block></block>
+  <block id="782250194e3b8d07e3c01ee076d7abd9" category="inline-link-macro">使用Google Cloud NetApp Volumes Flex 和Astra Trident实现 Kubernetes 无缝存储</block>
+  <block id="1c3ec9ce23b462e81e392f144f8c6527" category="list-text">2024年7月1日： <block ref="48908e9b9a4cb59db7244b631bf66632" category="inline-link-macro-rx"></block></block>
+  <block id="c0575ecf088b36655f7a582773399ba0" category="inline-link-macro">ONTAP作为 OpenShift 中集成映像注册表的后端存储</block>
+  <block id="fa465e5731c44ee6dc77398eecb4493d" category="list-text">2024年6月11日： <block ref="99a2855a4f47b1b3fc2dd744ecb3c177" category="inline-link-macro-rx"></block></block>
+  <block id="a35665637b8d8bcebbf303a7e9950cf2" category="inline-link-macro">使用Trident Protect 的恢复后钩子自动执行注册表故障转移以实现灾难恢复</block>
+  <block id="9eef003e4e8a5cd2654642dbf1806c35" category="list-text">2025年5月16日： <block ref="9c69f3b57e4c9e30a2d1dd0bbfc81eb9" category="inline-link-macro-rx"></block></block>
+  <block id="351257ff03e16ff522106900a9f35e9e" category="inline-link-macro">使用NetApp Trident Protect 进行 OpenShift 虚拟化灾难恢复</block>
+  <block id="cc48e904c9802b69a8760ed8f894b251" category="list-text">2025年5月16日： <block ref="a57e639cf15650353686ed7219eb274b" category="inline-link-macro-rx"></block></block>
+  <block id="a3bed2eca17a542318eff49566e65560" category="inline-link-macro">使用Trident进行存储类迁移保护备份和恢复</block>
+  <block id="95d102ffaff20709e445a0302dc9209b" category="list-text">2025年5月13日： <block ref="9965527798b3d27a2b7fb71617212405" category="inline-link-macro-rx"></block></block>
+  <block id="c00f8563a4e3023d2ff83b5b26a91edc" category="inline-link-macro">使用Trident保护恢复后钩子重新扩展 Kubernetes 应用程序</block>
+  <block id="a3ca851cebfd3307178076015c1cb876" category="list-text">2025年5月9日： <block ref="ee88df603de21180a12f2f1bbd1e61b2" category="inline-link-macro-rx"></block></block>
+  <block id="8f18e786e2a2dd5d70390afe4c75e024" category="inline-link-macro">Trident Protect 升级：Kubernetes 复制保护与灾难恢复</block>
+  <block id="ae7986fef0bfa9c9a4f730ee6bb5e0ac" category="list-text">2025年4月3日： <block ref="4ca932fa6234c864106756a287da48ac" category="inline-link-macro-rx"></block></block>
+  <block id="9c292a7d893942317e3d566cb6f6776c" category="paragraph">在应用程序上执行数据保护操作时，您需要手动或从命令行创建 AppVault CR。AppVaultCR 特定于您的环境，您可以使用本页上的示例作为创建 AppVault CR 的指南。</block>
+  <block id="e83cbbd4be53e68f06264e1522860ce6" category="admonition">确保 AppVault CR 位于安装了Trident Protect 的集群上。如果 AppVault CR 不存在或您无法访问，命令行会显示错误。</block>
+  <block id="05e673132e6ddc1f638835fcde244ff1" category="paragraph">在创建 AppVault CR 之前，请确保您选择的 AppVault 和数据移动器可以向提供商和任何相关资源进行身份验证。</block>
+  <block id="2c2d23c6647059f96e585a1174a5c975" category="paragraph">使用 CR 或Trident Protect CLI 插件创建 AppVault 对象时，您可以指定一个 Kubernetes 密钥，并使用自定义密码进行 Restic 和 Kopia 加密。如果您未指定密钥， Trident Protect 将使用默认密码。</block>
+  <block id="1850a20880f300b00b10477bfcbd6087" category="list-text">请将密码保存在安全的地方。您将需要它来还原同一集群或其他集群上的数据。如果集群或<block ref="9a82c7a4099124e5bfaa83e7c5997bd4" prefix=" " category="inline-code"></block>命名空间被删除后，没有密码您将无法恢复备份或快照。</block>
 </blocks>
