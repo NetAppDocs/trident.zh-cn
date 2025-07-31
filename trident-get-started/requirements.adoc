@@ -43,7 +43,7 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
 * Kubbernetes 1.27 - 1.33
 * OpenShift 4.14 - 4.18
-* R润 彻Kubernetes Engine 2 (RKE2) v1.26.7+rke2r1、v1.28.5+rke2r1
+* Rancher Kubernetes Engine 2（RKE2）v1.27.x - 1.33.x
 
 
 以下版本支持 Trident 操作符：
@@ -51,8 +51,11 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
 * Kubbernetes 1.27 - 1.33
 * OpenShift 4.14 - 4.18
-* R润 彻Kubernetes Engine 2 (RKE2) v1.26.7+rke2r1、v1.28.5+rke2r1
+* Rancher Kubernetes Engine 2（RKE2）v1.27.x - 1.33.x
 
+
+
+NOTE: 虽然Trident在 Rancher Kubernetes Engine 2 (RKE2) 版本 1.27.x - 1.33.x 上受支持，但Trident目前仅在 RKE2 v1.28.5+rke2r1 上获得认证。
 
 Trident还可以与许多其他完全托管和自行管理的Kubernetes产品配合使用、包括Google Kubernetes Engine (GKE)、Amazon Elatic Kubernetes Services (EKS)、Azure Kubernetes Service (AKS)、MiranT斯Kubernetes Engine (MKE)和VMware Tanzu产品组合。
 
