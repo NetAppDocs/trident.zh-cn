@@ -40,12 +40,10 @@ image::../media/openshift-operator-03.png[安装]
 +
 image::../media/openshift-operator-04.png[已安装]
 
-. 创建类似于operator软件包安装的Torc。
++
+== 卸载Trident操作符
 
 
-
-
-== 卸载Trident Operator
 
 .步骤
 . 从已安装操作员列表中选择Trident操作员。

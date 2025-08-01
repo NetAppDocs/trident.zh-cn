@@ -5348,8 +5348,6 @@ SMB</block>
   <block id="f19e5d93360a2cdbfe64b6c513e8d263" category="list-text">单击 * 安装 * 。</block>
   <block id="86499c179913093d38f20a089bb4967f" category="list-text">选择所需选项，然后单击*Install*。</block>
   <block id="301a8f7d2ea6785da5f183d668f629b2" category="list-text">安装完成后、操作员将显示在已安装操作员列表中。</block>
-  <block id="daf49607bdd50d5294748814ce67ed21" category="list-text">创建类似于operator软件包安装的Torc。</block>
-  <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">卸载Trident Operator</block>
   <block id="9838ab5306db947832d94d1cd49a486a" category="list-text">从已安装操作员列表中选择Trident操作员。</block>
   <block id="b5a7424a278ddd01fa4e381b58d1e00d" category="list-text">选择是否要从操作符中删除所有操作数实例。</block>
   <block id="28ed84868f638999e59e306d6b87b07c" category="admonition">如果未选中“*从该运算符中删除所有操作数实例*”复选框，则不会卸载Trident。</block>
@@ -5771,4 +5769,5 @@ SMB</block>
   <block id="99be75de31964ff7afed59629c2827c9" category="list-text">数字<block ref="415d01607bfb64fa0b7efaf0fe064e86" prefix=" " category="inline-code"></block></block>
   <block id="f0fbfac7ddb67830c39dcddb2e0101aa" category="list-text">下划线<block ref="b14a7b8059d9c055954c92674ce60032" prefix=" " category="inline-code"></block></block>
   <block id="c76231732eebaec2e2411ed7cfd30e2c" category="list-text">连字符<block ref="336d5ebc5436534e61d16e63ddfca327" prefix=" " category="inline-code"></block></block>
+  <block id="3304691bb80d9d42f8bae0707e46c701" category="paragraph">== 卸载Trident操作符</block>
 </blocks>
