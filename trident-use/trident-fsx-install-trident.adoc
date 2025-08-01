@@ -30,7 +30,7 @@ Trident简化了Kubelnetes中适用于NetApp ONTAP的Amazon FSx存储管理、�
 ====
 .Pod 身份
 --
-. 添加 NetApp Trident repo helm 配置：
+. 添加Trident Helm存储库：
 +
 [source, console]
 ----
@@ -62,7 +62,7 @@ trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT
 --
 .服务帐户协会 (IRSA)
 --
-. 添加 NetApp Trident repo helm 配置：
+. 添加Trident Helm存储库：
 +
 [source, console]
 ----

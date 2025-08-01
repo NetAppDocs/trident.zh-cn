@@ -38,7 +38,7 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 
 == 部署Trident操作员并使用Helm安装Trident
 
-使用Trident link:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Helm图表"^] 您可以一步部署Trident操作员并安装Trident。
+使用Tridentlink:https://netapp.github.io/trident-helm-chart["Helm图表"^]您可以一步部署Trident操作员并安装Trident 。
 
 请查看 link:../trident-get-started/kubernetes-deploy.html["安装概述"] 以确保满足安装前提条件并为您的环境选择正确的安装选项。
 
@@ -53,7 +53,7 @@ IMPORTANT: 在私有存储库中安装Trident时、如果 `imageRegistry`使用�
 +
 [source, console]
 ----
-helm repo add netapp-trident https://artifacthub.io/packages/helm/netapp-trident/trident-operator
+helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
 . 使用 `helm install` 并指定部署和映像注册表位置的名称。您的 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident和CSI映像"] 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。在示例中、 `100.2506.0`是要安装的Trident版本。
 +
