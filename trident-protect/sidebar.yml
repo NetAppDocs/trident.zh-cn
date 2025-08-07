@@ -33,7 +33,11 @@ entries:
   - title: 保护应用程序
     url: "/trident-protect/trident-protect-protect-apps.html"
   - title: 还原应用程序
-    url: "/trident-protect/trident-protect-restore-apps.html"
+    entries:
+    - title: 使用Trident Protect还原应用程序
+      url: "/trident-protect/trident-protect-restore-apps.html"
+    - title: 使用高级设置
+      url: "/trident-protect/trident-protect-restore-settings.html"
   - title: 使用NetApp SnapMirror复制应用程序
     url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
   - title: 迁移应用程序

@@ -14,7 +14,7 @@ summary: 您可以将备份或快照数据还原到其他集群或存储类
 
 
 [role="lead"]
-您可以通过将备份或快照数据还原到其他集群或存储类来在集群或存储类之间迁移应用程序。
+您可以通过恢复备份数据在集群之间或不同的存储类之间迁移您的应用程序。
 
 
 NOTE: 迁移应用程序时、为该应用程序配置的所有执行挂钩都会随该应用程序一起迁移。如果存在还原后执行挂钩、则它会在还原操作中自动运行。
@@ -65,7 +65,7 @@ NOTE: 您可以使用在不同集群之间复制应用程序link:trident-protect
 
 == 将应用程序从一个存储类迁移到另一个存储类
 
-您可以通过将快照还原到不同的目标存储类来将应用程序从一个存储类迁移到另一个存储类。
+您可以通过将备份还原到目标存储类，将应用程序从一个存储类迁移到另一个存储类。
 
 例如(从还原CR中排除密钥)：
 
@@ -79,11 +79,11 @@ spec:
   appArchivePath: "${snapshotArchivePath}"
   appVaultRef: "${appVaultCRName}"
   namespaceMapping:
-    destination: "${destinationNamespace}"
-    source: "${sourceNamespace}"
+    - destination: "${destinationNamespace}"
+      source: "${sourceNamespace}"
   storageClassMapping:
-    destination: "${destinationStorageClass}"
-    source: "${sourceStorageClass}"
+    - destination: "${destinationStorageClass}"
+      source: "${sourceStorageClass}"
   resourceFilter:
     resourceMatchers:
       kind: Secret

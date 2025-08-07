@@ -4153,7 +4153,6 @@ SMB</block>
   <block id="edb32c41feaaffb2d7ff10dac9d80312" category="open-title">使用命令行界面添加应用程序</block>
   <block id="0ef657dffb550796349fff7260ee7b1f" category="summary">您可以将备份或快照数据还原到其他集群或存储类</block>
   <block id="5d23a9c0c55a80ece74daa65c04f1d66" category="doc">迁移应用程序</block>
-  <block id="f0947115fd72dc8926d993b03e13a329" category="paragraph">您可以通过将备份或快照数据还原到其他集群或存储类来在集群或存储类之间迁移应用程序。</block>
   <block id="85ff05ce333a3cc83e4b1bece0b1a885" category="admonition">迁移应用程序时、为该应用程序配置的所有执行挂钩都会随该应用程序一起迁移。如果存在还原后执行挂钩、则它会在还原操作中自动运行。</block>
   <block id="dea2f94d534ebdd522c0137cd11f63bf" category="section-title">备份和还原操作</block>
   <block id="b21f1727ed04fb70c8e47cb11cdfb2bb" category="paragraph">要在以下情况下执行备份和还原操作、您可以自动执行特定的备份和还原任务。</block>
@@ -4171,7 +4170,6 @@ SMB</block>
   <block id="e27031b9d0bffffcf2abd2136eed21f5" category="list-text"><block ref="71bc4096317f8eb78a9951851bc1165b" category="inline-link-macro-rx"></block>(英文)</block>
   <block id="403ecb1db6fa0f1bb20e787bb5f5dacd" category="section-title">克隆到其他集群</block>
   <block id="181aa092ab965b34bcee90e25056f876" category="section-title">将应用程序从一个存储类迁移到另一个存储类</block>
-  <block id="97a1f17d0c2154050e8ba2ecfd07ecf4" category="paragraph">您可以通过将快照还原到不同的目标存储类来将应用程序从一个存储类迁移到另一个存储类。</block>
   <block id="f1ad7bca566917ee78958caa78fab3f5" category="paragraph">例如(从还原CR中排除密钥)：</block>
   <block id="daf2d2aebeca09dea5ece5c9c1513383" category="open-title">使用CR还原快照</block>
   <block id="a35b06511e032bee46bbed064afa12dc" category="list-text">创建自定义资源(CR)文件并将其命名为<block ref="fac6dff7f801a4983f4a536dbcbd40d7" prefix=" " category="inline-code"></block>。</block>
@@ -4299,7 +4297,6 @@ SMB</block>
   <block id="0334c5d881452d9144d4edf93d44ff85" category="list-text">创建自定义资源(CR)文件并将其命名为<block ref="aa3356b96c40153ef83fe9854ede7a70" prefix=" " category="inline-code"></block>。</block>
   <block id="8ebefb3e84a05b2e3bf54824870d776d" category="list-text">*spec.appArchivePath*：AppVault中存储备份内容的路径。您可以使用以下命令查找此路径：</block>
   <block id="3f1db1c30ba33e5d04499f000ed77f97" category="list-text">*spec.appVaultRef*：(_required_)存储备份内容的AppVault的名称。</block>
-  <block id="3e209c1619d0c38cf60c13838ca4cf72" category="list-text">*spec.storageClassMapping*：还原操作的源存储类到目标存储类的映射。将和<block ref="cb3a1d54728d178b537383d31afb4b53" prefix=" " category="inline-code"></block>替换<block ref="6d4164a2db4b8f123f2f4666f47d1304" prefix=" " category="inline-code"></block>为您环境中的信息。</block>
   <block id="a5085953f7b15a312b4e12827abc66e5" category="list-text">(_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：</block>
   <block id="be16b6e14200639734fb9694e3c0f655" category="list-text">*resourceMatcher[].group*：(_可 选_)要筛选的资源的组。</block>
   <block id="2162d9f0c97d87c37f838ea27ecb393a" category="list-text">*resourceMatcher[].KIND*：(_可 选_)要筛选的资源种类。</block>
@@ -5186,7 +5183,6 @@ SMB</block>
   <block id="c9272f0d68fac2055ba2d71be6c87b1b" category="paragraph">以下示例将配置警报管理器、以便向Sl延 时信道发送通知。要根据您的环境自定义此示例、请将此密钥的值替换<block ref="aa8106611bcfe43fec48e6d1d371de52" prefix=" " category="inline-code"></block>为您的环境中使用的Slackwebhook URL：</block>
   <block id="792d490e884279c961aba837ccd9b67a" category="admonition">Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。</block>
   <block id="d110d36251c4dd04b7da5ef237ac6063" category="inline-link">文档</block>
-  <block id="2cd3acbff016f03ffcfe72208e450647" category="admonition">在使用Koria作为数据移动工具还原备份时、您可以选择在CR中指定标注、也可以使用命令行界面控制Koria使用的主存储的行为。有关可配置选项的详细信息、请参见<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block>。有关使用Trident Protect命令行界面指定标注的详细信息、请使用<block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>命令。</block>
   <block id="7491b3d3a4aa89a2dd6445477c6b6e0a" category="list-text">对于Amazon S3 (AWS) AppVault对象、您可以选择指定sSession令牌、如果使用单点登录(SSO)进行身份验证、则此令牌非常有用。此令牌是在中为提供程序生成密钥时创建的<block ref="cd932e77bb3df9634d58b2fd34398b6f" category="inline-xref-macro-rx"></block>。</block>
   <block id="620026f954fdad541c9d19554476345c" category="list-text">删除AppVault对象、替换<block ref="bf09cf3bd2a9288a0bdf3d1b89b770a1" prefix=" " category="inline-code"></block>为要删除的AppVault对象的名称：</block>
   <block id="35d393329a969d87338f26cd6fe42238" category="list-text">使用Helm安装Trident Protect。替换<block ref="ecc79c99c4f86f0db5cc7f200415205f" prefix=" " category="inline-code"></block>为集群名称、此名称将分配给集群并用于标识集群的备份和快照：</block>
@@ -5394,7 +5390,6 @@ SMB</block>
   <block id="70694773feb2b23c45e7ff7a6a3c3c8b" category="paragraph">通过在文件中指定相应的配置、您可以将警报管理器配置为向其他通道发送通知、例如电子邮件、PagerDty、Microsoft团队或其他通知服务<block ref="9001eaececb0884cbeb80659e81340ad" prefix=" " category="inline-code"></block>。</block>
   <block id="965357e3c90ccf3fba01174c6508d562" category="listing-title">alertmanager.yaml：向 Slack 频道发送警报</block>
   <block id="fb72ca78c839cefc52d39ebcecaf6827" category="paragraph">卷快照支持<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ， <block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> ， <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ， <block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> ， <block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> ， <block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block> ， <block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> ， 和<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>司机。</block>
-  <block id="173f808fc086ccd7ca8b43512be2cd48" category="admonition">这<block ref="e28ab870e47892fbd81eca8fc84c45ac" prefix=" " category="inline-code"></block>属性仅在原始属性和新属性都有效时<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block>使用相同的存储后端。如果您尝试恢复到<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block>如果使用不同的存储后端，则恢复操作将失败。</block>
   <block id="02c19b7bc038d2af238bbd729bc3d9c4" category="list-text">手动创建 AppVault CR 时，使用 *spec.dataMoverPasswordSecretRef* 字段指定密钥。</block>
   <block id="0a636ed0406fe1d7ddf9db59b32011b3" category="list-text">使用 Trident Protect CLI 创建 AppVault 对象时，使用<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block>参数来指定秘密。</block>
   <block id="d2a7dc5804ec844f3f7bfb903e97693f" category="section-title">S3 兼容存储 IAM 权限</block>
@@ -5770,4 +5765,17 @@ SMB</block>
   <block id="f0fbfac7ddb67830c39dcddb2e0101aa" category="list-text">下划线<block ref="b14a7b8059d9c055954c92674ce60032" prefix=" " category="inline-code"></block></block>
   <block id="c76231732eebaec2e2411ed7cfd30e2c" category="list-text">连字符<block ref="336d5ebc5436534e61d16e63ddfca327" prefix=" " category="inline-code"></block></block>
   <block id="3304691bb80d9d42f8bae0707e46c701" category="paragraph">== 卸载Trident操作符</block>
+  <block id="e2cc5e54cd44b8315b1324dec48b3d79" category="paragraph">您可以通过恢复备份数据在集群之间或不同的存储类之间迁移您的应用程序。</block>
+  <block id="259898c4a16b145b9fb12c18949c2e58" category="paragraph">您可以通过将备份还原到目标存储类，将应用程序从一个存储类迁移到另一个存储类。</block>
+  <block id="b34476802a6b2dff98e6f97e309970b2" category="inline-link-macro">使用高级Trident保护恢复设置</block>
+  <block id="22d9eb2f3982698c6f5c93edae216a51" category="list-text">您可以使用高级设置来自定义恢复操作。要了解更多信息，请参阅<block ref="80b4b5e2c832cc4fcff1f69711f1c808" category="inline-link-macro-rx"></block>。</block>
+  <block id="3efe6f70bb45e527ed991c55df7d621d" category="admonition">当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block>有关您可以配置的选项的更多信息。使用<block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>命令以获取有关使用Trident Protect CLI 指定注释的更多信息。</block>
+  <block id="15910dd29963e5df5f2b5879472bcc00" category="admonition">SnapshotRestore 支持<block ref="b57d666629acffb30cc697faadc136b5" prefix=" " category="inline-code"></block>属性，但仅当源和目标存储类使用相同的存储后端时。如果您尝试恢复到<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block>如果使用不同的存储后端，则恢复操作将失败。</block>
+  <block id="4c2451a6dd1d1ce7a84476069f101573" category="summary">您可以使用注释、命名空间设置和存储选项自定义Trident保护恢复操作。</block>
+  <block id="3fbccf21ba46fe754417d45e7396e0e4" category="paragraph">您可以使用高级设置（例如注释、命名空间设置和存储选项）自定义恢复操作，以满足您的特定要求。</block>
+  <block id="52391deb129507aac52d6fb22aaf137c" category="section-title">支持的字段</block>
+  <block id="c87f7398b288400e3d2c984a3d997d7b" category="paragraph">本节介绍可用于恢复操作的其他字段。</block>
+  <block id="11162de38772a3876602bb4d9d213f43" category="section-title">存储类别映射</block>
+  <block id="b48c8c7ca3eb5e63afdfe6bbd74a35c9" category="paragraph">这<block ref="b57d666629acffb30cc697faadc136b5" prefix=" " category="inline-code"></block>属性定义从源应用程序中的现有存储类到目标集群上的新存储类的映射。您可以在具有不同存储类别的集群之间迁移应用程序时或更改 BackupRestore 操作的存储后端时使用此功能。</block>
+  <block id="27f5153068cecd37b6fa4a136586658d" category="sidebar">使用高级设置</block>
 </blocks>
