@@ -253,5 +253,10 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 | `excludePodSecurityPolicy` | 从创建过程中排除操作员POD安全策略。 | `false` 
 
 
-| `nodePrep` | 使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。* |  
+| `nodePrep`  a| 
+使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。*
+
+
+NOTE: 从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。
+|  
 |===

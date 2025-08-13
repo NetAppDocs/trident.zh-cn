@@ -119,7 +119,12 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 | `nodePluginTholeations` | 覆盖Kubernetes对Pod的容错。遵循与相同的格式 `pod.spec.Tolerations`。 | 无默认值；可选 
 
 
-| `nodePrep` | 使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。* |  
+| `nodePrep`  a| 
+使Trident能够使Kubbernetes集群的节点做好准备、以便使用指定的数据存储协议管理卷。*目前， `iscsi`是唯一支持的值。*
+
+
+NOTE: 从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。
+|  
 
 
 | `enableAutoBackendConfig` | 启用自动后端配置、从而根据输入参数无缝创建后端和存储类。 | 无默认值；可选 

@@ -42,7 +42,7 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
 * Kubbernetes 1.27 - 1.33
-* OpenShift 4.14 - 4.18
+* OpenShift 4.14 - 4.19（如果您计划使用 OpenShift 4.19 进行 iSCSI 节点准备，则支持的最低Trident版本为 25.06.1。）
 * Rancher Kubernetes Engine 2（RKE2）v1.27.x - 1.33.x
 
 
