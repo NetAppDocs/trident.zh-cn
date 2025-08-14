@@ -5793,4 +5793,5 @@ SMB</block>
   <block id="5df2f935f2bc3df2c6378f665b3d6659" category="list-text">您可以添加<block ref="e9a7558decb5e432d8b7c4d536cc9876" prefix=" " category="inline-code"></block>在所有 OpenShift 工作节点上配置和启用 iSCSI 和 Multipath 服务的参数。</block>
   <block id="f61306bfa8c6de676059739358d4479f" category="list-text">单击“创建”； Trident Orchestrator 将完全安装。</block>
   <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">卸载Trident操作员</block>
+  <block id="b94d4c5305d8d32a875a24a5b1501274" category="admonition">对于使用SolidFire的客户，请不要升级到 25.06.1，因为取消发布卷时存在已知问题。  25.06.2 即将发布以解决此问题。</block>
 </blocks>

@@ -28,6 +28,9 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 === Trident
 
 
+IMPORTANT: 对于使用SolidFire的客户，请不要升级到 25.06.1，因为取消发布卷时存在已知问题。  25.06.2 即将发布以解决此问题。
+
+
 
 ==== 修复
 
