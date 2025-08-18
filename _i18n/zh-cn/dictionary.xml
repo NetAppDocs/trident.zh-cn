@@ -4124,7 +4124,6 @@ SMB</block>
   <block id="e836d7c4f6371da7534f60641286999b" category="list-text">false (默认)</block>
   <block id="fa3e867f8599e4541ced8b0ced5b2cf1" category="list-text">*spec.dataWindowStart*：(_可 选_) RFC 3339格式的日期字符串，指定支持包中包含的数据窗口应开始的日期和时间。如果未指定、则默认为24小时前。您可以指定的最早窗口日期是7天前。</block>
   <block id="139f344cca23a89c521bc7cc6c7100b8" category="paragraph">YAML示例：</block>
-  <block id="1f5c923d658756149d27388a30350ece" category="list-text">使用正确的值填充文件后<block ref="f242db754742ad72c7a0a3fa93d314df" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="b69675775a82aaa1e3307ebbe6a45fc0" category="open-title">使用命令行界面创建支持包</block>
   <block id="2294988013d14e5c254422b8164d83ad" category="list-text">创建支持包、将括号中的值替换为您环境中的信息。<block ref="769627afa23a2b90f925b1091e474dc5" prefix=" " category="inline-code"></block>确定是否立即创建分发包，或者是否由计划决定了创建时间，可以是<block ref="e1ba155a9f2e8c3be94020eef32a0301" prefix=" " category="inline-code"></block>或<block ref="2b7dabba0077abe3732e0418b048a56b" prefix=" " category="inline-code"></block>。默认设置为<block ref="e1ba155a9f2e8c3be94020eef32a0301" prefix=" " category="inline-code"></block>。</block>
   <block id="4351048276414d4fad273a0c7ad9f491" category="summary">如果您的环境符合要求、则可以按照以下步骤安装Trident Protect。</block>
@@ -5794,4 +5793,11 @@ SMB</block>
   <block id="b94d4c5305d8d32a875a24a5b1501274" category="admonition">对于使用SolidFire的客户，请不要升级到 25.06.1，因为取消发布卷时存在已知问题。  25.06.2 即将发布以解决此问题。</block>
   <block id="4011c398b0ff3b95197b4f4713f3216e" category="list-text">使用<block ref="defd1e55f93269ac9278afc086951ba8" prefix=" " category="inline-code"></block>命令和更新的路径<block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block>文件。</block>
   <block id="f05848de69e82db6963b7b9c5322a67f" category="paragraph">*例子*：<block ref="7aa76d5ff854a67029ba30d1a11e1e53" prefix=" " category="inline-code"></block></block>
+  <block id="0884919e7c7d4a1981b4419350c63124" category="paragraph">Trident Protect 使管理员能够生成包含对NetApp支持有用的信息的捆绑包，包括有关所管理的集群和应用程序的日志、指标和拓扑信息。如果您已连接到互联网，则可以使用自定义资源 (CR) 文件将支持包上传到NetApp支持站点 (NSS)。</block>
+  <block id="b8331cd182c8a703fc1ad6851d01da14" category="list-text">填充后<block ref="699c503b46d4ca3ec78905dff3704cac" prefix=" " category="inline-code"></block>具有正确值的文件，应用 CR：</block>
+  <block id="a2a6b0573b13313f05c747e88489eec6" category="section-title">监视和检索支持包</block>
+  <block id="4ff0609d2c162c23c5b740871050dda7" category="paragraph">使用任一方法创建支持包后，您可以监视其生成进度并将其检索到本地系统。</block>
+  <block id="8aadefe9cc0cc86a02267b80b207f617" category="list-text">等待<block ref="f9826424ec573cdc9bb51c0f5cb897b0" prefix=" " category="inline-code"></block>到达<block ref="07ca5050e697392c9ed47e6453f1453f" prefix=" " category="inline-code"></block>状态。您可以使用以下命令监控生成进度：</block>
+  <block id="3bea11acf8836689dcfed98dab0d1b2e" category="list-text">将支持包检索到您的本地系统。从已完成的AutoSupport包中获取复制命令：</block>
+  <block id="ada844bd6c6a80bfce3dc4e9178eef4a" category="paragraph">找到<block ref="768c4e4d1692df1d92007f61dbeb0a6a" prefix=" " category="inline-code"></block>从输出中执行命令并运行它，用您喜欢的本地目录替换目标参数。</block>
 </blocks>

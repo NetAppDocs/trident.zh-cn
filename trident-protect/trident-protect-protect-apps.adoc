@@ -125,16 +125,6 @@ NOTE: 如果在应用程序定义中明确引用了集群范围的资源、或�
 ** *spec.snapshotRef*：（可选）：用作备份源的快照的名称。如果不提供此参数、则会创建和备份临时快照。
 ** *metadata.annotations.protect.trident.netapp.io/full-backup*：（可选）此注释用于指定备份是否应该是非增量的。默认情况下、所有备份均为增量备份。但是，如果此标注设置为 `true`，则备份将变为非增量备份。如果未指定、则备份将采用默认增量备份设置。最佳做法是、定期执行完整备份、然后在两次完整备份之间执行增量备份、以最大程度地降低与还原相关的风险。
 +
-[NOTE]
-====
-如果您需要在创建应用程序后应用此标注、可以使用以下命令：
-
-[source, console]
-----
-kubectl annotate backup -n <backup CR namespace> <backup CR name> protect.trident.netapp.io/full-backup="true"
-----
-====
-+
 YAML示例：
 
 +

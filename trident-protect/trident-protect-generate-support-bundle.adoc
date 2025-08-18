@@ -14,7 +14,7 @@ summary: '通过Trident Protect、管理员可以生成包含对NetApp支持有�
 
 
 [role="lead"]
-通过Trident Protect、管理员可以生成包含对NetApp支持有用信息的捆绑包、其中包括有关所管理的集群和应用程序的日志、指标和拓扑信息。如果您已连接到Internet、则可以使用自定义资源(CR)文件将支持包上传到NetApp支持站点(NSS)。
+Trident Protect 使管理员能够生成包含对NetApp支持有用的信息的捆绑包，包括有关所管理的集群和应用程序的日志、指标和拓扑信息。如果您已连接到互联网，则可以使用自定义资源 (CR) 文件将支持包上传到NetApp支持站点 (NSS)。
 
 [role="tabbed-block"]
 ====
@@ -56,11 +56,11 @@ spec:
 ----
 
 
-. 使用正确的值填充文件后 `astra-support-bundle.yaml` 、应用CR：
+. 填充后 `trident-protect-support-bundle.yaml`具有正确值的文件，应用 CR：
 +
 [source, console]
 ----
-kubectl apply -f trident-protect-support-bundle.yaml
+kubectl apply -f trident-protect-support-bundle.yaml -n trident-protect
 ----
 
 
@@ -75,9 +75,32 @@ kubectl apply -f trident-protect-support-bundle.yaml
 +
 [source, console]
 ----
-tridentctl-protect create autosupportbundle <my-bundle-name> --trigger-type <trigger-type>
+tridentctl-protect create autosupportbundle <my-bundle-name> --trigger-type <trigger-type> -n trident-protect
 ----
 
 
 --
 ====
+
+
+== 监视和检索支持包
+
+使用任一方法创建支持包后，您可以监视其生成进度并将其检索到本地系统。
+
+.步骤
+. 等待 `status.generationState`到达 `Completed`状态。您可以使用以下命令监控生成进度：
++
+[source, console]
+----
+kubectl get autosupportbundle trident-protect-support-bundle -n trident-protect
+----
+. 将支持包检索到您的本地系统。从已完成的AutoSupport包中获取复制命令：
++
+[source, console]
+----
+kubectl describe autosupportbundle trident-protect-support-bundle -n trident-protect
+----
++
+找到 `kubectl cp`从输出中执行命令并运行它，用您喜欢的本地目录替换目标参数。
+
+
