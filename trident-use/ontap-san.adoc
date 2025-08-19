@@ -136,7 +136,7 @@ Trident使用以下驱动程序支持非易失性内存快速(NVMe)协议 `ontap
 
 Trident不支持：
 
-* DH-HMAC-CHAP、由NVMe本机提供支持
+* NVMe 原生支持的 DH-HMAC-CHAP
 * 设备映射程序(Device maper、DM)多路径
 * 进行了加密
 
