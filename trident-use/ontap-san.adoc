@@ -140,3 +140,6 @@ Trident不支持：
 * 设备映射程序(Device maper、DM)多路径
 * 进行了加密
 
+
+
+NOTE: NVMe 仅支持ONTAP REST API，不支持 ONTAPI (ZAPI)。

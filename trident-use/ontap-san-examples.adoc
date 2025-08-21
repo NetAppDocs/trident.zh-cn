@@ -138,6 +138,9 @@ NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法�
 
 NOTE: NVMe 仅支持ONTAP REST API，不支持 ONTAPI (ZAPI)。
 
+
+NOTE: NVMe 仅支持ONTAP REST API，不支持 ONTAPI (ZAPI)。
+
 *如果指定，则始终设置为 `true`适用于ASA r2 系统*。
 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
 
