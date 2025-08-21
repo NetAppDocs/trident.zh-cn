@@ -49,6 +49,12 @@ Prometheus是一个工具包、可用于读取由Kube-state-metrics生成的数�
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
 ----
+. 将 Prometheus ServiceMonitor CRD 应用到集群：
++
+[source, console]
+----
+kubectl apply -f https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml
+----
 . 为Helm图表创建配置文件(例如 `metrics-config.yaml`)。您可以根据您的环境自定义以下示例配置：
 +
 .metrics-config.yaml：Kube-state-metrics Helm图表配置

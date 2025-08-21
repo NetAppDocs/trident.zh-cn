@@ -279,6 +279,7 @@ NOTE: 当您使用 Kopia 作为数据移动器恢复备份时，您可以选择�
 
 * 目标集群已安装Trident Protect。
 * 目标集群可以访问与存储备份的源集群相同的AppVault的分段路径。
+* 确保您的本地环境在运行 `tridentctl-protect get appvaultcontent`命令。如果网络限制阻止访问，请从目标集群上的 pod 内运行Trident Protect CLI。
 * 确保AWS会话令牌到期时间足以执行任何长时间运行的还原操作。如果令牌在还原操作期间过期、则操作可能会失败。
 +
 ** 有关检查当前会话令牌到期时间的详细信息、请参见 https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["AWS API文档"^]。
