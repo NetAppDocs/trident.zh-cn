@@ -19,6 +19,7 @@ summary: 您可以找到一些出色的NetApp Trident和Trident Protect博客。
 == Trident博客
 
 * 2025年5月9日： link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Automatic-Trident-backend-configuration-for-FSx-for-ONTAP-with-the-Amazon-EKS/ba-p/460586["使用 Amazon EKS 插件自动为 FSx for ONTAP 配置 Trident 后端"^]
+* 2025年8月19日：link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Enhancing-Data-Consistency-Volume-Group-Snapshots-in-OpenShift-virtualization/ba-p/462798["增强数据一致性：使用Trident在 OpenShift 虚拟化中使用卷组快照"]
 * 2025年4月15日： link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/NetApp-Trident-with-Google-Cloud-NetApp-Volumes-for-SMB-Protocol/ba-p/460118["NetApp Trident 与 Google Cloud NetApp Volumes 的 SMB 协议"^]
 * 2025年4月14日： link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Leveraging-Fiber-Channel-Protocol-with-Trident-25-02-for-Persistent-Storage-on/ba-p/460091["利用Trident 25.02 的光纤通道协议实现 Kubernetes 上的持久存储"^]
 * 2025年4月14日： link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Unlocking-the-power-of-NetApp-ASA-r2-systems-for-Kubernetes-block-storage/ba-p/460113["释放 NetApp ASA r2 系统对 Kubernetes 块存储的强大功能"^]
