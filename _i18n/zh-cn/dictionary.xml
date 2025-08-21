@@ -5589,14 +5589,6 @@ SMB</block>
   <block id="d716a23a6e731bf750989a45cf32a804" category="cell">分层策略使用“无” *不要为 ASA r2 系统指定*。</block>
   <block id="9e925e9341b490bfd3b4c4ca3b0c1ef2" category="inline-link-macro">这</block>
   <block id="5a401de4946c2175a17ad6fda3a04781" category="admonition"><block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block>与其他 ONTAP 系统（ASA、AFF 和 FAS）在存储层实现方面有所不同。在 ASA r2 系统中，使用存储可用区而不是聚合。请参阅<block ref="261295ed43e7c9d663fb0a84ba5b2157" category="inline-link-macro-rx"></block>有关如何在 ASA r2 系统中将聚合分配给 SVM 的知识库文章。</block>
-  <block id="d3a94db6693be8414be239f55df31b37" category="paragraph">== 对 ONTAP 后端进行身份验证</block>
-  <block id="f16fbd9bb3dcbec83ca559e0320bc245" category="paragraph">=== 启用基于凭证的身份验证</block>
-  <block id="222449e5312c55d5a234569ae308041a" category="paragraph">=== 启用基于证书的身份验证</block>
-  <block id="9a86918a1cd754d4c3e7a1745efe18dc" category="paragraph">=== 更新身份验证方法或轮换凭证</block>
-  <block id="f33ff792ccf735be92ad60ca85333619" category="paragraph">=== 为 Trident 创建自定义 ONTAP 角色</block>
-  <block id="1e86eeb01cf8def6f697ea2c64e7df45" category="paragraph">== 使用双向 CHAP 验证连接</block>
-  <block id="1c47399fc1153044c4efc19db3115ddf" category="paragraph">=== 工作原理</block>
-  <block id="0cc88844e21c5adec6036d2a3e35f523" category="paragraph">=== 轮换凭证并更新后端</block>
   <block id="6fddcf0bbb95fe4fb7de4f5f2e53ee74" category="paragraph">Kubernetes 持久卷 (PV) 卷组快照 NetApp Trident 提供了创建多个卷（一组卷快照）的功能。此卷组快照代表在同一时间点创建的多个卷的副本。</block>
   <block id="9c3e7c7a7d7349669946d43b4988c3ed" category="admonition">VolumeGroupSnapshot 是 Kubernetes 中的一个 Beta 功能，包含 Beta 版 API。VolumeGroupSnapshot所需的最低版本为 Kubernetes 1.32。</block>
   <block id="54100cbc57b96027d8dd74891c09bf53" category="section-title">创建卷组快照</block>
@@ -5804,4 +5796,8 @@ SMB</block>
   <block id="6f95f26584cb2bbbc9c25ed197bf9234" category="admonition">NVMe 仅支持ONTAP REST API，不支持 ONTAPI (ZAPI)。</block>
   <block id="32653402e1251f3e6f9db04a67492d01" category="paragraph">*如果指定，则始终设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>适用于ASA r2 系统*。</block>
   <block id="e1b6f2a617a63649b238c99a6557a915" category="list-text">NVMe 原生支持的 DH-HMAC-CHAP</block>
+  <block id="7fbe6e40125b7d1b2f5c5c05044e7526" category="section-title">启用基于证书的身份验证</block>
+  <block id="42f93278b0d15c8d0f6613813bf586d5" category="section-title">使用双向 CHAP 验证连接</block>
+  <block id="9ffdb95250e26c7a6b468126ac7c75b0" category="section-title">工作原理</block>
+  <block id="81f2df0265026a1a04bda5484798a10d" category="section-title">轮换凭证并更新后端</block>
 </blocks>
