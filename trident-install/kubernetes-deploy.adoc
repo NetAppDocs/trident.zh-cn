@@ -206,7 +206,8 @@ link:kubernetes-deploy-tridentctl.html["标准或脱机安装"]
 
 * 请始终使用相同的方法安装和卸载Trident。如果已使用部署 `tridentctl`，则应使用适当版本的 `tridentctl`二进制文件卸载Trident。同样、如果使用操作员进行部署、则应编辑 `TridentOrchestrator`CR并设置 `spec.uninstall=true`为卸载Trident。
 * 如果要删除基于操作员的部署并使用它 `tridentctl`来部署Trident、则应首先编辑并设置 `spec.uninstall=true`为卸载Trident。 `TridentOrchestrator`然后删除 `TridentOrchestrator`和操作员部署。然后，您可以使用安装 `tridentctl`。
-* 如果您使用的是基于操作员的手动部署、并且要使用基于Helm的Trident操作员部署、则应先手动卸载此操作员、然后再执行Helm安装。这样， Helm 就可以使用所需的标签和标注来部署 Trident 操作员。如果不执行此操作，则基于 Helm 的 Trident 操作员部署将失败，并显示标签验证错误和标注验证错误。如果您有 `tridentctl`基于部署、您可以使用基于Helm的部署、而不会遇到问题。
+* 如果您有一个基于手动操作员的部署，并且想要使用基于 Helm 的Trident操作员部署，则应先手动卸载操作员，然后执行 Helm 安装。这使得 Helm 能够使用所需的标签和注释来部署Trident操作符。如果不这样做，基于 Helm 的Trident操作员部署将因标签验证错误和注释验证错误而失败。
+* 如果你有一个 `tridentctl`基于部署，无需卸载Trident即可进行基于 Helm 或基于 Operator 的部署。
 
 
 
