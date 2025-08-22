@@ -65,7 +65,7 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 | `IPv6` | 安装基于IPv6的Trident | false 
 
 
-| `k8sTimeout` | Kubernetes 操作超时 | `30sec` 
+| `k8sTimeout` | Kubernetes 操作超时 | `180sec` 
 
 
 | `silenceAutosupport` | 不要向NetApp发送AutoSupport捆绑包
