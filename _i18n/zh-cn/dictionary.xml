@@ -2668,7 +2668,6 @@ SMB</block>
   <block id="f3f30d479f6e3b393d917a3b2f88c770" category="cell"><block ref="89801e9e98979062e84647433a8ed3e9" prefix="" category="inline-code"></block></block>
   <block id="fbbd7b4b14060c4fdb02f92c4c08e702" category="cell">设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 启用在Windows工作节点上的安装。</block>
   <block id="077e99fe42ced522b462656cffffe09c" category="cell"><block ref="d5276bb17ae062102e883a18454c2f1b" prefix="" category="inline-code"></block></block>
-  <block id="4448b73eac083e33b7142f0e5790fac5" category="cell">Kubernetes 操作超时</block>
   <block id="42cf123e93ecc5c0297652edbc547fc0" category="cell"><block ref="2fac1659431903a30e063d49b3effb9d" prefix="" category="inline-code"></block></block>
   <block id="4a213b7c3b997ffb0794b25909381d16" category="cell">不要向NetApp发送AutoSupport捆绑包
 自动</block>
@@ -5807,4 +5806,7 @@ SMB</block>
   <block id="bd3dd99c8eae44e2ae2bfc8f00dc3db0" category="cell"><block ref="045117b0e0a11a242b9765e79cbf113f" prefix="" category="inline-code"></block></block>
   <block id="44a97f581d6467983edc4e5900722f32" category="list-text">如果您有一个基于手动操作员的部署，并且想要使用基于 Helm 的Trident操作员部署，则应先手动卸载操作员，然后执行 Helm 安装。这使得 Helm 能够使用所需的标签和注释来部署Trident操作符。如果不这样做，基于 Helm 的Trident操作员部署将因标签验证错误和注释验证错误而失败。</block>
   <block id="96fa331785e435bbddfc7f404fa5ce84" category="list-text">如果你有一个<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>基于部署，无需卸载Trident即可进行基于 Helm 或基于 Operator 的部署。</block>
+  <block id="ebc465247274e830568c785a604321aa" category="paragraph">Kubernetes 操作超时。</block>
+  <block id="487b75b94dd20a59c7005f9de6a6c4a0" category="admonition">这<block ref="d5276bb17ae062102e883a18454c2f1b" prefix=" " category="inline-code"></block>参数仅适用于Trident安装。</block>
+  <block id="0784343c721b59e3c2426a1b76297982" category="admonition">这<block ref="b958a6de9ca123713491252f2ab02f59" prefix=" " category="inline-code"></block>参数仅适用于Trident安装。</block>
 </blocks>
