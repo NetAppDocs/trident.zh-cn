@@ -17,6 +17,9 @@ NOTE: 如果您使用 Red Hat OpenShift，请务必注意命名空间注释在 O
 ----
 kubectl set env -n trident-protect deploy/trident-protect-controller-manager RESTORE_SKIP_NAMESPACE_ANNOTATIONS=<annotation_key_to_skip_1>,<annotation_key_to_skip_2>
 ----
+
+NOTE: 执行恢复或故障转移操作时，在 `restoreSkipNamespaceAnnotations`和 `restoreSkipNamespaceLabels`被排除在恢复或故障转移操作之外。确保在初始 Helm 安装期间配置这些设置。要了解更多信息，请参阅link:../trident-protect/trident-protect-customize-installation.html#configure-autoSupport-and-namespace-filtering-options["配置AutoSupport和命名空间过滤选项"]。
+
 如果您使用带有标志的Helm安装源应用程序，则会对标签键进行 `--create-namespace`特殊处理 `name`。在还原或故障转移过程中、Trident Protect会将此标签复制到目标命名空间、但如果源命名空间中的值与源命名空间匹配、则会将此值更新为目标命名空间值。如果此值与源命名空间不匹配、则会将其复制到目标命名空间、而不会发生任何更改。
 
 

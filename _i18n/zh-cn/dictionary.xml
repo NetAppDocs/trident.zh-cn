@@ -4512,7 +4512,6 @@ SMB</block>
   <block id="d0848afd8553c34945705222a97a4553" category="paragraph">您应看到类似于以下内容的输出：</block>
   <block id="07337191562a62a775a853d9901903a6" category="list-text">测试用户是否可以获取他们现在有权访问的AppVault信息：</block>
   <block id="e7165fc51f62031fcae1d793899febaa" category="paragraph">您为其授予了AppVault权限的用户应该能够使用授权的AppVault对象执行应用程序数据管理操作、并且不能访问分配的命名区之外的任何资源、也不能创建他们无权访问的新资源。</block>
-  <block id="a268a576db3133de464aad1cd81ab3e1" category="inline-link-macro">生成支持包</block>
   <block id="753f99fdafabdea1282917a0d7df52d4" category="list-text">执行中的反向重新同步步骤<block ref="07428cadd63a52910df8ba314efe2f56" category="inline-xref-macro-rx"></block>。</block>
   <block id="fe411ea35c29677771dcaad52985fc08" category="list-text">反向重新同步复制关系。</block>
   <block id="eb10e971ec83f13f35beb8166ae8958b" category="admonition">请勿执行正常的重新同步操作、因为这会丢弃在故障转移过程中写入目标集群的数据。</block>
@@ -5082,26 +5081,12 @@ SMB</block>
   <block id="c4ca4238a0b923820dcc509a6f75849b" category="cell">1</block>
   <block id="ee747b6b4f133aa926c072d073f4a8d5" category="list-text">应用文件中的值<block ref="12cbdc8aa1f61a2cee8eff2b77c0e113" prefix=" " category="inline-code"></block>：</block>
   <block id="54b43aeb73b3f5136e6febff4f374663" category="paragraph">此操作会将默认值替换为文件中指定的值<block ref="12cbdc8aa1f61a2cee8eff2b77c0e113" prefix=" " category="inline-code"></block>。</block>
-  <block id="f7d44f30f5245f3d8b32ca7ac3386d95" category="section-title">为Trident Protect配置NetApp AutoSupport连接</block>
-  <block id="f7b9fd6fa7c3a2cb8d2aa416b333de52" category="paragraph">您可以通过为连接配置代理来更改Trident Protect连接到NetApp支持以上传支持包的方式。您可以根据需要将代理配置为使用安全或不安全连接。</block>
-  <block id="d9e0a3823b1441be4f5c45d4363b5f72" category="open-title">配置安全代理连接</block>
-  <block id="1f9d5a4d36fe5f9bef4b60a24e652273" category="list-text">为Trident Protect支持包上传配置安全代理连接：</block>
-  <block id="5bd30bac7c368f4bd00e4b23ea9fa84c" category="open-title">配置不安全的代理连接</block>
-  <block id="67d7248c78969a2f4f4e7a7204960d0a" category="list-text">为跳过Trident验证的TLS Protect支持包上传配置不安全的代理连接：</block>
   <block id="19ac5903f95d5ebe1db017be54990f37" category="section-title">将Trident保护Pod限制为特定节点</block>
   <block id="2c9025d65a10f87c581d792f629f0b40" category="paragraph">您可以使用Kubenetes nodeSelecte节点选择约束根据节点标签控制哪些节点有资格运行Trident Protect Pod。默认情况下、Trident Protect仅限于运行Linux的节点。您可以根据需要进一步自定义这些限制。</block>
   <block id="e131fc2359f1f35a2fdb476c3f19bfdd" category="list-text">创建一个名为的文件<block ref="7eec75c3fd904f84005cd47f3bed0e47" prefix=" " category="inline-code"></block>。</block>
   <block id="785a1066f4a7291f0bd0c65d4529e79f" category="list-text">将nodeSelector选项添加到文件中、然后修改文件以添加或更改节点标签、从而根据环境需求进行限制。例如、以下文件包含默认操作系统限制、但也针对特定区域和应用程序名称：</block>
   <block id="0b3a205b675b10deddbe1e4c76c36e22" category="list-text">应用文件中的值<block ref="7eec75c3fd904f84005cd47f3bed0e47" prefix=" " category="inline-code"></block>：</block>
   <block id="86ff3a8cca72a77f236198059cede1b6" category="paragraph">此操作会将默认限制替换为您在文件中指定的限制<block ref="7eec75c3fd904f84005cd47f3bed0e47" prefix=" " category="inline-code"></block>。</block>
-  <block id="213e43c92b705298b37a27707e3ecdea" category="section-title">禁用每日Trident Protect AutoSupport捆绑包上传</block>
-  <block id="e6e2ac25d149c9ca2eda9da019c8857c" category="paragraph">您也可以禁用计划的每日Trident Protect AutoSupport支持包上传。</block>
-  <block id="3701dd93d7fa9d380885a4c7fb15bebc" category="admonition">默认情况下、Trident Protect会收集有助于处理您可能创建的任何NetApp支持案例的支持信息、包括有关集群和托管应用程序的日志、指标和拓扑信息。Trident Protect会按每日计划将这些支持包发送给NetApp。您可以随时手动<block ref="dedfc5877c343d6cbe77701c7edd9bde" category="inline-link-macro-rx"></block>执行此操作。</block>
-  <block id="1b8215632ac6cd0bc10bb44ac5786a82" category="list-text">创建一个名为的文件<block ref="7cc35e350ac50663f9c914e677dc5c5a" prefix=" " category="inline-code"></block>。</block>
-  <block id="92e8c3505d5d84a0a2e1eb8698158967" category="list-text">将AutoSupport选项添加到文件中、然后根据您的环境需求修改参数。</block>
-  <block id="c924e3d11dc98c4bfb0bb0a7e4bba949" category="paragraph">以下示例显示了AutoSupport选项参数的默认值：</block>
-  <block id="668d522672fb38a8d3d4961de5f59a62" category="paragraph">如果<block ref="4dd202185370b5db00de876ba19c1bd1" prefix=" " category="inline-code"></block>将设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，则会禁用AutoSupport支持包的每日上传。</block>
-  <block id="3a73620d7003f9f9087ba74069b621e9" category="list-text">应用文件中的值<block ref="7cc35e350ac50663f9c914e677dc5c5a" prefix=" " category="inline-code"></block>：</block>
   <block id="b8c29704f9b86600d95c1c0c4d902455" category="list-text">使用Helm安装Trident Protect。替换<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block>为集群名称、此名称将分配给集群并用于标识集群的备份和快照：</block>
   <block id="029d1c6e95e08907e4a8d285674ab46b" category="inline-link-macro">全局Trident保护冻结设置</block>
   <block id="f0c05ba588826dcd6ebd5a2b3796d458" category="list-text">*。metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*:(_可 选_)此标注仅适用于从虚拟机定义的应用程序、例如在KubeVirt环境中、文件系统在快照之前冻结。指定此应用程序是否可以在快照期间写入文件系统。如果设置为true、则应用程序将忽略全局设置、并可在快照期间写入文件系统。如果设置为false、则应用程序将忽略全局设置、并且文件系统会在快照期间冻结。如果指定了此参数、但应用程序定义中没有虚拟机、则会忽略此标注。如果未指定，则应用程序将遵循<block ref="61895e61fe23c9afb5a69eafa8d9b7ba" category="inline-link-macro-rx"></block>。</block>
@@ -5809,4 +5794,25 @@ SMB</block>
   <block id="ebc465247274e830568c785a604321aa" category="paragraph">Kubernetes 操作超时。</block>
   <block id="487b75b94dd20a59c7005f9de6a6c4a0" category="admonition">这<block ref="d5276bb17ae062102e883a18454c2f1b" prefix=" " category="inline-code"></block>参数仅适用于Trident安装。</block>
   <block id="0784343c721b59e3c2426a1b76297982" category="admonition">这<block ref="b958a6de9ca123713491252f2ab02f59" prefix=" " category="inline-code"></block>参数仅适用于Trident安装。</block>
+  <block id="8238f7162d9219360737b28886d1e81e" category="inline-link-macro">配置AutoSupport和命名空间过滤选项</block>
+  <block id="f674ee7017be04f3990c16ce1e52c071" category="admonition">执行恢复或故障转移操作时，在<block ref="22416353aff9ef4322e1ee858f418ae4" prefix=" " category="inline-code"></block>和<block ref="8028cf835d9b72ff2d6f835934c25568" prefix=" " category="inline-code"></block>被排除在恢复或故障转移操作之外。确保在初始 Helm 安装期间配置这些设置。要了解更多信息，请参阅<block ref="be04583f34cff5b6411cf18afbc58993" category="inline-link-macro-rx"></block>。</block>
+  <block id="5db3625cb782a771bf36efc4994a8da5" category="section-title">配置其他Trident保护 Helm Chart 设置</block>
+  <block id="a7532dec52b4d581a8873a3048e6e181" category="paragraph">您可以自定义AutoSupport设置和命名空间过滤以满足您的特定要求。下表描述了可用的配置参数：</block>
+  <block id="1fceae4a3c0d1966481601a7ac4d1f83" category="cell">自动支持代理</block>
+  <block id="d93069a68fb6f0fccb979fdae4a99614" category="cell">为NetApp AutoSupport连接配置代理 URL。使用此功能通过代理服务器路由支持包上传。例子：<block ref="3753b9fc3cbe6d0d91c7b449cad0b465" prefix=" " category="inline-code"></block> 。</block>
+  <block id="c692f16bd0ca5b695511534a2e1eebfb" category="cell">自动支持.不安全</block>
+  <block id="ecf5fdf2786d609376e95f541c7dcdfa" category="cell">设置为时跳过AutoSupport代理连接的 TLS 验证<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。仅用于不安全的代理连接。  （默认：<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> )</block>
+  <block id="4dd202185370b5db00de876ba19c1bd1" category="cell">自动支持已启用</block>
+  <block id="5d75e627a269bd09b3b5ebef5a7bf257" category="cell">启用或禁用每日Trident保护AutoSupport捆绑包上传。当设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，计划的每日上传已被禁用，但您仍然可以手动生成支持包。  （默认：<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> )</block>
+  <block id="22416353aff9ef4322e1ee858f418ae4" category="cell">恢复跳过命名空间注释</block>
+  <block id="a91c3b0476974e9ec186952f05c189f1" category="cell">要从备份和恢复操作中排除的命名空间注释的逗号分隔列表。允许您根据注释过滤命名空间。</block>
+  <block id="8028cf835d9b72ff2d6f835934c25568" category="cell">restoreSkipNamespaceLabels</block>
+  <block id="3f1cf3db23b5a0d9cdd2db63b9b30061" category="cell">要从备份和恢复操作中排除的命名空间标签的逗号分隔列表。允许您根据标签过滤命名空间。</block>
+  <block id="4afdb4a6c604cf0a9b830ec8cb0430c9" category="paragraph">您可以使用 YAML 配置文件或命令行标志配置这些选项：</block>
+  <block id="bfb59a2948710affa80485c4339915a0" category="open-title">使用 YAML 文件</block>
+  <block id="edd355ced63179ed49206f4f87774b11" category="list-text">创建配置文件并命名<block ref="ba05023d0f1b5d4b64b6cad4cf9a7ecd" prefix=" " category="inline-code"></block>。</block>
+  <block id="68691c61fb4efdab4eca4a7e06fa75c7" category="list-text">在您创建的文件中，添加您想要自定义的配置选项。</block>
+  <block id="8050ee75d62c0711ec176f9e1481041b" category="list-text">填充后<block ref="ba05023d0f1b5d4b64b6cad4cf9a7ecd" prefix=" " category="inline-code"></block>具有正确值的文件，应用配置文件：</block>
+  <block id="2ee46f1547524b1cfc2f8b760b44c719" category="open-title">使用 CLI 标志</block>
+  <block id="fc7791ffb26e7154ff5b48ab1b14bf8b" category="list-text">使用以下命令<block ref="8b5806248570dbb13e7d3bc5e6c0ee37" prefix=" " category="inline-code"></block>标志来指定单个参数：</block>
 </blocks>
