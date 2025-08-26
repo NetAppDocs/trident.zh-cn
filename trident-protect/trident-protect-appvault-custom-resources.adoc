@@ -107,9 +107,50 @@ kubectl create secret generic my-optional-data-mover-secret \
 
 
 
+=== 用于 Amazon S3（AWS）身份验证的 EKS Pod Identity
+
+Trident Protect 支持 EKS Pod Identity 进行 Kopia 数据移动器操作。此功能可实现对 S3 存储桶的安全访问，而无需将 AWS 凭证存储在 Kubernetes 机密中。
+
+*带有Trident保护的 EKS Pod Identity 的要求*
+
+在使用带有Trident保护的 EKS Pod Identity 之前，请确保以下事项：
+
+* 您的 EKS 集群已启用 Pod Identity。
+* 您已创建具有必要的 S3 存储桶权限的 IAM 角色。要了解更多信息，请参阅link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-appvault-custom-resources.html#s3-compatible-storage-iam-permissions["S3 兼容存储 IAM 权限"]。
+* IAM 角色与以下Trident保护服务帐户相关联：
++
+** `<trident-protect>-controller-manager`
+** `<trident-protect>-resource-backup`
+** `<trident-protect>-resource-restore`
+** `<trident-protect>-resource-delete`
+
+
+
+
+有关启用 Pod Identity 以及将 IAM 角色与服务账户关联的详细说明，请参阅 https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html["AWS EKS Pod Identity 文档"^]。
+
+*AppVault 配置* 使用 EKS Pod Identity 时，请使用以下配置配置您的 AppVault CR `useIAM: true`标记而不是明确的凭证：
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: eks-protect-vault
+  namespace: trident-protect
+spec:
+  providerType: AWS
+  providerConfig:
+    s3:
+      bucketName: trident-protect-aws
+      endpoint: s3.example.com
+      useIAM: true
+----
+
+
 === 云提供商的AppVault密钥生成示例
 
-定义AppVault CR时、您需要包含凭据才能访问由提供程序托管的资源。根据提供程序的不同、为凭据生成密钥的方式也会有所不同。以下是多个提供程序的命令行密钥生成示例。您可以使用以下示例为每个云提供商的凭据创建密钥。
+定义 AppVault CR 时，您需要包含凭证以访问提供商托管的资源，除非您使用 IAM 身份验证。如何生成凭证密钥将根据提供商的不同而有所不同。以下是几个提供商的命令行密钥生成示例。您可以使用以下示例为每个云提供商的凭证创建密钥。
 
 [role="tabbed-block"]
 ====
@@ -249,6 +290,9 @@ spec:
         key: sessionToken
         name: s3-secret
 ----
+
+NOTE: 对于使用 Pod Identity 和 Kopia 数据移动器的 EKS 环境，您可以删除 `providerCredentials`部分并添加 `useIAM: true`根据 `s3`配置。
+
 --
 .Microsoft Azure
 --
