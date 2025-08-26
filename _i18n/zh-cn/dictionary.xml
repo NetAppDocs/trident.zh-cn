@@ -1596,7 +1596,6 @@
   <block id="365b452a5b5d2d01e1f193fc8bd9bf2c" category="list-text">您可以使用逗号分隔列表将PVC共享给多个命名空间。例如：<block ref="6b31015528f67fe4ce10b7c81957f601" prefix=" " category="inline-code"></block>。</block>
   <block id="fefd0d1f7e80bb8a4657265696b66694" category="list-text">您可以使用共享到所有命名空间<block ref="3389dae361af79b04c9c8e7057f60cc6" prefix=" " category="inline-code"></block>。例如：<block ref="e06421e15aa316addc52dd6c697027b7" prefix=" " category="inline-code"></block></block>
   <block id="bac5e1b9773b73b6702dfe25c8a61a05" category="list-text">您可以更新PVC以包括<block ref="287f26e3328f9ac0f3f4da2cdaddd3e2" prefix=" " category="inline-code"></block> 随时添加标注。</block>
-  <block id="512fce88fc641bb15b14b72474159acd" category="list-text">*集群管理员：*创建自定义角色并执行kubeconfig、以授予目标命名空间所有者在目标命名空间中创建TridentVolumeReference CR的权限。</block>
   <block id="5f560764a361bf1159f8a6c8cbd15dad" category="list-text">*目标命名空间所有者：*在目标命名空间中创建引用源命名空间的TridentVolumeReference CR<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block>。</block>
   <block id="d9bb6497cda089fc4a386c685a97cffa" category="list-text">*目标命名空间所有者：*创建PVC <block ref="3f6857fc20ae2372499a71869ac3fe7e" prefix="(" category="inline-code"></block>) <block ref="6fde1ba4470caca933058264dbfdea2e" prefix="(" category="inline-code"></block>)<block ref="57c54cbee1c6ed3d5902aa1d8cd1e55a" prefix=" " category="inline-code"></block> 用于指定源PVC的标注。</block>
   <block id="e22f320aefbf1cdb3ccd68c26b050060" category="admonition">目标PVC的大小必须小于或等于源PVC。</block>
@@ -5019,7 +5018,6 @@ SMB</block>
   <block id="848c08c0dad8da2f2f28ca678bbfbf1f" category="list-text">您可以使用逗号分隔列表将PVC共享给多个命名空间。例如，<block ref="01066aa74fe32f5dae708937da0fdc6f" prefix=" " category="inline-code"></block>。</block>
   <block id="e49c2aab2a070ab6ebb8b78acc7d3685" category="list-text">您可以使用共享到所有<block ref="3389dae361af79b04c9c8e7057f60cc6" prefix=" " category="inline-code"></block>的文件。例如、<block ref="b50a7cdb2a6c7bc49cf0ac66428e8a33" prefix=" " category="inline-code"></block></block>
   <block id="6844c666d46d26f14f45880c3b8cd2ec" category="list-text">您可以随时更新PVC以包含<block ref="176dbae9b2594398063073fa2462e819" prefix=" " category="inline-code"></block>标注。</block>
-  <block id="8e7677f5fca35d9d3480fac62441fe33" category="list-text">*Cluster admin:*创建自定义角色和kubeconfig,以向目标命名空间所有者授予在目标命名空间中创建Trident卷 参考CR的权限<block ref="6fde1ba4470caca933058264dbfdea2e" prefix="(" category="inline-code"></block>)。</block>
   <block id="b49d0358b75283a3c4f7a2e7229fc097" category="list-text">*Destination命名空间owner:*<block ref="3f6857fc20ae2372499a71869ac3fe7e" prefix="(" category="inline-code"></block>在目标命名空间中创建PVC<block ref="6fde1ba4470caca933058264dbfdea2e" prefix="(" category="inline-code"></block>)，使用<block ref="77167d63af133b47bca3bbacd580fa44" prefix=" " category="inline-code"></block>或<block ref="bfd2f3d7d043509924eaac702957a99d" prefix=" " category="inline-code"></block>和<block ref="2413b30c8869ee9ac5b416f44004a212" prefix=" " category="inline-code"></block>标注指定源PVC。</block>
   <block id="188811e4b8b33253d84403cd9a1fcfa9" category="list-text">对于使用PV-NAS经济型驱动程序配置的ONTAP、不支持只读克隆。</block>
   <block id="18554a6310d1d501f5fdbbbc7a0cd7c6" category="summary">Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展iSCSI、FC和NFS卷所需配置的信息。</block>
@@ -5815,4 +5813,6 @@ SMB</block>
   <block id="8050ee75d62c0711ec176f9e1481041b" category="list-text">填充后<block ref="ba05023d0f1b5d4b64b6cad4cf9a7ecd" prefix=" " category="inline-code"></block>具有正确值的文件，应用配置文件：</block>
   <block id="2ee46f1547524b1cfc2f8b760b44c719" category="open-title">使用 CLI 标志</block>
   <block id="fc7791ffb26e7154ff5b48ab1b14bf8b" category="list-text">使用以下命令<block ref="8b5806248570dbb13e7d3bc5e6c0ee37" prefix=" " category="inline-code"></block>标志来指定单个参数：</block>
+  <block id="b3d3f9a2121425d368b2e48af67d611a" category="list-text">集群管理员：确保已建立适当的 RBAC，以授予目标命名空间所有者在目标命名空间中创建 TridentVolumeReference CR 的权限<block ref="6fde1ba4470caca933058264dbfdea2e" prefix="(" category="inline-code"></block>）。</block>
+  <block id="74e502e81d780e5b5d204969a0d44635" category="list-text">*集群管理员：*确保已建立适当的 RBAC，以授予目标命名空间所有者在目标命名空间中创建 TridentVolumeReference CR 的权限。</block>
 </blocks>

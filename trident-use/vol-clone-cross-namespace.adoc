@@ -80,7 +80,7 @@ Trident将创建PV及其后端存储卷。
 
 
 ====
-. *Cluster admin:*创建自定义角色和kubeconfig,以向目标命名空间所有者授予在目标命名空间中创建Trident卷 参考CR的权限(`namespace2`)。
+. 集群管理员：确保已建立适当的 RBAC，以授予目标命名空间所有者在目标命名空间中创建 TridentVolumeReference CR 的权限(`namespace2`）。
 . *目标命名空间所有者：*在目标命名空间中创建引用源命名空间的TridentVolumeReference CR `pvc1`。
 +
 [source, yaml]
