@@ -2977,7 +2977,6 @@ SMB</block>
   <block id="4b7cb6c36399bdd4e8724de18a1c079b" category="cell">2027年2月</block>
   <block id="bcb8f00239af2cecd5a6b534dabea922" category="paragraph"><block ref="bcb8f00239af2cecd5a6b534dabea922" category="inline-link-macro-rx"></block></block>
   <block id="62bc04158f931e9b0a26f5676c8ab043" category="paragraph"><block ref="62bc04158f931e9b0a26f5676c8ab043" category="inline-link-macro-rx"></block></block>
-  <block id="3a766ef0e7ab8dbf17dc86487efd5fbf" category="paragraph">通过使用三端技术支持安装程序、可以创建一个Kubernetes ClusterRole、此类ClusterRole可以对Kubernetes集群中的集群的PersentVolume、PersentVolumeClaim、StorageClass和机密资源具有特定访问权限。请参见 <block ref="118dd7a3d307a499ad0f9c547981393b" category="inline-link-macro-rx"></block>。</block>
   <block id="054e161b9c33938d4cac2bab4e4d46b8" category="paragraph">对于节点数超过 64 个的 Kubernetes 集群，您应使用多个访问组。每个访问组最多可以包含 64 个 IQN ，每个卷可以属于四个访问组。在最多配置四个访问组的情况下，集群中大小最多为 256 个节点的任何节点都可以访问任何卷。有关卷访问组的最新限制、请参见<block ref="ac4000c3a85e5909daa6593f9f0617fd" category="inline-link-rx"></block>。</block>
   <block id="2284dc5d4add6f82e5bc0121aa82a816" category="list-text">增加了对Azure托管身份(AMI)与azure-NetApp-files存储驱动程序的使用支持。</block>
   <block id="f77d4be42f8ef9e2474d677786cf6d7a" category="paragraph">通过云身份、Kubnetes Pod可以通过作为工作负载身份进行身份验证来访问Azure资源、而不是提供明确的Azure凭据。</block>
@@ -5830,4 +5829,5 @@ SMB</block>
   <block id="cedc87a271db7f699ec07464bfd0a9ee" category="paragraph">*AppVault 配置* 使用 EKS Pod Identity 时，请使用以下配置配置您的 AppVault CR<block ref="df9bc6a254da3cea83fc8b7c71c71ea9" prefix=" " category="inline-code"></block>标记而不是明确的凭证：</block>
   <block id="ed69194cde8739a857f51b02498a0c27" category="paragraph">定义 AppVault CR 时，您需要包含凭证以访问提供商托管的资源，除非您使用 IAM 身份验证。如何生成凭证密钥将根据提供商的不同而有所不同。以下是几个提供商的命令行密钥生成示例。您可以使用以下示例为每个云提供商的凭证创建密钥。</block>
   <block id="0d96febdd171c11830ca8b96c7a4f8e4" category="admonition">对于使用 Pod Identity 和 Kopia 数据移动器的 EKS 环境，您可以删除<block ref="84695890ad88faf0bb2d6cdae8c01d51" prefix=" " category="inline-code"></block>部分并添加<block ref="df9bc6a254da3cea83fc8b7c71c71ea9" prefix=" " category="inline-code"></block>根据<block ref="c0828e0381730befd1f7a025057c74fb" prefix=" " category="inline-code"></block>配置。</block>
+  <block id="3d939b5d63f5846e5d71053999d3972e" category="paragraph">Trident安装程序会创建一个 Kubernetes ClusterRole，该角色对 Kubernetes 集群的 PersistentVolume、PersistentVolumeClaim、StorageClass 和 Secret 资源具有特定的访问权限。请参阅<block ref="ddc7df443077796093efdaf5a64d03cd" category="inline-link-macro-rx"></block> 。</block>
 </blocks>

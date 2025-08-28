@@ -86,7 +86,7 @@ Trident从Kubednetes API服务器读取数据、以确定应用程序何时请�
 
 === Trident使用哪些角色和Privileges？
 
-通过使用三端技术支持安装程序、可以创建一个Kubernetes ClusterRole、此类ClusterRole可以对Kubernetes集群中的集群的PersentVolume、PersentVolumeClaim、StorageClass和机密资源具有特定访问权限。请参见 link:../trident-get-started/kubernetes-customize-deploy-tridentctl.html["自定义tridentctl安装"^]。
+Trident安装程序会创建一个 Kubernetes ClusterRole，该角色对 Kubernetes 集群的 PersistentVolume、PersistentVolumeClaim、StorageClass 和 Secret 资源具有特定的访问权限。请参阅link:trident-get-started/kubernetes-customize-deploy-tridentctl.html["自定义tridentctl安装"^] 。
 
 
 
