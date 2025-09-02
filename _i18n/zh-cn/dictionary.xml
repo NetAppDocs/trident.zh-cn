@@ -2383,10 +2383,7 @@ SMB</block>
   <block id="2d63b64b84c821bc810927f7ca7fa993" category="inline-link">_PersigentVolumeClaim_</block>
   <block id="d948cda211eadd3a86a406b43ee0d5fa" category="paragraph">可以将PVC配置为请求特定大小的存储或访问模式。通过使用关联的StorageClass，集群管理员可以控制不限于持续卷大小和访问模式(例如性能或服务级别)。</block>
   <block id="35e98ba80f6254a33de7a37ab113316e" category="section-title">示例清单</block>
-  <block id="3c5f9191f489dbdd8d950bafc3dea6e0" category="example-title">PerfsentVolume示例清单</block>
-  <block id="a992ed82e7964281386cdd46c0c21da6" category="paragraph">此示例清单显示了与StorageClass关联的10gi的基本PV<block ref="1c62ceba602064183a6346b85fe26c96" prefix=" " category="inline-code"></block>。</block>
   <block id="cdeec5159e0548de993d76d7d1dcc992" category="paragraph">此示例显示了一个具有读取权限的基本PVC、该PVC与名为的StorageClass关联<block ref="1c62ceba602064183a6346b85fe26c96" prefix=" " category="inline-code"></block>。</block>
-  <block id="bb970cb0639998faceb4ab3a67e3f1e3" category="section-title">创建PV和PVC</block>
   <block id="e1f83bd8f580cc9a48311142d551b3cf" category="list-text">创建 PVC 。</block>
   <block id="150f6f248f009f461b84862124e2b499" category="list-text">验证PVC状态。</block>
   <block id="6a308a8072d1cf8c73629852d7f0b1af" category="list-text">将卷挂载到Pod中。</block>
@@ -2893,7 +2890,6 @@ SMB</block>
   <block id="2b1131719d4d8198515b53a0132411fb" category="image-alt">AWS EKS 02</block>
   <block id="5bab8196b750f3260d005a4548bc5de0" category="list-text">选择所需的附加软件版本。</block>
   <block id="92f63954b2feb520d9a85c6ac6087ad8" category="image-alt">AWS EKS 03</block>
-  <block id="165c328c69599353c4797fde7429e5b5" category="list-text">选择要从节点继承的IAM角色选项。</block>
   <block id="b64079b8570f34f88bca59be352b20e2" category="image-alt">AWS EKS 04</block>
   <block id="bf18811faac9b8e4fcaebab51afd1113" category="list-text">选择 * 创建 * 。</block>
   <block id="fa883f8fcd252ea2995457cd82515d03" category="list-text">验证此加载项的状态是否为_Active_.</block>
@@ -4495,7 +4491,6 @@ SMB</block>
   <block id="1ae067a03c56065918252f36c73024d1" category="sidebar">管理和保护应用程序</block>
   <block id="793ba052e921b84a44dd053d68f45012" category="sidebar">使用Trident Protect管理执行挂钩</block>
   <block id="a4ac350fb585f51020f747525f3175d8" category="paragraph"><block ref="2c7a14b5507108d57a83e6eb9858f03a" category="inline-link-macro-rx"></block>(英文)</block>
-  <block id="c5bc7ac802b8e0a400d724239314a7bf" category="image-alt">AWS EKS 06</block>
   <block id="c198f49680a4c22b6d731cdd7d7b513a" category="paragraph">您可以使用<block ref="cd4140d3de30b520500459331d08d2bf" prefix=" " category="inline-code"></block>命令查看安装详细信息、例如名称、命名空间、图表、状态、应用程序版本和修订版号。</block>
   <block id="d43d72969793ea80734b71e9c2406b2a" category="list-text">*保留集群上的附加软件*–此选项将删除Amazon EKS对任何设置的管理。此外、它还会使Amazon EKS无法通知您更新、并在您启动更新后自动更新Amazon EKS附加项。但是、它会保留集群上的附加软件。此选项可使附加组件成为自管理安装、而不是Amazon EKS附加组件。通过此选项、此附加组件不会出现停机。保留命令中的<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> 选项以保留此附加项。</block>
   <block id="03f2a9d8b5b9f1a03bc58b91a939d84f" category="paragraph"><block ref="ad43edaec055586043c762c9475bde5c" category="inline-link-macro-rx"></block> 是Google Cloud中的一项完全托管的文件存储服务、可提供高性能企业级文件存储。</block>
@@ -4984,7 +4979,6 @@ SMB</block>
   <block id="9a30deaecbfde403e36a8a700d09e3e1" category="cell">用于使用 ONTAP REST API 的布尔参数。如果设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，则Trident将使用ONTAP REST API与后端进行通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问<block ref="a9ba4dc88fa11d44cc7c0c918d174778" prefix=" " category="inline-code"></block> 应用程序。预定义的和角色可以满足这一<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 要求<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> 。</block>
   <block id="43d8d272a15eda3f1fbfcedc2408b697" category="paragraph">要在AWS Bottler套 件上配置NFS3卷、请将所需添加<block ref="e1d3d66c5926aa7fbc3186da8f9b476b" prefix=" " category="inline-code"></block>到存储类：</block>
   <block id="2b00559f1e8a052e6ec27fd2da2fc0ef" category="paragraph-title">PVC、可接入rwx</block>
-  <block id="808a149c66a46569dfd8eda4200e5b28" category="paragraph">此示例显示了具有rwx访问权限且与名为的StorageClass关联的NVMe/TCP的基本PVC<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block>。</block>
   <block id="627d563f4445675e960fd39150a292ba" category="paragraph">文件系统是 Amazon FSX 中的主要资源，类似于内部部署的 ONTAP 集群。在每个 SVM 中，您可以创建一个或多个卷，这些卷是将文件和文件夹存储在文件系统中的数据容器。借助Amazon FSx for NetApp ONTAP、将在云中作为托管文件系统提供。新的文件系统类型称为 * NetApp ONTAP * 。</block>
   <block id="e5fd3b07dfde2732fc5e3a9d4e7c5370" category="section-title">测试过的Amazon计算机映像(AMI)</block>
   <block id="af2fcef81914e3ce8b2cbe1ab832c879" category="cell">AMI</block>
@@ -5293,7 +5287,6 @@ SMB</block>
   <block id="00e7f88da8b7690738f8546262d2fe54" category="list-text">在源集群上，使用以下命令查找*shutdownfapp.statues.appArchivePath*的值，并记录文件路径的最后一部分(也称为基本名称；这将是最后一个斜杠之后的所有内容)：</block>
   <block id="579f2feb3d9edaa336d3ccb69c3fb855" category="list-text">执行从新目标集群到新源集群的故障转移、并进行以下更改：</block>
   <block id="23b4dec181e41ab3962cf73b28ffe58c" category="list-text">在当前目标集群上、删除App镜像 关系CR：</block>
-  <block id="90abe2b6c39f51adea4c5aabff2df094" category="list-text">遵循*附加配置模式*，并将*配置值*部分中的配置值参数设置为您在上一步(步骤1)中创建的ro-arn。值应采用以下格式：</block>
   <block id="6935ea1d99a0c26f0e4cddb80f444849" category="summary">如果使用Red Hat OpenShift、则可以使用操作员安装Trident。</block>
   <block id="c282cc9924716a0ecdcc1864c8821950" category="doc">从Trident社区运营商切换到OpenShift认证运营商</block>
   <block id="92da9bfce4b6635fcf5d3f3725accbbc" category="paragraph">要从NetApp社区Trident操作员切换到Red Hat OpenShift认证Trident操作员、您需要卸载社区操作员、然后使用OperatorHub安装认证操作员。</block>
@@ -5595,8 +5588,6 @@ SMB</block>
   <block id="d075b47d76ffc95cce31e3ff1a3bf887" category="paragraph">Trident支持在一个集群上的源卷与对等集群上的目标卷之间建立镜像关系、以便为灾难恢复复制数据。  您可以使用名为 Trident 镜像关系 (TMR) 的命名空间自定义资源定义 (CRD) 来执行以下操作：</block>
   <block id="2d78d4f2531b53f3a4980133900540f7" category="paragraph">NetApp Trident 支持使用 NetApp SnapMirror 技术进行卷复制，使用由以下驱动程序支持的存储类：** <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ：NFS** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ：iSCSI** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ： FC ** <block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ：NVMe/TCP（要求最低 ONTAP 版本 9.15.1）</block>
   <block id="a6d2a1b8501003e74309a1ac77e249d4" category="admonition">ASA r2 系统不支持使用 SnapMirror 进行卷复制。有关 ASA r2 系统的信息，请参阅<block ref="40f055dd42976ff294174231df35e37e" category="inline-link-macro-rx"></block> 。</block>
-  <block id="5bc634e5febd2967f50c152731ebe0e0" category="admonition">如果您使用 Pod Identity 关联，请跳过此步骤。</block>
-  <block id="26b17225b626fb9238849fd60eabdf60" category="paragraph">+</block>
   <block id="b2b0186a010875b0d453752a8aa06a4c" category="section-title">为服务帐户关联 (IRSA) 创建 Pod Identity 或 IAM 角色</block>
   <block id="152bceec6d4e34c053208d61763334bc" category="paragraph">您可以使用 EKS Pod Identity 配置 Kubernetes 服务账户，使其代入 AWS Identity and Access Management (IAM) 角色，或使用 IAM 角色进行服务账户关联 (IRSA)。任何配置为使用该服务账户的 Pod 都可以访问该角色有权访问的任何 AWS 服务。</block>
   <block id="0522426ad683048758e710700760f5a9" category="open-title">Pod 身份</block>
@@ -5830,4 +5821,12 @@ SMB</block>
   <block id="ed69194cde8739a857f51b02498a0c27" category="paragraph">定义 AppVault CR 时，您需要包含凭证以访问提供商托管的资源，除非您使用 IAM 身份验证。如何生成凭证密钥将根据提供商的不同而有所不同。以下是几个提供商的命令行密钥生成示例。您可以使用以下示例为每个云提供商的凭证创建密钥。</block>
   <block id="0d96febdd171c11830ca8b96c7a4f8e4" category="admonition">对于使用 Pod Identity 和 Kopia 数据移动器的 EKS 环境，您可以删除<block ref="84695890ad88faf0bb2d6cdae8c01d51" prefix=" " category="inline-code"></block>部分并添加<block ref="df9bc6a254da3cea83fc8b7c71c71ea9" prefix=" " category="inline-code"></block>根据<block ref="c0828e0381730befd1f7a025057c74fb" prefix=" " category="inline-code"></block>配置。</block>
   <block id="3d939b5d63f5846e5d71053999d3972e" category="paragraph">Trident安装程序会创建一个 Kubernetes ClusterRole，该角色对 Kubernetes 集群的 PersistentVolume、PersistentVolumeClaim、StorageClass 和 Secret 资源具有特定的访问权限。请参阅<block ref="ddc7df443077796093efdaf5a64d03cd" category="inline-link-macro-rx"></block> 。</block>
+  <block id="65f1acff2714c57d7d22160c1e0604ae" category="list-text">配置所需的附加组件设置。</block>
+  <block id="a77e64d999da7477c22c11d171944968" category="list-text">如果您使用 IRSA（服务帐户的 IAM 角色），请参阅其他配置步骤<block ref="75a5fb22d89ca2450e7a1cb8fb11e3d1" category="inline-link-macro-rx"></block>。</block>
+  <block id="b2a83c40e86c786c07c31acad2909e42" category="admonition">*如果您使用 Pod Identity 关联，请跳过这些步骤。*</block>
+  <block id="346a92db06c8942d8b2bd2e2de5c2796" category="paragraph">这<block ref="da3f7f170e13df7f56e057fc4226aa85" category="inline-link-rx"></block>对象将Trident标识为用于该类的供应器，并指示Trident如何供应卷。使用此示例为使用 NFS 的卷设置 Storageclass（有关属性的完整列表，请参阅下面的Trident属性部分）：</block>
+  <block id="7cb76a35f0ca09eacd7393285baf81df" category="paragraph">使用此示例为使用 iSCSI 的卷设置 Storageclass：</block>
+  <block id="4789829a93714df585353f631620ef1d" category="paragraph-title">使用 iSCSI 示例的 PVC</block>
+  <block id="325b282cbc15cc9dcde1a69271472526" category="paragraph">此示例展示了具有 RWO 访问权限的 iSCSI 基本 PVC，它与名为<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block>。</block>
+  <block id="4aac510e801e497da3b150682838f5f7" category="section-title">创建 PVC</block>
 </blocks>
