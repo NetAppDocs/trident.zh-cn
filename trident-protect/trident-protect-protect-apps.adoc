@@ -172,122 +172,17 @@ tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --a
 ====
 
 
-== 创建备份计划
-
-您可以计划非增量完整备份。默认情况下、所有备份均为增量备份。定期执行完整备份以及其间的增量备份有助于降低与还原相关的风险。
-
-
-NOTE: 如果在应用程序定义中明确引用了集群范围的资源、或者这些资源引用了任何应用程序命名源、则会将这些资源包括在备份、快照或克隆中。
-
-.开始之前
-确保AWS会话令牌到期时间足以执行任何长时间运行的S3备份操作。如果令牌在备份操作期间过期、则操作可能会失败。
-
-* 有关检查当前会话令牌到期时间的详细信息、请参见 https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["AWS API文档"^]。
-* 有关AWS资源凭据的详细信息、请参见 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html["AWS IAM文档"^]。
-
-
-[role="tabbed-block"]
-====
-.使用CR创建计划
---
-.步骤
-. 创建自定义资源(CR)文件并将其命名为 `trident-backup-schedule-cr.yaml`。
-. 在创建的文件中、配置以下属性：
-+
-** *。metadata.name*:(_required__)此自定义资源的名称；请为您的环境选择一个唯一且合理的名称。
-** *spec.dataMover*：(_可 选_)一个字符串，指示用于备份操作的备份工具。可能值(区分大小写)：
-+
-*** `Restic`
-*** `Kopia` (默认)
-
-
-** *spec.applicationRef*：要备份的应用程序的Kubernetes名称。
-** *spec.appVaultRef*：(_required_)应存储备份内容的AppVault的名称。
-** *spec.backupretention *：要保留的备份数。零表示不应创建任何备份。
-** *spec.snapshotretention *：要保留的快照数。零表示不应创建任何快照。
-** *。spec.granularity*:计划的运行频率。可能值以及必需的关联字段：
-+
-*** `hourly` (要求您指定 `spec.minute`)
-*** `daily` (要求您指定 `spec.minute` 和 `spec.hour`)
-*** `weekly`(要求您指定 `spec.minute, spec.hour`、和 `spec.dayOfWeek`)
-*** `monthly`(要求您指定 `spec.minute, spec.hour`、和 `spec.dayOfMonth`)
-
-
-** *spec.dayOfMonth*：(_可 选_)计划应运行的日期(1 - 31)。如果粒度设置为，则需要此字段 `monthly`。
-** *spec.dayOfWeek*：(_可 选_)计划应运行的日期(0到7)。值0或7表示星期日。如果粒度设置为，则需要此字段 `weekly`。
-** *spec.hour *：(_可 选_)计划应运行的时间(0 - 23)。如果粒度设置为、或，则需要此字段 `daily` `weekly` `monthly`。
-** *spec.minute：(_可 选_)计划应运行的分钟(0 - 59)。如果粒度设置为、、或，则需要此字段 `hourly` `daily` `weekly` `monthly`。
-** *。metadata.annotations.protect.trident.netapp.io/full-backup-rule*:(_可 选_)此标注用于指定计划完整备份的规则。您可以将其设置为以实现持续完整备份、也可以 `always`根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。
-+
-[source, yaml]
-----
----
-apiVersion: protect.trident.netapp.io/v1
-kind: Schedule
-metadata:
-  namespace: my-app-namespace
-  name: my-cr-name
-  annotations:
-    protect.trident.netapp.io/full-backup-rule: "Monday,Thursday"
-spec:
-  dataMover: Kopia
-  applicationRef: my-application
-  appVaultRef: appvault-name
-  backupRetention: "15"
-  snapshotRetention: "15"
-  granularity: daily
-  dayOfMonth: "1"
-  dayOfWeek: "0"
-  hour: "0"
-  minute: "0"
-----
-
-
-. 使用正确的值填充文件后 `trident-backup-schedule-cr.yaml` 、应用CR：
-+
-[source, console]
-----
-kubectl apply -f trident-backup-schedule-cr.yaml
-----
-
-
---
-.使用命令行界面创建计划
---
-.步骤
-. 创建备份计划、将括号中的值替换为您环境中的信息。例如：
-+
-
-NOTE: 您可以使用 `tridentctl-protect create schedule --help`查看此命令的详细帮助信息。
-
-+
-[source, console]
-----
-tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace> --full-backup-rule <string>
-----
-+
-您可以将此标志设置为 `always`以实现持续完整备份、也可以 `--full-backup-rule`根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。例如、使用 `--full-backup-rule "Monday,Thursday"`计划在星期一和星期四进行完整备份。
-
-
-
---
-====
-
-
 == 创建数据保护计划
 
-保护策略通过按定义的计划创建快照，备份或这两者来保护应用程序。您可以选择每小时，每天，每周和每月创建快照和备份，并且可以指定要保留的副本数。
+保护策略通过按照定义的计划创建快照、备份或两者来保护应用程序。您可以选择每小时、每天、每周和每月创建快照和备份，并可以指定要保留的副本数量。您可以使用 full-backup-rule 注释来安排非增量式完整备份。默认情况下，所有备份都是增量的。定期执行完整备份以及其间的增量备份有助于降低与恢复相关的风险。
+
+[NOTE]
+====
+* 您可以通过设置 `backupRetention`归零， `snapshotRetention`为大于零的值。环境 `snapshotRetention`为零意味着任何计划的备份仍将创建快照，但这些快照是临时的，并在备份完成后立即被删除。
+* 如果在应用程序定义中明确引用了集群范围的资源、或者这些资源引用了任何应用程序命名源、则会将这些资源包括在备份、快照或克隆中。
 
 
-NOTE: 如果在应用程序定义中明确引用了集群范围的资源、或者这些资源引用了任何应用程序命名源、则会将这些资源包括在备份、快照或克隆中。
-
-.开始之前
-确保AWS会话令牌到期时间足以执行任何长时间运行的S3备份操作。如果令牌在备份操作期间过期、则操作可能会失败。
-
-* 有关检查当前会话令牌到期时间的详细信息、请参见 https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["AWS API文档"^]。
-* 有关AWS资源凭据的详细信息、请参见 https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html["AWS IAM文档"^]。
-
-
+====
 [role="tabbed-block"]
 ====
 .使用CR创建计划
@@ -305,20 +200,25 @@ NOTE: 如果在应用程序定义中明确引用了集群范围的资源、或�
 
 ** *spec.applicationRef*：要备份的应用程序的Kubernetes名称。
 ** *spec.appVaultRef*：(_required_)应存储备份内容的AppVault的名称。
-** *spec.backupretention *：要保留的备份数。零表示不应创建任何备份。
+** *spec.backupRetention*：要保留的备份数量。零表示不应创建备份（仅快照）。
 ** *spec.snapshotretention *：要保留的快照数。零表示不应创建任何快照。
 ** *。spec.granularity*:计划的运行频率。可能值以及必需的关联字段：
 +
-*** `hourly` (要求您指定 `spec.minute`)
-*** `daily` (要求您指定 `spec.minute` 和 `spec.hour`)
-*** `weekly`(要求您指定 `spec.minute, spec.hour`、和 `spec.dayOfWeek`)
-*** `monthly`(要求您指定 `spec.minute, spec.hour`、和 `spec.dayOfMonth`)
+*** `Hourly`（要求您指定 `spec.minute`)
+*** `Daily`（要求您指定 `spec.minute`和 `spec.hour`)
+*** `Weekly`（要求您指定 `spec.minute, spec.hour`， 和 `spec.dayOfWeek`)
+*** `Monthly`（要求您指定 `spec.minute, spec.hour`， 和 `spec.dayOfMonth`)
+*** `Custom`
 
 
-** *spec.dayOfMonth*：(_可 选_)计划应运行的日期(1 - 31)。如果粒度设置为，则需要此字段 `monthly`。
-** *spec.dayOfWeek*：(_可 选_)计划应运行的日期(0到7)。值0或7表示星期日。如果粒度设置为，则需要此字段 `weekly`。
-** *spec.hour *：(_可 选_)计划应运行的时间(0 - 23)。如果粒度设置为、或，则需要此字段 `daily` `weekly` `monthly`。
-** *spec.minute：(_可 选_)计划应运行的分钟(0 - 59)。如果粒度设置为、、或，则需要此字段 `hourly` `daily` `weekly` `monthly`。
+** *spec.dayOfMonth*：（可选）计划应运行的月份日期（1 - 31）。如果粒度设置为 `Monthly`。该值必须以字符串形式提供。
+** *spec.dayOfWeek*：（可选）计划应运行的星期几（0 - 7）。值 0 或 7 表示星期日。如果粒度设置为 `Weekly`。该值必须以字符串形式提供。
+** *spec.hour*：（可选）计划应运行的小时数（0 - 23）。如果粒度设置为 `Daily`， `Weekly` ， 或者 `Monthly`。该值必须以字符串形式提供。
+** *spec.minute*：（可选）计划应运行的小时中的分钟数（0 - 59）。如果粒度设置为 `Hourly`， `Daily` ， `Weekly` ， 或者 `Monthly`。该值必须以字符串形式提供。
+** *。metadata.annotations.protect.trident.netapp.io/full-backup-rule*:(_可 选_)此标注用于指定计划完整备份的规则。您可以将其设置为以实现持续完整备份、也可以 `always`根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。
++
+备份和快照计划的示例 YAML：
+
 +
 [source, yaml]
 ----
@@ -328,16 +228,37 @@ kind: Schedule
 metadata:
   namespace: my-app-namespace
   name: my-cr-name
+  annotations:
+    protect.trident.netapp.io/full-backup-rule: "Monday,Thursday"
 spec:
   dataMover: Kopia
   applicationRef: my-application
   appVaultRef: appvault-name
   backupRetention: "15"
   snapshotRetention: "15"
-  granularity: <monthly>
-  dayOfMonth: "1"
-  dayOfWeek: "0"
+  granularity: Daily
   hour: "0"
+  minute: "0"
+----
++
+仅快照计划的示例 YAML：
+
++
+[source, yaml]
+----
+---
+apiVersion: protect.trident.netapp.io/v1
+kind: Schedule
+metadata:
+  namespace: my-app-namespace
+  name: my-snapshot-schedule
+spec:
+  applicationRef: my-application
+  appVaultRef: appvault-name
+  backupRetention: "0"
+  snapshotRetention: "15"
+  granularity: Daily
+  hour: "2"
   minute: "0"
 ----
 
@@ -362,8 +283,14 @@ NOTE: 您可以使用 `tridentctl-protect create schedule --help`查看此命令
 +
 [source, console]
 ----
-tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace>
+tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> --backup-retention <how_many_backups_to_retain> --data-mover <Kopia_or_Restic> --day-of-month <day_of_month_to_run_schedule> --day-of-week <day_of_month_to_run_schedule> --granularity <frequency_to_run> --hour <hour_of_day_to_run> --minute <minute_of_hour_to_run> --recurrence-rule <recurrence> --snapshot-retention <how_many_snapshots_to_retain> -n <application_namespace> --full-backup-rule <string>
 ----
++
+您可以将此标志设置为 `always`以实现持续完整备份、也可以 `--full-backup-rule`根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。例如、使用 `--full-backup-rule "Monday,Thursday"`计划在星期一和星期四进行完整备份。
+
++
+对于仅快照计划，设置 `--backup-retention 0`并指定一个大于 0 的值 `--snapshot-retention`。
+
 
 
 --

@@ -4199,21 +4199,11 @@ SMB</block>
   <block id="4dd48cffc8290e0b33e5c4ee6ddc6dbb" category="open-title">使用命令行界面创建备份</block>
   <block id="25ccf268b4f889fe28d3f3de94aace02" category="list-text">创建备份、将括号中的值替换为您环境中的信息。例如：</block>
   <block id="451d39e79b7f4418d96b486e79bbce7d" category="section-title">创建数据保护计划</block>
-  <block id="45ad0235a77627fe6b23b64997cecf69" category="paragraph">保护策略通过按定义的计划创建快照，备份或这两者来保护应用程序。您可以选择每小时，每天，每周和每月创建快照和备份，并且可以指定要保留的副本数。</block>
   <block id="1f3ba9ee33f6eeade259b37d0a9d4295" category="open-title">使用CR创建计划</block>
   <block id="0e94d109e3c6dd8f63d25b03253b5d5b" category="list-text">创建自定义资源(CR)文件并将其命名为<block ref="8b0c6e1f32e0c117335dedae62b11dba" prefix=" " category="inline-code"></block>。</block>
   <block id="fd3508664419c1ac5449e5dc6073188b" category="list-text">*spec.applicationRef*：要备份的应用程序的Kubernetes名称。</block>
-  <block id="42423d5a056001113d7894f5f70d7b91" category="list-text">*spec.backupretention *：要保留的备份数。零表示不应创建任何备份。</block>
   <block id="53ea99d8bfae17bb8fc2186524166892" category="list-text">*spec.snapshotretention *：要保留的快照数。零表示不应创建任何快照。</block>
   <block id="da9137c7fbfdc9b7f02e3ca8def0431d" category="list-text">*。spec.granularity*:计划的运行频率。可能值以及必需的关联字段：</block>
-  <block id="682d677bcf1ee88366ae753c477ace2d" category="list-text"><block ref="745fd0ea7f576f350a0eed4b8c48a8e2" prefix="" category="inline-code"></block> (要求您指定<block ref="aadd5cec42dbc02d51f62a1095401f59" prefix=" " category="inline-code"></block>)</block>
-  <block id="a1fbdfda9f5f05dbe5b05383881f400f" category="list-text"><block ref="bea79186fd7af2da67e59b4b15df5a26" prefix="" category="inline-code"></block> (要求您指定<block ref="aadd5cec42dbc02d51f62a1095401f59" prefix=" " category="inline-code"></block> 和<block ref="9199af27775b1a2a876e6d7b25540711" prefix=" " category="inline-code"></block>)</block>
-  <block id="41f071e1fad48cd8dcd577b1ac9c6917" category="list-text"><block ref="4a11fc05ed694c195f0703605b64da90" prefix="" category="inline-code"></block>(要求您指定<block ref="d5870327522a71f5b75f9d3793d0dc97" prefix=" " category="inline-code"></block>、和<block ref="4a04848e0e6e9423892ebc93ae61842d" prefix=" " category="inline-code"></block>)</block>
-  <block id="80ec5614051d9052a9306e31ccee727b" category="list-text"><block ref="708638881f3bac9d9c8c742c79502811" prefix="" category="inline-code"></block>(要求您指定<block ref="d5870327522a71f5b75f9d3793d0dc97" prefix=" " category="inline-code"></block>、和<block ref="9a7606959f42328ceeef95d70c353158" prefix=" " category="inline-code"></block>)</block>
-  <block id="fcf190043fb09fd4804fe6782a78a9a2" category="list-text">*spec.dayOfMonth*：(_可 选_)计划应运行的日期(1 - 31)。如果粒度设置为，则需要此字段<block ref="708638881f3bac9d9c8c742c79502811" prefix=" " category="inline-code"></block>。</block>
-  <block id="2af4c701bc864e6f851f67ac3c19d5ea" category="list-text">*spec.dayOfWeek*：(_可 选_)计划应运行的日期(0到7)。值0或7表示星期日。如果粒度设置为，则需要此字段<block ref="4a11fc05ed694c195f0703605b64da90" prefix=" " category="inline-code"></block>。</block>
-  <block id="b3af349c3c5d7f7aaa212c92d5ea9e51" category="list-text">*spec.hour *：(_可 选_)计划应运行的时间(0 - 23)。如果粒度设置为、或，则需要此字段<block ref="bea79186fd7af2da67e59b4b15df5a26" prefix=" " category="inline-code"></block><block ref="4a11fc05ed694c195f0703605b64da90" prefix=" " category="inline-code"></block><block ref="708638881f3bac9d9c8c742c79502811" prefix=" " category="inline-code"></block>。</block>
-  <block id="27c9cf2998853e8a9b756268b2844110" category="list-text">*spec.minute：(_可 选_)计划应运行的分钟(0 - 59)。如果粒度设置为、、或，则需要此字段<block ref="745fd0ea7f576f350a0eed4b8c48a8e2" prefix=" " category="inline-code"></block><block ref="bea79186fd7af2da67e59b4b15df5a26" prefix=" " category="inline-code"></block><block ref="4a11fc05ed694c195f0703605b64da90" prefix=" " category="inline-code"></block><block ref="708638881f3bac9d9c8c742c79502811" prefix=" " category="inline-code"></block>。</block>
   <block id="1326c499c45cd471c6075891c6573130" category="list-text">使用正确的值填充文件后<block ref="8b0c6e1f32e0c117335dedae62b11dba" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="6bb2ab2bbc2b0f3f5faec961628f6f4b" category="open-title">使用命令行界面创建计划</block>
   <block id="95e2bfc6f531a05575927e45b0a34558" category="list-text">创建保护计划、将括号中的值替换为您环境中的信息。例如：</block>
@@ -4842,8 +4832,6 @@ SMB</block>
   <block id="b55333d21cb50b1d1d34c529c999482f" category="list-text">注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.2.0</block>
   <block id="7e8b00e8f801232796015a8859867e55" category="list-text">注册表.k8s.io/sig-storage/CsI-N节点 驱动程序注册器：v2.13.0</block>
   <block id="0915385df687d0c4a0afb57a61f02af3" category="cell"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>仅限、、<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>和<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>。可与Kubnetes非正常节点关闭(NGN)结合使用、使集群管理员能够在节点运行状况不正常时将已挂载卷的工作负载安全地迁移到新节点。</block>
-  <block id="abef2fa5ff95ef0fcfa0688ea6bcb3a9" category="cell"><block ref="c257f92937b246af1d65825bab674c3b" prefix="" category="inline-code"></block></block>
-  <block id="abd94f25c6f83f31232f41e2c03a17c1" category="cell">启用自动后端配置、从而根据输入参数无缝创建后端和存储类。</block>
   <block id="584255a02e82c085a6eee64514bf791a" category="paragraph">强制分离仅适用于<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>、、<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>和<block ref="bc63092df841150cda2e4fd2992a38d1" prefix=" " category="inline-code"></block>。<block ref="c9cdb62835ea4d8965a6e946dc9826f0" prefix=" " category="inline-code"></block>在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。默认情况下、对于Kubbernetes 1.28及更高版本、NGN处于启用状态。有关详细信息，请参阅 <block ref="a0c86c823d7e699cfc277c93de351a2d" category="inline-link-macro-rx"></block>。</block>
   <block id="97949d2167cfb02925ebeb5fbc18e41c" category="admonition">使用或驱动程序时<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>、您需要将后端配置中的参数设置<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>、以便Trident可以限制通过受管导出策略应用了此内容的Kubornetes<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>节点的访问。</block>
   <block id="f27e6cf95381139bd9916c64f178d212" category="list-text">对于运行Kubbernetes 1.24的集群，请使用 <block ref="ccef28639b5a7d8b851d32c1ca719ce3" category="inline-link-macro-rx"></block>。</block>
@@ -5410,12 +5398,7 @@ SMB</block>
   <block id="13001655f60b86601d45076ffb7e8cb4" category="list-text">*spec.snapshotRef*：（可选）：用作备份源的快照的名称。如果不提供此参数、则会创建和备份临时快照。</block>
   <block id="ba2af206b00fb98d583a5fe7908af2cc" category="list-text">*metadata.annotations.protect.trident.netapp.io/full-backup*：（可选）此注释用于指定备份是否应该是非增量的。默认情况下、所有备份均为增量备份。但是，如果此标注设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，则备份将变为非增量备份。如果未指定、则备份将采用默认增量备份设置。最佳做法是、定期执行完整备份、然后在两次完整备份之间执行增量备份、以最大程度地降低与还原相关的风险。</block>
   <block id="93b1107cde6ba041513cd9ccf7b4bae0" category="paragraph">您可以选择使用<block ref="53f5240b338c91a0568f15e2562a35de" prefix=" " category="inline-code"></block>标志来指定备份是否应为非增量备份。默认情况下、所有备份均为增量备份。使用此标志时、备份将变为非增量备份。最佳做法是、定期执行完整备份、然后在两次完整备份之间执行增量备份、以最大程度地降低与还原相关的风险。</block>
-  <block id="99cd57e28c97c0577c8e6d701de91b88" category="section-title">创建备份计划</block>
-  <block id="46773fe21c0cf6451e8de9f6a18da51f" category="paragraph">您可以计划非增量完整备份。默认情况下、所有备份均为增量备份。定期执行完整备份以及其间的增量备份有助于降低与还原相关的风险。</block>
-  <block id="2c26e9a03dd91b6eafe57094f8245ad8" category="list-text">创建自定义资源(CR)文件并将其命名为<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block>。</block>
   <block id="1770a13eba6600496a86d2f1cf357813" category="list-text">*。metadata.annotations.protect.trident.netapp.io/full-backup-rule*:(_可 选_)此标注用于指定计划完整备份的规则。您可以将其设置为以实现持续完整备份、也可以<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block>根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。</block>
-  <block id="9355f48a9876fcaefe0351294df4e05c" category="list-text">使用正确的值填充文件后<block ref="cb18a3ae8903eb525dd256cfa3d4576e" prefix=" " category="inline-code"></block> 、应用CR：</block>
-  <block id="1bd9850ddb901f0e741293ec737c5de6" category="list-text">创建备份计划、将括号中的值替换为您环境中的信息。例如：</block>
   <block id="ab5807fb06fd654f730a4ed5a02bb950" category="paragraph">您可以将此标志设置为<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block>以实现持续完整备份、也可以<block ref="61df7cc86eb24ab1300f0e74e74bb50c" prefix=" " category="inline-code"></block>根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。例如、使用<block ref="d416cce9d6bcb838c8958b9fbb84dffa" prefix=" " category="inline-code"></block>计划在星期一和星期四进行完整备份。</block>
   <block id="396e0c641a3eb6083fa0ba7badcff8ac" category="admonition">确保回收策略设置为<block ref="f2a6c498fb90ee345d997f888fce3b18" prefix=" " category="inline-code"></block>从对象存储中删除所有备份数据。该策略的默认设置是<block ref="afece4245269582cb2f1009d4fb52047" prefix=" " category="inline-code"></block>以避免意外数据丢失。如果政策没有改变<block ref="f2a6c498fb90ee345d997f888fce3b18" prefix=" " category="inline-code"></block> ，备份数据将保留在对象存储中，需要手动删除。</block>
   <block id="28b0a2e1fa7af6d4a2a83bc61c130c0f" category="list-text">确保连接到集群的 NetApp 存储使用 Trident 24.02 或更新版本（建议使用 Trident 24.10）。</block>
@@ -5433,11 +5416,8 @@ SMB</block>
   <block id="738d4e5947ef1239f584cd47619cf356" category="paragraph">本节列出了系统中支持配置各种行为的注解。如果用户未明确设置注解，系统将使用默认值。</block>
   <block id="f49fa3f76b2a4fcdf04dff369d417d84" category="cell">protected.trident.netapp.io/data-mover-timeout-sec</block>
   <block id="a666ad37acca2b6a0ee400d7b2acf088" category="cell">允许数据移动设备操作停止的最长时间（以秒为单位）。</block>
-  <block id="94f6d7e04a4d452035300f18b984988c" category="cell">300</block>
   <block id="3b2f6f0bb673ee02e8aafe624e2e971f" category="cell">protected.trident.netapp.io/kopia-content-cache-size-limit-mb</block>
-  <block id="157db7df530023575515d366c9b672e8" category="cell">整数</block>
   <block id="f044e4dc5e5fdde631180451c25a973c" category="cell">Kopia 内容缓存的最大大小限制（以兆字节为单位）。</block>
-  <block id="a9b7ba70783b617e9998dc4dd82eb3c5" category="cell">1000</block>
   <block id="0ae48837f8ebc5da6e90828852d02027" category="admonition">25.06 及更高版本不需要此步骤。</block>
   <block id="ed98e5c2a168d1606df0370fe371df28" category="paragraph">从版本 24.10 升级时，升级期间运行的快照可能会失败。此失败不会阻止将来创建快照（无论是手动快照还是计划快照）。如果升级期间快照失败，您可以手动创建新快照以确保应用程序受到保护。</block>
   <block id="756accba0f305693c47126f932bd7ac6" category="paragraph">为避免潜在的故障，您可以在升级前禁用所有快照计划，然后在升级后重新启用。但是，这会导致升级期间丢失所有计划的快照。</block>
@@ -5831,4 +5811,22 @@ SMB</block>
   <block id="bef9303dd11d749d2facca8b3064630e" category="list-text">OpenShift 4.12、4.14 - 4.19（如果您计划使用 OpenShift 4.19 进行 iSCSI 节点准备，则支持的最低Trident版本为 25.06.1。）</block>
   <block id="3b30a7aea8a6f98824f61888e8628449" category="inline-link-macro">Red Hat 扩展更新支持 (EUS) 发布生命周期</block>
   <block id="6b62784ed0975ba9ec1e2f69af860e25" category="admonition">Trident继续支持旧版 OpenShift 版本，与<block ref="d73f30265a77d175825591fd08508146" category="inline-link-macro-rx"></block>，即使它们依赖上游不再受官方支持的 Kubernetes 版本。在这种情况下安装Trident时，您可以放心地忽略有关 Kubernetes 版本的任何警告消息。</block>
+  <block id="4efb4e385545dd4fb4a8cf16e5ef7763" category="paragraph">保护策略通过按照定义的计划创建快照、备份或两者来保护应用程序。您可以选择每小时、每天、每周和每月创建快照和备份，并可以指定要保留的副本数量。您可以使用 full-backup-rule 注释来安排非增量式完整备份。默认情况下，所有备份都是增量的。定期执行完整备份以及其间的增量备份有助于降低与恢复相关的风险。</block>
+  <block id="71f68550bd8133367f60c4ea58f6680d" category="list-text">您可以通过设置<block ref="90d510783632c9f8604cd880d9f84137" prefix=" " category="inline-code"></block>归零，<block ref="460d2880d85882a9c98985b9b97c15f8" prefix=" " category="inline-code"></block>为大于零的值。环境<block ref="460d2880d85882a9c98985b9b97c15f8" prefix=" " category="inline-code"></block>为零意味着任何计划的备份仍将创建快照，但这些快照是临时的，并在备份完成后立即被删除。</block>
+  <block id="183c1f11eb5fcbc4a480f1ed7ec6315d" category="list-text">*spec.backupRetention*：要保留的备份数量。零表示不应创建备份（仅快照）。</block>
+  <block id="50b9f8f4650a278b466928c2105fc23a" category="list-text"><block ref="769cb50c95fd3a43c659aa73aba99e5b" prefix="" category="inline-code"></block>（要求您指定<block ref="aadd5cec42dbc02d51f62a1095401f59" prefix=" " category="inline-code"></block>)</block>
+  <block id="03b866ae4a8a50619a4126154196606b" category="list-text"><block ref="c512b685438f41daa7386329a3b8f8d3" prefix="" category="inline-code"></block>（要求您指定<block ref="aadd5cec42dbc02d51f62a1095401f59" prefix=" " category="inline-code"></block>和<block ref="9199af27775b1a2a876e6d7b25540711" prefix=" " category="inline-code"></block>)</block>
+  <block id="2cfd34c47c4dbe46650e40185474bd21" category="list-text"><block ref="6c25e6a6da95b3d583c6ec4c3f82ed4d" prefix="" category="inline-code"></block>（要求您指定<block ref="d5870327522a71f5b75f9d3793d0dc97" prefix=" " category="inline-code"></block>， 和<block ref="4a04848e0e6e9423892ebc93ae61842d" prefix=" " category="inline-code"></block>)</block>
+  <block id="e36f4a95a41882feb14dd016e82700bc" category="list-text"><block ref="9030e39f00132d583da4122532e509e9" prefix="" category="inline-code"></block>（要求您指定<block ref="d5870327522a71f5b75f9d3793d0dc97" prefix=" " category="inline-code"></block>， 和<block ref="9a7606959f42328ceeef95d70c353158" prefix=" " category="inline-code"></block>)</block>
+  <block id="8461dc1f0cf640973db2ba7288efba21" category="list-text"><block ref="90589c47f06eb971d548591f23c285af" prefix="" category="inline-code"></block></block>
+  <block id="85b77ce1b7f65fe79fd40e5b53ba60f5" category="list-text">*spec.dayOfMonth*：（可选）计划应运行的月份日期（1 - 31）。如果粒度设置为<block ref="9030e39f00132d583da4122532e509e9" prefix=" " category="inline-code"></block>。该值必须以字符串形式提供。</block>
+  <block id="c3d0b5531d946d2ff5d8deeeec3e7984" category="list-text">*spec.dayOfWeek*：（可选）计划应运行的星期几（0 - 7）。值 0 或 7 表示星期日。如果粒度设置为<block ref="6c25e6a6da95b3d583c6ec4c3f82ed4d" prefix=" " category="inline-code"></block>。该值必须以字符串形式提供。</block>
+  <block id="6bacf4f9c6600aa7f82b6f6b4f8a85e0" category="list-text">*spec.hour*：（可选）计划应运行的小时数（0 - 23）。如果粒度设置为<block ref="c512b685438f41daa7386329a3b8f8d3" prefix=" " category="inline-code"></block>，<block ref="6c25e6a6da95b3d583c6ec4c3f82ed4d" prefix=" " category="inline-code"></block> ， 或者<block ref="9030e39f00132d583da4122532e509e9" prefix=" " category="inline-code"></block>。该值必须以字符串形式提供。</block>
+  <block id="7793fda5cb73b26f1ecdca11dcd1383e" category="list-text">*spec.minute*：（可选）计划应运行的小时中的分钟数（0 - 59）。如果粒度设置为<block ref="769cb50c95fd3a43c659aa73aba99e5b" prefix=" " category="inline-code"></block>，<block ref="c512b685438f41daa7386329a3b8f8d3" prefix=" " category="inline-code"></block> ，<block ref="6c25e6a6da95b3d583c6ec4c3f82ed4d" prefix=" " category="inline-code"></block> ， 或者<block ref="9030e39f00132d583da4122532e509e9" prefix=" " category="inline-code"></block>。该值必须以字符串形式提供。</block>
+  <block id="16220401716289e6ffa12bfc49da1d84" category="paragraph">备份和快照计划的示例 YAML：</block>
+  <block id="ce230d4d200ba39549537496edaaef6a" category="paragraph">仅快照计划的示例 YAML：</block>
+  <block id="19c776919085070d66d199dd494adbbf" category="paragraph">对于仅快照计划，设置<block ref="39c61d5d6dee0f5540cfcb77307edd90" prefix=" " category="inline-code"></block>并指定一个大于 0 的值<block ref="2c3fac80fc69264c6dbace5f18065639" prefix=" " category="inline-code"></block>。</block>
+  <block id="1991a9f25a93e75eb693b6e02bc130ed" category="list-text">Trident保护备份仅支持 Linux 计算节点。  Windows 计算节点不支持备份操作。</block>
+  <block id="aff5adfa33a9913ad2ab5d578c3f08c8" category="cell">“300”</block>
+  <block id="9d397fb20eca1ebda087637e32a30a7b" category="cell">“1000”</block>
 </blocks>
