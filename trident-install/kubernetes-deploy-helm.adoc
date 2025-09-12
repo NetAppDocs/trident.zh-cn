@@ -246,6 +246,11 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 
 NOTE: 从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。
 |  
+
+
+| `k8sAPIQPS`  a| 
+控制器与 Kubernetes API 服务器通信时使用的每秒查询数 (QPS) 限制。  Burst 值根据 QPS 值自动设置。
+| `100`; 选修的 
 |===
 
 

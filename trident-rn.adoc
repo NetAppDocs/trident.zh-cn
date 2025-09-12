@@ -318,7 +318,7 @@ link:./trident-protect/learn-about-trident-protect.html["详细了解Trident Pro
 
 
 
-* 为安装程序添加了一个新标志 `--k8s_api_qps`、用于设置Trident与Kubbernetes API服务器通信所使用的QPS值。
+* 添加了新标志 `--k8s-api-qps`安装程序设置Trident与 Kubernetes API 服务器通信所使用的 QPS 值。
 * 为安装程序添加了 `--node-prep`一个标志、用于自动管理Kubernetes集群节点上的存储协议依赖关系。已测试并验证与Amazon Linux 2023 iSCSI存储协议的兼容性
 * 增加了对在非正常节点关闭情况下强制断开ONTAP - NAS经济型卷的支持。
 * 使用后端选项时、新的NFS-NAS经济型ONTAP卷将使用每个qtree导出策略 `autoExportPolicy`。只有在发布时、qtrees才会映射到节点限制性导出策略、以提高访问控制和安全性。当Trident从所有节点取消发布卷时、现有qtrees将切换到新的导出策略模型、这样做不会影响活动工作负载。
