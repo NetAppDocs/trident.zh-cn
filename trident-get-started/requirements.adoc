@@ -218,6 +218,31 @@ link:../trident-reference/ports.html["Trident端口"]
 
 对于气隙安装、以下列表是安装Trident所需容器映像的参考。使用 `tridentctl images`命令验证所需容器映像的列表。
 
+
+
+=== Trident 25.06.2 所需的容器镜像
+
+[cols="2"]
+|===
+| Kubernetes版本 | 容器映像 
+
+
+| v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、 v1.32.0、v1.33.0  a| 
+* docker.io/netapp/trident:25.06.2
+* docer.io/NetApp/trdent-autostsupport：25.06
+* 注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.2.0
+* 注册表.k8s.io/sig-storage/CsI-Attacher：v4.8.1
+* 注册表.k8s.io/sig-storage/CsI-s不同：v1.13.2
+* 注册表.k8s.io/sig-storage/CsI-snapshotter：v8.2.1
+* 注册表.k8s.io/sig-storage/CsI-N节点 驱动程序注册器：v2.13.0
+* docker.io/netapp/trident-operator:25.06.2（可选）
+
+
+|===
+
+
+=== Trident 25.06 所需的容器镜像
+
 [cols="2"]
 |===
 | Kubernetes版本 | 容器映像 

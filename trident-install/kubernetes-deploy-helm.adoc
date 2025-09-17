@@ -254,11 +254,6 @@ NOTE: *技术预览*：此功能在NetApp Trident 25.06 中处于实验阶段，
 | `k8sAPIQPS`  a| 
 控制器与 Kubernetes API 服务器通信时使用的每秒查询数 (QPS) 限制。  Burst 值根据 QPS 值自动设置。
 | `100`; 选修的 
-
-
-| `k8sAPIQPS`  a| 
-控制器与 Kubernetes API 服务器通信时使用的每秒查询数 (QPS) 限制。  Burst 值根据 QPS 值自动设置。
-| `100`; 选修的 
 |===
 
 
