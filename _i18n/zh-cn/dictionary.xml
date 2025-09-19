@@ -3556,10 +3556,8 @@ SMB</block>
   <block id="0efdc02c2d9fa1fcf31ff85fec4ed8de" category="summary">您可以使用操作员轻松升级现有的Trident安装。</block>
   <block id="9a98985a342ee2d7d213394e90d838a9" category="doc">使用Trident Operator或Helm升级Trident安装</block>
   <block id="5430a6b8f98712c8210f8df2d906793a" category="paragraph">您可以使用Trident操作员手动或使用Helm升级Trident。您可以从Trident操作员安装升级到另一个Trident操作员安装、也可以从安装升级<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>到Trident操作员版本。在升级Trident操作员安装之前、请查看<block ref="5cffa5fbe758cc3901f0e33c78b29d1b" category="inline-link-macro-rx"></block>。</block>
-  <block id="7be5118cbf87396f839e400ffc94aecd" category="paragraph">您可以从集群范围的三端技术人员安装升级到另一个集群范围的三端技术人员安装。所有Trident 21.01及更高版本都使用集群范围的运算符。</block>
   <block id="18466b7fafaca62c9c0d2438889ca0c6" category="admonition">要从使用命名空间范围的运算符(版本20.07到20.10)安装的Trident升级、请按照Trident的升级说明进行操作<block ref="567dd1ff029f25a404a69ff1e3c8d83b" category="inline-link-macro-rx"></block>。</block>
   <block id="76e06d694db0c428e4d51e3354a7a4bd" category="list-text">验证Trident版本：</block>
-  <block id="5681bedbe2af394566fa4b56d2d4c938" category="list-text">删除用于安装当前Trident实例的Trident运算符。例如、如果要从23.07升级、请运行以下命令：</block>
   <block id="1863fa40be678d4efa33c952a5cba52e" category="paragraph">您可以升级Trident Helm安装。</block>
   <block id="b2095ed231848e69cbd92e44defb033b" category="admonition">在将安装了Trident的Kubernetes集群从1.24升级到1.25或更高版本时、您必须<block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block>先更新values.yaml以设置为或添加到<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>命令、<block ref="96d5d0b9a6e3e01b2ae2ed889f75d22e" prefix=" " category="inline-code"></block>然后才能升级集群。<block ref="94ef2a130a825358ab3002442d6e5145" prefix=" " category="inline-code"></block></block>
   <block id="5198b91e39c3a2f369e2426e2732625e" category="paragraph">如果您已将Kubnetes集群从1.24升级到1.25、但未升级Trident Helm、则Helm升级将失败。要完成Helm升级、请作为前提条件执行以下步骤：</block>
@@ -5383,7 +5381,6 @@ SMB</block>
   <block id="287d9354cd0e889ca3c170f1a20060ce" category="paragraph">在中<block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>，更新<block ref="ff1ea91c85a440ad216d6d8dafdb2b4a" prefix=" " category="inline-code"></block> 以反映映像注册表的位置。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。例如：</block>
   <block id="3ce13997cacbb7668e6636ffb21ba04a" category="list-text"><block ref="a5ad704b64900183c3e85fea9edad0f0" prefix="" category="inline-code"></block> 如果您的所有映像都位于一个注册表中。</block>
   <block id="b6e3b64ea99d65462c313d10936507a1" category="list-text"><block ref="f5f5dab4b39c35c32ac8846470b513ad" prefix="" category="inline-code"></block> 如果您的三端映像与CSI映像位于不同的注册表中。</block>
-  <block id="3821e533e08e97c63527fb3e1ab72017" category="list-text">使用适用于您的环境的正确捆绑包YAML文件安装Trident、其中_是 或<block ref="5a02ebff4889c2de0379a0fb10bed282" prefix=" " category="inline-code"></block>基于您的&lt;bundle.yaml&gt;<block ref="bd2cc8575fe69c7f775292759380c838" prefix=" " category="inline-code"></block>版本。例如、如果要安装Trident 25.06、请运行以下命令：</block>
   <block id="d180bc23594b2a81a598da69af7136af" category="list-text">如果您 <block ref="538f4beb16c8502421a8389e199d34ce" category="inline-link-macro-rx"></block>使用，则可以使用<block ref="9ba27131bd1269499334744b89769fac" prefix=" " category="inline-code"></block> 一步升级。如果您未添加Helm repo或无法使用它进行升级：</block>
   <block id="19edaf19feadf74a38c5b3da24fd64bd" category="list-text">使用<block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 命令、其中<block ref="c49c0910ea156a14c49e617b509b605a" prefix=" " category="inline-code"></block> 反映了要升级到的版本。</block>
   <block id="843e8c92f2887fa83e4564f86e6a7ca0" category="list-text">您可以直接升级到已安装版本的四个版本窗口中的任何目标版本。例如、您可以直接从24.06 (或任何24.06 DOT版本)升级到25.06。</block>
@@ -5846,4 +5843,9 @@ SMB</block>
   <block id="c70a7b422c141acedc1060dd737c17a5" category="section-title">25.06.2 中的新增功能</block>
   <block id="3e49406f91b1756e000630d03496d0da" category="list-text">*Kubernetes*：修复了从 Kubernetes 节点分离卷时发现不正确的 iSCSI 设备的严重问题。</block>
   <block id="76adb46eab5f5dd5b58c3c8a62320c12" category="section-title">25.06.1 中的变更</block>
+  <block id="618fab30e005e12b783d70218c18af46" category="paragraph">您可以从集群范围的Trident操作员安装升级到另一个集群范围的Trident操作员安装。所有Trident版本都使用集群范围的操作符。</block>
+  <block id="723dc7fd3bdd515b6046b390cb3bc388" category="list-text">更新<block ref="9fa80de5781893b057ff1d535201893b" prefix=" " category="inline-code"></block>，<block ref="244895464fd1d6c7ff5a2044c324c0fc" prefix=" " category="inline-code"></block> ， 和<block ref="36b3316c230e2ae6e23e806fff5277a2" prefix=" " category="inline-code"></block>使用您要升级到的版本（例如 25.06）的注册表和图像路径以及正确的密钥。</block>
+  <block id="b162e08e74f97a30264a0b1a8c613b78" category="list-text">删除用于安装当前Trident实例的Trident操作员。例如，如果您从 25.02 升级，请运行以下命令：</block>
+  <block id="31bb2a9401efa36d10c52fa5f70fb6bc" category="list-text">使用适合您环境的正确 bundle YAML 文件安装Trident ，其中 _&lt;bundle.yaml&gt;_ 是<block ref="bd2cc8575fe69c7f775292759380c838" prefix=" " category="inline-code"></block>或者<block ref="5a02ebff4889c2de0379a0fb10bed282" prefix=" " category="inline-code"></block>根据您的 Kubernetes 版本。例如，如果您正在安装Trident 25.06.0，请运行以下命令：</block>
+  <block id="6c352d855b7a2a90e6e0514063875d1a" category="list-text">编辑三叉戟项圈以包含图像 25.06.0。</block>
 </blocks>

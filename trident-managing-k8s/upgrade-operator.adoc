@@ -18,7 +18,7 @@ summary: 您可以使用操作员轻松升级现有的Trident安装。
 
 == 升级手动安装
 
-您可以从集群范围的三端技术人员安装升级到另一个集群范围的三端技术人员安装。所有Trident 21.01及更高版本都使用集群范围的运算符。
+您可以从集群范围的Trident操作员安装升级到另一个集群范围的Trident操作员安装。所有Trident版本都使用集群范围的操作符。
 
 
 NOTE: 要从使用命名空间范围的运算符(版本20.07到20.10)安装的Trident升级、请按照Trident的升级说明进行操作link:../earlier-versions.html["您安装的版本"]。
@@ -40,20 +40,22 @@ NOTE: 要从使用命名空间范围的运算符(版本20.07到20.10)安装的Tr
 ----
 ./tridentctl -n trident version
 ----
-. 删除用于安装当前Trident实例的Trident运算符。例如、如果要从23.07升级、请运行以下命令：
+. 更新 `operator.yaml`， `tridentorchestrator_cr.yaml` ， 和 `post_1_25_bundle.yaml`使用您要升级到的版本（例如 25.06）的注册表和图像路径以及正确的密钥。
+. 删除用于安装当前Trident实例的Trident操作员。例如，如果您从 25.02 升级，请运行以下命令：
 +
 [listing]
 ----
-kubectl delete -f 23.07.0/trident-installer/deploy/<bundle.yaml> -n trident
+kubectl delete -f 25.02.0/trident-installer/deploy/<bundle.yaml> -n trident
 ----
 . 如果您使用自定义了初始安装 `TridentOrchestrator` 属性、您可以编辑 `TridentOrchestrator` 用于修改安装参数的对象。其中可能包括为脱机模式指定镜像Trident和CSI映像注册表、启用调试日志或指定映像提取密钥所做的更改。
-. 使用适用于您的环境的正确捆绑包YAML文件安装Trident、其中_是 或 `bundle_post_1_25.yaml`基于您的<bundle.yaml>
-`bundle_pre_1_25.yaml`版本。例如、如果要安装Trident 25.06、请运行以下命令：
+. 使用适合您环境的正确 bundle YAML 文件安装Trident ，其中 _<bundle.yaml>_ 是
+`bundle_pre_1_25.yaml`或者 `bundle_post_1_25.yaml`根据您的 Kubernetes 版本。例如，如果您正在安装Trident 25.06.0，请运行以下命令：
 +
 [listing]
 ----
 kubectl create -f 25.06.0/trident-installer/deploy/<bundle.yaml> -n trident
 ----
+. 编辑三叉戟项圈以包含图像 25.06.0。
 
 
 
