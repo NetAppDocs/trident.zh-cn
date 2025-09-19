@@ -5848,4 +5848,5 @@ SMB</block>
   <block id="b162e08e74f97a30264a0b1a8c613b78" category="list-text">删除用于安装当前Trident实例的Trident操作员。例如，如果您从 25.02 升级，请运行以下命令：</block>
   <block id="31bb2a9401efa36d10c52fa5f70fb6bc" category="list-text">使用适合您环境的正确 bundle YAML 文件安装Trident ，其中 _&lt;bundle.yaml&gt;_ 是<block ref="bd2cc8575fe69c7f775292759380c838" prefix=" " category="inline-code"></block>或者<block ref="5a02ebff4889c2de0379a0fb10bed282" prefix=" " category="inline-code"></block>根据您的 Kubernetes 版本。例如，如果您正在安装Trident 25.06.0，请运行以下命令：</block>
   <block id="6c352d855b7a2a90e6e0514063875d1a" category="list-text">编辑三叉戟项圈以包含图像 25.06.0。</block>
+  <block id="2094195fd55afe126d43ae0e716d1274" category="admonition">跨命名空间克隆仅支持<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>和<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>存储驱动程序。不支持只读克隆。</block>
 </blocks>
