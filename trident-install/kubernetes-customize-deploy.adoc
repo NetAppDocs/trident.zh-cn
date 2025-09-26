@@ -151,7 +151,7 @@ NOTE: 有关格式化POD参数的详细信息、请参阅 link:https://kubernete
 
 === 有关强制断开的详细信息
 
-强制分离仅适用于 `ontap-san`、、 `ontap-san-economy`和 `onatp-nas-economy`。 `onatp-nas`在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。默认情况下、对于Kubbernetes 1.28及更高版本、NGN处于启用状态。有关详细信息，请参阅 link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubnetes：节点非正常关闭"^]。
+强制分离适用于 `ontap-san`， `ontap-san-economy` ， `ontap-nas` ， 和 `ontap-nas-economy`仅有的。在启用强制分离之前，必须在 Kubernetes 集群上启用非正常节点关闭 (NGNS)。Kubernetes 1.28 及以上版本默认启用 NGNS。有关详细信息，请参阅link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubnetes：节点非正常关闭"^] 。
 
 
 NOTE: 使用或驱动程序时 `ontap-nas`、您需要将后端配置中的参数设置 `autoExportPolicy`为 `true`、以便Trident可以限制通过受管导出策略应用了此内容的Kubornetes `ontap-nas-economy`节点的访问。
