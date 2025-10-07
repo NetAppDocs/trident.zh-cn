@@ -5619,7 +5619,6 @@ SMB</block>
   <block id="669b3bc77d6c32aa7e2c1bfe7cc9b452" category="cell">表示 QoS 类型：自动或手动。* Trident 25.06 技术预览版*</block>
   <block id="06b9281e396db002010bde1de57262eb" category="cell">自动</block>
   <block id="ae4d8eab27ac4c80edb95b30fc583854" category="cell"><block ref="08566efed9fdb13392ea1b11d6b533a4" prefix="" category="inline-code"></block></block>
-  <block id="dd71c14df42fdb8389de90b03536c45f" category="cell">设置允许的最大吞吐量。仅支持手动 QoS 容量池。* Trident 25.06 技术预览版*</block>
   <block id="3eef9a5398f4b353f217625ca5768cc0" category="cell"><block ref="60f649f49ce41c3f0123ddceb5c9f688" prefix="" category="inline-code"></block></block>
   <block id="b70d8bcceb91e3665bafe307a5b97682" category="example-title">具有手动 QoS 容量池的后端示例</block>
   <block id="3ffc8f9f72c24f82c0703e3b5a78db96" category="paragraph">此后端配置将卷放置在 Azure 的<block ref="6356111305f5daab178fa6051b7a8ae7" prefix=" " category="inline-code"></block>具有手动 QoS 容量池的位置。* NetApp Trident 25.06 中的技术预览*。</block>
@@ -5849,4 +5848,5 @@ SMB</block>
   <block id="ac359e2f52a664608f09a2e7a47ec527" category="paragraph">强制分离适用于<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>，<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> ，<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ， 和<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>仅有的。在启用强制分离之前，必须在 Kubernetes 集群上启用非正常节点关闭 (NGNS)。Kubernetes 1.28 及以上版本默认启用 NGNS。有关详细信息，请参阅<block ref="a0c86c823d7e699cfc277c93de351a2d" category="inline-link-macro-rx"></block> 。</block>
   <block id="04bed90b9e7d65b6d7dd48211e0a9f6c" category="paragraph">创建<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>自定义资源定义（CRD）。您将创建一个<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>稍后自定义资源。使用适当的 CRD YAML 版本<block ref="91ff3926f7c7983bb4a56689f631e6c9" prefix=" " category="inline-code"></block>创建<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>CRD：</block>
   <block id="ef2305a5dae85359e321280954448fc1" category="paragraph">创建<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>自定义资源定义（CRD）。您将创建一个<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>稍后自定义资源。使用适当的 CRD YAML 版本<block ref="91ff3926f7c7983bb4a56689f631e6c9" prefix=" " category="inline-code"></block>创建<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>CRD。</block>
+  <block id="4fe2efdffc54aa536c8714ad9bab97a2" category="cell">设置允许的最大吞吐量（以 MiB/秒为单位）。仅支持手动 QoS 容量池。* Trident 25.06 技术预览版*</block>
 </blocks>

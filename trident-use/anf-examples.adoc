@@ -103,7 +103,7 @@ Azure NetApp Files后端提供了这些配置选项。
 | `qosType` | 表示 QoS 类型：自动或手动。* Trident 25.06 技术预览版* | 自动 
 
 
-| `maxThroughput` | 设置允许的最大吞吐量。仅支持手动 QoS 容量池。* Trident 25.06 技术预览版* | `4 MiB/sec` 
+| `maxThroughput` | 设置允许的最大吞吐量（以 MiB/秒为单位）。仅支持手动 QoS 容量池。* Trident 25.06 技术预览版* | `4 MiB/sec` 
 |===
 
 NOTE: 有关网络功能的详细信息、请参见 link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/configure-network-features["配置Azure NetApp Files 卷的网络功能"^]。
