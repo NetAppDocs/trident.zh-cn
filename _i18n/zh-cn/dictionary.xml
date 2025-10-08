@@ -5849,4 +5849,9 @@ SMB</block>
   <block id="04bed90b9e7d65b6d7dd48211e0a9f6c" category="paragraph">创建<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>自定义资源定义（CRD）。您将创建一个<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>稍后自定义资源。使用适当的 CRD YAML 版本<block ref="91ff3926f7c7983bb4a56689f631e6c9" prefix=" " category="inline-code"></block>创建<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>CRD：</block>
   <block id="ef2305a5dae85359e321280954448fc1" category="paragraph">创建<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>自定义资源定义（CRD）。您将创建一个<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>稍后自定义资源。使用适当的 CRD YAML 版本<block ref="91ff3926f7c7983bb4a56689f631e6c9" prefix=" " category="inline-code"></block>创建<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>CRD。</block>
   <block id="4fe2efdffc54aa536c8714ad9bab97a2" category="cell">设置允许的最大吞吐量（以 MiB/秒为单位）。仅支持手动 QoS 容量池。* Trident 25.06 技术预览版*</block>
+  <block id="62fd283f8b260923bfb8cde9c318b507" category="section-title">SnapMirror复制的 Kubernetes 集群要求</block>
+  <block id="03ba2e33bef23ce0f974f7521e636992" category="paragraph">确保您的 Kubernetes 集群满足以下要求：</block>
+  <block id="da635a644d2727b18debb9ea48c169b6" category="list-text">*AppVault 可访问性*：源集群和目标集群都必须具有网络访问权限，才能从 AppVault 读取和写入应用程序对象复制。</block>
+  <block id="debae13e33c5f861b21b322eed48bf3f" category="list-text">*网络连接*：配置防火墙规则、存储桶权限和 IP 允许列表，以实现跨 WAN 的集群和 AppVault 之间的通信。</block>
+  <block id="35d8960b4053e461085ad015f6805d14" category="admonition">许多企业环境在 WAN 连接中实施严格的防火墙策略。在配置复制之前，请与您的基础设施团队验证这些网络要求。</block>
 </blocks>
