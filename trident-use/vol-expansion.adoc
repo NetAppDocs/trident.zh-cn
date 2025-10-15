@@ -12,7 +12,7 @@ summary: Trident使Kubnetes用户能够在创建卷后对其进行扩展。查�
 
 
 [role="lead"]
-Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展iSCSI、NFS和FC卷所需配置的信息。
+Trident为 Kubernetes 用户提供了在创建卷后扩展卷的能力。查找有关扩展 iSCSI、NFS、SMB、NVMe/TCP 和 FC 卷所需的配置的信息。
 
 
 

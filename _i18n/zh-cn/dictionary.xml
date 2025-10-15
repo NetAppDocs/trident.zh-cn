@@ -4996,7 +4996,6 @@ SMB</block>
   <block id="b49d0358b75283a3c4f7a2e7229fc097" category="list-text">*Destination命名空间owner:*<block ref="3f6857fc20ae2372499a71869ac3fe7e" prefix="(" category="inline-code"></block>在目标命名空间中创建PVC<block ref="6fde1ba4470caca933058264dbfdea2e" prefix="(" category="inline-code"></block>)，使用<block ref="77167d63af133b47bca3bbacd580fa44" prefix=" " category="inline-code"></block>或<block ref="bfd2f3d7d043509924eaac702957a99d" prefix=" " category="inline-code"></block>和<block ref="2413b30c8869ee9ac5b416f44004a212" prefix=" " category="inline-code"></block>标注指定源PVC。</block>
   <block id="188811e4b8b33253d84403cd9a1fcfa9" category="list-text">对于使用PV-NAS经济型驱动程序配置的ONTAP、不支持只读克隆。</block>
   <block id="18554a6310d1d501f5fdbbbc7a0cd7c6" category="summary">Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展iSCSI、FC和NFS卷所需配置的信息。</block>
-  <block id="bda53ac9cab805b0770875d4365918b2" category="paragraph">Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展iSCSI、NFS和FC卷所需配置的信息。</block>
   <block id="1dea918d41199b513b961287c6579f4f" category="section-title">展开 FC 卷</block>
   <block id="213524ddd0b0daf2a171ee47c3596e00" category="paragraph">您可以使用CSI配置程序扩展FC持久卷(PV)。</block>
   <block id="7ff05a6f045c4cd794027d9a80f2ee93" category="admonition">驱动程序支持FC卷扩展<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>、并且需要Kubernetes 1.16及更高版本。</block>
@@ -5854,4 +5853,5 @@ SMB</block>
   <block id="da635a644d2727b18debb9ea48c169b6" category="list-text">*AppVault 可访问性*：源集群和目标集群都必须具有网络访问权限，才能从 AppVault 读取和写入应用程序对象复制。</block>
   <block id="debae13e33c5f861b21b322eed48bf3f" category="list-text">*网络连接*：配置防火墙规则、存储桶权限和 IP 允许列表，以实现跨 WAN 的集群和 AppVault 之间的通信。</block>
   <block id="35d8960b4053e461085ad015f6805d14" category="admonition">许多企业环境在 WAN 连接中实施严格的防火墙策略。在配置复制之前，请与您的基础设施团队验证这些网络要求。</block>
+  <block id="996b8601627b0cb893a41930ccbbeb4b" category="paragraph">Trident为 Kubernetes 用户提供了在创建卷后扩展卷的能力。查找有关扩展 iSCSI、NFS、SMB、NVMe/TCP 和 FC 卷所需的配置的信息。</block>
 </blocks>
