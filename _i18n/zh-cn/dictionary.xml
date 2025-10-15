@@ -5854,4 +5854,6 @@ SMB</block>
   <block id="19cfd1d1df86c48cee153f9fbaa31f0f" category="paragraph">Trident可以导入包含单个 LUN 的ONTAP SAN FlexVol卷。这与<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 驱动程序，它为每个 PVC 创建一个FlexVol volume，并在FlexVol volume内创建一个 LUN。Trident导入FlexVol volume并将其与 PVC 定义关联。Trident可以导入<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 包含多个 LUN 的卷。</block>
   <block id="e214c4610b9128a251097b5d36c60e8b" category="list-text">Trident不支持使用<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 司机。</block>
   <block id="4afb8b760c67eab8ce5a9cf405163d78" category="list-text">NetApp 有限支持下的本地FAS、 AFF、Select 或ASA r2（iSCSI 和 NVMe/TCP）集群版本。看<block ref="50931d770a2149cdd08c9f8b08c33f00" category="inline-link-macro-rx"></block>。</block>
+  <block id="ed323fee394548d260c31d933876b771" category="section-title">当预期启用“v4.2-xattrs”时，NFSv4.2 客户端在升级ONTAP后报告“无效参数”</block>
+  <block id="b9785b666a04771c63b539840201a4db" category="paragraph">升级ONTAP后，NFSv4.2 客户端在尝试挂载 NFSv4.2 导出时可能会报告“无效参数”错误。当<block ref="5a54626559918ca9ebb6414eebaa97bf" prefix=" " category="inline-code"></block> SVM 上未启用该选项。.解决方法启用<block ref="5a54626559918ca9ebb6414eebaa97bf" prefix=" " category="inline-code"></block> 选项或升级到ONTAP 9.12.1 或更高版本，默认情况下此选项处于启用状态。</block>
 </blocks>
