@@ -100,7 +100,7 @@ Trident支持使用和 `ontap-nas-flexgroup`驱动程序导入卷 `ontap-nas`。
 
 [NOTE]
 ====
-* 。 `ontap-nas-economy` 驱动程序无法导入和管理qtree。
+* Trident不支持使用 `ontap-nas-economy` 司机。
 * 。 `ontap-nas` 和 `ontap-nas-flexgroup` 驱动程序不允许使用重复的卷名称。
 
 
