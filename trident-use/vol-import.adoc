@@ -149,9 +149,9 @@ tridentctl import volume nas_blog unmanaged_volume -f <path-to-pvc-file> --no-ma
 
 === ONTAP SAN
 
-Trident支持使用和 `ontap-san-economy`驱动程序导入卷 `ontap-san`。
+Trident支持使用卷导入 `ontap-san` （iSCSI、NVMe/TCP 和 FC）和 `ontap-san-economy` 司机。
 
-Trident可以导入包含单个LUN的ONTAP SAN FlexVol卷。这与驱动程序一致 `ontap-san`、该驱动程序会为FlexVol volume中的每个PVC和LUN创建一个FlexVol volume。Trident导入FlexVol volume并将其与PVC定义关联。
+Trident可以导入包含单个 LUN 的ONTAP SAN FlexVol卷。这与 `ontap-san` 驱动程序，它为每个 PVC 创建一个FlexVol volume，并在FlexVol volume内创建一个 LUN。Trident导入FlexVol volume并将其与 PVC 定义关联。Trident可以导入 `ontap-san-economy` 包含多个 LUN 的卷。
 
 .ONTAP SAN示例
 以下是受管卷和非受管卷导入的示例。
