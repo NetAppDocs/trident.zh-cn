@@ -25,7 +25,7 @@ summary: 在安装Trident之前、您应查看这些常规系统要求。特定�
 ====
 []
 =====
-* 现在、在Trident中支持Kubnetes 1.33。在升级Kubernetes之前升级Trident。
+* Trident现已支持 Kubernetes 1.34。在升级 Kubernetes 之前先升级Trident 。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
@@ -41,16 +41,16 @@ summary: 在安装Trident之前、您应查看这些常规系统要求。特定�
 Trident支持多个容器引擎和流程编排程序、其中包括：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
-* Kubbernetes 1.27 - 1.33
+* Kubernetes 1.27 - 1.34
 * OpenShift 4.12、4.14 - 4.19（如果您计划使用 OpenShift 4.19 进行 iSCSI 节点准备，则支持的最低Trident版本为 25.06.1。）
 +
 
 NOTE: Trident继续支持旧版 OpenShift 版本，与link:https://access.redhat.com/support/policy/updates/openshift["Red Hat 扩展更新支持 (EUS) 发布生命周期"]，即使它们依赖上游不再受官方支持的 Kubernetes 版本。在这种情况下安装Trident时，您可以放心地忽略有关 Kubernetes 版本的任何警告消息。
 
-* Rancher Kubernetes Engine 2（RKE2）v1.27.x - 1.33.x
+* Rancher Kubernetes Engine 2（RKE2）v1.27.x - 1.34.x
 +
 
-NOTE: 虽然Trident在 Rancher Kubernetes Engine 2 (RKE2) 版本 1.27.x - 1.33.x 上受支持，但Trident目前仅在 RKE2 v1.28.5+rke2r1 上获得认证。
+NOTE: 虽然Trident在 Rancher Kubernetes Engine 2 (RKE2) 版本 1.27.x - 1.34.x 上受支持，但Trident目前仅在 RKE2 v1.28.5+rke2r1 上获得认证。
 
 
 
@@ -114,56 +114,56 @@ Trident支持以下用于KubeVirt和OpenShift虚拟化的ONTAP驱动程序：
 
 
 | Trident  a| 
-1.27 - 1.33
+1.27 - 1.34
  a| 
 否
 
 
 
 | 卷快照  a| 
-1.27 - 1.33
+1.27 - 1.34
  a| 
 否
 
 
 
 | 卷快照中的 PVC  a| 
-1.27 - 1.33
+1.27 - 1.34
  a| 
 否
 
 
 
 | iSCSI PV 调整大小  a| 
-1.27 - 1.33
+1.27 - 1.34
  a| 
 否
 
 
 
 | ONTAP 双向 CHAP  a| 
-1.27 - 1.33
+1.27 - 1.34
  a| 
 否
 
 
 
 | 动态导出策略  a| 
-1.27 - 1.33
+1.27 - 1.34
  a| 
 否
 
 
 
 | Trident 运算符  a| 
-1.27 - 1.33
+1.27 - 1.34
  a| 
 否
 
 
 
 | CSI 拓扑  a| 
-1.27 - 1.33
+1.27 - 1.34
  a| 
 否
 
@@ -227,7 +227,7 @@ link:../trident-reference/ports.html["Trident端口"]
 | Kubernetes版本 | 容器映像 
 
 
-| v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、 v1.32.0、v1.33.0  a| 
+| v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、v1.32.0、v1.33.0、v1.34.0  a| 
 * docker.io/netapp/trident:25.06.2
 * docer.io/NetApp/trdent-autostsupport：25.06
 * 注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.2.0
@@ -248,7 +248,7 @@ link:../trident-reference/ports.html["Trident端口"]
 | Kubernetes版本 | 容器映像 
 
 
-| v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、 v1.32.0、v1.33.0  a| 
+| v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、v1.32.0、v1.33.0、v1.34.0  a| 
 * dDocker。io/NetApp/trdent：25.06.0
 * docer.io/NetApp/trdent-autostsupport：25.06
 * 注册表.k8s.io/sig-storage/CsI-置 配置程序：v5.2.0
