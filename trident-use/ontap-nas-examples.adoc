@@ -63,10 +63,10 @@ summary: 了解如何在Trident安装中创建和使用ONTAP NAS驱动程序。�
 | `trustedCACertifate` | 受信任 CA 证书的 Base64 编码值。可选。用于基于证书的身份验证 | "" 
 
 
-| `用户名` | 用于连接到集群 /SVM 的用户名。用于基于凭据的身份验证 |  
+| `用户名` | 用于连接到集群/SVM 的用户名。用于基于凭据的身份验证。有关 Active Directory 身份验证，请参阅 link:../trident-use/ontap-san-examples.html#authenticate-trident-to-a-backend-svm-using-active-directory-credentials["使用 Active Directory 凭据向后端 SVM 验证Trident 的身份"]。 |  
 
 
-| `密码` | 连接到集群 /SVM 的密码。用于基于凭据的身份验证 |  
+| `密码` | 连接到集群/SVM 的密码。用于基于凭据的身份验证。有关 Active Directory 身份验证，请参阅 link:../trident-use/ontap-san-examples.html#authenticate-trident-to-a-backend-svm-using-active-directory-credentials["使用 Active Directory 凭据向后端 SVM 验证Trident 的身份"]。 |  
 
 
 | `s存储前缀`  a| 

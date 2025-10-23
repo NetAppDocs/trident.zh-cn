@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/ontap-san-examples.html 
-keywords: map backends, storage classes, trident backend, ontap san, ontap san economy, options, storageclasses, fsx, metrocluster 
+keywords: map backends, storage classes, trident backend, ontap san, ontap san economy, options, storageclasses, fsx, metrocluster, ad, active directory 
 summary: 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。 
 ---
 = ONTAP SAN配置选项和示例
@@ -90,10 +90,10 @@ NOTE: 如果您使用的是"vsadmin"凭据、 `managementLIF`则必须是SVM的�
 | `trustedCACertifate` | 受信任 CA 证书的 Base64 编码值。可选。用于基于证书的身份验证。 | "" 
 
 
-| `用户名` | 与ONTAP 集群通信所需的用户名。用于基于凭据的身份验证。 | "" 
+| `用户名` | 与ONTAP集群通信所需的用户名。用于基于凭证的身份验证。有关 Active Directory 身份验证，请参阅 link:../trident-use/ontap-san-examples.html#authenticate-trident-to-a-backend-svm-using-active-directory-credentials["使用 Active Directory 凭据向后端 SVM 验证Trident 的身份"]。 | "" 
 
 
-| `密码` | 与ONTAP 集群通信所需的密码。用于基于凭据的身份验证。 | "" 
+| `密码` | 与ONTAP集群通信所需的密码。用于基于凭证的身份验证。有关 Active Directory 身份验证，请参阅 link:../trident-use/ontap-san-examples.html#authenticate-trident-to-a-backend-svm-using-active-directory-credentials["使用 Active Directory 凭据向后端 SVM 验证Trident 的身份"]。 | "" 
 
 
 | `sVM` | 要使用的 Storage Virtual Machine | 如果指定了 SVM `managementLIF` ，则派生 
@@ -169,6 +169,28 @@ Trident建议使用以下选项来加快格式化过程：
 *-E NODiscard：*
 
 * 保留、不要尝试在mkfs时间丢弃块(丢弃块最初在固态设备和稀疏/精简配置存储上很有用)。此选项将取代已弃用的选项"-K"、并适用于所有文件系统(xfs、ext3和ext4)。
+
+
+
+
+=== 使用 Active Directory 凭据向后端 SVM 验证Trident 的身份
+
+您可以配置Trident以使用 Active Directory (AD) 凭据对后端 SVM 进行身份验证。在 AD 帐户可以访问 SVM 之前，您必须配置 AD 域控制器对集群或 SVM 的访问权限。对于使用 AD 帐户进行集群管理，您必须创建域隧道。参考 link:https://docs.netapp.com/us-en/ontap/authentication/enable-ad-users-groups-access-cluster-svm-task.html["在ONTAP中配置 Active Directory 域控制器访问"^] 了解详情。
+
+.步骤
+. 为后端 SVM 配置域名系统 (DNS) 设置：
++
+`vserver services dns create -vserver <svm_name> -dns-servers <dns_server_ip1>,<dns_server_ip2>`
+
+. 运行以下命令在 Active Directory 中为 SVM 创建计算机帐户：
++
+`vserver active-directory create -vserver DataSVM -account-name ADSERVER1 -domain demo.netapp.com`
+
+. 使用此命令创建 AD 用户或组来管理集群或 SVM
++
+`security login create -vserver <svm_name> -user-or-group-name <ad_user_or_group> -application <application> -authentication-method domain -role vsadmin`
+
+. 在Trident后端配置文件中，设置 `username` 和 `password` 参数分别为 AD 用户或组名称和密码。
 
 
 
