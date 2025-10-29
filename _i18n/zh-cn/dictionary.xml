@@ -4896,7 +4896,6 @@ SMB</block>
   <block id="a61f1a0c3100fa19040c465723b8d138" category="example-title">SMB卷的配置</block>
   <block id="d7532ab2cf050869a37a3b301475208c" category="paragraph">现在、您可以将Google Cloud NetApp卷配置为Trident的后端。您可以使用Google Cloud NetApp卷后端连接NFS和SMB卷。</block>
   <block id="e996b7ab8a2ede8d8b06fc99b3a11062" category="cell"><block ref="8321592ce24c8a122ecf26a63cfca407" prefix="" category="inline-code"></block><block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>或<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block></block>
-  <block id="b9bc5d902a9cd0a94cdcf025103a3488" category="cell">如果请求的卷大小超过此值、则配置失败。此外、还会限制它为qtrees管理的卷的大小上限、并且此<block ref="8b08152c170e621ffcc8bfac7c4d6785" prefix=" " category="inline-code"></block>选项允许自定义每个FlexVol volume的qtrees的最大数量</block>
   <block id="891bc9d98980555712816ab85ae4a747" category="list-text"><block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix="" category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。这表示Trident会为SVM的使用此后端配置的每个卷创建一个导出策略<block ref="3568c00ad84b08a31b2dfadbfd8ee221" prefix=" " category="inline-code"></block>、并使用地址块处理规则的添加和删除<block ref="c108f084ab28ac46ad3787ba09ae8304" prefix=" " category="inline-code"></block>。在将卷连接到节点之前、此卷会使用一个空导出策略、此策略不带任何规则来防止对该卷进行不必要的访问。将卷发布到节点后、Trident会创建一个与指定CIDR块中包含节点IP的底层qtree同名的导出策略。这些IP也会添加到父FlexVol volume使用的导出策略中</block>
   <block id="ce3bd20884ed2b4f4a604d922dbb0dd9" category="admonition">您必须在SVM上同时配置NFS和SMB/CCIFS协议、才能为ONTAP内部集群创建<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>SMB卷。如果未能配置其中任一协议、则发生原因 SMB卷创建将失败。</block>
   <block id="b6de3e094a7f00742b82e2ac02d7d167" category="cell"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block>或<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block></block>
@@ -5867,4 +5866,5 @@ SMB</block>
   <block id="34dd5efc5c883d290ed743abcc3fccb1" category="list-text">使用此命令创建 AD 用户或组来管理集群或 SVM</block>
   <block id="82a5f11771bfe77a499bcb96a45ce13f" category="paragraph"><block ref="22ec37652eb447176b3d5645ac4a7dbb" prefix="" category="inline-code"></block></block>
   <block id="743fda998716813dc210d0fd0c3f2b65" category="list-text">在Trident后端配置文件中，设置<block ref="14c4b06b824ec593239362517f538b29" prefix=" " category="inline-code"></block> 和<block ref="5f4dcc3b5aa765d61d8327deb882cf99" prefix=" " category="inline-code"></block> 参数分别为 AD 用户或组名称和密码。</block>
+  <block id="66896c99fb06e0b6c86498b249f8217a" category="cell">如果请求的卷大小大于此值，则配置失败。</block>
 </blocks>

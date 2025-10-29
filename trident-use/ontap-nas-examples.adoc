@@ -98,7 +98,7 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 | "" 
 
 
-| `limitVolumeSize` | 如果请求的卷大小超过此值、则配置失败。此外、还会限制它为qtrees管理的卷的大小上限、并且此 `qtreesPerFlexvol`选项允许自定义每个FlexVol volume的qtrees的最大数量 | ""(默认情况下不强制实施) 
+| `limitVolumeSize` | 如果请求的卷大小大于此值，则配置失败。 | ""(默认情况下不强制实施) 
 
 
 | `debugTraceFlags` | 故障排除时要使用的调试标志。例如、｛"api"：false、"METHO"：true｝
