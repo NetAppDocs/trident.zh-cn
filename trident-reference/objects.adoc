@@ -75,6 +75,9 @@ Kubernetes `PersistentVolumeClaim` 对象是 Kubernetes 集群用户发出的存
 
 
 | trident.netapp.io/blockSize | 块大小 | solidfire-san 
+
+
+| trident.netapp.io/skipRecoveryQueue | 跳过恢复队列 | ontap-nas、ontap-nas-economy、ontap-nas-flexgroup、ontap-san、ontap-san-economy 
 |===
 如果创建的 PV 具有 `Delete` reclaime 策略，则在释放 PV 时（即用户删除 PVC 时）， Trident 会同时删除 PV 和后备卷。如果删除操作失败， Trident 会将 PV 标记为相应的 PV ，并定期重试此操作，直到操作成功或 PV 手动删除为止。如果 PV 使用 ` +retain+` 策略， Trident 会忽略该策略，并假定管理员将从 Kubernetes 和后端清理该策略，以便在删除卷之前对其进行备份或检查。请注意，删除 PV 不会通过发生原因 Trident 删除后备卷。您应使用 REST API （`tridentctl` ）将其删除。
 
@@ -434,6 +437,9 @@ NOTE: 这是您自己创建和管理的两种对象类型之一。另一个是 K
 
 
 | 文件系统 | string | 否 | 文件系统类型 
+
+
+| 跳过恢复队列 | string | 否 | 删除卷时，绕过存储中的恢复队列，立即删除卷。 
 |===
 创建卷时， Trident 会生成 `internalName` 。这包括两个步骤。首先，它会将存储前缀（默认值 `trident` 或后端配置中的前缀）预先添加到卷名称中，从而使名称格式为 ` <prefix>-<volume-name>` 。然后，它将继续清理名称，替换后端不允许使用的字符。对于 ONTAP 后端，它会将连字符替换为下划线（因此，内部名称将变为 ` <prefix>_<volume-name>` ）。对于 Element 后端，它会将下划线替换为连字符。
 
