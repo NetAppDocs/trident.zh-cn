@@ -49,16 +49,17 @@ helm install trident-protect netapp-trident-protect/trident-protect --set cluste
 +
 [source, console]
 ----
-netapp/controller:25.06.0
-netapp/restic:25.06.0
-netapp/kopia:25.06.0
-netapp/trident-autosupport:25.06.0
-netapp/exechook:25.06.0
-netapp/resourcebackup:25.06.0
-netapp/resourcerestore:25.06.0
-netapp/resourcedelete:25.06.0
-bitnami/kubectl:1.30.2
-kubebuilder/kube-rbac-proxy:v0.16.0
+docker.io/netapp/controller:25.06.0
+docker.io/netapp/restic:25.06.0
+docker.io/netapp/kopia:25.06.0
+docker.io/netapp/kopiablockrestore:25.06.0
+docker.io/netapp/trident-autosupport:25.06.0
+docker.io/netapp/exechook:25.06.0
+docker.io/netapp/resourcebackup:25.06.0
+docker.io/netapp/resourcerestore:25.06.0
+docker.io/netapp/resourcedelete:25.06.0
+docker.io/bitnami/kubectl:1.30.2
+gcr.io/kubebuilder/kube-rbac-proxy:v0.16.0
 ----
 +
 例如：
@@ -66,18 +67,22 @@ kubebuilder/kube-rbac-proxy:v0.16.0
 +
 [source, console]
 ----
-docker pull netapp/controller:25.06.0
+docker pull docker.io/netapp/controller:25.06.0
 ----
 +
 [source, console]
 ----
-docker tag netapp/controller:25.06.0 <private-registry-url>/controller:25.06.0
+docker tag docker.io/netapp/controller:25.06.0 <private-registry-url>/controller:25.06.0
 ----
 +
 [source, console]
 ----
 docker push <private-registry-url>/controller:25.06.0
 ----
++
+
+NOTE: 要获取 Helm Chart，首先需要在可以访问互联网的计算机上下载 Helm Chart。 `helm pull trident-protect --version 100.2506.0 --repo https://netapp.github.io/trident-protect-helm-chart`然后复制结果 `trident-protect-100.2506.0.tgz` 将文件复制到您的离线环境并进行安装 `helm install trident-protect ./trident-protect-100.2506.0.tgz` 而不是在最后一步中使用存储库引用。
+
 . 创建Trident Protect系统命名空间：
 +
 [source, console]
@@ -107,10 +112,6 @@ helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-he
 [source, yaml]
 ----
 ---
-image:
-  registry: <private-registry-url>
-imagePullSecrets:
-  - name: regcred
 controller:
   image:
     registry: <private-registry-url>
@@ -124,6 +125,10 @@ webhooksCleanup:
   imagePullSecrets:
     - name: regcred
 ----
++
+
+NOTE: 这 `controller.image.registry` 此设置适用于所有组件图像，包括 `resourcebackup` 和 `resourcerestore`。如果您将镜像推送到注册表中的特定存储库路径（例如， `example.com:443/my-repo`），请在注册表字段中包含完整路径。这将确保所有图像都从此处提取。 `<private-registry-url>/<image-name>:<tag>`。
+
 . 使用Helm安装Trident Protect。替换 `<name_of_cluster>`为集群名称、此名称将分配给集群并用于标识集群的备份和快照：
 +
 [source, console]
@@ -134,3 +139,5 @@ helm install trident-protect netapp-trident-protect/trident-protect --set cluste
 
 --
 ====
+
+NOTE: 有关其他 Helm Chart 配置选项，包括AutoSupport设置和命名空间过滤，请参阅 link:trident-protect-customize-installation.html#configure-additional-trident-protect-helm-chart-settings["自定义Trident Protect安装"]。
