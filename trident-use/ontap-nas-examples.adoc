@@ -223,7 +223,7 @@ defaults:
 
 [listing]
 ----
-Total volume size = (PVC requested size) / (1 - (snapshotReserve percentage) / 100)
+Total volume size = <PVC requested size> / (1 - (<snapshotReserve percentage> / 100))
 ----
 对于快照预留 = 50% 且 PVC 请求 = 5 GiB 的情况，总卷大小为 5/.5 = 10 GiB，可用大小为 5 GiB，这正是用户在 PVC 请求中请求的大小。  `volume show`命令应显示与此示例类似的结果：
 
