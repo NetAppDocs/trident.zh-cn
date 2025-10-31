@@ -74,7 +74,7 @@ vserver modify -vserver <svm_name> -max-volumes <num_of_volumes>
 
 === 克隆卷
 
-NetApp Trident 支持使用 `ontap-nas` ，  `ontap-san` ，  `solidfire-san` ， 和 `gcp-cvs`存储驱动程序。使用或 `ontap-nas-economy`驱动程序时 `ontap-nas-flexgroup`、不支持克隆。从现有卷创建新卷将创建新快照。
+NetApp Trident在使用时支持克隆卷 `ontap-nas`， `ontap-san` ， 和 `solidfire-san`存储驱动程序。使用时 `ontap-nas-flexgroup`或者 `ontap-nas-economy`驱动程序不支持克隆。从现有卷创建新卷将创建一个新的快照。
 
 
 WARNING: 避免克隆与其他 StorageClass 关联的 PVC。请在同一 StorageClass 内执行克隆操作，以确保兼容性并防止出现意外行为。

@@ -68,7 +68,7 @@ IMPORTANT: 使用 `solidfire-san` 驱动程序时，上述示例将删除并清�
 
 == 克隆卷
 
-使用 `ontap-nas`、、 `ontap-san` `solidfire-san`和 `gcp-cvs storage drivers`时，Trident可以克隆卷。使用或 `ontap-nas-economy`驱动程序时 `ontap-nas-flexgroup`、不支持克隆。从现有卷创建新卷将创建新快照。
+使用时 `ontap-nas`， `ontap-san` ， 和 `solidfire-san`存储驱动程序， Trident可以克隆卷。使用时 `ontap-nas-flexgroup`或者 `ontap-nas-economy`驱动程序不支持克隆。从现有卷创建新卷将创建一个新的快照。
 
 * 检查卷以枚举快照：
 +

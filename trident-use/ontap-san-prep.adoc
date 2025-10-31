@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/ontap-san-prep.html 
-keywords: trident backend, ontap san, ontap-san, ontap-san-economy, fcp, asa r2, iscsi, nvme/tcp 
+keywords: trident backend, ontap san, ontap-san, ontap-san-economy, fcp, asa r2, iscsi, nvme/tcp, fc 
 summary: 了解如何准备使用 ONTAP SAN 驱动程序配置 ONTAP 后端。 
 ---
 = 准备使用ONTAP SAN驱动程序配置后端
@@ -21,7 +21,7 @@ summary: 了解如何准备使用 ONTAP SAN 驱动程序配置 ONTAP 后端。
 对于所有 ONTAP 后端，Trident 要求至少将一个聚合分配给 SVM。
 
 
-NOTE: link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2系统"^]与其他 ONTAP 系统（ASA、AFF 和 FAS）在存储层实现方面有所不同。在 ASA r2 系统中，使用存储可用区而不是聚合。请参阅link:https://kb.netapp.com/on-prem/ASAr2/ASAr2_KBs/su_create_by_SVM_admin_using_CLI_fails_with_error_No_candidate_aggregates_are_available_for_storage_services["这"^]有关如何在 ASA r2 系统中将聚合分配给 SVM 的知识库文章。
+NOTE: link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2系统"^]与其他ONTAP系统（ASA、 AFF和FAS）在存储层的实现上有所不同。在ASA r2 系统中，使用存储可用区而不是聚合。请参阅link:https://kb.netapp.com/on-prem/ASAr2/ASAr2_KBs/su_create_by_SVM_admin_using_CLI_fails_with_error_No_candidate_aggregates_are_available_for_storage_services["这"^]知识库文章，介绍如何在ASA r2 系统中将聚合分配给 SVM。
 
 请记住，您还可以运行多个驱动程序，并创建指向其中一个驱动程序的存储类。例如，您可以配置使用 `ontap-san` 驱动程序的 `san-dev` 类和使用 `ontap-san-economy-one` 的 `san-default` 类。
 

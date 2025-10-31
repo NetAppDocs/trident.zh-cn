@@ -16,7 +16,7 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 
 
 
-== 有关Trident 25.06的重要信息
+== 关于Trident 25.10 的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -70,7 +70,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2506.0 --set i
 --
 [source, console]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2506.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:25.06.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:25.06 --set tridentImage=<your-registry>/trident:25.06.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2506.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:25.10.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:25.10 --set tridentImage=<your-registry>/trident:25.10.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 ====
@@ -252,7 +252,7 @@ NOTE: 这 `tridentK8sTimeout`参数仅适用于Trident安装。
 | `windows` | 使Trident能够安装在Windows工作节点上。 | `false` 
 
 
-| `enableForceDetach` | 允许启用强制分离功能。 | `false` 
+| `enableForceDetach` | 允许启用强制分离功能。您可以通过与节点健康检查 (NHC) 操作符集成来自动执行强制分离过程。有关信息，请参阅link:../trident-reco/force-detach.html["使用Trident实现有状态应用程序的故障转移自动化"]。 | `false` 
 
 
 | `excludePodSecurityPolicy` | 从创建过程中排除操作员POD安全策略。 | `false` 
@@ -264,4 +264,119 @@ NOTE: 这 `tridentK8sTimeout`参数仅适用于Trident安装。
 
 NOTE: 从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。
 |  
+
+
+| `resources`  a| 
+设置 Kubernetes 对Trident控制器、节点和操作员 pod 的资源限制和请求。您可以为每个容器和边车配置 CPU 和内存，以管理 Kubernetes 中的资源分配。
+
+有关配置资源请求和限制的更多信息，请参阅link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/["Pod 和容器的资源管理"^]。
+
+[WARNING]
+====
+* 请勿更改任何容器或字段的名称。
+* 请勿更改缩进 - YAML 缩进对于正确解析至关重要。
+
+
+====
+[NOTE]
+====
+* 默认情况下不应用任何限制——只有请求才有默认值。
+* 容器名称按其在 pod 规范中的显示方式列出。
+* 边车列在每个主集装箱下方。
+* 检查TORC的 `status.CurrentInstallationParams`用于查看当前应用值的字段。
+
+
+==== a| 
+[source, yaml]
+----
+resources:
+  controller:
+    trident-main:
+      requests:
+        cpu: 10m
+        memory: 80Mi
+      limits:
+          cpu:
+          memory:
+    csi-provisioner:
+      requests:
+        cpu: 2m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    csi-attacher:
+      requests:
+        cpu: 2m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    csi-resizer:
+      requests:
+        cpu: 3m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    csi-snapshotter:
+      requests:
+        cpu: 2m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    trident-autosupport:
+      requests:
+        cpu: 1m
+        memory: 30Mi
+      limits:
+        cpu:
+        memory:
+  node:
+    linux:
+      trident-main:
+        requests:
+          cpu: 10m
+          memory: 60Mi
+        limits:
+          cpu:
+          memory:
+      node-driver-registrar:
+        requests:
+          cpu: 1m
+          memory: 10Mi
+        limits:
+          cpu:
+          memory:
+    windows:
+      trident-main:
+        requests:
+          cpu: 6m
+          memory: 40Mi
+        limits:
+          cpu:
+          memory:
+      node-driver-registrar:
+        requests:
+          cpu: 6m
+          memory: 40Mi
+        limits:
+          cpu:
+          memory:
+      liveness-probe:
+        requests:
+          cpu: 2m
+          memory: 40Mi
+        limits:
+          cpu:
+          memory:
+  operator:
+    requests:
+      cpu: 10m
+      memory: 40Mi
+    limits:
+      cpu:
+      memory:
+----
 |===

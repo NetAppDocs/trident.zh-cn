@@ -1,0 +1,273 @@
+---
+sidebar: sidebar 
+permalink: trident-reco/force-detach.html 
+keywords: force detach, automated failover, node health check, tridentnoderemediation, tridentnoderemediationtemplate, TNR, TNR template, NHC, node health check operator 
+summary: 使用此处列出的信息，通过Trident自动实现有状态应用程序的故障转移。 
+---
+= 使用Trident实现有状态应用程序的故障转移自动化
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident 的强制分离功能允许您自动将卷从 Kubernetes 集群中不健康的节点分离，从而防止数据损坏并确保应用程序的可用性。此功能在节点无响应或因维护而离线的情况下特别有用。
+
+
+
+== 有关强制断开的详细信息
+
+强制分离适用于 `ontap-san`， `ontap-san-economy` ， `ontap-nas` ， 和 `ontap-nas-economy`仅有的。在启用强制分离之前，必须在 Kubernetes 集群上启用非正常节点关闭 (NGNS)。Kubernetes 1.28 及以上版本默认启用 NGNS。有关详细信息，请参阅link:https://kubernetes.io/docs/concepts/cluster-administration/node-shutdown/#non-graceful-node-shutdown["Kubnetes：节点非正常关闭"^] 。
+
+
+NOTE: 使用或驱动程序时 `ontap-nas`、您需要将后端配置中的参数设置 `autoExportPolicy`为 `true`、以便Trident可以限制通过受管导出策略应用了此内容的Kubornetes `ontap-nas-economy`节点的访问。
+
+
+WARNING: 由于Trident依赖于Kubbernetes NGN、因此在重新计划所有不可允许的工作负载之前、请勿从运行状况不正常的节点中删除 `out-of-service`污点。不负责任地应用或删除该问题可能会危及后端数据保护。
+
+当Kubnetes集群管理员已将此标记应用 `node.kubernetes.io/out-of-service=nodeshutdown:NoExecute`于节点并 `enableForceDetach`设置为 `true`时，Trident将确定节点状态并：
+
+. 停止对挂载到该节点的卷的后端 I/O 访问。
+. 将Trident节点对象标记为 `dirty`(对于新出版物不安全)。
++
+
+NOTE: Trident控制器将拒绝新的发布卷请求，直到节点被Trident节点POD重新认定(标记为后)为止 `dirty`。使用挂载的PVC计划的任何工作负载(即使在集群节点运行状况良好且已准备就绪之后)都将无法接受、直到Trident能够验证该节点 `clean`(对于新发布的产品来说是安全的)。
+
+
+
+在恢复节点运行状况并删除此污染后、Trident将：
+
+. 确定并清除节点上陈旧的已发布路径。
+. 如果此节点处于某个 `cleanable`状态(已删除服务中断、并且此节点处于 `Ready`状态)、并且所有陈旧的已发布路径均已清理、则Trident会将此节点重新提交为、并允许新的已发布卷访问此节点 `clean`。
+
+
+
+
+== 有关自动故障转移的详细信息
+
+您可以通过与以下系统的集成来自动执行强制分离过程：link:https://github.com/medik8s/node-healthcheck-operator["节点健康检查（NHC）操作符"^] 。当节点发生故障时，NHC 会通过在 Trident 的命名空间中创建 TridentNodeRemediation CR 来定义故障节点，从而触发Trident节点修复 (TNR) 并自动强制分离。  TNR 仅在节点发生故障时创建，并在节点恢复上线或节点被删除后由 NHC 删除。
+
+
+
+=== 节点 Pod 移除过程失败
+
+自动故障转移会选择要从故障节点移除的工作负载。创建 TNR 时，TNR 控制器会将节点标记为脏节点，阻止任何新的卷发布，并开始移除强制分离支持的 pod 及其卷附件。
+
+所有受强制分离支持的卷/PVC均受自动故障转移支持：
+
+* NAS 和使用自动导出策略的 NAS 经济型卷（尚不支持 SMB）。
+* SAN 和 SAN 经济型卷。
+
+
+参考<<有关强制断开的详细信息>>。
+
+*默认行为*：
+
+* 使用 force-detach 支持的卷的 Pod 将从故障节点中移除。  Kubernetes 会将这些任务重新调度到健康的节点上。
+* 使用不支持强制分离的卷（包括非 Trident 卷）的 Pod 不会从故障节点中移除。
+* 无状态 Pod（非 PVC）不会从故障节点中移除，除非 Pod 注解另有规定。 `trident.netapp.io/podRemediationPolicy: delete`已设置。
+
+
+*覆盖 pod 移除行为*：
+
+可以使用 Pod 注解来自定义 Pod 移除行为： `trident.netapp.io/podRemediationPolicy[retain, delete]` 。发生故障转移时，会检查并使用这些注解。在 Kubernetes 部署/副本集 Pod 规范中添加注解，以防止故障转移后注解消失：
+
+* `retain`- 在自动故障转移期间，Pod 不会从故障节点中移除。
+* `delete`- 在自动故障转移期间，Pod 将从故障节点中移除。
+
+
+这些注解可以应用于任何 pod。
+
+[WARNING]
+====
+* 仅当发生故障的节点支持强制分离时，I/O 操作才会被阻塞。
+* 对于不支持强制分离的卷，存在数据损坏和多重附加问题的风险。
+
+
+====
+
+
+=== TridentNode修复CR
+
+TridentNodeRemediation (TNR) CR 定义了一个故障节点。  TNR 的名称就是故障节点的名称。
+
+*TNR 示例*：
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentNodeRemediation
+metadata:
+  name: <K8s-node-name>
+spec: {}
+----
+*TNR状态*：使用以下命令查看TNR状态：
+`kubectl get tnr <name> -n <trident-namespace>`
+
+TNR（诱捕、绝育、放归）可能处于以下几种状态之一：
+
+* 修复中：
++
+** 停止对强制分离挂载到该节点的卷的后端 I/O 访问。
+** Trident节点对象被标记为脏（不适合发布新内容）。
+** 从节点中移除 Pod 和卷附件
+
+
+* _NodeRecoveryPending_:
++
+** 控制器正在等待节点重新上线。
+** 一旦节点上线，发布强制执行将确保节点干净且已准备好发布新卷。
+
+
+* 如果节点从 K8s 中删除，TNR 控制器将移除 TNR 并停止协调。
+* 成功：
++
+** 所有修复和节点恢复步骤均已成功完成。该节点已清理完毕，可以发布新的卷。
+
+
+* _失败的_：
++
+** 无法恢复的错误。错误原因设置在 CR 的状态消息字段中。
+
+
+
+
+
+
+=== 启用自动故障转移
+
+*先决条件*：
+
+* 请确保在启用自动故障转移之前已启用强制分离。更多信息，请参阅<<有关强制断开的详细信息>>。
+* 在 Kubernetes 集群中安装节点健康检查 (NHC)。
++
+** link:https://sdk.operatorframework.io/docs/installation/["安装 operator-sdk"]。
+** 如果集群中尚未安装 Operator Lifecycle Manager (OLM)，请安装它： `operator-sdk olm install` 。
+** 安装节点健康检查运算符： `kubectl create -f https://operatorhub.io/install/node-healthcheck-operator.yaml` 。
+
+
+
+
+
+NOTE: 您还可以使用其他方法来检测节点故障，具体方法请参见相关文档。<<Integrating Custom Node Health Check Solutions>>以下部分。
+
+看link:https://www.redhat.com/en/blog/node-health-check-operator["节点健康检查操作符"^]了解更多信息。
+
+.步骤
+. 在Trident命名空间中创建 NodeHealthCheck (NHC) CR，以监控集群中的工作节点。示例：
++
+[source, yaml]
+----
+apiVersion: remediation.medik8s.io/v1alpha1
+kind: NodeHealthCheck
+metadata:
+  name: <CR name>
+spec:
+  selector:
+    matchExpressions:
+      - key: node-role.kubernetes.io/control-plane
+        operator: DoesNotExist
+      - key: node-role.kubernetes.io/master
+        operator: DoesNotExist
+  remediationTemplate:
+    apiVersion: trident.netapp.io/v1
+    kind: TridentNodeRemediationTemplate
+    namespace: <Trident installation namespace>
+    name: trident-node-remediation-template
+  minHealthy: 0 # Trigger force-detach upon one or more node failures
+  unhealthyConditions:
+    - type: Ready
+      status: "False"
+      duration: 0s
+    - type: Ready
+      status: Unknown
+      duration: 0s
+----
+. 在节点健康检查 CR 中应用 `trident`命名空间。
++
+`kubectl apply -f <nhc-cr-file>.yaml -n <trident-namespace>`
+
+
+
+上述 CR 配置为监视 K8s 工作节点，以检测节点状态 Ready: false 和 Unknown。当节点进入 Ready: false 或 Ready: Unknown 状态时，将触发自动故障转移。
+
+这 `unhealthyConditions`CR 中使用了 0 秒宽限期。这样一来，一旦 K8s 将节点状态 Ready: false 设置为 false（在 K8s 失去节点的心跳信号后设置），就会立即触发自动故障转移。 K8s 在最后一次心跳后默认等待 40 秒，然后才将 Ready: false 设置为 false。该宽限期可在 K8s 部署选项中进行自定义。
+
+有关其他配置选项，请参阅link:https://github.com/medik8s/node-healthcheck-operator/blob/main/docs/configuration.md["节点健康检查操作符文档"^]。
+
+
+
+=== 其他设置信息
+
+当Trident安装时启用了强制分离功能， Trident命名空间中会自动创建两个额外的资源，以方便与 NHC 集成：TridentNodeRemediationTemplate (TNRT) 和 ClusterRole。
+
+*TridentNodeRemediationTemplate (TNRT)*：
+
+TNRT 可作为 NHC 控制器的模板，NHC 控制器可根据需要使用 TNRT 生成 TNR 资源。
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentNodeRemediationTemplate
+metadata:
+  name: trident-node-remediation-template
+  namespace: trident
+spec:
+  template:
+    spec: {}
+----
+*集群角色*：
+
+启用强制分离功能时，安装过程中还会添加集群角色。这使得 NHC 能够对Trident命名空间中的 TNR 进行授权。
+
+[source, yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    rbac.ext-remediation/aggregate-to-ext-remediation: "true"
+  name: tridentnoderemediation-access
+rules:
+- apiGroups:
+  - trident.netapp.io
+  resources:
+  - tridentnoderemediationtemplates
+  - tridentnoderemediations
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+----
+
+
+=== K8s集群升级和维护
+
+为防止发生故障转移，在 K8s 维护或升级期间暂停自动故障转移，因为预计节点会停止运行或重新启动。您可以通过修改 NHC CR 的补丁来暂停该 CR（如上所述）：
+
+`kubectl patch NodeHealthCheck <cr-name> --patch '{"spec":{"pauseRequests":["<description-for-reason-of-pause>"]}}' --type=merge`
+
+这将暂停自动故障转移。要重新启用自动故障转移，维护完成后，请从规范中删除 pauseRequests。
+
+
+
+=== 限制
+
+* 仅对受强制分离支持的卷，在发生故障的节点上阻止 I/O 操作。只有使用强制分离支持的卷/PVC的pod才会自动移除。
+* 自动故障转移和强制分离在三叉戟控制器舱内运行。如果托管 trident-controller 的节点发生故障，自动故障转移将会延迟，直到 K8s 将 pod 迁移到健康的节点。
+
+
+
+
+=== 集成自定义节点健康检查解决方案
+
+您可以将节点健康检查操作器替换为其他节点故障检测工具，以触发自动故障转移。为确保与自动故障转移机制兼容，您的自定义解决方案应：
+
+* 当检测到节点故障时，创建 TNR，使用故障节点的名称作为 TNR CR 名称。
+* 当节点恢复且 TNR 处于成功状态时，删除 TNR。
+

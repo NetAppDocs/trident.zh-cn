@@ -22,7 +22,6 @@ summary: Trident遵循四个月的发布节奏、每年发布三个主要版本�
 
 * 在给定的Kubnetes集群中的所有名称区中只应安装一个Trident实例。
 * Trident 23.07及更高版本需要v1卷快照、不再支持Alpha或Beta快照。
-* 如果您在中创建了适用于Google Cloud的Cloud Volumes Servicelink:../trident-use/gcp.html#learn-about-trident-support-for-cloud-volumes-service-for-google-cloud["CVS 服务类型"]，则在从Trident 23.01升级时，必须更新后端配置才能使用 `standardsw`或 `zoneredundantstandardsw`服务级别。如果无法在后端更新 `serviceLevel`、可能会导致卷失败。有关详细信息、请参见 link:../trident-use/gcp.html#cvs-service-type-examples["CVS服务类型示例"] 。
 * 升级时、请务必在"由Trident使用"中 `StorageClasses`提供 `parameter.fsType`。您可以在不中断已有卷的情况下删除和重新创建 `StorageClasses`卷。
 +
 ** 这是执行的一项 * 要求 * https://kubernetes.io/docs/tasks/configure-pod-container/security-context/["安全上下文"^] SAN 卷。

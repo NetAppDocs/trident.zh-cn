@@ -27,7 +27,7 @@ Trident提供了一组Prometheus指标端点、可用于监控Trident性能。
 
 
 
-NOTE: 默认情况下， Trident 的指标会显示在 `/metrics` 端点的目标端口` 8001 ` 上。安装 Trident 时，这些指标默认为 * 已启用 * 。
+NOTE: 默认情况下，Trident 的指标会暴露在目标端口上。 `8001`在 `/metrics`端点。安装Trident时，这些指标*默认启用*。您可以配置通过 HTTPS 在端口上消费Trident指标。 `8444`也一样。看link:..https://docs.netapp.com/us-en/trident/trident-use/monitor-trident.html#step-2-create-a-prometheus-servicemonitor["第 2 步：创建 Prometheus ServiceMonitor"^]了解更多信息。
 
 .您需要的内容
 * 安装了Trident的Kubnetes集群。
@@ -67,9 +67,62 @@ spec:
     - port: metrics
       interval: 15s
 ----
-此ServiceMonitor定义检索服务返回的指标 `trident-csi`、并专门查找 `metrics`服务的端点。因此、Prometheus现在可以配置为了解Trident的指标。
+此 ServiceMonitor 定义检索由以下方式返回的指标： `trident-csi`服务，特别是寻找 `metrics`服务的端点。因此，Prometheus 现在已配置为能够理解 Trident 的指标。
 
 除了直接从Trident获得的指标之外、kubelet还会通过自己的指标端点公开许多 `kubelet_volume_*`指标。Kubelet 可以提供有关已连接的卷， Pod 及其处理的其他内部操作的信息。请参阅 https://kubernetes.io/docs/concepts/cluster-administration/monitoring/["此处"^]。
+
+
+
+=== 通过 HTTPS 使用Trident指标
+
+要通过 HTTPS（端口 8444）使用Trident指标，您必须修改 ServiceMonitor 定义以包含 TLS 配置。你还需要复制 `trident-csi`秘密来自 `trident`将命名空间指向 Prometheus 运行所在的命名空间。您可以使用以下命令执行此操作：
+
+`kubectl get secret trident-csi -n trident -o yaml | sed 's/namespace: trident/namespace: monitoring/' | kubectl apply -f -`
+
+HTTPS 指标的示例 ServiceMonitor 如下所示：
+
+[source, yaml]
+----
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: trident-sm
+  namespace: monitoring
+  labels:
+    release: prom-operator
+spec:
+  jobLabel: trident
+  selector:
+    matchLabels:
+      app: controller.csi.trident.netapp.io
+  namespaceSelector:
+    matchNames:
+      - trident
+  endpoints:
+    - interval: 15s
+      path: /metrics
+      port: https-metrics
+      scheme: https
+      tlsConfig:
+        ca:
+          secret:
+            key: caCert
+            name: trident-csi
+        cert:
+          secret:
+            key: clientCert
+            name: trident-csi
+        keySecret:
+          key: clientKey
+          name: trident-csi
+        serverName: trident-csi
+----
+Trident支持所有安装方法中的 HTTPS 指标：tridentctl、Helm chart 和 Operator：
+
+* 如果您正在使用 `tridentctl install`命令，你可以传递 `--https-metrics`启用 HTTPS 指标的标志。
+* 如果您使用的是 Helm Chart，则可以进行设置。 `httpsMetrics`用于启用 HTTPS 指标的参数。
+* 如果您使用的是 YAML 文件，则可以添加以下内容： `--https_metrics`向…… `trident-main`容器中的 `trident-deployment.yaml`文件。
+
 
 
 

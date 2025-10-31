@@ -14,12 +14,12 @@ summary: 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。�
 [role="lead"]
 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了将后端映射到StorageClasses的后端配置示例和详细信息。
 
-link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2系统"^]与其他 ONTAP 系统（ASA、AFF 和 FAS）在存储层实现方面有所不同。这些差异会影响某些参数的使用，具体如下。link:https://docs.netapp.com/us-en/asa-r2/learn-more/hardware-comparison.html["详细了解 ASA r2 系统与其他 ONTAP 系统之间的差异"^](英文)
+link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2系统"^]与其他ONTAP系统（ASA、 AFF和FAS）在存储层的实现上有所不同。这些变化会影响某些参数的使用，如注释中所述。link:https://docs.netapp.com/us-en/asa-r2/learn-more/hardware-comparison.html["详细了解 ASA r2 系统与其他 ONTAP 系统之间的差异"^]。
 
 
-NOTE: 只有 `ontap-san` ASA r2 系统支持驱动程序（带有 iSCSI 和 NVMe/TCP 协议）。
+NOTE: 只有 `ontap-san`ASA r2 系统支持驱动程序（支持 iSCSI、NVMe/TCP 和 FC 协议）。
 
-在 Trident 后端配置中，您无需指定系统是 ASA r2。当您选择 `ontap-san`作为 `storageDriverName` Trident 会自动检测 ASA r2 或传统 ONTAP 系统。某些后端配置参数不适用于 ASA r2 系统，如下表所示。
+在Trident后端配置中，无需指定您的系统是ASA r2。当您选择 `ontap-san`作为 `storageDriverName`Trident可自动检测ASA r2 或其他ONTAP系统。如下表所示，某些后端配置参数不适用于ASA r2 系统。
 
 
 

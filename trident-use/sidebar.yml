@@ -24,8 +24,6 @@ entries:
       url: "/trident-use/gcnv-prep.html"
     - title: 配置选项和示例
       url: "/trident-use/gcnv-examples.html"
-  - title: 适用于 Google Cloud 的 Cloud Volumes Service
-    url: "/trident-use/gcp.html"
   - title: NetApp HCI 或SolidFire
     url: "/trident-use/element.html"
   - title: ONTAP SAN 驱动程序

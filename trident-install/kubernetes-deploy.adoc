@@ -16,7 +16,7 @@ summary: '您可以使用Trident操作员(手动或使用Helm)或与一起安装
 
 
 
-== 有关Trident 25.06的重要信息
+== 关于Trident 25.10 的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 

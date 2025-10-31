@@ -50,7 +50,7 @@ Kubernetes `PersistentVolumeClaim` 对象是 Kubernetes 集群用户发出的存
 | trident.netapp.io/fileSystem | 文件系统 | ontap-san、solidfire-san、ontap-san-economy. 
 
 
-| trident.netapp.io/cloneFromPVC | cloneSourceVolume | ontap-nas ， ontap-san ， solidfire-san ， azure-netapp-files ， gcp-cvs ， ontap-san-economy. 
+| trident.netapp.io/cloneFromPVC | cloneSourceVolume | ontap-nas、ontap-san、solidfire-san、azure-netapp-files、ontap-san-economy 
 
 
 | trident.netapp.io/splitOnClone | splitOnClone | ontap-NAS ， ontap-san 
@@ -65,7 +65,7 @@ Kubernetes `PersistentVolumeClaim` 对象是 Kubernetes 集群用户发出的存
 | trident.netapp.io/snapshotPolicy | snapshotPolicy | ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup ， ontap-san 
 
 
-| trident.netapp.io/snapshotReserve | SnapshotReserve | ontap-nas ， ontap-nas-flexgroup ， ontap-san ， GCP-CVS 
+| trident.netapp.io/snapshotReserve | SnapshotReserve | ontap-nas、ontap-nas-flexgroup、ontap-san 
 
 
 | trident.netapp.io/snapshotDirectory | snapshotDirectory | ontap-nas ， ontap-nas-economy-、 ontap-nas-flexgroup 
@@ -173,14 +173,14 @@ volumeBindingMode: Immediate
 
 
 | 后端类型 | string  a| 
-ontap-nas、ontap-nas-economy. ontap-nas-flexgroup、ontap-san、solidfire-san、GCP-CVS、azure-netapp-files、ontap-san-economy.
+ontap-nas、ontap-nas-economy、ontap-nas-flexgroup、ontap-san、solidfire-san、azure-netapp-files、ontap-san-economy
 | 池属于此类型的后端 | 指定后端 | 所有驱动程序 
 
 
-| snapshots | 池 | true false | Pool 支持具有快照的卷 | 启用了快照的卷 | ontap-nas ， ontap-san ， solidfire-san ， gcp-cvs 
+| snapshots | 池 | true false | Pool 支持具有快照的卷 | 启用了快照的卷 | ontap-nas、ontap-san、solidfire-san 
 
 
-| 克隆 | 池 | true false | Pool 支持克隆卷 | 启用了克隆的卷 | ontap-nas ， ontap-san ， solidfire-san ， gcp-cvs 
+| 克隆 | 池 | true false | Pool 支持克隆卷 | 启用了克隆的卷 | ontap-nas、ontap-san、solidfire-san 
 
 
 | 加密 | 池 | true false | 池支持加密卷 | 已启用加密的卷 | ontap-nas ， ontap-nas-economy-、 ontap-nas-flexgroups ， ontap-san 
@@ -218,7 +218,7 @@ ontap-nas、ontap-nas-economy. ontap-nas-flexgroup、ontap-san、solidfire-san�
 | FSType | string | ext4、ext3、xfs | 块卷的文件系统类型 | solidfire-san、ontap-nas、ontap-nas-economy. ontap-nas-flexgroup、ontap-san、ontap-san-economy. | 全部 
 
 
-| 允许卷扩展 | boolean | true false | 启用或禁用对增加 PVC 大小的支持 | ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup ， ontap-san ， ontap-san-economy. solidfire-san ， gcp-cvs ， azure-netapp-files | 1.11 及更高版本 
+| 允许卷扩展 | boolean | true false | 启用或禁用对增加 PVC 大小的支持 | ontap-nas、ontap-nas-economy、ontap-nas-flexgroup、ontap-san、ontap-san-economy、solidfire-san、azure-netapp-files | 1.11 及更高版本 
 
 
 | 卷绑定模式 | string | 即时， WaitForFirstConsumer" | 选择何时进行卷绑定和动态配置 | 全部 | 1.19 - 1.26 
@@ -370,7 +370,7 @@ NOTE: 这是您自己创建和管理的两种对象类型之一。另一个是 K
 
 == Trident `StoragePool`对象
 
-存储池表示可在每个后端配置的不同位置。对于 ONTAP ，这些聚合对应于 SVM 中的聚合。对于 NetApp HCI/SolidFire ，这些 QoS 分段对应于管理员指定的 QoS 分段。对于 Cloud Volumes Service ，这些区域对应于云提供商区域。每个存储池都有一组不同的存储属性，用于定义其性能特征和数据保护特征。
+存储池代表每个后端可用于配置的不同位置。对于ONTAP而言，这些对应于 SVM 中的聚合。对于NetApp HCI/ SolidFire，这些对应于管理员指定的 QoS 频段。每个存储池都有一组独特的存储属性，这些属性定义了其性能特征和数据保护特征。
 
 与此处的其他对象不同，存储池候选对象始终会自动发现和管理。
 

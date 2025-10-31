@@ -10,6 +10,8 @@ entries:
   url: "/trident-reco/integrate-trident.html"
 - title: 数据保护和灾难恢复
   url: "/trident-reco/backup.html"
+- title: 使用Trident实现有状态应用程序的故障转移自动化
+  url: "/trident-reco/force-detach.html"
 - title: 安全性
   entries:
   - title: 安全建议
