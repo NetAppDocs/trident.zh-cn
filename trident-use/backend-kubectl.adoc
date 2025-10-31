@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/backend-kubectl.html 
-keywords: backends, storage system, anf, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, kubectl, create backends 
+keywords: backends, storage system, anf, cvs for gcp, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, kubectl, create backends 
 summary: '后端用于定义Trident与存储系统之间的关系。它会告诉Trident如何与该存储系统通信、以及Trident如何从该存储系统配置卷。安装Trident后、下一步是创建后端。 `TridentBackendConfig`通过自定义资源定义(CRD)、您可以直接通过Kubednetes界面创建和管理Trident后端。您可以使用或对Kubornetes分发等效的命令行界面工具来执行此操作 `kubectl`。' 
 ---
 = 使用 kubectl 创建后端
@@ -114,6 +114,20 @@ stringData:
 clientId
  a| 
 应用程序注册中的客户端 ID
+
+
+
+| Cloud Volumes Service for GCP  a| 
+私钥 ID
+ a| 
+私钥的ID。具有 CVS 管理员角色的 GCP 服务帐户的部分 API 密钥
+
+
+
+| Cloud Volumes Service for GCP  a| 
+私钥
+ a| 
+私钥。具有 CVS 管理员角色的 GCP 服务帐户的部分 API 密钥
 
 
 

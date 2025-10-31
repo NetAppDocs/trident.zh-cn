@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-get-started/intro.html 
-keywords: product overview, Trident, fsx, element, google cloud, architecture, node pod, controller pod, pods, csi, sidecar 
+keywords: product overview, Trident, fsx, element, google cloud, cvs, architecture, node pod, controller pod, pods, csi, sidecar 
 summary: 'Trident 是一个由 NetApp 维护的完全受支持的开源项目。它旨在帮助您使用容器存储接口(CSI)等行业标准接口满足容器化应用程序的持久性需求。' 
 ---
 = 了解Trident
@@ -18,7 +18,7 @@ Trident 是由 NetApp 维护的一个受全面支持的开源项目。它旨在�
 
 == 什么是Trident？
 
-NetApp Trident支持在所有流行的NetApp存储平台（包括公有云和本地）上使用和管理存储资源，包括本地ONTAP集群（AFF、 FAS和ASA）、 ONTAP Select、 Cloud Volumes ONTAP、Element 软件（NetApp HCI、 SolidFire）、 Azure NetApp Files和Amazon FSx for NetApp ONTAP。
+NetApp Trident支持在所有流行的NetApp存储平台（包括公有云和本地）上使用和管理存储资源，例如本地ONTAP集群（AFF、 FAS和ASA）、 ONTAP Select、 Cloud Volumes ONTAP、Element 软件（NetApp HCI、 SolidFire）、 Azure NetApp Files、 Amazon FSx for NetApp ONTAP和 Google Cloud 上的Cloud Volumes Service 。
 
 Trident是一款与本机集成的符合容器存储接口(CI)的动态存储流程编排程序link:https://kubernetes.io/["Kubernetes"^]。Trident在集群中的每个工作节点上作为一个控制器Pod加一个节点Pod运行。有关详细信息、请参见 link:../trident-get-started/architecture.html["Trident架构"] 。
 

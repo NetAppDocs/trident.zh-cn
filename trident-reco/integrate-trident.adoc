@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: trident-reco/integrate-trident.html 
-keywords: kubernetes, clusters, nodes, components, master, compute, fsx, flexgroup, flexvolume, solidfire, hci, virtual pool 
+keywords: kubernetes, clusters, nodes, components, master, compute, fsx, flexgroup, flexvolume, solidfire, hci, virtual pool, cvs, gcp, volumes 
 summary: Kubernetes 集群通常由两种类型的节点组成，每种节点负责不同的功能方面。 
 ---
 = 集成Trident
@@ -124,6 +124,37 @@ Trident使用 `azure-netapp-files`驱动程序管理link:https://azure.microsoft
 
 
 
+=== Google Cloud 后端驱动程序上的Cloud Volumes Service
+
+Trident使用 `gcp-cvs`用于连接 Google Cloud 上的Cloud Volumes Service的驱动程序。
+
+这 `gcp-cvs`驱动程序使用虚拟池来抽象后端，并允许Trident确定卷放置位置。管理员在以下位置定义虚拟池： `backend.json`文件。存储类使用选择器按标签识别虚拟池。
+
+* 如果后端定义了虚拟池， Trident将尝试在 Google Cloud 存储池中创建卷，而这些虚拟池仅限于这些存储池。
+* 如果后端未定义虚拟池， Trident将从该区域的可用存储池中选择一个 Google Cloud 存储池。
+
+
+要在Trident上配置 Google Cloud 后端，您必须指定 `projectNumber`， `apiRegion` ， 和 `apiKey`在后端文件中。您可以在 Google Cloud 控制台中找到项目编号。API 密钥取自您在 Google Cloud 上为Cloud Volumes Service设置 API 访问权限时创建的服务帐户私钥文件。
+
+有关 Google Cloud 上的Cloud Volumes Service服务类型和服务级别的详细信息，请参阅：link:../trident-use/gcp.html["了解Trident对 GCP 版 CVS 的支持"] 。
+
+[cols="20,10,10,10,10,10,10"]
+|===
+| 适用于 Google Cloud Drive 的Cloud Volumes Service | 快照 | 克隆 | 多连接 | QoS | 展开 | Replication 
+
+
+| `gcp-cvs` | 是的。 | 是的。 | 是的。 | 是的。 | 是的。 | 仅适用于 CVS-Performance 服务类型。 
+|===
+[NOTE]
+====
+.复制说明
+* 复制功能并非由Trident管理。
+* 克隆卷将创建在与源卷相同的存储池中。
+
+
+====
+
+
 == 存储类设计
 
 要创建 Kubernetes 存储类对象，需要配置并应用各个存储类。本节讨论如何为您的应用程序设计存储类。
@@ -162,7 +193,7 @@ Trident使用 `azure-netapp-files`驱动程序管理link:https://azure.microsoft
 
 == 虚拟池设计
 
-创建后端时，通常可以指定一组参数。管理员无法创建具有相同存储凭据和不同参数集的另一个后端。随着虚拟池的引入，这个问题得到了缓解。虚拟池是在后端和 Kubernetes 存储类之间引入的级别抽象，以便管理员可以定义参数以及可以通过 Kubernetes 存储类作为选择器引用的标签，以与后端无关的方式。可以使用Trident为所有受支持的NetApp后端定义虚拟池。该列表包括SolidFire/ NetApp HCI、 ONTAP以及Azure NetApp Files。
+创建后端时，通常可以指定一组参数。管理员无法创建具有相同存储凭据和不同参数集的另一个后端。随着虚拟池的引入，这个问题得到了缓解。虚拟池是在后端和 Kubernetes 存储类之间引入的级别抽象，以便管理员可以定义参数以及可以通过 Kubernetes 存储类作为选择器引用的标签，以与后端无关的方式。可以使用Trident为所有受支持的NetApp后端定义虚拟池。该列表包括SolidFire/ NetApp HCI、 ONTAP、GCP 上的Cloud Volumes Service以及Azure NetApp Files。
 
 
 NOTE: 定义虚拟池时、建议不要尝试在后端定义中重新排列现有虚拟池的顺序。此外，建议不要编辑 / 修改现有虚拟池的属性，而是定义新的虚拟池。
@@ -246,17 +277,17 @@ Trident 还支持从卷快照创建 PersistentVolumes 。为此、只需创建�
 
 === 展开卷
 
-Trident支持调整 NFS、iSCSI 和 FC PV 的大小。这样用户就可以直接通过 Kubernetes 层调整卷的大小。所有主流NetApp存储平台（包括ONTAP）和SolidFire/ NetApp HCI后端均可进行卷扩展。为了便于日后扩展，请设置 `allowVolumeExpansion`到 `true`在与该卷关联的 StorageClass 中。每当需要调整持久卷的大小时，请编辑以下内容： `spec.resources.requests.storage`在持久卷声明中添加对所需卷大小的注释。Trident会自动处理存储集群上卷的大小调整。
+Trident支持调整 NFS、iSCSI 和 FC PV 的大小。这样用户就可以直接通过 Kubernetes 层调整卷的大小。所有主流NetApp存储平台，包括ONTAP、 SolidFire/ NetApp HCI和Cloud Volumes Service后端，均可进行卷扩展。为了便于日后扩展，请设置 `allowVolumeExpansion`到 `true`在与该卷关联的 StorageClass 中。每当需要调整持久卷的大小时，请编辑以下内容： `spec.resources.requests.storage`在持久卷声明中添加对所需卷大小的注释。Trident会自动处理存储集群上卷的大小调整。
 
 
 
 === 将现有卷导入到 Kubernetes 中
 
-卷导入功能允许将现有存储卷导入 Kubernetes 环境。目前这得到了以下方面的支持： `ontap-nas` ， `ontap-nas-flexgroup` ， `solidfire-san` ， 和 `azure-netapp-files`司机。将现有应用程序移植到 Kubernetes 或灾难恢复场景中，此功能非常有用。
+卷导入功能允许将现有存储卷导入 Kubernetes 环境。目前这得到了以下方面的支持： `ontap-nas` ， `ontap-nas-flexgroup` ， `solidfire-san` ， `azure-netapp-files` ， 和 `gcp-cvs`司机。将现有应用程序移植到 Kubernetes 或灾难恢复场景中，此功能非常有用。
 
 使用ONTAP和驱动程序时 `solidfire-san`、请使用命令 `tridentctl import volume <backend-name> <volume-name> -f /path/pvc.yaml`将现有卷导入到要由Trident管理的Kubnetes中。导入卷命令中使用的 PVC YAML 或 JSON 文件指向将 Trident 标识为配置程序的存储类。使用 NetApp HCI/SolidFire 后端时，请确保卷名称是唯一的。如果卷名称重复，请将卷克隆为唯一名称，以便卷导入功能可以区分它们。
 
-如果 `azure-netapp-files`驱动程序已启用，请使用该命令 `tridentctl import volume <backend-name> <volume path> -f /path/pvc.yaml`将卷导入 Kubernetes 以便由Trident管理。这样就确保了卷号的唯一性。
+如果 `azure-netapp-files`或者 `gcp-cvs`使用了驱动程序，请使用命令 `tridentctl import volume <backend-name> <volume path> -f /path/pvc.yaml`将卷导入 Kubernetes 以便由Trident管理。这样就确保了卷号的唯一性。
 
 执行上述命令后， Trident 将在后端找到卷并读取其大小。它会自动添加(并在必要时覆盖)已配置的PVC卷大小。然后， Trident 会创建新的 PV ， Kubernetes 会将 PVC 绑定到 PV 。
 

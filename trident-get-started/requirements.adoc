@@ -72,7 +72,7 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高�
 * Cloud Volumes ONTAP
 * Google Cloud NetApp卷
 * NetApp 全 SAN 阵列（ ASA ）
-* NetApp 有限支持下的本地FAS、 AFF或ASA r2（iSCSI、NVMe/TCP 和 FC）集群版本。看link:https://mysupport.netapp.com/site/info/version-support["软件版本支持"]。
+* NetApp 有限支持下的本地FAS、 AFF、Select 或ASA r2（iSCSI 和 NVMe/TCP）集群版本。看link:https://mysupport.netapp.com/site/info/version-support["软件版本支持"]。
 * NetApp HCI/ Element软件11或更高版本
 
 
@@ -220,7 +220,7 @@ link:../trident-reference/ports.html["Trident端口"]
 
 
 
-=== Trident 25.10 所需的容器镜像
+=== Trident 25.06.2 所需的容器镜像
 
 [cols="2"]
 |===
@@ -228,14 +228,35 @@ link:../trident-reference/ports.html["Trident端口"]
 
 
 | v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、v1.32.0、v1.33.0、v1.34.0  a| 
-* docker.io/netapp/trident:25.10.0
-* docker.io/netapp/trident-autosupport:25.10
-* registry.k8s.io/sig-storage/csi-provisioner:v5.3.0
-* registry.k8s.io/sig-storage/csi-attacher:v4.10.0
-* registry.k8s.io/sig-storage/csi-resizer:v1.14.0
-* registry.k8s.io/sig-storage/csi-snapshotter:v8.3.1
-* registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
-* docker.io/netapp/trident-operator:25.10.0（可选）
+* docker.io/netapp/trident:25.06.2
+* docker.io/netapp/trident-autosupport:25.06
+* registry.k8s.io/sig-storage/csi-provisioner:v5.2.0
+* registry.k8s.io/sig-storage/csi-attacher:v4.8.1
+* registry.k8s.io/sig-storage/csi-resizer:v1.13.2
+* registry.k8s.io/sig-storage/csi-snapshotter:v8.2.1
+* registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
+* docker.io/netapp/trident-operator:25.06.2（可选）
+
+
+|===
+
+
+=== Trident 25.06 所需的容器镜像
+
+[cols="2"]
+|===
+| Kubernetes版本 | 容器映像 
+
+
+| v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、v1.32.0、v1.33.0、v1.34.0  a| 
+* docker.io/netapp/trident:25.06.0
+* docker.io/netapp/trident-autosupport:25.06
+* registry.k8s.io/sig-storage/csi-provisioner:v5.2.0
+* registry.k8s.io/sig-storage/csi-attacher:v4.8.1
+* registry.k8s.io/sig-storage/csi-resizer:v1.13.2
+* registry.k8s.io/sig-storage/csi-snapshotter:v8.2.1
+* registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
+* docker.io/netapp/trident-operator:25.06.0（可选）
 
 
 |===

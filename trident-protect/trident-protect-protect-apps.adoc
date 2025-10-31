@@ -46,6 +46,7 @@ NOTE: 如果在应用程序定义中明确引用了集群范围的资源、或�
 +
 [source, yaml]
 ----
+---
 apiVersion: protect.trident.netapp.io/v1
 kind: Snapshot
 metadata:
@@ -122,6 +123,7 @@ NOTE: 如果在应用程序定义中明确引用了集群范围的资源、或�
 
 
 ** *spec.snapshotRef*：（可选）：用作备份源的快照的名称。如果不提供此参数、则会创建和备份临时快照。
+** *metadata.annotations.protect.trident.netapp.io/full-backup* : (_可选_) 此注释用于指定备份是否应为非增量备份。默认情况下，所有备份都是增量的。但是，如果此注释设置为 `true`这样，备份就变成了非增量备份。如果未指定，备份将遵循默认的增量备份设置。最佳实践是定期执行完整备份，然后在两次完整备份之间执行增量备份，以最大限度地降低与恢复相关的风险。
 +
 YAML示例：
 
@@ -134,6 +136,8 @@ kind: Backup
 metadata:
   namespace: my-app-namespace
   name: my-cr-name
+  annotations:
+    protect.trident.netapp.io/full-backup: "true"
 spec:
   applicationRef: my-application
   appVaultRef: appvault-name
@@ -166,31 +170,6 @@ tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --a
 
 --
 ====
-
-
-=== 支持的备份注释
-
-下表描述了创建备份 CR 时可以使用的注释：
-
-[cols="2,1,3,1"]
-|===
-| 标注 | Type | Description | 默认值 
-
-
-| protect.trident.netapp.io/full-backup | string | 指定备份是否应为非增量备份。设置为 `true`创建非增量备份。最佳实践是定期执行完整备份，然后在两次完整备份之间执行增量备份，以最大限度地降低与恢复相关的风险。 | false 
-
-
-| protect.trident.netapp.io/snapshot-completion-timeout | string | 完成整个快照操作允许的最长时间。 | 60米 
-
-
-| protect.trident.netapp.io/volume-snapshots-ready-to-use-timeout | string | 卷快照达到可用状态所需的最长时间。 | 30米 
-
-
-| protect.trident.netapp.io/volume-snapshots-created-timeout | string | 创建卷快照允许的最长时间。 | 5米 
-
-
-| protect.trident.netapp.io/pvc-bind-timeout-sec | string | 等待新创建的持久卷声明 (PVC) 到达的最大时间（以秒为单位） `Bound`操作失败前的阶段。 | 1200（20分钟） 
-|===
 
 
 == 创建数据保护计划
@@ -236,6 +215,7 @@ tridentctl-protect create backup <my_backup_name> --appvault <my-vault-name> --a
 ** *spec.dayOfWeek*：（可选）计划应运行的星期几（0 - 7）。值 0 或 7 表示星期日。如果粒度设置为 `Weekly`。该值必须以字符串形式提供。
 ** *spec.hour*：（可选）计划应运行的小时数（0 - 23）。如果粒度设置为 `Daily`， `Weekly` ， 或者 `Monthly`。该值必须以字符串形式提供。
 ** *spec.minute*：（可选）计划应运行的小时中的分钟数（0 - 59）。如果粒度设置为 `Hourly`， `Daily` ， `Weekly` ， 或者 `Monthly`。该值必须以字符串形式提供。
+** *metadata.annotations.protect.trident.netapp.io/full-backup-rule*: (_可选_) 此注解用于指定安排完整备份的规则。你可以将其设置为 `always`您可以根据需要进行持续完整备份或自定义备份。例如，如果您选择按日粒度进行备份，则可以指定应进行完整备份的星期几。
 +
 备份和快照计划的示例 YAML：
 
@@ -248,6 +228,8 @@ kind: Schedule
 metadata:
   namespace: my-app-namespace
   name: my-cr-name
+  annotations:
+    protect.trident.netapp.io/full-backup-rule: "Monday,Thursday"
 spec:
   dataMover: Kopia
   applicationRef: my-application
@@ -313,31 +295,6 @@ tridentctl-protect create schedule <my_schedule_name> --appvault <my_appvault_na
 
 --
 ====
-
-
-=== 支持的日程注释
-
-下表描述了创建计划变更请求 (CR) 时可以使用的注释：
-
-[cols="2,1,3,1"]
-|===
-| 标注 | Type | Description | 默认值 
-
-
-| protect.trident.netapp.io/full-backup-rule | string | 指定安排完整备份的规则。你可以将其设置为 `always`您可以根据需要进行持续完整备份或自定义备份。例如，如果您选择按日粒度进行备份，则可以指定应进行完整备份的星期几（例如， `"Monday,Thursday"` ）。 | 未设置（所有备份均为增量备份） 
-
-
-| protect.trident.netapp.io/snapshot-completion-timeout | string | 完成整个快照操作允许的最长时间。 | 60米 
-
-
-| protect.trident.netapp.io/volume-snapshots-ready-to-use-timeout | string | 卷快照达到可用状态所需的最长时间。 | 30米 
-
-
-| protect.trident.netapp.io/volume-snapshots-created-timeout | string | 创建卷快照允许的最长时间。 | 5米 
-
-
-| protect.trident.netapp.io/pvc-bind-timeout-sec | string | 等待新创建的持久卷声明 (PVC) 到达的最大时间（以秒为单位） `Bound`操作失败前的阶段。 | 1200（20分钟） 
-|===
 
 
 == 删除快照

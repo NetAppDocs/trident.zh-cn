@@ -35,7 +35,7 @@ IMPORTANT: 在私有存储库中安装Trident时、如果 `--image-registry`使�
 * `trident service.yaml`
 * `trident 命名空间 .yaml`
 * `trident 服务帐户。 yaml`
-* `trident-resourcequota.yaml`*
+* `trident-resourcequota.yaml`
 
 
 生成这些文件后，您可以根据需要对其进行修改，然后使用 ` -use-custom-yaml` 安装自定义部署。

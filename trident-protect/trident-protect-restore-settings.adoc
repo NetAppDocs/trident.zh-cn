@@ -135,7 +135,4 @@ storageClassMapping:
 
 
 | protected.trident.netapp.io/kopia-content-cache-size-limit-mb | string | Kopia 内容缓存的最大大小限制（以兆字节为单位）。 | “1000” 
-
-
-| protect.trident.netapp.io/pvc-bind-timeout-sec | string | 等待新创建的持久卷声明 (PVC) 到达的最大时间（以秒为单位） `Bound`操作失败前的阶段。适用于所有恢复 CR 类型（备份恢复、备份就地恢复、快照恢复、快照就地恢复）。如果您的存储后端或集群经常需要更多时间，请使用更高的值。 | 1200（20分钟） 
 |===
