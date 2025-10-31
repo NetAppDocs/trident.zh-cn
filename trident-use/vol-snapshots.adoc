@@ -18,7 +18,7 @@ summary: '持久卷(PVs)的Kubbernetes卷快照支持卷的时间点副本。您
 
 == 概述
 
-卷快照受支持 `ontap-nas`， `ontap-nas-flexgroup` ， `ontap-san` ， `ontap-san-economy` ， `solidfire-san` ， `gcp-cvs` ， `azure-netapp-files` ， 和 `google-cloud-netapp-volumes`司机。
+卷快照受支持 `ontap-nas`， `ontap-nas-flexgroup` ， `ontap-san` ， `ontap-san-economy` ， `solidfire-san` ， `azure-netapp-files` ， 和 `google-cloud-netapp-volumes`司机。
 
 .开始之前
 要使用快照、您必须具有外部快照控制器和自定义资源定义(CRD)。这是Kubernetes流程编排程序(例如：Kubeadm、GKE、OpenShift)的职责。
@@ -257,7 +257,7 @@ NOTE: 还原Snapshot副本时、现有卷配置将被覆盖。创建Snapshot副�
 
 Trident可使用(TSR) CR从快照快速原位还原卷 `TridentActionSnapshotRestore`。此CR用作要务Kubbernetes操作、在操作完成后不会持久保留。
 
-Trident支持快照恢复 `ontap-san`， `ontap-san-economy` ， `ontap-nas` ， `ontap-nas-flexgroup` ， `azure-netapp-files` ， `gcp-cvs` ， `google-cloud-netapp-volumes` ， 和 `solidfire-san`司机。
+Trident支持快照恢复 `ontap-san`， `ontap-san-economy` ， `ontap-nas` ， `ontap-nas-flexgroup` ， `azure-netapp-files` ， `google-cloud-netapp-volumes` ， 和 `solidfire-san`司机。
 
 .开始之前
 您必须具有绑定的PVC和可用的卷快照。

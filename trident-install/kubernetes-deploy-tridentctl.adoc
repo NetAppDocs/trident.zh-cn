@@ -16,7 +16,7 @@ summary: '您可以使用安装Trident `tridentctl`。此过程适用于Trident�
 
 
 
-== 关于Trident25.06的关键信息
+== 关于Trident10的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -75,8 +75,8 @@ Trident安装程序包会创建Trident Pod、配置用于保持其状态的CRD�
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v25.06.0/trident-installer-25.06.0.tar.gz
-tar -xf trident-installer-25.06.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v25.10.0/trident-installer-25.10.0.tar.gz
+tar -xf trident-installer-25.10.0.tar.gz
 cd trident-installer
 ----
 
@@ -98,14 +98,14 @@ cd trident-installer
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.06 --trident-image <your-registry>/trident:25.06.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.10 --trident-image <your-registry>/trident:25.10.0
 ----
 --
 .不同注册表中的映像
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.06 --trident-image <your-registry>/trident:25.06.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:25.10 --trident-image <your-registry>/trident:25.10.0
 ----
 --
 ====
@@ -126,7 +126,7 @@ INFO Created Trident daemonset.
 INFO Waiting for Trident pod to start.
 INFO Trident pod started.                          namespace=trident pod=trident-controller-679648bd45-cv2mx
 INFO Waiting for Trident REST interface.
-INFO Trident REST interface is up.                 version=25.06.0
+INFO Trident REST interface is up.                 version=25.10.0
 INFO Trident installation succeeded.
 ....
 ----
@@ -166,7 +166,7 @@ NOTE: 如果安装程序未成功完成或 `trident-controller-<generated id>` (
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 25.06.0        | 25.06.0        |
+| 25.10.0        | 25.10.0        |
 +----------------+----------------+
 ----
 
@@ -188,7 +188,7 @@ tridentctl install --windows -n trident
 .强制断开
 [%collapsible]
 ====
-有关强制分离的更多信息，请参阅link:..trident-get-started/kubernetes-customize-deploy.html["自定义Trident操作员安装"]。
+有关信息，请参阅link:../trident-reco/force-detach.html["使用Trident实现有状态应用程序的故障转移自动化"]。
 
 [listing]
 ----
@@ -201,7 +201,7 @@ tridentctl install --enable-force-detach=true -n trident
 为了启用并发Trident控制器操作以提高吞吐量，请添加 `--enable-concurrency`如本例所示，在安装过程中选择此选项。
 
 
-NOTE: *技术预览*：此功能在NetApp Trident 25.06 中处于实验阶段，目前支持使用ONTAP-SAN 驱动程序（iSCSI 和 FCP 协议）的有限并行工作流程。
+NOTE: *技术预览*：此功能为实验性功能，目前除了现有的ONTAP -SAN 驱动程序（统一ONTAP 9 中的 iSCSI 和 FCP 协议）技术预览版外，还支持ONTAP-NAS（仅限 NFS）和ONTAP -SAN（统一ONTAP 9 中的 NVMe）驱动程序的有限并行工作流程。
 
 [listing]
 ----

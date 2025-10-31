@@ -21,7 +21,7 @@ Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷�
 如果您使用的是驱动程序组合、则应安装驱动程序所需的所有工具。默认情况下、最新版本的Red Hat Enterprise Linux CoreTM OS (RHCOS)已安装这些工具。
 
 .NFS工具
-link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nfs-volumes["安装NFS工具"]如果您正在使用： `ontap-nas` ， `ontap-nas-economy` ， `ontap-nas-flexgroup` ， `azure-netapp-files` ， `gcp-cvs` 。
+link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#nfs-volumes["安装NFS工具"]如果您正在使用： `ontap-nas` ， `ontap-nas-economy` ， `ontap-nas-flexgroup` ， 或者 `azure-netapp-files`。
 
 .iSCSI工具
 link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#install-the-iscsi-tools["安装iSCSI工具"] 如果您使用的是： `ontap-san`， `ontap-san-economy`， `solidfire-san`。

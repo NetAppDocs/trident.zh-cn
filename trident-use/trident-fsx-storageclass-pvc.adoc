@@ -193,14 +193,14 @@ pvc-storage Bound  pv-name 2Gi      RWO                       5m
 
 
 | 后端类型 | string  a| 
-ontap-nas、ontap-nas-economy、ontap-nas-flexgroup、ontap-san、solidfire-san、gcp-cvs、azure-netapp-files、ontap-san-economy
+ontap-nas、ontap-nas-economy、ontap-nas-flexgroup、ontap-san、solidfire-san、azure-netapp-files、ontap-san-economy
 | 池属于此类型的后端 | 指定后端 | 所有驱动程序 
 
 
-| snapshots | 池 | true false | Pool 支持具有快照的卷 | 启用了快照的卷 | ontap-nas、ontap-san、solidfire-san、gcp-cvs 
+| snapshots | 池 | true false | Pool 支持具有快照的卷 | 启用了快照的卷 | ontap-nas、ontap-san、solidfire-san 
 
 
-| 克隆 | 池 | true false | Pool 支持克隆卷 | 启用了克隆的卷 | ontap-nas、ontap-san、solidfire-san、gcp-cvs 
+| 克隆 | 池 | true false | Pool 支持克隆卷 | 启用了克隆的卷 | ontap-nas、ontap-san、solidfire-san 
 
 
 | 加密 | 池 | true false | 池支持加密卷 | 已启用加密的卷 | ontap-nas ， ontap-nas-economy-、 ontap-nas-flexgroups ， ontap-san 

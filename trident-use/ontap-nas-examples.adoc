@@ -14,6 +14,13 @@ summary: 了解如何在Trident安装中创建和使用ONTAP NAS驱动程序。�
 [role="lead"]
 了解如何在Trident安装中创建和使用ONTAP NAS驱动程序。本节提供了将后端映射到StorageClasses的后端配置示例和详细信息。
 
+从 25.10 版本开始， NetApp Trident支持link:https://docs.netapp.com/us-en/ontap-afx/index.html["NetApp AFX 存储系统"^]。NetApp AFX 存储系统与其他基于ONTAP的系统（ASA、 AFF和FAS）在存储层的实现方式上有所不同。
+
+
+NOTE: 只有 `ontap-nas`NetApp AFX 系统支持 NFS 协议驱动程序；不支持 SMB 协议。
+
+在Trident后端配置中，无需指定您的系统是NetApp AFX 存储系统。当您选择 `ontap-nas`作为 `storageDriverName`Trident会自动检测 AFX 存储系统。如下表所示，某些后端配置参数不适用于 AFX 存储系统。
+
 
 
 == 后端配置选项
@@ -28,7 +35,12 @@ summary: 了解如何在Trident安装中创建和使用ONTAP NAS驱动程序。�
 | `ve版本` |  | 始终为 1 
 
 
-| `storageDriverName` | 存储驱动程序的名称 | `ontap-nas` `ontap-nas-economy`或 `ontap-nas-flexgroup` 
+| `storageDriverName`  a| 
+存储驱动程序的名称
+
+
+NOTE: 仅适用于NetApp AFX 系统 `ontap-nas`已支持。
+| `ontap-nas` `ontap-nas-economy`或 `ontap-nas-flexgroup` 
 
 
 | `backendName` | 自定义名称或存储后端 | 驱动程序名称+"_"+ dataLIF 
@@ -82,12 +94,14 @@ NOTE: 如果使用的ONTAP是包含24个或更多字符的storagePrefix、则qtr
 
 
 NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法是轮询SVM、而无需重新启动Trident控制器。在Trident中配置了特定聚合以配置卷后、如果将该聚合重命名或移出SVM、则在轮询SVM聚合时、后端将在Trident中变为故障状态。您必须将聚合更改为SVM上的聚合、或者将其全部删除、以使后端恢复联机。
+
+*请勿指定用于 AFX 存储系统。*
  a| 
 ""
 
 
 
-| `limitAggregateUsage` | 如果使用率超过此百分比，则配置失败。*不适用于Amazon FSx for ONTAP*。 | "" （默认情况下不强制实施） 
+| `limitAggregateUsage` | 如果使用率超过此百分比，则配置失败。*不适用于Amazon FSx for ONTAP*。*请勿指定用于 AFX 存储系统。* | "" （默认情况下不强制实施） 
 
 
 | FlexgroupGroupGroupRegateList  a| 
@@ -106,7 +120,7 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 请勿使用 `debugTraceFlags` 除非您正在进行故障排除并需要详细的日志转储。 | 空 
 
 
-| `nasType` | 配置NFS或SMB卷创建。选项包括 `nfs`， `smb` 或为空。默认情况下、将设置为空会将NFS卷设置为空。 | `nfs` 
+| `nasType` | 配置 NFS 或 SMB 卷的创建。选项有 `nfs`， `smb`或空值。设置为 null 则默认使用 NFS 卷。*如果指定，则始终设置为 `nfs`适用于 AFX 存储系统*。 | `nfs` 
 
 
 | `nfsMountOptions` | NFS挂载选项的逗号分隔列表。通常会在存储类中为Kubnetes-永久性 卷指定挂载选项、但如果在存储类中未指定挂载选项、则Trident将回退到使用存储后端配置文件中指定的挂载选项。如果在存储类或配置文件中未指定挂载选项、则Trident不会在关联的永久性卷上设置任何挂载选项。 | "" 
@@ -118,7 +132,7 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 | `smbShare` | 您可以指定以下选项之一：使用Microsoft管理控制台或ONTAP命令行界面创建的SMB共享的名称；允许Trident创建SMB共享的名称；或者、您可以将参数留空以防止对卷进行通用共享访问。对于内部ONTAP、此参数是可选的。此参数对于Amazon FSx for ONTAP后端为必填项、不能为空。 | `smb-share` 
 
 
-| `useREST` | 用于使用 ONTAP REST API 的布尔参数。 `useREST`设置为时 `true`，Trident使用ONTAP REST API与后端通信；设置为时 `false`，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问 `ontapi` 应用程序。预定义的和角色可以满足这一 `vsadmin` 要求 `cluster-admin` 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会 `useREST`设置为 `true`；更 `useREST`改为 `false`以使用ONTAPI (ZAPI)调用。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
+| `useREST` | 使用ONTAP REST API 的布尔参数。 `useREST`设置为 `true`Trident使用ONTAP REST API 与后端通信；当设置为 `false`Trident使用 ONTAPI (ZAPI) 调用与后端通信。此功能需要ONTAP 9.11.1 及更高版本。此外，所使用的ONTAP登录角色必须具有访问权限。 `ontapi`应用。预定义项满足了这一点。 `vsadmin`和 `cluster-admin`角色。从Trident 24.06 版本和ONTAP 9.15.1 或更高版本开始， `useREST`设置为 `true`默认；更改 `useREST`到 `false`使用 ONTAPI (ZAPI) 调用。*如果指定，则始终设置为 `true`适用于 AFX 存储系统*。 | `true` 对于ONTAP 9.151或更高版本，否则 `false`。 
 
 
 | `limitVolumePoolSize` | 在qtree-NAS ONTAP经济型后端使用qtrees时可请求的最大FlexVol大小。 | "" （默认情况下不强制实施） 
@@ -217,7 +231,7 @@ defaults:
   snapshotPolicy: default
   snapshotReserve: "10"
 ----
-为了 `ontap-nas`和 `ontap-nas-flexgroups`Trident现在使用新的计算方法，以确保FlexVol 的尺寸与 snapshotReserve 百分比和 PVC 正确匹配。当用户请求 PVC 时， Trident会使用新的计算方法创建具有更多空间的原始FlexVol 。此计算方法可确保用户在 PVC 中获得其请求的可写空间，而不是少于其请求的空间。在 v21.07 之前，当用户请求 PVC（例如 5 GiB）时，如果快照预留百分比为 50%，则只能获得 2.5 GiB 的可写空间。这是因为用户请求的是整个卷。 `snapshotReserve`是其中的百分比。在Trident 21.07 中，用户请求的是可写空间，而Trident定义了该空间。 `snapshotReserve`将数值表示为占总体积的百分比。这不适用于 `ontap-nas-economy`。请参阅以下示例了解其工作原理：
+为了 `ontap-nas`和 `ontap-nas-flexgroups`Trident现在使用新的计算方法，以确保FlexVol 的尺寸与 snapshotReserve 百分比和 PVC 正确匹配。当用户请求 PVC 时， Trident会使用新的计算方法创建具有更多空间的原始FlexVol 。此计算确保用户在 PVC 中获得其请求的可写空间，而不是少于其请求的空间。在 v21.07 之前，当用户请求 PVC（例如 5 GiB）时，如果快照预留百分比为 50%，则只能获得 2.5 GiB 的可写空间。这是因为用户请求的是整个卷。 `snapshotReserve`是其中的百分比。在Trident 21.07 中，用户请求的是可写空间，而Trident定义了该空间。 `snapshotReserve`将数值表示为占总体积的百分比。这不适用于 `ontap-nas-economy`。请参阅以下示例了解其工作原理：
 
 计算方法如下：
 

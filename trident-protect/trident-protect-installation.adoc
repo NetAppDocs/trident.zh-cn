@@ -35,8 +35,17 @@ helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-he
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --version 100.2506.0 --create-namespace --namespace trident-protect
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --version 100.2510.0 --create-namespace --namespace trident-protect
 ----
+. （可选）要启用调试日志记录（建议用于故障排除），请使用：
++
+[source, console]
+----
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --set logLevel=debug --version 100.2510.0 --create-namespace --namespace trident-protect
+----
++
+调试日志记录有助于NetApp支持人员排除故障，而无需更改日志级别或重现问题。
+
 
 
 --
@@ -49,17 +58,16 @@ helm install trident-protect netapp-trident-protect/trident-protect --set cluste
 +
 [source, console]
 ----
-docker.io/netapp/controller:25.06.0
-docker.io/netapp/restic:25.06.0
-docker.io/netapp/kopia:25.06.0
-docker.io/netapp/kopiablockrestore:25.06.0
-docker.io/netapp/trident-autosupport:25.06.0
-docker.io/netapp/exechook:25.06.0
-docker.io/netapp/resourcebackup:25.06.0
-docker.io/netapp/resourcerestore:25.06.0
-docker.io/netapp/resourcedelete:25.06.0
-docker.io/bitnami/kubectl:1.30.2
-gcr.io/kubebuilder/kube-rbac-proxy:v0.16.0
+docker.io/netapp/controller:25.10.0
+docker.io/netapp/restic:25.10.0
+docker.io/netapp/kopia:25.10.0
+docker.io/netapp/kopiablockrestore:25.10.0
+docker.io/netapp/trident-autosupport:25.10.0
+docker.io/netapp/exechook:25.10.0
+docker.io/netapp/resourcebackup:25.10.0
+docker.io/netapp/resourcerestore:25.10.0
+docker.io/netapp/resourcedelete:25.10.0
+docker.io/netapp/trident-protect-utils:v1.0.0
 ----
 +
 例如：
@@ -67,21 +75,21 @@ gcr.io/kubebuilder/kube-rbac-proxy:v0.16.0
 +
 [source, console]
 ----
-docker pull docker.io/netapp/controller:25.06.0
+docker pull docker.io/netapp/controller:25.10.0
 ----
 +
 [source, console]
 ----
-docker tag docker.io/netapp/controller:25.06.0 <private-registry-url>/controller:25.06.0
+docker tag docker.io/netapp/controller:25.10.0 <private-registry-url>/controller:25.10.0
 ----
 +
 [source, console]
 ----
-docker push <private-registry-url>/controller:25.06.0
+docker push <private-registry-url>/controller:25.10.0
 ----
 +
 
-NOTE: 要获取 Helm Chart，首先需要在可以访问互联网的计算机上下载 Helm Chart。 `helm pull trident-protect --version 100.2506.0 --repo https://netapp.github.io/trident-protect-helm-chart`然后复制结果 `trident-protect-100.2506.0.tgz` 将文件复制到您的离线环境并进行安装 `helm install trident-protect ./trident-protect-100.2506.0.tgz` 而不是在最后一步中使用存储库引用。
+NOTE: 要获取 Helm Chart，首先需要在可以访问互联网的计算机上下载 Helm Chart。 `helm pull trident-protect --version 100.2510.0 --repo https://netapp.github.io/trident-protect-helm-chart`然后复制结果 `trident-protect-100.2510.0.tgz` 将文件复制到您的离线环境并进行安装 `helm install trident-protect ./trident-protect-100.2510.0.tgz` 而不是在最后一步中使用存储库引用。
 
 . 创建Trident Protect系统命名空间：
 +
@@ -112,29 +120,29 @@ helm repo add netapp-trident-protect https://netapp.github.io/trident-protect-he
 [source, yaml]
 ----
 ---
-controller:
-  image:
-    registry: <private-registry-url>
-rbacProxy:
-  image:
-    registry: <private-registry-url>
-crCleanup:
-  imagePullSecrets:
-    - name: regcred
-webhooksCleanup:
-  imagePullSecrets:
-    - name: regcred
+imageRegistry: <private-registry-url>
+imagePullSecrets:
+  - name: regcred
 ----
 +
 
-NOTE: 这 `controller.image.registry` 此设置适用于所有组件图像，包括 `resourcebackup` 和 `resourcerestore`。如果您将镜像推送到注册表中的特定存储库路径（例如， `example.com:443/my-repo`），请在注册表字段中包含完整路径。这将确保所有图像都从此处提取。 `<private-registry-url>/<image-name>:<tag>`。
+NOTE: 这 `imageRegistry`和 `imagePullSecrets`这些值适用于所有组件图像，包括 `resourcebackup`和 `resourcerestore`。如果您将镜像推送到注册表中的特定存储库路径（例如， `example.com:443/my-repo`），请在注册表字段中包含完整路径。这将确保所有图像都从此处提取。 `<private-registry-url>/<image-name>:<tag>`。
 
 . 使用Helm安装Trident Protect。替换 `<name_of_cluster>`为集群名称、此名称将分配给集群并用于标识集群的备份和快照：
 +
 [source, console]
 ----
-helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2506.0 --create-namespace --namespace trident-protect -f protectValues.yaml
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name_of_cluster> --version 100.2510.0 --create-namespace --namespace trident-protect -f protectValues.yaml
 ----
+. （可选）要启用调试日志记录（建议用于故障排除），请使用：
++
+[source, console]
+----
+helm install trident-protect netapp-trident-protect/trident-protect --set clusterName=<name-of-cluster> --set logLevel=debug --version 100.2510.0 --create-namespace --namespace trident-protect -f protectValues.yaml
+----
++
+调试日志记录有助于NetApp支持人员排除故障，而无需更改日志级别或重现问题。
+
 
 
 --

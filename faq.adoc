@@ -114,12 +114,6 @@ Trident只是一个Kubbernetes Pod、可以安装在运行Kubbernetes的任何�
 
 
 
-=== Trident是否与 Cloud Volumes Services 兼容？
-
-是的， Trident支持 Azure 中的Azure NetApp Files服务以及 GCP 中的Cloud Volumes Service。
-
-
-
 == 故障排除和支持
 
 
@@ -367,7 +361,7 @@ Make sure to remove the DP mode or put the volume online before importing the vo
 
 === 哪些驱动程序支持Trident卷快照？
 
-截至今日，我们的产品已提供按需快照支持。 `ontap-nas` ， `ontap-nas-flexgroup` ， `ontap-san` ， `ontap-san-economy` ， `solidfire-san` ， `gcp-cvs` ， 和 `azure-netapp-files`后端驱动程序。
+截至今日，我们的产品已提供按需快照支持。 `ontap-nas` ， `ontap-nas-flexgroup` ， `ontap-san` ， `ontap-san-economy` ， `solidfire-san` ， 和 `azure-netapp-files`后端驱动程序。
 
 
 

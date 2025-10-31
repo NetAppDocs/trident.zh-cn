@@ -16,7 +16,7 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 
 
 
-== 关于Trident25.06的关键信息
+== 关于Trident 25.10 的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -222,38 +222,161 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 | `windows` | 使Trident能够安装在Windows工作节点上。 | `false` 
 
 
-| `enableForceDetach` | 允许启用强制分离功能。 | `false` 
+| `enableForceDetach` | 允许启用强制分离功能。 | 您可以通过与节点健康检查 (NHC) 操作符集成来自动执行强制分离过程。有关信息，请参阅link:../trident-reco/force-detach.html["使用Trident实现有状态应用程序的故障转移自动化"]。 
 
 
-| `excludePodSecurityPolicy` | 从创建过程中排除操作员POD安全策略。 | `false` 
+| `false` | `excludePodSecurityPolicy` | 从创建过程中排除操作员POD安全策略。 
 
 
-| `cloudProvider` | 设置为 `"Azure"` 在AKS集群上使用托管身份或云身份时。如果在EKS集群上使用云标识、请设置为"Aws"。 | `""` 
+| `false` | `cloudProvider` | 设置为 `"Azure"` 在AKS集群上使用托管身份或云身份时。如果在EKS集群上使用云标识、请设置为"Aws"。 
 
 
-| `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe"")。 | `""` 
+| `""` | `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe"")。 
 
 
-| `iscsiSelfHealingInterval` | 调用iSCSI自我修复的间隔。 | `5m0s` 
+| `""` | `iscsiSelfHealingInterval` | 调用iSCSI自我修复的间隔。 
 
 
-| `iscsiSelfHealingWaitTime` | iSCSI自我修复通过执行注销和后续登录来尝试解决陈旧会话之前经过的持续时间。 | `7m0s` 
+| `5m0s` | `iscsiSelfHealingWaitTime` | iSCSI自我修复通过执行注销和后续登录来尝试解决陈旧会话之前经过的持续时间。 
 
 
-| `nodePrep` | 使Trident能够准备 Kubernetes 集群的节点，以使用指定的数据存储协议管理卷。 *现在， `iscsi`是唯一支持的值。*注意：从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。 |  
+| `7m0s` | `nodePrep` | 使Trident能够准备 Kubernetes 集群的节点，以使用指定的数据存储协议管理卷。 *现在， `iscsi`是唯一支持的值。*注意：从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。 
 
 
-| `enableConcurrency`  a| 
+|  | `enableConcurrency`  a| 
 支持并发Trident控制器操作以提高吞吐量。
 
 
-NOTE: *技术预览*：此功能在NetApp Trident 25.06 中处于实验阶段，目前支持使用ONTAP-SAN 驱动程序（iSCSI 和 FCP 协议）的有限并行工作流程。
-| false 
+NOTE: *技术预览*：此功能为实验性功能，目前除了现有的ONTAP -SAN 驱动程序（统一ONTAP 9 中的 iSCSI 和 FCP 协议）技术预览版外，还支持ONTAP-NAS（仅限 NFS）和ONTAP -SAN（统一ONTAP 9 中的 NVMe）驱动程序的有限并行工作流程。
 
 
-| `k8sAPIQPS`  a| 
+
+| false | `k8sAPIQPS`  a| 
 控制器与 Kubernetes API 服务器通信时使用的每秒查询数 (QPS) 限制。  Burst 值根据 QPS 值自动设置。
-| `100`; 选修的 
+
+
+
+| `100`; 选修的 | `resources`  a| 
+设置 Kubernetes 对Trident控制器、节点和操作员 pod 的资源限制和请求。您可以为每个容器和边车配置 CPU 和内存，以管理 Kubernetes 中的资源分配。
+
+有关配置资源请求和限制的更多信息，请参阅link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/["Pod 和容器的资源管理"^]。
+
+[WARNING]
+====
+* 请勿更改任何容器或字段的名称。
+* 请勿更改缩进 - YAML 缩进对于正确解析至关重要。
+
+
+====
+[NOTE]
+====
+* 默认情况下不应用任何限制——只有请求才有默认值，如果未指定则自动应用。
+* 容器名称按其在 pod 规范中的显示方式列出。
+* 边车列在每个主集装箱下方。
+* 检查TORC的 `status.CurrentInstallationParams`用于查看当前应用值的字段。
+
+
+====
+
+
+ a| 
+[source, yaml]
+----
+resources:
+  controller:
+    trident-main:
+      requests:
+        cpu: 10m
+        memory: 80Mi
+      limits:
+          cpu:
+          memory:
+    csi-provisioner:
+      requests:
+        cpu: 2m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    csi-attacher:
+      requests:
+        cpu: 2m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    csi-resizer:
+      requests:
+        cpu: 3m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    csi-snapshotter:
+      requests:
+        cpu: 2m
+        memory: 20Mi
+      limits:
+        cpu:
+        memory:
+    trident-autosupport:
+      requests:
+        cpu: 1m
+        memory: 30Mi
+      limits:
+        cpu:
+        memory:
+  node:
+    linux:
+      trident-main:
+        requests:
+          cpu: 10m
+          memory: 60Mi
+        limits:
+          cpu:
+          memory:
+      node-driver-registrar:
+        requests:
+          cpu: 1m
+          memory: 10Mi
+        limits:
+          cpu:
+          memory:
+    windows:
+      trident-main:
+        requests:
+          cpu: 6m
+          memory: 40Mi
+        limits:
+          cpu:
+          memory:
+      node-driver-registrar:
+        requests:
+          cpu: 6m
+          memory: 40Mi
+        limits:
+          cpu:
+          memory:
+      liveness-probe:
+        requests:
+          cpu: 2m
+          memory: 40Mi
+        limits:
+          cpu:
+          memory:
+  operator:
+    requests:
+      cpu: 10m
+      memory: 40Mi
+    limits:
+      cpu:
+      memory:
+----| `httpsMetrics` | 为 Prometheus 指标端点启用 HTTPS。 
+
+
+| false | `hostNetwork`  a| 
+为Trident控制器启用主机联网功能。在多宿主网络中，当需要分离前端和后端流量时，这非常有用。
+
 |===
 
 
