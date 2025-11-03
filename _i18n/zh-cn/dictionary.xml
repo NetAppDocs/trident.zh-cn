@@ -5731,7 +5731,6 @@ SMB</block>
   <block id="b3cced1be48d0693b2f46bcda2fa2c69" category="inline-link-macro">Pod 和容器的资源管理</block>
   <block id="7f63543d9b500b3e7393819885f5f1e9" category="paragraph">有关配置资源请求和限制的更多信息，请参阅<block ref="de686d97b32164bdc56086e6c13cb3a8" category="inline-link-macro-rx"></block>。</block>
   <block id="4bd9e59a927ee617750858c374fbd520" category="list-text">默认情况下不应用任何限制——只有请求才有默认值。</block>
-  <block id="110948e00913b5858d789e532b2bcf8e" category="cell">您可以通过与节点健康检查 (NHC) 操作符集成来自动执行强制分离过程。有关信息，请参阅<block ref="b527eafc73367312d2cf15ed698bf909" category="inline-link-macro-rx"></block>。</block>
   <block id="f30810552abf03525fcde528c58a7732" category="list-text">默认情况下不应用任何限制——只有请求才有默认值，如果未指定则自动应用。</block>
   <block id="6e3335c4209c3f574d11a55c3c410b51" category="cell"><block ref="511a93ba3f22794b25bb3e8095217c70" prefix="" category="inline-code"></block></block>
   <block id="cca021b5f438a6d9183c226d38fb5a5a" category="cell">为 Prometheus 指标端点启用 HTTPS。</block>
@@ -5946,4 +5945,5 @@ SMB</block>
   <block id="8381e23b38563797c34712dd03a338af" category="list-text">为ONTAP-NAS 和ONTAP-NAS-Economy（NAS 驱动程序中不包括 SMB）以及ONTAP-SAN 和ONTAP-SAN-Economy 驱动程序添加了强制卷分离的自动工作负载故障转移支持。看<block ref="a0b18ac4464586bcd0ef288f450a4b90" category="inline-link-macro-rx"></block>。</block>
   <block id="c99a3e599c7121ee81c14119678920d6" category="list-text">新增了一个选项，可以使用 HTTPS 而不是 HTTP 来提供 Prometheus 指标。看<block ref="586c064a2ab176c62a5b2a439f317c69" category="inline-link-macro-rx"></block>。</block>
   <block id="c3321b49eb2cf3cee2a3de2bf85aea24" category="list-text">添加了一个选项<block ref="c6b199cbed247635514ab9e4771be7ff" prefix=" " category="inline-code"></block>导入卷时，保留原始名称，但让Trident管理卷的生命周期。看<block ref="f6a6f2bd8dd988ec020611ce2a45c009" category="inline-link-macro-rx"></block>。</block>
+  <block id="7c1bc9b37347420055cd1e893cbad87c" category="cell">允许将Trident的日志级别设置为<block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>。您可以通过与节点健康检查 (NHC) 操作符集成来自动执行强制分离过程。有关信息，请参阅<block ref="b527eafc73367312d2cf15ed698bf909" category="inline-link-macro-rx"></block>。</block>
 </blocks>

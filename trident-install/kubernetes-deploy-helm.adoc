@@ -201,7 +201,7 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 | `tridentLogLevel` | 允许将Trident的日志级别设置为： `trace`、 `debug` `info`、、、 `warn` `error`或 `fatal`。 | `"info"` 
 
 
-| `tridentDebug` | 允许将Trident的日志级别设置为 `debug`。 | `false` 
+| `tridentDebug` | 允许将Trident的日志级别设置为 `debug`。您可以通过与节点健康检查 (NHC) 操作符集成来自动执行强制分离过程。有关信息，请参阅link:../trident-reco/force-detach.html["使用Trident实现有状态应用程序的故障转移自动化"]。 | `false` 
 
 
 | `tridentLogWorkflows` | 允许为跟踪日志记录或日志抑制启用特定的Trident工作流。 | `""` 
@@ -222,41 +222,41 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 | `windows` | 使Trident能够安装在Windows工作节点上。 | `false` 
 
 
-| `enableForceDetach` | 允许启用强制分离功能。 | 您可以通过与节点健康检查 (NHC) 操作符集成来自动执行强制分离过程。有关信息，请参阅link:../trident-reco/force-detach.html["使用Trident实现有状态应用程序的故障转移自动化"]。 
+| `enableForceDetach` | 允许启用强制分离功能。 | `false` 
 
 
-| `false` | `excludePodSecurityPolicy` | 从创建过程中排除操作员POD安全策略。 
+| `excludePodSecurityPolicy` | 从创建过程中排除操作员POD安全策略。 | `false` 
 
 
-| `false` | `cloudProvider` | 设置为 `"Azure"` 在AKS集群上使用托管身份或云身份时。如果在EKS集群上使用云标识、请设置为"Aws"。 
+| `cloudProvider` | 设置为 `"Azure"` 在AKS集群上使用托管身份或云身份时。如果在EKS集群上使用云标识、请设置为"Aws"。 | `""` 
 
 
-| `""` | `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe"")。 
+| `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe"")。 | `""` 
 
 
-| `""` | `iscsiSelfHealingInterval` | 调用iSCSI自我修复的间隔。 
+| `iscsiSelfHealingInterval` | 调用iSCSI自我修复的间隔。 | `5m0s` 
 
 
-| `5m0s` | `iscsiSelfHealingWaitTime` | iSCSI自我修复通过执行注销和后续登录来尝试解决陈旧会话之前经过的持续时间。 
+| `iscsiSelfHealingWaitTime` | iSCSI自我修复通过执行注销和后续登录来尝试解决陈旧会话之前经过的持续时间。 | `7m0s` 
 
 
-| `7m0s` | `nodePrep` | 使Trident能够准备 Kubernetes 集群的节点，以使用指定的数据存储协议管理卷。 *现在， `iscsi`是唯一支持的值。*注意：从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。 
+| `nodePrep` | 使Trident能够准备 Kubernetes 集群的节点，以使用指定的数据存储协议管理卷。 *现在， `iscsi`是唯一支持的值。*注意：从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。 |  
 
 
-|  | `enableConcurrency`  a| 
+| `enableConcurrency`  a| 
 支持并发Trident控制器操作以提高吞吐量。
 
 
 NOTE: *技术预览*：此功能为实验性功能，目前除了现有的ONTAP -SAN 驱动程序（统一ONTAP 9 中的 iSCSI 和 FCP 协议）技术预览版外，还支持ONTAP-NAS（仅限 NFS）和ONTAP -SAN（统一ONTAP 9 中的 NVMe）驱动程序的有限并行工作流程。
+| false 
 
 
-
-| false | `k8sAPIQPS`  a| 
+| `k8sAPIQPS`  a| 
 控制器与 Kubernetes API 服务器通信时使用的每秒查询数 (QPS) 限制。  Burst 值根据 QPS 值自动设置。
+| `100`; 选修的 
 
 
-
-| `100`; 选修的 | `resources`  a| 
+| `resources`  a| 
 设置 Kubernetes 对Trident控制器、节点和操作员 pod 的资源限制和请求。您可以为每个容器和边车配置 CPU 和内存，以管理 Kubernetes 中的资源分配。
 
 有关配置资源请求和限制的更多信息，请参阅link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/["Pod 和容器的资源管理"^]。
@@ -276,10 +276,7 @@ NOTE: *技术预览*：此功能为实验性功能，目前除了现有的ONTAP 
 * 检查TORC的 `status.CurrentInstallationParams`用于查看当前应用值的字段。
 
 
-====
-
-
- a| 
+==== a| 
 [source, yaml]
 ----
 resources:
@@ -371,12 +368,15 @@ resources:
     limits:
       cpu:
       memory:
-----| `httpsMetrics` | 为 Prometheus 指标端点启用 HTTPS。 
+----
 
 
-| false | `hostNetwork`  a| 
+| `httpsMetrics` | 为 Prometheus 指标端点启用 HTTPS。 | false 
+
+
+| `hostNetwork`  a| 
 为Trident控制器启用主机联网功能。在多宿主网络中，当需要分离前端和后端流量时，这非常有用。
-
+| false 
 |===
 
 
