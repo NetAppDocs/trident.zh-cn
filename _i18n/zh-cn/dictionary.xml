@@ -5495,7 +5495,6 @@ SMB</block>
   <block id="11162de38772a3876602bb4d9d213f43" category="section-title">存储类别映射</block>
   <block id="b48c8c7ca3eb5e63afdfe6bbd74a35c9" category="paragraph">这<block ref="b57d666629acffb30cc697faadc136b5" prefix=" " category="inline-code"></block>属性定义从源应用程序中的现有存储类到目标集群上的新存储类的映射。您可以在具有不同存储类别的集群之间迁移应用程序时或更改 BackupRestore 操作的存储后端时使用此功能。</block>
   <block id="27f5153068cecd37b6fa4a136586658d" category="sidebar">使用高级设置</block>
-  <block id="2c9ccd5e8999c2c36f29069165f327c3" category="admonition">如果您使用 Red Hat OpenShift，请务必注意命名空间注释在 OpenShift 环境中的重要作用。命名空间注释确保恢复的 pod 遵守 OpenShift 安全上下文约束 (SCC) 定义的适当权限和安全配置，并且可以访问卷而不会出现权限问题。欲了解更多信息，请参阅<block ref="f3121e004cef0b92f500227025367589" category="inline-link-rx"></block>。</block>
   <block id="dcc6257f6685a427757ede81b2086cb2" category="admonition">从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。</block>
   <block id="56f0b7f1d902abcea5e9a924acc8cf68" category="list-text">修复了在从子系统取消映射之前未检查 NQN 的问题。</block>
   <block id="74ede3b036d836536636c89ae6208dc1" category="list-text">修复了多次尝试关闭 LUKS 设备导致无法分离卷的问题。</block>
@@ -5595,7 +5594,6 @@ SMB</block>
   <block id="4789829a93714df585353f631620ef1d" category="paragraph-title">使用 iSCSI 示例的 PVC</block>
   <block id="325b282cbc15cc9dcde1a69271472526" category="paragraph">此示例展示了具有 RWO 访问权限的 iSCSI 基本 PVC，它与名为<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block>。</block>
   <block id="4aac510e801e497da3b150682838f5f7" category="section-title">创建 PVC</block>
-  <block id="bef9303dd11d749d2facca8b3064630e" category="list-text">OpenShift 4.12、4.14 - 4.19（如果您计划使用 OpenShift 4.19 进行 iSCSI 节点准备，则支持的最低Trident版本为 25.06.1。）</block>
   <block id="3b30a7aea8a6f98824f61888e8628449" category="inline-link-macro">Red Hat 扩展更新支持 (EUS) 发布生命周期</block>
   <block id="6b62784ed0975ba9ec1e2f69af860e25" category="admonition">Trident继续支持旧版 OpenShift 版本，与<block ref="d73f30265a77d175825591fd08508146" category="inline-link-macro-rx"></block>，即使它们依赖上游不再受官方支持的 Kubernetes 版本。在这种情况下安装Trident时，您可以放心地忽略有关 Kubernetes 版本的任何警告消息。</block>
   <block id="4efb4e385545dd4fb4a8cf16e5ef7763" category="paragraph">保护策略通过按照定义的计划创建快照、备份或两者来保护应用程序。您可以选择每小时、每天、每周和每月创建快照和备份，并可以指定要保留的副本数量。您可以使用 full-backup-rule 注释来安排非增量式完整备份。默认情况下，所有备份都是增量的。定期执行完整备份以及其间的增量备份有助于降低与恢复相关的风险。</block>
@@ -5962,4 +5960,6 @@ SMB</block>
   <block id="75bf9030851f3cf5454c338258e98f47" category="example-title">Kubernetes资源请求和限制配置，适用于Trident控制器以及Trident Windows和Linux节点Pod</block>
   <block id="c6f0dfdaf60b2fd022cd1b94ce713c90" category="paragraph">本示例为Trident控制器和Trident Windows 和 Linux 节点 pod 配置 Kubernetes 资源请求和限制。</block>
   <block id="b320bddb4a4bb9ebc05f4941f7f248a0" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.3.0</block>
+  <block id="80aabc2f42a52376f3d884d3b02360f4" category="admonition">如果您使用 Red Hat OpenShift，请务必注意命名空间注释在 OpenShift 环境中的重要作用。命名空间注释确保恢复的 pod 遵守 OpenShift 安全上下文约束 (SCC) 定义的适当权限和安全配置，并且可以访问卷而不会出现权限问题。欲了解更多信息，请参阅<block ref="842acfa178c0bbf09e368bf9db0716b8" category="inline-link-macro-rx"></block>。</block>
+  <block id="0547999ac2794529491ce433caf5eadb" category="list-text">OpenShift 4.12、4.14 - 4.20（如果您计划在 OpenShift 4.19 中使用 iSCSI 节点准备，则支持的最低Trident版本为 25.06.1。）</block>
 </blocks>
