@@ -27,7 +27,7 @@ Trident提供了一组Prometheus指标端点、可用于监控Trident性能。
 
 
 
-NOTE: 默认情况下，Trident 的指标会暴露在目标端口上。 `8001`在 `/metrics`端点。安装Trident时，这些指标*默认启用*。您可以配置通过 HTTPS 在端口上消费Trident指标。 `8444`也一样。看link:..https://docs.netapp.com/us-en/trident/trident-use/monitor-trident.html#step-2-create-a-prometheus-servicemonitor["第 2 步：创建 Prometheus ServiceMonitor"^]了解更多信息。
+NOTE: 默认情况下，Trident 的指标会暴露在目标端口上。 `8001`在 `/metrics`端点。安装Trident时，这些指标*默认启用*。您可以配置通过 HTTPS 在端口上消费Trident指标。 `8444`也一样。
 
 .您需要的内容
 * 安装了Trident的Kubnetes集群。
@@ -38,7 +38,7 @@ NOTE: 默认情况下，Trident 的指标会暴露在目标端口上。 `8001`�
 
 == 第 1 步：定义 Prometheus 目标
 
-您应定义Prometheus目标、以收集指标并获取有关Trident管理的后端及其创建的卷等的信息。这 https://netapp.io/2020/02/20/prometheus-and-trident/["博客"^]说明了如何将Prometheus和Grafana与Trident结合使用来检索指标。本博客介绍了如何以操作员身份在Kubelnetes集群中运行Prometheus、以及如何创建ServiceMonitor来获取Trident指标。
+您应该定义一个 Prometheus 目标来收集指标并获取有关Trident管理的后端、它创建的卷等的信息。看link:https://prometheus-operator.dev/docs/developer/getting-started/["Prometheus Operator 文档"^]。
 
 
 

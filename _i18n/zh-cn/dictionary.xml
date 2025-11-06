@@ -3695,7 +3695,6 @@ SMB</block>
   <block id="35ada9c61125e74058c883f83c6c6867" category="list-text">密切关注Trident的运行状况和配置。您可以检查操作的成功程度以及它是否能够按预期与后端进行通信。</block>
   <block id="35ff0baf577051daffe0a27ab0d03c9e" category="list-text">跟踪性能。您可以查看Trident与后端通信并执行操作所需的时间。</block>
   <block id="cb9109c9018f4c25d0545bac0f21176f" category="list-text">安装了Trident的Kubnetes集群。</block>
-  <block id="67cc72b550d17849cb7141b0b95aea77" category="paragraph">您应定义Prometheus目标、以收集指标并获取有关Trident管理的后端及其创建的卷等的信息。这<block ref="dc7964965bf1b3af43b28caf6231e550" category="inline-link-rx"></block>说明了如何将Prometheus和Grafana与Trident结合使用来检索指标。本博客介绍了如何以操作员身份在Kubelnetes集群中运行Prometheus、以及如何创建ServiceMonitor来获取Trident指标。</block>
   <block id="b25be1046c4629be0262d9873a147d96" category="paragraph">除了直接从Trident获得的指标之外、kubelet还会通过自己的指标端点公开许多<block ref="f706c2d1cef9479098166eec3d215483" prefix=" " category="inline-code"></block>指标。Kubelet 可以提供有关已连接的卷， Pod 及其处理的其他内部操作的信息。请参阅<block ref="3f1f0977d0df3e8b343e403140284021" category="inline-link-rx"></block>。</block>
   <block id="0665ea39a4ca4388763b36eda9a3986d" category="list-text">**来自Trident的HTTP 2XX响应的百分比**</block>
   <block id="26cd09e35e7d03c2f93f8d6a691c8567" category="list-text">**通过状态代码来自Trident的REST响应的百分比**</block>
@@ -5896,7 +5895,6 @@ SMB</block>
   <block id="84b478e347796a4189c8153f04b8f22f" category="cell">表示 QoS 类型：自动或手动。</block>
   <block id="9d01c188aeecb39d6a072a7fe3f6bbec" category="cell">设置允许的最大吞吐量，单位为 MiB/秒。仅支持手动 QoS 容量池。</block>
   <block id="999b5fc8ace28361827a30c87184dc52" category="paragraph">此后端配置将卷放置在 Azure 中<block ref="6356111305f5daab178fa6051b7a8ae7" prefix=" " category="inline-code"></block>具有手动 QoS 容量池的位置。</block>
-  <block id="503faf64f07688ccd82c6ea0dcbafc94" category="admonition">默认情况下，Trident 的指标会暴露在目标端口上。<block ref="bc3c4a6331a8a9950945a1aa8c95ab8a" prefix=" " category="inline-code"></block>在<block ref="ae3b848d2daecffc635ae20b0b882d8f" prefix=" " category="inline-code"></block>端点。安装Trident时，这些指标*默认启用*。您可以配置通过 HTTPS 在端口上消费Trident指标。<block ref="c24f4c5eef7ec01c46e003a9296c8645" prefix=" " category="inline-code"></block>也一样。看<block ref="fa54214f84afcb78d6b5287833f1e589" category="inline-link-macro-rx"></block>了解更多信息。</block>
   <block id="f36399c8e5916099bb38486b839c5a17" category="paragraph">此 ServiceMonitor 定义检索由以下方式返回的指标：<block ref="d9585690fd147c34fbd50c487a3520de" prefix=" " category="inline-code"></block>服务，特别是寻找<block ref="aa59d67c2123f094d0d6798ffe651c4d" prefix=" " category="inline-code"></block>服务的端点。因此，Prometheus 现在已配置为能够理解 Trident 的指标。</block>
   <block id="9c0a20de0cc47a8e12a961b4d6b741d7" category="section-title">通过 HTTPS 使用Trident指标</block>
   <block id="6ee42c2966b1aebb345c670a455ab7c9" category="paragraph">要通过 HTTPS（端口 8444）使用Trident指标，您必须修改 ServiceMonitor 定义以包含 TLS 配置。你还需要复制<block ref="d9585690fd147c34fbd50c487a3520de" prefix=" " category="inline-code"></block>秘密来自<block ref="47cb44be55a0dffa15dfc900a4c687be" prefix=" " category="inline-code"></block>将命名空间指向 Prometheus 运行所在的命名空间。您可以使用以下命令执行此操作：</block>
@@ -5962,4 +5960,7 @@ SMB</block>
   <block id="b320bddb4a4bb9ebc05f4941f7f248a0" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.3.0</block>
   <block id="80aabc2f42a52376f3d884d3b02360f4" category="admonition">如果您使用 Red Hat OpenShift，请务必注意命名空间注释在 OpenShift 环境中的重要作用。命名空间注释确保恢复的 pod 遵守 OpenShift 安全上下文约束 (SCC) 定义的适当权限和安全配置，并且可以访问卷而不会出现权限问题。欲了解更多信息，请参阅<block ref="842acfa178c0bbf09e368bf9db0716b8" category="inline-link-macro-rx"></block>。</block>
   <block id="0547999ac2794529491ce433caf5eadb" category="list-text">OpenShift 4.12、4.14 - 4.20（如果您计划在 OpenShift 4.19 中使用 iSCSI 节点准备，则支持的最低Trident版本为 25.06.1。）</block>
+  <block id="5137aa193de4e4cc652a198db463acd3" category="admonition">默认情况下，Trident 的指标会暴露在目标端口上。<block ref="bc3c4a6331a8a9950945a1aa8c95ab8a" prefix=" " category="inline-code"></block>在<block ref="ae3b848d2daecffc635ae20b0b882d8f" prefix=" " category="inline-code"></block>端点。安装Trident时，这些指标*默认启用*。您可以配置通过 HTTPS 在端口上消费Trident指标。<block ref="c24f4c5eef7ec01c46e003a9296c8645" prefix=" " category="inline-code"></block>也一样。</block>
+  <block id="e4850469bb389cec2e3ac44d4276ffb0" category="inline-link-macro">Prometheus Operator 文档</block>
+  <block id="faa779ed6ae9bda26148b1ff6bf0cc52" category="paragraph">您应该定义一个 Prometheus 目标来收集指标并获取有关Trident管理的后端、它创建的卷等的信息。看<block ref="64a51bde051e46320750fd80d285a3d9" category="inline-link-macro-rx"></block>。</block>
 </blocks>
