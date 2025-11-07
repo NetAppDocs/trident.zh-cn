@@ -3760,8 +3760,6 @@ SMB</block>
   <block id="c59bb4e25695c195dbaa360d34c9795e" category="cell"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix="" category="inline-code"></block></block>
   <block id="091b358e8a9ea5e6b1137fbd4c18372f" category="paragraph"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix=" " category="inline-code"></block>用于指定命令的命令行参数、每当对卷进行格式化时、都会应用这些参数<block ref="899da842f7d2c1db0e3f8c88ad72507f" prefix=" " category="inline-code"></block>。这样、您可以根据偏好格式化卷。请确保指定与mkfs命令选项类似的格式选项，但不包括设备路径。示例："-E nobdiscard"</block>
   <block id="18eb1633594b2436e83e73071958b960" category="section-title">有关使用formatOptions的建议</block>
-  <block id="d9ec468a8922eca17349404c59b7659c" category="paragraph">Trident建议使用以下选项来加快格式化过程：</block>
-  <block id="ee8d7eb9cc1e43184ed6a64abb3255f6" category="paragraph">*-E NODiscard：*</block>
   <block id="f1e8c049fa2ad08b8d1a332e2d26163e" category="cell">要为创建的卷分配的 QoS 策略组。选择每个存储池 / 后端的 qosPolicy 或 adaptiveQosPolicy 之一。将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。</block>
   <block id="c598aba0725ffc7663bf0f4db1a3238f" category="cell"><block ref="80fd16da9d17abac4374b362f2e409fe" prefix="" category="inline-code"></block></block>
   <block id="a5b88f2b14a5b0fa1aa2bbed9eb87602" category="cell">限制<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>后端创建新的FlexVol卷以包含其LUN。仅会使用已有的FlexVol配置新的PV.</block>
@@ -5086,7 +5084,6 @@ SMB</block>
   <block id="c72dc6713f14ba2541824417f46e1cd6" category="cell">故障排除时要使用的调试标志。例如、｛"api"：false、"METHO"：true｝</block>
   <block id="cc1ae9a700356c7c519b4aee7dcbf53b" category="cell">"10.0.0.1"、"[2001：1234：abc：：：fefe]"</block>
   <block id="1925cd490b13f25205214eccfe51fccd" category="admonition">如果您使用的是"vsadmin"凭据、<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block>则必须是SVM的凭据；如果使用的是"admin"凭据、则必须是集群的凭据<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block>。</block>
-  <block id="788fe8d661645297ab41d7c9235dcbb8" category="list-text">保留、不要尝试在mkfs时间丢弃块(丢弃块最初在固态设备和稀疏/精简配置存储上很有用)。此选项将取代已弃用的选项"-K"、并适用于所有文件系统(xfs、ext3和ext4)。</block>
   <block id="470fa5f00d398bad1d1874a9b4d59d7b" category="cell">"["0.0.0.0/0、"：：：/0"]"</block>
   <block id="1e8d899088cef4cd1758075ac2b63721" category="cell">为快照"0"预留的卷百分比</block>
   <block id="d8d01124b8b3fe614b475ad96fca4635" category="cell">如果<block ref="0a236e7685e50a59df980d0a30929d6c" prefix=" " category="inline-code"></block>为<block ref="334c4a4c42fdb79d7ebc3e73b517e6f8" prefix=" " category="inline-code"></block>，<block ref="2954e92a9b4d0e998fe4893f8141649a" prefix=" " category="inline-code"></block>“”</block>
@@ -5649,7 +5646,6 @@ SMB</block>
   <block id="b9785b666a04771c63b539840201a4db" category="paragraph">升级ONTAP后，NFSv4.2 客户端在尝试挂载 NFSv4.2 导出时可能会报告“无效参数”错误。当<block ref="5a54626559918ca9ebb6414eebaa97bf" prefix=" " category="inline-code"></block> SVM 上未启用该选项。.解决方法启用<block ref="5a54626559918ca9ebb6414eebaa97bf" prefix=" " category="inline-code"></block> 选项或升级到ONTAP 9.12.1 或更高版本，默认情况下此选项处于启用状态。</block>
   <block id="65cfb19ed2b3d296782fbfdd6b7075b1" category="list-text">Trident现已支持 Kubernetes 1.34。在升级 Kubernetes 之前先升级Trident 。</block>
   <block id="e69ddc8f5253cd0167cca555b0f0fd9c" category="list-text">Kubernetes 1.27 - 1.34</block>
-  <block id="7f6d66fd53fc399c1b8baeebcdb94472" category="list-text">Rancher Kubernetes Engine 2（RKE2）v1.27.x - 1.34.x</block>
   <block id="844c50b4f1aab48821867a1209be687b" category="admonition">虽然Trident在 Rancher Kubernetes Engine 2 (RKE2) 版本 1.27.x - 1.34.x 上受支持，但Trident目前仅在 RKE2 v1.28.5+rke2r1 上获得认证。</block>
   <block id="27f15237580e8f85cd2846baf40ad83b" category="paragraph">1.27 - 1.34</block>
   <block id="73b1fe6d150d74c875ee4a368dd3b1a9" category="cell">v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、v1.32.0、v1.33.0、v1.34.0</block>
@@ -5963,4 +5959,8 @@ SMB</block>
   <block id="5137aa193de4e4cc652a198db463acd3" category="admonition">默认情况下，Trident 的指标会暴露在目标端口上。<block ref="bc3c4a6331a8a9950945a1aa8c95ab8a" prefix=" " category="inline-code"></block>在<block ref="ae3b848d2daecffc635ae20b0b882d8f" prefix=" " category="inline-code"></block>端点。安装Trident时，这些指标*默认启用*。您可以配置通过 HTTPS 在端口上消费Trident指标。<block ref="c24f4c5eef7ec01c46e003a9296c8645" prefix=" " category="inline-code"></block>也一样。</block>
   <block id="e4850469bb389cec2e3ac44d4276ffb0" category="inline-link-macro">Prometheus Operator 文档</block>
   <block id="faa779ed6ae9bda26148b1ff6bf0cc52" category="paragraph">您应该定义一个 Prometheus 目标来收集指标并获取有关Trident管理的后端、它创建的卷等的信息。看<block ref="64a51bde051e46320750fd80d285a3d9" category="inline-link-macro-rx"></block>。</block>
+  <block id="0bca60aba2da7f8ae6d6dac4fb580afe" category="list-text">Rancher Kubernetes Engine 2（RKE2）v1.28.x - 1.34.x</block>
+  <block id="3802caa8e4bea50419dcef8b68f5b82e" category="paragraph">Trident建议采用以下选项来加快格式化过程：</block>
+  <block id="8b081afdb240ed6d03a50d7b70aac895" category="list-text">*-E nodiscard (ext3, ext4):* 不要尝试在 mkfs 时丢弃块（最初丢弃块对固态设备和稀疏/精简配置存储很有用）。这将取代已弃用的选项“-K”，并且适用于 ext3、ext4 文件系统。</block>
+  <block id="01f770831133fae79fa85eb89c42b8f2" category="list-text">*-K (xfs):* 不要在执行 mkfs 时尝试丢弃块。此选项适用于 xfs 文件系统。</block>
 </blocks>

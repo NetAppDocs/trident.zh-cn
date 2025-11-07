@@ -47,7 +47,7 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 
 NOTE: Trident继续支持旧版 OpenShift 版本，与link:https://access.redhat.com/support/policy/updates/openshift["Red Hat 扩展更新支持 (EUS) 发布生命周期"]，即使它们依赖上游不再受官方支持的 Kubernetes 版本。在这种情况下安装Trident时，您可以放心地忽略有关 Kubernetes 版本的任何警告消息。
 
-* Rancher Kubernetes Engine 2（RKE2）v1.27.x - 1.34.x
+* Rancher Kubernetes Engine 2（RKE2）v1.28.x - 1.34.x
 +
 
 NOTE: 虽然Trident在 Rancher Kubernetes Engine 2 (RKE2) 版本 1.27.x - 1.34.x 上受支持，但Trident目前仅在 RKE2 v1.28.5+rke2r1 上获得认证。
