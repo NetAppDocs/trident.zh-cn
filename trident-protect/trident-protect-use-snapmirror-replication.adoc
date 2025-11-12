@@ -174,7 +174,7 @@ kubectl apply -f trident-protect-appvault-primary-source.yaml -n trident-protect
 +
 [source, console]
 ----
-tridentctl-protect create vault Azure <vault-name> --account <account-name> --bucket <bucket-name> --secret <secret-name>
+tridentctl-protect create vault Azure <vault-name> --account <account-name> --bucket <bucket-name> --secret <secret-name> -n trident-protect
 ----
 
 
@@ -231,7 +231,8 @@ tridentctl-protect create app <my-app-name> --namespaces <namespaces-to-be-inclu
 
 --
 ====
-. 或者，在源集群上，拍摄源应用程序的快照。此快照将用作目标集群上应用程序的基础。如果跳过此步骤、则需要等待运行下一个计划快照、以便获得最新快照。
+. （可选）在源集群上，对源应用程序进行快照。此快照将用作目标集群上应用程序的基础。如果跳过此步骤，则需要等待下一次计划快照运行，以便获得最新的快照。要创建按需快照，请参阅 link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-protect-apps.html#create-an-on-demand-snapshot["创建按需快照"^]。
+. 在源集群上，创建复制计划 CR：
 +
 [NOTE]
 ====
@@ -245,7 +246,7 @@ tridentctl-protect create app <my-app-name> --namespaces <namespaces-to-be-inclu
 +
 [role="tabbed-block"]
 ====
-.使用CR创建快照
+.使用 CR 创建复制计划
 --
 .. 为源应用程序创建复制计划：
 +
@@ -253,8 +254,8 @@ tridentctl-protect create app <my-app-name> --namespaces <namespaces-to-be-inclu
 ... 配置以下属性：
 +
 **** * metadata.name*:(_required__)计划自定义资源的名称。
-**** *spec.appVaultRef*：(_required_)此值必须与源应用程序的AppVault的metadata.name字段匹配。
-**** *spec.ApplicationRef*：(_required_)此值必须与源应用程序CR的metadata.name字段匹配。
+**** *spec.appVaultRef*: (_必需_) 此值必须与源应用程序的 AppVault 的 metadata.name 字段匹配。
+**** *spec.applicationRef*: (_必需_) 此值必须与源应用程序 CR 的 metadata.name 字段匹配。
 **** *spec.backup놣 쇴*：(_required_)此字段为必填字段、且值必须设置为0。
 **** *spec.enabled *：必须设置为true。
 **** *。spec.granularity*:必须设置为 `Custom`。
@@ -270,14 +271,14 @@ YAML示例：
 apiVersion: protect.trident.netapp.io/v1
 kind: Schedule
 metadata:
-  name: appmirror-schedule-0e1f88ab-f013-4bce-8ae9-6afed9df59a1
+  name: appmirror-schedule
   namespace: my-app-namespace
 spec:
-  appVaultRef: generic-s3-trident-protect-src-bucket-04b6b4ec-46a3-420a-b351-45795e1b5e34
+  appVaultRef: my-appvault-name
   applicationRef: my-app-name
   backupRetention: "0"
   enabled: true
-  granularity: custom
+  granularity: Custom
   recurrenceRule: |-
     DTSTART:20220101T000200Z
     RRULE:FREQ=MINUTELY;INTERVAL=5
@@ -296,13 +297,21 @@ kubectl apply -f trident-protect-schedule.yaml -n my-app-namespace
 
 
 --
-.使用命令行界面创建快照
+.使用 CLI 创建复制计划
 --
-.. 创建快照、将括号中的值替换为您环境中的信息。例如：
+.. 创建复制计划，并将括号中的值替换为您环境中的信息：
 +
 [source, console]
 ----
-tridentctl-protect create snapshot <my_snapshot_name> --appvault <my_appvault_name> --app <name_of_app_to_snapshot> -n <application_namespace>
+tridentctl-protect create schedule --name appmirror-schedule --app <my_app_name> --appvault <my_app_vault> --granularity Custom --recurrence-rule <rule> --snapshot-retention <snapshot_retention_count> -n <my_app_namespace>
+----
++
+* 示例： *
+
++
+[source, console]
+----
+tridentctl-protect create schedule --name appmirror-schedule --app <my_app_name> --appvault <my_app_vault> --granularity Custom --recurrence-rule  "DTSTART:20220101T000200Z\nRRULE:FREQ=MINUTELY;INTERVAL=5" --snapshot-retention 2 -n <my_app_namespace>
 ----
 
 
@@ -313,7 +322,7 @@ tridentctl-protect create snapshot <my_snapshot_name> --appvault <my_appvault_na
 +
 [source, console]
 ----
-kubectl apply -f trident-protect-appvault-primary-destination.yaml -n my-app-namespace
+kubectl apply -f trident-protect-appvault-primary-destination.yaml -n trident-protect
 ----
 . 在目标集群上为目标应用程序创建目标AppVault CR。根据您的存储提供程序、修改中的示例link:trident-protect-appvault-custom-resources.html["AppVault自定义资源"]以适合您的环境：
 +
@@ -349,7 +358,7 @@ kubectl apply -f trident-protect-appvault-primary-destination.yaml -n my-app-nam
 +
 [source, console]
 ----
-kubectl apply -f trident-protect-appvault-secondary-destination.yaml -n my-app-namespace
+kubectl apply -f trident-protect-appvault-secondary-destination.yaml -n trident-protect
 ----
 
 
@@ -367,7 +376,8 @@ kubectl apply -f trident-protect-appvault-secondary-destination.yaml -n my-app-n
 *** *。spec.namespaceMapping*:(_required__)目标和源命名空间必须与相应应用程序CR中定义的应用程序命名空间匹配。
 *** *spec.sourceAppVaultRef*：(_required_)此值必须与源应用程序的AppVault名称匹配。
 *** *spec.sourceApplicationName*:(_required_)此值必须与您在源应用程序CR中定义的源应用程序的名称匹配。
-*** *spec.storageClassName*：(_required_)选择集群上有效存储类的名称。存储类必须链接到与源环境建立对等关系的ONTAP Storage VM。
+*** *spec.sourceApplicationUID*: （必需）此值必须与您在源应用程序 CR 中定义的源应用程序的 UID 匹配。
+*** *spec.storageClassName*: (_可选_) 选择集群上有效的存储类的名称。存储类必须链接到与源环境建立对等连接的ONTAP存储 VM。如果未提供存储类，则默认使用集群上的默认存储类。
 *** *spec.rec发 规则*：定义UTC时间的开始日期和重复间隔。
 +
 YAML示例：
@@ -408,11 +418,19 @@ kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
 --
 .使用命令行界面创建App镜像 关系
 --
-.. 创建并应用App镜像 关系对象、将括号中的值替换为环境中的信息。例如：
+.. 创建并应用 AppMirrorRelationship 对象，并将括号中的值替换为您环境中的信息：
 +
 [source, console]
 ----
-tridentctl-protect create appmirrorrelationship <name_of_appmirorrelationship> --destination-app-vault <my_vault_name> --recurrence-rule <rule> --source-app <my_source_app> --source-app-vault <my_source_app_vault> -n <application_namespace>
+tridentctl-protect create appmirrorrelationship <name_of_appmirorrelationship> --destination-app-vault <my_vault_name> --source-app-vault <my_vault_name> --recurrence-rule <rule> --namespace-mapping <ns_mapping> --source-app-id <source_app_UID> --source-app <my_source_app_name> --storage-class <storage_class_name> -n <application_namespace>
+----
++
+* 示例： *
+
++
+[source, console]
+----
+tridentctl-protect create appmirrorrelationship my-amr --destination-app-vault appvault2 --source-app-vault appvault1 --recurrence-rule "DTSTART:20220101T000200Z\nRRULE:FREQ=MINUTELY;INTERVAL=5" --source-app my-app --namespace-mapping "my-source-ns1:my-dest-ns1,my-source-ns2:my-dest-ns2" --source-app-id 373f24c1-5769-404c-93c3-5538af6ccc36 --storage-class my-storage-class -n my-dest-ns1
 ----
 
 

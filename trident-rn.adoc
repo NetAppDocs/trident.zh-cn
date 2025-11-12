@@ -102,11 +102,11 @@ NetApp Trident Protect提供高级应用程序数据管理功能、可增强由N
 ** `protect.trident.netapp.io/volume-snapshots-ready-to-use-timeout`
 ** `protect.trident.netapp.io/volume-snapshots-created-timeout`
 +
-看link:trident-protect-protect-apps.html["支持的备份和计划注释"^]。
+看link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-protect-apps.html["支持的备份和计划注释"^]。
 
 
 
-* 在计划 CR 中添加了一个注释，用于配置 PVC 绑定超时，该超时将由备份 CR 使用： `protect.trident.netapp.io/pvc-bind-timeout-sec` 。看link:trident-protect-protect-apps.html["支持的备份和计划注释"^]。
+* 在计划 CR 中添加了一个注释，用于配置 PVC 绑定超时，该超时将由备份 CR 使用： `protect.trident.netapp.io/pvc-bind-timeout-sec` 。看link:https://docs.netapp.com/us-en/trident/trident-protect/trident-protect-protect-apps.html["支持的备份和计划注释"^]。
 * 改进 `tridentctl-protect`备份和快照列表新增一个字段，用于指示执行钩子失败。
 
 

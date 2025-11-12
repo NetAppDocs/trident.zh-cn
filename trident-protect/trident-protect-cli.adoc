@@ -122,11 +122,11 @@ tridentctl-protect help
 .为bash shell启用自动完成
 --
 .步骤
-. 下载完成脚本：
+. 创建完成脚本：
 +
 [source, console]
 ----
-curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/25.10.0/tridentctl-completion.bash
+tridentctl-protect completion bash > tridentctl-completion.bash
 ----
 . 在主目录中创建一个新目录以包含该脚本：
 +
@@ -152,11 +152,11 @@ source ~/.bash/completions/tridentctl-completion.bash
 .为Z shell启用自动完成
 --
 .步骤
-. 下载完成脚本：
+. 创建完成脚本：
 +
 [source, console]
 ----
-curl -L -O https://github.com/NetApp/tridentctl-protect/releases/download/25.10.0/tridentctl-completion.zsh
+tridentctl-protect completion zsh > tridentctl-completion.zsh
 ----
 . 在主目录中创建一个新目录以包含该脚本：
 +

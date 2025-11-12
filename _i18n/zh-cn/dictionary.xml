@@ -3942,7 +3942,6 @@ SMB</block>
   <block id="da9d072bec5b191d5b5120761a2094e5" category="section-title">启用命令自动完成</block>
   <block id="2994879f05c105b10427c87890d6ce6a" category="paragraph">安装Trident Protect命令行界面插件后、您可以对某些命令启用自动完成。</block>
   <block id="df7d0aa2cf46fe870b9bba130ea4d964" category="open-title">为bash shell启用自动完成</block>
-  <block id="dc8d08efd37c5c2cd13f1da4b74b2004" category="list-text">下载完成脚本：</block>
   <block id="bbd32e1d32af84e3002666b13f548cce" category="list-text">在主目录中创建一个新目录以包含该脚本：</block>
   <block id="63f01fb9933705d6d795c4c690a6504c" category="list-text">将下载的脚本移动到<block ref="37476bab24bad3126a5edbc11fab761e" prefix=" " category="inline-code"></block>目录：</block>
   <block id="4a76f80f250e570c9fd0b4b8b9e41486" category="list-text">将以下行添加到<block ref="b8cb707d54dfbd8ab64f0b1dc81b72e1" prefix=" " category="inline-code"></block>主目录中的文件：</block>
@@ -4250,7 +4249,6 @@ SMB</block>
   <block id="57cc31c4785dfe52bb22cc8d375a3b67" category="list-text">创建自定义资源(CR)文件并将其命名(例如<block ref="8898becea7c9a79dd32acb9c34818b46" prefix=" " category="inline-code"></block>)。</block>
   <block id="87918fdbe5607aeceec3ec53bc40a2f8" category="list-text">* metadata.name*:(_required__)计划自定义资源的名称。</block>
   <block id="3e23380d121194d4ed43d5587e33eeba" category="list-text">*spec.appVaultRef*：(_required_)此值必须与源应用程序的AppVault的metadata.name字段匹配。</block>
-  <block id="a7ac547d97c63ad78926b420081cf36d" category="list-text">*spec.ApplicationRef*：(_required_)此值必须与源应用程序CR的metadata.name字段匹配。</block>
   <block id="565c53b27f6972afc514c3431a7fb733" category="list-text">*spec.backup놣 쇴*：(_required_)此字段为必填字段、且值必须设置为0。</block>
   <block id="e00228f2eaa851d908b74fd6e1cbb1ab" category="list-text">*spec.enabled *：必须设置为true。</block>
   <block id="b8e08f9f53492c0cf7c4c918c8c27185" category="list-text">*。spec.granularity*:必须设置为<block ref="90589c47f06eb971d548591f23c285af" prefix=" " category="inline-code"></block>。</block>
@@ -4270,7 +4268,6 @@ SMB</block>
   <block id="5c0044cad9c27e4f4742c4a031edd6eb" category="list-text">*spec.sourceApplicationName*:(_required_)此值必须与您在源应用程序CR中定义的源应用程序的名称匹配。</block>
   <block id="e1e70c108ffb369c9c05ac65820562c3" category="list-text">使用正确的值填充文件后<block ref="e4fba3915616865173fe7feee130a30f" prefix=" " category="inline-code"></block> 、应用CR：</block>
   <block id="d4c94febe4f13411fa761de57ad6cce6" category="open-title">使用命令行界面创建App镜像 关系</block>
-  <block id="1d29e9d9da5d097b90cc18a976fa591c" category="list-text">创建并应用App镜像 关系对象、将括号中的值替换为环境中的信息。例如：</block>
   <block id="86d47ead9019d8e9c93c863f7ab4e41b" category="list-text">(_可 选_)检查复制关系的状态：</block>
   <block id="70cc2bec279e168711b67e789468c45c" category="section-title">故障转移到目标集群</block>
   <block id="196c4df78e5add7c9590d6a1c18367ec" category="paragraph">使用Trident Protect、您可以将复制的应用程序故障转移到目标集群。此操作步骤 将停止复制关系并使应用程序在目标集群上联机。如果源集群上的应用程序正常运行、则Trident Protect不会停止该应用程序。</block>
@@ -4435,7 +4432,6 @@ SMB</block>
   <block id="baafbccab17d07f9ba18e7becb7c76d2" category="inline-link-macro">从备份还原数据</block>
   <block id="878bbf0662ed19ef900e4e06bfad92d2" category="list-text">在目标集群上，<block ref="11860f9f3ec51316f8ebc9805806b6cd" category="inline-link-macro-rx"></block>。</block>
   <block id="4a0207b6a74b63dcaaa4d58fe75ec431" category="list-text">*resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用<block ref="f4d72a64acd8929c0cc9ed96a7a336cc" prefix=" " category="inline-code"></block>或包含或<block ref="843f2812f595e7ec7c5036e89fde02d6" prefix=" " category="inline-code"></block>排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：</block>
-  <block id="5e77ee724e7a9c6f34c1fd6a65b3f3b5" category="list-text">*spec.storageClassName*：(_required_)选择集群上有效存储类的名称。存储类必须链接到与源环境建立对等关系的ONTAP Storage VM。</block>
   <block id="b22804421b3e5bca94f2a9979721eb60" category="cell">具有角色的Google Cloud服务帐户的API密钥<block ref="e50dbf86780cfad5e007e4a95a6aa71e" prefix=" " category="inline-code"></block> 。它包括 Google Cloud 服务帐户专用密钥文件的 JSON 格式的内容（逐字复制到后端配置文件）。<block ref="c9ff119073ea2567730fb42e3a4fe805" prefix=" " category="inline-code"></block>必须包括以下键的键值对：<block ref="599dcce2998a6b40b1e38e8c6006cb0a" prefix=" " category="inline-code"></block>、<block ref="b098ad43c65e68f3d8ce27a3c7e6f6e2" prefix=" " category="inline-code"></block>、<block ref="a4a9fd77bfb3720e66b510bef7ffe71a" prefix=" " category="inline-code"></block>、、<block ref="2bfe9d72a4aae8f06a31025b7536be80" prefix=" " category="inline-code"></block><block ref="478cc0e49bfbb9ded4ffc7ea662d3968" prefix=" " category="inline-code"></block><block ref="98b215082431c21156af94f3aa69f838" prefix=" " category="inline-code"></block><block ref="8201fe8e688f4f948a62370fd1b411d4" prefix=" " category="inline-code"></block>和<block ref="61426bc7fdd11e59a5c98e7ee37e3dbb" prefix=" " category="inline-code"></block>。</block>
   <block id="d0e48e9528072c6ff90b82adeab94dea" category="list-text">具有NetApp卷管理员角色的Google Cloud服务帐户 <block ref="04bf1a6a0250bc9d4cba09ee34106dfc" prefix="(" category="inline-code"></block>。请参阅 <block ref="4f506c30a158c85db714d53536a12770" category="inline-link-macro-rx"></block>。</block>
   <block id="a13eeeef5ff2b7fe85692890fb5d28b3" category="open-title">Amazon S3 (AWS)</block>
@@ -5234,12 +5230,9 @@ SMB</block>
   <block id="3d11bc959173dddd2997400e7bdf4d67" category="list-text">在故障转移期间，执行挂钩会自动从源集群复制到目标集群。您无需手动重新创建它们。故障转移后，执行挂钩仍存在于应用程序中，并将在任何相关操作期间执行。</block>
   <block id="ba9dd6212c2e02686051fbf28e548584" category="list-text">在反向同步或反向重新同步期间，应用程序上所有现有的执行钩子都将被移除。当源应用程序成为目标应用程序时，这些执行钩子将失效，并会被删除以阻止其执行。</block>
   <block id="98b9f287abe5860abcc3ab5364313188" category="paragraph">要了解有关执行钩子的更多信息，请参阅<block ref="d0f7adc5528355d3ba6ac91271095c29" category="inline-link-macro-rx"></block> 。</block>
-  <block id="f815c45e5a618fe75ef3a716b30b711d" category="list-text">或者，在源集群上，拍摄源应用程序的快照。此快照将用作目标集群上应用程序的基础。如果跳过此步骤、则需要等待运行下一个计划快照、以便获得最新快照。</block>
   <block id="9399bd959f53d5a7d8671b597df92df2" category="paragraph">除了下面提供的计划外，建议创建一个单独的每日快照计划，保留期为 7 天，以便在对等 ONTAP 集群之间维护通用快照。这可确保快照最多可用 7 天，但保留期可根据用户需求自定义。</block>
   <block id="bd8250ba3a5ac73f1ca0ba8c92937c5a" category="paragraph">如果发生故障转移，系统可以使用这些快照最多 7 天进行反向操作。这种方法使反向过程更快、更高效，因为只会传输自上次快照以来所做的更改，而不是所有数据。</block>
   <block id="af22b57fbc1d302d6a0b83cb06ce9e6a" category="paragraph">如果应用程序的现有计划已经满足所需的保留要求，则不需要额外的计划。</block>
-  <block id="84caf200e79d5962bc7f3516e9ad328c" category="open-title">使用CR创建快照</block>
-  <block id="3feb4a62c8b59cd52ae22845d363c901" category="open-title">使用命令行界面创建快照</block>
   <block id="e995d56efd9e31d97825dd79be4d1383" category="inline-link-macro">了解ASA R2存储系统</block>
   <block id="19bf8687ff63071d6f6661c290cba7c2" category="admonition">ASA r2 系统不支持 LUKS 加密。有关 ASA r2 系统的信息，请参阅<block ref="40f055dd42976ff294174231df35e37e" category="inline-link-macro-rx"></block> 。</block>
   <block id="9470f4768dd90ef0be0fb76cb2f6e04b" category="admonition">避免克隆与其他 StorageClass 关联的 PVC。请在同一 StorageClass 内执行克隆操作，以确保兼容性并防止出现意外行为。</block>
@@ -5883,8 +5876,6 @@ SMB</block>
   <block id="8b8d9f4c952c1a96deb64c793af4e464" category="list-text"><block ref="a3f0891bded2c705ab3b29833481ffcf" prefix="" category="inline-code"></block></block>
   <block id="73a728f42314eb885248ddf406b25363" category="list-text"><block ref="af978cfba15392673bcd27f4c22e2926" prefix="" category="inline-code"></block></block>
   <block id="aee2fa9c2204a55585128f5277354ae9" category="inline-link-macro">支持的备份和计划注释</block>
-  <block id="c012e297eb92b407e41744b41b55a25a" category="paragraph">看<block ref="76183371d4bb7f7ba60f0a02290c6001" category="inline-link-macro-rx"></block>。</block>
-  <block id="39ebbf61bcc7edd8606432a4977ae4fc" category="list-text">在计划 CR 中添加了一个注释，用于配置 PVC 绑定超时，该超时将由备份 CR 使用：<block ref="728633ade1403bcbcd881fc22ec19596" prefix=" " category="inline-code"></block> 。看<block ref="76183371d4bb7f7ba60f0a02290c6001" category="inline-link-macro-rx"></block>。</block>
   <block id="e3245c0aba43966b1051780d8f62f1fb" category="list-text">改进<block ref="d4845d5856667a10aee97f3404a35627" prefix=" " category="inline-code"></block>备份和快照列表新增一个字段，用于指示执行钩子失败。</block>
   <block id="6c194c516ba4058b297409f4d40113b5" category="section-title">25.06.2 中的变更</block>
   <block id="cd133424a13afaa0badf4f13c4bf4c72" category="list-text">除了 iSCSI 之外，还增加了对ONTAP ASA r2 的 NVMe/TCP 支持。看<block ref="f2fd3fe662daf33e514604a72251389c" category="inline-link-macro-rx"></block>。</block>
@@ -5963,4 +5954,17 @@ SMB</block>
   <block id="3802caa8e4bea50419dcef8b68f5b82e" category="paragraph">Trident建议采用以下选项来加快格式化过程：</block>
   <block id="8b081afdb240ed6d03a50d7b70aac895" category="list-text">*-E nodiscard (ext3, ext4):* 不要尝试在 mkfs 时丢弃块（最初丢弃块对固态设备和稀疏/精简配置存储很有用）。这将取代已弃用的选项“-K”，并且适用于 ext3、ext4 文件系统。</block>
   <block id="01f770831133fae79fa85eb89c42b8f2" category="list-text">*-K (xfs):* 不要在执行 mkfs 时尝试丢弃块。此选项适用于 xfs 文件系统。</block>
+  <block id="1a715172aa56ca325fbc38f4b522da46" category="list-text">创建完成脚本：</block>
+  <block id="30e52f4e46178e20ec0172d136f6e964" category="list-text">（可选）在源集群上，对源应用程序进行快照。此快照将用作目标集群上应用程序的基础。如果跳过此步骤，则需要等待下一次计划快照运行，以便获得最新的快照。要创建按需快照，请参阅 <block ref="359fb751a7b652662d6f4f859ab7278e" category="inline-link-macro-rx"></block>。</block>
+  <block id="5c24c4abf654732ea864deb8dfd27900" category="list-text">在源集群上，创建复制计划 CR：</block>
+  <block id="7f3cf5a508f65aafe24cfcbde532a846" category="open-title">使用 CR 创建复制计划</block>
+  <block id="7228f7e08042915e251a683bfff18231" category="list-text">*spec.appVaultRef*: (_必需_) 此值必须与源应用程序的 AppVault 的 metadata.name 字段匹配。</block>
+  <block id="2845cbe42176f1140d5d897aaf3abea8" category="list-text">*spec.applicationRef*: (_必需_) 此值必须与源应用程序 CR 的 metadata.name 字段匹配。</block>
+  <block id="4cd94b75213793150ad247d75cd897e9" category="open-title">使用 CLI 创建复制计划</block>
+  <block id="3de5f07029546bc00c37d9c9edf9cc20" category="list-text">创建复制计划，并将括号中的值替换为您环境中的信息：</block>
+  <block id="7749c9ae56691a1f3a933f4d23d038e3" category="list-text">*spec.sourceApplicationUID*: （必需）此值必须与您在源应用程序 CR 中定义的源应用程序的 UID 匹配。</block>
+  <block id="3d684c1e0271c67148a368e61c2e954e" category="list-text">*spec.storageClassName*: (_可选_) 选择集群上有效的存储类的名称。存储类必须链接到与源环境建立对等连接的ONTAP存储 VM。如果未提供存储类，则默认使用集群上的默认存储类。</block>
+  <block id="c97418e1743694adcebfb4447351b629" category="list-text">创建并应用 AppMirrorRelationship 对象，并将括号中的值替换为您环境中的信息：</block>
+  <block id="2b4bab15439acee1a7a1ecf65aefccf8" category="paragraph">看<block ref="8a2f8872ebe6d6c56e608637c3cdaf0f" category="inline-link-macro-rx"></block>。</block>
+  <block id="da88dec11cfebffca5dfcf278b6ef68c" category="list-text">在计划 CR 中添加了一个注释，用于配置 PVC 绑定超时，该超时将由备份 CR 使用：<block ref="728633ade1403bcbcd881fc22ec19596" prefix=" " category="inline-code"></block> 。看<block ref="8a2f8872ebe6d6c56e608637c3cdaf0f" category="inline-link-macro-rx"></block>。</block>
 </blocks>
