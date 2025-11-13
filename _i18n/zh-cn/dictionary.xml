@@ -5968,4 +5968,5 @@ SMB</block>
   <block id="da88dec11cfebffca5dfcf278b6ef68c" category="list-text">在计划 CR 中添加了一个注释，用于配置 PVC 绑定超时，该超时将由备份 CR 使用：<block ref="728633ade1403bcbcd881fc22ec19596" prefix=" " category="inline-code"></block> 。看<block ref="8a2f8872ebe6d6c56e608637c3cdaf0f" category="inline-link-macro-rx"></block>。</block>
   <block id="506953e8ef42800e0b5f740b30b09a33" category="list-text"><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix="" category="inline-code"></block> - 仅适用于 iSCSI 协议。</block>
   <block id="ebe98a8374dc31f4dd5bb51932ba3ba4" category="admonition">NetApp ASA r2 或 AFX 存储系统不支持卷组快照。</block>
+  <block id="b3fd6a68d255a3fb79774387cf52d7e4" category="admonition">如果虚拟网络与Azure NetApp Files(ANF) 存储帐户位于不同的资源组中，则在配置后端资源组列表时，请为虚拟网络指定资源组。</block>
 </blocks>
