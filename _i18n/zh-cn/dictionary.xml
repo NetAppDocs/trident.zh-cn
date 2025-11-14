@@ -2931,10 +2931,6 @@ SMB</block>
   <block id="3c49604e542827bab74a3fdc9c521379" category="doc">自定义卷名称和标签</block>
   <block id="52929ef06c83a3071dc677c6076f8eb3" category="paragraph">可自定义的卷名称和标签支持：</block>
   <block id="ba7ad86bd3d0a50a4a04306d941e6c28" category="list-text">卷创建、导入和克隆操作。</block>
-  <block id="174a7026faf4af3e1ec0eeec9d35af81" category="list-text">如果使用的是ONTA-NAS经济型驱动程序、则只有qtree卷的名称符合此名称模板。</block>
-  <block id="12df52676a1d1f4040501d3a804b1a4b" category="list-text">如果使用的是ONONTAP SAN经济版驱动程序、则只有LUN名称符合此名称模板。</block>
-  <block id="0ee903e586aac760f5cdfb2c770f936b" category="list-text">可自定义的卷名称仅与ONTAP内部部署驱动程序兼容。</block>
-  <block id="b3c7ca4cfca79f517812064c1b9b0ef3" category="list-text">可自定义的卷名称不适用于现有卷。</block>
   <block id="4c71628145ace597229ccf6ca6fdc8bf" category="section-title">可自定义卷名称的关键行为</block>
   <block id="a5a284fe1356005dc517f157bef35adc" category="list-text">如果因名称模板中的语法无效而导致失败、则后端创建将失败。但是、如果模板应用程序失败、则会根据现有命名约定对卷进行命名。</block>
   <block id="d654edd1d54bb9458ddce1a8e82a2733" category="list-text">如果使用后端配置中的名称模板来命名卷、则存储前缀不适用。任何所需的前缀值都可以直接添加到模板中。</block>
@@ -5970,4 +5966,9 @@ SMB</block>
   <block id="8227b927875caa5115317241f2ef5aed" category="paragraph-title">SMB工具</block>
   <block id="07481e3d69515bb71aba543becb5f83d" category="paragraph"><block ref="2c87a2692f74b765fc7d12f8607c123c" category="inline-link-macro-rx"></block> 如果您正在使用：<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 为 SMB 提供卷。</block>
   <block id="d35c59236d3e20dddbaa302d4a00761e" category="paragraph">您可以使用以下方式配置 SMB 卷<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 司机。</block>
+  <block id="f69aa651a1e9b3f43819495ea61170d7" category="list-text">就此而言<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 驱动程序中，只有 Qtree 卷的名称符合名称模板。</block>
+  <block id="482b43f7720e701d1c20f10fcb766b00" category="list-text">就此而言<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 驱动程序中，只有 LUN 名称符合名称模板。</block>
+  <block id="da9889ca93f8b399ea30566497c29a3e" category="list-text">自定义卷名称仅与ONTAP本地驱动程序兼容。</block>
+  <block id="c45320b69becc7810ef088c7d038c27a" category="list-text">仅对以下情况支持自定义标签：<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>，<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>， 和<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 司机。</block>
+  <block id="a9703a3dbb920f8f87b7d3293e2e0831" category="list-text">自定义卷名称不适用于现有卷。</block>
 </blocks>
