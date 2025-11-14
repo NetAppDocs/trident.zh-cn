@@ -278,64 +278,6 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 |===
 
 
-== 准备配置SMB卷
+== 提供 SMB 卷
 
-您可以使用配置SMB卷 `ontap-nas` 驱动程序。完成前 <<ONTAP SAN和NAS驱动程序集成>> 完成以下步骤。
-
-.开始之前
-才能使用配置SMB卷 `ontap-nas` 驱动程序、则必须满足以下条件。
-
-* 一个Kubernetes集群、其中包含一个Linux控制器节点以及至少一个运行Windows Server 2019的Windows工作节点。Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。
-* 至少一个包含Active Directory凭据的Trident密钥。生成密钥 `smbcreds`：
-+
-[source, console]
-----
-kubectl create secret generic smbcreds --from-literal username=user --from-literal password='password'
-----
-* 配置为Windows服务的CSI代理。配置 `csi-proxy`、请参见 link:https://github.com/kubernetes-csi/csi-proxy["GitHub：CSI代理"^] 或 link:https://github.com/Azure/aks-engine/blob/master/docs/topics/csi-proxy-windows.md["GitHub：适用于Windows的CSI代理"^] 适用于在Windows上运行的Kubernetes节点。
-
-
-.步骤
-. 创建SMB共享。您可以使用以下两种方式之一创建SMB管理共享 link:https://learn.microsoft.com/en-us/troubleshoot/windows-server/system-management-components/what-is-microsoft-management-console["Microsoft管理控制台"^] 共享文件夹管理单元或使用ONTAP 命令行界面。要使用ONTAP 命令行界面创建SMB共享、请执行以下操作：
-+
-.. 如有必要，为共享创建目录路径结构。
-+
-。 `vserver cifs share create` 命令会在创建共享期间检查-path选项中指定的路径。如果指定路径不存在，则命令将失败。
-
-.. 创建与指定SVM关联的SMB共享：
-+
-[source, console]
-----
-vserver cifs share create -vserver vserver_name -share-name share_name -path path [-share-properties share_properties,...] [other_attributes] [-comment text]
-----
-.. 验证是否已创建共享：
-+
-[source, console]
-----
-vserver cifs share show -share-name share_name
-----
-+
-
-NOTE: 请参见 link:https://docs.netapp.com/us-en/ontap/smb-config/create-share-task.html["创建 SMB 共享"^] 了解完整详细信息。
-
-
-
-. 创建后端时、必须配置以下内容以指定SMB卷。有关适用于ONTAP 后端的所有FSX配置选项、请参见 link:trident-fsx-examples.html["适用于ONTAP 的FSX配置选项和示例"]。
-+
-[cols="3"]
-|===
-| 参数 | Description | 示例 
-
-
-| `smbShare` | 您可以指定以下选项之一：使用Microsoft管理控制台或ONTAP命令行界面创建的SMB共享的名称、或者允许Trident创建SMB共享的名称。对于Amazon FSx for ONTAP后端、此参数是必需的。 | `smb-share` 
-
-
-| `nasType` | *必须设置为 `smb`如果为空、则默认为 `nfs`。 | `smb` 
-
-
-| `securityStyle` | 新卷的安全模式。*必须设置为 `ntfs` 或 `mixed` 用于SMB卷。* | `ntfs` 或 `mixed` 对于SMB卷 
-
-
-| `unixPermissions` | 新卷的模式。对于SMB卷、*必须留空。* | "" 
-|===
-
+您可以使用以下方式配置 SMB 卷： `ontap-nas`司机。在你完成之前 <<ONTAP SAN和NAS驱动程序集成>> 请完成以下步骤： link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#prepare-to-provision-smb-volumes["准备配置SMB卷"]。
