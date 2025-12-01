@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-use-execution-hooks.html 
 keywords: trident, protect, execution hooks 
-summary: 您可以使用Trident Protect为应用程序创建自定义执行挂钩。要创建执行挂钩，您需要拥有所有者，管理员或成员权限。 
+summary: 您可以使用Trident Protect 为应用程序创建自定义执行钩子。您需要拥有所有者、管理员或成员权限才能创建执行钩子。 
 ---
-= 管理Trident Protect执行挂钩
+= 管理Trident Protect 执行钩子
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -20,7 +20,7 @@ summary: 您可以使用Trident Protect为应用程序创建自定义执行挂�
 
 == 执行挂钩的类型
 
-Trident Protect支持以下类型的执行挂钩、具体取决于它们可以运行的时间：
+Trident Protect 支持以下几种执行钩子类型，具体取决于它们的运行时机：
 
 * 预快照
 * 快照后
@@ -37,7 +37,7 @@ Trident Protect支持以下类型的执行挂钩、具体取决于它们可以�
 运行数据保护操作时、执行钩事件按以下顺序发生：
 
 . 任何适用的自定义操作前执行挂钩都会在相应的容器上运行。您可以根据需要创建和运行任意数量的自定义操作前挂钩、但操作前这些挂钩的执行顺序既不能保证也不可配置。
-. 如果适用、会发生文件系统冻结。link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["详细了解如何使用Trident Protect配置文件系统冻结"](英文)
+. 如果适用，则会发生文件系统冻结。link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["了解更多关于使用Trident Protect 配置文件系统冻结的信息"]。
 . 执行数据保护操作。
 . 如果适用、冻结的文件系统将被解除冻结。
 . 任何适用的自定义操作后执行挂钩都会在相应的容器上运行。您可以根据需要创建和运行任意数量的自定义操作后挂机、但这些挂机在操作后的执行顺序既不能保证也不可配置。
@@ -67,9 +67,9 @@ NOTE: 如果快照前执行挂钩添加、更改或删除了Kubornetes资源、�
 在为应用程序规划执行挂钩时，请考虑以下几点。
 
 * 执行挂钩必须使用脚本执行操作。许多执行挂钩可以引用同一个脚本。
-* Trident Protect要求以可执行shell脚本的格式编写执行挂钩所使用的脚本。
+* Trident Protect 要求执行钩子使用的脚本以可执行 shell 脚本的格式编写。
 * 脚本大小限制为96 KB。
-* Trident Protect使用执行挂钩设置和任何匹配条件来确定哪些挂钩适用于快照、备份或还原操作。
+* Trident Protect 使用执行钩子设置和任何匹配条件来确定哪些钩子适用于快照、备份或恢复操作。
 
 
 
@@ -81,7 +81,7 @@ NOTE: 由于执行挂钩通常会减少或完全禁用其运行的应用程序�
 
 在为应用程序添加或编辑执行挂钩时、可以向执行挂钩添加筛选器、以管理挂钩将匹配的容器。对于在所有容器上使用相同容器映像的应用程序、筛选器非常有用、但可能会将每个映像用于不同的用途(例如Elasticsearch)。通过筛选器、您可以创建执行挂钩在某些容器上运行的方案、但不一定是所有相同的容器上运行的方案。如果为单个执行钩创建多个筛选器、则这些筛选器将与逻辑运算符和运算符结合使用。每个执行连接最多可以有10个活动筛选器。
 
-添加到执行挂钩中的每个筛选器都会使用一个正则表达式来匹配集群中的容器。当某个挂钩与某个容器匹配时、该挂钩将在该容器上运行其关联脚本。筛选器的正则表达式使用正则表达式2 (RE2)语法、不支持创建从匹配列表中排除容器的筛选器。有关Trident Protect在执行挂钩过滤器中支持正则表达式的语法的信息，请参阅 https://github.com/google/re2/wiki/Syntax["正则表达式2 (RE2)语法支持"^]。
+添加到执行挂钩的每个过滤器都使用正则表达式来匹配集群中的容器。当钩子与容器匹配时，钩子将在该容器上运行其关联的脚本。过滤器的正则表达式使用正则表达式 2 (RE2) 语法，该语法不支持创建从匹配列表中排除容器的过滤器。有关Trident Protect 在执行钩子过滤器中支持的正则表达式语法的详细信息，请参阅 https://github.com/google/re2/wiki/Syntax["正则表达式2 (RE2)语法支持"^]。
 
 
 NOTE: 如果将命名空间筛选器添加到在还原或克隆操作之后运行的执行挂钩、并且还原或克隆源和目标位于不同的命名空间中、则命名空间筛选器仅会应用于目标命名空间。
@@ -96,7 +96,7 @@ NOTE: 如果将命名空间筛选器添加到在还原或克隆操作之后运�
 
 == 创建执行挂钩
 
-您可以使用Trident Protect为应用程序创建自定义执行挂钩。要创建执行挂钩，您需要拥有所有者，管理员或成员权限。
+您可以使用Trident Protect 为应用程序创建自定义执行钩子。您需要拥有所有者、管理员或成员权限才能创建执行钩子。
 
 [role="tabbed-block"]
 ====
@@ -104,7 +104,7 @@ NOTE: 如果将命名空间筛选器添加到在还原或克隆操作之后运�
 --
 .步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-hook.yaml`。
-. 根据您的Trident Protect环境和集群配置配置以下属性：
+. 配置以下属性以匹配您的Trident Protect 环境和集群配置：
 +
 ** *。metadata.name*:(_required__)此自定义资源的名称；请为您的环境选择一个唯一且合理的名称。
 ** *spec.applicationRef*：(_required_)要运行执行挂钩的应用程序的Kubernetes名称。
@@ -221,7 +221,7 @@ tridentctl-protect create exechook <my_exec_hook_name> --action <action_type> --
 --
 .步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-resource-backup.yaml`。
-. 根据您的Trident Protect环境和集群配置配置以下属性：
+. 配置以下属性以匹配您的Trident Protect 环境和集群配置：
 +
 ** *。metadata.name*:(_required__)此自定义资源的名称；请为您的环境选择一个唯一且合理的名称。
 ** *spec.applicationRef*：(_required_)要为其创建备份资源的应用程序的Kubernetes名称。
@@ -294,7 +294,7 @@ kubectl describe resourcebackup <my_backup_name>
 --
 .步骤
 . 创建自定义资源(CR)文件并将其命名为 `trident-protect-hook-run.yaml`。
-. 根据您的Trident Protect环境和集群配置配置以下属性：
+. 配置以下属性以匹配您的Trident Protect 环境和集群配置：
 +
 ** *。metadata.name*:(_required__)此自定义资源的名称；请为您的环境选择一个唯一且合理的名称。
 ** *spec.applicationRef*：(_required_)确保此值与您在步骤1中创建的ResourceBackup CR中的应用程序名称匹配。

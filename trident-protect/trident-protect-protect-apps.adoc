@@ -4,7 +4,7 @@ permalink: trident-protect/trident-protect-protect-apps.html
 keywords: protect, snapshots, demand, configuration, cluster, appvault 
 summary: 通过使用自动保护策略或临时创建快照和备份来保护所有应用程序。 
 ---
-= 使用Trident Protect保护应用程序
+= 使用Trident Protect 保护应用程序
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,10 +14,10 @@ summary: 通过使用自动保护策略或临时创建快照和备份来保护�
 
 
 [role="lead"]
-您可以通过使用自动保护策略或临时创建快照和备份来保护Trident Protect管理的所有应用程序。
+您可以使用自动保护策略或临时保护策略，通过拍摄快照和备份来保护Trident Protect 管理的所有应用程序。
 
 
-NOTE: 您可以将Trident Protect配置为在数据保护操作期间冻结和取消冻结文件系统。link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["详细了解如何使用Trident Protect配置文件系统冻结"](英文)
+NOTE: 您可以配置Trident Protect 在数据保护操作期间冻结和解冻文件系统。link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["了解更多关于使用Trident Protect 配置文件系统冻结的信息"]。
 
 
 
@@ -390,13 +390,13 @@ kubectl get backup -n <namespace_name> <my_backup_cr_name> -o jsonpath='{.status
 
 == 为azure-ANF-files (NetApp)操作启用备份和还原
 
-如果您已安装Trident Protect、则可以为使用azure-files-files NetApp存储类且在Trident 24.06之前创建的存储后端启用节省空间的备份和还原功能。此功能适用于NFSv4卷、不会占用容量池中的额外空间。
+如果您已安装Trident Protect，则可以为使用 azure-netapp-files 存储类且在Trident 24.06 之前创建的存储后端启用节省空间的备份和还原功能。此功能适用于 NFSv4 卷，并且不会占用容量池中的额外空间。
 
 .开始之前
 确保满足以下要求：
 
 * 您已安装Trident Protect。
-* 您已在Trident Protect中定义应用程序。在您完成此操作步骤之前、此应用程序的保护功能将受限。
+* 您已在Trident Protect中定义了一个应用程序。在您完成此步骤之前，此应用程序的保护功能将受到限制。
 * 您已 `azure-netapp-files` 选择作为存储后端的默认存储类。
 
 
@@ -426,13 +426,13 @@ tridentctl get volume <pv name> -n trident -o yaml | grep snapshotDir
 snapshotDirectory: "true"
 ----
 +
-如果未启用快照目录、Trident Protect将选择常规备份功能、此功能会在备份过程中临时占用容量池中的空间。在这种情况下、请确保容量池中有足够的可用空间来创建与要备份的卷大小相同的临时卷。
+如果未启用快照目录， Trident Protect 将选择常规备份功能，该功能会在备份过程中暂时占用容量池中的空间。在这种情况下，请确保容量池中有足够的空间来创建与被备份卷大小相同的临时卷。
 
 
 
 
 
 .结果
-此应用程序已准备好使用Trident Protect进行备份和还原。每个PVC还可供其他应用程序用于备份和恢复。
+该应用程序已准备好使用Trident Protect 进行备份和恢复。每个 PVC 也可供其他应用程序用于备份和恢复。
 
 ====

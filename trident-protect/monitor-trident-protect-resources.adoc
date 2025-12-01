@@ -2,7 +2,7 @@
 permalink: trident-protect/monitor-trident-protect-resources.html 
 sidebar: sidebar 
 keywords: manage, authentication, rbac 
-summary: 您可以使用Kube-state-metrics和Prometheus监控Trident Protect资源的状态。这样、您就可以获得有关部署、节点和Pod的运行状况信息。 
+summary: 您可以使用 kube-state-metrics 和 Prometheus 监控Trident Protect 资源的状态。这可以为您提供有关部署、节点和 Pod 的运行状况信息。 
 ---
 = 监控Trident保护资源
 :allow-uri-read: 
@@ -11,11 +11,11 @@ summary: 您可以使用Kube-state-metrics和Prometheus监控Trident Protect资�
 
 
 [role="lead"]
-您可以使用Kube-state-metrics、Prometheus和智能管理器开源工具来监控受Trident Protect保护的资源的运行状况。
+您可以使用 kube-state-metrics、Prometheus 和 Alertmanager 开源工具来监控Trident Protect 保护的资源的健康状况。
 
-Kube-state-metrics服务可通过Kuber-netes API通信生成指标。将其与Trident Protect结合使用可提供有关环境中资源状态的有用信息。
+kube-state-metrics 服务从 Kubernetes API 通信生成指标。将其与Trident Protect 结合使用，可以显示有关环境中资源状态的有用信息。
 
-Prometheus是一个工具包、可用于读取由Kube-state-metrics生成的数据、并将其呈现为有关这些对象的易读信息。Kube-state-metrics和Prometheus共同为您提供了一种监控使用Trident Protect管理的资源的运行状况和状态的方法。
+Prometheus 是一个工具包，它可以接收 kube-state-metrics 生成的数据，并将其呈现为关于这些对象的易于阅读的信息。kube-state-metrics 和 Prometheus 共同提供了一种方法，让您可以监控使用Trident Protect 管理的资源的健康状况和状态。
 
 警报管理器是一项服务、可接收Prometheus等工具发送的警报、并将其路由到您配置的目标。
 
@@ -33,7 +33,7 @@ Prometheus是一个工具包、可用于读取由Kube-state-metrics生成的数�
 
 == 第1步：安装监控工具
 
-要在Trident Protect中启用资源监控、您需要安装和配置Kube-state-metrics、Prometus和智能管理器。
+要在Trident Protect 中启用资源监控，您需要安装和配置 kube-state-metrics、Promethus 和 Alertmanager。
 
 
 
@@ -108,7 +108,7 @@ prometheus:
 ----
 helm install custom-resource -f metrics-config.yaml prometheus-community/kube-state-metrics --version 5.21.0
 ----
-. 按照中的说明配置Kube-state-metrics，以便为Trident Protect使用的自定义资源生成度量指标 https://github.com/kubernetes/kube-state-metrics/blob/main/docs/metrics/extend/customresourcestate-metrics.md#custom-resource-state-metrics["Kube-state-metrics自定义资源文档"^]。
+. 按照以下说明配置 kube-state-metrics，以生成Trident Protect 使用的自定义资源的指标： https://github.com/kubernetes/kube-state-metrics/blob/main/docs/metrics/extend/customresourcestate-metrics.md#custom-resource-state-metrics["Kube-state-metrics自定义资源文档"^] 。
 
 
 

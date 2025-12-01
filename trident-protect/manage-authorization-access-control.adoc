@@ -2,16 +2,16 @@
 permalink: trident-protect/manage-authorization-access-control.html 
 sidebar: sidebar 
 keywords: manage, authentication, rbac 
-summary: 'Trident Protect使用基于角色的访问控制(Role-Based Access Control、RBAC)的Kubelnetes模型。您可以使用Trident保护RBAC功能更精细地控制对资源的访问。' 
+summary: 'Trident Protect 使用 Kubernetes 的基于角色的访问控制 (RBAC) 模型。您可以使用Trident Protect RBAC 功能来更精细地控制对资源的访问。' 
 ---
-= 管理Trident保护授权和访问控制
+= 管理Trident Protect 授权和访问控制
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Trident Protect使用基于角色的访问控制(Role-Based Access Control、RBAC)的Kubelnetes模型。默认情况下、Trident Protect提供单个系统命名空间及其关联的默认服务帐户。如果您的组织具有许多用户或特定的安全需求、则可以使用Trident Protect的RBAC功能更精细地控制对资源和域名称的访问。
+Trident Protect 使用 Kubernetes 的基于角色的访问控制 (RBAC) 模型。默认情况下， Trident Protect 提供一个系统命名空间及其关联的默认服务帐户。如果您的组织拥有众多用户或特定的安全需求，则可以使用Trident Protect 的 RBAC 功能来更精细地控制对资源和命名空间的访问。
 
 集群管理员始终可以访问默认命名空间中的资源 `trident-protect`、也可以访问所有其他命名空间中的资源。要控制对资源和应用程序的访问、您需要创建更多的名分并将资源和应用程序添加到这些名分。
 
@@ -19,7 +19,7 @@ Trident Protect使用基于角色的访问控制(Role-Based Access Control、RBA
 
 [NOTE]
 ====
-只有管理员才能访问特权Trident Protect自定义资源对象、其中包括：
+只有管​​理员才能访问具有特权的Trident Protect 自定义资源对象，其中包括：
 
 * *AppVault*：需要存储分段凭据数据
 * *AutoSupportBundle*：收集指标、日志和其他敏感的Trident Protect数据
@@ -128,7 +128,7 @@ type: kubernetes.io/service-account-token
 
 === 第4步：创建RoleBinding对象以将ClusterRole对象绑定到每个新服务帐户
 
-安装Trident Protect时会创建一个默认的ClusterRole对象。您可以通过创建和应用RoleBinding对象将此ClusterRole绑定到服务帐户。
+安装Trident Protect 时会创建一个默认的 ClusterRole 对象。您可以通过创建和应用 RoleBinding 对象将此 ClusterRole 绑定到服务帐户。
 
 .步骤
 . 将ClusterRole绑定到工程服务帐户：
@@ -215,7 +215,7 @@ apiVersion: protect.trident.netapp.io/v1
 kind: AppVault
 metadata:
   name: appvault-for-eng-user-only
-  namespace: trident-protect # Trident protect system namespace
+  namespace: trident-protect # Trident Protect system namespace
 spec:
   providerConfig:
     azure:

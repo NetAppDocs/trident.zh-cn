@@ -1,18 +1,18 @@
 ---
 section: trident-protect
-title: 使用Trident Protect保护应用程序
+title: 使用Trident Protect 保护应用程序
 entries:
 - title: 了解Trident Protect
   url: "/trident-protect/learn-about-trident-protect.html"
 - title: 安装Trident Protect
   entries:
-  - title: Trident Protect要求
+  - title: Trident保护要求
     url: "/trident-protect/trident-protect-requirements.html"
   - title: 安装Trident Protect
     url: "/trident-protect/trident-protect-installation.html"
-  - title: 安装Trident Protect命令行界面插件
+  - title: 安装Trident Protect CLI 插件
     url: "/trident-protect/trident-protect-cli.html"
-  - title: 自定义Trident Protect安装
+  - title: 定制Trident Protect 安装
     url: "/trident-protect/trident-protect-customize-installation.html"
 - title: 管理Trident Protect
   entries:
@@ -20,9 +20,9 @@ entries:
     url: "/trident-protect/manage-authorization-access-control.html"
   - title: 监控Trident保护资源
     url: "/trident-protect/monitor-trident-protect-resources.html"
-  - title: 生成Trident Protect支持包
+  - title: 生成Trident Protect 支持包
     url: "/trident-protect/trident-protect-generate-support-bundle.html"
-  - title: 升级Trident Protect
+  - title: 升级Trident保护
     url: "/trident-protect/trident-protect-upgrade.html"
 - title: 管理和保护应用程序
   entries:
@@ -34,7 +34,7 @@ entries:
     url: "/trident-protect/trident-protect-protect-apps.html"
   - title: 还原应用程序
     entries:
-    - title: 使用Trident Protect还原应用程序
+    - title: 使用Trident Protect 恢复应用程序
       url: "/trident-protect/trident-protect-restore-apps.html"
     - title: 使用高级设置
       url: "/trident-protect/trident-protect-restore-settings.html"
@@ -42,7 +42,7 @@ entries:
     url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
   - title: 迁移应用程序
     url: "/trident-protect/trident-protect-migrate-apps.html"
-  - title: 使用Trident Protect管理执行挂钩
+  - title: 使用Trident Protect 管理执行钩子
     url: "/trident-protect/trident-protect-use-execution-hooks.html"
 - title: 卸载Trident Protect
   url: "/trident-protect/trident-protect-uninstall.html"

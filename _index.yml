@@ -42,11 +42,11 @@ indexpage:
       url: "/trident-use/vol-operations.html"
   - title: 高级数据管理和保护
     links:
-    - title: 借助Trident Protect实现高级数据保护
+    - title: 使用Trident Protect 实现高级数据保护
       url: "/trident-protect/learn-about-trident-protect.html"
-    - title: 部署Trident Protect
+    - title: 部署Trident保护
       url: "/trident-protect/trident-protect-installation.html"
-    - title: 升级Trident Protect
+    - title: 升级Trident保护
       url: "/trident-protect/trident-protect-upgrade.html"
   - title: 演示教程
     links:
@@ -54,7 +54,7 @@ indexpage:
       url: https://media.netapp.com/video-detail/c5bebae0-aab6-5fed-ae16-df6a3a8b260d/netapp-trident-advanced-data-protection-for-kubernetes-applications
   - title: 博客社区
     links:
-    - title: Trident和Trident保护博客
+    - title: Trident和Trident Protect 博客
       url: "/blog-posts.html"
     - title: netapp.io
       url: https://netapp.io/

@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-cli.html 
 keywords: trident, protect, command line utility, cli, netapp, custom, resources 
-summary: 您可以使用protect c结合 命令创建Trident Protect自定义资源并与之进行交互。 
+summary: 您可以使用 protectctl 命令创建和操作Trident Protect 自定义资源。 
 ---
-= 安装Trident Protect命令行界面插件
+= 安装Trident Protect CLI 插件
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,11 +14,11 @@ summary: 您可以使用protect c结合 命令创建Trident Protect自定义资�
 
 
 [role="lead"]
-您可以使用Trident Protect命令行插件(Trident实用程序的扩展)创建Trident Protect `tridentctl`自定义资源(CRS)并与之交互。
+您可以使用Trident Protect 命令行插件，它是Trident的一个扩展。 `tridentctl`用于创建和与Trident Protect 自定义资源 (CR) 交互的实用程序。
 
 
 
-== 安装Trident Protect命令行界面插件
+== 安装Trident Protect CLI 插件
 
 在使用命令行实用程序之前、您需要将其安装在用于访问集群的计算机上。根据您的计算机使用的是x64 CPU还是ARM CPU、执行以下步骤。
 
@@ -27,7 +27,7 @@ summary: 您可以使用protect c结合 命令创建Trident Protect自定义资�
 .下载适用于Linux amd64 CPU的插件
 --
 .步骤
-. 下载Trident Protect命令行界面插件：
+. 下载Trident Protect CLI 插件：
 +
 [source, console]
 ----
@@ -39,7 +39,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 .下载适用于Linux ARM64 CPU的插件
 --
 .步骤
-. 下载Trident Protect命令行界面插件：
+. 下载Trident Protect CLI 插件：
 +
 [source, console]
 ----
@@ -51,7 +51,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 .下载适用于Mac amd64 CPU的插件
 --
 .步骤
-. 下载Trident Protect命令行界面插件：
+. 下载Trident Protect CLI 插件：
 +
 [source, console]
 ----
@@ -63,7 +63,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 .下载适用于Mac ARM64 CPU的插件
 --
 .步骤
-. 下载Trident Protect命令行界面插件：
+. 下载Trident Protect CLI 插件：
 +
 [source, console]
 ----
@@ -115,7 +115,7 @@ tridentctl-protect help
 
 == 启用命令自动完成
 
-安装Trident Protect命令行界面插件后、您可以对某些命令启用自动完成。
+安装Trident Protect CLI 插件后，您可以为某些命令启用自动补全功能。
 
 [role="tabbed-block"]
 ====

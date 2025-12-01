@@ -5,7 +5,7 @@
 . (_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：
 +
 
-NOTE: Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。
+NOTE: Trident Protect 会自动选择一些资源，因为它们与您选择的资源存在关联。例如，如果您选择持久卷声明资源并且它有一个关联的 pod， Trident Protect 还会恢复关联的 pod。
 
 +
 ** *resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用 `Include`或包含或 `Exclude`排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：

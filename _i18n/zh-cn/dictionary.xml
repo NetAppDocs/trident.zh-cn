@@ -3861,21 +3861,10 @@ SMB</block>
   <block id="98b1298645505c6ec838667dff651c81" category="cell">在qtree-NAS ONTAP经济型后端使用qtrees时可请求的最大FlexVol大小。</block>
   <block id="7be7ec1f4262cda30e19c85af89449af" category="cell">qtrees的空间分配</block>
   <block id="bc78339d85241498c635b61d8f201ef9" category="cell">如果请求的卷大小超过此值、则配置失败。此外、还会限制它为LUN管理的卷的大小上限。</block>
-  <block id="579198c91fea423d4b79c97828ac3da4" category="summary">通过Trident Protect、您可以使用Trident保护应用程序和应用程序数据。</block>
-  <block id="a53f4cc048a3d0227206b8b6182e67dc" category="doc">了解Trident Protect</block>
-  <block id="6d8d3279a9b2226029d9af309058363b" category="paragraph">NetApp Trident Protect提供高级应用程序数据管理功能、可增强由NetApp ONTAP存储系统和NetApp Trident CSI存储配置程序提供支持的有状态Kubbernetes应用程序的功能和可用性。Trident Protect可简化公有云和内部环境中容器化工作负载的管理、保护和移动。它还通过API和CLI提供自动化功能。</block>
-  <block id="6a945469c2d9fdc27b0cb844d066c984" category="paragraph">您可以通过创建自定义资源(CRS)或使用Trident Protect命令行界面来使用Trident Protect保护应用程序。</block>
-  <block id="7e6f9558ca98ca29afd74d0bbb0b2bce" category="paragraph">您可以在安装Trident Protect之前了解其要求：</block>
-  <block id="a0a1eb9fbd2b7284352e6b610999f841" category="inline-link-macro">Trident Protect要求</block>
-  <block id="8d806bd87636d4fd0eecab0333057f10" category="list-text"><block ref="8d806bd87636d4fd0eecab0333057f10" category="inline-link-macro-rx"></block></block>
-  <block id="af68364761ed4114c192b6bb2962467b" category="summary">Trident Protect使用基于角色的访问控制(Role-Based Access Control、RBAC)的Kubelnetes模型。您可以使用Trident保护RBAC功能更精细地控制对资源的访问。</block>
   <block id="3f94255d3ae6517615821f8939ba6230" category="doc">管理授权和访问控制</block>
-  <block id="9991f5d4b3aa4ae5a36fb2ad6a637d73" category="paragraph">Trident Protect使用基于角色的访问控制(Role-Based Access Control、RBAC)的Kubelnetes模型。默认情况下、Trident Protect提供单个系统命名空间及其关联的默认服务帐户。如果您的组织具有许多用户或特定的安全需求、则可以使用Trident Protect的RBAC功能更精细地控制对资源和域名称的访问。</block>
   <block id="a22c0a4dfca95968d88392eb0bbb2dcf" category="paragraph">集群管理员始终可以访问默认命名空间中的资源<block ref="9a82c7a4099124e5bfaa83e7c5997bd4" prefix=" " category="inline-code"></block>、也可以访问所有其他命名空间中的资源。要控制对资源和应用程序的访问、您需要创建更多的名分并将资源和应用程序添加到这些名分。</block>
   <block id="661e3b2b32de1ab85fb426b5abec28f3" category="paragraph">请注意、任何用户都不能在默认命名空间中创建应用程序数据管理CRS<block ref="9a82c7a4099124e5bfaa83e7c5997bd4" prefix=" " category="inline-code"></block>。您需要在应用程序命名空间中创建应用程序数据管理CRS (最佳做法是、在与其关联的应用程序相同的命名空间中创建应用程序数据管理CRS)。</block>
-  <block id="b1f69b20762545a6c94e024888638df8" category="paragraph">只有管理员才能访问特权Trident Protect自定义资源对象、其中包括：</block>
   <block id="4516bb1529fba64216073cc95812839c" category="list-text">*AppVault*：需要存储分段凭据数据</block>
-  <block id="984eb0d94901a4b5f9105f96d4d2b4a9" category="list-text">*AutoSupportBundle*：收集指标、日志和其他敏感的Trident Protect数据</block>
   <block id="10e6811ca4c78900349b612176a3233b" category="list-text">*AutoSupportBundleSchedule：管理日志收集计划</block>
   <block id="7cfd5c25f0cd486a1157966cad4acba7" category="paragraph">作为最佳实践、请使用RBAC限制管理员对有权限的对象的访问。</block>
   <block id="407b2fe2d3bbcc55c8ae895a2fd8263c" category="inline-link">Kubbernetes RBAC文档</block>
@@ -3897,16 +3886,13 @@ SMB</block>
   <block id="78a7dfb4e5b60d84d3c54ec150be8a80" category="list-text">为工程服务帐户创建一个密钥：</block>
   <block id="b098f513abca683a5e1c36cbc8b244db" category="list-text">为营销服务帐户创建密钥：</block>
   <block id="d1732b3423240a19064951afa9a3266a" category="section-title">第4步：创建RoleBinding对象以将ClusterRole对象绑定到每个新服务帐户</block>
-  <block id="720de81bb5619bda23df5ae99eb9ebcb" category="paragraph">安装Trident Protect时会创建一个默认的ClusterRole对象。您可以通过创建和应用RoleBinding对象将此ClusterRole绑定到服务帐户。</block>
   <block id="067d8d99affb5418a3d899eba8658cc4" category="list-text">将ClusterRole绑定到工程服务帐户：</block>
   <block id="b25ecd55b23c424058fdad947fe23b13" category="list-text">将ClusterRole绑定到营销服务帐户：</block>
   <block id="574c7934280b498080dfc2272c570f69" category="section-title">第5步：测试权限</block>
   <block id="8d65423ec256f18737823ea6cedeae87" category="paragraph">测试权限是否正确。</block>
   <block id="7b0c0cd292b286167249cc067be6d47d" category="list-text">确认工程用户可以访问工程资源：</block>
   <block id="37aa0c3d444b765e5080a77f572f9040" category="list-text">确认工程用户无法访问营销资源：</block>
-  <block id="1317a4b523ecc5ea298adec08e7ba407" category="summary">用于Trident Protect的存储分段自定义资源(CR)称为AppVault。AppVault是存储分段的声明性Kubarnetes工作流表示形式。</block>
   <block id="618ce5e44021c1c57c9655e5e3846eda" category="doc">使用AppVault对象管理分段</block>
-  <block id="f39726752bf5b117fe78f8c383e31cdd" category="paragraph">用于Trident Protect的存储分段自定义资源(CR)称为AppVault。AppVault对象是存储分段的声明性Kubarnetes工作流表示形式。AppVault CR包含在备份、快照、还原操作和SnapMirror复制等保护操作中使用存储分段所需的配置。只有管理员才能创建AppVault。</block>
   <block id="56ef2682280ac110060b881925a87b80" category="section-title">Google Cloud</block>
   <block id="1668ca1bd914c1d847f23b491319ac91" category="section-title">Microsoft Azure</block>
   <block id="cf04a02e37b774fc311a48f605c3c597" category="cell">azure</block>
@@ -3914,17 +3900,12 @@ SMB</block>
   <block id="485573baf8bfa9487485deb07780d89f" category="list-text">查看AppVault对象的内容：</block>
   <block id="10dce9030ad8783afd2b4e831da49b7f" category="paragraph">*示例输出*：</block>
   <block id="72444a17ff17655124f96b02602fe90f" category="list-text">(可选)要查看每个资源的AppVaultPath，请使用标志<block ref="a9b1c03a99224cbb5c6773ccbe51d4fb" prefix=" " category="inline-code"></block>。</block>
-  <block id="caef5be37857b92378c0054db6bc8696" category="paragraph">只有在Trident Protect Helm安装中指定了集群名称时、此表第一列中的集群名称才可用。例如：<block ref="b84d46473a6782105f40ea4fa2bc2964" prefix=" " category="inline-code"></block>。</block>
   <block id="eb5dcb495342ee5285be31fb17267ccc" category="section-title">删除AppVault</block>
   <block id="086d4622dbc50dc37c51fc80568681a2" category="paragraph">您可以随时删除AppVault对象。</block>
   <block id="79f2a1cdb1287644a5d3176157cc43c4" category="admonition">在删除AppVault对象之前、请勿<block ref="276c63528ef3085f91fb1bc80a3febc0" prefix=" " category="inline-code"></block>删除AppVault CR中的密钥。如果这样做、可能会导致AppVault存储分段中有残留数据、集群中会出现孤立资源。</block>
   <block id="33850d305da8c5eb949c81e70e40a54d" category="open-title">使用Kubbernetes命令行界面删除AppVault</block>
-  <block id="6c4ae71603666b23d3e05193118a3147" category="summary">您可以使用protect c结合 命令创建Trident Protect自定义资源并与之进行交互。</block>
-  <block id="40e0842217cf3fc8b760cbd68cc14a76" category="doc">安装Trident Protect命令行界面插件</block>
-  <block id="bd0df34f0c12fe6faae3a05dde47f3a9" category="paragraph">您可以使用Trident Protect命令行插件(Trident实用程序的扩展)创建Trident Protect<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>自定义资源(CRS)并与之交互。</block>
   <block id="2b1100a071932a4cb5f33e22121f48fa" category="paragraph">在使用命令行实用程序之前、您需要将其安装在用于访问集群的计算机上。根据您的计算机使用的是x64 CPU还是ARM CPU、执行以下步骤。</block>
   <block id="852f04e90409df288c69ca8f37453383" category="open-title">下载适用于Linux amd64 CPU的插件</block>
-  <block id="567471047b313eb49e48a17b4213a1d1" category="list-text">下载Trident Protect命令行界面插件：</block>
   <block id="b64b2077b896969e7810dbb0a2de2f1a" category="open-title">下载适用于Linux ARM64 CPU的插件</block>
   <block id="d58e744bd40cf0f8373ee5b2c7d11387" category="open-title">下载适用于Mac amd64 CPU的插件</block>
   <block id="fd3e558ef6c1af851bddabf0eb1945d7" category="open-title">下载适用于Mac ARM64 CPU的插件</block>
@@ -3932,7 +3913,6 @@ SMB</block>
   <block id="305f79cb740685921820521a57e525e5" category="paragraph">您可以使用内置插件的帮助功能获取有关插件功能的详细帮助：</block>
   <block id="09b4818c610e8f967a9f5257455a3a2a" category="list-text">使用帮助功能查看使用指南：</block>
   <block id="da9d072bec5b191d5b5120761a2094e5" category="section-title">启用命令自动完成</block>
-  <block id="2994879f05c105b10427c87890d6ce6a" category="paragraph">安装Trident Protect命令行界面插件后、您可以对某些命令启用自动完成。</block>
   <block id="df7d0aa2cf46fe870b9bba130ea4d964" category="open-title">为bash shell启用自动完成</block>
   <block id="bbd32e1d32af84e3002666b13f548cce" category="list-text">在主目录中创建一个新目录以包含该脚本：</block>
   <block id="63f01fb9933705d6d795c4c690a6504c" category="list-text">将下载的脚本移动到<block ref="37476bab24bad3126a5edbc11fab761e" prefix=" " category="inline-code"></block>目录：</block>
@@ -3941,7 +3921,6 @@ SMB</block>
   <block id="45dba4471beecdb4813778042a6ccfc2" category="list-text">将下载的脚本移动到<block ref="d6ca46a9bae5529cb8e845fb419ba1e0" prefix=" " category="inline-code"></block>目录：</block>
   <block id="e2f12f24108169a5ab9aa9923f95a468" category="list-text">将以下行添加到<block ref="f0f9c4057b7322a99704208706a05ba7" prefix=" " category="inline-code"></block>主目录中的文件：</block>
   <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">结果</block>
-  <block id="7b6672be7a52979b1357ccc3d2a45f8a" category="summary">通过Trident Protect、管理员可以生成包含对NetApp支持有用信息的捆绑包、其中包括有关所管理的集群和应用程序的日志、指标和拓扑信息。如果您已连接到Internet、则可以使用自定义资源(CR)文件将支持包上传到NetApp支持站点(NSS)。</block>
   <block id="e984343e441956b7136d09919877b5ab" category="open-title">使用CR创建支持包</block>
   <block id="dd942fa25b8e28c96c8d05e37b0f157e" category="list-text">创建自定义资源(CR)文件并将其命名(例如<block ref="699c503b46d4ca3ec78905dff3704cac" prefix=" " category="inline-code"></block>)。</block>
   <block id="18924d9e76d2dc9a88bddb772904461d" category="list-text">配置以下属性：</block>
@@ -3955,22 +3934,12 @@ SMB</block>
   <block id="139f344cca23a89c521bc7cc6c7100b8" category="paragraph">YAML示例：</block>
   <block id="b69675775a82aaa1e3307ebbe6a45fc0" category="open-title">使用命令行界面创建支持包</block>
   <block id="2294988013d14e5c254422b8164d83ad" category="list-text">创建支持包、将括号中的值替换为您环境中的信息。<block ref="769627afa23a2b90f925b1091e474dc5" prefix=" " category="inline-code"></block>确定是否立即创建分发包，或者是否由计划决定了创建时间，可以是<block ref="e1ba155a9f2e8c3be94020eef32a0301" prefix=" " category="inline-code"></block>或<block ref="2b7dabba0077abe3732e0418b048a56b" prefix=" " category="inline-code"></block>。默认设置为<block ref="e1ba155a9f2e8c3be94020eef32a0301" prefix=" " category="inline-code"></block>。</block>
-  <block id="4351048276414d4fad273a0c7ad9f491" category="summary">如果您的环境符合要求、则可以按照以下步骤安装Trident Protect。</block>
-  <block id="9ee0b57319616120eef37546fa8e4c42" category="doc">安装和配置Trident Protect</block>
-  <block id="dc48a335c2095fb6a79ee14ee62b4806" category="paragraph">如果您的环境满足Trident Protect的要求、您可以按照以下步骤在集群上安装Trident Protect。您可以从NetApp获取Trident Protect、也可以从您自己的私人注册表安装它。如果集群无法访问Internet、则从专用注册表进行安装非常有用。</block>
-  <block id="1d5f2a4008fa2c223d0ebc6aea423256" category="open-title">安装Trident Protect from NetApp</block>
-  <block id="f1db582519ebcfcc20d90e41c0c5e9cc" category="open-title">从专用注册表安装Trident Protect</block>
-  <block id="73dac5f92be0a06ecbcb1b8139b40593" category="paragraph">如果您的Trident集群无法访问Internet、则可以从专用映像注册表安装Kubbernetes Protect。在以下示例中、将括号中的值替换为您环境中的信息：</block>
   <block id="dfb8cfd789dde682f000a96e0aabb1f1" category="list-text">将以下映像提取到本地计算机、更新标记、然后将其推送到您的私人注册表：</block>
-  <block id="2dcd4437dbff8aff3bc16ac15a71b74d" category="list-text">创建Trident Protect系统命名空间：</block>
   <block id="e0f6b701766eb28d805d7ba1e820f582" category="list-text">登录到注册表：</block>
   <block id="814565bb5d7e7359fff967986fd4195a" category="list-text">创建用于私人注册表身份验证的拉机密：</block>
-  <block id="86e8b34710172d33dcae839e1f4dd07e" category="summary">您可以通过创建应用程序CR和关联的Trident Vault CR来使AppProtect能够识别要管理的应用程序。</block>
   <block id="80b940e5c68d020c06f9dc2f188d2169" category="doc">定义要管理的应用程序</block>
-  <block id="1e10d655f5307ce7f79aeee68a9e72f3" category="paragraph">您可以通过创建应用程序CR和关联的Trident Vault CR来定义要使用AppProtect管理的应用程序。</block>
   <block id="58bd941b0268654136e17a3f6361fa75" category="section-title">创建AppVault CR</block>
   <block id="f5ddee36f3439fbf6875de509925b804" category="inline-link-macro">AppVault自定义资源。</block>
-  <block id="2c2c79b6a4bc3f3b90fed9b96ab44d05" category="paragraph">您需要创建一个AppVault CR、以便在对应用程序执行数据保护操作时使用、并且AppVault CR需要驻留在安装了Trident Protect的集群上。AppVault CR特定于您的环境；有关AppVault CRS的示例、请参见<block ref="7e7838343a821a01b97d2b866c568a54" category="inline-link-macro-rx"></block></block>
   <block id="7eb786201a1068df31c2a8d7805c50bf" category="open-title">使用CR添加应用程序</block>
   <block id="b4b10aa7102ef4de9ba1d5672445c895" category="list-text">创建目标应用程序CR文件：</block>
   <block id="0f14679ea6b53d676a4e19300d32937e" category="list-text">创建自定义资源(CR)文件并将其命名(例如<block ref="6e1c6964e1bb7e391ff353b09e122d80" prefix=" " category="inline-code"></block>)。</block>
@@ -4056,20 +4025,13 @@ SMB</block>
   <block id="b030755f5014f11eb86aee527d4ef872" category="paragraph">您可以使用命令行检查正在进行、已完成或失败的备份操作的状态。</block>
   <block id="83fe182363ccdea33046e538aec4ac23" category="list-text">使用以下命令检索备份操作的状态、将括号中的值替换为环境中的信息：</block>
   <block id="bdd3c7731ba2eae7059bfebd0d56c7e3" category="section-title">为azure-ANF-files (NetApp)操作启用备份和还原</block>
-  <block id="e9730662640f8238dbf4ed30d6292ecb" category="paragraph">如果您已安装Trident Protect、则可以为使用azure-files-files NetApp存储类且在Trident 24.06之前创建的存储后端启用节省空间的备份和还原功能。此功能适用于NFSv4卷、不会占用容量池中的额外空间。</block>
   <block id="a3ba5a3fd33b03f148e52fd833cda7c3" category="paragraph">确保满足以下要求：</block>
-  <block id="a6cdb2021351db573212b98138416717" category="list-text">您已安装Trident Protect。</block>
-  <block id="1b56af5799cb507ae72605b020a620df" category="list-text">您已在Trident Protect中定义应用程序。在您完成此操作步骤之前、此应用程序的保护功能将受限。</block>
   <block id="a9910fb38baec2aa849c3ea6191b1cf9" category="list-text">您已<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> 选择作为存储后端的默认存储类。</block>
   <block id="579cc8ac85c74501fbfa1bac4d013c1f" category="example-title">展开以了解配置步骤</block>
   <block id="b1927eae954479de09c736cae4ed08dd" category="list-text">如果ANF卷是在升级到Trident 24.10之前创建的、请在Trident中执行以下操作：</block>
   <block id="119a6ab21356c173b517e4baf8ab21d3" category="list-text">为每个基于azure-pv-files且与应用程序关联的NetApp启用Snapshot目录：</block>
   <block id="9cb0a94d3b3051cae7cda63d4c5aa1d6" category="list-text">确认已为每个关联PV启用Snapshot目录：</block>
   <block id="54472d1da4b0c6eadf8684e846b25dcc" category="paragraph">响应：</block>
-  <block id="77c9498d5c74a08af1c5918bd5fd8ee1" category="paragraph">如果未启用快照目录、Trident Protect将选择常规备份功能、此功能会在备份过程中临时占用容量池中的空间。在这种情况下、请确保容量池中有足够的可用空间来创建与要备份的卷大小相同的临时卷。</block>
-  <block id="2efd4c8775ce47d6aa29183091d2a4e2" category="paragraph">此应用程序已准备好使用Trident Protect进行备份和还原。每个PVC还可供其他应用程序用于备份和恢复。</block>
-  <block id="697f51e8965440d487236d46d469510d" category="summary">首先验证您的操作环境、应用程序集群、应用程序和许可证是否已准备就绪。确保您的环境满足这些要求、才能部署和运行Trident Protect。</block>
-  <block id="c8f91050b5ec3e677d9c7e16e424f9bc" category="paragraph">Trident Protect与各种完全托管和自行管理的Kubernetes产品兼容、其中包括：</block>
   <block id="480c9b5f979d1ce95ea2a58b09826d1b" category="list-text">Amazon Elelic Kubelnetes Service (EKS)</block>
   <block id="974030a30a48754684d05541fd5e96c9" category="list-text">Google Kubernetes Engine （ GKEE ）</block>
   <block id="f3bd1985b243e9691bbbd63c6702344b" category="list-text">Microsoft Azure Kubernetes Service （ AKS ）</block>
@@ -4077,15 +4039,11 @@ SMB</block>
   <block id="6577b94f9943e513915919cfd0dc5909" category="list-text">SUSE试用者</block>
   <block id="c395793804bd9dfa82ff727781faf3c5" category="list-text">VMware Tanzu产品组合</block>
   <block id="1de3a8db0dcc39abe68ae2b506a8f0ac" category="list-text">上游Kubernetes</block>
-  <block id="f6fbfc99b1ed4fcb2dee65355a088f0b" category="section-title">Trident保护存储后端兼容性</block>
-  <block id="dc754c1df3be627f8c83600f4c69aade" category="paragraph">Trident Protect支持以下存储后端：</block>
   <block id="ca3930511e1c5997e851e891e33190ab" category="list-text">ONTAP存储阵列</block>
   <block id="e254891423d193d0e614eaf948880de5" category="paragraph">确保存储后端满足以下要求：</block>
   <block id="1efa9b79a24750278cc3058eaf2ead00" category="list-text">确保您有一个NetApp ONTAP存储后端。</block>
   <block id="c9a524733ac9eb25fbf1980538b5437d" category="list-text">确保已配置用于存储备份的对象存储分段。</block>
-  <block id="953216b11f9b494b0b28bcec605cbea1" category="list-text">创建您计划用于应用程序或应用程序数据管理操作的任何应用程序卷。Trident Protect不会为您创建这些命名空间；如果在自定义资源中指定不存在的命名空间、则操作将失败。</block>
   <block id="f4ce5a5f08fdc6de51b81cc305a21fd0" category="section-title">NAS经济型卷的要求</block>
-  <block id="85641afe25671a9190f50185f6e499d5" category="paragraph">Trident Protect支持对NAS经济型卷执行备份和还原操作。目前不支持将快照、克隆和SnapMirror复制到NAS经济型卷。您需要为计划与Trident Protect结合使用的每个NAS经济型卷启用一个Snapshot目录。</block>
   <block id="43da051477acee60af3ad54451d3d090" category="paragraph">某些应用程序与使用Snapshot目录的卷不兼容。对于这些应用程序、您需要通过在ONTAP存储系统上运行以下命令来隐藏Snapshot目录：</block>
   <block id="beb2d6f4cedfc5b87a39d1766369fade" category="paragraph">您可以通过对每个NAS经济型卷运行以下命令来启用Snapshot目录、并将其替换<block ref="a86374477aa0b3d451812bb6ced0458d" prefix=" " category="inline-code"></block>为要更改的卷的UUID：</block>
   <block id="70117c3862b4c793cc80799862e6fde9" category="admonition">通过将Trident后端配置选项设置为，您可以默认为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>新卷启用快照目录<block ref="7ad68fdac2eac069eb8ed0fc45b0fb74" prefix=" " category="inline-code"></block>。现有卷不受影响。</block>
@@ -4101,10 +4059,7 @@ SMB</block>
   <block id="9fecd08b776fdfca7b33426363edf913" category="inline-link">集群和 SVM 对等概述</block>
   <block id="ddae31913091b421eaff815ed1e19b4f" category="list-text">*集群和SVM*：ONTAP存储后端必须建立对等状态。有关详细信息、请参见<block ref="36ecaf21e9ca81a83e736deb4ff5c657" category="inline-link-rx"></block> 。</block>
   <block id="94ac6b3955eab183cb88ab17c91000eb" category="admonition">确保两个ONTAP集群之间的复制关系中使用的SVM名称是唯一的。</block>
-  <block id="e05c29680eacd6a4c163eefe138ff9fd" category="list-text">*托管后端*：您需要在Trident Protect中添加和管理ONTAP存储后端、才能创建复制关系。</block>
   <block id="57fe82c052fea1c269ca2b14e92e80d3" category="section-title">用于SnapMirror复制的Trident / ONTAP配置</block>
-  <block id="59292a70a610fc937685ef1c3a3b5cb1" category="paragraph">Trident Protect要求您至少配置一个存储后端、以便为源集群和目标集群同时支持复制。如果源集群和目标集群相同、则目标应用程序应使用与源应用程序不同的存储后端、以获得最佳故障恢复能力。</block>
-  <block id="4b92c534580865d96f1efb9f86289249" category="summary">您可以使用Trident Protect从快照或备份还原应用程序。将应用程序还原到同一集群时，从现有快照进行还原的速度会更快。</block>
   <block id="ff29014f3961a30f52557df7142d1a65" category="doc">还原应用程序</block>
   <block id="f346d32ba5d9c332bf8577bf1bacda07" category="admonition">还原应用程序时、为该应用程序配置的所有执行挂钩都会随该应用程序还原。如果存在还原后执行挂钩、则它会在还原操作中自动运行。</block>
   <block id="a082effb2d23d4eb077129001a77582f" category="section-title">从备份还原到其他命名空间</block>
@@ -4136,16 +4091,8 @@ SMB</block>
   <block id="ba2718de6be08337811d049982d9f03f" category="section-title">检查还原操作的状态</block>
   <block id="97dedb929a195e839af5f7d7f8ef0ec5" category="paragraph">您可以使用命令行检查正在进行、已完成或失败的还原操作的状态。</block>
   <block id="c076e91339c1f092aaad1d36a9c18a7a" category="list-text">使用以下命令检索还原操作的状态、将括号中的值替换为环境中的信息：</block>
-  <block id="3b236bd888d7d3460e381b13adb8f6b8" category="summary">如果您要从产品的试用版升级到完整版本、则可能需要删除Trident Protect组件。</block>
-  <block id="1bc8acdabd6fc240195da5f19b986dd6" category="doc">卸载Trident Protect</block>
-  <block id="fb509ce83a58c3beeca23f5d55c8d75c" category="paragraph">要删除Trident Protect、请执行以下步骤。</block>
-  <block id="f6116aed83b3970c50d28447d27f4f97" category="list-text">删除Trident Protect CR文件：</block>
-  <block id="aec02c2a1b714f40a949aa18d1f2d588" category="list-text">删除Trident保护：</block>
-  <block id="20c06650be80c297c0e4dc5ae977d44f" category="list-text">删除Trident Protect命名空间：</block>
-  <block id="a8c1fc9f09b8338dd9f8badd5c3d30c0" category="summary">您可以使用Trident Protect为应用程序创建自定义执行挂钩。要创建执行挂钩，您需要拥有所有者，管理员或成员权限。</block>
   <block id="ccd62d676165e34c2e9c6d088c06e70f" category="paragraph">执行挂钩是一种自定义操作、您可以将其配置为与受管应用程序的数据保护操作结合运行。例如、如果您有一个数据库应用程序、则可以使用执行挂钩在快照之前暂停所有数据库事务、并在快照完成后恢复事务。这样可以确保应用程序一致的快照。</block>
   <block id="83fbf1604bedff410ea11872b40ab9f0" category="section-title">执行挂钩的类型</block>
-  <block id="d702711249a4d54c15ce81c80152b8e7" category="paragraph">Trident Protect支持以下类型的执行挂钩、具体取决于它们可以运行的时间：</block>
   <block id="9c6a9cc04a4d5840a5d237b232190a35" category="list-text">预快照</block>
   <block id="65db6b15c7f05c97a1647c11699053e3" category="list-text">快照后</block>
   <block id="0a2055495a94f091655a2e4d421cffe2" category="list-text">预备份</block>
@@ -4167,21 +4114,17 @@ SMB</block>
   <block id="f99748fb4b1cf592516b60937743c52d" category="section-title">有关自定义执行挂钩的重要注意事项</block>
   <block id="6b8e88c5f4231fbc6994f3a29dd893af" category="paragraph">在为应用程序规划执行挂钩时，请考虑以下几点。</block>
   <block id="c9333604c0c05d7727ea70ec5f1b806b" category="list-text">执行挂钩必须使用脚本执行操作。许多执行挂钩可以引用同一个脚本。</block>
-  <block id="cc0a52984aa9087cc5fca898c4dc1caa" category="list-text">Trident Protect要求以可执行shell脚本的格式编写执行挂钩所使用的脚本。</block>
   <block id="6a7d60379bb9015c0bfe02adcc54d0b5" category="list-text">脚本大小限制为96 KB。</block>
-  <block id="d6eb1b65eb578d8eb99d367edc11bb03" category="list-text">Trident Protect使用执行挂钩设置和任何匹配条件来确定哪些挂钩适用于快照、备份或还原操作。</block>
   <block id="6b988caf78b1aa60f0402c611a1c8e2a" category="admonition">由于执行挂钩通常会减少或完全禁用其运行的应用程序的功能，因此您应始终尽量缩短自定义执行挂钩运行所需的时间。如果使用关联的执行挂钩启动备份或快照操作、但随后将其取消、则在备份或快照操作已开始时、仍允许运行这些挂钩。这意味着、备份后执行挂钩中使用的逻辑不能假定备份已完成。</block>
   <block id="99dc882fc0f61d1db87631ed9f156913" category="section-title">执行钩筛选器</block>
   <block id="44db75fbdb91be494665aebf40107fcf" category="paragraph">在为应用程序添加或编辑执行挂钩时、可以向执行挂钩添加筛选器、以管理挂钩将匹配的容器。对于在所有容器上使用相同容器映像的应用程序、筛选器非常有用、但可能会将每个映像用于不同的用途(例如Elasticsearch)。通过筛选器、您可以创建执行挂钩在某些容器上运行的方案、但不一定是所有相同的容器上运行的方案。如果为单个执行钩创建多个筛选器、则这些筛选器将与逻辑运算符和运算符结合使用。每个执行连接最多可以有10个活动筛选器。</block>
   <block id="7caae75448dbc59fcadd621099e170b3" category="inline-link">正则表达式2 (RE2)语法支持</block>
-  <block id="c8390f7fcf8913e63d64e8069f87aa58" category="paragraph">添加到执行挂钩中的每个筛选器都会使用一个正则表达式来匹配集群中的容器。当某个挂钩与某个容器匹配时、该挂钩将在该容器上运行其关联脚本。筛选器的正则表达式使用正则表达式2 (RE2)语法、不支持创建从匹配列表中排除容器的筛选器。有关Trident Protect在执行挂钩过滤器中支持正则表达式的语法的信息，请参阅<block ref="d4d0dd655d04b2dc5b031206e1febd50" category="inline-link-rx"></block>。</block>
   <block id="4c004df391027b81952b788a3802e37c" category="admonition">如果将命名空间筛选器添加到在还原或克隆操作之后运行的执行挂钩、并且还原或克隆源和目标位于不同的命名空间中、则命名空间筛选器仅会应用于目标命名空间。</block>
   <block id="f1ec6389b6d19d3be02f29f4a7d29051" category="section-title">执行钩示例</block>
   <block id="0370124d48bfc5af2def19c48f433283" category="inline-link">NetApp Verda GitHub项目</block>
   <block id="a59e4fa5cc01a3a4bdebbff4cec60b47" category="paragraph">请访问<block ref="84d9961ef5a89731849bc2055780d0b6" category="inline-link-rx"></block> 、下载适用于Apache cassandr和Elascearch等常见应用程序的真实执行挂钩。您还可以查看示例并了解如何构建自己的自定义执行挂钩。</block>
   <block id="b103709bb8bab06f6db02c661d88466a" category="section-title">创建执行挂钩</block>
   <block id="e39c63d5ded2742e4215d5e339fa729e" category="list-text">创建自定义资源(CR)文件并将其命名为<block ref="ce6abb389eaae6953714e27f1dfde579" prefix=" " category="inline-code"></block>。</block>
-  <block id="a1b64283bac1ca460b6b777a46121e7f" category="list-text">根据您的Trident Protect环境和集群配置配置以下属性：</block>
   <block id="500ef917ae8cc36e9c85a2c0bc7d9337" category="list-text">*spec.applicationRef*：(_required_)要运行执行挂钩的应用程序的Kubernetes名称。</block>
   <block id="5422fe7ebd8e2354557341f5b0c60905" category="list-text">*spec.stage *：(_required_)一个字符串，指示执行挂钩应在操作期间的哪个阶段运行。可能值：</block>
   <block id="fb55a965b77791b31ffd2bb548f71080" category="list-text">预</block>
@@ -4204,11 +4147,9 @@ SMB</block>
   <block id="011b50d44a6bb217bbe310071e727641" category="list-text">*spec.匹 配Cricery.value*：(_可 选_)用于标识执行挂钩筛选器值的字符串或正则表达式。</block>
   <block id="5b34802949c91e91f2c85f8ee1c129bd" category="list-text">使用正确的值填充CR文件后、应用CR：</block>
   <block id="de72143da28c8cafc0b906859f6e6d05" category="list-text">创建执行挂钩、将括号中的值替换为环境中的信息。例如：</block>
-  <block id="d37692493f4055c8b34b9de2897bb1a6" category="summary">通过使用Trident Protect、您可以使用NetApp SnapMirror技术的异步复制功能将数据和应用程序更改从一个存储后端复制到另一个存储后端、复制到同一集群上或复制到不同集群之间。</block>
   <block id="73ff2f0e4c750901167edccad459407d" category="doc">使用NetApp SnapMirror复制应用程序</block>
   <block id="40322a2a338856f04751d8d3bdb62496" category="section-title">设置复制关系</block>
   <block id="f7c69ddccabddb0b74276d3c2a3086e0" category="paragraph">设置复制关系涉及以下方面：</block>
-  <block id="a7b38e98cd0b780e4d7f39ca030851fe" category="list-text">选择希望Trident Protect创建应用程序快照的频率(包括应用程序的Kubbernetes资源以及应用程序每个卷的卷快照)</block>
   <block id="cc37bc9830a1edb8e50e296af8ade03b" category="list-text">选择复制计划(包括Kubbernetes资源以及永久性卷数据)</block>
   <block id="55960a396448d8f19fb182dfd2b04d90" category="list-text">设置创建快照的时间</block>
   <block id="7fe804bb721f10861ae38239b332f774" category="inline-link-macro">AppVault自定义资源</block>
@@ -4262,7 +4203,6 @@ SMB</block>
   <block id="d4c94febe4f13411fa761de57ad6cce6" category="open-title">使用命令行界面创建App镜像 关系</block>
   <block id="86d47ead9019d8e9c93c863f7ab4e41b" category="list-text">(_可 选_)检查复制关系的状态：</block>
   <block id="70cc2bec279e168711b67e789468c45c" category="section-title">故障转移到目标集群</block>
-  <block id="196c4df78e5add7c9590d6a1c18367ec" category="paragraph">使用Trident Protect、您可以将复制的应用程序故障转移到目标集群。此操作步骤 将停止复制关系并使应用程序在目标集群上联机。如果源集群上的应用程序正常运行、则Trident Protect不会停止该应用程序。</block>
   <block id="2d258c624d61d2388efacfc246d2439e" category="list-text">保存 CR 文件。</block>
   <block id="66ccf267a388b1a30a7530a93ea5ce18" category="list-text">(_可 选_)在故障转移应用程序上创建所需的任何保护计划。</block>
   <block id="ea7117a895b98283737d3855ef6a2adc" category="section-title">重新同步故障转移复制关系</block>
@@ -4275,7 +4215,6 @@ SMB</block>
   <block id="3c890586eb43d0d71cdcb47011358420" category="list-text">通过将最初用于设置复制关系的CR文件应用于对等集群来设置复制关系。</block>
   <block id="8a427fa57d96e74516c008754320b521" category="list-text">在另一个集群上设置复制关系、并配置反向值。</block>
   <block id="792322eb4a0bf1a122100fc009041d9b" category="section-title">反转应用程序复制方向</block>
-  <block id="eb89cf8a1850f41e41a65f7b65ec9c87" category="paragraph">反向复制方向时、Trident Protect会将应用程序移至目标存储后端、同时继续复制回原始源存储后端。Trident Protect会先停止源应用程序并将数据复制到目标、然后再故障转移到目标应用程序。</block>
   <block id="4625c1e6ccf2351ad9a08dcee33270c8" category="paragraph">在这种情况下、您将交换源和目标。</block>
   <block id="4f902591d45de06985f0af6d869c8a04" category="open-title">使用CR创建关闭快照</block>
   <block id="1f6c30c2bcecec90eda54cd7038f326b" category="list-text">禁用源应用程序的保护策略计划。</block>
@@ -4296,7 +4235,6 @@ SMB</block>
   <block id="b6c3873d17157e3e4a0b1ef02b3cef69" category="list-text">此应用程序的Kubornetes资源将使用在初始源应用程序关闭后复制的卷数据从关闭前的快照中还原。</block>
   <block id="3cecdf93ba8c40eb3b09b7a7f9985e1d" category="list-text">反向重新建立复制。</block>
   <block id="827d6f4840be3ba668aa3eaee7c11d8d" category="section-title">将应用程序故障恢复到原始源集群</block>
-  <block id="fbe6471033a142db5e3165e4034c1157" category="paragraph">通过使用Trident Protect、您可以通过以下操作序列在故障转移操作后实现"故障恢复"。在此恢复原始复制方向的工作流中、Trident Protect会在反转复制方向之前将所有应用程序更改复制(重新同步)回原始源应用程序。</block>
   <block id="3a045f0ae84563b460627f43bb272936" category="paragraph">此过程从已完成故障转移到目标的关系开始、涉及以下步骤：</block>
   <block id="9cbd7771b861e31b5edb23d83de4758c" category="list-text">从故障转移状态开始。</block>
   <block id="39d2beed854377dcad2ea22fe9e58477" category="section-title">删除复制关系</block>
@@ -4306,18 +4244,9 @@ SMB</block>
   <block id="5866b98c049a53ea6dc7f50f9349f434" category="list-text">数据迁移</block>
   <block id="645a84975202e30700b572b49a5ee29d" category="list-text">灾难恢复</block>
   <block id="11d5920d0c0b3a97e764f84dc92ef110" category="list-text">应用程序移动性</block>
-  <block id="f593e32b2a3ead4ac029c13126d3531d" category="inline-link-macro">详细了解Trident Protect</block>
   <block id="487dc96e91d89134e7a216bab529a019" category="paragraph">从24.10版开始、Astra Trident更名为Trident (NetApp Trident)。此品牌重塑不会影响Trident的任何功能、支持的平台或互操作性。</block>
   <block id="a2d3ef10e2d8aae09270e11f8faea2d2" category="sidebar">高级数据管理和保护</block>
-  <block id="6274fe9ce01bdde4e27e80b7958fb714" category="sidebar">借助Trident Protect实现高级数据保护</block>
-  <block id="1251ea693b8f0b6da19ce6991115faa0" category="sidebar">部署Trident Protect</block>
-  <block id="6c3cb2816fa53d1d99c44a111d9f7206" category="sidebar">使用Trident Protect保护应用程序</block>
-  <block id="884400bd4c8f5f2b0070bef92b055594" category="sidebar">安装Trident Protect</block>
-  <block id="f284d92e4bd22a3c7a76bfe530ddd899" category="sidebar">管理Trident Protect</block>
-  <block id="b9ef0ee6944eb101de3de64b82db00dd" category="sidebar">生成Trident Protect支持包</block>
   <block id="1ae067a03c56065918252f36c73024d1" category="sidebar">管理和保护应用程序</block>
-  <block id="793ba052e921b84a44dd053d68f45012" category="sidebar">使用Trident Protect管理执行挂钩</block>
-  <block id="a4ac350fb585f51020f747525f3175d8" category="paragraph"><block ref="2c7a14b5507108d57a83e6eb9858f03a" category="inline-link-macro-rx"></block>(英文)</block>
   <block id="c198f49680a4c22b6d731cdd7d7b513a" category="paragraph">您可以使用<block ref="cd4140d3de30b520500459331d08d2bf" prefix=" " category="inline-code"></block>命令查看安装详细信息、例如名称、命名空间、图表、状态、应用程序版本和修订版号。</block>
   <block id="d43d72969793ea80734b71e9c2406b2a" category="list-text">*保留集群上的附加软件*–此选项将删除Amazon EKS对任何设置的管理。此外、它还会使Amazon EKS无法通知您更新、并在您启动更新后自动更新Amazon EKS附加项。但是、它会保留集群上的附加软件。此选项可使附加组件成为自管理安装、而不是Amazon EKS附加组件。通过此选项、此附加组件不会出现停机。保留命令中的<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> 选项以保留此附加项。</block>
   <block id="03f2a9d8b5b9f1a03bc58b91a939d84f" category="paragraph"><block ref="ad43edaec055586043c762c9475bde5c" category="inline-link-macro-rx"></block> 是Google Cloud中的一项完全托管的文件存储服务、可提供高性能企业级文件存储。</block>
@@ -4360,31 +4289,17 @@ SMB</block>
   <block id="0ac202e458490a734271522fcedf4876" category="list-text">确保<block ref="8732863da72605a20ed96b4eee87a5fb" prefix=" " category="inline-code"></block>正在运行：</block>
   <block id="69eeaf73fccab6d6abcba46bd6a3a3bf" category="list-text">确保<block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block>已启用且正在运行：</block>
   <block id="00ea3f7016d7b9a4ad023b106cc1e6d3" category="paragraph"><block ref="7e7b7908484dc2cebc13ec93d8042bd0" category="inline-link-macro-rx"></block>如果您使用的是<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>sanType<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block> (基于FC的SCSI)。</block>
-  <block id="0cc310db20eaee9161e8ef937010b536" category="doc">管理Trident保护授权和访问控制</block>
-  <block id="97f3fa7a4bb86197f0db69aa160c73e9" category="doc">使用Trident Protect AppVault对象管理分段</block>
-  <block id="bf4313699bccd15d73aa8653cfdfd754" category="doc">使用Trident Protect定义要管理的应用程序</block>
-  <block id="b6a8ee5a5280d899b4ea1be0f8697335" category="doc">使用Trident Protect迁移应用程序</block>
-  <block id="8686ed080978191a10848ee52cd0c87a" category="doc">使用Trident Protect保护应用程序</block>
-  <block id="0539043b2ec0bd1bfae64dc58173dec7" category="doc">使用Trident Protect还原应用程序</block>
-  <block id="873e2eae9a82cbe9c291ade077f017d2" category="doc">管理Trident Protect执行挂钩</block>
-  <block id="6f8f09e1a22390ac35a40283a4dc713f" category="doc">使用NetApp SnapMirror和Trident Protect复制应用程序</block>
   <block id="2fc23e09b483dc4495beb473646c0273" category="list-text"><block ref="2fc23e09b483dc4495beb473646c0273" category="inline-link-macro-rx"></block></block>
   <block id="e132245ad28668c6b32dee21fb8a3820" category="list-text">获取目标接口的WWPN。有关详细信息、请参见<block ref="92fd8fd0370792cd397ea6fdc3c8edb0" category="inline-link-rx"></block> 。</block>
   <block id="ab17e5f89eede1d0e6d8d31cc646b837" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block>准备工作节点</block>
   <block id="8f571d58ed95211be01ea993de3fee3e" category="paragraph-title"><block ref="54f425ce8d89f4ed6b8a546561af5d60" category="inline-image-macro-rx" type="image"></block>安装Trident</block>
   <block id="2fd92693952062fc00d949899370185d" category="section-title">定义应用程序</block>
-  <block id="da305154e58c2f6709cee1cca6b2d8c8" category="paragraph">您需要定义要使用Trident Protect管理的每个应用程序。您可以通过手动创建应用程序CR或使用Trident Protect命令行界面来定义要管理的应用程序。</block>
   <block id="964ba319e15e38c5b0f3ee2a3dd4a8f8" category="list-text">创建应用程序CR以匹配您的环境后、请应用CR。例如：</block>
-  <block id="4d2e55f1e0d6587dd3b63700ee1065af" category="paragraph-title">Trident智能驭领保障24.10</block>
-  <block id="2d261bce9a1e151a31ff22788033f212" category="paragraph">Trident Protect 24.10不会在数据保护操作期间自动确保KubeVirt VM文件系统的状态一致。如果要使用Trident Protect 24.10保护KubeVirt VM数据、则需要在执行数据保护操作之前手动为文件系统启用冻结/取消冻结功能。这样可确保文件系统处于一致状态。</block>
   <block id="acb14ba5b70eb330a1d4de9c6b7a325d" category="inline-link-macro">正在配置虚拟化</block>
-  <block id="74c1cc067621b7ea2ccf9f91b4595bd8" category="paragraph">您可以先配置Trident Protect 24.10、以便在执行数据保护操作期间管理VM文件系统的冻结和解除冻结<block ref="e0dd4c4b8aa16596df6c3f5cb36d3cdc" category="inline-link-macro-rx"></block>、然后使用以下命令：</block>
-  <block id="42a2550b14037192e0c3252e7666ec4d" category="paragraph">从Trident Protect 24.10.1开始、Trident Protect会在数据保护操作期间自动冻结和解除冻结KubeVirt文件系统。或者、您可以使用以下命令禁用此自动行为：</block>
   <block id="cedf2576eebff15fc6b30d5a7109eb6b" category="doc">还原和故障转移操作期间的命名空间标注和标签</block>
   <block id="131ff34387be167411ffda7d60b577e7" category="paragraph">在还原和故障转移操作期间、目标命名空间中的标签和标注会与源命名空间中的标签和标注相匹配。此时将添加源命名空间中目标命名空间中不存在的标签或标注、并覆盖已存在的任何标签或标注、以便与源命名空间中的值匹配。仅存在于目标命名空间上的标签或标注保持不变。</block>
   <block id="20f40e0b9308901dac07ce8a8efb3350" category="inline-link">OpenShift安全上下文约束文档</block>
   <block id="6c83555d4261acb08ebbc5f24823dc7b" category="paragraph">在执行还原或故障转移操作之前、您可以通过设置Kubornetes环境变量来防止目标命名空间中的特定标注被覆盖<block ref="1580ff61f204e9d56cd5324c7e9221ba" prefix=" " category="inline-code"></block>。例如：</block>
-  <block id="11a75e55f9a91a12e7d31886a76ff312" category="paragraph">如果您使用带有标志的Helm安装源应用程序，则会对标签键进行<block ref="cc1f5c1d16e33b8463c9ee27295cd5df" prefix=" " category="inline-code"></block>特殊处理<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>。在还原或故障转移过程中、Trident Protect会将此标签复制到目标命名空间、但如果源命名空间中的值与源命名空间匹配、则会将此值更新为目标命名空间值。如果此值与源命名空间不匹配、则会将其复制到目标命名空间、而不会发生任何更改。</block>
   <block id="1280c48f074ec68fd2281266662c9a3f" category="paragraph">以下示例显示了一个源和目标命名空间、每个命名空间都具有不同的标注和标签。您可以查看目标命名空间在操作前后的状态、以及标注和标签在目标命名空间中的组合或覆盖方式。</block>
   <block id="2cfe257f724ed59a07ab01918c828fb5" category="section-title">在执行还原或故障转移操作之前</block>
   <block id="c972cd959174c84d137520d91c011446" category="paragraph">下表说明了执行还原或故障转移操作之前示例源和目标名称卷的状态：</block>
@@ -4403,21 +4318,11 @@ SMB</block>
   <block id="46c40b68ab6fcc817f5134602b1985e3" category="section-title">还原操作之后</block>
   <block id="15d6567aa33ad00e352de9164a741b8b" category="paragraph">下表显示了还原或故障转移操作后示例目标命名空间的状态。已添加某些密钥、某些密钥已被覆盖、并且<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>标签已更新以与目标命名空间匹配：</block>
   <block id="a8306d4d1af4239dba9a6bcfd799eba7" category="list-text">name=nS-2</block>
-  <block id="da1046077b664fa54e4894632960137d" category="paragraph">您可以通过使用自动保护策略或临时创建快照和备份来保护Trident Protect管理的所有应用程序。</block>
-  <block id="e27f117e119beccd01579e6a8d0151fb" category="inline-link-macro">详细了解如何使用Trident Protect配置文件系统冻结</block>
-  <block id="9efebf2c277b6c382e759b6b916fd0dd" category="admonition">您可以将Trident Protect配置为在数据保护操作期间冻结和取消冻结文件系统。<block ref="d0a15703ee89b8fa8b780fb2dbace2bd" category="inline-link-macro-rx"></block>(英文)</block>
   <block id="ac84b7596169ab3fb6c24e8a5c85c234" category="section-title">使用KubeVirt VM保护数据</block>
-  <block id="c14dcfe7b0231c7a77642ffab50a55eb" category="summary">您可以将Trident Protect升级到最新版本、以利用新功能或错误修复。</block>
-  <block id="91d6fa36b819133d3be4dc9c8bf2cf22" category="doc">升级Trident Protect</block>
-  <block id="9a4ef497aa1e88e71b08a41b069a9cf4" category="paragraph">要升级Trident Protect、请执行以下步骤。</block>
   <block id="08583ac87350c1205f57ca5d8c629482" category="list-text">更新Trident Helm存储库：</block>
-  <block id="0f5b1b3a9bfb872579b78d2db623d3d8" category="list-text">升级Trident Protect CRD：</block>
-  <block id="a16ec228f0e3336de76f224b11d860d9" category="list-text">升级Trident Protect：</block>
-  <block id="08810911e9a818361e28207072354bd4" category="list-text">如果适用、会发生文件系统冻结。<block ref="d0a15703ee89b8fa8b780fb2dbace2bd" category="inline-link-macro-rx"></block>(英文)</block>
   <block id="caf47630bbafdc416f6b6ecdb585e83e" category="list-text">如果适用、冻结的文件系统将被解除冻结。</block>
   <block id="1eb6c79d30a4cb086ad406cb25fec350" category="list-text">*resourceFilter.resourceMatcher*：resourceMatcher对象数组。如果在此数组中定义多个元素，它们将作为OR操作进行匹配，每个元素(组、种类、版本)中的字段将作为AND操作进行匹配。</block>
   <block id="effa92215c770083617150adc291c130" category="list-text">展开*可选配置设置*并根据需要进行修改。</block>
-  <block id="fd8585ec0c8ba7001713251f9ab9c69e" category="paragraph">要将应用程序克隆到其他集群(执行跨集群克隆)、请在源集群上创建备份、然后将备份还原到其他集群。确保目标集群上已安装Trident Protect。</block>
   <block id="a1f41e52e9ddbd9f87ecd032c237b1c0" category="inline-link-macro">SnapMirror 复制</block>
   <block id="f6acb98f21e25882aaaa267339abcc92" category="admonition">您可以使用在不同集群之间复制应用程序<block ref="69314cba6d14bf88b8e850c978056766" category="inline-link-macro-rx"></block>。</block>
   <block id="fe961357dbe4b6bf8b5503f4919ea35c" category="list-text">确保已在目标集群上为包含备份的对象存储分段配置AppVault CR。</block>
@@ -4432,25 +4337,15 @@ SMB</block>
   <block id="79832d443dadeb6d3b0637941d6ac067" category="open-title">StorageGRID S3</block>
   <block id="6b4d16571162a69eb03c99cb132a69ec" category="section-title">AppVault CR示例</block>
   <block id="d05c8b60cfd355fccac41017c33ca892" category="paragraph">您可以使用以下CR示例为每个云提供程序创建AppVault对象。</block>
-  <block id="59264d37bdf7f6cbf4f94ad00dacdce1" category="section-title">使用Trident Protect命令行界面创建AppVault的示例</block>
   <block id="4db09810b323e73b4041a65c99bb14f8" category="paragraph">您可以使用以下命令行界面命令示例为每个提供程序创建AppVault CRS。</block>
-  <block id="c8dac6733f0c00d0b3b8b239841a0255" category="list-text">创建一个名为的文件<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block>。确保它包含以下Trident保护设置：</block>
-  <block id="d9802724acbde7ce7749f0884262496a" category="section-title">指定Trident Protect容器资源限制</block>
-  <block id="723ff7c28b60307db94ddb35dd6cc517" category="paragraph">安装Trident Protect后、您可以使用配置文件为Trident Protect容器指定资源限制。通过设置资源限制、您可以控制Trident Protect操作占用的集群资源量。</block>
   <block id="45d7099b61647936da59ccfbaa49ca5c" category="list-text">创建一个名为的文件<block ref="e66ad8c89b28dc43a24e6e1689a79cdc" prefix=" " category="inline-code"></block>。</block>
-  <block id="9f83417f7d6c999c56b0dcc3b274be23" category="list-text">根据您的环境需求、使用Trident Protect容器的资源限制选项填充文件。</block>
   <block id="956fe3fe2ad4f9cb1b569d66b4ff1db5" category="list-text">应用文件中的值<block ref="e66ad8c89b28dc43a24e6e1689a79cdc" prefix=" " category="inline-code"></block>：</block>
-  <block id="a4af4e386bb379977acdb5a465780149" category="open-title">使用Trident Protect命令行界面删除AppVault</block>
   <block id="7bbf9a1a0bbcbeb6a4fef133c3975079" category="paragraph">下次shell登录时、您可以使用带有trdentcd-protect插件的命令自动完成。</block>
   <block id="0708d6413707329d6051a0456f0810ac" category="admonition">您可以使用<block ref="deb04333ae980bc0147681e476e1941c" prefix=" " category="inline-code"></block>查看此命令的详细帮助信息。</block>
-  <block id="b0e7049d5aeb967991b6b3a21db08de3" category="paragraph">使用BackupRestore CR将备份还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、并为还原的应用程序创建应用程序CR。要保护已还原的应用程序、请创建按需备份或快照、或者制定保护计划。</block>
-  <block id="4b405223d9feceac91c5ef8df77b1961" category="paragraph">您可以使用自定义资源(CR)文件从快照将数据还原到其他命名空间或原始源命名空间。使用SnapshotRestore CR将快照还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、并为还原的应用程序创建应用程序CR。要保护已还原的应用程序、请创建按需备份或快照、或者制定保护计划。</block>
   <block id="375efef64643c8aa6bb8e0ba2159a82a" category="list-text">为插件二进制文件启用执行权限：</block>
   <block id="eefd51253afc93c1ad54658882a65dec" category="list-text">您也可以将插件二进制文件复制到主目录中的某个位置。在这种情况下、建议确保此位置属于您的路径变量：</block>
   <block id="75b0e724fe59ed9d6eda0fcd4679bfee" category="admonition">通过将插件复制到路径变量中的某个位置、您可以通过在任意位置键入或<block ref="e89ec374c6edc886ea12d28524834e68" prefix=" " category="inline-code"></block>来使用此插件<block ref="d4845d5856667a10aee97f3404a35627" prefix=" " category="inline-code"></block>。</block>
-  <block id="dc5b2d9ecd49d3e5ee37059e2d80512f" category="section-title">Trident Protect Kubbernetes集群兼容性</block>
   <block id="9ac0dd27d420b7b48ca72e463ae95e18" category="inline-link">这些说明</block>
-  <block id="664d28801abc192d5c7dfd7bfa758e98" category="admonition">确保为安装Trident Protect的集群配置了正在运行的快照控制器以及相关的CRD。要安装快照控制器，请参见<block ref="5d66944a2971d1b9b5f332812a6e737b" category="inline-link-rx"></block>。</block>
   <block id="9560d298aea880d389acf56a45410c4b" category="summary">您可以配置加密以保护Trident与存储后端之间的流量。</block>
   <block id="c994f1e00d22f7d8d4e7b3e7f50f8002" category="doc">Kerberos传输中加密</block>
   <block id="c8ea4672c0efc6fee26c8648f609a829" category="paragraph">通过使用Kerberos传输中加密、您可以对受管集群和存储后端之间的流量启用加密、从而提高数据访问安全性。</block>
@@ -4620,9 +4515,7 @@ SMB</block>
   <block id="d1548585dadda37a28905a23e22cf65d" category="section-title">从备份还原到其他集群</block>
   <block id="7fa8874b1f645ca2af9d81b51985b8fb" category="paragraph">如果原始集群出现问题、您可以将备份还原到其他集群。</block>
   <block id="dd4ee610bd1d035c73bc0cbcd80e46da" category="paragraph">确保满足以下前提条件：</block>
-  <block id="1d6028c560c8f6dbee841737e60a3d9d" category="list-text">目标集群已安装Trident Protect。</block>
   <block id="b20f8883edb9068c67a2faeb3c083d38" category="list-text">目标集群可以访问与存储备份的源集群相同的AppVault的分段路径。</block>
-  <block id="0425d0358a4cba7a7cce5ddd727ab6a2" category="list-text">使用Trident Protect命令行界面插件检查目标集群上AppVault CR的可用性：</block>
   <block id="1ff83a5266e9e025c2984e0c10dea90e" category="admonition">确保目标集群上存在用于应用程序还原的命名空间。</block>
   <block id="8d433ae9a21c49e9e5433ebd408605c0" category="list-text">从目标集群查看可用AppVault的备份内容：</block>
   <block id="378e6f0ba7080535a4462b5311befb40" category="paragraph">运行此命令可显示AppVault中的可用备份、包括其原始集群、相应的应用程序名称、时间戳和归档路径。</block>
@@ -4663,7 +4556,6 @@ SMB</block>
   <block id="97949d2167cfb02925ebeb5fbc18e41c" category="admonition">使用或驱动程序时<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>、您需要将后端配置中的参数设置<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>、以便Trident可以限制通过受管导出策略应用了此内容的Kubornetes<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>节点的访问。</block>
   <block id="f27e6cf95381139bd9916c64f178d212" category="list-text">对于运行Kubbernetes 1.24的集群，请使用 <block ref="ccef28639b5a7d8b851d32c1ca719ce3" category="inline-link-macro-rx"></block>。</block>
   <block id="b9f6abf28d1518cdaae0ed7e29a5727e" category="list-text">对于运行Kubernetes 1.25或更高版本的集群，请使用 <block ref="d1039b29d019902f70f499d65ede99cb" category="inline-link-macro-rx"></block>。</block>
-  <block id="572a8b759ae44dd81571fb9d11e9932b" category="paragraph">NetApp SnapMirror复制可用于以下ONTAP解决方案的Trident Protect：</block>
   <block id="701fc71f0daf0d596d98b3af41d195dd" category="list-text">内部NetApp FAS、AFF和ASA集群</block>
   <block id="405c5315f2ee81c7d907857a97bc9ccc" category="list-text">将备份项目放在FlexVol volume上</block>
   <block id="f4d58905240b9c44d84e6ee73c8499ac" category="admonition">NetApp建议您保护与另一个SVM具有SnapMirror关系的FlexVol所在的SVM。</block>
@@ -4706,14 +4598,10 @@ SMB</block>
   <block id="50da178eec9235ba0a85999374d51cba" category="list-text">增加了在Trident运算符中禁用自动配置器协调的选项<block ref="95579fcabb606a95f307c6ba89588c08" category="inline-link-macro-rx"></block>()。</block>
   <block id="16aa6756a13a48723b3d2bc4bf50c104" category="inline-link-macro">问题描述#976</block>
   <block id="60b04b91abae29736bd23b21579be5cb" category="list-text">增加了CSI -非标准容器的SecurityContext<block ref="a97be45bfcdf3eeaee81dc9917811f8f" category="inline-link-macro-rx"></block> ()。</block>
-  <block id="cb1f1e88b6db83dc715d1cb1d8733445" category="section-title">Trident Protect</block>
-  <block id="b094c3f306a844e9e49992f69a84cfa4" category="paragraph">NetApp Trident Protect提供高级应用程序数据管理功能、可增强由NetApp ONTAP存储系统和NetApp Trident CSI存储配置程序提供支持的有状态Kubbernetes应用程序的功能和可用性。</block>
   <block id="7df125a00671c08a40e0225c8e7bfe51" category="list-text">增加了在Kubevirt环境的应用程序级别控制冻结行为的功能。</block>
   <block id="bde8e1e3de96ead9884d920004bad3bf" category="list-text">增加了对配置AutoSupport代理连接的支持。</block>
   <block id="3a3a7f688efad3284b8088de98d9c990" category="list-text">增加了为数据移动程序加密(Kerberos / Restic)定义密钥的功能。</block>
   <block id="7bd24598cff0819911511e7a4114afc9" category="list-text">增加了手动运行执行挂钩的功能。</block>
-  <block id="d8420a2285ade91fbb556a8705392d4e" category="list-text">增加了在Trident Protect安装期间配置安全上下文约束(SCC)的功能。</block>
-  <block id="397cc2a4d426cf97968c783f15ec2de3" category="list-text">增加了对在Trident Protect安装期间配置nodeSelect器 的支持。</block>
   <block id="b5b9bc3aab84e4b648c1432f95ac9294" category="list-text">增加了对AppVault对象的HTTP/HTTPS出口代理的支持。</block>
   <block id="e7ce2b289382a615113880a71867a2fb" category="list-text">扩展的ResourceFilter可用于排除集群范围的资源。</block>
   <block id="230ae1ea7310e8fa80a6cd9e6208085e" category="list-text">增加了对S3 AppVault凭据中AWS会话令牌的支持。</block>
@@ -4850,11 +4738,9 @@ SMB</block>
   <block id="34515f1d88b10d0db0a78eba6c533394" category="paragraph">已知问题可确定可能妨碍您成功使用此版本产品的问题。</block>
   <block id="825cc355a6b503245e0d84d26f0e16d1" category="paragraph">以下已知问题会影响当前版本：</block>
   <block id="dd298b4e9bfcd54db2048c92819679ad" category="section-title">还原大型文件的Restic备份可能会失败</block>
-  <block id="beca1b1ae9141eb4cf9a371088911e0f" category="paragraph">从使用Restic创建的Amazon S3备份还原30 GB或更大的文件时、还原操作可能会失败。解决方法是、使用Koria作为数据移动工具备份数据(Koria是备份的默认数据移动工具)。有关说明、请参见<block ref="1e108e5c10b0ba51ea4cfaf507765efb" category="inline-link-rx"></block> 。</block>
   <block id="7fc5875d06887df5109a87a0ada90eca" category="section-title">配置AppVault身份验证和密码</block>
   <block id="8e2c4d33f50c044b257a84cd65ff1c79" category="section-title">数据移动工具存储库密码</block>
   <block id="e64d157c7a9e337d525d51f62d9d0809" category="section-title">创建数据移动工具存储库密码密钥</block>
-  <block id="fc114cb2ee6c7bff559d58e2a7454cab" category="paragraph">使用以下示例创建密码密钥。创建AppVault对象时、您可以指示Trident Protect使用此密钥向数据移动工具存储库进行身份验证。</block>
   <block id="571768fad7edd9c4f57173c592c1f86c" category="section-title">云提供商的AppVault密钥生成示例</block>
   <block id="3e2db83ddd4087c64413cfd7c14100b6" category="section-title">AppVault创建示例</block>
   <block id="80b938565b2e1ff14bd06e780149b085" category="paragraph">以下是每个提供程序的AppVault定义示例。</block>
@@ -4862,13 +4748,8 @@ SMB</block>
   <block id="2b7c7776f596f179d63bae82e841e9fe" category="list-text">对于S3 AppVault对象、您可以选择使用密钥为出站S3流量指定出口代理URL<block ref="ea739eb21b9424ad95fb5cd1b3ee7d1c" prefix=" " category="inline-code"></block>。</block>
   <block id="99313bdb05c30c161eb80ae8dc89265f" category="list-text">对于S3 AppVault对象、您可以选择使用参数为出站S3流量指定出口代理URL<block ref="c0b36cdbc2185c1fe6ee0b0c177312da" prefix=" " category="inline-code"></block>。</block>
   <block id="aafdbe511f8dcfce152fe32eec4b84a8" category="section-title">查看AppVault信息</block>
-  <block id="fe7f61a858dc37b884e97617cd26e1da" category="paragraph">您可以使用Trident保护命令行界面插件查看有关在集群上创建的AppVault对象的信息。</block>
-  <block id="ef3bab72151c3b40feca67b002c6d518" category="summary">自定义Trident Protect的默认设置以满足您的特定需求。</block>
-  <block id="c465b5ba6226b5fce1902a4b68097d26" category="doc">自定义Trident Protect安装</block>
-  <block id="f59f3d4c8cdf79dc43502eea9ff82e75" category="paragraph">您可以自定义Trident Protect的默认配置、以满足您环境的特定要求。</block>
   <block id="df0ecee897380da18617ddb170abdeb0" category="paragraph">以下示例配置文件显示了可用设置、并包含每个资源限制的默认值：</block>
   <block id="73d4542a63a157d0b7e3093eabec8fc9" category="section-title">自定义安全上下文约束</block>
-  <block id="d3b1c8ea61eed8a2b7579d4013d792b3" category="paragraph">安装Trident Protect后、您可以使用配置文件修改Trident Protect容器的OpenShift安全上下文约束(SCC)。这些限制为Red Hat OpenShift集群中的Pod定义了安全限制。</block>
   <block id="2708058a93672fbaa8bcf3e785e87b21" category="list-text">创建一个名为的文件<block ref="12cbdc8aa1f61a2cee8eff2b77c0e113" prefix=" " category="inline-code"></block>。</block>
   <block id="468f17ddccd3b34c0d539404233a5e45" category="list-text">将scc选项添加到文件中、然后根据环境的需要修改参数。</block>
   <block id="616d9e371ad293e03cb7d5ad25d66c80" category="paragraph">以下示例显示了SCC选项参数的默认值：</block>
@@ -4881,18 +4762,12 @@ SMB</block>
   <block id="c4ca4238a0b923820dcc509a6f75849b" category="cell">1</block>
   <block id="ee747b6b4f133aa926c072d073f4a8d5" category="list-text">应用文件中的值<block ref="12cbdc8aa1f61a2cee8eff2b77c0e113" prefix=" " category="inline-code"></block>：</block>
   <block id="54b43aeb73b3f5136e6febff4f374663" category="paragraph">此操作会将默认值替换为文件中指定的值<block ref="12cbdc8aa1f61a2cee8eff2b77c0e113" prefix=" " category="inline-code"></block>。</block>
-  <block id="19ac5903f95d5ebe1db017be54990f37" category="section-title">将Trident保护Pod限制为特定节点</block>
-  <block id="2c9025d65a10f87c581d792f629f0b40" category="paragraph">您可以使用Kubenetes nodeSelecte节点选择约束根据节点标签控制哪些节点有资格运行Trident Protect Pod。默认情况下、Trident Protect仅限于运行Linux的节点。您可以根据需要进一步自定义这些限制。</block>
   <block id="e131fc2359f1f35a2fdb476c3f19bfdd" category="list-text">创建一个名为的文件<block ref="7eec75c3fd904f84005cd47f3bed0e47" prefix=" " category="inline-code"></block>。</block>
   <block id="785a1066f4a7291f0bd0c65d4529e79f" category="list-text">将nodeSelector选项添加到文件中、然后修改文件以添加或更改节点标签、从而根据环境需求进行限制。例如、以下文件包含默认操作系统限制、但也针对特定区域和应用程序名称：</block>
   <block id="0b3a205b675b10deddbe1e4c76c36e22" category="list-text">应用文件中的值<block ref="7eec75c3fd904f84005cd47f3bed0e47" prefix=" " category="inline-code"></block>：</block>
   <block id="86ff3a8cca72a77f236198059cede1b6" category="paragraph">此操作会将默认限制替换为您在文件中指定的限制<block ref="7eec75c3fd904f84005cd47f3bed0e47" prefix=" " category="inline-code"></block>。</block>
-  <block id="b8c29704f9b86600d95c1c0c4d902455" category="list-text">使用Helm安装Trident Protect。替换<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block>为集群名称、此名称将分配给集群并用于标识集群的备份和快照：</block>
-  <block id="029d1c6e95e08907e4a8d285674ab46b" category="inline-link-macro">全局Trident保护冻结设置</block>
-  <block id="f0c05ba588826dcd6ebd5a2b3796d458" category="list-text">*。metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*:(_可 选_)此标注仅适用于从虚拟机定义的应用程序、例如在KubeVirt环境中、文件系统在快照之前冻结。指定此应用程序是否可以在快照期间写入文件系统。如果设置为true、则应用程序将忽略全局设置、并可在快照期间写入文件系统。如果设置为false、则应用程序将忽略全局设置、并且文件系统会在快照期间冻结。如果指定了此参数、但应用程序定义中没有虚拟机、则会忽略此标注。如果未指定，则应用程序将遵循<block ref="61895e61fe23c9afb5a69eafa8d9b7ba" category="inline-link-macro-rx"></block>。</block>
   <block id="1fdb8b98325df025bfd256fc475c0986" category="paragraph">如果您需要在创建应用程序后应用此标注、可以使用以下命令：</block>
   <block id="221764e612f482dbef981bc478028287" category="list-text">使用以下示例之一创建并应用应用程序定义、将括号中的值替换为您环境中的信息。您可以使用逗号分隔列表和示例中显示的参数在应用程序定义中包括名称和资源。</block>
-  <block id="50b08150a783c8c645d4ae11790366e3" category="paragraph">您可以选择在创建应用程序时使用标注来指定应用程序是否可以在快照期间写入文件系统。这仅适用于从虚拟机定义的应用程序、例如在KubeVirt环境中、文件系统在快照之前冻结。如果将标注设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，则应用程序将忽略全局设置，并可在快照期间写入文件系统。如果将其设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，则应用程序将忽略全局设置，并且文件系统会在快照期间冻结。如果使用标注、但应用程序定义中没有虚拟机、则会忽略标注。如果不使用标注，则应用程序将遵循<block ref="61895e61fe23c9afb5a69eafa8d9b7ba" category="inline-link-macro-rx"></block>。</block>
   <block id="26f08cf1da862c1ae831c562f3621d09" category="paragraph">要在使用命令行界面创建应用程序时指定标注、可以使用标志。<block ref="3164592cacced1f14eeb788e764306a8" prefix=" " category="inline-code"></block></block>
   <block id="1ab026b6049460749549c7e94872c903" category="list-text">创建应用程序并使用文件系统冻结行为的全局设置：</block>
   <block id="5c69fd9a5297da7a82e38395fe1ca096" category="list-text">创建应用程序并为文件系统冻结行为配置本地应用程序设置：</block>
@@ -4920,14 +4795,8 @@ SMB</block>
   <block id="aa9f056f37cdee5e5bcd47f7bc3ac1ba" category="list-text">创建手动执行挂钩运行请求：</block>
   <block id="42e563c466d27e9d4943ef1acd3703b7" category="list-text">检查执行挂钩运行的状态。您可以重复运行此命令、直到操作完成：</block>
   <block id="8430f2c56dfc9e79fcaf741392d54499" category="list-text">描述exech本 运行对象以查看最终详细信息和状态：</block>
-  <block id="b343abb76f62f4eef4afa255e885eee4" category="paragraph">从Trident 25.02开始、新增功能摘要提供了有关Trident和Trident Protect版本的增强功能、修复和弃用的详细信息。</block>
   <block id="4fc9faf161c64ed80d0fb8ca9aa0882e" category="admonition">根据所使用的数据移动工具、您只需包含该数据移动工具的相应密码即可。例如、如果您正在使用Restic、并且将来不打算使用KONIA、则在创建密钥时只能包含Restic密码。</block>
   <block id="6a346946ba0777d650b6e41a4c30c7b6" category="paragraph">确保已删除要删除的AppVault正在使用的所有快照和备份CRS。</block>
-  <block id="b00fc94596cde685c68e0bedddb72ec6" category="summary">您可以使用Kube-state-metrics和Prometheus监控Trident Protect资源的状态。这样、您就可以获得有关部署、节点和Pod的运行状况信息。</block>
-  <block id="9f496d568415fb10daa1a69c18a27d52" category="doc">监控Trident保护资源</block>
-  <block id="c3815bcedc348a572c0e7310d70e426d" category="paragraph">您可以使用Kube-state-metrics、Prometheus和智能管理器开源工具来监控受Trident Protect保护的资源的运行状况。</block>
-  <block id="57d16d79ebb62eb467b490200f5f3191" category="paragraph">Kube-state-metrics服务可通过Kuber-netes API通信生成指标。将其与Trident Protect结合使用可提供有关环境中资源状态的有用信息。</block>
-  <block id="0e68741139605975f01bc532098ea92c" category="paragraph">Prometheus是一个工具包、可用于读取由Kube-state-metrics生成的数据、并将其呈现为有关这些对象的易读信息。Kube-state-metrics和Prometheus共同为您提供了一种监控使用Trident Protect管理的资源的运行状况和状态的方法。</block>
   <block id="6d0450323deb4880d88d2da4155d7c76" category="paragraph">警报管理器是一项服务、可接收Prometheus等工具发送的警报、并将其路由到您配置的目标。</block>
   <block id="45501c075fe75338b712d61db6d82f54" category="paragraph">这些步骤中包含的配置和指导仅为示例；您需要对其进行自定义以符合您的环境。有关具体说明和支持、请参见以下官方文档：</block>
   <block id="d9bdb1d7869cec3eaa75aaa48b414845" category="inline-link">Kube-state-metrics 文档</block>
@@ -4937,7 +4806,6 @@ SMB</block>
   <block id="853d2b8407eda505e00a8014afdb0ddf" category="inline-link">记录</block>
   <block id="e23d8cb1d9d009a1aa298e95526efcd3" category="list-text"><block ref="e23d8cb1d9d009a1aa298e95526efcd3" category="inline-link-rx"></block></block>
   <block id="b246a1443f359b6da345c33e0b25f47a" category="section-title">第1步：安装监控工具</block>
-  <block id="08d75478cbb19385a09620acc4f7a148" category="paragraph">要在Trident Protect中启用资源监控、您需要安装和配置Kube-state-metrics、Prometus和智能管理器。</block>
   <block id="2a2c51a8db12ee75c90da4a3fb0e1a0b" category="section-title">安装Kube-state-metrics</block>
   <block id="016aa0f0550f5a0506cb61b61568e043" category="paragraph">您可以使用Helm安装Kube-state-metrics。</block>
   <block id="ea6a84ebff4515f07a0f260b7cce7b83" category="list-text">添加Kube-state-metrics Helm图表。例如：</block>
@@ -4945,7 +4813,6 @@ SMB</block>
   <block id="cf5cf09f9422112814f7fa967e303283" category="listing-title">metrics-config.yaml：Kube-state-metrics Helm图表配置</block>
   <block id="eca99dda7e2a747b75c232f5c3e314a0" category="list-text">通过部署Helm图表来安装Kube-state-metrics。例如：</block>
   <block id="1b61aa1e4c2991758aa9c5bea0047156" category="inline-link">Kube-state-metrics自定义资源文档</block>
-  <block id="6c21207c2c29ab5841100bb2ca67480f" category="list-text">按照中的说明配置Kube-state-metrics，以便为Trident Protect使用的自定义资源生成度量指标<block ref="0c2d96c77ebc80eb4f9df846c2904f4c" category="inline-link-rx"></block>。</block>
   <block id="88b8613d339947a37e41b1f514dcc42c" category="section-title">安装 Prometheus</block>
   <block id="6cfabcb4c640f9570382e21ec242a3c0" category="paragraph">您可以按照中的说明安装Prometheus<block ref="9c3dd7b31d363d10addc1dc55a338e01" category="inline-link-rx"></block>。</block>
   <block id="7d512717b3f318d83bbce6f09e891a6f" category="section-title">安装活动管理器</block>
@@ -4958,11 +4825,9 @@ SMB</block>
   <block id="917045fa08d9c44ee88951e8cdb4023b" category="section-title">警报示例：备份失败</block>
   <block id="e8665bc518bf7a6d63332be811e8f6cb" category="section-title">将警报管理器配置为向其他通道发送警报</block>
   <block id="c9272f0d68fac2055ba2d71be6c87b1b" category="paragraph">以下示例将配置警报管理器、以便向Sl延 时信道发送通知。要根据您的环境自定义此示例、请将此密钥的值替换<block ref="aa8106611bcfe43fec48e6d1d371de52" prefix=" " category="inline-code"></block>为您的环境中使用的Slackwebhook URL：</block>
-  <block id="792d490e884279c961aba837ccd9b67a" category="admonition">Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。</block>
   <block id="d110d36251c4dd04b7da5ef237ac6063" category="inline-link">文档</block>
   <block id="7491b3d3a4aa89a2dd6445477c6b6e0a" category="list-text">对于Amazon S3 (AWS) AppVault对象、您可以选择指定sSession令牌、如果使用单点登录(SSO)进行身份验证、则此令牌非常有用。此令牌是在中为提供程序生成密钥时创建的<block ref="cd932e77bb3df9634d58b2fd34398b6f" category="inline-xref-macro-rx"></block>。</block>
   <block id="620026f954fdad541c9d19554476345c" category="list-text">删除AppVault对象、替换<block ref="bf09cf3bd2a9288a0bdf3d1b89b770a1" prefix=" " category="inline-code"></block>为要删除的AppVault对象的名称：</block>
-  <block id="35d393329a969d87338f26cd6fe42238" category="list-text">使用Helm安装Trident Protect。替换<block ref="ecc79c99c4f86f0db5cc7f200415205f" prefix=" " category="inline-code"></block>为集群名称、此名称将分配给集群并用于标识集群的备份和快照：</block>
   <block id="c14fd2bf15bccb33c362aafa6a463f49" category="section-title">是否需要在ONTAP后端定义文件中同时定义管理和数据LIF？</block>
   <block id="7279808725b91afce38762e4e1a8108b" category="paragraph">管理LIF为必填项。DataLIF因情况而异：</block>
   <block id="adfb1f23733ff9ee458d139c1df9f86f" category="list-text">ONTAP NAS：NetApp建议指定<block ref="ea76b2438eb5996eb2c347e7341ed59a" prefix=" " category="inline-code"></block>。如果未提供此参数、则Trident将从SVM提取数据LIF。您可以指定要用于NFS挂载操作的完全限定域名(FQDN)、以便创建轮叫DNS来在多个dataLIF之间进行负载平衡。有关详细信息、请参见<block ref="879dc93198c7c5e8ce7148b6d1205d73" category="inline-link-macro-rx"></block></block>
@@ -4988,26 +4853,15 @@ SMB</block>
   <block id="a0c3ccd8e55dd8a4f5f5ad3a5269e331" category="admonition">如果您还没有熟悉<block ref="13aad4b6f98e790ff55e578921fa5ede" category="inline-link-macro-rx"></block>，现在是一个好时机。</block>
   <block id="f54758d5b91452d3103cc1017fa70d71" category="admonition">有关Kubnetes集群上Trident架构的详细信息，请参阅<block ref="2e4686c52a7aa47e7bc2aa3cfa953fbe" category="inline-link-macro-rx"></block>。</block>
   <block id="50a4fd89cedf0068776b972ce96fcceb" category="cell">用于使用 ONTAP REST API 的布尔参数。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为时<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，Trident使用ONTAP REST API与后端通信；设置为时<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，Trident使用ONTAPI (ZAPI)调用与后端通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block> 应用程序。预定义的和角色可以满足这一<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 要求<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> 。从Trident 24.06版和9.15.1 9.151或更高版本开始、默认情况下会<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>；更<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>改为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>以使用ONTAPI (ZAPI)调用。</block>
-  <block id="e516fe45e3db545de8d5d292a67f4990" category="list-text">为两个卷模式(文件和卷模式：块(原始设备)存储)增加了对KubeVirt / OpenShift虚拟化VM的备份和恢复支持。此支持与所有Trident驱动程序兼容、并可增强使用NetApp SnapMirror和Trident Protect复制存储时的现有保护功能。</block>
   <block id="fc1d748db1b5b488ce7af7d17ea15d55" category="inline-link-macro">软件版本支持</block>
-  <block id="1906137ea73af1894fec1becb00e0aee" category="summary">您可以找到一些出色的NetApp Trident和Trident Protect博客。</block>
-  <block id="0db80d8cadbd011f12ade006191e47b0" category="doc">Trident和Trident保护博客</block>
-  <block id="c5497cf98d8e6141ba38e1421502c2d4" category="paragraph">您可以在以下位置找到一些出色的NetApp Trident和Trident Protect博客：</block>
   <block id="897b6a6a21c73524107071aff80ed94e" category="inline-link-macro">解锁无缝iSCSI存储集成：适用于AWS的ROSA集群上的FSxN指南</block>
   <block id="6dc79a8e11fda729083bb4e518de411f" category="inline-link-macro">介绍Trident中的光纤通道支持</block>
-  <block id="767cfc132547de728a22c9fa992eabfc" category="section-title">Trident Protect博客</block>
   <block id="a706b02fe1ef4870ecc8b588cbe37989" category="inline-link-macro">为OpenShift虚拟化VM执行崩溃状态一致的备份和还原操作</block>
   <block id="938cab8cf5785dfe0cd9ba76b4cae8f0" category="list-text">2025年3月13日：<block ref="94b3904630a42c759a6ceb844d104a7a" category="inline-link-macro-rx"></block></block>
   <block id="20e2f4e6733d3ac5dd3cfb83506a2882" category="inline-link-macro">利用NetApp Trident将GitOps模式扩展到应用程序数据保护</block>
   <block id="ccd722b2b8950bc9aa2b92826dcc4664" category="list-text">2025年3月11日：<block ref="751073ae4d07c4adc8a15e872b137421" category="inline-link-macro-rx"></block></block>
   <block id="bc057a27d4d8047073d6f5fa802c9c2b" category="inline-link-macro">Trident 25.02：借助激动人心的新功能提升Red Hat OpenShift体验</block>
   <block id="fb68b473f5b70bc40e206ef882be4c63" category="list-text">2025年3月3日：<block ref="ce0fc75766d0530b76aaabf87dc1b463" category="inline-link-macro-rx"></block></block>
-  <block id="62ca59fefb174e2cae471bd3ff034f37" category="inline-link-macro">介绍Trident Protect基于角色的访问控制</block>
-  <block id="2471f7ea5ea7dad7f60b4ece1fab4a9f" category="list-text">2025年1月15日：<block ref="685287f953e60833f62fba2c623c4cb9" category="inline-link-macro-rx"></block></block>
-  <block id="4a685524952a84cef8685a87bb60f47a" category="inline-link">推出trdentctrd protect：适用于Trident Protect的强大命令行界面</block>
-  <block id="281486a8e7fd8f1c6bd6cf0c6bc7eba0" category="list-text">2024年11月11日：<block ref="b1528afdd7be1e71d2c311686269cf66" category="inline-link-rx"></block></block>
-  <block id="c0d721f6d5aa4d159e2f9890fab5bbee" category="inline-link-macro">Kubernetes驱动的数据管理：Trident Protect带来的新时代</block>
-  <block id="78ec91ade28d11ab9c3f53f543bba8d3" category="list-text">2024年11月11日：<block ref="46b2057fd4479a7d4462fb82adc6f54b" category="inline-link-macro-rx"></block></block>
   <block id="244fede3edf8f2ab57f281d777777961" category="list-text">*。spec.includedNamespaces*:(_required__)使用命名空间和标签选择器指定应用程序使用的命名空间和资源。应用程序命名空间必须属于此列表。标签选择器是可选的、可用于筛选每个指定命名空间中的资源。</block>
   <block id="cc8aa03bb88101c1901ab425b29a1901" category="list-text">*。spec.includedClusterScopedResources*:(_可 选_)使用此属性指定要包含在应用程序定义中的集群范围资源。此属性允许您根据资源的组、版本、种类和标签来选择这些资源。</block>
   <block id="eba6898a839f426c3106a97f94614eb9" category="list-text">*groupVersionKind*：(_required_)指定集群范围资源的API组、版本和类型。</block>
@@ -5159,9 +5013,7 @@ SMB</block>
   <block id="70694773feb2b23c45e7ff7a6a3c3c8b" category="paragraph">通过在文件中指定相应的配置、您可以将警报管理器配置为向其他通道发送通知、例如电子邮件、PagerDty、Microsoft团队或其他通知服务<block ref="9001eaececb0884cbeb80659e81340ad" prefix=" " category="inline-code"></block>。</block>
   <block id="965357e3c90ccf3fba01174c6508d562" category="listing-title">alertmanager.yaml：向 Slack 频道发送警报</block>
   <block id="02c19b7bc038d2af238bbd729bc3d9c4" category="list-text">手动创建 AppVault CR 时，使用 *spec.dataMoverPasswordSecretRef* 字段指定密钥。</block>
-  <block id="0a636ed0406fe1d7ddf9db59b32011b3" category="list-text">使用 Trident Protect CLI 创建 AppVault 对象时，使用<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block>参数来指定秘密。</block>
   <block id="d2a7dc5804ec844f3f7bfb903e97693f" category="section-title">S3 兼容存储 IAM 权限</block>
-  <block id="48f73146a4944adc8ee8fb44ba954d59" category="paragraph">当您访问与 S3 兼容的存储（例如 Amazon S3、Generic S3）时， <block ref="3d0b4c23d9ed62ec7d7cd16273ca2521" category="inline-link-rx"></block> ， 或者<block ref="3a31dfad8c316380b9a5542d694c5833" category="inline-link-rx"></block>使用 Trident 保护时，您需要确保您提供的用户凭证具有访问存储桶所需的权限。以下是一个策略示例，该策略授予使用 Trident 保护访问所需的最低权限。您可以将此策略应用于管理与 S3 兼容的存储桶策略的用户。</block>
   <block id="d9b7f314625fb7dcf35c741afe65b676" category="inline-link">Amazon S3 文档</block>
   <block id="46d663191f16f782a681e5f6702a09d4" category="list-text">对于所有 ONTAP 后端，Trident 要求至少将一个聚合分配给 SVM。</block>
   <block id="782b4a6bf31d7d564f002ed80e56a970" category="doc">数据移动器超时注释</block>
@@ -5195,7 +5047,6 @@ SMB</block>
   <block id="ab5807fb06fd654f730a4ed5a02bb950" category="paragraph">您可以将此标志设置为<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block>以实现持续完整备份、也可以<block ref="61df7cc86eb24ab1300f0e74e74bb50c" prefix=" " category="inline-code"></block>根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。例如、使用<block ref="d416cce9d6bcb838c8958b9fbb84dffa" prefix=" " category="inline-code"></block>计划在星期一和星期四进行完整备份。</block>
   <block id="396e0c641a3eb6083fa0ba7badcff8ac" category="admonition">确保回收策略设置为<block ref="f2a6c498fb90ee345d997f888fce3b18" prefix=" " category="inline-code"></block>从对象存储中删除所有备份数据。该策略的默认设置是<block ref="afece4245269582cb2f1009d4fb52047" prefix=" " category="inline-code"></block>以避免意外数据丢失。如果政策没有改变<block ref="f2a6c498fb90ee345d997f888fce3b18" prefix=" " category="inline-code"></block> ，备份数据将保留在对象存储中，需要手动删除。</block>
   <block id="28b0a2e1fa7af6d4a2a83bc61c130c0f" category="list-text">确保连接到集群的 NetApp 存储使用 Trident 24.02 或更新版本（建议使用 Trident 24.10）。</block>
-  <block id="089456655f37605dd109f3d8c7ece010" category="list-text">*NetApp Trident*：NetApp Trident 必须存在于使用 ONTAP 作为后端的源 Kubernetes 集群和目标 Kubernetes 集群上。Trident Protect支持使用以下驱动程序支持的存储类通过NetApp SnapMirror技术进行复制：</block>
   <block id="070b998f5495f2da2fb3ac5053772d1e" category="list-text"><block ref="8321592ce24c8a122ecf26a63cfca407" prefix="" category="inline-code"></block> ：NFS</block>
   <block id="48af35aa41f6c14dcd31a429e161cd45" category="list-text"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block> ：iSCSI</block>
   <block id="af09466318992e13530265625ea96e63" category="list-text"><block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix="" category="inline-code"></block> ：足球俱乐部</block>
@@ -5221,7 +5072,6 @@ SMB</block>
   <block id="bfc5a6b94bc23ccc51c85a2aa1cb71b4" category="paragraph">当使用 AppMirror 关系保护您的应用程序时，您应该在故障转移和反转操作期间注意与执行挂钩相关的特定行为。</block>
   <block id="3d11bc959173dddd2997400e7bdf4d67" category="list-text">在故障转移期间，执行挂钩会自动从源集群复制到目标集群。您无需手动重新创建它们。故障转移后，执行挂钩仍存在于应用程序中，并将在任何相关操作期间执行。</block>
   <block id="ba9dd6212c2e02686051fbf28e548584" category="list-text">在反向同步或反向重新同步期间，应用程序上所有现有的执行钩子都将被移除。当源应用程序成为目标应用程序时，这些执行钩子将失效，并会被删除以阻止其执行。</block>
-  <block id="98b9f287abe5860abcc3ab5364313188" category="paragraph">要了解有关执行钩子的更多信息，请参阅<block ref="d0f7adc5528355d3ba6ac91271095c29" category="inline-link-macro-rx"></block> 。</block>
   <block id="9399bd959f53d5a7d8671b597df92df2" category="paragraph">除了下面提供的计划外，建议创建一个单独的每日快照计划，保留期为 7 天，以便在对等 ONTAP 集群之间维护通用快照。这可确保快照最多可用 7 天，但保留期可根据用户需求自定义。</block>
   <block id="bd8250ba3a5ac73f1ca0ba8c92937c5a" category="paragraph">如果发生故障转移，系统可以使用这些快照最多 7 天进行反向操作。这种方法使反向过程更快、更高效，因为只会传输自上次快照以来所做的更改，而不是所有数据。</block>
   <block id="af22b57fbc1d302d6a0b83cb06ce9e6a" category="paragraph">如果应用程序的现有计划已经满足所需的保留要求，则不需要额外的计划。</block>
@@ -5386,7 +5236,6 @@ SMB</block>
   <block id="cbe74dc7c890979d924675df2fa27a35" category="list-text">增加了对 CSI 卷组快照的支持<block ref="ee21100dace47d83bcefcb7dea09cdd3" prefix=" " category="inline-code"></block>适用于 ONTAP-SAN iSCSI 驱动程序的卷组快照 Kubernetes API。请参阅。 <block ref="b136941d5c2c98d5e9ff86fd07e97048" category="inline-link-macro-rx"></block></block>
   <block id="674d1c5daba14e57bb12199e316a830d" category="list-text">为 ONTAP-NAS 和 ONTAP-NAS-Economy 卷添加了安全的 SMB 支持。ActiveDirectory 用户和组现在可以与 SMB 卷一起使用，以增强安全性。请参阅。 <block ref="4f989a35378d98430cb4c4899de0cc08" category="inline-link-macro-rx"></block></block>
   <block id="68e904dfe8bbc558c556cc39aaca54b6" category="list-text">增加了对使用 SnapMirror 对 NVMe 后端进行卷复制的支持。请参阅。 <block ref="0837d9a30d067376d83aa60bb79334f8" category="inline-link-macro-rx"></block></block>
-  <block id="afce633f05d99c109d2b0429ee891495" category="admonition">如果您从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在包含在 Trident Protect Helm 图表中。</block>
   <block id="b71ccf1062cee8c376a7eb37e3c42603" category="cell">启用LUKS加密。请参阅 <block ref="569f9f91cdcc19909b8acbf6f423daf7" category="inline-link-macro-rx"></block>。</block>
   <block id="af4e755c6284fa61e563c93320e97aaa" category="paragraph">Trident使用以下端口在 Kubernetes 内部进行通信：</block>
   <block id="ef46cb32ba76d79fbc7bfb7586fff578" category="list-text">确保您已升级到最新版本<block ref="452b142235e718663e27bc4f162c14ca" prefix=" " category="inline-code"></block> 。</block>
@@ -5422,8 +5271,6 @@ SMB</block>
   <block id="469a8897f90d7e07ede75ff9b199e586" category="inline-link-macro">使用Trident、GKE 和Google Cloud NetApp Volumes部署云身份</block>
   <block id="cb2e2f8e2789874710f34e485efc824e" category="list-text">2025年2月27日： <block ref="46c84c372fb557e16383c0494f1255f5" category="inline-link-macro-rx"></block></block>
   <block id="869493e7a782c2bac6bf8778d6bf749e" category="list-text">2024年12月12日： <block ref="5c3a9e150bc491524071eb191093dabe" category="inline-link-macro-rx"></block></block>
-  <block id="afd55df73a814282b1a34c79040d709a" category="inline-link-macro">Trident 25.01：通过新功能和增强功能增强 Kubernetes 存储体验</block>
-  <block id="13c401b1f27132099b945b95025ca748" category="list-text">2024年11月26日： <block ref="4a1bf3162dde1793089483cf7682fb86" category="inline-link-macro-rx"></block></block>
   <block id="0d5eeacaefc73b7986c8f85945c72129" category="inline-link-macro">NetApp Trident与Google Cloud NetApp Volumes</block>
   <block id="02104a16ef3fcf06a78872f4f5aea5d2" category="inline-link-macro">使用Trident在 AWS 上将Amazon FSx for NetApp ONTAP与 Red Hat OpenShift 服务 (ROSA) 结合使用</block>
   <block id="e2218d0205cdf02ed15039a9eb215920" category="list-text">2024年10月29日： <block ref="ecf88162cd631914aa447c7edeaa2e6e" category="inline-link-macro-rx"></block></block>
@@ -5435,20 +5282,12 @@ SMB</block>
   <block id="1c3ec9ce23b462e81e392f144f8c6527" category="list-text">2024年7月1日： <block ref="48908e9b9a4cb59db7244b631bf66632" category="inline-link-macro-rx"></block></block>
   <block id="c0575ecf088b36655f7a582773399ba0" category="inline-link-macro">ONTAP作为 OpenShift 中集成映像注册表的后端存储</block>
   <block id="fa465e5731c44ee6dc77398eecb4493d" category="list-text">2024年6月11日： <block ref="99a2855a4f47b1b3fc2dd744ecb3c177" category="inline-link-macro-rx"></block></block>
-  <block id="a35665637b8d8bcebbf303a7e9950cf2" category="inline-link-macro">使用Trident Protect 的恢复后钩子自动执行注册表故障转移以实现灾难恢复</block>
-  <block id="9eef003e4e8a5cd2654642dbf1806c35" category="list-text">2025年5月16日： <block ref="9c69f3b57e4c9e30a2d1dd0bbfc81eb9" category="inline-link-macro-rx"></block></block>
   <block id="351257ff03e16ff522106900a9f35e9e" category="inline-link-macro">使用NetApp Trident Protect 进行 OpenShift 虚拟化灾难恢复</block>
   <block id="cc48e904c9802b69a8760ed8f894b251" category="list-text">2025年5月16日： <block ref="a57e639cf15650353686ed7219eb274b" category="inline-link-macro-rx"></block></block>
-  <block id="a3bed2eca17a542318eff49566e65560" category="inline-link-macro">使用Trident进行存储类迁移保护备份和恢复</block>
-  <block id="95d102ffaff20709e445a0302dc9209b" category="list-text">2025年5月13日： <block ref="9965527798b3d27a2b7fb71617212405" category="inline-link-macro-rx"></block></block>
-  <block id="c00f8563a4e3023d2ff83b5b26a91edc" category="inline-link-macro">使用Trident保护恢复后钩子重新扩展 Kubernetes 应用程序</block>
-  <block id="a3ca851cebfd3307178076015c1cb876" category="list-text">2025年5月9日： <block ref="ee88df603de21180a12f2f1bbd1e61b2" category="inline-link-macro-rx"></block></block>
   <block id="8f18e786e2a2dd5d70390afe4c75e024" category="inline-link-macro">Trident Protect 升级：Kubernetes 复制保护与灾难恢复</block>
   <block id="ae7986fef0bfa9c9a4f730ee6bb5e0ac" category="list-text">2025年4月3日： <block ref="4ca932fa6234c864106756a287da48ac" category="inline-link-macro-rx"></block></block>
   <block id="9c292a7d893942317e3d566cb6f6776c" category="paragraph">在应用程序上执行数据保护操作时，您需要手动或从命令行创建 AppVault CR。AppVaultCR 特定于您的环境，您可以使用本页上的示例作为创建 AppVault CR 的指南。</block>
-  <block id="e83cbbd4be53e68f06264e1522860ce6" category="admonition">确保 AppVault CR 位于安装了Trident Protect 的集群上。如果 AppVault CR 不存在或您无法访问，命令行会显示错误。</block>
   <block id="05e673132e6ddc1f638835fcde244ff1" category="paragraph">在创建 AppVault CR 之前，请确保您选择的 AppVault 和数据移动器可以向提供商和任何相关资源进行身份验证。</block>
-  <block id="2c2d23c6647059f96e585a1174a5c975" category="paragraph">使用 CR 或Trident Protect CLI 插件创建 AppVault 对象时，您可以指定一个 Kubernetes 密钥，并使用自定义密码进行 Restic 和 Kopia 加密。如果您未指定密钥， Trident Protect 将使用默认密码。</block>
   <block id="1850a20880f300b00b10477bfcbd6087" category="list-text">请将密码保存在安全的地方。您将需要它来还原同一集群或其他集群上的数据。如果集群或<block ref="9a82c7a4099124e5bfaa83e7c5997bd4" prefix=" " category="inline-code"></block>命名空间被删除后，没有密码您将无法恢复备份或快照。</block>
   <block id="9509f036573c9b78acc044938588f7c4" category="paragraph">以下示例命令安装Trident EKS 附加组件：<block ref="f235325f054788c50b512241d68cb329" prefix=" " category="inline-code"></block> （附专用版本）</block>
   <block id="cedb5a7bb4fc5e3e014ce0b58a3d5095" category="cell">iSCSI经济型</block>
@@ -5465,11 +5304,7 @@ SMB</block>
   <block id="c76231732eebaec2e2411ed7cfd30e2c" category="list-text">连字符<block ref="336d5ebc5436534e61d16e63ddfca327" prefix=" " category="inline-code"></block></block>
   <block id="e2cc5e54cd44b8315b1324dec48b3d79" category="paragraph">您可以通过恢复备份数据在集群之间或不同的存储类之间迁移您的应用程序。</block>
   <block id="259898c4a16b145b9fb12c18949c2e58" category="paragraph">您可以通过将备份还原到目标存储类，将应用程序从一个存储类迁移到另一个存储类。</block>
-  <block id="b34476802a6b2dff98e6f97e309970b2" category="inline-link-macro">使用高级Trident保护恢复设置</block>
-  <block id="22d9eb2f3982698c6f5c93edae216a51" category="list-text">您可以使用高级设置来自定义恢复操作。要了解更多信息，请参阅<block ref="80b4b5e2c832cc4fcff1f69711f1c808" category="inline-link-macro-rx"></block>。</block>
-  <block id="3efe6f70bb45e527ed991c55df7d621d" category="admonition">当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block>有关您可以配置的选项的更多信息。使用<block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>命令以获取有关使用Trident Protect CLI 指定注释的更多信息。</block>
   <block id="15910dd29963e5df5f2b5879472bcc00" category="admonition">SnapshotRestore 支持<block ref="b57d666629acffb30cc697faadc136b5" prefix=" " category="inline-code"></block>属性，但仅当源和目标存储类使用相同的存储后端时。如果您尝试恢复到<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block>如果使用不同的存储后端，则恢复操作将失败。</block>
-  <block id="4c2451a6dd1d1ce7a84476069f101573" category="summary">您可以使用注释、命名空间设置和存储选项自定义Trident保护恢复操作。</block>
   <block id="3fbccf21ba46fe754417d45e7396e0e4" category="paragraph">您可以使用高级设置（例如注释、命名空间设置和存储选项）自定义恢复操作，以满足您的特定要求。</block>
   <block id="52391deb129507aac52d6fb22aaf137c" category="section-title">支持的字段</block>
   <block id="c87f7398b288400e3d2c984a3d997d7b" category="paragraph">本节介绍可用于恢复操作的其他字段。</block>
@@ -5499,7 +5334,6 @@ SMB</block>
   <block id="b94d4c5305d8d32a875a24a5b1501274" category="admonition">对于使用SolidFire的客户，请不要升级到 25.06.1，因为取消发布卷时存在已知问题。  25.06.2 即将发布以解决此问题。</block>
   <block id="4011c398b0ff3b95197b4f4713f3216e" category="list-text">使用<block ref="defd1e55f93269ac9278afc086951ba8" prefix=" " category="inline-code"></block>命令和更新的路径<block ref="9c15d32711e9ef8c6f76deda35452e13" prefix=" " category="inline-code"></block>文件。</block>
   <block id="f05848de69e82db6963b7b9c5322a67f" category="paragraph">*例子*：<block ref="7aa76d5ff854a67029ba30d1a11e1e53" prefix=" " category="inline-code"></block></block>
-  <block id="0884919e7c7d4a1981b4419350c63124" category="paragraph">Trident Protect 使管理员能够生成包含对NetApp支持有用的信息的捆绑包，包括有关所管理的集群和应用程序的日志、指标和拓扑信息。如果您已连接到互联网，则可以使用自定义资源 (CR) 文件将支持包上传到NetApp支持站点 (NSS)。</block>
   <block id="b8331cd182c8a703fc1ad6851d01da14" category="list-text">填充后<block ref="699c503b46d4ca3ec78905dff3704cac" prefix=" " category="inline-code"></block>具有正确值的文件，应用 CR：</block>
   <block id="a2a6b0573b13313f05c747e88489eec6" category="section-title">监视和检索支持包</block>
   <block id="4ff0609d2c162c23c5b740871050dda7" category="paragraph">使用任一方法创建支持包后，您可以监视其生成进度并将其检索到本地系统。</block>
@@ -5520,7 +5354,6 @@ SMB</block>
   <block id="299fb00578f305c7fc8cabf601fd1c80" category="list-text">2025年8月19日：<block ref="e5b6bdace6eea699ef0d8738f7d6c354" category="inline-link-macro-rx"></block></block>
   <block id="a21cecd213989d401167ec6cfba8d998" category="list-text">2024年11月11日： <block ref="daed3e0cfbeb06368e36167c5fc4f468" category="inline-link-macro-rx"></block></block>
   <block id="dcae39a3bdbd6a2685507ccc14623d62" category="list-text">将 Prometheus ServiceMonitor CRD 应用到集群：</block>
-  <block id="e95fc483374f2aa2997fb27e7235f723" category="list-text">确保您的本地环境在运行<block ref="f9adf231483d5dde9cfc10a610b748d3" prefix=" " category="inline-code"></block>命令。如果网络限制阻止访问，请从目标集群上的 pod 内运行Trident Protect CLI。</block>
   <block id="710d51eba716c95765550f52a1c4fd61" category="cell"><block ref="4aff31f193e6ea4df2a1c4f841bad5d6" prefix="" category="inline-code"></block></block>
   <block id="68087b4c898b9466dc989d8086e173dc" category="cell">覆盖大多数 Kubernetes API 操作的默认 180 秒超时（如果非零，则以秒为单位）。</block>
   <block id="bd3dd99c8eae44e2ae2bfc8f00dc3db0" category="cell"><block ref="045117b0e0a11a242b9765e79cbf113f" prefix="" category="inline-code"></block></block>
@@ -5529,14 +5362,12 @@ SMB</block>
   <block id="ebc465247274e830568c785a604321aa" category="paragraph">Kubernetes 操作超时。</block>
   <block id="487b75b94dd20a59c7005f9de6a6c4a0" category="admonition">这<block ref="d5276bb17ae062102e883a18454c2f1b" prefix=" " category="inline-code"></block>参数仅适用于Trident安装。</block>
   <block id="0784343c721b59e3c2426a1b76297982" category="admonition">这<block ref="b958a6de9ca123713491252f2ab02f59" prefix=" " category="inline-code"></block>参数仅适用于Trident安装。</block>
-  <block id="5db3625cb782a771bf36efc4994a8da5" category="section-title">配置其他Trident保护 Helm Chart 设置</block>
   <block id="a7532dec52b4d581a8873a3048e6e181" category="paragraph">您可以自定义AutoSupport设置和命名空间过滤以满足您的特定要求。下表描述了可用的配置参数：</block>
   <block id="1fceae4a3c0d1966481601a7ac4d1f83" category="cell">自动支持代理</block>
   <block id="d93069a68fb6f0fccb979fdae4a99614" category="cell">为NetApp AutoSupport连接配置代理 URL。使用此功能通过代理服务器路由支持包上传。例子：<block ref="3753b9fc3cbe6d0d91c7b449cad0b465" prefix=" " category="inline-code"></block> 。</block>
   <block id="c692f16bd0ca5b695511534a2e1eebfb" category="cell">自动支持.不安全</block>
   <block id="ecf5fdf2786d609376e95f541c7dcdfa" category="cell">设置为时跳过AutoSupport代理连接的 TLS 验证<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。仅用于不安全的代理连接。  （默认：<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> )</block>
   <block id="4dd202185370b5db00de876ba19c1bd1" category="cell">自动支持已启用</block>
-  <block id="5d75e627a269bd09b3b5ebef5a7bf257" category="cell">启用或禁用每日Trident保护AutoSupport捆绑包上传。当设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，计划的每日上传已被禁用，但您仍然可以手动生成支持包。  （默认：<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> )</block>
   <block id="22416353aff9ef4322e1ee858f418ae4" category="cell">恢复跳过命名空间注释</block>
   <block id="a91c3b0476974e9ec186952f05c189f1" category="cell">要从备份和恢复操作中排除的命名空间注释的逗号分隔列表。允许您根据注释过滤命名空间。</block>
   <block id="8028cf835d9b72ff2d6f835934c25568" category="cell">restoreSkipNamespaceLabels</block>
@@ -5551,12 +5382,8 @@ SMB</block>
   <block id="b3d3f9a2121425d368b2e48af67d611a" category="list-text">集群管理员：确保已建立适当的 RBAC，以授予目标命名空间所有者在目标命名空间中创建 TridentVolumeReference CR 的权限<block ref="6fde1ba4470caca933058264dbfdea2e" prefix="(" category="inline-code"></block>）。</block>
   <block id="74e502e81d780e5b5d204969a0d44635" category="list-text">*集群管理员：*确保已建立适当的 RBAC，以授予目标命名空间所有者在目标命名空间中创建 TridentVolumeReference CR 的权限。</block>
   <block id="955d6e7ec20d5d3fcf83f82552f7d6e0" category="section-title">用于 Amazon S3（AWS）身份验证的 EKS Pod Identity</block>
-  <block id="67165804f666601e4155d69a62d46a7d" category="paragraph">Trident Protect 支持 EKS Pod Identity 进行 Kopia 数据移动器操作。此功能可实现对 S3 存储桶的安全访问，而无需将 AWS 凭证存储在 Kubernetes 机密中。</block>
-  <block id="3c0f2c9a4c9b9d63ff7db27d3c3732d2" category="paragraph">*带有Trident保护的 EKS Pod Identity 的要求*</block>
-  <block id="e674398aa14fe057d6f89aae4be1955a" category="paragraph">在使用带有Trident保护的 EKS Pod Identity 之前，请确保以下事项：</block>
   <block id="6aa9f6ea95e8a0a226da6a3727f18bb1" category="list-text">您的 EKS 集群已启用 Pod Identity。</block>
   <block id="ecadca4297640c38809298ae5d418fff" category="list-text">您已创建具有必要的 S3 存储桶权限的 IAM 角色。要了解更多信息，请参阅<block ref="d40f70e9b63b2ee09271e4f02ea6bf6d" category="inline-link-macro-rx"></block>。</block>
-  <block id="af030ad9c72e341fd6b3331215a88c19" category="list-text">IAM 角色与以下Trident保护服务帐户相关联：</block>
   <block id="5b71e41c96f404db1afa2e12eecd6500" category="list-text"><block ref="91bb592c84ad55997a90ac08be4392a4" prefix="" category="inline-code"></block></block>
   <block id="1aa00347a52b15ca93b318123bc06e86" category="list-text"><block ref="f7466ebc5710cc1f7aebdb3c2347f9e6" prefix="" category="inline-code"></block></block>
   <block id="7a9c1f2789b528ff73c69693fde3ecba" category="list-text"><block ref="12cb7c67caac3126c1f43145ffe66ca6" prefix="" category="inline-code"></block></block>
@@ -5592,7 +5419,6 @@ SMB</block>
   <block id="16220401716289e6ffa12bfc49da1d84" category="paragraph">备份和快照计划的示例 YAML：</block>
   <block id="ce230d4d200ba39549537496edaaef6a" category="paragraph">仅快照计划的示例 YAML：</block>
   <block id="19c776919085070d66d199dd494adbbf" category="paragraph">对于仅快照计划，设置<block ref="39c61d5d6dee0f5540cfcb77307edd90" prefix=" " category="inline-code"></block>并指定一个大于 0 的值<block ref="2c3fac80fc69264c6dbace5f18065639" prefix=" " category="inline-code"></block>。</block>
-  <block id="1991a9f25a93e75eb693b6e02bc130ed" category="list-text">Trident保护备份仅支持 Linux 计算节点。  Windows 计算节点不支持备份操作。</block>
   <block id="aff5adfa33a9913ad2ab5d578c3f08c8" category="cell">“300”</block>
   <block id="9d397fb20eca1ebda087637e32a30a7b" category="cell">“1000”</block>
   <block id="c58ac3825b86aa7d2974a07f7fa6034e" category="cell"><block ref="ddb26827be8b4407890c3c9d97a1cfaa" prefix="" category="inline-code"></block></block>
@@ -5656,12 +5482,6 @@ SMB</block>
   <block id="7cf94358f605f1f7e8dbc9526c3af907" category="cell">trident.netapp.io/skipRecoveryQueue</block>
   <block id="fd94acda3d48b098f39b5364b959552d" category="cell">跳过恢复队列</block>
   <block id="7ea9fc727097fba59345a8e9de8695fa" category="cell">ontap-nas、ontap-nas-economy、ontap-nas-flexgroup、ontap-san、ontap-san-economy</block>
-  <block id="adaf860b162537ccd86468e316749804" category="admonition">执行恢复或故障转移操作时，任何命名空间注释和标签都将生效。<block ref="22416353aff9ef4322e1ee858f418ae4" prefix=" " category="inline-code"></block> 和<block ref="8028cf835d9b72ff2d6f835934c25568" prefix=" " category="inline-code"></block> 不参与恢复或故障转移操作。确保在初始 Helm 安装期间配置这些设置。欲了解更多信息，请参阅 <block ref="bfb3a58fb131a21fe676fab0dd0dcdbd" category="inline-link-macro-rx"></block>。</block>
-  <block id="8930d6311ad94f452526952640346942" category="admonition">有关其他 Helm Chart 配置选项，包括AutoSupport设置和命名空间过滤，请参阅 <block ref="ef9a5a0ef1ff08e1895ead252257abfa" category="inline-link-macro-rx"></block>。</block>
-  <block id="9ebca76480e7cf25363aaaa813bb802a" category="paragraph">Trident Protect 在数据保护操作期间为 KubeVirt 虚拟机提供文件系统冻结和解冻功能，以确保数据一致性。虚拟机冻结操作的配置方法和默认行为在Trident Protect 版本之间有所不同，较新的版本通过 Helm chart 参数提供了简化的配置。</block>
-  <block id="a035d6e03ab533c99f66d3c92345f9d1" category="example-title">Trident Protect 25.10 及更新版本</block>
-  <block id="7f9bd6620cf25b0e8ebca614466ae961" category="paragraph">Trident Protect 在数据保护操作期间自动冻结和解冻 KubeVirt 文件系统，以确保一致性。从Trident Protect 25.10 开始，您可以使用以下方法禁用此行为：<block ref="f9e1922095ec0e9e8b4f185586e66425" prefix=" " category="inline-code"></block> Helm Chart 安装过程中的参数。该参数默认启用。</block>
-  <block id="c1d390d39e4519cece58a30c11f5179a" category="example-title">Trident保护 24.10.1 至 25.06</block>
   <block id="3fb1fa434932281b37117e0b0718830d" category="paragraph">如果您运行的不是Trident 25.10 版本，则可以根据以下信息获取先前版本的文档：<block ref="6d47e9235a19453f00cf246917b9e162" category="inline-link-macro-rx"></block> 。</block>
   <block id="2f2d18de2d892d2628bd1d6072de9b16" category="inline-link">Trident25.06</block>
   <block id="9266010dfc4c6c6414f01708ce347cc8" category="list-text"><block ref="9266010dfc4c6c6414f01708ce347cc8" category="inline-link-rx"></block></block>
@@ -5741,7 +5561,6 @@ SMB</block>
   <block id="9ffffe599d0bc4659e6c0f79801fcaae" category="cell">指定安排完整备份的规则。你可以将其设置为<block ref="f9f90eeaf400d228facde6bc48da5cfb" prefix=" " category="inline-code"></block>您可以根据需要进行持续完整备份或自定义备份。例如，如果您选择按日粒度进行备份，则可以指定应进行完整备份的星期几（例如，<block ref="1f27587ff587afb7a193caa147250c69" prefix=" " category="inline-code"></block> ）。</block>
   <block id="b01a80a674fe93ad98089e11a51fcea9" category="cell">未设置（所有备份均为增量备份）</block>
   <block id="b5e51a86f312c3ccd69b085ad9c3dbe0" category="cell">等待新创建的持久卷声明 (PVC) 到达的最大时间（以秒为单位）<block ref="685d1f2146dd079015e81918414e8971" prefix=" " category="inline-code"></block>操作失败前的阶段。适用于所有恢复 CR 类型（备份恢复、备份就地恢复、快照恢复、快照就地恢复）。如果您的存储后端或集群经常需要更多时间，请使用更高的值。</block>
-  <block id="2fccf9a4820d5ebf8befdd5f3438a9d6" category="list-text">对于私有镜像仓库安装，请确保目标版本所需的 Helm Chart 和镜像在您的私有镜像仓库中可用，并验证您的自定义 Helm 值与新 Chart 版本兼容。更多信息，请参阅<block ref="0e0e882ab2e1ab4e37b13bef355f10d8" category="inline-link-macro-rx"></block>。</block>
   <block id="f5c80bb44fdac7820c81d85638ff23d1" category="admonition">您可以通过添加以下内容来配置升级期间的日志级别。<block ref="96bd1ee7f33c1d6baf0aad13f7a31974" prefix=" " category="inline-code"></block>升级命令。默认日志级别为<block ref="1ea4c3ab05ee0c6d4de30740443769cb" prefix=" " category="inline-code"></block>。建议启用调试日志记录进行故障排除，因为它可以帮助NetApp支持人员诊断问题，而无需更改日志级别或重现问题。</block>
   <block id="e66afc6581b6aeabf935a293dcce9e57" category="summary">使用此处列出的信息，通过Trident自动实现有状态应用程序的故障转移。</block>
   <block id="5b0090ac65d6251e38985b2f3a62a716" category="paragraph">Trident 的强制分离功能允许您自动将卷从 Kubernetes 集群中不健康的节点分离，从而防止数据损坏并确保应用程序的可用性。此功能在节点无响应或因维护而离线的情况下特别有用。</block>
@@ -5829,7 +5648,6 @@ SMB</block>
   <block id="d2583dd4ccd2bddbfb497981b5f2f808" category="cell">ontap-nas、ontap-nas-economy、ontap-nas-flexgroup、ontap-san、ontap-san-economy、solidfire-san、azure-netapp-files</block>
   <block id="2da75969ae2c50dfcc7a3458269b1f39" category="paragraph">存储池代表每个后端可用于配置的不同位置。对于ONTAP而言，这些对应于 SVM 中的聚合。对于NetApp HCI/ SolidFire，这些对应于管理员指定的 QoS 频段。每个存储池都有一组独特的存储属性，这些属性定义了其性能特征和数据保护特征。</block>
   <block id="9d5a9690e203a91236d7cd904141669f" category="section-title">25.10 版本新增内容</block>
-  <block id="0886e5b088dd36454fbf1743b9786266" category="paragraph">了解Trident和Trident Protect 的新特性，包括增强功能、修复和弃用。</block>
   <block id="bf2cad21c17e517de15898a65bd88f1e" category="list-text">除了ONTAP -SAN（iSCSI 和 FC）驱动程序之外，还为ONTAP-NAS NFS 和ONTAP -SAN-Economy 驱动程序添加了对 CSI 卷组快照的支持，v1beta1 卷组快照 Kubernetes API。看<block ref="b136941d5c2c98d5e9ff86fd07e97048" category="inline-link-macro-rx"></block>。</block>
   <block id="56f5bb963efe48d3888916499768c7d6" category="list-text">增强Trident节点并发性，以提高 FCP 卷节点操作的可扩展性。</block>
   <block id="06b45a58a51e7373d67a23e9559f7c66" category="list-text">为ONTAP NAS 驱动程序添加了ONTAP AFX 支持。看<block ref="3da83682cd332597e99e50fecca154d7" category="inline-link-macro-rx"></block>。</block>
@@ -5971,4 +5789,184 @@ SMB</block>
   <block id="da9889ca93f8b399ea30566497c29a3e" category="list-text">自定义卷名称仅与ONTAP本地驱动程序兼容。</block>
   <block id="c45320b69becc7810ef088c7d038c27a" category="list-text">仅对以下情况支持自定义标签：<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>，<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>， 和<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 司机。</block>
   <block id="a9703a3dbb920f8f87b7d3293e2e0831" category="list-text">自定义卷名称不适用于现有卷。</block>
+  <block id="94d4a30d9c79c7c0ed251e92efa4cf7e" category="paragraph">Trident Protect 在数据保护操作期间为 KubeVirt 虚拟机提供文件系统冻结和解冻功能，以确保数据一致性。虚拟机冻结操作的配置方法和默认行为在Trident Protect 的不同版本中有所不同，较新的版本通过 Helm chart 参数提供了简化的配置。</block>
+  <block id="d7a7411094ef8b2d0700b0d64c688766" category="example-title">Trident Protect 25.10 及更新版本</block>
+  <block id="bef8e5378f20989a496a5caac68e7dc0" category="paragraph">Trident Protect 在数据保护操作期间自动冻结和解冻 KubeVirt 文件系统，以确保一致性。从Trident Protect 25.10 开始，您可以使用以下方法禁用此行为：<block ref="f9e1922095ec0e9e8b4f185586e66425" prefix=" " category="inline-code"></block> Helm Chart 安装过程中的参数。该参数默认启用。</block>
+  <block id="e8ac8c64b628b92773c6f939fe2b1102" category="example-title">Trident Protect 24.10.1 至 25.06</block>
+  <block id="a099f4b5b32bb2a3c98bf39fd2eada0d" category="paragraph">从Trident Protect 24.10.1 开始， Trident Protect 会在数据保护操作期间自动冻结和解冻 KubeVirt 文件系统。您也可以使用以下命令禁用此自动行为：</block>
+  <block id="ea7f18044a9efb2ea47bdd370e5870f3" category="example-title">Trident Protect 24.10</block>
+  <block id="98d3ce5c789124fc9207b48d4d1e8fc7" category="paragraph">Trident Protect 24.10 在数据保护操作期间不会自动确保 KubeVirt VM 文件系统的一致性状态。如果您想使用Trident Protect 24.10 保护您的 KubeVirt VM 数据，则需要在执行数据保护操作之前手动启用文件系统的冻结/解冻功能。这样可以确保文件系统处于一致状态。</block>
+  <block id="5ea5c247812e1dca5ff02ca853f05032" category="paragraph">您可以配置Trident Protect 24.10 来管理数据保护操作期间 VM 文件系统的冻结和解冻。<block ref="e0dd4c4b8aa16596df6c3f5cb36d3cdc" category="inline-link-macro-rx"></block>然后使用以下命令：</block>
+  <block id="59f713e31282fe744caf06335d891f9a" category="inline-link-macro">配置其他Trident Protect 舵图设置</block>
+  <block id="98b806d92f2e28da541021a181de980f" category="admonition">执行恢复或故障转移操作时，任何命名空间注释和标签都将生效。<block ref="22416353aff9ef4322e1ee858f418ae4" prefix=" " category="inline-code"></block> 和<block ref="8028cf835d9b72ff2d6f835934c25568" prefix=" " category="inline-code"></block> 不参与恢复或故障转移操作。确保在初始 Helm 安装期间配置这些设置。欲了解更多信息，请参阅 <block ref="647ed99900e7ff1307ad7b7cec525a2c" category="inline-link-macro-rx"></block>。</block>
+  <block id="d65eac563b898cb7e41b8853a4fe1a3c" category="paragraph">如果您使用 Helm 安装了源应用程序，<block ref="cc1f5c1d16e33b8463c9ee27295cd5df" prefix=" " category="inline-code"></block>国旗，给予特殊待遇<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>标签键。在恢复或故障转移过程中， Trident Protect 会将此标签复制到目标命名空间，但如果源命名空间的值与源命名空间的值匹配，则会将值更新为目标命名空间的值。如果此值与源命名空间不匹配，则会将其复制到目标命名空间，而不做任何更改。</block>
+  <block id="2cb1c3616d5b69db8670e7040d8b858f" category="admonition">Trident Protect 会自动选择一些资源，因为它们与您选择的资源存在关联。例如，如果您选择持久卷声明资源并且它有一个关联的 pod， Trident Protect 还会恢复关联的 pod。</block>
+  <block id="17c507c96af0d4930d7ac2524e3a8acd" category="summary">您可以找到一些很棒的NetApp Trident和Trident Protect 博客。</block>
+  <block id="5a2bfc6e50f399c48eab6faf10a936b5" category="doc">Trident和Trident Protect 博客</block>
+  <block id="a379165e52bcf191b35cd8f667084f8b" category="paragraph">您可以在这里找到一些很棒的NetApp Trident和Trident Protect 博客：</block>
+  <block id="578bed20f2bcf30122be983c8ce6db25" category="section-title">Trident Protect博客</block>
+  <block id="824b24caca137b6e7945137aa9d8f586" category="inline-link-macro">利用Trident Protect 的恢复后钩子实现注册表故障转移的自动化，以进行灾难恢复</block>
+  <block id="6d36c1f345cef80083542e771027df24" category="list-text">2025年5月16日：<block ref="222214dff1838a6a01ed98ff4a8282b3" category="inline-link-macro-rx"></block></block>
+  <block id="0fab9671fe897fb9ef3bdbca36b49c71" category="inline-link-macro">使用Trident Protect 备份和恢复进行存储类迁移</block>
+  <block id="b3ffb1f04461024c29e35bb953531d81" category="list-text">2025年5月13日：<block ref="735f3c24f5b29e94acabd21a58785df0" category="inline-link-macro-rx"></block></block>
+  <block id="50b1e99149398e4544ef6941270243a2" category="inline-link-macro">使用Trident Protect 恢复后钩子重新扩展 Kubernetes 应用程序</block>
+  <block id="4d3f50a0bb8d0aa06198251d243a610f" category="list-text">2025年5月9日：<block ref="8bf4497e25dfb1d363a51c8a1225e8b2" category="inline-link-macro-rx"></block></block>
+  <block id="51cbce14d33c240dcce6264e624cc50c" category="inline-link-macro">隆重推出Trident Protect 基于角色的访问控制</block>
+  <block id="6160324dcfbbd61773bc180e8a31deb7" category="list-text">2025年1月15日：<block ref="081a62f4f9eb4d3386a2721283573d9c" category="inline-link-macro-rx"></block></block>
+  <block id="182ea97ce927399855cdcfbb500fd3b5" category="inline-link">隆重推出 tridentctl protect： Trident Protect 的强大命令行界面</block>
+  <block id="8e71d16338d786f6825af5e4b954c0cc" category="list-text">2024年11月11日：<block ref="b1b53e288de7dce6fe2cc1c6406062ed" category="inline-link-rx"></block></block>
+  <block id="9f2c55992b2b50b1d922c2d01e878ff7" category="inline-link-macro">Kubernetes驱动的数据管理： Trident Protect开启新时代</block>
+  <block id="0e7954c659c3ab1217994a58581a985d" category="list-text">2024年11月11日：<block ref="a4680749fd618f0f08eaefc023a6637d" category="inline-link-macro-rx"></block></block>
+  <block id="3e08b68951a9cc47f14998b092350bbb" category="inline-link">使用Trident Protect 保护应用程序</block>
+  <block id="a12844efcfbf8005da28d423b66fbc21" category="paragraph">从使用 Restic 创建的 Amazon S3 备份中恢复 30GB 或更大的文件时，恢复操作可能会失败。作为变通方法，可以使用 Kopia 作为数据移动工具备份数据（Kopia 是备份的默认数据移动工具）。请参阅<block ref="8ad9bc2d5e7eb4a82f2f28b944c3ba3a" category="inline-link-rx"></block>以获取说明。</block>
+  <block id="186ed0696d9f28961b696fce39a1ab04" category="summary">Trident Protect 使您能够使用Trident保护您的应用程序和应用程序数据。</block>
+  <block id="a1fc1c89153021eb03a34941e90a9ac8" category="doc">了解Trident Protect</block>
+  <block id="8e5dd4e5adac56cea1dc2d33ce1fb16d" category="paragraph">NetApp Trident Protect 提供高级应用程序数据管理功能，增强了由NetApp ONTAP存储系统和NetApp Trident CSI 存储供应器支持的有状态 Kubernetes 应用程序的功能和可用性。 Trident Protect 简化了跨公有云和本地环境的容器化工作负载的管理、保护和迁移。它还通过其 API 和 CLI 提供自动化功能。</block>
+  <block id="f8c19139074cb59a75b44d606c717f8c" category="paragraph">您可以通过创建自定义资源 (CR) 或使用Trident Protect CLI 来使用Trident Protect 保护应用程序。</block>
+  <block id="f75cefaa6253f6baec3b37a877190d58" category="paragraph">您可以先了解Trident Protect 的相关要求，然后再进行安装：</block>
+  <block id="a36c33156a01492f882621b3d9439e19" category="inline-link-macro">Trident保护要求</block>
+  <block id="e729e17d911612e1e8443312aeca41bc" category="list-text"><block ref="e729e17d911612e1e8443312aeca41bc" category="inline-link-macro-rx"></block></block>
+  <block id="9576ee16383bba42a76a1c5c4fba3610" category="summary">Trident Protect 使用 Kubernetes 的基于角色的访问控制 (RBAC) 模型。您可以使用Trident Protect RBAC 功能来更精细地控制对资源的访问。</block>
+  <block id="ed335c13bb78e208d86e5f041a062d77" category="doc">管理Trident Protect 授权和访问控制</block>
+  <block id="53f246f5b6c5c9527af81e004a5465cb" category="paragraph">Trident Protect 使用 Kubernetes 的基于角色的访问控制 (RBAC) 模型。默认情况下， Trident Protect 提供一个系统命名空间及其关联的默认服务帐户。如果您的组织拥有众多用户或特定的安全需求，则可以使用Trident Protect 的 RBAC 功能来更精细地控制对资源和命名空间的访问。</block>
+  <block id="35f04ac444c4730f0b010b0b00905ab3" category="paragraph">只有管​​理员才能访问具有特权的Trident Protect 自定义资源对象，其中包括：</block>
+  <block id="1ebe16955ececaae67d3cf58803335d2" category="list-text">*AutoSupportBundle*：收集指标、日志和其他敏感的Trident Protect数据</block>
+  <block id="f5b0d8e5ea0bcbbfdb4c2b59f377ab84" category="paragraph">安装Trident Protect 时会创建一个默认的 ClusterRole 对象。您可以通过创建和应用 RoleBinding 对象将此 ClusterRole 绑定到服务帐户。</block>
+  <block id="e7602722404dc8ff90221b60a1300a2e" category="summary">您可以使用 kube-state-metrics 和 Prometheus 监控Trident Protect 资源的状态。这可以为您提供有关部署、节点和 Pod 的运行状况信息。</block>
+  <block id="8d4bffa6f29dbf7808f048c4d63753cb" category="doc">监控Trident保护资源</block>
+  <block id="049debaeac5a21b1b9a5b2a67f704d77" category="paragraph">您可以使用 kube-state-metrics、Prometheus 和 Alertmanager 开源工具来监控Trident Protect 保护的资源的健康状况。</block>
+  <block id="2afaaad3ea4a6b79522c2166bf833518" category="paragraph">kube-state-metrics 服务从 Kubernetes API 通信生成指标。将其与Trident Protect 结合使用，可以显示有关环境中资源状态的有用信息。</block>
+  <block id="5ceeae4af4fbba7b6c3f23860e93d3cf" category="paragraph">Prometheus 是一个工具包，它可以接收 kube-state-metrics 生成的数据，并将其呈现为关于这些对象的易于阅读的信息。kube-state-metrics 和 Prometheus 共同提供了一种方法，让您可以监控使用Trident Protect 管理的资源的健康状况和状态。</block>
+  <block id="12bdb359a24d5856fe76fb568abcf8d1" category="paragraph">要在Trident Protect 中启用资源监控，您需要安装和配置 kube-state-metrics、Promethus 和 Alertmanager。</block>
+  <block id="3b15ac971d514086584c073fc7b9ebda" category="list-text">按照以下说明配置 kube-state-metrics，以生成Trident Protect 使用的自定义资源的指标：<block ref="0c2d96c77ebc80eb4f9df846c2904f4c" category="inline-link-rx"></block> 。</block>
+  <block id="bc13327772f75ed0280d75f548627918" category="summary">Trident Protect 的存储桶自定义资源 (CR) 被称为 AppVault。AppVault 是存储桶的声明式 Kubernetes 工作流表示。</block>
+  <block id="36232457f4c28ae76f2c98b665ead40c" category="doc">使用Trident Protect AppVault 对象来管理存储桶。</block>
+  <block id="32b7058b3107bb8f17c6bba2e35a930c" category="paragraph">Trident Protect 的存储桶自定义资源 (CR) 被称为 AppVault。AppVault 对象是存储桶的声明性 Kubernetes 工作流表示。AppVault CR 包含存储桶在保护操作（例如备份、快照、恢复操作和SnapMirror复制）中使用的必要配置。只有管​​理员才能创建应用保险库。</block>
+  <block id="07d57f7af53f2cdc1c56d31f616d6057" category="admonition">确保 AppVault CR 位于安装了Trident Protect 的集群上。如果 AppVault CR 不存在或您无法访问，命令行会显示错误。</block>
+  <block id="14de1852089ccb2c36bf8405a90d3638" category="paragraph">当您使用 CR 或Trident Protect CLI 插件创建 AppVault 对象时，您可以为 Restic 和 Kopia 加密指定带有自定义密码的 Kubernetes 密钥。如果您不指定密钥， Trident Protect 将使用默认密码。</block>
+  <block id="184a14468493ef937883ca0199fa55f7" category="list-text">使用Trident Protect CLI 创建 AppVault 对象时，请使用<block ref="66f22eb4f5e5b0147ea7521212b07044" prefix=" " category="inline-code"></block>用于指定密钥的参数。</block>
+  <block id="c378872ba7a56053ab0f374a666d9c47" category="paragraph">请参考以下示例创建密码密钥。创建 AppVault 对象时，您可以指示Trident Protect 使用此密钥向数据移动器存储库进行身份验证。</block>
+  <block id="53a277b8ef7ee43319013252fa21a97f" category="paragraph">当您访问与 S3 兼容的存储（例如 Amazon S3、通用 S3）时，<block ref="3d0b4c23d9ed62ec7d7cd16273ca2521" category="inline-link-rx"></block> ， 或者<block ref="3a31dfad8c316380b9a5542d694c5833" category="inline-link-rx"></block>使用Trident Protect 时，您需要确保提供的用户凭据具有访问存储桶的必要权限。以下是授予使用Trident Protect 进行访问所需的最低权限的策略示例。您可以将此策略应用于管理 S3 兼容存储桶策略的用户。</block>
+  <block id="2705dcfef9ccf6a8c26498407937a932" category="paragraph">Trident Protect 支持 Kopia 数据移动器操作的 EKS Pod Identity。此功能可实现对 S3 存储桶的安全访问，而无需将 AWS 凭证存储在 Kubernetes 机密中。</block>
+  <block id="bd004a975dcd0eeb8250e5a3d1f916ec" category="paragraph">*EKS Pod Identity 与Trident Protect 的要求*</block>
+  <block id="2742f64f70d5b90bad2b1c898bdd9e64" category="paragraph">在将 EKS Pod Identity 与Trident Protect 结合使用之前，请确保以下事项：</block>
+  <block id="035fe729cd4f67810a3ad8b8885b21de" category="list-text">IAM 角色与以下Trident Protect 服务帐户关联：</block>
+  <block id="53c26e1b5abeebc0a5a45f5e687bfe0f" category="section-title">使用Trident Protect CLI 创建 AppVault 的示例</block>
+  <block id="52cc98f9773d08c7e457aaa84d987801" category="paragraph">您可以使用Trident Protect CLI 插件查看有关您在集群上创建的 AppVault 对象的信息。</block>
+  <block id="f34b73c5ce560d484c593f257864bcd3" category="paragraph">只有在Trident Protect helm 安装中指定了集群名称时，表格第一列中的集群名称才可用。例如：<block ref="b84d46473a6782105f40ea4fa2bc2964" prefix=" " category="inline-code"></block> 。</block>
+  <block id="77123d25e78bd4b317b645c0cff492ef" category="open-title">使用Trident Protect CLI 删除 AppVault</block>
+  <block id="3ad8f6db77e9b2740fd2b74265655e2b" category="summary">您可以使用 protectctl 命令创建和操作Trident Protect 自定义资源。</block>
+  <block id="66296c0c4ab3568f7a50dfabb1fc57f9" category="doc">安装Trident Protect CLI 插件</block>
+  <block id="8c5e021776b8d89478d1d4645a6666ea" category="paragraph">您可以使用Trident Protect 命令行插件，它是Trident的一个扩展。<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>用于创建和与Trident Protect 自定义资源 (CR) 交互的实用程序。</block>
+  <block id="484622e8e21f4638a10f4d7275c68e17" category="list-text">下载Trident Protect CLI 插件：</block>
+  <block id="10bb2ae2f693aa79b853c34cee633de3" category="paragraph">安装Trident Protect CLI 插件后，您可以为某些命令启用自动补全功能。</block>
+  <block id="adcca0736eb3cb85bbcdcd2f589d5afc" category="summary">自定义Trident Protect 的默认设置，以满足您的特定需求。</block>
+  <block id="595f82e1719f05918ecd1cb485230563" category="doc">定制Trident Protect 安装</block>
+  <block id="5242c478ae9d3b671857964b152e827c" category="paragraph">您可以自定义Trident Protect 的默认配置，以满足您环境的特定要求。</block>
+  <block id="10475501fb85172a1ecd467e858af547" category="section-title">指定Trident Protect 容器资源限制</block>
+  <block id="ee382d151f8b137775f9a254da6b324a" category="paragraph">安装Trident Protect 后，您可以使用配置文件来指定Trident Protect 容器的资源限制。设置资源限制可以控制Trident Protect 操作消耗集群资源的程度。</block>
+  <block id="355fc5f48551b9e07ed405860fbb4dd9" category="list-text">根据您的环境需求，在文件中填充Trident Protect 容器的资源限制选项。</block>
+  <block id="b15f0b7b98832ccb49e56c94f9c03998" category="paragraph">安装Trident Protect 后，您可以使用配置文件来修改Trident Protect 容器的 OpenShift 安全上下文约束 (SCC)。这些约束定义了 Red Hat OpenShift 集群中 pod 的安全限制。</block>
+  <block id="d26749521d8080b03797c2031c1405b1" category="cell">启用或禁用每日Trident Protect AutoSupport捆绑包上传。设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>每日定时上传功能已禁用，但您仍然可以手动生成支持包。（默认：<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> ）</block>
+  <block id="da0ff93953189c1e21b7a1961b08303a" category="section-title">将Trident Protect Pod 限制在特定节点上</block>
+  <block id="e327b7f51898edd8d6ac0b8e1eba09ec" category="paragraph">您可以使用 Kubernetes nodeSelector 节点选择约束，根据节点标签来控制哪些节点有资格运行Trident Protect pod。默认情况下， Trident Protect 仅限于运行 Linux 的节点。您可以根据需要进一步自定义这些限制条件。</block>
+  <block id="8f02039b35e4022a5708ae80cf91e165" category="summary">Trident Protect 使管理员能够生成包含对NetApp支持有用的信息的捆绑包，包括有关受管理集群和应用程序的日志、指标和拓扑信息。如果您已连接到互联网，则可以使用自定义资源 (CR) 文件将支持包上传到NetApp支持站点 (NSS)。</block>
+  <block id="d50e081382e6d63e2af634e643be98d8" category="doc">生成Trident Protect 支持包</block>
+  <block id="9306c15f97b8ab2e0bc6aa8047e9e027" category="paragraph">Trident Protect 使管理员能够生成包含对NetApp支持有用的信息的捆绑包，包括有关受管理集群和应用程序的日志、指标和拓扑信息。如果您已连接到互联网，则可以使用自定义资源 (CR) 文件将支持包上传到NetApp支持站点 (NSS)。</block>
+  <block id="c2429ddfa24a45055e7502efac364217" category="summary">如果您的环境符合要求，您可以按照以下步骤安装Trident Protect。</block>
+  <block id="845b43fa08ae2a42cfeb159e5fc1366c" category="doc">安装并配置Trident Protect</block>
+  <block id="bb50add256acfe3f6c958f2b4e018fce" category="paragraph">如果您的环境满足Trident Protect 的要求，您可以按照以下步骤在集群上安装Trident Protect。您可以从NetApp获取Trident Protect，或者从您自己的私有注册表中安装它。如果您的集群无法访问互联网，从私有注册表安装会很有帮助。</block>
+  <block id="9a660681c53f773fd48d7ad58cd48d53" category="section-title">安装Trident Protect</block>
+  <block id="e0efc186d85cb700edf5d19dd5bc9496" category="open-title">从NetApp安装Trident Protect</block>
+  <block id="2110ce9dfcad630240ac9194e30801ad" category="list-text">使用 Helm 安装Trident Protect。代替<block ref="ecc79c99c4f86f0db5cc7f200415205f" prefix=" " category="inline-code"></block>集群名称将分配给集群，并用于标识集群的备份和快照：</block>
+  <block id="272a3e0fc5f097dfcb8f549a6577a5f6" category="open-title">从私有注册表安装Trident Protect</block>
+  <block id="357de3657314f9b2b3abd151f9d483ee" category="paragraph">如果您的 Kubernetes 集群无法访问互联网，您可以从私有镜像仓库安装Trident Protect。在这些示例中，请将括号中的值替换为您环境中的信息：</block>
+  <block id="8bb72cea6536be6ef0764dfc1d24b096" category="list-text">创建Trident Protect 系统命名空间：</block>
+  <block id="35931b526a6c0c04f0b248e331cfa12f" category="list-text">创建一个名为的文件<block ref="5744e710490761bdd5b4603b9b0487a7" prefix=" " category="inline-code"></block>。请确保其中包含以下Trident Protect 设置：</block>
+  <block id="f5e4366841de053f79f8471bf881e87f" category="list-text">使用 Helm 安装Trident Protect。代替<block ref="b90b2ffedb63ca3bd8795caf4397715e" prefix=" " category="inline-code"></block>集群名称将分配给集群，并用于标识集群的备份和快照：</block>
+  <block id="66a18bd39aa087b2ab1ee23053f8a22b" category="admonition">有关其他 Helm Chart 配置选项，包括AutoSupport设置和命名空间过滤，请参阅 <block ref="f3931118af9a18a4fa600194a733f6ec" category="inline-link-macro-rx"></block>。</block>
+  <block id="859907c8f7f3b8fee4686d91f3ff3a95" category="summary">您可以通过创建应用程序 CR 和关联的 AppVault CR，让Trident Protect 了解您要管理的应用程序。</block>
+  <block id="bb6a1031786570f5efbd120022930c4d" category="doc">使用Trident Protect 定义管理应用程序</block>
+  <block id="dd9087d2ada9f483d5993ca38f424ddd" category="paragraph">您可以通过创建应用程序 CR 和关联的 AppVault CR 来定义要使用Trident Protect 管理的应用程序。</block>
+  <block id="6b351bf9a90179c1bf4dfb635cae7f8b" category="paragraph">您需要创建一个 AppVault CR，该 CR 将在对应用程序执行数据保护操作时使用，并且 AppVault CR 需要位于安装了Trident Protect 的集群上。AppVault CR 是针对您的特定环境的；有关 AppVault CR 的示例，请参阅：<block ref="7e7838343a821a01b97d2b866c568a54" category="inline-link-macro-rx"></block></block>
+  <block id="3127b137b318ecdc790653543934571a" category="paragraph">您需要定义要使用Trident Protect 管理的每个应用程序。您可以通过手动创建应用程序 CR 或使用Trident Protect CLI 来定义要管理的应用程序。</block>
+  <block id="5430617017ab73aa9ca4784c693f46cc" category="inline-link-macro">全球Trident Protect 冷冻设置</block>
+  <block id="56338ad00ada44f147efc5a5dc486f6a" category="list-text">*metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*: (_可选_) 此注解仅适用于从虚拟机定义的应用程序，例如 KubeVirt 环境，其中文件系统冻结发生在快照之前。指定此应用程序在快照期间是否可以写入文件系统。如果设置为 true，应用程序将忽略全局设置，并且可以在快照期间写入文件系统。如果设置为 false，应用程序将忽略全局设置，并且在快照期间文件系统将被冻结。如果指定了注解，但应用程序定义中没有虚拟机，则忽略该注解。如未特别说明，则申请流程如下：<block ref="cad6f4c0cd851207bf49fc0535bd1989" category="inline-link-macro-rx"></block> 。</block>
+  <block id="5a0d81ce3f20a64549a2b409b49fca24" category="paragraph">创建应用时，您可以选择使用注解来指定应用在快照期间是否可以写入文件系统。这仅适用于从虚拟机定义的应用程序，例如 KubeVirt 环境，其中文件系统冻结发生在快照之前。如果您将注释设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>该应用程序忽略全局设置，可以在快照期间写入文件系统。如果你把它设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>该应用程序忽略全局设置，导致文件系统在快照期间冻结。如果使用了注解，但应用程序定义中没有虚拟机，则该注解将被忽略。如果您不使用注解，应用程序将遵循以下规则：<block ref="cad6f4c0cd851207bf49fc0535bd1989" category="inline-link-macro-rx"></block> 。</block>
+  <block id="02d146964c2600f14f867b6e899ac16c" category="doc">使用Trident Protect 迁移应用程序</block>
+  <block id="7cd0f85b8ff8c4b060bfcc24f7beb69a" category="paragraph">要将应用程序克隆到不同的集群（执行跨集群克隆），请在源集群上创建备份，然后将备份还原到不同的集群。请确保目标集群上已安装Trident Protect。</block>
+  <block id="d075d7bb863ffe0aa757603d564ca090" category="paragraph">您可以使用自动保护策略或临时保护策略，通过拍摄快照和备份来保护Trident Protect 管理的所有应用程序。</block>
+  <block id="b69d0d4c17b9b5532a7bf67b14c342c2" category="inline-link-macro">了解更多关于使用Trident Protect 配置文件系统冻结的信息</block>
+  <block id="7927b4fc176662e1023887f00f7cc92f" category="admonition">您可以配置Trident Protect 在数据保护操作期间冻结和解冻文件系统。<block ref="e019680d5fc80a6a772db1153dfe4d66" category="inline-link-macro-rx"></block>。</block>
+  <block id="f93e5c10e8a9e3890ef855e7e7b53b42" category="paragraph">如果您已安装Trident Protect，则可以为使用 azure-netapp-files 存储类且在Trident 24.06 之前创建的存储后端启用节省空间的备份和还原功能。此功能适用于 NFSv4 卷，并且不会占用容量池中的额外空间。</block>
+  <block id="7f9574de510184fa4984256b9bd52f9e" category="list-text">您已安装Trident Protect。</block>
+  <block id="5c988e5008390b9a3e9eec9ccb6b7275" category="list-text">您已在Trident Protect中定义了一个应用程序。在您完成此步骤之前，此应用程序的保护功能将受到限制。</block>
+  <block id="76d8d1a8d95bf0c8521b80cdf7becbf6" category="paragraph">如果未启用快照目录， Trident Protect 将选择常规备份功能，该功能会在备份过程中暂时占用容量池中的空间。在这种情况下，请确保容量池中有足够的空间来创建与被备份卷大小相同的临时卷。</block>
+  <block id="fc53c460fa3679942307a868cb86ce5f" category="paragraph">该应用程序已准备好使用Trident Protect 进行备份和恢复。每个 PVC 也可供其他应用程序用于备份和恢复。</block>
+  <block id="c792e8472de999b9df658a1202580532" category="summary">首先，请验证您的运行环境、应用程序集群、应用程序和许可证是否准备就绪。确保您的环境满足部署和运行Trident Protect 的这些要求。</block>
+  <block id="dad76a1d38d59b472a3143f23d633d9b" category="section-title">Trident Protect Kubernetes 集群兼容性</block>
+  <block id="fd3bd2fcfeedfca19073cae4b15b6d58" category="paragraph">Trident Protect 与各种完全托管和自托管的 Kubernetes 产品兼容，包括：</block>
+  <block id="cff79812dcd5fbc00814225da6e01321" category="list-text">Trident Protect备份仅支持Linux计算节点。Windows 计算节点不支持备份操作。</block>
+  <block id="9ac14e26b678482e730c473a2182b3cd" category="list-text">确保安装Trident Protect 的集群已配置运行中的快照控制器和相关的 CRD。要安装快照控制器，请参阅<block ref="5d66944a2971d1b9b5f332812a6e737b" category="inline-link-rx"></block>。</block>
+  <block id="d1aeab176ad80dc54e61f7c70cd3ae3b" category="section-title">Trident Protect 存储后端兼容性</block>
+  <block id="5599f02aecfd2b4e31e0c79404170afe" category="paragraph">Trident Protect 支持以下存储后端：</block>
+  <block id="e8cdc937e4fea4b9dbba5e00d7662548" category="list-text">创建您计划用于应用程序或应用程序数据管理操作的任何应用程序命名空间。Trident Protect 不会为您创建这些命名空间；如果您在自定义资源中指定了不存在的命名空间，则操作将失败。</block>
+  <block id="1045d62a7b99460399e0346f2ae30b23" category="paragraph">Trident Protect 支持对 nas-economy 卷进行备份和恢复操作。目前不支持将快照、克隆和SnapMirror复制到 nas-economy 卷。您需要为计划与Trident Protect 一起使用的每个 nas-economy 卷启用快照目录。</block>
+  <block id="d24e3ecca2966126e528f3b9e614e910" category="paragraph">NetApp SnapMirror复制功能可与Trident Protect 配合使用，适用于以下ONTAP解决方案：</block>
+  <block id="42612b6fec9e12698f24e329a0057ea3" category="list-text">* NetApp Trident *：使用ONTAP作为后端服务的源 Kubernetes 集群和目标 Kubernetes 集群上都必须存在NetApp Trident 。Trident Protect 支持使用NetApp SnapMirror技术进行复制，该技术使用以下驱动程序支持的存储类：</block>
+  <block id="fd061cf50a47c913ada57ca992823154" category="list-text">*托管后端*：您需要在Trident Protect 中添加和管理ONTAP存储后端，以创建复制关系。</block>
+  <block id="ee9dbfe472a4404175c214c5bc3503d6" category="paragraph">Trident Protect 要求您至少配置一个支持源集群和目标集群复制的存储后端。如果源集群和目标集群相同，为了获得最佳弹性，目标应用程序应该使用与源应用程序不同的存储后端。</block>
+  <block id="e91e1786215e817bc20eba0859e44992" category="summary">您可以使用Trident Protect 从快照或备份中恢复您的应用程序。将应用程序恢复到同一集群时，从现有快照恢复速度会更快。</block>
+  <block id="2f17c2ec082854ce1f49ed1f47122369" category="doc">使用Trident Protect 恢复应用程序</block>
+  <block id="a70d8da6dfd6ff156b493e11162ca857" category="inline-link-macro">使用高级Trident Protect 恢复设置</block>
+  <block id="24faeee2994b42f760a5f4868305d167" category="list-text">您可以使用高级设置来自定义恢复操作。欲了解更多信息，请参阅 <block ref="f411630dc75b0837a55c8046f65149cf" category="inline-link-macro-rx"></block>。</block>
+  <block id="1c6eace91e0dc01cf9008fefb2dab254" category="paragraph">当您使用 BackupRestore CR 将备份还原到不同的命名空间时， Trident Protect 会在新的命名空间中还原应用程序，并为还原的应用程序创建一个应用程序 CR。为了保护已恢复的应用程序，可以创建按需备份或快照，或者制定保护计划。</block>
+  <block id="a893520b03c95dde2af0c5ccef82b6fd" category="admonition">当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block>有关您可以配置的选项的更多信息。使用<block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>有关使用Trident Protect CLI 指定注释的更多信息，请参阅命令。</block>
+  <block id="e23fef665fca7137c4d6ee6b9a9ec06a" category="list-text">目标集群已安装Trident Protect。</block>
+  <block id="a9f49426447e0464bef483c17509fd98" category="list-text">确保在运行 AppVault CR 时，本地环境可以连接到 AppVault CR 中定义的对象存储桶。<block ref="f9adf231483d5dde9cfc10a610b748d3" prefix=" " category="inline-code"></block>命令。如果网络限制阻止访问，请改为从目标集群上的 pod 内运行Trident Protect CLI。</block>
+  <block id="cfb3749b52f4ce0c21dcdc3a9fce80f2" category="list-text">使用Trident Protect CLI 插件检查目标集群上 AppVault CR 的可用性：</block>
+  <block id="00a11b317e9c8f9d94e106859445f95b" category="paragraph">您可以使用自定义资源 (CR) 文件从快照恢复数据，恢复到不同的命名空间或原始源命名空间。当您使用 SnapshotRestore CR 将快照还原到不同的命名空间时， Trident Protect 会在新的命名空间中还原应用程序，并为还原的应用程序创建一个应用程序 CR。为了保护已恢复的应用程序，可以创建按需备份或快照，或者制定保护计划。</block>
+  <block id="f493357e2629878fdea1bf9f7073c82d" category="summary">您可以使用注释、命名空间设置和存储选项来自定义Trident Protect 恢复操作。</block>
+  <block id="b3cc398bcb7f536fcb9416eb16f4fff6" category="summary">如果您要从试用版升级到完整版产品，可能需要移除Trident Protect 组件。</block>
+  <block id="dd28e2f5a84c48ae81ab3d88858e28ee" category="doc">卸载Trident Protect</block>
+  <block id="cb38bfec92928c82db030cfdce9bccdf" category="paragraph">要移除Trident Protect，请执行以下步骤。</block>
+  <block id="2e5c0707a785908014e16ab0cbf18366" category="list-text">删除Trident Protect CR 文件：</block>
+  <block id="776420d2a523398306e23e8ddde41835" category="list-text">移除Trident保护：</block>
+  <block id="4ddbb510a6a83f944b61747e65e231af" category="list-text">移除Trident Protect 命名空间：</block>
+  <block id="cde61ef6aff0f74c93f975b94c538c81" category="summary">您可以将Trident Protect 升级到最新版本，以享受新功能或修复错误。</block>
+  <block id="516ee22feede3bac94e552d7d7d47c7a" category="doc">升级Trident保护</block>
+  <block id="5826b90805989bc1e70d45a439955a20" category="list-text">对于私有镜像仓库安装，请确保目标版本所需的 Helm Chart 和镜像在您的私有镜像仓库中可用，并验证您的自定义 Helm 值与新 Chart 版本兼容。更多信息，请参阅<block ref="1cbaec3c50cf58cc3dc774fe58a4af33" category="inline-link-macro-rx"></block>。</block>
+  <block id="af256125ca711d0e16dc4c173930116f" category="paragraph">要升级Trident Protect，请执行以下步骤。</block>
+  <block id="578bfdcecd0a48c1dad189ec9d70204a" category="list-text">升级Trident Protect CRD：</block>
+  <block id="814a37dc29d2671dd3cdbf3982ee4a85" category="admonition">如果您是从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在已包含在Trident Protect Helm 图表中。</block>
+  <block id="e9234397b7137bc49ace1f1229a5a982" category="list-text">升级Trident保护：</block>
+  <block id="6f8a1c340d72b735b7cd3b6957d814e3" category="summary">您可以使用Trident Protect 为应用程序创建自定义执行钩子。您需要拥有所有者、管理员或成员权限才能创建执行钩子。</block>
+  <block id="c8032c002085d9b42031ec80a534e894" category="doc">管理Trident Protect 执行钩子</block>
+  <block id="ba45cbc00acdb40a749e6b9a5bf95eff" category="paragraph">Trident Protect 支持以下几种执行钩子类型，具体取决于它们的运行时机：</block>
+  <block id="019c0400e3d10bda84f61aadf4d88474" category="list-text">如果适用，则会发生文件系统冻结。<block ref="e019680d5fc80a6a772db1153dfe4d66" category="inline-link-macro-rx"></block>。</block>
+  <block id="1f3ffd6698226c67c537c364eaf041be" category="list-text">Trident Protect 要求执行钩子使用的脚本以可执行 shell 脚本的格式编写。</block>
+  <block id="5f751924fb5492c94aa54485264a30e9" category="list-text">Trident Protect 使用执行钩子设置和任何匹配条件来确定哪些钩子适用于快照、备份或恢复操作。</block>
+  <block id="d46485186a1153a2fbf335ff2db190f4" category="paragraph">添加到执行挂钩的每个过滤器都使用正则表达式来匹配集群中的容器。当钩子与容器匹配时，钩子将在该容器上运行其关联的脚本。过滤器的正则表达式使用正则表达式 2 (RE2) 语法，该语法不支持创建从匹配列表中排除容器的过滤器。有关Trident Protect 在执行钩子过滤器中支持的正则表达式语法的详细信息，请参阅<block ref="d4d0dd655d04b2dc5b031206e1febd50" category="inline-link-rx"></block>。</block>
+  <block id="d7fe96269d51ee2db54db3f582053bbc" category="list-text">配置以下属性以匹配您的Trident Protect 环境和集群配置：</block>
+  <block id="7614dc1d9f60c2a1a41782cd8da64d6a" category="summary">使用Trident Protect，您可以利用NetApp SnapMirror技术的异步复制功能，将数据和应用程序更改从一个存储后端复制到另一个存储后端，无论是在同一集群内还是在不同集群之间。</block>
+  <block id="752b9530af53850991ee625c360b5886" category="doc">使用NetApp SnapMirror和Trident Protect 复制应用程序</block>
+  <block id="372808e5f5197d8bced21ed6beef8221" category="paragraph">要了解有关执行钩子的更多信息，请参阅<block ref="81ec01a9d0e5d60206e703bc5aa140b4" category="inline-link-macro-rx"></block>。</block>
+  <block id="e7278dfae13b6c5f2e23e4b66378889e" category="list-text">选择Trident Protect 拍摄应用程序快照的频率（包括应用程序的 Kubernetes 资源以及应用程序每个卷的卷快照）。</block>
+  <block id="b89f2db2cb82925801d5b1149de27c17" category="paragraph">使用Trident Protect，您可以将复制的应用程序故障转移到目标集群。此过程会停止复制关系，并将应用程序在目标集群上联机。如果源集群上的应用程序正在运行， Trident Protect 不会停止该应用程序。</block>
+  <block id="b65e765544fa343d7e8889398daebb9c" category="paragraph">当您反转复制方向时， Trident Protect 会将应用程序移动到目标存储后端，同时继续复制回原始源存储后端。  Trident Protect 会停止源应用程序并将数据复制到目标位置，然后再故障转移到目标应用程序。</block>
+  <block id="61295c8685fb78b94f9c72b204443888" category="paragraph">使用Trident Protect，您可以通过以下步骤序列在故障转移操作后实现“故障恢复”。在此恢复原始复制方向的工作流程中， Trident Protect 会将任何应用程序更改复制（重新同步）回原始源应用程序，然后再反转复制方向。</block>
+  <block id="efdfb5051e307ae2669c564ab462ab70" category="paragraph">了解Trident和Trident Protect 的新特性，包括增强功能、修复和弃用。</block>
+  <block id="9b6a034e6854c5f27feb3ac185829f8d" category="section-title">Trident保护</block>
+  <block id="dcf5f26cacbeeaa8161c0edfd64677e8" category="paragraph">NetApp Trident Protect 提供高级应用程序数据管理功能，增强了由NetApp ONTAP存储系统和NetApp Trident CSI 存储供应器支持的有状态 Kubernetes 应用程序的功能和可用性。</block>
+  <block id="e1291fe029973ec93a54b63b382dcf15" category="paragraph">从Trident 25.02 开始，“新增功能”摘要提供了Trident和Trident Protect 版本的增强功能、修复和弃用详情。</block>
+  <block id="b3ede630079275ba568ae0ecd38dd1b8" category="list-text">为 KubeVirt / OpenShift 虚拟化虚拟机添加了备份和恢复支持，支持 volumeMode: File 和 volumeMode: Block（原始设备）存储。此支持与所有Trident驱动程序兼容，并且在使用NetApp SnapMirror和Trident Protect 复制存储时增强了现有的保护功能。</block>
+  <block id="0ca0fb71ff9be8f3e574ccbd272e9df8" category="list-text">增加了在Trident Protect 安装过程中配置安全上下文约束 (SCC) 的功能。</block>
+  <block id="0585ebe3e3fa33ee030cab4d8f843c2b" category="list-text">增加了在Trident Protect 安装过程中配置 nodeSelector 的支持。</block>
+  <block id="f2492ecd5d283ce85dae0f4a9ee08a0a" category="inline-link-macro">了解更多关于Trident Protect的信息</block>
+  <block id="fcea491f131646a6f887b5a13212cd84" category="paragraph"><block ref="30e9c40051e05c72dc744ea1f1015e1f" category="inline-link-macro-rx"></block>。</block>
+  <block id="bb74735100fa22a9878799bf2d21623f" category="sidebar">使用Trident Protect 实现高级数据保护</block>
+  <block id="77cc7f8867b1ad1e9856bcd26c8ecff3" category="sidebar">部署Trident保护</block>
+  <block id="70568f333da28442c152ac2e1f71e1a0" category="sidebar">使用Trident Protect 保护应用程序</block>
+  <block id="8545a0d7cdafff8da2dece1a851630dc" category="sidebar">管理Trident Protect</block>
+  <block id="83ff2dd2ff6a9ee85daa1b0fefef4019" category="sidebar">使用Trident Protect 管理执行钩子</block>
 </blocks>

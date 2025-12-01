@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-upgrade.html 
 keywords: trident, protect, netapp, upgrade, new, version 
-summary: 您可以将Trident Protect升级到最新版本、以利用新功能或错误修复。 
+summary: 您可以将Trident Protect 升级到最新版本，以享受新功能或修复错误。 
 ---
-= 升级Trident Protect
+= 升级Trident保护
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,7 +14,7 @@ summary: 您可以将Trident Protect升级到最新版本、以利用新功能�
 
 
 [role="lead"]
-您可以将Trident Protect升级到最新版本、以利用新功能或错误修复。
+您可以将Trident Protect 升级到最新版本，以享受新功能或修复错误。
 
 [NOTE]
 ====
@@ -22,11 +22,11 @@ summary: 您可以将Trident Protect升级到最新版本、以利用新功能�
 +
 为避免潜在的故障，您可以在升级前禁用所有快照计划，然后在升级后重新启用。但是，这会导致升级期间丢失所有计划的快照。
 
-* 对于私有镜像仓库安装，请确保目标版本所需的 Helm Chart 和镜像在您的私有镜像仓库中可用，并验证您的自定义 Helm 值与新 Chart 版本兼容。更多信息，请参阅link:trident-protect-installation.html["从专用注册表安装Trident Protect"]。
+* 对于私有镜像仓库安装，请确保目标版本所需的 Helm Chart 和镜像在您的私有镜像仓库中可用，并验证您的自定义 Helm 值与新 Chart 版本兼容。更多信息，请参阅link:trident-protect-installation.html["从私有注册表安装Trident Protect"]。
 
 
 ====
-要升级Trident Protect、请执行以下步骤。
+要升级Trident Protect，请执行以下步骤。
 
 .步骤
 . 更新Trident Helm存储库：
@@ -38,7 +38,7 @@ helm repo update
 . 升级Trident Protect CRD：
 +
 
-NOTE: 如果您从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在包含在 Trident Protect Helm 图表中。
+NOTE: 如果您是从 25.06 之前的版本升级，则需要执行此步骤，因为 CRD 现在已包含在Trident Protect Helm 图表中。
 
 +
 .. 运行此命令将 CRD 的管理从 `trident-protect-crds`到 `trident-protect` ：
@@ -59,7 +59,7 @@ kubectl delete secret -n trident-protect -l name=trident-protect-crds,owner=helm
 ----
 
 
-. 升级Trident Protect：
+. 升级Trident保护：
 +
 [source, console]
 ----

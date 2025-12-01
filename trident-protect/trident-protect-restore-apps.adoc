@@ -2,9 +2,9 @@
 sidebar: sidebar 
 permalink: trident-protect/trident-protect-restore-apps.html 
 keywords: trident, protect, restore, data, backup 
-summary: 您可以使用Trident Protect从快照或备份还原应用程序。将应用程序还原到同一集群时，从现有快照进行还原的速度会更快。 
+summary: 您可以使用Trident Protect 从快照或备份中恢复您的应用程序。将应用程序恢复到同一集群时，从现有快照恢复速度会更快。 
 ---
-= 使用Trident Protect还原应用程序
+= 使用Trident Protect 恢复应用程序
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,13 +14,13 @@ summary: 您可以使用Trident Protect从快照或备份还原应用程序。�
 
 
 [role="lead"]
-您可以使用Trident Protect从快照或备份还原应用程序。将应用程序还原到同一集群时，从现有快照进行还原的速度会更快。
+您可以使用Trident Protect 从快照或备份中恢复您的应用程序。将应用程序恢复到同一集群时，从现有快照恢复速度会更快。
 
 [NOTE]
 ====
 * 还原应用程序时、为该应用程序配置的所有执行挂钩都会随该应用程序还原。如果存在还原后执行挂钩、则它会在还原操作中自动运行。
 * 对于 qtree 卷，支持从备份还原到其他命名空间或原始命名空间。但是，对于 qtree 卷，不支持从快照还原到其他命名空间或原始命名空间。
-* 您可以使用高级设置来自定义恢复操作。要了解更多信息，请参阅link:../trident-protect/trident-protect-restore-settings.html["使用高级Trident保护恢复设置"]。
+* 您可以使用高级设置来自定义恢复操作。欲了解更多信息，请参阅 link:../trident-protect/trident-protect-restore-settings.html["使用高级Trident Protect 恢复设置"]。
 
 
 ====
@@ -28,7 +28,7 @@ summary: 您可以使用Trident Protect从快照或备份还原应用程序。�
 
 == 从备份还原到其他命名空间
 
-使用BackupRestore CR将备份还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、并为还原的应用程序创建应用程序CR。要保护已还原的应用程序、请创建按需备份或快照、或者制定保护计划。
+当您使用 BackupRestore CR 将备份还原到不同的命名空间时， Trident Protect 会在新的命名空间中还原应用程序，并为还原的应用程序创建一个应用程序 CR。为了保护已恢复的应用程序，可以创建按需备份或快照，或者制定保护计划。
 
 
 NOTE: 将备份还原到具有现有资源的其他命名空间不会更改与备份中的资源共享名称的任何资源。要还原备份中的所有资源、请删除并重新创建目标命名空间、或者将备份还原到新命名空间。
@@ -41,7 +41,7 @@ NOTE: 将备份还原到具有现有资源的其他命名空间不会更改与�
 
 
 
-NOTE: 当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅 https://kopia.io/docs/getting-started/["文档"^]有关您可以配置的选项的更多信息。使用 `tridentctl-protect create --help`命令以获取有关使用Trident Protect CLI 指定注释的更多信息。
+NOTE: 当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅 https://kopia.io/docs/getting-started/["文档"^]有关您可以配置的选项的更多信息。使用 `tridentctl-protect create --help`有关使用Trident Protect CLI 指定注释的更多信息，请参阅命令。
 
 [role="tabbed-block"]
 ====
@@ -79,7 +79,7 @@ spec:
 . (_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：
 +
 
-NOTE: Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。
+NOTE: Trident Protect 会自动选择一些资源，因为它们与您选择的资源存在关联。例如，如果您选择持久卷声明资源并且它有一个关联的 pod， Trident Protect 还会恢复关联的 pod。
 
 +
 ** *resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用 `Include`或包含或 `Exclude`排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：
@@ -160,7 +160,7 @@ tridentctl-protect create backuprestore <my_restore_name> \
 
 
 
-NOTE: 当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅 https://kopia.io/docs/getting-started/["文档"^]有关您可以配置的选项的更多信息。使用 `tridentctl-protect create --help`命令以获取有关使用Trident Protect CLI 指定注释的更多信息。
+NOTE: 当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅 https://kopia.io/docs/getting-started/["文档"^]有关您可以配置的选项的更多信息。使用 `tridentctl-protect create --help`有关使用Trident Protect CLI 指定注释的更多信息，请参阅命令。
 
 [role="tabbed-block"]
 ====
@@ -199,7 +199,7 @@ spec:
 . (_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：
 +
 
-NOTE: Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。
+NOTE: Trident Protect 会自动选择一些资源，因为它们与您选择的资源存在关联。例如，如果您选择持久卷声明资源并且它有一个关联的 pod， Trident Protect 还会恢复关联的 pod。
 
 +
 ** *resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用 `Include`或包含或 `Exclude`排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：
@@ -272,14 +272,14 @@ tridentctl-protect create backupinplacerestore <my_restore_name> \
 如果原始集群出现问题、您可以将备份还原到其他集群。
 
 
-NOTE: 当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅 https://kopia.io/docs/getting-started/["文档"^]有关您可以配置的选项的更多信息。使用 `tridentctl-protect create --help`命令以获取有关使用Trident Protect CLI 指定注释的更多信息。
+NOTE: 当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅 https://kopia.io/docs/getting-started/["文档"^]有关您可以配置的选项的更多信息。使用 `tridentctl-protect create --help`有关使用Trident Protect CLI 指定注释的更多信息，请参阅命令。
 
 .开始之前
 确保满足以下前提条件：
 
 * 目标集群已安装Trident Protect。
 * 目标集群可以访问与存储备份的源集群相同的AppVault的分段路径。
-* 确保您的本地环境在运行 `tridentctl-protect get appvaultcontent`命令。如果网络限制阻止访问，请从目标集群上的 pod 内运行Trident Protect CLI。
+* 确保在运行 AppVault CR 时，本地环境可以连接到 AppVault CR 中定义的对象存储桶。 `tridentctl-protect get appvaultcontent`命令。如果网络限制阻止访问，请改为从目标集群上的 pod 内运行Trident Protect CLI。
 * 确保AWS会话令牌到期时间足以执行任何长时间运行的还原操作。如果令牌在还原操作期间过期、则操作可能会失败。
 +
 ** 有关检查当前会话令牌到期时间的详细信息、请参见 https://docs.aws.amazon.com/STS/latest/APIReference/API_GetSessionToken.html["AWS API文档"^]。
@@ -289,7 +289,7 @@ NOTE: 当您使用 Kopia 作为数据移动器恢复备份时，您可以选择�
 
 
 .步骤
-. 使用Trident Protect命令行界面插件检查目标集群上AppVault CR的可用性：
+. 使用Trident Protect CLI 插件检查目标集群上 AppVault CR 的可用性：
 +
 [source, console]
 ----
@@ -395,7 +395,7 @@ tridentctl-protect create backuprestore <restore_name> \
 
 == 从快照还原到其他命名空间
 
-您可以使用自定义资源(CR)文件从快照将数据还原到其他命名空间或原始源命名空间。使用SnapshotRestore CR将快照还原到其他命名空间时、Trident Protect会将应用程序还原到新命名空间中、并为还原的应用程序创建应用程序CR。要保护已还原的应用程序、请创建按需备份或快照、或者制定保护计划。
+您可以使用自定义资源 (CR) 文件从快照恢复数据，恢复到不同的命名空间或原始源命名空间。当您使用 SnapshotRestore CR 将快照还原到不同的命名空间时， Trident Protect 会在新的命名空间中还原应用程序，并为还原的应用程序创建一个应用程序 CR。为了保护已恢复的应用程序，可以创建按需备份或快照，或者制定保护计划。
 
 
 NOTE: SnapshotRestore 支持 `spec.storageClassMapping`属性，但仅当源和目标存储类使用相同的存储后端时。如果您尝试恢复到 `StorageClass`如果使用不同的存储后端，则恢复操作将失败。
@@ -443,7 +443,7 @@ spec:
 . (_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：
 +
 
-NOTE: Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。
+NOTE: Trident Protect 会自动选择一些资源，因为它们与您选择的资源存在关联。例如，如果您选择持久卷声明资源并且它有一个关联的 pod， Trident Protect 还会恢复关联的 pod。
 
 +
 ** *resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用 `Include`或包含或 `Exclude`排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：
@@ -565,7 +565,7 @@ spec:
 . (_可 选_)如果只需要选择要还原的应用程序的某些资源、请添加包含或排除带有特定标签的资源的筛选：
 +
 
-NOTE: Trident Protect会自动选择某些资源、因为这些资源与您选择的资源之间存在关系。例如、如果您选择永久性卷请求资源、并且该资源具有关联的POD、则Trident Protect也会还原关联的POD。
+NOTE: Trident Protect 会自动选择一些资源，因为它们与您选择的资源存在关联。例如，如果您选择持久卷声明资源并且它有一个关联的 pod， Trident Protect 还会恢复关联的 pod。
 
 +
 ** *resourceFilter.resourceSourcedionCritera*：(筛选时需要)使用 `Include`或包含或 `Exclude`排除资源匹配备程序中定义的资源。添加以下resourceMatchers参数以定义要包括或排除的资源：
