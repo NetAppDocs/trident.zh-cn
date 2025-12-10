@@ -5973,4 +5973,21 @@ SMB</block>
   <block id="7686f86b5b964234d48e80748592235c" category="list-text">*spec.snapshotReclaimPolicy*: (_可选_) 确定如果快照 CR 在其保留期内被删除，则快照会发生什么情况。保留期过后，快照总是会被删除。可能的值（区分大小写）：</block>
   <block id="0219cebc6ab6bc045fd44c689e3508dd" category="list-text"><block ref="afece4245269582cb2f1009d4fb52047" prefix="" category="inline-code"></block></block>
   <block id="eced49573e92b0138aa5161875ff0f1e" category="list-text"><block ref="f2a6c498fb90ee345d997f888fce3b18" prefix="" category="inline-code"></block>（默认）</block>
+  <block id="08f633e7002ad36a5c8bc527db07e211" category="section-title">支持<block ref="4e3608d39f092e8af1be45b04350f1a1" prefix=" " category="inline-code"></block>配置选项</block>
+  <block id="42b660fa9ad2ff7e603ddeb991191daa" category="paragraph">请参阅下表了解 S3 提供程序配置选项：</block>
+  <block id="9e965c2561790f5795363a58280142cf" category="cell"><block ref="0ca993c9bc0fd19b642d323b59a36539" prefix="" category="inline-code"></block></block>
+  <block id="0eca3183fc69ea6f396e772946204a5c" category="cell">禁用 SSL/TLS 证书验证。</block>
+  <block id="a8ef00c2294bbb43977e7dc9fd2a1ae3" category="cell">“真”，“假”</block>
+  <block id="1f3f7edb7c7c1de0cb2c465b8ddcd056" category="cell"><block ref="f8e8e31faffe064bcecb40c10a840b71" prefix="" category="inline-code"></block></block>
+  <block id="e00f2b6aaee0e89837b7344c6c699ee6" category="cell">启用与 S3 端点的安全 HTTPS 通信。</block>
+  <block id="f81bcc66558000f7cfefd3cc20fd0a8e" category="cell"><block ref="3c9622a5d959b41abae2263f05892a60" prefix="" category="inline-code"></block></block>
+  <block id="3de2fd08f537cf1bfbd8e7100fcd0978" category="cell">指定用于连接到 S3 的代理服务器的 URL。</block>
+  <block id="6adf97f83acf6453d4a6a4b1070f3754" category="cell">无</block>
+  <block id="95dbd7d67755b93da5edf3f51015e334" category="cell"><block ref="95dbd7d67755b93da5edf3f51015e334" category="inline-link-rx"></block></block>
+  <block id="c49bdad42b17110b2c040203c6bdb822" category="cell"><block ref="a9a9528efe7ca0e033e0fe2d3992f2ef" prefix="" category="inline-code"></block></block>
+  <block id="2ec04adaedab334fde26b3e2e0589b33" category="cell">提供用于 SSL/TLS 验证的自定义根 CA 证书。</block>
+  <block id="16046164c4b13ac28108d2ecbdabf10b" category="cell">"CN=MyCustomCA"</block>
+  <block id="e40bdae327bee4d52c74e4b3250b08ce" category="cell"><block ref="27081e7eec2d2a1beae20d90b1d5af4f" prefix="" category="inline-code"></block></block>
+  <block id="304bbbc132c2b33e03e087cb6838276e" category="cell">启用 IAM 身份验证以访问 S3 存储桶。适用于 EKS Pod 标识。</block>
+  <block id="09a18f0598e032559af2cd41ba3aa659" category="list-text">确保至少存在一个 VolumeSnapshotClass。更多信息，请参阅<block ref="9597869a9c7d53c1c9b0a0dcb905675c" category="inline-link-macro-rx"></block>。</block>
 </blocks>

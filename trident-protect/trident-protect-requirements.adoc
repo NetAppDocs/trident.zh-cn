@@ -35,6 +35,7 @@ Trident Protect 与各种完全托管和自托管的 Kubernetes 产品兼容，�
 ====
 * Trident Protect备份仅支持Linux计算节点。Windows 计算节点不支持备份操作。
 * 确保安装Trident Protect 的集群已配置运行中的快照控制器和相关的 CRD。要安装快照控制器，请参阅 https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller["这些说明"]。
+* 确保至少存在一个 VolumeSnapshotClass。更多信息，请参阅link:https://docs.netapp.com/us-en/trident_main/trident-reference/objects.html#kubernetes-volumesnapshotclass-objects["VolumeSnapshotClass"]。
 
 
 ====
