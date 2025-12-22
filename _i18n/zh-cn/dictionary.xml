@@ -2097,8 +2097,6 @@
   <block id="1dedbfd605df8b562acc8f759a8e9acc" category="list-text">运行的Kubernetes集群 <block ref="229e1052bb9ecd8cf2680d6f44691174" category="inline-link-macro-rx"></block></block>
   <block id="17c5eeb01739643b5aef94fe18b6c849" category="paragraph">您可以使用版本选择器在最新版本和以前的四个版本之间导航、也可以使用以下链接。</block>
   <block id="2122a8acb599837078e6b76436e892c4" category="list-text">现在、在Trident中支持Kubnetes 1.27。在升级Kubernetes之前升级Trident。</block>
-  <block id="a3460163c4a2854c79a419dda57ac917" category="list-text">RHEL 8+(AMD64和ARM64)</block>
-  <block id="f51a58a0cffb9f9953edce6411578b53" category="list-text">Ubuntu 22.04或更高版本(AMD64和ARM64)</block>
   <block id="38a0b9f59e6fe23e1617dc0e78498afe" category="section-title">有关强制断开的详细信息</block>
   <block id="20c0c9efee2da2645ec0eefaf3c75d8c" category="inline-link-macro">Kubnetes：节点非正常关闭</block>
   <block id="8f57f52b7233aecf56728bcd48d3a51c" category="list-text">确定并清除节点上陈旧的已发布路径。</block>
@@ -4989,7 +4987,6 @@ SMB</block>
   <block id="e80b6a304e29d5dfcb9150f47d69db94" category="section-title">Trident支持KubeVirt和OpenShift虚拟化</block>
   <block id="cffd29fb8e17cb30625130ee24cd667d" category="paragraph">Trident支持以下用于KubeVirt和OpenShift虚拟化的ONTAP驱动程序：</block>
   <block id="0ae326ef84f2a6bc4be48951f88c0162" category="list-text">在OpenShift虚拟化环境中更新存储类以使用<block ref="7cfbb6f07899c8071ff38e69dca190e2" prefix=" " category="inline-code"></block>参数(例如：<block ref="6db865adcb81b7cf881ff9839476f850" prefix=" " category="inline-code"></block>)。如果需要、可使用中的参数<block ref="c6dda2fd1e6d70d582099348cfe6c847" prefix=" " category="inline-code"></block>将卷模式明确设置为阻止<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block>、以通知数据卷创建者。</block>
-  <block id="daa6a182f8035711e9635994f572c7bc" category="list-text">OpenShift容器平台(amd64和ARM64)支持的Red Hat Enterprise Linux CoreTM OS (RHCOS)版本</block>
   <block id="2bf380408feee0a9443f217c907f0681" category="inline-link-macro">Red Hat OpenShift日志记录文档</block>
   <block id="796814ebd3d324fe438f0c699c37c89e" category="admonition">下表仅包含与日志记录服务相关的存储配置相关的变量。您可以找到其他选项、应根据您的部署查看、配置和使用这些选项<block ref="202ad309c67a74272d432350a2d0cf76" category="inline-link-macro-rx"></block>。</block>
   <block id="3a298688c4d78e1b7532d3859cd16a57" category="inline-link-macro">Red Hat OpenShift Container Platform 3.11文档</block>
@@ -5990,4 +5987,8 @@ SMB</block>
   <block id="e40bdae327bee4d52c74e4b3250b08ce" category="cell"><block ref="27081e7eec2d2a1beae20d90b1d5af4f" prefix="" category="inline-code"></block></block>
   <block id="304bbbc132c2b33e03e087cb6838276e" category="cell">启用 IAM 身份验证以访问 S3 存储桶。适用于 EKS Pod 标识。</block>
   <block id="09a18f0598e032559af2cd41ba3aa659" category="list-text">确保至少存在一个 VolumeSnapshotClass。更多信息，请参阅<block ref="9597869a9c7d53c1c9b0a0dcb905675c" category="inline-link-macro-rx"></block>。</block>
+  <block id="01a2f6f3fc3712c00aaaff540b7187f3" category="list-text">OpenShift 容器平台在 AMD64 和 ARM64 架构上支持的 Red Hat Enterprise Linux CoreOS (RHCOS) 版本</block>
+  <block id="1c93bd59e1abbbe543685399acba3c3b" category="list-text">Red Hat Enterprise Linux (RHEL) 8 或更高版本，支持 AMD64 和 ARM64 架构</block>
+  <block id="d79b838675f4d040c12110c1c22fcf32" category="list-text">Ubuntu 22.04 LTS 或更高版本，支持 AMD64 和 ARM64 架构</block>
+  <block id="02869471b3c4ac5c57fb8c2e1d4355dd" category="list-text">SUSE Linux Enterprise Server (SLES) 15 或更高版本</block>
 </blocks>
