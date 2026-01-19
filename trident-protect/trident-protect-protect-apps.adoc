@@ -328,13 +328,25 @@ tridentctl-protect create schedule <my_schedule_name> \
   --snapshot-retention <how_many_snapshots_to_retain> \
   --snapshot-reclaim-policy <Retain|Delete (default Delete)> \
   --full-backup-rule <string> \
+  --run-immediately <true|false> \
   -n <application_namespace>
 ----
 +
-您可以将此标志设置为 `always`以实现持续完整备份、也可以 `--full-backup-rule`根据需要对其进行自定义。例如、如果您选择每日粒度、则可以指定应在哪些工作日进行完整备份。例如、使用 `--full-backup-rule "Monday,Thursday"`计划在星期一和星期四进行完整备份。
+以下选项可让您对日程安排进行更多控制：
 
 +
-对于仅快照计划，设置 `--backup-retention 0`并指定一个大于 0 的值 `--snapshot-retention`。
+** *完整备份计划*：使用 `--full-backup-rule` 标记以安排非增量式完整备份。此标志仅适用于 `--granularity Daily`。可能的值：
++
+*** `Always`每天创建完整备份。
+*** 具体工作日：指定一个或多个日期，用逗号分隔（例如， `"Monday,Thursday"`）。有效值：星期一、星期二、星期三、星期四、星期五、星期六、星期日。
++
+
+NOTE: 这 `--full-backup-rule` 该标志位不适用于按小时、按周或按月划分的粒度。
+
+
+
+** *仅快照计划*：设置 `--backup-retention 0` 并指定一个大于零的值 `--snapshot-retention`。
+
 
 
 
@@ -351,7 +363,7 @@ tridentctl-protect create schedule <my_schedule_name> \
 | 标注 | Type | Description | 默认值 
 
 
-| protect.trident.netapp.io/full-backup-rule | string | 指定安排完整备份的规则。你可以将其设置为 `always`您可以根据需要进行持续完整备份或自定义备份。例如，如果您选择按日粒度进行备份，则可以指定应进行完整备份的星期几（例如， `"Monday,Thursday"` ）。 | 未设置（所有备份均为增量备份） 
+| protect.trident.netapp.io/full-backup-rule | string | 指定安排完整备份的规则。你可以将其设置为 `Always` 您可以根据需要进行持续完整备份或自定义备份。例如，如果您选择按日粒度进行备份，则可以指定应进行完整备份的星期几（例如， `"Monday,Thursday"`）。有效的工作日值为：星期一、星期二、星期三、星期四、星期五、星期六、星期日。请注意，此注释只能用于已包含以下内容的日程表： `granularity` 设置为 `Daily`。 | 未设置（所有备份均为增量备份） 
 
 
 | protect.trident.netapp.io/snapshot-completion-timeout | string | 完成整个快照操作允许的最长时间。 | 60米 
