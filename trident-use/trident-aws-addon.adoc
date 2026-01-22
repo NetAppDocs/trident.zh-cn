@@ -75,6 +75,12 @@ kubectl get pods -n trident
 以下示例命令安装Trident EKS 附加组件：
 `eksctl create addon --cluster clusterName --name netapp_trident-operator --version v25.6.0-eksbuild.1` （附专用版本）
 
+以下示例命令安装 Trident EKS 插件版本 25.6.1：
+`eksctl create addon --cluster clusterName --name netapp_trident-operator --version v25.6.1-eksbuild.1`（带有专用版本）
+
+以下示例命令安装 Trident EKS 插件版本 25.6.2：
+`eksctl create addon --cluster clusterName --name netapp_trident-operator --version v25.6.2-eksbuild.1`（带有专用版本）
+
 .使用命令行界面卸载NetApp Trident EKS加载项：
 以下命令将卸载Trident EKS加载项：
 
