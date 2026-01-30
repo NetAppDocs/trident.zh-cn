@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: trident-use/vol-import.html 
-keywords: volumes, import volumes, drivers, tridentctl import, pv, persistent volumes, pvc, disaster recovery, dr, clone, reuse, managed volume, unmanaged volume, managed 
-summary: '您可以使用 `tridentctl import` 将现有存储卷作为 Kubernetes PV 导入。' 
+keywords: volumes, import volumes, drivers, tridentctl import, pv, persistent volumes, pvc, disaster recovery, dr, clone, reuse, managed volume, unmanaged volume, managed, annotations 
+summary: '您可以使用  `tridentctl import` 或 PVC 注释将现有存储卷导入为 Kubernetes PV。' 
 ---
 = 导入卷
 :hardbreaks:
@@ -12,7 +12,7 @@ summary: '您可以使用 `tridentctl import` 将现有存储卷作为 Kubernete
 
 
 [role="lead"]
-您可以使用 `tridentctl import` 将现有存储卷作为 Kubernetes PV 导入。
+您可以使用 `tridentctl import`或通过创建带有 Trident 导入注释的持久卷声明 (PVC) 将现有存储卷导入为 Kubernetes PV。
 
 
 
@@ -59,10 +59,17 @@ TIP: 如果您想使用 Kubernetes 进行容器化工作负载，但又想在 Ku
 
 == 导入卷
 
-您可以使用 `tridentctl import` 以导入卷。
+您可以使用 `tridentctl import`或通过创建带有 Trident 导入注释的 PVC 来导入卷。
 
+
+NOTE: 如果使用 PVC 注释，则无需下载或使用 `tridentctl`来导入卷。
+
+[role="tabbed-block"]
+====
+.使用 tridentctl
+--
 .步骤
-. 创建永久性卷请求(PVC)文件(例如、 `pvc.yaml`)。PVC文件应包括 `name`， `namespace`， `accessModes`，和 `storageClassName`。您也可以指定 `unixPermissions` 在PVC定义中。
+. 创建一个 PVC 文件（例如， `pvc.yaml`），该文件将用于创建 PVC。PVC 文件应包括 `name`、 `namespace`、 `accessModes`和 `storageClassName`。或者，您可以在 PVC 定义中指定 `unixPermissions`。
 +
 以下是最低规格示例：
 
@@ -81,7 +88,7 @@ spec:
 ----
 +
 
-WARNING: 请勿包含PV名称或卷大小等其他参数。这可能发生原因会使导入命令失败。
+NOTE: 仅包括所需的参数。PV 名称或卷大小等附加参数可能导致导入命令失败。
 
 . 使用 `tridentctl import`用于指定包含卷的Trident后端名称以及唯一标识存储上卷的名称的命令（例如： ONTAP FlexVol、Element Volume）。这 `-f`需要提供参数来指定PVC文件的路径。
 +
@@ -91,6 +98,58 @@ tridentctl import volume <backendName> <volumeName> -f <path-to-pvc-file>
 ----
 
 
+--
+.使用 PVC 注释
+--
+.步骤
+. 使用所需的 Trident 导入注释创建 PVC YAML 文件（例如， `pvc.yaml`）。PVC 文件应包括：
++
+** `name` 和  `namespace` 在元数据中
+** `accessModes`、 `resources.requests.storage` 和  `storageClassName` 在规格中
+** 标注：
++
+*** `trident.netapp.io/importOriginalName`: 后端上的卷名称
+*** `trident.netapp.io/importBackendUUID`：卷存在的后端 UUID
+*** `trident.netapp.io/notManaged` (_Optional_)：为非托管卷设置为 `"true"`。默认值为 `"false"`。
++
+下面是导入托管卷的示例规范：
+
++
+[source, yaml]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: <pvc-name>
+  namespace: <namespace>
+  annotations:
+    trident.netapp.io/importOriginalName: "<volume-name>"
+    trident.netapp.io/importBackendUUID: "<backend-uuid>"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: <size>
+  storageClassName: <storage-class-name>
+----
+
+
+
+
+. 将 PVC YAML 文件应用到 Kubernetes 集群：
++
+[listing]
+----
+kubectl apply -f <pvc-file>.yaml
+----
++
+Trident 将自动导入卷并将其绑定到 PVC。
+
+
+
+--
+====
 
 
 == 示例
@@ -112,8 +171,8 @@ Trident支持使用和 `ontap-nas-flexgroup`驱动程序导入卷 `ontap-nas`。
 ====
 使用驱动程序创建的每个卷 `ontap-nas`都是ONTAP集群上的一个FlexVol volume。使用驱动程序导入FlexVol卷的 `ontap-nas`工作原理相同。可以将ONTAP集群上已存在的FlexVol卷作为PVC导入 `ontap-nas`。同样、FlexGroup vols也可以作为PVC导入 `ontap-nas-flexgroup`。
 
-.ONTAP NAS示例
-以下是受管卷和非受管卷导入的示例。
+.使用 tridentctl 的 ONTAP NAS 示例
+以下示例演示如何使用  `tridentctl` 导入托管卷和非托管卷。
 
 [role="tabbed-block"]
 ====
@@ -150,6 +209,60 @@ tridentctl import volume nas_blog unmanaged_volume -f <path-to-pvc-file> --no-ma
 ----
 --
 ====
+.使用 PVC 注释的 ONTAP NAS 示例
+以下示例演示如何使用 PVC 注释导入托管和非托管卷。
+
+[role="tabbed-block"]
+====
+.受管卷
+--
+以下示例从后端 `81abcb27-ea63-49bb-b606-0a5315ac5f21`导入名为 `ontap_volume1`的 1GiB `ontap-nas` 卷，使用 PVC 注释设置了 RWO 访问模式：
+
+[source, yaml]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: <managed-imported-volume>
+  namespace: <namespace>
+  annotations:
+    trident.netapp.io/importOriginalName: "ontap_volume1"
+    trident.netapp.io/importBackendUUID: "81abcb27-ea63-49bb-b606-0a5315ac5f21"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: <storage-class-name>
+
+----
+--
+.非受管卷
+--
+以下示例使用 PVC 注释从后端 `34abcb27-ea63-49bb-b606-0a5315ac5f34`导入名为 `ontap-volume2`的 1Gi `ontap-nas` 卷，并设置 RWO 访问模式：
+
+[source, yaml]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: <umanaged-imported-volume>
+  namespace: <namespace>
+  annotations:
+    trident.netapp.io/importOriginalName: "ontap-volume2"
+    trident.netapp.io/importBackendUUID: "34abcb27-ea63-49bb-b606-0a5315ac5f34"
+    trident.netapp.io/notManaged: "true"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: <storage-class-name>
+----
+--
+====
 
 
 === ONTAP SAN
@@ -158,8 +271,7 @@ Trident支持使用卷导入 `ontap-san` （iSCSI、NVMe/TCP 和 FC）和 `ontap
 
 Trident可以导入包含单个 LUN 的ONTAP SAN FlexVol卷。这与 `ontap-san` 驱动程序，它为每个 PVC 创建一个FlexVol volume，并在FlexVol volume内创建一个 LUN。Trident导入FlexVol volume并将其与 PVC 定义关联。Trident可以导入 `ontap-san-economy` 包含多个 LUN 的卷。
 
-.ONTAP SAN示例
-以下是受管卷和非受管卷导入的示例。
+以下示例显示了如何导入托管卷和非托管卷：
 
 [role="tabbed-block"]
 ====
@@ -211,7 +323,6 @@ Trident支持使用驱动程序导入NetApp Element软件和NetApp HCI卷 `solid
 
 NOTE: Element 驱动程序支持重复的卷名称。但是、如果存在重复的卷名称、Trident将返回错误。作为临时解决策、克隆卷、提供唯一的卷名称并导入克隆的卷。
 
-.元素示例
 以下示例将导入 `element-managed` 后端上的卷 `element_default`。
 
 [listing]
@@ -233,7 +344,6 @@ Trident支持使用驱动程序导入卷 `azure-netapp-files`。
 
 NOTE: 要导入Azure NetApp Files卷、请按卷路径确定该卷。卷路径是卷的导出路径的一部分、位于之后 `:/`。例如、如果挂载路径为 `10.0.0.2:/importvol1`、卷路径为 `importvol1`。
 
-.Azure NetApp Files示例
 以下示例将导入 `azure-netapp-files` 后端上的卷 `azurenetappfiles_40517` 卷路径 `importvol1`。
 
 [listing]
@@ -252,8 +362,7 @@ tridentctl import volume azurenetappfiles_40517 importvol1 -f <path-to-pvc-file>
 
 Trident支持使用驱动程序导入卷 `google-cloud-netapp-volumes`。
 
-.Google Cloud NetApp卷示例
-以下示例将使用卷在后端 `backend-tbc-gcnv1`导入 `google-cloud-netapp-volumes`卷 `testvoleasiaeast1`。
+以下示例在后端  `backend-tbc-gcnv1` 上导入卷  `testvoleasiaeast1`。
 
 [listing]
 ----

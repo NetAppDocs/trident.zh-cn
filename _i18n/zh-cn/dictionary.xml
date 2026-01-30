@@ -739,7 +739,6 @@
   <block id="27b4a9ed8609e35526601aa8d8be1ab9" category="paragraph">如果您已创建没有此选项的存储类，则只需使用 `kubectl edit storageclass` 编辑现有存储类即可进行卷扩展。</block>
   <block id="3b16cea25bd4a9aaf5a9c3dcc13ea7eb" category="section-title">第 3 步：展开 PV</block>
   <block id="4a59ce1bc63fd7e6333968fb4bbd9d45" category="section-title">第 4 步：验证扩展</block>
-  <block id="cf13ba16f33b5f6772614929649be6c2" category="summary">您可以使用 `tridentctl import` 将现有存储卷作为 Kubernetes PV 导入。</block>
   <block id="5f48c343984786005c9830d96c6fca87" category="doc">导入卷</block>
   <block id="76057e180d7b3edcebaa935c7ccab687" category="paragraph">PVC 和 PV 中会添加一个标注，用于指示卷已导入以及 PVC 和 PV 是否已管理。不应修改或删除此标注。</block>
   <block id="07b434b23f63ca6490df33b213599320" category="section-title">管理 NFS 导出策略</block>
@@ -2203,29 +2202,21 @@
   <block id="604eea1f3df98285b6887ff059258827" category="list-text">回收策略最初设置为<block ref="16d79ff80feadcf2f52096f073f2b94a" prefix=" " category="inline-code"></block> 在PV中。Kubernetes 成功绑定 PVC 和 PV 后，将更新回收策略以匹配存储类的回收策略。</block>
   <block id="5d24684cf5054f53b1e945be75b37f69" category="list-text">存储类的回收策略为时<block ref="099af53f601532dbd31e0ea99ffdeb64" prefix=" " category="inline-code"></block>、删除PV时、存储卷将被删除。</block>
   <block id="db31dcd83fd57b294fb0340ea975015f" category="section-title">导入卷</block>
-  <block id="61a1adebea5e6a017b4bd4b405ae4f52" category="paragraph">您可以使用<block ref="a768f5449e3a83ac56f2fb8ab4562339" prefix=" " category="inline-code"></block> 以导入卷。</block>
-  <block id="8feb5f647cb423db7fa8a957ae4ef075" category="list-text">创建永久性卷请求(PVC)文件(例如、<block ref="88bf8ee4d993e535425148da6a64c1c2" prefix=" " category="inline-code"></block>)。PVC文件应包括<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>，<block ref="89801e9e98979062e84647433a8ed3e9" prefix=" " category="inline-code"></block>，<block ref="1963d17f24888bdf1f22d7ea7f72f607" prefix=" " category="inline-code"></block>，和<block ref="ee822781a3bd0ae0f8f6331dc4865d9c" prefix=" " category="inline-code"></block>。您也可以指定<block ref="c005e78d4bd808038335c32dd84cf7da" prefix=" " category="inline-code"></block> 在PVC定义中。</block>
   <block id="7f745c89a2e8fd59353bab523e12eb77" category="paragraph">以下是最低规格示例：</block>
-  <block id="a9e31569460a0b133fdd97c5f482c04e" category="admonition">请勿包含PV名称或卷大小等其他参数。这可能发生原因会使导入命令失败。</block>
   <block id="37c0e0081d2fa3ebdf688df7e37ecd7a" category="paragraph">查看以下卷导入示例、了解受支持的驱动程序。</block>
   <block id="b8cd11aae04b2508e6cf401f43cdb4f9" category="section-title">ONTAP NAS和ONTAP NAS FlexGroup</block>
   <block id="15f21f5d1f84f4b986a4db037c57333d" category="list-text">。<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 和<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 驱动程序不允许使用重复的卷名称。</block>
-  <block id="3fa3bc64b029b88f42b842bb7dc4e52d" category="paragraph-title">ONTAP NAS示例</block>
-  <block id="77fe25c67ee05760d58e91a98e3ff055" category="paragraph">以下是受管卷和非受管卷导入的示例。</block>
   <block id="865c1a701e3847de9fbff4a375ac7177" category="open-title">受管卷</block>
   <block id="9baac1fff2f93c6aa6f2205921fe6b32" category="paragraph">以下示例将导入名为的卷<block ref="b61fdc0d7fc5d08e674f3891a91d3116" prefix=" " category="inline-code"></block> 位于名为的后端<block ref="b0253ee501e433d48faea12f8e40ef28" prefix=" " category="inline-code"></block>：</block>
   <block id="ed12f17a6dc2e65dfdf289eb64d258ae" category="open-title">非受管卷</block>
   <block id="30690ec57cb4844d007f7d2e2c9393a2" category="paragraph">以下示例导入<block ref="60d9e6d88af815fe67aed90572f53184" prefix=" " category="inline-code"></block> 在上<block ref="b0253ee501e433d48faea12f8e40ef28" prefix=" " category="inline-code"></block> 后端：</block>
   <block id="548fedaf4074fe2826e3c53dfd92a19e" category="section-title">ONTAP SAN</block>
-  <block id="854d516b7e1eddbead5cbea0b17dac88" category="paragraph-title">ONTAP SAN示例</block>
   <block id="d172829ee06c1c52828b60f0544b2f06" category="paragraph">以下示例导入<block ref="a5c0fa75ec8cf92d22eadab558660dda" prefix=" " category="inline-code"></block> 在上<block ref="2dec4fe0d108047546d031f48f4073f7" prefix=" " category="inline-code"></block> 后端：</block>
   <block id="58f7692a8b6ce5b3fa31b6daec3259fe" category="paragraph">如果您将LUN映射到与Kubornetes节点IQN共享IQN的igroux、如以下示例所示、您将收到错误：<block ref="4524d417d10c9cf90c4a674da76c4964" prefix=" " category="inline-code"></block>。您需要删除启动程序或取消映射LUN才能导入卷。</block>
   <block id="5ccef908ed30c9dac1afd0a7f3dc5e7f" category="inline-image-macro">映射到iqn和集群iqn的LUN的图像。</block>
   <block id="81238a539b4fc11fb20c6d27db1e5d33" category="paragraph"><block ref="81238a539b4fc11fb20c6d27db1e5d33" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="d12ef9e4a047861afd11513bde147f35" category="paragraph-title">元素示例</block>
   <block id="e91134286ebcca5f894ca859ce6e6527" category="paragraph">以下示例将导入<block ref="ce9d6be888db333d9f15ad3ca22aab5c" prefix=" " category="inline-code"></block> 后端上的卷<block ref="54034d50b7e92e0dd9d45b9be754d7bd" prefix=" " category="inline-code"></block>。</block>
   <block id="7501988e9549daa8c2fcd13e55b9fc78" category="admonition">要导入Azure NetApp Files卷、请按卷路径确定该卷。卷路径是卷的导出路径的一部分、位于之后<block ref="fb256b96ee496724e4579987e5a6e4da" prefix=" " category="inline-code"></block>。例如、如果挂载路径为<block ref="a88065dde27cea3a008a18172c5a9c9e" prefix=" " category="inline-code"></block>、卷路径为<block ref="062b749476713f7b5bbc675159e90bad" prefix=" " category="inline-code"></block>。</block>
-  <block id="1cfd9b4e20d41cdca62f758d3b0cb58b" category="paragraph-title">Azure NetApp Files示例</block>
   <block id="bd46b0a8c2c4c89a60ee85052ad2dd0e" category="paragraph">以下示例将导入<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> 后端上的卷<block ref="d8dd89ab9d39f5487714722f9becb468" prefix=" " category="inline-code"></block> 卷路径<block ref="062b749476713f7b5bbc675159e90bad" prefix=" " category="inline-code"></block>。</block>
   <block id="0b8ca2be5f4fe564fb8e843cbc53703d" category="admonition">如果在GKE环境中创建按需卷快照、请勿创建快照控制器。GKE-使用内置的隐藏快照控制器。</block>
   <block id="ad90b7d29d0d8a9c746868fe1f38ca90" category="paragraph">Rwo、ROX、rwx、RWOP</block>
@@ -4720,8 +4711,6 @@ SMB</block>
   <block id="76f6a2d1bd679fa4c1b485fed91cd412" category="paragraph">对于受管卷，Trident会将FlexVol volume重命名为格式，并将FlexVol volume中的LUN重命名<block ref="b1a57c8f543d163276a264ab84f98485" prefix=" " category="inline-code"></block>为<block ref="1793051c27c3288cfb3a1c86e4e41b41" prefix=" " category="inline-code"></block>。</block>
   <block id="4e0dca66d693b4377c93d787e9d5176a" category="paragraph">以下示例将导入<block ref="9c263b72b293041bdc16e8711bb55a99" prefix=" " category="inline-code"></block>后端上的FlexVol volume<block ref="5461c7e570fd7b4318a37f0dceb291c1" prefix=" " category="inline-code"></block>：</block>
   <block id="aa39e6a781613c350b8408df39aa0171" category="paragraph">Trident支持使用驱动程序导入卷<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>。</block>
-  <block id="89df083c083e8cfa84ef1517f2b9e609" category="paragraph-title">Google Cloud NetApp卷示例</block>
-  <block id="3312627a317726be3901705d655e8582" category="paragraph">以下示例将使用卷在后端<block ref="c082d32d434314708cccf35dd974ac32" prefix=" " category="inline-code"></block>导入<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>卷<block ref="acdf8df0c694db089171ecaf51f80166" prefix=" " category="inline-code"></block>。</block>
   <block id="94154cfb6a6056267c34a431cd1a4224" category="paragraph">以下示例将在两个卷位于同一区域时导入<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>卷：</block>
   <block id="93c5b0ed9261693ca8644540ac8a1cd9" category="admonition">NetApp建议对NVMe/TCP使用ONTAP 9.12或更高版本。</block>
   <block id="d019fe86b16ae6b783603693309fb4c6" category="section-title">基于FC卷的SCSI</block>
@@ -6000,4 +5989,30 @@ SMB</block>
   <block id="5d644af86a05d68ceba69b7be5855202" category="paragraph">以下示例命令安装 Trident EKS 插件版本 25.6.1：<block ref="c0283be6b5622fc9d2b8ebb2d7fd26c9" prefix=" " category="inline-code"></block>（带有专用版本）</block>
   <block id="5ebe108c241a46f56c18ffb59389b015" category="paragraph">以下示例命令安装 Trident EKS 插件版本 25.6.2：<block ref="c1c3ee7d0d3404bd1e2b5bdd62f81d43" prefix=" " category="inline-code"></block>（带有专用版本）</block>
   <block id="7400a1a595f19cde496a4d3cdf6a4570" category="admonition">使用</block>
+  <block id="5b8e1e79bf81135afd29cee3f88e8b30" category="summary">您可以使用 <block ref="a768f5449e3a83ac56f2fb8ab4562339" prefix=" " category="inline-code"></block> 或 PVC 注释将现有存储卷导入为 Kubernetes PV。</block>
+  <block id="397460c9fd506a22e7b4c34b8d0d4d7d" category="paragraph">您可以使用<block ref="a768f5449e3a83ac56f2fb8ab4562339" prefix=" " category="inline-code"></block>或通过创建带有 Trident 导入注释的持久卷声明 (PVC) 将现有存储卷导入为 Kubernetes PV。</block>
+  <block id="b08d73a7ef39ba9a1b69252df2432d6d" category="paragraph">您可以使用<block ref="a768f5449e3a83ac56f2fb8ab4562339" prefix=" " category="inline-code"></block>或通过创建带有 Trident 导入注释的 PVC 来导入卷。</block>
+  <block id="cbaac9a260727431dda3844fc89a1f56" category="admonition">如果使用 PVC 注释，则无需下载或使用<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>来导入卷。</block>
+  <block id="9f33c2a343cecba4e698e173a72b7205" category="open-title">使用 tridentctl</block>
+  <block id="dc2ba8519acbce5371c3c73e23b848da" category="list-text">创建一个 PVC 文件（例如，<block ref="88bf8ee4d993e535425148da6a64c1c2" prefix=" " category="inline-code"></block>），该文件将用于创建 PVC。PVC 文件应包括<block ref="b068931cc450442b63f5b3d276ea4297" prefix=" " category="inline-code"></block>、<block ref="89801e9e98979062e84647433a8ed3e9" prefix=" " category="inline-code"></block>、<block ref="1963d17f24888bdf1f22d7ea7f72f607" prefix=" " category="inline-code"></block>和<block ref="ee822781a3bd0ae0f8f6331dc4865d9c" prefix=" " category="inline-code"></block>。或者，您可以在 PVC 定义中指定<block ref="c005e78d4bd808038335c32dd84cf7da" prefix=" " category="inline-code"></block>。</block>
+  <block id="3830f157276a56250bf76ff75b8cff68" category="admonition">仅包括所需的参数。PV 名称或卷大小等附加参数可能导致导入命令失败。</block>
+  <block id="088199d1debc901b2e9436960c656998" category="open-title">使用 PVC 注释</block>
+  <block id="746a5142790411babd49bcf9a3e4b947" category="list-text">使用所需的 Trident 导入注释创建 PVC YAML 文件（例如，<block ref="88bf8ee4d993e535425148da6a64c1c2" prefix=" " category="inline-code"></block>）。PVC 文件应包括：</block>
+  <block id="c5af1b1587b493f72559330872964fe5" category="list-text"><block ref="b068931cc450442b63f5b3d276ea4297" prefix="" category="inline-code"></block> 和 <block ref="89801e9e98979062e84647433a8ed3e9" prefix=" " category="inline-code"></block> 在元数据中</block>
+  <block id="d305a0a83c85bbd5ad5d69d2717694ac" category="list-text"><block ref="1963d17f24888bdf1f22d7ea7f72f607" prefix="" category="inline-code"></block>、<block ref="0a36a88c4bcbae4c6ef55004d652aba3" prefix=" " category="inline-code"></block> 和 <block ref="ee822781a3bd0ae0f8f6331dc4865d9c" prefix=" " category="inline-code"></block> 在规格中</block>
+  <block id="0ff8f09564f199f14ff7a19d17eeab3e" category="list-text">标注：</block>
+  <block id="38cfc99fbbb0ca3eb7dfec7a76498ade" category="list-text"><block ref="2b57591dab2fd7e62891330cb5c08e04" prefix="" category="inline-code"></block>: 后端上的卷名称</block>
+  <block id="35ab5de095ed9aa55079aab648067876" category="list-text"><block ref="c7715ec18c9136486b59fd3ecb8b4728" prefix="" category="inline-code"></block>：卷存在的后端 UUID</block>
+  <block id="652807bc698e3601f704586910f8f354" category="list-text"><block ref="cc636a9cad634dcc341d49da1bb224db" prefix="" category="inline-code"></block> (_Optional_)：为非托管卷设置为<block ref="ebc576222020c2a2ae2fc769169f1d2a" prefix=" " category="inline-code"></block>。默认值为<block ref="c07fbc0b2a1a865fe9e3a55c05b4f690" prefix=" " category="inline-code"></block>。</block>
+  <block id="2c9db1af51ac3e6429befaccc4a28946" category="paragraph">下面是导入托管卷的示例规范：</block>
+  <block id="de88eae0ff40e6781524bc7c680fc27d" category="list-text">将 PVC YAML 文件应用到 Kubernetes 集群：</block>
+  <block id="04861a760059dbbada499fbe4c3ef328" category="paragraph">Trident 将自动导入卷并将其绑定到 PVC。</block>
+  <block id="96eb863539228447aee795db4a9ef144" category="paragraph-title">使用 tridentctl 的 ONTAP NAS 示例</block>
+  <block id="06c358feef346225dd8f00164106a052" category="paragraph">以下示例演示如何使用 <block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 导入托管卷和非托管卷。</block>
+  <block id="566544cc9547e874249525434ef6b92c" category="paragraph-title">使用 PVC 注释的 ONTAP NAS 示例</block>
+  <block id="ecc356799a42045ed6a6397f3f280cd2" category="paragraph">以下示例演示如何使用 PVC 注释导入托管和非托管卷。</block>
+  <block id="cd8b45d6d96bb528f04c3ce2788b337d" category="paragraph">以下示例从后端<block ref="ac181edf7a7be1f8ae6a6b0ac4a71686" prefix=" " category="inline-code"></block>导入名为<block ref="47068649001b68b4aba2f4219a2f981b" prefix=" " category="inline-code"></block>的 1GiB<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 卷，使用 PVC 注释设置了 RWO 访问模式：</block>
+  <block id="6aa655b386a1e31c420fd6553ed2b4fc" category="paragraph">以下示例使用 PVC 注释从后端<block ref="4bafc897a4f30b09156a60d3350c8819" prefix=" " category="inline-code"></block>导入名为<block ref="a8aa3f9da25a5d21fdd26c0a26592e1e" prefix=" " category="inline-code"></block>的 1Gi<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 卷，并设置 RWO 访问模式：</block>
+  <block id="3a175f8153aad5b64492df6eadb5a5af" category="paragraph">以下示例显示了如何导入托管卷和非托管卷：</block>
+  <block id="ae3918e109e702f2d03b5027de8a73eb" category="paragraph">以下示例在后端 <block ref="c082d32d434314708cccf35dd974ac32" prefix=" " category="inline-code"></block> 上导入卷 <block ref="acdf8df0c694db089171ecaf51f80166" prefix=" " category="inline-code"></block>。</block>
 </blocks>
