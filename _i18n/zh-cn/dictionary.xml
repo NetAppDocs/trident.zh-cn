@@ -6015,4 +6015,5 @@ SMB</block>
   <block id="6aa655b386a1e31c420fd6553ed2b4fc" category="paragraph">以下示例使用 PVC 注释从后端<block ref="4bafc897a4f30b09156a60d3350c8819" prefix=" " category="inline-code"></block>导入名为<block ref="a8aa3f9da25a5d21fdd26c0a26592e1e" prefix=" " category="inline-code"></block>的 1Gi<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 卷，并设置 RWO 访问模式：</block>
   <block id="3a175f8153aad5b64492df6eadb5a5af" category="paragraph">以下示例显示了如何导入托管卷和非托管卷：</block>
   <block id="ae3918e109e702f2d03b5027de8a73eb" category="paragraph">以下示例在后端 <block ref="c082d32d434314708cccf35dd974ac32" prefix=" " category="inline-code"></block> 上导入卷 <block ref="acdf8df0c694db089171ecaf51f80166" prefix=" " category="inline-code"></block>。</block>
+  <block id="36a57158e28c15925c88aebde90472b6" category="admonition">运行此命令后，ONTAP 提示输入证书。粘贴步骤 1 中生成的<block ref="0c7b1ee06b5fdaab7c83f24275255cf5" prefix=" " category="inline-code"></block>文件内容，然后输入<block ref="b1a326c06d88bf042f73d70f50197905" prefix=" " category="inline-code"></block>以完成安装。</block>
 </blocks>
