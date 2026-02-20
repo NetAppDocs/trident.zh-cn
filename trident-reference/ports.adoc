@@ -16,25 +16,104 @@ summary: 详细了解Trident通信所使用的端口。
 
 
 
-== Trident端口
+== 概述
 
-Trident使用以下端口在 Kubernetes 内部进行通信：
+Trident 使用各种端口在 Kubernetes 集群内以及与存储后端进行通信。以下是关键端口、其用途和安全注意事项的摘要。
 
-[cols="2,4"]
+* **出站焦点**：Kubernetes 节点（控制器和工作节点）主要启动到存储 LIF/IP 的流量，因此 iptables 规则应允许从节点 IP 出站到这些端口上的特定存储 IP。避免宽泛的"任意对任意"规则。
+* **入站限制**：将内部 Trident 端口限制为集群内部流量（例如，使用像 Calico 这样的 CNI）。主机防火墙上没有不必要的入站曝光。
+* **协议安全性**：
++
+** 尽可能使用 TCP（更可靠）。
+** 如果敏感，为 iSCSI 启用 CHAP/IPsec；为管理启用 TLS/HTTPS（端口 443/8443）。
+** 对于 NFSv4（Trident 中的默认值），如果不需要，请修剪 UDP/较旧的 NFSv3 端口（例如，4045-4049）。
+** 仅限于受信任的子网；使用 Prometheus（可选端口 8001）等工具进行监控。
+
+
+
+
+
+
+=== 控制器节点的端口
+
+这些端口主要用于 Trident operator（后端管理）。所有内部端口都是 pod 级；仅当主机防火墙干扰 CNI 时才允许在节点上使用。
+
+[cols="1,1,2,1,2"]
 |===
-| Port | 目的 
+| 端口/协议 | 方向 | 目的 | 驱动程序/协议 | 安全说明 
 
 
-| 8443 | 后通道 HTTPS 
+| TCP 8000 | 入站/出站（集群内部） | Trident REST 服务器（操作员-控制器通信） | 全部 | 仅限于 pod CIDR；无外部暴露。 
 
 
-| 8001 | Prometheus 指标端点 
+| TCP 8443 | 入站/出站（集群内部） | 反向通道 HTTPS（安全内部 API） | 全部 | TLS 加密；如果使用，则限制为 Kubernetes 服务网格。 
 
 
-| 8000 | Trident REST 服务器 
+| TCP 8001 | 入站（集群内部，可选） | Prometheus 指标 | 全部 | 仅暴露给监控工具（例如，使用 RBAC）；如果未使用，则禁用。 
 
 
-| 17546 | Trident demonset Pod 使用的活动性 / 就绪性探测端口 
+| TCP 443 | 出站 | HTTPS 到 ONTAP SVM/集群管理 LIF | ONTAP（all）、ANF | 需要 TLS 证书验证；仅限于管理 LIF IP。 
+
+
+| TCP 8443 | 出站 | HTTPS 到 E-Series Web Services Proxy | E 系列 (iSCSI) | 默认 REST API；使用证书；可在后端 YAML 中配置。 
+|===
+
+
+=== 工作节点的端口
+
+这些端口用于 CSI 节点守护程序集和 pod 挂载。数据端口出站到存储数据 LIF；如果使用 NFSv3，则包括 NFSv3 附加组件（NFSv4 可选）。
+
+[cols="1,1,2,1,2"]
+|===
+| 端口/协议 | 方向 | 目的 | 驱动程序/协议 | 安全说明 
+
+
+| TCP 17546 | 入站（本地到 pod） | CSI 节点活跃度/就绪探测 | 全部 | 可配置（--probe-port）；确保没有主机冲突；仅限本地。 
+
+
+| TCP 8000 | 入站/出站（集群内部） | Trident REST 服务器 | 全部 | 如上所述；pod-internal。 
+
+
+| TCP 8443 | 入站/出站（集群内部） | 后通道 HTTPS | 全部 | 同上。 
+
+
+| TCP 8001 | 入站（集群内部，可选） | Prometheus 指标 | 全部 | 同上。 
+
+
+| TCP 443 | 出站 | HTTPS 到 ONTAP SVM/集群管理 LIF | ONTAP（all）、ANF | 如上；用于发现。 
+
+
+| TCP 8443 | 出站 | HTTPS 到 E-Series Web Services Proxy | E 系列 (iSCSI) | 同上。 
+
+
+| TCP/UDP 111 | 出站 | RPCBIND/portmapper | ONTAP-NAS (NFSv3/v4)、ANF (NFS) | v3 必需；v4 可选（防火墙卸载）；如果仅使用 NFSv4，则限制。 
+
+
+| TCP/UDP 2049 | 出站 | NFS 守护进程 | ONTAP-NAS (NFSv3/v4)、ANF (NFS) | 核心数据；众所周知；使用 TCP 实现可靠性。 
+
+
+| TCP/UDP 635 | 出站 | 挂载守护进程 | ONTAP-NAS (NFSv3/v4)、ANF (NFS) | 挂载；可以进行双向回调（如果需要，允许入站临时连接）。 
+
+
+| UDP 4045 | 出站 | NFS 锁定管理器 (nlockmgr) | ONTAP-NAS（NFSv3） | 文件锁定；跳过 v4（pNFS 句柄）；仅限 UDP。 
+
+
+| UDP 4046 | 出站 | NFS 状态监控 (statd) | ONTAP-NAS（NFSv3） | 通知；可能需要入站临时端口 (1024-65535) 进行回拨。 
+
+
+| UDP 4049 | 出站 | NFS 配额守护进程 (rquotad) | ONTAP-NAS（NFSv3） | 配额；跳过 v4。 
+
+
+| TCP 3260 | 出站 | iSCSI 目标（发现/数据/CHAP） | ONTAP-SAN (iSCSI)、E-Series (iSCSI) | 众所周知；通过此端口进行 CHAP 身份验证；启用双方 CHAP 以实现安全。 
+
+
+| TCP 445 | 出站 | SMB/CIFS | ONTAP-NAS (SMB)、ANF (SMB) | 众所周知；使用 SMB3 进行加密（Trident annotation netapp.io/smb-encryption=true）。 
+
+
+| TCP/UDP 88（可选） | 出站 | Kerberos 身份验证 | ONTAP（带 Kerb 的 NFS/SMB/iSCSI） | 如果使用 Kerberos（非默认）；到 AD 服务器，而不是存储。 
+
+
+| TCP/UDP 389（可选） | 出站 | LDAP | ONTAP（使用 LDAP 的 NFS/SMB） | 类似；用于名称解析/身份验证；限制为 AD。 
 |===
 
 NOTE: 在安装期间、可以使用更改活跃度/就绪性探测端口 `--probe-port` 标志。请务必确保此端口未被工作节点上的其他进程使用。

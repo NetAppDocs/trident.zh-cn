@@ -1,0 +1,48 @@
+= 支持的操作
+:allow-uri-read: 
+
+
+sidebar: sidebar permalink: trident-asar2-support.html keywords: asar2, trident, fcp, nvme, tcp, nvme/tcp, fibre channel summary: NetApp Trident 支持用于 iSCSI 和 NVMe/TCP 的 ONTAP ASA r2。--- = NetApp Trident 对 ONTAP ASA r2 存储系统的支持 :hardbreaks: :icons: font :imagesdir: ./media/
+
+[role="lead"]
+NetApp Trident 25.02 及更高版本支持 NetApp ASA r2 系统作为存储后端。有关详细信息，请参见 link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2系统"^]。
+
+ASA r2 系统需要 `ontap-san`驱动程序。Trident 不支持 ASA r2 系统的 `ontap-san-economy`驱动程序。
+
+当您在后端配置中指定  `ontap-san` 作为  `storageDriverName` 时，Trident 会自动检测 ASA r2 存储系统。
+
+Trident 为具有 Trident protect 的 ASA r2 系统提供有限的数据保护。
+
+支持的 SAN 协议取决于您的 Trident 版本：
+
+* Trident 25.02 及更高版本支持 iSCSI。
+* Trident 25.06 及更高版本除 iSCSI 外还支持 NVMe/TCP。
+
+
+必须至少将一个聚合分配给 ONTAP 后端存储的 Storage Virtual Machine (SVM)。有关说明，请参阅 link:https://kb.netapp.com/on-prem/ASAr2/ASAr2_KBs/su_create_by_SVM_admin_using_CLI_fails_with_error_No_candidate_aggregates_are_available_for_storage_services["为 ASA r2 系统中的 SVM 分配聚合"^]。
+
+
+
+== 支持的操作
+
+* 配置持久卷 (PV)
+* 动态卷配置
+* 创建和删除卷
+* 克隆卷
+* 扩展卷
+* 管理存储类
+
+
+
+
+== 不支持的操作
+
+* 进行了加密
+* SnapMirror 卷复制
+* 限制聚合使用
+* 空间预留模式
+* 快照
+* 分层
+
+
+有关详细信息，请参见 link:https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html["ONTAP SAN配置选项和示例"^] 。

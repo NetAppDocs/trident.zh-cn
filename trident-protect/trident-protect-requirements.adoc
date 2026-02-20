@@ -133,7 +133,7 @@ kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=
 
 NetApp SnapMirror复制功能可与Trident Protect 配合使用，适用于以下ONTAP解决方案：
 
-* 内部NetApp FAS、AFF和ASA集群
+* 本地 NetApp FAS、AFF 和 ASA 系统。目前 ASA r2 系统不支持使用 Trident 保护进行 SnapMirror 复制。
 * NetApp ONTAP Select
 * NetApp Cloud Volumes ONTAP
 * 适用于 NetApp ONTAP 的 Amazon FSX
