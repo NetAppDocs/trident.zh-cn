@@ -20,6 +20,8 @@ entries:
     entries:
     - title: 概述
       url: "/trident-use/gcnv.html"
+    - title: 配置块存储
+      url: "/trident-use/gcnv-block.html"
     - title: 准备配置
       url: "/trident-use/gcnv-prep.html"
     - title: 配置选项和示例
@@ -52,6 +54,8 @@ entries:
       url: "/trident-use/trident-fsx-install-trident.html"
     - title: 配置存储后端
       url: "/trident-use/trident-fsx-storage-backend.html"
+    - title: 配置自动后端配置
+      url: "/trident-use/trident-fsx-auto-backend-configuration.html"
     - title: 配置存储类和PVC
       url: "/trident-use/trident-fsx-storageclass-pvc.html"
     - title: 部署示例应用程序
@@ -80,6 +84,12 @@ entries:
     url: "/trident-use/vol-provision.html"
   - title: 展开卷
     url: "/trident-use/vol-expansion.html"
+  - title: 了解 RWX NVMe 子系统限制
+    url: "/trident-use/trident-nvme-rwx-subsystem-limits.html"
+  - title: 控制器可扩展性
+    url: "/trident-use/controller-scalability.html"
+  - title: 自动卷扩展
+    url: "/trident-use/automatic-volume-expansion.html"
   - title: 导入卷
     url: "/trident-use/vol-import.html"
   - title: 自定义卷名称

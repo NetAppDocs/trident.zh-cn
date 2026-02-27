@@ -16,7 +16,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 
 
 
-== 关于Trident10的关键信息
+== 有关Trident的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -25,7 +25,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 ====
 []
 =====
-* Trident现已支持 Kubernetes 1.34。在升级 Kubernetes 之前先升级Trident 。
+* Trident 现在支持 Kubernetes 1.35。在升级 Kubernetes 之前升级 Trident。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。

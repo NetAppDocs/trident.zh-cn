@@ -1,0 +1,187 @@
+---
+sidebar: sidebar 
+permalink: trident-use/google-cloud-netapp-volumes-auto-tiering.html 
+keywords: trident, google cloud netapp volumes, auto-tiering, storageclass, pvc annotations, data tiering, cooling days 
+summary: 使用 Trident，通过 Kubernetes 原生机制配置 Google Cloud NetApp Volumes 自动分层。 
+---
+= 为 Google Cloud NetApp Volumes 配置自动分层
+:hardbreaks:
+:allow-uri-read: 
+:icons: 
+:imagesdir: ../media/
+:icontype: font:
+
+
+[role="lead"]
+本页介绍如何使用 Trident 为 Google Cloud NetApp Volumes 配置自动分层。自动分层通过 Trident 后端参数和 PersistentVolumeClaim 注释在卷配置期间进行配置。
+
+
+
+== 概述
+
+自动分层允许 Trident 配置卷，自动将非活动数据从性能层移动到容量层。这降低了存储成本，同时保留了频繁访问数据的性能。
+
+Trident 仅在卷创建时应用自动分层设置。Trident 26.02 不支持预配后更改。
+
+
+
+== 概念
+
+
+
+=== 自动分层
+
+自动分层根据访问模式将不经常访问的数据从性能层移动到容量层。数据移动是异步发生的，并不是立即发生的。
+
+
+
+=== 分层策略
+
+分层策略确定是否为卷启用自动分层。
+
+支持以下策略：* `auto`：根据访问模式启用自动分层 * `none`：禁用自动分层
+
+
+
+=== 冷却天数
+
+冷却天数指定数据块在符合分层条件之前必须保持非活动状态的最短天数。仅当分层策略设置为 `auto`时，才适用冷却天数。
+
+
+
+== 配置模型
+
+
+
+=== 配置范围
+
+可以在多个范围内配置自动分层：
+
+* **存储池范围** 适用于从池中配置的所有卷。
+* **卷范围** 通过 PersistentVolumeClaim 注释应用于单个卷。
+
+
+Trident 根据每个设置的定义位置确定有效配置。
+
+
+
+=== 配置优先级
+
+当在多个作用域中定义了相同的设置时，Trident 应用以下优先级顺序：
+
+. PersistentVolumeClaim 注释
+. Trident 后端配置
+. 存储池默认值
+
+
+在较高优先级定义的设置将覆盖较低级别的值。
+
+
+
+== Trident 26.02 中支持的功能
+
+Trident 26.02 支持 Google Cloud NetApp Volumes 的以下自动分层功能：
+
+* 在卷配置期间启用或禁用自动分层
+* 在 Trident 后端配置中定义分层策略
+* 使用 PVC 注释覆盖分层策略和每个卷的冷却天数
+* 为启用自动分层的卷配置冷却天数
+
+
+
+
+== Trident 26.02 中不支持的功能
+
+不支持以下操作：
+
+* 创建卷后修改自动分层设置
+* 使用 Kubernetes 更新更改现有卷的分层策略
+* 在 Trident 管理的配置工作流之外应用自动分层设置
+
+
+
+
+== 后端配置参数
+
+以下参数在 Trident 后端配置中定义时控制自动分层行为：
+
+[cols="2,1,2"]
+|===
+| 参数 | Required | Description 
+
+
+| tieringPolicy | 否 | 卷的分层策略（(`auto`或 `none`） 
+
+
+| tieringMinimumCoolingDays | 否 | 数据分层前的非活动天数（范围：2–183，默认值：31） 
+|===
+
+
+== 使用 PersistentVolumeClaim 注释的卷级覆盖
+
+
+
+=== 支持的注释
+
+PersistentVolumeClaim 批注允许按卷覆盖自动分层设置。
+
+[cols="2,2"]
+|===
+| 标注 | Description 
+
+
+| `trident.netapp.io/tieringPolicy` | 覆盖卷的分层策略 
+
+
+| `trident.netapp.io/tieringMinimumCoolingDays` | 覆盖该卷的冷却天数值 
+|===
+
+
+=== 示例：PersistentVolumeClaim 使用自动分层覆盖
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: auto-tiering-pvc
+  annotations:
+    trident.netapp.io/tieringPolicy: auto
+    trident.netapp.io/tieringMinimumCoolingDays: "45"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: google-cloud-netapp-volumes-auto-tiering
+  resources:
+    requests:
+      storage: 500Gi
+----
+
+
+== 行为和限制
+
+
+
+=== 配置行为
+
+* 自动分层设置仅在创建卷时进行评估和应用。
+* Trident 在配置后不会协调分层配置。
+* 当分层策略设置为 `none`时，冷却天数将被忽略。
+
+
+
+
+=== 平台限制
+
+* 只有 NAS 卷（NFS 和 SMB）才支持自动分层。
+* 块卷 (iSCSI) 不支持自动分层。
+* Google Cloud NetApp Volumes 存储池必须在 Google Cloud 中启用自动分层。
+
+
+
+
+=== 支持的值
+
+*  `tieringMinimumCoolingDays` 的有效范围：2 到 183
+* 默认值：31
+

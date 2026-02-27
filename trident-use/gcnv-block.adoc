@@ -1,0 +1,352 @@
+---
+sidebar: sidebar 
+permalink: trident-use/gcnv-block.html 
+keywords: Trident backend, Google Cloud NetApp Volumes, iSCSI, SAN, block storage, Flex Unified pools, GKE 
+summary: 配置 Trident 以从 Google Cloud NetApp Volumes Flex Unified 池中配置块（iSCSI）卷。 
+---
+= 为 SAN 工作负载配置 Google Cloud NetApp Volumes
+:allow-uri-read: 
+
+
+[role="lead"]
+您可以将 Trident 配置为使用 iSCSI 协议从 Google Cloud NetApp Volumes 配置块存储卷。SAN 卷使用
+`google-cloud-netapp-volumes-san`存储驱动程序从 *Flex Unified* 存储池进行配置。
+
+此驱动程序专用于块工作负载，不支持 NAS 协议。
+
+
+NOTE:  `google-cloud-netapp-volumes-san` 后端需要配置 iSCSI 块卷。 `google-cloud-netapp-volumes` 后端仅支持 NAS 协议，不能用于 SAN 工作负载。
+
+
+
+== NAS 卷和 iSCSI 块卷
+
+Google Cloud NetApp Volumes 同时支持 NAS 和块存储，这在应用程序访问和管理数据的方式上有所不同。
+
+NAS 卷提供基于文件的存储，并使用 NFS 或 SMB 作为共享文件系统进行装载。当多个 pod 或节点需要并发访问相同数据时，通常使用这些卷。
+
+iSCSI 块卷提供原始块存储，并作为块设备连接到 Kubernetes 节点。每个卷都作为一个逻辑单元号（Logical Unit Number，LUN）进行调配，并使用 iSCSI 协议进行访问。当工作负载需要块级访问或应用程序管理的 I/O 行为时，通常使用块存储。
+
+您可以使用由 *Flex Unified* Google Cloud NetApp Volumes 池支持的 Trident 管理的 iSCSI 存储在 Google Kubernetes Engine 上部署面向块的工作负载。
+
+这适用于以下环境：
+
+* Trident 26.02 及更高版本
+* Google Kubernetes Engine （ GKEE ）
+* Google Cloud NetApp Volumes *Flex Unified* 存储池
+* 基于 iSCSI 的数据块工作负载
+
+
+
+NOTE: Trident 26.02 中的 SAN 工作负载仅支持 Flex 服务级别。
+
+
+
+== 存储架构概述
+
+对于 SAN 工作负载，Trident 通过在 Flex Unified 存储池中创建 iSCSI 逻辑单元号 (LUN) 来配置块存储。
+
+每个 Kubernetes PersistentVolume 对应一个 LUN。Trident 管理 LUN 的整个生命周期，包括创建、主机映射、附加和清理。
+
+
+
+== Flex Unified 存储池
+
+Flex Unified 存储池使用 iSCSI 协议提供块存储，并且是 SAN 配置所必需的。
+
+对于 Trident 26.02：
+
+* 仅支持 *Flex Unified REGIONAL* 池
+* 从 Trident 26.02.1 开始支持 Flex Unified *ZONAL* 池
+* SAN 工作负载仅支持 *Flex* 服务级别
+
+
+
+
+== 块卷
+
+块卷被调配为 iSCSI LUN，并作为块设备呈现给 Kubernetes 节点。
+
+块卷：
+
+* 使用 iSCSI 协议
+* 支持文件系统和原始块呈现
+* 由 Trident 连接和管理
+* 支持多种 Kubernetes 访问模式
+
+
+
+
+== 访问模式
+
+Trident 配置的块卷支持以下访问模式：
+
+* `ReadWriteOnce`（RWO）
+* `ReadOnlyMany`（ROX）
+* `ReadWriteOncePod`（RWOP）
+* `ReadWriteMany` (RWX)，仅在 `volumeMode: Block`时受支持
+
+
+
+
+== volumeMode 行为
+
+ `volumeMode` 字段控制块卷的暴露方式：
+
+* `Filesystem` Trident 格式化和装载卷。
+* `Block` Trident 附加设备并将其公开为原始块设备。
+
+
+
+
+== 配置 Trident SAN 后端
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: gcnv-san
+  namespace: trident
+spec:
+  version: 1
+  storageDriverName: google-cloud-netapp-volumes-san
+  projectNumber: "<project-number>"
+  location: "<region>"
+  sdkTimeout: "600"
+  storage:
+  - labels:
+      cloud: gcp
+      performance: flex
+    network: "<vpc-network>"
+    serviceLevel: Flex
+----
+
+
+== 为 SAN 工作负载创建 StorageClass
+
+配置 SAN 后端后，创建一个引用
+`google-cloud-netapp-volumes-san`驱动程序的 StorageClass。
+
+文件系统类型在 StorageClass 中定义，而不是在后端。
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gcnv-san
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "google-cloud-netapp-volumes-san"
+  fsType: "ext4"
+allowVolumeExpansion: true
+----
+支持的文件系统类型：
+
+* `ext4` (默认)
+* `ext3`
+* `xfs`
+
+
+
+NOTE: SAN 驱动程序仅支持 Flex 服务级别，不使用特定于 NAS 的后端参数，例如 `exportRule`、 `unixPermissions`、
+`nasType`、 `snapshotDir`、 `nfsMountOptions`或与分层相关的设置。
+
+
+
+== 支持的操作
+
+使用 
+`google-cloud-netapp-volumes-san` 驱动程序配置的块卷支持：
+
+* 创建
+* 删除
+* 克隆
+* Snapshot
+* 调整大小
+* 导入
+
+
+
+
+== 配置块卷
+
+
+
+=== ReadWriteOnce（RWO）
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gcnv-san-rwo
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: gcnv-san
+----
+
+
+=== ReadWriteOncePod（RWOP）
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gcnv-san-rwop
+spec:
+  accessModes:
+    - ReadWriteOncePod
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: gcnv-san
+----
+
+
+=== ReadOnlyMany（ROX）
+
+ROX 的常见模式是克隆现有 ReadWriteOnce 卷并将克隆挂载为只读。
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gcnv-san-rox
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: gcnv-san
+  dataSource:
+    kind: PersistentVolumeClaim
+    name: gcnv-san-rwo
+----
+
+
+=== ReadWriteMany (RWX) — 仅原始块
+
+只有当 `volumeMode: Block`时才支持 ReadWriteMany。
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gcnv-san-raw-rwx
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Block
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: gcnv-san
+----
+
+
+== 额外的 GiB 过度配置行为
+
+Google Cloud NetApp Volumes 块卷包括内部元数据开销。与调配的容量相比，这种开销减少了内核可见的设备大小。
+
+测试显示：
+
+* 初始创建时约 300 KiB 的开销
+* 调整大小后开销高达约 107 MiB
+
+
+由于 Google Cloud NetApp Volumes 仅接受全 GiB 分配，Trident 确保可用设备大小始终满足或超过 PVC 请求：
+
+* 将请求的大小舍入至下一个整 GiB
+* 添加额外的 1 GiB 缓冲区
+
+
+示例：
+
+* PVC 请求：100 GiB
+* Google Cloud NetApp Volumes 中的预配大小：101 GiB
+* 应用程序可见的可用空间：至少 100 GiB
+
+
+这保证了应用程序始终收到所请求的容量，即使在考虑了内部元数据开销之后也是如此。
+
+
+
+== Pod 示例
+
+
+
+=== 文件系统挂载的块卷 (RWO)
+
+[source, yaml]
+----
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-rwo
+spec:
+  containers:
+  - name: app
+    image: ubuntu:22.04
+    command: ["sleep", "infinity"]
+    volumeMounts:
+    - name: data
+      mountPath: /mnt/data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: gcnv-san-rwo
+----
+
+
+=== 原始块设备 (RWX)
+
+[source, yaml]
+----
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-raw-rwx
+spec:
+  containers:
+  - name: app
+    image: ubuntu:22.04
+    command: ["sleep", "infinity"]
+    volumeDevices:
+    - name: data
+      devicePath: /dev/xda
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: gcnv-san-raw-rwx
+----
+
+
+== 连接和挂载行为
+
+对于从 Google Cloud NetApp Volumes 配置的 SAN 卷：
+
+* Trident 在 Flex Unified 存储池中创建逻辑单元号 (LUN)。
+* 在发布期间， Trident 将 LUN 映射到每个节点的主机组。
+* 在节点暂存期间，Trident：
++
+** 登录到 iSCSI 目标
+** 发现 LUN
+** 配置多路径
+
+
+* 如果 `volumeMode: Filesystem`，Trident 会根据需要格式化设备并挂载它。
+* 如果 `volumeMode: Block`，Trident 会连接设备并将其直接暴露给 pod，无需格式化或挂载。
+
+
+
+NOTE: SAN 块卷不提供分布式锁定或写入协调。当一个块卷被多个节点访问时（ReadWriteMany 与 `volumeMode: Block`），应用程序或文件系统必须管理并发。
