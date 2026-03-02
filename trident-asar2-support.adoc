@@ -1,8 +1,15 @@
-= 支持的操作
+---
+sidebar: sidebar 
+permalink: trident-asar2-support.html 
+keywords: asar2, trident, fcp, nvme, tcp, nvme/tcp, fibre channel 
+summary: NetApp Trident 支持用于 iSCSI 和 NVMe/TCP 的 ONTAP ASA r2。 
+---
+= NetApp Trident 支持 ONTAP ASA r2 存储系统
+:hardbreaks:
 :allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
 
-
-sidebar: sidebar permalink: trident-asar2-support.html keywords: asar2, trident, fcp, nvme, tcp, nvme/tcp, fibre channel summary: NetApp Trident 支持用于 iSCSI 和 NVMe/TCP 的 ONTAP ASA r2。--- = NetApp Trident 对 ONTAP ASA r2 存储系统的支持 :hardbreaks: :icons: font :imagesdir: ./media/
 
 [role="lead"]
 NetApp Trident 25.02 及更高版本支持 NetApp ASA r2 系统作为存储后端。有关详细信息，请参见 link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2系统"^]。

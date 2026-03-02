@@ -1,0 +1,487 @@
+---
+sidebar: sidebar 
+permalink: trident-use/manage-autogrow-policies.html 
+keywords: trident, autogrow, automatic volume expansion, autogrow policy, persistent volume claim resize, ontap, kubernetes 
+summary: 使用 Trident Autogrow Policies 管理自动卷扩展。 
+---
+= 管理 Autogrow 策略
+:allow-uri-read: 
+
+
+[role="lead"]
+创建 Autogrow 策略后，可以根据需要查看、更新和删除它们。您还可以监控哪些卷正在使用给定的策略。
+
+
+
+== 查看 Autogrow 策略
+
+
+
+=== 列出所有策略
+
+使用  `kubectl` 列出集群中的所有 Autogrow Policies：
+
+[source, console]
+----
+kubectl get tridentautogrowpolicy
+----
+或者，也可以使用 `tridentctl`：
+
+[source, console]
+----
+tridentctl get autogrowpolicy
+----
+
+
+=== 查看策略详细信息
+
+要查看策略的完整规范和状态：
+
+[source, console]
+----
+kubectl describe tridentautogrowpolicy production-db-policy
+----
+要以 YAML 格式查看策略及其关联的卷：
+
+[source, console]
+----
+tridentctl get autogrowpolicy production-db-policy -o yaml
+----
+
+
+== 更新 Autogrow 策略
+
+您可以修改现有策略以更改其阈值、增长量或最大大小。更改将立即对使用该策略的所有卷生效。
+
+
+IMPORTANT: 更改会影响当前使用此策略的所有卷。尽可能先在非生产环境中测试更改。
+
+.步骤
+. 编辑策略：
++
+[source, console]
+----
+kubectl edit tridentautogrowpolicy production-db-policy
+----
+. 根据需要修改 `spec`字段：
++
+[source, yaml]
+----
+spec:
+  usedThreshold: "75%"    # Changed from 80%
+  growthAmount: "20%"     # Changed from 10%
+  maxSize: "1Ti"          # Changed from 500Gi
+----
+. 保存并退出。更改立即生效。
+
+
+
+
+=== 更新注意事项
+
+* *即时效应：* 所有使用该策略的卷在下一次增长评估时都采用新参数。
+* *无需重新启动卷：*更改适用于下一次增长操作。
+* *先测试：* 尽可能在非生产环境中验证更改。
+* *沟通更改：*修改共享策略时通知团队。
+
+
+
+
+== 删除 Autogrow 策略
+
+Autogrow 策略使用终结器保护，以防止在卷正在使用时意外删除。
+
+.步骤
+. 删除策略：
++
+[source, console]
+----
+kubectl delete tridentautogrowpolicy production-db-policy
+----
+. 如果卷仍在使用策略，则删除进入  `Deleting` 状态。检查受影响的卷：
++
+[source, console]
+----
+tridentctl get autogrowpolicy production-db-policy -o yaml
+----
+. 从每个受影响的卷中删除策略。从下列选项中选择一项：
++
+--
+** *选项 A：通过将注释设置为 `"none"`来显式禁用自动增长*：
++
+[source, console]
+----
+kubectl annotate pvc <pvc-name> \
+  trident.netapp.io/autogrowPolicy="none" \
+  --overwrite
+----
+** *选项 B：完全删除注释：*
++
+[source, console]
+----
+kubectl annotate pvc <pvc-name> \
+  trident.netapp.io/autogrowPolicy-
+----
+
+
+--
+
+
+
+
+=== 删除行为
+
+[cols="1,2"]
+|===
+| 场景 | 行为 
+
+
+| 没有卷使用该策略 | 策略将立即删除。 
+
+
+| 卷正在使用此策略 | 策略进入 `Deleting`状态。终结器阻止完成，直到删除所有卷。 
+
+
+| 所有卷均已从策略中删除 | 终结器将被删除，策略也将被删除。 
+|===
+
+
+== 监控 Autogrow 策略使用情况
+
+
+
+=== 使用策略检查卷
+
+[source, console]
+----
+tridentctl get autogrowpolicy production-db-policy -o json | jq '.volumes'
+----
+
+
+=== 查找卷使用的策略
+
+[source, console]
+----
+kubectl get pvc database-pvc -o jsonpath='{.metadata.annotations.trident\.netapp\.io/autogrowPolicy}'
+----
+
+
+=== 监控策略事件
+
+[source, console]
+----
+kubectl get events --field-selector involvedObject.kind=TridentAutogrowPolicy
+----
+
+
+== 支持的协议
+
+Autogrow 支持以下存储协议：
+
+* NFS
+* iSCSI
+* FCP
+* NVMe
+
+
+
+NOTE: 对于 SAN 卷，如果配置的 `growthAmount`为 50 MiB 或更少，Trident 会自动将调整大小操作的增长量增加到 51 MB，前提是结果大小不超过 `maxSize`。
+
+
+
+== 已知限制
+
+* *ONTAP NVMe 原始块卷：* 使用早于 9.16.1 的 ONTAP 版本创建的卷不支持自动增长。
+* *现有卷（brownfield 部署）：*即使应用了有效的 Autogrow Policy，Autogrow 可能也不适用于现有卷。这是由于卷发布的持续迁移。要确认迁移已完成，请检查 Trident 控制器日志中的 `"Migration completed"`消息。
+
+
+
+
+== 常见问题解答
+
+
+
+=== Trident 何时评估阈值？
+
+Trident 持续监控卷使用情况。当使用的容量超过 `usedThreshold`时，Trident 会创建一个内部调整大小请求，并按配置的 `growthAmount`扩展卷。
+
+例如，此策略将以 80% 的容量触发扩展，并每次将卷增长 10%，最多可达 500 GiB：
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: standard-autogrow
+spec:
+  usedThreshold: "80%"
+  growthAmount: "10%"
+  maxSize: "500Gi"
+----
+
+
+=== 是否可以在已配置卷后应用策略？
+
+可以。您可以随时创建 Autogrow Policy，并通过添加或更新 `trident.netapp.io/autogrowPolicy`注释将其应用于现有 PVC。您无需重新创建 PVC 或 StorageClass。
+
+将策略应用于现有 PVC：
+
+[source, console]
+----
+kubectl annotate pvc <pvc-name> \
+  trident.netapp.io/autogrowPolicy="production-db-policy" \
+  --overwrite
+----
+要将策略应用于现有 StorageClass：
+
+[source, console]
+----
+kubectl annotate storageclass ontap-gold \
+  trident.netapp.io/autogrowPolicy="production-db-policy" \
+  --overwrite
+----
+
+
+=== 如果我同时在 StorageClass 和 PVC 上设置自动增长策略，会发生什么？
+
+PVC 注释始终优先。如果 PVC 具有 `trident.netapp.io/autogrowPolicy`注释，则无论StorageClass指定什么，Trident 都会使用该值。有关详细信息，请参阅link:create-autogrow-policies.adoc#_policy_precedence["策略优先级"]。
+
+例如，假设此 StorageClass：
+
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-gold
+  annotations:
+    trident.netapp.io/autogrowPolicy: "standard-agp"
+provisioner: csi.trident.netapp.io
+allowVolumeExpansion: true
+----
+此 PVC 覆盖 StorageClass 策略：
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: database-pvc
+  annotations:
+    trident.netapp.io/autogrowPolicy: "logs-policy"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  storageClassName: ontap-gold
+----
+Trident 使用 `logs-policy`用于 `database-pvc`，而不是 `standard-agp`。
+
+
+
+=== 如何禁用特定卷的自动增长？
+
+将 PVC 注释设置为 `"none"`。这将覆盖该卷的任何 StorageClass 级别策略：
+
+[source, console]
+----
+kubectl annotate pvc <pvc-name> \
+  trident.netapp.io/autogrowPolicy="none" \
+  --overwrite
+----
+您可以验证是否已禁用自动增长：
+
+[source, console]
+----
+kubectl get pvc <pvc-name> -o jsonpath='{.metadata.annotations.trident\.netapp\.io/autogrowPolicy}'
+----
+.预期输出
+[source, console]
+----
+none
+----
+
+
+=== 当卷达到 maxSize 时会发生什么？
+
+Trident 停止扩展卷。即使使用量继续增加超过 `usedThreshold`，也不会为该卷创建进一步的调整大小请求。
+
+例如，通过此策略，Trident 在卷达到 100 GiB 后停止增长：
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: capped-policy
+spec:
+  usedThreshold: "90%"
+  growthAmount: "10Gi"
+  maxSize: "100Gi"
+----
+要允许无限增长，请忽略  `maxSize` 或将其设置为  `0`：
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: unlimited-policy
+spec:
+  usedThreshold: "85%"
+  growthAmount: "10%"
+----
+
+
+=== 我可以在不重新启动卷的情况下更改策略吗？
+
+可以。更新策略时，使用该策略的所有卷将在下一次增长评估时采用新参数。不需要重新启动卷。
+
+要就地更新策略：
+
+[source, console]
+----
+kubectl edit tridentautogrowpolicy production-db-policy
+----
+根据需要修改字段：
+
+[source, yaml]
+----
+spec:
+  usedThreshold: "75%"    # Changed from 80%
+  growthAmount: "20%"     # Changed from 10%
+  maxSize: "1Ti"          # Changed from 500Gi
+----
+保存并退出。验证更新后的策略：
+
+[source, console]
+----
+kubectl get tridentautogrowpolicy production-db-policy
+----
+.预期输出
+[source, console]
+----
+NAME                   USED THRESHOLD   GROWTH AMOUNT   STATE
+production-db-policy   75%              20%             Success
+----
+
+
+=== 为什么我的策略处于失败状态？
+
+ `Failed` 状态表示策略规范包含验证错误。运行以下命令来查看错误详细信息：
+
+[source, console]
+----
+kubectl describe tridentautogrowpolicy <policy-name>
+----
+常见原因包括无效的 `usedThreshold`（必须为 1–99%）、 `growthAmount` 超过 `maxSize`，或无效的 Kubernetes 数量格式。请更正规范并重新应用：
+
+[source, console]
+----
+kubectl apply -f autogrow-policy.yaml
+----
+
+
+=== 为什么我无法删除策略？
+
+策略使用终结器保护。如果卷仍在使用该策略，则删除将进入  `Deleting` 状态，并等待从策略中删除所有卷。
+
+识别受影响的卷：
+
+[source, console]
+----
+tridentctl get autogrowpolicy production-db-policy -o yaml
+----
+然后从每个 PVC 中删除注释：
+
+[source, console]
+----
+# Option A: Explicitly disable autogrow
+kubectl annotate pvc <pvc-name> \
+  trident.netapp.io/autogrowPolicy="none" \
+  --overwrite
+
+# Option B: Remove the annotation entirely
+kubectl annotate pvc <pvc-name> \
+  trident.netapp.io/autogrowPolicy-
+----
+删除所有卷后，将释放终结器并删除策略。
+
+
+
+=== 自动增长是否适用于所有 ONTAP 后端？
+
+Autogrow 支持 NFS、iSCSI、FCP 和 NVMe 协议。但是，NVMe 原始块卷需要 ONTAP 9.16.1 或更高版本。
+
+棕色字段部署中的现有卷可能需要在自动增长生效之前完成卷发布迁移。通过检查 Trident 控制器日志来验证迁移状态：
+
+[source, console]
+----
+kubectl logs -l app=trident-controller -n trident | grep "Migration completed"
+----
+以下 StorageClass 示例显示为 NAS 和 SAN 后端配置的自动增长：
+
+.NAS 后端
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ontap-nas-autogrow
+  annotations:
+    trident.netapp.io/autogrowPolicy: "standard-autogrow"
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-nas"
+  fsType: "ext4"
+allowVolumeExpansion: true
+----
+.SAN 后端
+[source, yaml]
+----
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: database-storage
+  annotations:
+    trident.netapp.io/autogrowPolicy: "production-db-policy"
+provisioner: csi.trident.netapp.io
+parameters:
+  backendType: "ontap-san"
+  fsType: "ext4"
+allowVolumeExpansion: true
+----
+
+
+=== SAN 卷的最低增长量是多少？
+
+对于 SAN 卷，有效最低增长量为 51 MB。如果将 `growthAmount`配置为 50 MiB 或更少，Trident 会自动将调整大小操作的增长增加到 51 MB。
+
+例如，此策略设置 `growthAmount`的 `"40Mi"`，但 Trident 对使用它的任何 SAN 卷应用 51 MB 增长：
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: san-minimal-policy
+spec:
+  usedThreshold: "85%"
+  growthAmount: "40Mi"
+  maxSize: "100Gi"
+----
+要避免这种自动调整，请将 `growthAmount`设置为大于 50 MiB 的值：
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentAutogrowPolicy
+metadata:
+  name: san-policy
+spec:
+  usedThreshold: "85%"
+  growthAmount: "100Mi"
+  maxSize: "500Gi"
+----
