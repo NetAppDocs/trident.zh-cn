@@ -90,7 +90,7 @@ NOTE: 这 `k8sTimeout`参数仅适用于Trident安装。
 | `logFormat` | 要使用的Trident日志记录格式[text,json] | `"text"` 
 
 
-| `TridentImage` | 要安装的Trident映像 | `"netapp/trident:25.10"` 
+| `TridentImage` | 要安装的Trident映像 | `"netapp/trident:26.02"` 
 
 
 | `imageRegistry` | 内部注册表的路径、格式

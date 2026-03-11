@@ -33,6 +33,11 @@ Trident根据您的版本提供三个支持级别。请参阅 link:https://mysup
 
 
  a| 
+link:https://docs.netapp.com/us-en/trident/index.html["26.02"^]
+| 2026年2月 | 2027年2月 | 2028年2月 
+
+
+ a| 
 link:https://docs.netapp.com/us-en/trident/index.html["25.10"^]
 | 2026年10月 | 2027年10月 | 2028年10月 
 
