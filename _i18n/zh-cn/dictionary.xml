@@ -5413,12 +5413,8 @@ SMB</block>
   <block id="493d70b01045b3860d249e304254b4c7" category="paragraph">使用Trident，您可以利用 VolumeSnapshots 从中创建新的 PV。使用FlexClone技术从这些快照创建 PV（适用于受支持的ONTAP后端）执行。从快照创建 PV 时，后备卷是快照父卷的FlexClone 。这<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block>驱动程序使用 Element 软件卷克隆从快照创建 PV。它在这里从 Element 快照创建一个克隆。</block>
   <block id="25f96c73018ecdf4416a2540508d0a38" category="paragraph">使用时<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>，<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ， 和<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block>存储驱动程序， Trident可以克隆卷。使用时<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>或者<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>驱动程序不支持克隆。从现有卷创建新卷将创建一个新的快照。</block>
   <block id="6ee9f47ba3ae173d8bb74106620d9108" category="paragraph">NetApp Trident支持在所有流行的NetApp存储平台（包括公有云和本地）上使用和管理存储资源，包括本地ONTAP集群（AFF、 FAS和ASA）、 ONTAP Select、 Cloud Volumes ONTAP、Element 软件（NetApp HCI、 SolidFire）、 Azure NetApp Files和Amazon FSx for NetApp ONTAP。</block>
-  <block id="a83aae835c84331f16ea2f7ab7c6b32b" category="list-text">docker.io/netapp/trident-autosupport:25.10</block>
-  <block id="85cacb03f2d374d44118baf0147c92d6" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v5.3.0</block>
   <block id="04405dc8db6e17d7853c7b251f054223" category="list-text">registry.k8s.io/sig-storage/csi-attacher:v4.10.0</block>
-  <block id="8ca2a31d7227b3df1183df9f930d889e" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v1.14.0</block>
   <block id="d49d35d0964102edd30044f046d62050" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0</block>
-  <block id="6abe296459a351f6d3067ba3a8b8041b" category="list-text">docker.io/netapp/trident-operator:25.10.0（可选）</block>
   <block id="a3bfe8b87df4b85184ac2c726bd7b15e" category="list-text"><block ref="1a368feb8bb72ef66bb194b43d0a15b3" prefix="" category="inline-code"></block>*</block>
   <block id="e344165681ff8191ed4faed24ded7cc3" category="paragraph">Trident在集群中的每个工作节点上以单个控制器 pod 和节点 pod 的形式运行。节点 pod 必须运行在您希望挂载Trident卷的任何主机上。</block>
   <block id="2cfd796902655e533881e53b6b9743ed" category="inline-link-macro">使用Trident实现有状态应用程序的故障转移自动化</block>
@@ -5666,7 +5662,6 @@ SMB</block>
   <block id="14f42721f8b15817f87c891438fb0a22" category="admonition">*免责声明*：本示例中提供的请求和限制值仅用于演示目的。请根据您的环境和工作负载需求调整这些值。</block>
   <block id="75bf9030851f3cf5454c338258e98f47" category="example-title">Kubernetes资源请求和限制配置，适用于Trident控制器以及Trident Windows和Linux节点Pod</block>
   <block id="c6f0dfdaf60b2fd022cd1b94ce713c90" category="paragraph">本示例为Trident控制器和Trident Windows 和 Linux 节点 pod 配置 Kubernetes 资源请求和限制。</block>
-  <block id="b320bddb4a4bb9ebc05f4941f7f248a0" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.3.0</block>
   <block id="80aabc2f42a52376f3d884d3b02360f4" category="admonition">如果您使用 Red Hat OpenShift，请务必注意命名空间注释在 OpenShift 环境中的重要作用。命名空间注释确保恢复的 pod 遵守 OpenShift 安全上下文约束 (SCC) 定义的适当权限和安全配置，并且可以访问卷而不会出现权限问题。欲了解更多信息，请参阅<block ref="842acfa178c0bbf09e368bf9db0716b8" category="inline-link-macro-rx"></block>。</block>
   <block id="5137aa193de4e4cc652a198db463acd3" category="admonition">默认情况下，Trident 的指标会暴露在目标端口上。<block ref="bc3c4a6331a8a9950945a1aa8c95ab8a" prefix=" " category="inline-code"></block>在<block ref="ae3b848d2daecffc635ae20b0b882d8f" prefix=" " category="inline-code"></block>端点。安装Trident时，这些指标*默认启用*。您可以配置通过 HTTPS 在端口上消费Trident指标。<block ref="c24f4c5eef7ec01c46e003a9296c8645" prefix=" " category="inline-code"></block>也一样。</block>
   <block id="e4850469bb389cec2e3ac44d4276ffb0" category="inline-link-macro">Prometheus Operator 文档</block>
@@ -6523,7 +6518,6 @@ SMB</block>
   <block id="ec92eeadf77128110614c3ae4b04e5c6" category="list-text">OpenShift 4.12、4.14 - 4.21 （如果您计划使用 OpenShift 4.19 的 iSCSI 节点准备，则支持的最低 Trident 版本为 25.06.1。）</block>
   <block id="991b6998365b18269e10fd6932757c88" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.35.x</block>
   <block id="8d64b27a6d71fd535c11f889aa7bab23" category="cell">v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、v1.32.0、v1.33.0、v1.35.0</block>
-  <block id="c707950f03771f414f81ae094c2a267c" category="list-text">docker.io/netapp/trident:25.10.0</block>
   <block id="fa39b55af1ef0692bcd52101a2886102" category="inline-link-macro">控制器可扩展性文档</block>
   <block id="132f0447aa079a2a979713029f6c5c0f" category="list-text">添加了对 ONTAP-NAS（仅限 NFS）、ONTAP-SAN（iSCSI、FCP、NVMe）和 Google Cloud NetApp Volumes (GCNV) 驱动程序并发性的一般可用性 (GA) 支持，使此功能从 Tech Preview 升级。有关详细信息，请参见<block ref="2cdc5fbb0ceee513eb25d6f3a67c7e5a" category="inline-link-macro-rx"></block>。</block>
   <block id="79c677a07b8e51f9201ddd1c415adbfc" category="inline-link-macro">自动卷扩展文档</block>
@@ -6722,4 +6716,10 @@ SMB</block>
   <block id="a55370dbc1a259397316ceebdfed21b8" category="paragraph">要避免这种自动调整，请将<block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>设置为大于 50 MiB 的值：</block>
   <block id="b58eceaaba71c126318ed8daedaef74b" category="sidebar">配置自动分层</block>
   <block id="29032e0a813e69e465f384eaf892dbb3" category="sidebar">管理 Autogrow 策略</block>
+  <block id="4711816ecf930de7bedb0fff0ed5f46a" category="list-text">docker.io/netapp/trident:26.02.0</block>
+  <block id="d9d8d43f99f88fa1757ca456d25bffdc" category="list-text">docker.io/netapp/trident-autosupport:26.02</block>
+  <block id="93284b31b63cc86c59eeb4dcd6ba1751" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v6.1.0</block>
+  <block id="f5345a3e1ca4c50ed544fae4c14150b1" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v2.0.0</block>
+  <block id="ed2e3a3511b1047c788e7fd621778ee2" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.5.0</block>
+  <block id="62b6189a1ca283e5a1f0152c40a1d139" category="list-text">docker.io/netapp/trident-operator:26.02.0（可选）</block>
 </blocks>
