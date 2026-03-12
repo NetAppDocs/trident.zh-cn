@@ -4881,16 +4881,12 @@ SMB</block>
   <block id="579f2feb3d9edaa336d3ccb69c3fb855" category="list-text">执行从新目标集群到新源集群的故障转移、并进行以下更改：</block>
   <block id="23b4dec181e41ab3962cf73b28ffe58c" category="list-text">在当前目标集群上、删除App镜像 关系CR：</block>
   <block id="6935ea1d99a0c26f0e4cddb80f444849" category="summary">如果使用Red Hat OpenShift、则可以使用操作员安装Trident。</block>
-  <block id="c282cc9924716a0ecdcc1864c8821950" category="doc">从Trident社区运营商切换到OpenShift认证运营商</block>
-  <block id="92da9bfce4b6635fcf5d3f3725accbbc" category="paragraph">要从NetApp社区Trident操作员切换到Red Hat OpenShift认证Trident操作员、您需要卸载社区操作员、然后使用OperatorHub安装认证操作员。</block>
   <block id="cec1c482e499b4748371d5e19359dacd" category="inline-link-macro">准备安装Trident的环境</block>
-  <block id="82c3da1e712e572f424c3b7bf7dafcaf" category="section-title">卸载NetApp Trident社区操作员</block>
   <block id="ae76609b28371ddbc9f46be837040994" category="list-text">使用OpenShift控制台导航到OperatorHub。</block>
   <block id="349838fb1d851d3e2014b9fe39203275" category="image-alt">安装</block>
   <block id="2d8d10c295f87a1f17d2f37a4df9688d" category="list-text">查找NetApp Trident社区操作员。</block>
   <block id="e1b3a07c6ba67335c1564ff539f1f885" category="admonition">不要选择*从该操作符中删除所有操作数实例*。</block>
   <block id="615da270425b5ecb4fe6ddeed9358880" category="list-text">单击 * 卸载 * 。</block>
-  <block id="c7afcce8432c7e249a80e803d2a81180" category="section-title">安装OpenShift认证操作员</block>
   <block id="6eaf33f9c2387a07f89fc20e19acffaa" category="list-text">导航到Red Hat OperatorHub。</block>
   <block id="cccebca328e4674a8888d5dc22f61e0d" category="list-text">搜索并选择NetApp Trident操作员。</block>
   <block id="9872de8cf3e5ac67cae81e5c17eaa5cc" category="list-text">按照屏幕上的说明安装操作员。</block>
@@ -4905,7 +4901,6 @@ SMB</block>
   <block id="28ed84868f638999e59e306d6b87b07c" category="admonition">如果未选中“*从该运算符中删除所有操作数实例*”复选框，则不会卸载Trident。</block>
   <block id="0e9e7400617f4a815b5ec92f2030b580" category="sidebar">使用OpenShift认证操作员进行安装</block>
   <block id="93e4eff1c01241084bfc9427074bacea" category="sidebar">使用OpenShift OperatorHub安装Trident</block>
-  <block id="c9e3d6c8fc80db4773cf69e205f2b571" category="sidebar">从Trident社区运营商切换到OpenShift认证运营商</block>
   <block id="88f2acec92adfdf94ffec73a8fda60a6" category="paragraph">只需几个步骤即可设置卷克隆。</block>
   <block id="e44a637a848aa60ef27cfc477d692412" category="paragraph">Trident将创建PV及其后端存储卷。</block>
   <block id="9f965f02f635b760a84c43d43aba854f" category="paragraph">开始安装之前，<block ref="a24ee29cd883cbf52de58a68b0fed1a7" category="inline-link-macro-rx"></block>。</block>
@@ -6724,4 +6719,18 @@ SMB</block>
   <block id="f6742c05233fa63959541b8dde0d38c6" category="list-text"><block ref="b60c14c79386a1c34022777459be2c8d" prefix="" category="inline-code"></block> 如果您的 Trident 镜像位于与 CSI 镜像不同的注册表中。</block>
   <block id="1005b3a0632a1617ff4b8822375abb93" category="list-text">请使用 <block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 命令，其中 <block ref="5949043f5e5709138a63b4badf24d7cc" prefix=" " category="inline-code"></block> 反映要升级到的版本。</block>
   <block id="fb40eaf6d704634f11299ec916862c3b" category="list-text">为 ANF 驱动程序添加了手动 QoS 支持，使其在 Trident 26.02 中可投入生产；此实验性增强在 Trident 25.06 中引入。</block>
+  <block id="f1462e5be0262f51cdc6fb6c3b5027dc" category="summary">如果使用 Red Hat OpenShift，则可以从社区操作员、基于 Helm 的安装或手动部署的操作员切换到经过认证的 Trident 操作员。</block>
+  <block id="9e7ed03c18ddecce0aa7a5623628fe1a" category="doc">切换到 OpenShift 认证的 Trident 操作员</block>
+  <block id="00e22a4bea8f6d3bb56845f5728a38f9" category="paragraph">您可以从社区操作员、基于 Helm 的安装或手动部署的操作员切换到 Red Hat OpenShift 认证的 Trident 操作员。每种方法的过程包括卸载现有操作员，然后使用 OperatorHub 安装认证操作员。</block>
+  <block id="e0fb7e598cd3d0a8e5e0f6c10e11f31a" category="admonition">请勿在卸载过程中删除<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>自定义资源 (CR)。<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> CR 保留您的后端和存储类配置，这是在安装认证操作员后所需的配置。</block>
+  <block id="7d8dfdf990860db5c02cc533b2569b8f" category="section-title">从社区运营商切换</block>
+  <block id="b55982405dde4490383f45006a38bdb9" category="inline-xref">安装 OpenShift 认证操作员</block>
+  <block id="8fe087a922a6808c951c0594b69828c8" category="list-text">卸载完成后，请继续 <block ref="40f1b93fbc056c81e4746efd0b19f07f" category="inline-xref-macro-rx"></block>。</block>
+  <block id="d208c568b03c6f135b7ff8a6d7278bc5" category="section-title">从基于 Helm 的操作员安装切换</block>
+  <block id="bdcb884239945a51a171877bdd8f44cf" category="list-text">列出 Trident 安装的 Helm 版本：</block>
+  <block id="563c22175d543b518951ea32e50aabaa" category="list-text">卸载 Helm 版本：</block>
+  <block id="a7377c371690a5509c042cfa7cdab7f3" category="section-title">从手动部署的 operator 切换</block>
+  <block id="5a450639fa89231b036826f5af7d71cd" category="paragraph">如果您通过使用安装程序包中的 <block ref="0d472c887b61206765c1caa63a9290ec" prefix=" " category="inline-code"></block> 手动部署操作员来安装 Trident，请通过删除相同的清单来删除它。</block>
+  <block id="038293ff84b09b1a0092a33fdf412425" category="list-text">使用捆绑清单删除操作员部署：</block>
+  <block id="f5c23abe35c557b95db4b3fce1038b0e" category="sidebar">切换至 OpenShift 认证 Trident 操作员</block>
 </blocks>

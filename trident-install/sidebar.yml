@@ -26,5 +26,5 @@ entries:
   entries:
   - title: 使用OpenShift OperatorHub安装Trident
     url: "/trident-get-started/openshift-operator-deploy.html"
-  - title: 从Trident社区运营商切换到OpenShift认证运营商
-    url: "/trident-get-started/openshift-certified-operator-deploy.html"
+  - title: 切换至 OpenShift 认证 Trident 操作员
+    url: "/trident-install/openshift-certified-operator-deploy.html"
