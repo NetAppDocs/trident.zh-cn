@@ -5437,7 +5437,6 @@ SMB</block>
   <block id="13421cd669efb1bbf8db0c5eac94e4d0" category="paragraph">有关信息，请参阅<block ref="b527eafc73367312d2cf15ed698bf909" category="inline-link-macro-rx"></block>。</block>
   <block id="b1cbc96f53c677765633caf5af4dd9c7" category="list-text">（可选）要启用调试日志记录（建议用于故障排除），请使用：</block>
   <block id="a75138553dd56a4327fa0da9256c6130" category="paragraph">调试日志记录有助于NetApp支持人员排除故障，而无需更改日志级别或重现问题。</block>
-  <block id="acbe525f4ec795ff5a3b0f861d110760" category="admonition">要获取 Helm Chart，首先需要在可以访问互联网的计算机上下载 Helm Chart。<block ref="647ef8ddeca7869e0a7beea8e1dd05ed" prefix=" " category="inline-code"></block>然后复制结果<block ref="c265d889aefa7f1eafd4a9d64a5611ae" prefix=" " category="inline-code"></block> 将文件复制到您的离线环境并进行安装<block ref="222083e2a3b7f539cdb75386d59d4681" prefix=" " category="inline-code"></block> 而不是在最后一步中使用存储库引用。</block>
   <block id="b12f855d5509dac4b79afc31e54cc96f" category="admonition">这<block ref="990dc1a09e10c7b5378e6bc8a1956cb8" prefix=" " category="inline-code"></block>和<block ref="0d9b54b29da54379cca6b8782b9faae5" prefix=" " category="inline-code"></block>这些值适用于所有组件图像，包括<block ref="337f1ae6c2a69673e695c10040714cd4" prefix=" " category="inline-code"></block>和<block ref="a3b6861798228b46d8f1400c35806e4c" prefix=" " category="inline-code"></block>。如果您将镜像推送到注册表中的特定存储库路径（例如，<block ref="9ced4e1438bfae120b7503d1459e84a0" prefix=" " category="inline-code"></block>），请在注册表字段中包含完整路径。这将确保所有图像都从此处提取。<block ref="52da7a794020b670663422d9b8722c45" prefix=" " category="inline-code"></block>。</block>
   <block id="3f09cbddd61fbee1ddfdf268eb77431c" category="section-title">支持的备份注释</block>
   <block id="4ca8f3a143324271168d8e81d7efa3cd" category="paragraph">下表描述了创建备份 CR 时可以使用的注释：</block>
@@ -6733,4 +6732,5 @@ SMB</block>
   <block id="5a450639fa89231b036826f5af7d71cd" category="paragraph">如果您通过使用安装程序包中的 <block ref="0d472c887b61206765c1caa63a9290ec" prefix=" " category="inline-code"></block> 手动部署操作员来安装 Trident，请通过删除相同的清单来删除它。</block>
   <block id="038293ff84b09b1a0092a33fdf412425" category="list-text">使用捆绑清单删除操作员部署：</block>
   <block id="f5c23abe35c557b95db4b3fce1038b0e" category="sidebar">切换至 OpenShift 认证 Trident 操作员</block>
+  <block id="14f3910a0b98b041ef49c99202ac9220" category="admonition">要获取 Helm 图表，请首先在具有 Internet 访问权限的计算机上使用<block ref="75b190fb779b22a7754d4a5d68128df4" prefix=" " category="inline-code"></block>下载 Helm 图表，然后将生成的<block ref="c13cb34a78859274a12ec8a8c0ff2044" prefix=" " category="inline-code"></block>文件复制到离线环境，并在最后步骤中使用<block ref="df98262a1bb421160e8fe1c48161c970" prefix=" " category="inline-code"></block>而不是存储库引用进行安装。</block>
 </blocks>
