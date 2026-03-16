@@ -4956,10 +4956,6 @@ SMB</block>
   <block id="e26bc895e5bb00237e35bd08e101a228" category="inline-link-macro">25.06</block>
   <block id="e388180fa8946253a28286d92fcbc393" category="cell">2028年6月</block>
   <block id="61a3094d46fa14bffb9067eeb8d3405a" category="paragraph"><block ref="61a3094d46fa14bffb9067eeb8d3405a" category="inline-link-macro-rx"></block></block>
-  <block id="d7ccfdca42aadc41314f5df3ed2e4cbf" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block> 并指定部署和映像注册表位置的名称。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表中、也可以位于不同的注册表中、但所有CSI图像都必须位于同一注册表中。在示例中、<block ref="5c9befb508998ce21883733ce6ab129f" prefix=" " category="inline-code"></block>是要安装的Trident版本。</block>
-  <block id="9632d6ad86670e70a32c6b93e85ad9f4" category="paragraph">例如，要更改的默认值<block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>，请运行以下命令，其中<block ref="5c9befb508998ce21883733ce6ab129f" prefix=" " category="inline-code"></block>是要安装的Trident版本：</block>
-  <block id="b34ad03c5088f36033c20b21d9aae4c2" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署名称、如以下示例所示、其中<block ref="5c9befb508998ce21883733ce6ab129f" prefix=" " category="inline-code"></block>是要安装的Trident版本。</block>
-  <block id="d180bc23594b2a81a598da69af7136af" category="list-text">如果您 <block ref="538f4beb16c8502421a8389e199d34ce" category="inline-link-macro-rx"></block>使用，则可以使用<block ref="9ba27131bd1269499334744b89769fac" prefix=" " category="inline-code"></block> 一步升级。如果您未添加Helm repo或无法使用它进行升级：</block>
   <block id="843e8c92f2887fa83e4564f86e6a7ca0" category="list-text">您可以直接升级到已安装版本的四个版本窗口中的任何目标版本。例如、您可以直接从24.06 (或任何24.06 DOT版本)升级到25.06。</block>
   <block id="d4ea8129c0158e8c6ac0b3bb00a333e5" category="list-text">如果要从四个版本窗口之外的版本进行升级、请执行多步骤升级。按照您要升级的的升级说明升级到适合四个版本窗口的 <block ref="a799aa6eaf3a5192b34ea19f24bb716f" category="inline-link-macro-rx"></block> 最新版本。例如、如果您运行的是23.07并希望升级到25.06：</block>
   <block id="96643a0b653f3484db440bd905d8e591" category="list-text">首次从23.07升级到24.06。</block>
@@ -6757,4 +6753,8 @@ SMB</block>
   <block id="9e30ef913cabaa12906b6d57768d8d26" category="paragraph">这可能会中断存储连接并中断正在运行的工作负载。</block>
   <block id="ffa574ac86862864324d67c3d6ad69c0" category="paragraph">在删除任何托管 StorageClass 之前，请验证潜在影响。</block>
   <block id="0a016d1270ba974707ac8af9f53a2e63" category="sidebar">配置自动后端配置</block>
+  <block id="fd271eb2e0c07a35a036e5d3d38f7295" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署和映像注册表位置的名称。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。在示例中，<block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本。</block>
+  <block id="b1a6996825cda91a559712aa47487d56" category="paragraph">例如，要更改<block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>的默认值，请运行以下命令，其中<block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本：</block>
+  <block id="4b4a2f07a31fb7ce67a051d38cdb07a1" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署的名称，如下例所示，其中<block ref="5b8b118bf0117b802a69cacdb76c3dc5" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本。</block>
+  <block id="965e298527e6fa46e6de9289de270ccf" category="list-text">如果您<block ref="538f4beb16c8502421a8389e199d34ce" category="inline-link-macro-rx"></block>，您可以使用<block ref="ecdd1f9daa1459f8b8c837369bdc27a9" prefix=" " category="inline-code"></block>一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：</block>
 </blocks>
