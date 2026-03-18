@@ -1275,7 +1275,6 @@
   <block id="8e1e1dad95de3dc781f25f58483acdf3" category="list-text">修复了一个问题描述，在删除节点并将其重新添加回 Kubernetes 集群时，可能会将 Trident 控制器置于 CrashLoopBackOff 状态（ GitHub 问题描述 669 ）。</block>
   <block id="d7c32cb5ff2be4aaff3a8eaea9d18e0d" category="list-text">修复了在未指定 SVM 名称的情况下不再发现 SVM 的问题描述（ GitHub 问题描述 612 ）。</block>
   <block id="94912f7fb206038e8527957b44dfbf25" category="paragraph">此操作将重新启动所有 Trident Pod ，这可能需要几秒钟的时间。您可以通过观察 `kubectl get pod -n trident` 输出中的 "age" 列来检查此问题。</block>
-  <block id="08ee53e1d5cefb7967a295e98036598e" category="cell">控制 .snapshot 目录的可见性</block>
   <block id="016a4b469916e37291cfe2f7fab49aaf" category="cell">`resourceGroups`</block>
   <block id="66d09fbe1165f3d10b368cbe0cc029f4" category="cell">用于筛选已发现资源的资源组列表</block>
   <block id="36cbcb8a57112362b05d06b9fe037a6e" category="cell">"[]" （无筛选器）</block>
@@ -2227,7 +2226,6 @@
   <block id="01eacb47d802acac83a7e60311768055" category="list-text">。<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> StorageClass将映射到中的第一个和第二个虚拟池<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 后端。这些池是唯一提供金牌保护的池。</block>
   <block id="6b35cdd98b7f7e55e698a6d0628e18e0" category="list-text">。<block ref="afbfe298fa275e5fff1aca9b2f213d9a" prefix=" " category="inline-code"></block> StorageClass将映射到中的第三个和第四个虚拟池<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 后端。这些池是唯一提供黄金级以外保护级别的池。</block>
   <block id="535efa214445261dfda5d5edc613e56b" category="list-text">。<block ref="65846755494383158592c748f74421ec" prefix=" " category="inline-code"></block> StorageClass将映射到中的第四个虚拟池<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 后端。这是为mysqldb类型的应用程序提供存储池配置的唯一池。</block>
-  <block id="d0c5a28c77fc4e37f7271d37f7372724" category="list-text">。<block ref="2e63b2ff91d4aeb88b54db5c90b71443" prefix=" " category="inline-code"></block> StorageClass将映射到中的第三个虚拟池<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 后端。这是唯一提供银牌保护和20000个信用点的池。</block>
   <block id="0191eea3640b05213a7522d6581a2fd5" category="list-text">。<block ref="a96bee9dd30f3ea0af93b4c64ca1e4a4" prefix=" " category="inline-code"></block> StorageClass将映射到中的第三个虚拟池<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 中的后端和第二个虚拟池<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 后端。这是唯一一款信用点数为5000的池产品。</block>
   <block id="cd5dd52b9f0bba70b1336e13afe05818" category="paragraph">这是使用的基本配置<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 驱动程序。</block>
   <block id="31089bb4131b18ca65c3d384cdd49644" category="example-title">双向CHAP示例</block>
@@ -2990,8 +2988,6 @@ SMB</block>
   <block id="1fa71ec0db169cb1ef6cfabf7648910e" category="paragraph">要验证PVC是否已绑定、请运行以下命令：</block>
   <block id="42d7c2849e22a4d78da8b275f64f75aa" category="summary">在配置Google Cloud NetApp Volumes后端之前、您需要确保满足以下要求。</block>
   <block id="b50d4e4fb1b847d1270df87e42364fe0" category="doc">准备配置Google Cloud NetApp卷后端</block>
-  <block id="0935df2153a18d9a4776751ebfb7cb82" category="section-title">NFS卷的前提条件</block>
-  <block id="a03c3224ff98ca5b518f8a11ed9d6f72" category="paragraph">如果您是首次使用Google Cloud NetApp卷或在新位置使用、则需要进行一些初始配置才能设置Google Cloud NetApp卷和创建NFS卷。请参阅 <block ref="d2edeebd0b5ddcd8a293f6eb7960f37c" category="inline-link-macro-rx"></block>。</block>
   <block id="ec8b4b1603705e8f5deb17b1f83c5b04" category="paragraph">在配置Google Cloud NetApp卷后端之前、请确保您满足以下条件：</block>
   <block id="1215f8190533dfdf63d2224a6d88266f" category="inline-link-macro">Google Cloud NetApp卷</block>
   <block id="cbd1a08f0c7e9ece495b85acebbda95f" category="list-text">配置有Google Cloud NetApp卷服务的Google Cloud帐户。请参阅 <block ref="633097af004065de10009ea2f33900c4" category="inline-link-macro-rx"></block>。</block>
@@ -3160,7 +3156,6 @@ SMB</block>
   <block id="98c76e4bb2a33d9fd5985c31833d545b" category="paragraph">如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。</block>
   <block id="dd7e96ca2da30b4de0cef5d5d0d67883" category="paragraph">有关详细信息，请参阅：<block ref="5113a2fb1642ecd23870711ba25c4ad7" category="inline-link-macro-rx"></block>。</block>
   <block id="775acc7033e41c0ec1b40c64643c6339" category="paragraph">用于访问目录的NAS选项<block ref="a15da8cecb1f1192c4d913b8ba676121" prefix=" " category="inline-code"></block>。</block>
-  <block id="9baf39c0a00f0d9f174a9671e5cefbab" category="paragraph">对于NFSv4、为"TRUE"；对于NFSv3、为"false"</block>
   <block id="e1232df03027aec38979e9ee0c9b350c" category="paragraph">选择<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>一个驱动程序来提高单个卷的并行处理能力、该卷可能会增长到包含数十亿个文件的PB级范围。FlexGroup 的一些理想用例包括 AI/ML/DL ，大数据和分析，软件构建，流式传输，文件存储库等。配置FlexGroup卷时、Trident会使用分配给SVM的所有聚合。Trident 中的 FlexGroup 支持还需要注意以下事项：</block>
   <block id="90bce6b2a4ca618777f172f6d51e69f1" category="list-text">FlexGroup卷不支持克隆。</block>
   <block id="971d29a2392e004ddd4263282b307e0c" category="inline-link">《NetApp FlexGroup卷最佳实践和实施指南》</block>
@@ -4292,7 +4287,6 @@ SMB</block>
   <block id="c994f1e00d22f7d8d4e7b3e7f50f8002" category="doc">Kerberos传输中加密</block>
   <block id="c8ea4672c0efc6fee26c8648f609a829" category="paragraph">通过使用Kerberos传输中加密、您可以对受管集群和存储后端之间的流量启用加密、从而提高数据访问安全性。</block>
   <block id="420bac2406e93da0c7c791aca209017d" category="paragraph">Trident支持将ONTAP用作存储后端的Kerberos加密：</block>
-  <block id="796f801ad41f96aeb2e1a1950ed629e4" category="list-text">*内部部署Kubernet*—Trident支持通过从ONTAP OpenShift和上游Kubernetes集群到内部部署ONTAP卷的NFS3和NFSv4连接进行Kerberos加密。</block>
   <block id="0a710c309a5f6dc65b056833a5208521" category="paragraph">您可以创建、删除、调整大小、创建快照、克隆、 只读克隆、并导入使用NFS加密的卷。</block>
   <block id="2aff02c8ceb99a9445937af9d4d8f286" category="section-title">使用内部ONTAP卷配置传输中的Kerberos加密</block>
   <block id="330282591e8caa9814eb88ec524b89cf" category="paragraph">您可以对受管集群与内部ONTAP存储后端之间的存储流量启用Kerberos加密。</block>
@@ -4300,12 +4294,9 @@ SMB</block>
   <block id="0ff02d27ae5cac1a12c6c403fd55443c" category="list-text">确保您可以访问该<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 实用程序。</block>
   <block id="bef890ed7cc869346d4b483cd3e3ab00" category="list-text">确保您对ONTAP存储后端具有管理员访问权限。</block>
   <block id="160b05c1b85ce34d702a3568614baec1" category="list-text">确保您知道要从ONTAP存储后端共享的一个或多个卷的名称。</block>
-  <block id="9fe985de654739fa6f48edb0d49059b4" category="inline-link">《NetApp NFSv4增强功能和最佳实践指南》</block>
-  <block id="9c6a0d551d50340cca48e6cfa4355566" category="list-text">确保已正确配置使用Kerberos加密的任何NFSv4卷。请参阅的“NetApp NFSv4域配置”一节(第13页)<block ref="fcbfe3012009d21ef9ba8407142f85b6" category="inline-link-rx"></block>。</block>
   <block id="7c67bfc9153da2055f6d09209f9853c7" category="section-title">添加或修改ONTAP导出策略</block>
   <block id="3afa4a2a4546fcf1b9a361d1bff9763b" category="paragraph">您需要向现有ONTAP导出策略添加规则、或者创建新的导出策略、以便对ONTAP Storage VM根卷以及与上游Kubornetes集群共享的任何ONTAP卷支持Kerberos加密。您添加的导出策略规则或创建的新导出策略需要支持以下访问协议和访问权限：</block>
   <block id="e21233a7f0d7fedb5883aea1dfed27cf" category="paragraph-title">访问协议</block>
-  <block id="e10f51f4d0eb1b58929237c03db4b832" category="paragraph">使用NFS、NFSv3和NFSv4访问协议配置导出策略。</block>
   <block id="baedff73fdfff23f65e8b80727cd3088" category="paragraph-title">访问详细信息</block>
   <block id="892969be437eb53b05f372cc0ae74d6c" category="paragraph">您可以根据卷的需求配置以下三种不同版本的Kerberos加密之一：</block>
   <block id="fda32d078836aa6e69a3497be5f9cdca" category="list-text">*Kerberos 5*-(身份验证和加密)</block>
@@ -5027,7 +5018,6 @@ SMB</block>
   <block id="969ab4db9d9d63b4573cc75a0b550b21" category="list-text">[技术预览] 使用 ANF 驱动程序添加了手动 QOS 支持。</block>
   <block id="fa420d9ecbb50720fc93ab14f7943b42" category="list-text">修复了 CSI NodeExpandVolume 的问题，当底层 SCSI 磁盘不可用时，多路径设备可能会出现大小不一致的情况。</block>
   <block id="69e0fec3be54a3b91103c8c7b788339f" category="list-text">修复了无法清理 ONTAP-NAS 和 ONTAP-NAS-Economy 驱动程序的重复导出策略的问题。</block>
-  <block id="6e02211c85412fa0d990bce8af9e671f" category="list-text">修复了 GCNV 卷默认为 NFSv3 的问题<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block>未设置；现在 NFSv3 和 NFSv4 协议均受支持。如果<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block>如果未提供，则将使用主机的默认 NFS 版本（NFSv3 或 NFSv4）。</block>
   <block id="aaa014969ef27003313b67f83fe7091d" category="inline-link-macro">问题描述#831</block>
   <block id="cd620e798a4bbf9171d504843ebb70d0" category="list-text">修复了使用 Kustomize 安装 Trident 时出现的部署问题（ <block ref="ae3bb668f87d2aa74a2bfe43dedc0001" category="inline-link-macro-rx"></block> ）。</block>
   <block id="81a9708305846c55b26ba31f647ab071" category="inline-link-macro">问题描述#1016</block>
@@ -5247,7 +5237,6 @@ SMB</block>
   <block id="8b29df4adf6fbbaec0828beed4564d1b" category="list-text">单击“查看操作员”可查看操作员的详细信息。</block>
   <block id="7c7ed74fe0c2134a4029358fd7840eaa" category="list-text">在 * Trident Orchestrator* 下，单击 *创建实例*。</block>
   <block id="7b61a3bcc8bbd41470bf0de7fcfd839e" category="list-text">单击“YAML 视图”并将以下内容粘贴到表单中：</block>
-  <block id="9152cfa618e086866a5af7caaed0d2bd" category="list-text">Red Hat Enterprise Linux CoreOS (RHCOS) 未启用和配置 iSCSI。</block>
   <block id="5df2f935f2bc3df2c6378f665b3d6659" category="list-text">您可以添加<block ref="e9a7558decb5e432d8b7c4d536cc9876" prefix=" " category="inline-code"></block>在所有 OpenShift 工作节点上配置和启用 iSCSI 和 Multipath 服务的参数。</block>
   <block id="f61306bfa8c6de676059739358d4479f" category="list-text">单击“创建”； Trident Orchestrator 将完全安装。</block>
   <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">卸载Trident操作员</block>
@@ -5995,7 +5984,6 @@ SMB</block>
   <block id="7dc6151116748c06820707b3267ee0b6" category="cell">TCP/UDP 111</block>
   <block id="3ee12b938a2552d8e7e829deac4f0d88" category="cell">RPCBIND/portmapper</block>
   <block id="ee36adb297d92e86dd9cb9a6294bafe2" category="cell">ONTAP-NAS (NFSv3/v4)、ANF (NFS)</block>
-  <block id="22514c1437249e60404f00fd34a14237" category="cell">v3 必需；v4 可选（防火墙卸载）；如果仅使用 NFSv4，则限制。</block>
   <block id="a44b673cbbbd63bfa33d42c853f57439" category="cell">TCP/UDP 2049</block>
   <block id="5cf46b19bdb5ea243def7352324db5af" category="cell">NFS 守护进程</block>
   <block id="a3d5e36471b118748b9809c728b8706e" category="cell">核心数据；众所周知；使用 TCP 实现可靠性。</block>
@@ -6734,4 +6722,18 @@ SMB</block>
   <block id="91cc0b93c8dc86369bc288988a041c18" category="paragraph">编辑 StorageClass 并添加以下注释：</block>
   <block id="c9f5e695969fa31f7d624a795cc39fc0" category="paragraph">应用更改后，Trident 更新后端配置并更新 StorageClass 注释。</block>
   <block id="adf4ed394ce07a1587cbc4320c7a6f81" category="paragraph">删除 StorageClass 通常会删除关联的 Trident 后端。这可能会中断存储连接并中断正在运行的工作负载。在删除托管 StorageClass 之前验证影响。</block>
+  <block id="dac5012fe50d282b4ce61c95054ca149" category="paragraph">启用或禁用对 <block ref="a15da8cecb1f1192c4d913b8ba676121" prefix=" " category="inline-code"></block> 目录的访问。</block>
+  <block id="51f9d701191e420ed39266d6c65191b8" category="paragraph">有效值：<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。默认行为可能因 ONTAP 和 Trident 版本而异。明确设置以确保行为一致。</block>
+  <block id="b6e5467d6e3184e82d2324528e166e84" category="list-text">Red Hat Enterprise Linux CoreOS (RHCOS) 未启用和配置 iSCSI。</block>
+  <block id="ebf79a17d0a10b060b88da85a533dc26" category="list-text">*本地 ONTAP* - Trident 支持基于 NFSv3 的 Kerberos 加密以及从 Red Hat OpenShift 和上游 Kubernetes 集群到本地 ONTAP 卷的连接。</block>
+  <block id="65675a41b0f49633987e598dd7ffcb23" category="inline-link">NetApp 增强功能和最佳实践指南</block>
+  <block id="052ef7045b8c09ce818e2fad09ebe073" category="list-text">请确保您使用 Kerberos 加密的所有卷都配置正确。请参阅<block ref="f8470a53f564de1533285eba87ab95cd" category="inline-link-rx"></block>的 NetApp 域配置部分（第 13 页）。</block>
+  <block id="336dea50c2c2418edd367cce565e1879" category="paragraph">使用 NFS、NFSv3 和访问协议配置导出策略。</block>
+  <block id="f18904f016d0dd2cbc3caf83ed1734d3" category="cell">对于 v3 是必需的；对于 v4（防火墙卸载）是可选的；如果使用 -only，则进行限制。</block>
+  <block id="460db1bfc0066fbf55e3e388b2ba8592" category="list-text">修复了未设置<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block>时 GCNV 卷默认为 NFSv3 的问题；现在支持 NFSv3 和 NFSv4 协议。如果未提供<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block>，则使用主机的默认 NFS 版本（NFSv3 或 NFSv4）。</block>
+  <block id="4bd5d0aa96daf67a3e8c2494ca905de2" category="cell"><block ref="b326b5062b2f0e69046810717534cb09" prefix="" category="inline-code"></block>, <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> (显式设置)。</block>
+  <block id="11c1dbb3fa55c48a97462a616085ddfc" category="cell"><block ref="b326b5062b2f0e69046810717534cb09" prefix="" category="inline-code"></block>,<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> (默认行为可能会有所不同。显式设置) NFSv3 的 "false"</block>
+  <block id="826434aa2de870d45f65375eed4dd985" category="section-title">NFS 或 SMB 卷的先决条件</block>
+  <block id="796744214a34447ec504843fb0c28924" category="paragraph">如果是首次使用 Google Cloud NetApp Volumes 或在新位置使用，则需要一些初始配置才能设置 Google Cloud NetApp Volumes 并创建 NFS 或 SMB 卷。请参阅<block ref="d2edeebd0b5ddcd8a293f6eb7960f37c" category="inline-link-macro-rx"></block>。</block>
+  <block id="f58d26da0e092aac8227607603acb293" category="list-text"><block ref="2e63b2ff91d4aeb88b54db5c90b71443" prefix=" " category="inline-code"></block> StorageClass 将映射到<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>后端中的第三个虚拟池。这是唯一提供银级保护和 20000 creditpoints 的池。</block>
 </blocks>

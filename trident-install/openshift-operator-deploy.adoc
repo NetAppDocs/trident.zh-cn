@@ -65,7 +65,7 @@ spec:
   nodePrep:
   - iscsi
   imageRegistry: ''
-  k8sTimeout: 30
+  k8sTimeout: 180s
   namespace: trident
   silenceAutosupport: false
 ----

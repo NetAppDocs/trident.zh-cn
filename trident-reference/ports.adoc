@@ -86,7 +86,7 @@ Trident 使用各种端口在 Kubernetes 集群内以及与存储后端进行通
 | TCP 8443 | 出站 | HTTPS 到 E-Series Web Services Proxy | E 系列 (iSCSI) | 同上。 
 
 
-| TCP/UDP 111 | 出站 | RPCBIND/portmapper | ONTAP-NAS (NFSv3/v4)、ANF (NFS) | v3 必需；v4 可选（防火墙卸载）；如果仅使用 NFSv4，则限制。 
+| TCP/UDP 111 | 出站 | RPCBIND/portmapper | ONTAP-NAS (NFSv3/v4)、ANF (NFS) | 对于 v3 是必需的；对于 v4（防火墙卸载）是可选的；如果使用 -only，则进行限制。 
 
 
 | TCP/UDP 2049 | 出站 | NFS 守护进程 | ONTAP-NAS (NFSv3/v4)、ANF (NFS) | 核心数据；众所周知；使用 TCP 实现可靠性。 
