@@ -6723,17 +6723,17 @@ SMB</block>
   <block id="c9f5e695969fa31f7d624a795cc39fc0" category="paragraph">应用更改后，Trident 更新后端配置并更新 StorageClass 注释。</block>
   <block id="adf4ed394ce07a1587cbc4320c7a6f81" category="paragraph">删除 StorageClass 通常会删除关联的 Trident 后端。这可能会中断存储连接并中断正在运行的工作负载。在删除托管 StorageClass 之前验证影响。</block>
   <block id="dac5012fe50d282b4ce61c95054ca149" category="paragraph">启用或禁用对 <block ref="a15da8cecb1f1192c4d913b8ba676121" prefix=" " category="inline-code"></block> 目录的访问。</block>
-  <block id="51f9d701191e420ed39266d6c65191b8" category="paragraph">有效值：<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。默认行为可能因 ONTAP 和 Trident 版本而异。明确设置以确保行为一致。</block>
   <block id="b6e5467d6e3184e82d2324528e166e84" category="list-text">Red Hat Enterprise Linux CoreOS (RHCOS) 未启用和配置 iSCSI。</block>
-  <block id="ebf79a17d0a10b060b88da85a533dc26" category="list-text">*本地 ONTAP* - Trident 支持基于 NFSv3 的 Kerberos 加密以及从 Red Hat OpenShift 和上游 Kubernetes 集群到本地 ONTAP 卷的连接。</block>
-  <block id="65675a41b0f49633987e598dd7ffcb23" category="inline-link">NetApp 增强功能和最佳实践指南</block>
-  <block id="052ef7045b8c09ce818e2fad09ebe073" category="list-text">请确保您使用 Kerberos 加密的所有卷都配置正确。请参阅<block ref="f8470a53f564de1533285eba87ab95cd" category="inline-link-rx"></block>的 NetApp 域配置部分（第 13 页）。</block>
-  <block id="336dea50c2c2418edd367cce565e1879" category="paragraph">使用 NFS、NFSv3 和访问协议配置导出策略。</block>
-  <block id="f18904f016d0dd2cbc3caf83ed1734d3" category="cell">对于 v3 是必需的；对于 v4（防火墙卸载）是可选的；如果使用 -only，则进行限制。</block>
   <block id="460db1bfc0066fbf55e3e388b2ba8592" category="list-text">修复了未设置<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block>时 GCNV 卷默认为 NFSv3 的问题；现在支持 NFSv3 和 NFSv4 协议。如果未提供<block ref="e477739f39dbd2f1e1c5268912135e92" prefix=" " category="inline-code"></block>，则使用主机的默认 NFS 版本（NFSv3 或 NFSv4）。</block>
   <block id="4bd5d0aa96daf67a3e8c2494ca905de2" category="cell"><block ref="b326b5062b2f0e69046810717534cb09" prefix="" category="inline-code"></block>, <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> (显式设置)。</block>
   <block id="11c1dbb3fa55c48a97462a616085ddfc" category="cell"><block ref="b326b5062b2f0e69046810717534cb09" prefix="" category="inline-code"></block>,<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> (默认行为可能会有所不同。显式设置) NFSv3 的 "false"</block>
   <block id="826434aa2de870d45f65375eed4dd985" category="section-title">NFS 或 SMB 卷的先决条件</block>
   <block id="796744214a34447ec504843fb0c28924" category="paragraph">如果是首次使用 Google Cloud NetApp Volumes 或在新位置使用，则需要一些初始配置才能设置 Google Cloud NetApp Volumes 并创建 NFS 或 SMB 卷。请参阅<block ref="d2edeebd0b5ddcd8a293f6eb7960f37c" category="inline-link-macro-rx"></block>。</block>
   <block id="f58d26da0e092aac8227607603acb293" category="list-text"><block ref="2e63b2ff91d4aeb88b54db5c90b71443" prefix=" " category="inline-code"></block> StorageClass 将映射到<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>后端中的第三个虚拟池。这是唯一提供银级保护和 20000 creditpoints 的池。</block>
+  <block id="183d6aa6c2aa2a35b1017b0f500bf757" category="paragraph">有效值：<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。默认行为可能因 ONTAP 和 Trident 版本而异。明确设置以确保行为一致。</block>
+  <block id="796f801ad41f96aeb2e1a1950ed629e4" category="list-text">*本地 ONTAP* - Trident 支持通过 NFSv3 和 NFSv4 连接从 Red Hat OpenShift 和上游 Kubernetes 集群到本地 ONTAP 卷的 Kerberos 加密。</block>
+  <block id="9fe985de654739fa6f48edb0d49059b4" category="inline-link">NetApp NFSv4 增强功能和最佳实践指南</block>
+  <block id="9c6a0d551d50340cca48e6cfa4355566" category="list-text">请确保您使用 Kerberos 加密的任何 NFSv4 卷配置正确。请参阅 NetApp NFSv4 域配置部分（第 13 页）<block ref="fcbfe3012009d21ef9ba8407142f85b6" category="inline-link-rx"></block>。</block>
+  <block id="e10f51f4d0eb1b58929237c03db4b832" category="paragraph">使用 NFS、NFSv3 和 NFSv4 访问协议配置导出策略。</block>
+  <block id="22514c1437249e60404f00fd34a14237" category="cell">v3 必需；v4 可选（防火墙卸载）；如果仅使用 NFSv4，则限制。</block>
 </blocks>

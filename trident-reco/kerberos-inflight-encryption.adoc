@@ -16,7 +16,7 @@ summary: 您可以配置加密以保护Trident与存储后端之间的流量。
 
 Trident支持将ONTAP用作存储后端的Kerberos加密：
 
-* *本地 ONTAP* - Trident 支持基于 NFSv3 的 Kerberos 加密以及从 Red Hat OpenShift 和上游 Kubernetes 集群到本地 ONTAP 卷的连接。
+* *本地 ONTAP* - Trident 支持通过 NFSv3 和 NFSv4 连接从 Red Hat OpenShift 和上游 Kubernetes 集群到本地 ONTAP 卷的 Kerberos 加密。
 
 
 您可以创建、删除、调整大小、创建快照、克隆、 只读克隆、并导入使用NFS加密的卷。
@@ -35,7 +35,7 @@ NOTE: 只有使用存储驱动程序、才支持对使用内部ONTAP存储后端
 * 确保您对ONTAP存储后端具有管理员访问权限。
 * 确保您知道要从ONTAP存储后端共享的一个或多个卷的名称。
 * 确保已准备好ONTAP Storage VM以支持NFS卷的Kerberos加密。有关说明、请参见 https://docs.netapp.com/us-en/ontap/nfs-config/create-kerberos-config-task.html["在dataLIF上启用Kerberos"^] 。
-* 请确保您使用 Kerberos 加密的所有卷都配置正确。请参阅 https://www.netapp.com/media/16398-tr-3580.pdf["NetApp 增强功能和最佳实践指南"^]的 NetApp 域配置部分（第 13 页）。
+* 请确保您使用 Kerberos 加密的任何 NFSv4 卷配置正确。请参阅 NetApp NFSv4 域配置部分（第 13 页） https://www.netapp.com/media/16398-tr-3580.pdf["NetApp NFSv4 增强功能和最佳实践指南"^]。
 
 
 
@@ -45,7 +45,7 @@ NOTE: 只有使用存储驱动程序、才支持对使用内部ONTAP存储后端
 您需要向现有ONTAP导出策略添加规则、或者创建新的导出策略、以便对ONTAP Storage VM根卷以及与上游Kubornetes集群共享的任何ONTAP卷支持Kerberos加密。您添加的导出策略规则或创建的新导出策略需要支持以下访问协议和访问权限：
 
 .访问协议
-使用 NFS、NFSv3 和访问协议配置导出策略。
+使用 NFS、NFSv3 和 NFSv4 访问协议配置导出策略。
 
 .访问详细信息
 您可以根据卷的需求配置以下三种不同版本的Kerberos加密之一：
@@ -216,7 +216,7 @@ ontap-nas-sc    csi.trident.netapp.io   15h
 * 确保已在受管Red Hat OpenShift集群上启用Trident。
 * 确保您可以访问该 `tridentctl` 实用程序。
 * 请注意要求并按照中的说明，确保已为Kerberos加密准备好Azure NetApp Files存储后端 https://learn.microsoft.com/en-us/azure/azure-netapp-files/configure-kerberos-encryption["Azure NetApp Files 文档"^]。
-* 请确保您使用 Kerberos 加密的所有卷都配置正确。请参阅 https://www.netapp.com/media/16398-tr-3580.pdf["NetApp 增强功能和最佳实践指南"^]的 NetApp 域配置部分（第 13 页）。
+* 请确保您使用 Kerberos 加密的任何 NFSv4 卷配置正确。请参阅 NetApp NFSv4 域配置部分（第 13 页） https://www.netapp.com/media/16398-tr-3580.pdf["NetApp NFSv4 增强功能和最佳实践指南"^]。
 
 
 

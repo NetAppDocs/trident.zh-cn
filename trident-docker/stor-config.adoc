@@ -234,13 +234,6 @@ true
  a| 
 启用或禁用对  `.snapshot` 目录的访问。
 
-
-
-| `snapshotDir`  a| 
-用于访问目录的NAS选项 `.snapshot`。
- a| 
-启用或禁用对  `.snapshot` 目录的访问。
-
 有效值： `true`， `false`。默认行为可能因 ONTAP 和 Trident 版本而异。明确设置以确保行为一致。
 
 
