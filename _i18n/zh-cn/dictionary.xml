@@ -2971,7 +2971,6 @@ SMB</block>
   <block id="95c5fc7684c0c685ae305908e8360de5" category="cell">新卷的导出规则。必须是IPv4地址任意组合的逗号分隔列表。</block>
   <block id="3731633acfd0b9fb847e03ce2fdab4fa" category="cell">""(接受默认值0)</block>
   <block id="f666bd4432d66c3d0a6c3eb68602a507" category="cell">新卷的UNIX权限(4个八进制数字)。</block>
-  <block id="b0663450e547d90a59ef16fd10b49313" category="paragraph">当您刚刚开始使用Google Cloud NetApp卷并尝试操作时、此配置是理想的选择、但实际上、您很可能需要为您配置的卷提供额外的范围界定。</block>
   <block id="2d55ceabc505d58735d6f639a0ddee3c" category="example-title">使用StoragePools筛选器的配置</block>
   <block id="9f50e88dc1b2f50c32d6623a46186422" category="paragraph">此后端配置可在一个文件中定义多个虚拟池。虚拟池在一节中进行了定义<block ref="ddecebdea58b5f264d27f1f7909bab74" prefix=" " category="inline-code"></block> 。如果您有多个存储池支持不同的服务级别、而您希望在Kubbernetes中创建表示这些服务级别的存储类、则这些选项板非常有用。虚拟池标签用于区分池。例如、在以下示例中<block ref="c05f6c233521207f6fe311afef550c3c" prefix=" " category="inline-code"></block> 、标签和<block ref="f1d0ae63f2e948a9e43dcc60303d595d" prefix=" " category="inline-code"></block> 类型用于区分虚拟池。</block>
   <block id="88b8febb44310d1976318cdfbfc8e272" category="paragraph">此外、您还可以设置一些适用于所有虚拟池的默认值、并覆盖各个虚拟池的默认值。在以下示例中、<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block> 和<block ref="c72971f17465d2a32345bc872af62a34" prefix=" " category="inline-code"></block> 用作所有虚拟池的默认值。</block>
@@ -6736,4 +6735,7 @@ SMB</block>
   <block id="9c6a0d551d50340cca48e6cfa4355566" category="list-text">请确保您使用 Kerberos 加密的任何 NFSv4 卷配置正确。请参阅 NetApp NFSv4 域配置部分（第 13 页）<block ref="fcbfe3012009d21ef9ba8407142f85b6" category="inline-link-rx"></block>。</block>
   <block id="e10f51f4d0eb1b58929237c03db4b832" category="paragraph">使用 NFS、NFSv3 和 NFSv4 访问协议配置导出策略。</block>
   <block id="22514c1437249e60404f00fd34a14237" category="cell">v3 必需；v4 可选（防火墙卸载）；如果仅使用 NFSv4，则限制。</block>
+  <block id="9d5a9690e203a91236d7cd904141669f" category="section-title">25.10 中的新增功能</block>
+  <block id="f74472a1f5a071b8eb49ce2cf4c7f852" category="paragraph">当您刚刚开始使用 Google Cloud NetApp Volumes 并尝试使用时，此配置非常理想，但在实践中，您可能需要为配置的卷提供额外的范围。</block>
+  <block id="8eff9b9f03bae3f241ea78649c5afe12" category="admonition">请将 <block ref="49e22ed291a6cbd4445ed587b8bd46c4" prefix=" " category="inline-code"></block> 和 <block ref="7d02a93664a6fdb768f99da64ea2b2e7" prefix=" " category="inline-code"></block> 替换为您的服务帐户凭据。</block>
 </blocks>
