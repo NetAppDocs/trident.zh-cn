@@ -1,5 +1,9 @@
 ---
 indexpage:
+  title: Trident 26.02 文档
+  summary: Trident是由NetApp维护的开源存储配置程序和编排程序。通过它，您可以为 Docker 和 Kubernetes 管理的容器化应用程序创建存储卷。
+  keywords: trident, 2602, documentation, release notes, get started, deploy, upgrade,
+    use, data management, protection, demos, tutorials, blogs, community
   lead: Trident是由NetApp维护的开源存储配置程序和编排程序。通过它，您可以为 Docker 和 Kubernetes 管理的容器化应用程序创建存储卷。
   tiles:
   - title: 发行说明

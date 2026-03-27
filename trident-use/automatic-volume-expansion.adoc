@@ -31,10 +31,10 @@ summary: 使用 Trident Autogrow Policies 配置和管理自动卷扩展。
 * StorageClasses 配置为 `allowVolumeExpansion: true`
 * 支持的 ONTAP 协议：
 +
-** 网络文件系统
-** 互联网小型计算机系统接口
-** 光纤通道协议
-** 基于结构的非易失性内存 Express
+** 网络文件系统 (NFS)
+** Internet 小型计算机系统接口 (iSCSI)
+** 光纤通道协议 (NVMe)
+** 基于网络结构的非易失性内存快速通道 (FCP)
 
 
 
@@ -49,10 +49,10 @@ summary: 使用 Trident Autogrow Policies 配置和管理自动卷扩展。
 * 当卷达到 `maxSize`时，不会发生进一步的扩展。
 * 支持自动卷扩展的协议：
 +
-** 网络文件系统
-** 互联网小型计算机系统接口
-** 光纤通道协议
-** 基于结构的非易失性内存 Express
+** 网络文件系统 (NFS)
+** Internet 小型计算机系统接口 (iSCSI)
+** 光纤通道协议 (NVMe)
+** 基于网络结构的非易失性内存快速通道 (FCP)
 
 
 

@@ -148,7 +148,7 @@ NOTE: 不适用于生产环境。
 
 
 * 为Trident控制器添加了通过 helm、operator 和 tridentctl 使用主机网络的选项（link:https://github.com/NetApp/trident/issues/858["第858期"] ）。
-* 为 ANF 驱动程序添加了手动 QoS 支持，使其在 Trident 26.02 中可投入生产；此实验性增强在 Trident 25.06 中引入。
+* 为 ANF 驱动程序添加了手动 QoS 支持，使其在 Trident 25.10 中可投入生产；此实验性增强在 Trident 25.06 中引入。
 
 
 

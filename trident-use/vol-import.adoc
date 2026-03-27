@@ -316,6 +316,63 @@ image:./san-import-igroup.png["映射到iqn和集群iqn的LUN的图像。"]
 ====
 
 
+== ONTAP SAN-economy 示例
+
+以下示例演示如何为  `ontap-san-economy` 后端导入托管和非托管卷。
+
+[role="tabbed-block"]
+====
+.受管卷
+--
+当您导入托管卷时， Trident 将获得 FlexVol 的所有权并重命名它。当您从同一个 FlexVol 导入多个 LUN 时，您必须考虑此重命名。
+
+以下示例将 `lun1`从FlexVol `toimport`导入为名为 `vol-managed-saneco`的受管卷：
+
+[listing]
+----
+tridentctl import volume vol-managed-saneco toimport/lun1 -f import1.yaml
+----
+导入 `lun1`后，Trident 将 FlexVol 重命名（例如，重命名为 `trident_lun_pool_xyz`）。要从相同的 FlexVol 导入其他 LUN，请使用新的 FlexVol 名称：
+
+[listing]
+----
+tridentctl import volume vol-managed-saneco trident_lun_pool_xyz/lun2 -f import2.yaml
+----
+
+NOTE:  `ontap-san-economy` 后端一次导入一个 LUN。您可以使用脚本自动执行多个导入。
+
+--
+.非受管卷
+--
+当您导入非托管卷时，Trident 不拥有 FlexVol。但是，FlexVol 和 LUN 必须遵循 Trident 命名约定。
+
+FlexVol 命名格式::
++
+--
+[listing]
+----
+trident_lun_pool_STORAGEPREFIX_RANDOMSTRING
+----
+* `STORAGEPREFIX` 是后端配置中  `storagePrefix` 的值。默认值为  `trident`。
+* `RANDOMSTRING` 是您选择的任何字符串。
+
+
+--
+LUN 命名要求:: 必须为 LUN 命名 `lun0`。
+示例:: 如果您的 `storagePrefix`是 `xyz`，则 LUN 的完整路径为：
++
+--
+[listing]
+----
+trident_lun_pool_xyz_randomstring/lun0
+----
+--
+
+
+--
+====
+
+
 === Element
 
 Trident支持使用驱动程序导入NetApp Element软件和NetApp HCI卷 `solidfire-san`。
