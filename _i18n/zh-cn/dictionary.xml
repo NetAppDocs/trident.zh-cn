@@ -1863,7 +1863,6 @@
   <block id="92aa2031bb642a0c5c916142f725400d" category="list-text">建议不要修改现有虚拟池的属性。您应定义一个新的虚拟池以进行更改。</block>
   <block id="43d41b472d09879b85f78a3b8e487fd1" category="paragraph">大多数方面都以后端特定术语来指定。重要的是、宽高值不会公开在后端驱动程序之外、也不能在中进行匹配<block ref="f652904c3bfb48fb25a0a75f485f0ff6" prefix=" " category="inline-code"></block>。而是管理员为每个虚拟池定义一个或多个标签。每个标签都是一个键：值对，标签可能在唯一的后端通用。与其他方面一样，可以为每个池指定标签，也可以为后端指定全局标签。与具有预定义名称和值的方面不同，管理员可以根据需要全权定义标签键和值。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。</block>
   <block id="e084f7ea866c7ad616e67a911925c850" category="paragraph">答<block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix=" " category="inline-code"></block> 通过引用选择器参数中的标签来标识要使用的虚拟池。虚拟池选择器支持以下运算符：</block>
-  <block id="0b62778604e11f72525f5a82bbd26c6a" category="paragraph"><block ref="6a2736fcbb5755dd03d114a5153506eb" category="inline-link-rx"></block> 是一种完全托管的AWS服务、可使客户启动和运行由NetApp ONTAP 存储操作系统提供支持的文件系统。借助适用于ONTAP 的FSx、您可以利用您熟悉的NetApp功能、性能和管理功能、同时利用在AWS上存储数据的简便性、灵活性、安全性和可扩展性。FSX for ONTAP 支持ONTAP 文件系统功能和管理API。</block>
   <block id="9b85b10750f4b0e98b7853ee468d8bd5" category="list-text">SMB卷：</block>
   <block id="cf201a9e802aa6e35997590206919b1a" category="list-text">SMB卷支持使用<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 仅限驱动程序。</block>
   <block id="994eaa47aad78cae857818e1655e2800" category="paragraph">有关启用身份验证的详细信息、请参阅适用于您的驱动程序类型的身份验证：</block>
@@ -3114,7 +3113,6 @@ SMB</block>
   <block id="17ab7ccda1012696aabc01e478bd7612" category="cell">2027年10月</block>
   <block id="1e441e2a6ea2842643d9b8f88e32aebf" category="paragraph"><block ref="1e441e2a6ea2842643d9b8f88e32aebf" category="inline-link-macro-rx"></block></block>
   <block id="d2196853cebe173567df4b864e4816f7" category="paragraph"><block ref="d2196853cebe173567df4b864e4816f7" category="inline-link-macro-rx"></block></block>
-  <block id="62c93f738b926db77daa59d585fbfa48" category="paragraph">有关故障排除文章的完整列表，请参阅<block ref="57f5c759ada931c6a2051314ca6ee99e" category="inline-link-rx"></block>。</block>
   <block id="9cc21385e3a5bbf0e140948125e39e4c" category="paragraph">我们的上有一个由容器用户(包括Trident开发人员)组成的活跃公共社区<block ref="6130664377fa14615bb1abd5257e9714" category="inline-link-macro-rx"></block>。这是一个很好的地方，可以提出有关项目的一般问题，并与志同道合的同行讨论相关主题。</block>
   <block id="b27fcb3adc5d56564559e3f24a9659c8" category="paragraph">要获得有关Trident的帮助，请使用创建支持包<block ref="1d41e2024c69110ad6054ffc785ca8e0" prefix=" " category="inline-code"></block>并将其发送到<block ref="da34ca64df3f236a423516102d4096c2" prefix=" " category="inline-code"></block>。</block>
   <block id="40d95260a6bcacc40a23df4576b97ec8" category="inline-link-macro">Trident博客</block>
@@ -3644,7 +3642,6 @@ SMB</block>
   <block id="b508f8888445cd57bcf910ed51afb0dd" category="paragraph">Trident发送的有效负载示例如下所示：</block>
   <block id="19398926f4bb3de321ccfc2488d606dd" category="section-title">禁用Trident指标</block>
   <block id="053cd9e68cf6c155e5b93616bc7e3e32" category="summary">了解如何在Trident安装中创建和使用ONTAP NAS驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。</block>
-  <block id="6603621fd665e289ada4dbb1dcc5835c" category="paragraph">了解如何在Trident安装中创建和使用ONTAP NAS驱动程序。本节提供了将后端映射到StorageClasses的后端配置示例和详细信息。</block>
   <block id="c31c728d8c1e31b350486f8db0ebd5df" category="cell">集群或SVM管理LIF的IP地址可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如<block ref="33e9328e92e3ef05629093b4693b3925" prefix=" " category="inline-code"></block>。有关无缝MetroCluster切换的信息，请参见<block ref="41195e18a4a81a05f5c5a6be365a5602" category="inline-xref-macro-rx"></block>。</block>
   <block id="5b487539b64483311ed87290e717353a" category="cell">启用自动创建和更新导出策略[布尔值]。使用<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>和<block ref="b9c40fbe9daa81e40e06509d5bbd5a6c" prefix=" " category="inline-code"></block>选项、Trident可以自动管理导出策略。</block>
   <block id="aeeba745624a2ddc45043c3be805561e" category="cell">用于筛选KubeNet节点IP的CIDR列表(启用时)。<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>使用<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>和<block ref="b9c40fbe9daa81e40e06509d5bbd5a6c" prefix=" " category="inline-code"></block>选项、Trident可以自动管理导出策略。</block>
@@ -3691,7 +3688,6 @@ SMB</block>
   <block id="fed5cc1d933ad528f364a438a22f2465" category="paragraph">对于Amazon FSx for NetApp ONTAP部署、Trident应使用集群用户<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block>或SVM用户以ONTAP或SVM管理员身份运行、或者使用具有相同角色的其他名称的用户运行<block ref="679500f227997b45be97e3ca8115c678" prefix=" " category="inline-code"></block>。此<block ref="679500f227997b45be97e3ca8115c678" prefix=" " category="inline-code"></block>用户只能有限地替代集群管理员用户。</block>
   <block id="6e82d09aa274380adf21d56aaa3b0413" category="admonition">如果使用<block ref="d57551b1efacf8a7be84b4d10c5a6e99" prefix=" " category="inline-code"></block>参数、则需要集群管理员权限。将Amazon FSx for NetApp ONTAP与Trident结合使用时、<block ref="d57551b1efacf8a7be84b4d10c5a6e99" prefix=" " category="inline-code"></block>参数不适用于<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block>和<block ref="679500f227997b45be97e3ca8115c678" prefix=" " category="inline-code"></block>用户帐户。如果指定此参数，配置操作将失败。</block>
   <block id="8dbaef294ecadfe828f5bab1ae097d46" category="summary">了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。</block>
-  <block id="55fd4fb7ce66d950d3136fb6613ab770" category="paragraph">了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了将后端映射到StorageClasses的后端配置示例和详细信息。</block>
   <block id="c59bb4e25695c195dbaa360d34c9795e" category="cell"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix="" category="inline-code"></block></block>
   <block id="091b358e8a9ea5e6b1137fbd4c18372f" category="paragraph"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix=" " category="inline-code"></block>用于指定命令的命令行参数、每当对卷进行格式化时、都会应用这些参数<block ref="899da842f7d2c1db0e3f8c88ad72507f" prefix=" " category="inline-code"></block>。这样、您可以根据偏好格式化卷。请确保指定与mkfs命令选项类似的格式选项，但不包括设备路径。示例："-E nobdiscard"</block>
   <block id="18eb1633594b2436e83e73071958b960" category="section-title">有关使用formatOptions的建议</block>
@@ -3720,8 +3716,6 @@ SMB</block>
   <block id="a2e4c75efdd834198ec30de5256aa938" category="paragraph">您可以使用以下驱动程序将Trident与Amazon FSx for NetApp ONTAP集成：</block>
   <block id="b67b129bb636d36f948ca02b68bfa9bc" category="cell">集群或SVM管理LIF的IP地址可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义、例如：[28e8：d9fb：a825：b7bf：69a8：d02f：9e7b：3555]。如果在字段下<block ref="ac68bbf921d953d1cfab916cb6120864" prefix=" " category="inline-code"></block>提供<block ref="d731d2fecb66f9c4a30253bd316a220f" prefix=" " category="inline-code"></block>、则无需提供、<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block>因为Trident会从AWS检索SVM<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block>信息。因此、您必须提供SVM下某个用户的凭据(例如vsadmin)、并且该用户必须具有此<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 角色。</block>
   <block id="456166bed74a8ee84892a1778e8485a7" category="section-title">Trident属性</block>
-  <block id="0a6a0f274bdb2256373050bb5155f62f" category="paragraph">您可以将Amazon FSx for NetApp ONTAP文件系统与Trident进行集成、以确保在Amazon Elic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP支持的块和文件永久性卷。</block>
-  <block id="e22cd0725c5dbd58b894af3d4584607c" category="paragraph">通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以确保在Amazon Elic Kubelnetes Service (EKS)中运行的Kubelnetes集群可以配置ONTAP支持的块和文件永久性卷。</block>
   <block id="0ad999be0dea6cdee2afca2bcb6da8b1" category="paragraph">除了<block ref="6004af307fc2eed554c42ebaa4be8446" category="inline-link-macro-rx"></block>，要将FSx for ONTAP与Trident集成，您还需要：</block>
   <block id="6bb2a5c441a4e421f26e835928b68f1f" category="list-text">Trident EKS加载项不支持SMB卷。</block>
   <block id="910bc8aad96dce304454db69330c4c1c" category="list-text">Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。有关详细信息、请参见 <block ref="5d9770278862f1ca4af19e761a5fa655" category="inline-link-macro-rx"></block> 。</block>
@@ -4434,7 +4428,6 @@ SMB</block>
   <block id="bc08468157c4a9e3a30eed7ba64cc309" category="paragraph"><block ref="1f9dfae8a369525bce4996df40963532" prefix="" category="inline-code"></block> 反映TridentAction镜像 更新CRD的状态。它可以从_suced_、_in Progress _或_failed中获取值。</block>
   <block id="73a8d79444c307e1446b60eb6a9ba8f1" category="paragraph">在配置适用于AWS EKS的Trident加载项之前、请确保满足以下条件：</block>
   <block id="5c48b2cb013af0c5d292d6bc5659074c" category="section-title">使用命令行界面安装/卸载Trident EKS加载项</block>
-  <block id="1095f7331744c1accf45762c2da50a60" category="paragraph">Trident简化了Kubelnetes中适用于NetApp ONTAP的Amazon FSx存储管理、使开发人员和管理员能够专注于应用程序部署。</block>
   <block id="aa9c9ff1836c624104eb3a256a7b8b69" category="section-title">通过舵安装Trident</block>
   <block id="b0e9da2f71a439472cddf0553ae43edc" category="section-title">通过EKS插件安装Trident</block>
   <block id="03023c37f6d85929cf0151fe858d3183" category="paragraph">Trident EKS加载项包括最新的安全修补程序和错误修复、并已通过AWS验证、可与Amazon EKS配合使用。通过EKS加载项、您可以始终确保Amazon EKS集群安全稳定、并减少安装、配置和更新加载项所需的工作量。</block>
@@ -4589,7 +4582,6 @@ SMB</block>
   <block id="02b550dde0cf971ab3461242774691c7" category="paragraph">*验证OCD提供程序是否关联*：</block>
   <block id="25c5ea267b4be122e562399076209238" category="paragraph">验证OIDC提供程序是否已与集群关联。您可以使用以下命令进行验证：</block>
   <block id="7c3f89bd6bb66984ef17d4765bf1f65a" category="open-title">eksc</block>
-  <block id="bc04665b1c712547a7dcc87033ae7152" category="paragraph">您可以使用以下方法之一安装Trident：</block>
   <block id="a01b2c45a64c7d0c2a2aa3ce418eaa04" category="inline-link-macro">为CSI卷启用快照功能</block>
   <block id="9adc02aa546c3838bddb73a67ebaa4e2" category="paragraph">如果要使用快照功能、请安装CSI快照控制器加载项。有关详细信息、请参见 <block ref="d2fce68a585fb4c517040885fb7393e9" category="inline-link-macro-rx"></block> 。</block>
   <block id="df5baf46554bffd06bf1e8e9ae5e6b52" category="paragraph">以下示例命令将安装Trident EKS加载项：</block>
@@ -4606,7 +4598,6 @@ SMB</block>
   <block id="9a30deaecbfde403e36a8a700d09e3e1" category="cell">用于使用 ONTAP REST API 的布尔参数。如果设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，则Trident将使用ONTAP REST API与后端进行通信。此功能需要使用ONTAP 9.11.1及更高版本。此外、使用的ONTAP登录角色必须有权访问<block ref="a9ba4dc88fa11d44cc7c0c918d174778" prefix=" " category="inline-code"></block> 应用程序。预定义的和角色可以满足这一<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 要求<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block> 。</block>
   <block id="43d8d272a15eda3f1fbfcedc2408b697" category="paragraph">要在AWS Bottler套 件上配置NFS3卷、请将所需添加<block ref="e1d3d66c5926aa7fbc3186da8f9b476b" prefix=" " category="inline-code"></block>到存储类：</block>
   <block id="2b00559f1e8a052e6ec27fd2da2fc0ef" category="paragraph-title">PVC、可接入rwx</block>
-  <block id="627d563f4445675e960fd39150a292ba" category="paragraph">文件系统是 Amazon FSX 中的主要资源，类似于内部部署的 ONTAP 集群。在每个 SVM 中，您可以创建一个或多个卷，这些卷是将文件和文件夹存储在文件系统中的数据容器。借助Amazon FSx for NetApp ONTAP、将在云中作为托管文件系统提供。新的文件系统类型称为 * NetApp ONTAP * 。</block>
   <block id="e5fd3b07dfde2732fc5e3a9d4e7c5370" category="section-title">测试过的Amazon计算机映像(AMI)</block>
   <block id="af2fcef81914e3ce8b2cbe1ab832c879" category="cell">AMI</block>
   <block id="c07ee5debf5f3a3fef16c1ee5e8e4942" category="cell">NAS</block>
@@ -5580,9 +5571,7 @@ SMB</block>
   <block id="d793d23636bde1af33eb40ef4de2eed6" category="list-text">如果您使用的是 Helm Chart，则可以进行设置。<block ref="511a93ba3f22794b25bb3e8095217c70" prefix=" " category="inline-code"></block>用于启用 HTTPS 指标的参数。</block>
   <block id="60466502053de34b3a98668d8f30da30" category="list-text">如果您使用的是 YAML 文件，则可以添加以下内容：<block ref="b87bd393f906f49aff86fe4fa9da6426" prefix=" " category="inline-code"></block>向……<block ref="7883e3d8f80ff24d70c49bd975fb3f75" prefix=" " category="inline-code"></block>容器中的<block ref="eb6cdeddd28243c1552ea3b1061b4410" prefix=" " category="inline-code"></block>文件。</block>
   <block id="79f45e16487785bb3d621fef10fb2c75" category="inline-link-macro">NetApp AFX 存储系统</block>
-  <block id="b736bc64ad608ba92379f45fcf862250" category="paragraph">从 25.10 版本开始， NetApp Trident支持<block ref="f33b68c7b6392c7aac0a8125f2e686d8" category="inline-link-macro-rx"></block>。NetApp AFX 存储系统与其他基于ONTAP的系统（ASA、 AFF和FAS）在存储层的实现方式上有所不同。</block>
   <block id="56bfc80041ebbdd39de39ecbcb18e84b" category="admonition">只有<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>NetApp AFX 系统支持 NFS 协议驱动程序；不支持 SMB 协议。</block>
-  <block id="b46760459aac4d412701c1dff9ec8da6" category="paragraph">在Trident后端配置中，无需指定您的系统是NetApp AFX 存储系统。当您选择<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>Trident会自动检测 AFX 存储系统。如下表所示，某些后端配置参数不适用于 AFX 存储系统。</block>
   <block id="827885f5adf3b6b0111abd9357dd10e3" category="admonition">仅适用于NetApp AFX 系统<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>已支持。</block>
   <block id="f0f32c1ebd604d0b16837d9a6821cad9" category="paragraph">*请勿指定用于 AFX 存储系统。*</block>
   <block id="c0dc8d1a97aa82aeba1b05cb8890ac87" category="cell">如果使用率超过此百分比，则配置失败。*不适用于Amazon FSx for ONTAP*。*请勿指定用于 AFX 存储系统。*</block>
@@ -5590,12 +5579,8 @@ SMB</block>
   <block id="e0747acdfb2eb94a4a1d3aa417d1a841" category="cell">使用ONTAP REST API 的布尔参数。<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>Trident使用ONTAP REST API 与后端通信；当设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>Trident使用 ONTAPI (ZAPI) 调用与后端通信。此功能需要ONTAP 9.11.1 及更高版本。此外，所使用的ONTAP登录角色必须具有访问权限。<block ref="045ed0306c61104cb0777ccd31ce648b" prefix=" " category="inline-code"></block>应用。预定义项满足了这一点。<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block>和<block ref="fdb6ba311fad29ec53069808f10ebef4" prefix=" " category="inline-code"></block>角色。从Trident 24.06 版本和ONTAP 9.15.1 或更高版本开始，<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>默认；更改<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>到<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>使用 ONTAPI (ZAPI) 调用。*如果指定，则始终设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>适用于 AFX 存储系统*。</block>
   <block id="b8fefb790f164ddcd42c70816145c524" category="paragraph">为了<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>和<block ref="10be922aa0fd75bc53ab71eda9229763" prefix=" " category="inline-code"></block>Trident现在使用新的计算方法，以确保FlexVol 的尺寸与 snapshotReserve 百分比和 PVC 正确匹配。当用户请求 PVC 时， Trident会使用新的计算方法创建具有更多空间的原始FlexVol 。此计算确保用户在 PVC 中获得其请求的可写空间，而不是少于其请求的空间。在 v21.07 之前，当用户请求 PVC（例如 5 GiB）时，如果快照预留百分比为 50%，则只能获得 2.5 GiB 的可写空间。这是因为用户请求的是整个卷。<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block>是其中的百分比。在Trident 21.07 中，用户请求的是可写空间，而Trident定义了该空间。<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block>将数值表示为占总体积的百分比。这不适用于<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>。请参阅以下示例了解其工作原理：</block>
   <block id="0395fcc0bfef9244eb9f333af3052585" category="inline-link-macro">NetApp AFX存储系统</block>
-  <block id="9046dc891c6251d74c5c221ebbbcb296" category="paragraph">从 25.10 版本开始， NetApp Trident支持<block ref="49c50fa35a079b2c52542809f887838b" category="inline-link-macro-rx"></block>。NetApp AFX 存储系统与其他ONTAP系统（ASA、 AFF和FAS）在存储层的实现方式上有所不同。</block>
   <block id="500d8f925a64614faa69b99264fb4646" category="admonition">只有<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>AFX 系统支持 NFS 协议驱动程序；不支持 SMB 协议。</block>
-  <block id="f84f05aa55b195e10dbafe5e544bb40f" category="paragraph">在Trident后端配置中，您无需指定您的系统是 AFX。当您选择<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>Trident可自动检测 AFX 系统。</block>
-  <block id="6f72939c53675b4961c5e1f116cf3f7b" category="paragraph"><block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block>与其他ONTAP系统（ASA、 AFF和FAS）在存储层的实现上有所不同。这些变化会影响某些参数的使用，如注释中所述。<block ref="54401c26bff345016bccb2761388f645" category="inline-link-macro-rx"></block>。</block>
   <block id="f974cc4de3b127fe51cf4dee58c1e3cd" category="admonition">只有<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>ASA r2 系统支持驱动程序（支持 iSCSI、NVMe/TCP 和 FC 协议）。</block>
-  <block id="5a48fc01f5e1fb93c736fb2e220b3b14" category="paragraph">在Trident后端配置中，无需指定您的系统是ASA r2。当您选择<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>Trident可自动检测ASA r2 或其他ONTAP系统。如下表所示，某些后端配置参数不适用于ASA r2 系统。</block>
   <block id="7ff7debd36efb30a7a980a4c28802e4b" category="admonition"><block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block>与其他ONTAP系统（ASA、 AFF和FAS）在存储层的实现上有所不同。在ASA r2 系统中，使用存储可用区而不是聚合。请参阅<block ref="261295ed43e7c9d663fb0a84ba5b2157" category="inline-link-macro-rx"></block>知识库文章，介绍如何在ASA r2 系统中将聚合分配给 SVM。</block>
   <block id="52c260f6ab30b76029f95eaf1df1a8c5" category="paragraph">Trident支持为已配置的 NFS PV 扩展容量。<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ，<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> ，<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> ， 和<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block>后端。</block>
   <block id="5730fbedf520ab31269b9d78af8034cf" category="paragraph">以下存储驱动程序支持卷组快照：</block>
@@ -6214,7 +6199,6 @@ SMB</block>
   <block id="c0327ab240833cf7990359f6dae2c164" category="list-text">避免在自动化脚本中假设操作顺序</block>
   <block id="ef8eb050000e134fa5a2198e8ff5038e" category="summary">使用 Trident，通过 Kubernetes 原生机制配置 Google Cloud NetApp Volumes 自动分层。</block>
   <block id="dab9b285e93c136eba2e723beb8edd60" category="doc">为 Google Cloud NetApp Volumes 配置自动分层</block>
-  <block id="83ffc703a625612c79f7277e1240a53e" category="paragraph">本页介绍如何使用 Trident 为 Google Cloud NetApp Volumes 配置自动分层。自动分层通过 Trident 后端参数和 PersistentVolumeClaim 注释在卷配置期间进行配置。</block>
   <block id="afb75f46d7710bfa697c616ccf2b5ea3" category="paragraph">自动分层允许 Trident 配置卷，自动将非活动数据从性能层移动到容量层。这降低了存储成本，同时保留了频繁访问数据的性能。</block>
   <block id="5915b91d7147475077383a0b6bb57408" category="paragraph">Trident 仅在卷创建时应用自动分层设置。Trident 26.02 不支持预配后更改。</block>
   <block id="cb093658cef2560e46a3c54bec672cf8" category="section-title">自动分层</block>
@@ -6274,7 +6258,6 @@ SMB</block>
   <block id="145262b324869c9f50771e1bc61d54c1" category="list-text">默认值：31</block>
   <block id="ac93ad43c097943006fe719e9fd99b27" category="summary">配置 Trident 以从 Google Cloud NetApp Volumes Flex Unified 池中配置块（iSCSI）卷。</block>
   <block id="9219256f157bdafe1c5a214d5484f9c8" category="doc">为 SAN 工作负载配置 Google Cloud NetApp Volumes</block>
-  <block id="20b9c0c133f7e69a0b8502d9962924f4" category="paragraph">您可以将 Trident 配置为使用 iSCSI 协议从 Google Cloud NetApp Volumes 配置块存储卷。SAN 卷使用<block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>存储驱动程序从 *Flex Unified* 存储池进行配置。</block>
   <block id="030ed2edf468b53664e975b876d46f03" category="paragraph">此驱动程序专用于块工作负载，不支持 NAS 协议。</block>
   <block id="f5112c14f372dd7b94423fd6a40d95d7" category="admonition"><block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block> 后端需要配置 iSCSI 块卷。<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 后端仅支持 NAS 协议，不能用于 SAN 工作负载。</block>
   <block id="5319fb19b2dd90537aeb7ba40a987af6" category="section-title">NAS 卷和 iSCSI 块卷</block>
@@ -6362,7 +6345,6 @@ SMB</block>
   <block id="d1360e89470f42abf8a1bd73bd223f8e" category="admonition">SAN 块卷不提供分布式锁定或写入协调。当一个块卷被多个节点访问时（ReadWriteMany 与<block ref="f772287729bdf01bff1301d6925477bb" prefix=" " category="inline-code"></block>），应用程序或文件系统必须管理并发。</block>
   <block id="d0bd2d44c9e10fd926af513d41f656f9" category="summary">配置 Trident 以从 Google Cloud NetApp Volumes 配置 NAS（NFS 和 SMB）卷。</block>
   <block id="e408445650c57d1c86de3334ef3c5506" category="doc">为 NAS 工作负载配置 Google Cloud NetApp Volumes</block>
-  <block id="cc635ca7e774fc78f27bdab5b14e31a1" category="paragraph">您可以将 Google Cloud NetApp Volumes 配置为 Trident 的后端，以配置基于文件的存储卷。Trident 可以使用 Google Cloud NetApp Volumes 后端连接 NFS 和 SMB 卷。</block>
   <block id="533896b18d8dc2c69fd548bd5af29c8e" category="paragraph">Trident 在 Google Cloud NetApp Volumes 中为 NAS 和 SAN 工作负载使用不同的后端。该<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 后端仅支持基于文件的协议，无法用于配置 iSCSI 卷。</block>
   <block id="c710352491043a1ba711d50aa67d45cd" category="paragraph">要配置 iSCSI 块卷，请使用<block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>后端，这是专门为 SAN 工作负载设计的单独后端类型。</block>
   <block id="ddc6ce5874a2cb498e3d88489cbc793d" category="paragraph">Google Cloud NetApp Volumes 同时支持 NAS 和块存储，这在应用程序访问和管理数据的方式上有所不同。</block>
@@ -6416,7 +6398,6 @@ SMB</block>
   <block id="08f45bc4adb475bf58bc296ae49e6860" category="paragraph">只有适用于 NetApp ONTAP 的 AWS FSx 才支持自动后端配置。</block>
   <block id="7e80a1b4c777bf1b96cc3f7eadcdc40d" category="summary">了解 RWX NVMe 子系统限制，包括每卷 64 节点的限制、子系统体系结构更改以及所需的升级步骤。</block>
   <block id="df49672d11fa6f15f19136396b6056e9" category="doc">了解 RWX NVMe 子系统限制</block>
-  <block id="5828517680866dd290dcff365b08e0e7" category="paragraph">使用 NVMe 协议的 ReadWriteMany (RWX) 卷的可扩展性限制为每卷 64 个节点。以下包括限制，解释了所涉及的 NVMe 子系统体系结构，并概述了所需的解决步骤。</block>
   <block id="ebf507822886fdc4e5edd89fcc88afe7" category="section-title">了解 64 节点限制</block>
   <block id="7a9296be0e3b6af2e191233c1c6eae94" category="paragraph">如果您计划将 ReadWriteMany (RWX) 卷与 NVMe 协议一起使用，则单个 RWX NVMe 卷不能由 Kubernetes 群集中超过 64 个节点装载。</block>
   <block id="a15159d97bafcae25298d231ae676f80" category="paragraph">请勿计划在 64 个以上节点上挂载相同 RWX NVMe PersistentVolumeClaim 的工作负载。</block>
@@ -6685,7 +6666,6 @@ SMB</block>
   <block id="b1a6996825cda91a559712aa47487d56" category="paragraph">例如，要更改<block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>的默认值，请运行以下命令，其中<block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本：</block>
   <block id="4b4a2f07a31fb7ce67a051d38cdb07a1" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署的名称，如下例所示，其中<block ref="5b8b118bf0117b802a69cacdb76c3dc5" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本。</block>
   <block id="965e298527e6fa46e6de9289de270ccf" category="list-text">如果您<block ref="538f4beb16c8502421a8389e199d34ce" category="inline-link-macro-rx"></block>，您可以使用<block ref="ecdd1f9daa1459f8b8c837369bdc27a9" prefix=" " category="inline-code"></block>一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：</block>
-  <block id="112932a144144754ee49bfabdb99d739" category="paragraph">Trident 支持 AWS FSx for NetApp ONTAP (FSxN) 的自动后端配置。当您创建包含所需 FSxN 参数的 StorageClass 时，Trident 会自动创建相应的后端和 VolumeSnapshotClass。</block>
   <block id="16b97664881a67a27dea071f7290ff06" category="paragraph">Trident 从 StorageClass 定义中导出后端配置。当您应用 StorageClass 时，Trident 验证所需的参数，创建后端，并使用状态注释 StorageClass。</block>
   <block id="3d4d8632d9ddb90edb43db4b7c53a227" category="paragraph">Trident 只创建一次 VolumeSnapshotClass。Trident 会为后续的 StorageClasses 重复使用同一个 VolumeSnapshotClass。</block>
   <block id="6c60936b230f8221d8dfdd63e27e1ff4" category="paragraph">要触发自动后端创建，请在 StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> 节中定义所需的参数。</block>
@@ -6753,4 +6733,19 @@ SMB</block>
   <block id="63e1a9a9d7b9fc2be6e83be05814b615" category="list-text">LUN 命名要求</block>
   <block id="85958d42db0cb572989090e88d48a620" category="list-text">必须为 LUN 命名<block ref="1793051c27c3288cfb3a1c86e4e41b41" prefix=" " category="inline-code"></block>。</block>
   <block id="34c417f2acb582bff5bf551e16b1edb7" category="list-text">如果您的<block ref="ed66bef2b107983b6e4066fddf8c45c3" prefix=" " category="inline-code"></block>是<block ref="d16fb36f0911f878998c136191af705e" prefix=" " category="inline-code"></block>，则 LUN 的完整路径为：</block>
+  <block id="d5c64803deffce85697dfc74edff222a" category="paragraph">要查看完整的故障排除文章列表，请参阅<block ref="57f5c759ada931c6a2051314ca6ee99e" category="inline-link-rx"></block>。</block>
+  <block id="5244ac716dbb2dd029da822917011675" category="paragraph">自动分层通过 Trident 后端参数和 PersistentVolumeClaim 注释在卷配置期间进行配置。您可以使用 Trident 为 Google Cloud NetApp Volumes 配置自动分层。</block>
+  <block id="5da21c390857453a730d154195b8d8c5" category="paragraph">您可以将 Trident 配置为使用 iSCSI 协议从 Google Cloud NetApp Volumes 配置块存储卷。SAN 卷使用<block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>存储驱动程序从 Flex Unified 存储池进行配置。</block>
+  <block id="53eb2e8715c68706fd60a20aea024d5f" category="paragraph">您可以将 Google Cloud NetApp Volumes 配置为 Trident 的后端，以配置基于文件的存储卷。Trident 可以使用 Google Cloud NetApp Volumes 后端连接 NFS 和 SMB 卷。</block>
+  <block id="7bd17d3f5d8aeed56a3d78c1a04e52d7" category="paragraph">了解如何在 Trident 安装中创建和使用 ONTAP NAS 驱动程序。本节提供了将后端映射到 StorageClasses 的后端配置示例和详细信息。从 25.10 版本开始，NetApp Trident 支持 <block ref="f33b68c7b6392c7aac0a8125f2e686d8" category="inline-link-macro-rx"></block>。NetApp AFX 存储系统与其他基于 ONTAP 的系统（ASA、AFF 和 FAS）在存储层的实现方面有所不同。</block>
+  <block id="c32e295517ca2afdf0849a0ccf956198" category="paragraph">在 Trident 后端配置中，无需指定您的系统是 NetApp AFX 存储系统。当您选择<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>时，Trident 会自动检测 AFX 存储系统。某些后端配置参数不适用于 AFX 存储系统。</block>
+  <block id="5d57df97e93c7218bf50f1ec5cda9223" category="paragraph">下表显示了后端配置选项：</block>
+  <block id="aad38c18824e908ae7e8a835a9edae11" category="paragraph">了解使用 ONTAP NAS 驱动程序配置 ONTAP 后端的要求、身份验证选项和导出策略。从 25.10 版本开始，NetApp Trident 支持 <block ref="49c50fa35a079b2c52542809f887838b" category="inline-link-macro-rx"></block>。NetApp AFX 存储系统与其他 ONTAP 系统（ASA、AFF 和 FAS）在存储层的实现方面有所不同。在 Trident 后端配置中，无需指定您的系统是 AFX。当您选择<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>时，Trident 会自动检测 AFX 系统。</block>
+  <block id="240ec0d57a300e95ec2e7b3019dce531" category="paragraph">了解如何在 Trident 安装中创建和使用 ONTAP SAN 驱动程序。本节提供了将后端映射到 StorageClasses 的后端配置示例和详细信息。<block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block> 不同于其他 ONTAP 系统（ASA、AFF 和 FAS）的存储层实现。这些变化会影响某些标注参数的使用。<block ref="54401c26bff345016bccb2761388f645" category="inline-link-macro-rx"></block>。在 Trident 后端配置中，无需指定您的系统是 ASA r2。当您选择<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>时，Trident 会自动检测 ASA r2 或其他 ONTAP 系统。某些后端配置参数不适用于 ASA r2 系统，如下表所示。</block>
+  <block id="eb2ee77e3bce8ac83a7ffb687fe6ba3f" category="paragraph">Trident 支持 AWS FSx for NetApp ONTAP (FSxN) 的自动后端配置。当您创建包含所需 FSxN 参数的 StorageClass 时，Trident 会自动创建相应的后端和 VolumeSnapshotClass。</block>
+  <block id="a24b1fc957d4a3542de5e601eac1d28f" category="doc">部署应用程序</block>
+  <block id="1c21e9c64b7661ab6b46e1a5d6c8bc6d" category="section-title">部署示例应用程序</block>
+  <block id="7fdc028dffbf771dba84d86122529ce5" category="paragraph">Trident 简化了 Kubernetes 中 Amazon FSx for NetApp ONTAP 存储管理，使您的开发人员和管理员能够专注于应用程序部署。您可以使用以下方法之一安装 Trident：</block>
+  <block id="6529ed4499fd7aea7863a4cbdb1e267a" category="paragraph"><block ref="6a2736fcbb5755dd03d114a5153506eb" category="inline-link-rx"></block> 是一项完全托管的 AWS 服务，运行由 NetApp ONTAP 存储操作系统支持的文件系统。它提供 ONTAP 功能、性能和管理，具有 AWS 的可扩展性和操作简便性。文件系统是 Amazon FSx 中的主要资源，类似于本地 ONTAP 集群。每个文件系统包含一个或多个存储虚拟机 (SVM)，每个 SVM 包含一个或多个存储文件和目录的卷。这种集成使在 Amazon Elastic Kubernetes Service (EKS) 中运行的 Kubernetes 集群能够为块和文件工作负载配置 ONTAP 支持的持久卷。</block>
+  <block id="e135dbea693333923195aacbaa21dfde" category="paragraph">使用 NVMe 协议的 ReadWriteMany (RWX) 卷的可扩展性限制为每卷 64 个节点。以下包括限制，解释了所涉及的 NVMe 子系统体系结构，并概述了所需的解决步骤。</block>
 </blocks>

@@ -8,12 +8,14 @@ summary: 配置 Trident 以从 Google Cloud NetApp Volumes 配置 NAS（NFS 和 
 :allow-uri-read: 
 
 
-[role="lead lead"]
+[role="lead"]
 您可以将 Google Cloud NetApp Volumes 配置为 Trident 的后端，以配置基于文件的存储卷。Trident 可以使用 Google Cloud NetApp Volumes 后端连接 NFS 和 SMB 卷。
 
-Trident 在 Google Cloud NetApp Volumes 中为 NAS 和 SAN 工作负载使用不同的后端。该 `google-cloud-netapp-volumes` 后端仅支持基于文件的协议，无法用于配置 iSCSI 卷。
 
-要配置 iSCSI 块卷，请使用
+NOTE: Trident 在 Google Cloud NetApp Volumes 中为 NAS 和 SAN 工作负载使用不同的后端。该 `google-cloud-netapp-volumes` 后端仅支持基于文件的协议，无法用于配置 iSCSI 卷。
+
+
+NOTE: 要配置 iSCSI 块卷，请使用
 `google-cloud-netapp-volumes-san`后端，这是专门为 SAN 工作负载设计的单独后端类型。
 
 

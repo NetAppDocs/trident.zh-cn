@@ -13,7 +13,7 @@ summary: 使用 Trident，通过 Kubernetes 原生机制配置 Google Cloud NetA
 
 
 [role="lead"]
-本页介绍如何使用 Trident 为 Google Cloud NetApp Volumes 配置自动分层。自动分层通过 Trident 后端参数和 PersistentVolumeClaim 注释在卷配置期间进行配置。
+自动分层通过 Trident 后端参数和 PersistentVolumeClaim 注释在卷配置期间进行配置。您可以使用 Trident 为 Google Cloud NetApp Volumes 配置自动分层。
 
 
 
