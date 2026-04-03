@@ -4438,11 +4438,8 @@ SMB</block>
   <block id="7fa8874b1f645ca2af9d81b51985b8fb" category="paragraph">如果原始集群出现问题、您可以将备份还原到其他集群。</block>
   <block id="dd4ee610bd1d035c73bc0cbcd80e46da" category="paragraph">确保满足以下前提条件：</block>
   <block id="b20f8883edb9068c67a2faeb3c083d38" category="list-text">目标集群可以访问与存储备份的源集群相同的AppVault的分段路径。</block>
-  <block id="1ff83a5266e9e025c2984e0c10dea90e" category="admonition">确保目标集群上存在用于应用程序还原的命名空间。</block>
-  <block id="8d433ae9a21c49e9e5433ebd408605c0" category="list-text">从目标集群查看可用AppVault的备份内容：</block>
   <block id="378e6f0ba7080535a4462b5311befb40" category="paragraph">运行此命令可显示AppVault中的可用备份、包括其原始集群、相应的应用程序名称、时间戳和归档路径。</block>
   <block id="053aba80de03f3fdf626d1c858342330" category="list-text">使用AppVault名称和归档路径将应用程序还原到目标集群：</block>
-  <block id="fceebbe32c1f7b24c54d6a4e8a0fa776" category="admonition">如果BackupRestore CR不可用、您可以使用步骤2中提到的命令查看备份内容。</block>
   <block id="4ef55c1fec2de9218af40d16cbc021a4" category="list-text">使用以下命令还原应用程序、将括号中的值替换为环境中的信息。命名空间映射参数使用冒号分隔的命名空间将源命名空间映射到正确的目标命名空间、格式为SOURCE1：dest1、Source2：dest2。例如：</block>
   <block id="41ee1e1e674f49a8e3c78fc5517b1b83" category="inline-link">Trident 24.10</block>
   <block id="330905133ec61fb32dbdb0593cf466a2" category="list-text"><block ref="330905133ec61fb32dbdb0593cf466a2" category="inline-link-rx"></block></block>
@@ -5782,7 +5779,6 @@ SMB</block>
   <block id="a893520b03c95dde2af0c5ccef82b6fd" category="admonition">当您使用 Kopia 作为数据移动器恢复备份时，您可以选择在 CR 中指定注释或使用 CLI 来控制 Kopia 使用的临时存储的行为。请参阅<block ref="08f67cdc0555f043586a8a4182d9187b" category="inline-link-rx"></block>有关您可以配置的选项的更多信息。使用<block ref="26d4326deff4a9a34c8bff3eaf4ad7fc" prefix=" " category="inline-code"></block>有关使用Trident Protect CLI 指定注释的更多信息，请参阅命令。</block>
   <block id="e23fef665fca7137c4d6ee6b9a9ec06a" category="list-text">目标集群已安装Trident Protect。</block>
   <block id="a9f49426447e0464bef483c17509fd98" category="list-text">确保在运行 AppVault CR 时，本地环境可以连接到 AppVault CR 中定义的对象存储桶。<block ref="f9adf231483d5dde9cfc10a610b748d3" prefix=" " category="inline-code"></block>命令。如果网络限制阻止访问，请改为从目标集群上的 pod 内运行Trident Protect CLI。</block>
-  <block id="cfb3749b52f4ce0c21dcdc3a9fce80f2" category="list-text">使用Trident Protect CLI 插件检查目标集群上 AppVault CR 的可用性：</block>
   <block id="00a11b317e9c8f9d94e106859445f95b" category="paragraph">您可以使用自定义资源 (CR) 文件从快照恢复数据，恢复到不同的命名空间或原始源命名空间。当您使用 SnapshotRestore CR 将快照还原到不同的命名空间时， Trident Protect 会在新的命名空间中还原应用程序，并为还原的应用程序创建一个应用程序 CR。为了保护已恢复的应用程序，可以创建按需备份或快照，或者制定保护计划。</block>
   <block id="f493357e2629878fdea1bf9f7073c82d" category="summary">您可以使用注释、命名空间设置和存储选项来自定义Trident Protect 恢复操作。</block>
   <block id="b3cc398bcb7f536fcb9416eb16f4fff6" category="summary">如果您要从试用版升级到完整版产品，可能需要移除Trident Protect 组件。</block>
@@ -6748,4 +6744,10 @@ SMB</block>
   <block id="7fdc028dffbf771dba84d86122529ce5" category="paragraph">Trident 简化了 Kubernetes 中 Amazon FSx for NetApp ONTAP 存储管理，使您的开发人员和管理员能够专注于应用程序部署。您可以使用以下方法之一安装 Trident：</block>
   <block id="6529ed4499fd7aea7863a4cbdb1e267a" category="paragraph"><block ref="6a2736fcbb5755dd03d114a5153506eb" category="inline-link-rx"></block> 是一项完全托管的 AWS 服务，运行由 NetApp ONTAP 存储操作系统支持的文件系统。它提供 ONTAP 功能、性能和管理，具有 AWS 的可扩展性和操作简便性。文件系统是 Amazon FSx 中的主要资源，类似于本地 ONTAP 集群。每个文件系统包含一个或多个存储虚拟机 (SVM)，每个 SVM 包含一个或多个存储文件和目录的卷。这种集成使在 Amazon Elastic Kubernetes Service (EKS) 中运行的 Kubernetes 集群能够为块和文件工作负载配置 ONTAP 支持的持久卷。</block>
   <block id="e135dbea693333923195aacbaa21dfde" category="paragraph">使用 NVMe 协议的 ReadWriteMany (RWX) 卷的可扩展性限制为每卷 64 个节点。以下包括限制，解释了所涉及的 NVMe 子系统体系结构，并概述了所需的解决步骤。</block>
+  <block id="4daca3334f00c4ec7830e587d1e0269d" category="list-text">安装 Trident Protect 需要 Helm 4.x 或更高版本。</block>
+  <block id="43da129a49cd39591bce7ddda6f0dc82" category="list-text">使用 Trident Protect CLI 插件验证目标集群上是否存在 AppVault CR：</block>
+  <block id="ad00af2208d1570d2b6ca4c83cbbb61e" category="admonition">如果目标集群上不存在 AppVault CR，请按照 <block ref="5f86f4618afc0bb72a8693bca73e9890" category="inline-link-macro-rx"></block> 中的步骤创建它。</block>
+  <block id="b104127df6a8992a1e7bad2dbd1aad7c" category="list-text">查看目标集群上可用的 AppVault 的备份内容，并记录<block ref="bf8f430bcd54ced8b34c5fd6d4b41d3c" prefix=" " category="inline-code"></block>要还原的备份：</block>
+  <block id="a1d573518c6d239a09cfdd19537e0944" category="admonition">使用 CR 时，请确保目标集群上存在用于应用程序还原的命名空间。</block>
+  <block id="5566fd919e0cd2daefbf9fbd55ec09e3" category="list-text">*spec.appArchivePath*: (_Required_) AppVault 内存储备份内容的路径。使用步骤 2 中的命令查看备份内容并找到<block ref="bf8f430bcd54ced8b34c5fd6d4b41d3c" prefix=" " category="inline-code"></block>要还原的备份。</block>
 </blocks>
