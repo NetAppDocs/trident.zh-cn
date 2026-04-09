@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/kubernetes-deploy-operator.html 
+permalink: trident-install/kubernetes-deploy-operator.html 
 keywords: deploy, Trident, methods, operator, tridentctl, registry, registries 
 summary: 您可以手动部署Trident操作员以安装Trident。此过程适用于Trident所需容器映像未存储在私有注册表中的安装。 
 ---
@@ -38,7 +38,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 
 == 手动部署Trident操作员并安装Trident
 
-请查看 link:../trident-get-started/kubernetes-deploy.html["安装概述"] 以确保满足安装前提条件并为您的环境选择正确的安装选项。
+请检查 link:kubernetes-deploy.html["安装概述"] 以确保您已满足安装先决条件，并为您的环境选择了正确的安装选项。
 
 .开始之前
 开始安装之前、请登录到Linux主机并验证它是否正在管理一个正常运行的、 link:requirements.html["支持的 Kubernetes 集群"^] 并且您拥有必要的特权。

@@ -27,7 +27,7 @@ summary: '您可以使用轻松升级现有的Trident安装 `tridentctl`。'
 ----
 ./tridentctl uninstall -n <namespace>
 ----
-. 重新安装Trident。请参阅 link:../trident-get-started/kubernetes-deploy-tridentctl.html["使用trdentcl安装Trident"]。
+. 重新安装 Trident。请参阅 link:../trident-install/kubernetes-deploy-tridentctl.html["使用trdentcl安装Trident"]。
 
 
 
