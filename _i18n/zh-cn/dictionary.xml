@@ -6691,8 +6691,6 @@ SMB</block>
   <block id="cb114173f156e2eda40775089a3067ff" category="list-text">为 ANF 驱动程序添加了手动 QoS 支持，使其在 Trident 25.10 中可投入生产；此实验性增强在 Trident 25.06 中引入。</block>
   <block id="6d228b9c6fb2e4c9e3a85dbae436035c" category="list-text">网络文件系统 (NFS)</block>
   <block id="611e52be5c0e9d0f23d78a96a901a63b" category="list-text">Internet 小型计算机系统接口 (iSCSI)</block>
-  <block id="ce1ff0a6a194c07d183ef0de076f81ae" category="list-text">光纤通道协议 (NVMe)</block>
-  <block id="062d8e05f949590d9b752838eb96ff40" category="list-text">基于网络结构的非易失性内存快速通道 (FCP)</block>
   <block id="8b346ec343205378291cfb292f7afa32" category="paragraph">Trident 通过改进多个存储驱动程序的并发性来引入控制器可扩展性。客户可以确定哪些 Trident 驱动程序在一般可用时支持控制器可扩展性，以及哪些驱动程序在 Trident 26.02 中作为技术预览可用。这为可扩展的 Kubernetes 环境提供了明智的部署决策和适当的风险管理。</block>
   <block id="d6295b678067b0517d1f1e80acbf65c1" category="paragraph">启用控制器可扩展性后，不同卷和后端上的操作将同时进行。这增加了吞吐量，并减少了具有大量并发 PersistentVolumeClaim 和 VolumeSnapshot 操作的环境中的端到端操作时间。</block>
   <block id="6255f747f2d40f968f7a0826747a0636" category="paragraph"><block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 和 <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block> 驱动程序不同。仅支持 <block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>。请勿在后端配置或示例中使用 <block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>。</block>
@@ -6750,4 +6748,6 @@ SMB</block>
   <block id="395717e339150790e9789265ce54670c" category="image-alt">Trident 附加组件配置设置</block>
   <block id="7d46dc6377e8ce5df89a34c4ad4e2991" category="image-alt">Trident 附加组件活动状态</block>
   <block id="2c0204a63fd46aab7636df3eb5f83972" category="paragraph">使用 <block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 实用程序，您可以运行 <block ref="b5eda0a74558a342cf659187f06f746f" prefix=" " category="inline-code"></block> 命令来获取从属卷。有关详细信息，请参见 link:../trident-reference/trident-cl.html<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix="[" category="inline-code"></block> 命令和选项]。</block>
+  <block id="69ce754add983294c9646b227af63485" category="list-text">光纤通道协议 (FCP)</block>
+  <block id="95879db8219c8aca8e161d3712e8b423" category="list-text">基于结构的非易失性内存速成 (NVMe)</block>
 </blocks>

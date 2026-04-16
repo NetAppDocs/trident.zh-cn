@@ -33,8 +33,8 @@ summary: 使用 Trident Autogrow Policies 配置和管理自动卷扩展。
 +
 ** 网络文件系统 (NFS)
 ** Internet 小型计算机系统接口 (iSCSI)
-** 光纤通道协议 (NVMe)
-** 基于网络结构的非易失性内存快速通道 (FCP)
+** 光纤通道协议 (FCP)
+** 基于结构的非易失性内存速成 (NVMe)
 
 
 
@@ -51,8 +51,8 @@ summary: 使用 Trident Autogrow Policies 配置和管理自动卷扩展。
 +
 ** 网络文件系统 (NFS)
 ** Internet 小型计算机系统接口 (iSCSI)
-** 光纤通道协议 (NVMe)
-** 基于网络结构的非易失性内存快速通道 (FCP)
+** 光纤通道协议 (FCP)
+** 基于结构的非易失性内存速成 (NVMe)
 
 
 
