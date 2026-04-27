@@ -9,16 +9,15 @@ summary: 使用 Trident Autogrow Policies 配置和管理自动卷扩展。
 
 
 [role="lead"]
-自动卷扩展使 Trident 配置的持久卷能够在使用的容量达到定义的阈值时自动增长。此功能可降低运营开销，并有助于防止因容量耗尽而导致的应用程序中断。
-
-使用 Autogrow Policies 实现自动卷扩展。Autogrow Policy 定义：
+自动卷扩展使 Trident 配置的持久卷能够在使用的容量达到定义的阈值时自动增长。此功能可降低运营开销，并有助于防止因容量耗尽而导致的应用程序中断。使用 Autogrow Policies 实现自动卷扩展。Autogrow Policy 定义：
 
 * 触发扩展的利用率阈值
 * 卷增长的量
 * 卷可以达到的最大大小
 
 
-当超过定义的利用率阈值时，卷的大小会自动增加。卷永远不会自动缩减。
+
+NOTE: 当超过定义的利用率阈值时，卷的大小会自动增加。卷永远不会自动缩减。
 
 
 
@@ -33,8 +32,8 @@ summary: 使用 Trident Autogrow Policies 配置和管理自动卷扩展。
 +
 ** 网络文件系统 (NFS)
 ** Internet 小型计算机系统接口 (iSCSI)
-** 光纤通道协议 (NVMe)
-** 基于网络结构的非易失性内存快速通道 (FCP)
+** 非易失性内存快速通道 (NVMe)
+** 光纤通道协议 (FCP)
 
 
 
@@ -51,8 +50,8 @@ summary: 使用 Trident Autogrow Policies 配置和管理自动卷扩展。
 +
 ** 网络文件系统 (NFS)
 ** Internet 小型计算机系统接口 (iSCSI)
-** 光纤通道协议 (NVMe)
-** 基于网络结构的非易失性内存快速通道 (FCP)
+** 非易失性内存快速通道 (NVMe)
+** 光纤通道协议 (FCP)
 
 
 

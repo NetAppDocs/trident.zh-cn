@@ -39,14 +39,7 @@ NOTE: 确保选择最新的 Operator 版本。
 +
 image::../media/openshift-operator-03.png[安装]
 
-+
-安装完成后，Operator 将显示在已安装的 Operator 列表中并可供使用。
-
 . 单击“查看操作员”可查看操作员的详细信息。
-+
-image::../media/openshift-operator-04.png[已安装]
-
-. 在 * Trident Orchestrator* 下，单击 *创建实例*。
 +
 image::../media/openshift-operator-07.png[已安装]
 
@@ -70,11 +63,29 @@ spec:
   silenceAutosupport: false
 ----
 +
-[]
+[NOTE]
 ====
-** Red Hat Enterprise Linux CoreOS (RHCOS) 未启用和配置 iSCSI。
-** 您可以添加 `nodePrep`在所有 OpenShift 工作节点上配置和启用 iSCSI 和 Multipath 服务的参数。
-** 从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。
+UI 提供了默认示例。您可以直接编辑它，而不是复制完整配置。
+
+====
+
+
+[NOTE]
+====
+可选：启用并发
+
+要启用并发，请将以下字段添加到规范：
+
+[source, yaml]
+----
+enableConcurrency: true
+----
+====
+[NOTE]
+====
+* Red Hat Enterprise Linux CoreOS (RHCOS) 未启用和配置 iSCSI。
+* 您可以添加 `nodePrep`在所有 OpenShift 工作节点上配置和启用 iSCSI 和 Multipath 服务的参数。
+* 从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06.1。
 
 
 ====
