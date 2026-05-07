@@ -54,12 +54,10 @@ entries:
       url: "/trident-use/trident-fsx-iam-role.html"
     - title: 安装 Trident
       url: "/trident-use/trident-fsx-install-trident.html"
-    - title: 配置存储后端
-      url: "/trident-use/trident-fsx-storage-backend.html"
-    - title: 配置自动后端配置
-      url: "/trident-use/trident-fsx-auto-backend-configuration.html"
-    - title: 配置存储类和PVC
+    - title: 配置存储类
       url: "/trident-use/trident-fsx-storageclass-pvc.html"
+    - title: 配置 PVC
+      url: "/trident-use/trident-fsx-create-pvc.html"
     - title: 部署示例应用程序
       url: "/trident-use/trident-fsx-deploy-sample.html"
     - title: 在EKS集群上配置Trident EKS加载项
@@ -92,10 +90,8 @@ entries:
     url: "/trident-use/controller-scalability.html"
   - title: 自动卷扩展
     url: "/trident-use/automatic-volume-expansion.html"
-  - title: 创建 Autogrow 策略
-    url: "/trident-use/automatic-volume-expansion.html"
-  - title: 管理 Autogrow 策略
-    url: "/trident-use/create-autogrow-policy.html"
+  - title: 管理自动卷扩展
+    url: "/trident-use/manage-autogrow-policies.html"
   - title: 导入卷
     url: "/trident-use/vol-import.html"
   - title: 自定义卷名称

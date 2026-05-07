@@ -28,7 +28,7 @@ Trident 只创建一次 VolumeSnapshotClass。Trident 会为后续的 StorageCla
 
 要触发自动后端创建，请在 StorageClass `parameters` 节中定义所需的参数。
 
-[cols="2,1,2,2"]
+[cols="2,1,1,3"]
 |===
 | 参数 | Required | Type | Description 
 
@@ -39,7 +39,7 @@ Trident 只创建一次 VolumeSnapshotClass。Trident 会为后续的 StorageCla
 | `storageDriverName` | 是的。 | string | Trident 存储驱动程序（例如， `ontap-nas` 或  `ontap-san`） 
 
 
-| `credentialsName` | 是的。 | string | 包含 AWS 凭据的 Kubernetes Secret 的名称 
+| `credentialsName` | 是的。 | string | 包含 FSx for ONTAP 凭据的 Kubernetes Secret 的名称 
 |===
 
 
@@ -47,7 +47,7 @@ Trident 只创建一次 VolumeSnapshotClass。Trident 会为后续的 StorageCla
 
 您可以通过 StorageClass 传递可选的后端参数。在 StorageClass `parameters` 部分中将所有可选值定义为字符串。
 
-有关后端参数的完整列表，请参阅：xref:trident-use/trident-fsx-storage-backend.adoc#backend-advanced-configuration-and-examples[FSx for NetApp ONTAP 后端配置]。
+有关后端参数的完整列表，请参阅：xref:trident-fsx-storage-backend.html#backend-advanced-configuration-and-examples[FSx for NetApp ONTAP 后端配置]。
 
 
 

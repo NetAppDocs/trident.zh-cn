@@ -13,7 +13,17 @@ summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以
 
 
 
-== ONTAP SAN和NAS驱动程序集成
+== 概述
+
+在使用 Trident 配置卷之前，您需要通过创建 Trident 后端配置 (TBC) 将存储后端与 Trident 集成。TBC 定义了 Trident 如何连接到存储后端，并为 Trident 管理存储资源提供了必要的信息。
+
+
+
+== 为 FSx for ONTAP 创建 Trident 后端配置 (TBC)
+
+有两种方法可以将 Trident 后端配置为使用 FSx for ONTAP 文件系统：* 创建一个利用自动后端功能的 StorageClass。* 分别创建后端和 StorageClass。
+
+本节中的步骤介绍了如何单独创建后端。有关如何使用 Automatic Backend 功能的信息，请参见 xref:trident-fsx-storageclass-pvc.html#configure-a-kubernetes-storageclass-object-with-automatic-backend-configuration-support-for-fsx-for-ontap[配置 StorageClass 和 PVC] 部分以了解更多信息。
 
 要创建存储后端、您需要创建JSON或YAML格式的配置文件。该文件需要指定所需的存储类型(NAS或SAN)、文件系统和用于获取该文件的SVM以及如何向其进行身份验证。以下示例显示了如何定义基于NAS的存储以及如何使用AWS密钥将凭据存储到要使用的SVM：
 
@@ -280,4 +290,4 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 
 == 提供 SMB 卷
 
-您可以使用以下方式配置 SMB 卷： `ontap-nas`司机。在你完成之前 <<ONTAP SAN和NAS驱动程序集成>> 请完成以下步骤： link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#prepare-to-provision-smb-volumes["准备配置SMB卷"]。
+您可以使用以下方式配置 SMB 卷： `ontap-nas`司机。在你完成之前 <<ONTAP SAN and NAS driver integration>> 请完成以下步骤： link:https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html#prepare-to-provision-smb-volumes["准备配置SMB卷"]。

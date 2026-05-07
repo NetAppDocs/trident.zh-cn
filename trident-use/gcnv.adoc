@@ -95,6 +95,11 @@ tridentctl install \
 == 配置 NAS 存储
 
 
+NOTE: 对于 Google Cloud NetApp Volumes UNIFIED 存储池，Trident 在卷操作期间应用 UNIFIED 特定的命名和验证规则。
+
+定位卷时，Trident 可以评估多个兼容的卷名变体（例如，连字符和下划线格式），以提高导入和发现的可靠性。
+
+
 
 === 驱动程序详细信息
 
