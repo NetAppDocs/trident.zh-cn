@@ -5969,8 +5969,6 @@ SMB</block>
   <block id="69a4986cbe93f4162ce953d8e917b215" category="list-text"><block ref="69a4986cbe93f4162ce953d8e917b215" category="inline-link-rx"></block></block>
   <block id="4c2c3e7d0f5cd32449fc11925a3ad7bc" category="doc">Trident 26.02 文档</block>
   <block id="28b62bff68083dad22bdf1acf812f48a" category="list-text">Trident 现在支持 Kubernetes 1.35。在升级 Kubernetes 之前升级 Trident。</block>
-  <block id="3efcec6a387ab5737e772a3baeea51b2" category="list-text">Kubernetes 1.27 - 1.35</block>
-  <block id="43e43f38c3caf4af908ea20149dccef1" category="paragraph">1.27 - 1.35</block>
   <block id="ac6cc7900e3d9478b2fcf3a73c070b29" category="section-title">Trident 26.02 所需的容器映像</block>
   <block id="627219ce2083b03812e10846d1307811" category="list-text">*spec.runImmediately*：（_可选_）设置为 <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 以在创建计划时触发一次性的即时基线运行（根据保留设置进行备份和/或快照）。默认为 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。这不会修改后续重复周期。</block>
   <block id="b267d2c4b44dd537f81ddd4d1ca1cdd8" category="paragraph">立即运行的计划的示例 YAML：</block>
@@ -6349,7 +6347,6 @@ SMB</block>
   <block id="0e2ef50b7c69ffbf62cb09918ee19243" category="paragraph">Trident 支持一系列 Kubernetes 发行版和平台。</block>
   <block id="9dc48bb809ddb16298a6203467073aba" category="list-text">SUSE Harvester 1.7.0（ONTAP iSCSI）</block>
   <block id="ec92eeadf77128110614c3ae4b04e5c6" category="list-text">OpenShift 4.12、4.14 - 4.21 （如果您计划使用 OpenShift 4.19 的 iSCSI 节点准备，则支持的最低 Trident 版本为 25.06.1。）</block>
-  <block id="991b6998365b18269e10fd6932757c88" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.35.x</block>
   <block id="fa39b55af1ef0692bcd52101a2886102" category="inline-link-macro">控制器可扩展性文档</block>
   <block id="132f0447aa079a2a979713029f6c5c0f" category="list-text">添加了对 ONTAP-NAS（仅限 NFS）、ONTAP-SAN（iSCSI、FCP、NVMe）和 Google Cloud NetApp Volumes (GCNV) 驱动程序并发性的一般可用性 (GA) 支持，使此功能从 Tech Preview 升级。有关详细信息，请参见<block ref="2cdc5fbb0ceee513eb25d6f3a67c7e5a" category="inline-link-macro-rx"></block>。</block>
   <block id="79c677a07b8e51f9201ddd1c415adbfc" category="inline-link-macro">自动卷扩展文档</block>
@@ -6610,7 +6607,6 @@ SMB</block>
   <block id="9d5a9690e203a91236d7cd904141669f" category="section-title">25.10 中的新增功能</block>
   <block id="f74472a1f5a071b8eb49ce2cf4c7f852" category="paragraph">当您刚刚开始使用 Google Cloud NetApp Volumes 并尝试使用时，此配置非常理想，但在实践中，您可能需要为配置的卷提供额外的范围。</block>
   <block id="8eff9b9f03bae3f241ea78649c5afe12" category="admonition">请将 <block ref="49e22ed291a6cbd4445ed587b8bd46c4" prefix=" " category="inline-code"></block> 和 <block ref="7d02a93664a6fdb768f99da64ea2b2e7" prefix=" " category="inline-code"></block> 替换为您的服务帐户凭据。</block>
-  <block id="5efca7076d66285d044c3d550f412284" category="cell">v1.27.0，v1.28.0，v1.29.0，v1.30.0，v1.31.0，v1.32.0，v1.33.0，v1.34.0，v1.35.0</block>
   <block id="bc8f2e08eff77df26551ba5e4180236f" category="list-text">（_Optional_）如果需要，可以将资源筛选添加到同一 CR 以包括或排除特定资源：</block>
   <block id="b5576cce77be319ad80f479a5e774cba" category="list-text">*通用过滤器示例：*</block>
   <block id="4878b93d7331aa7f789a8e06af931f1a" category="list-text">*仅 PVC 过滤器示例：*</block>
@@ -6809,4 +6805,9 @@ SMB</block>
   <block id="8e31ed98521d2fbd01629de60bdbfd6a" category="list-text">Go 运行时：<block ref="472bd143483bc49bc89effbd314435c0" category="inline-link-macro-rx"></block></block>
   <block id="278b5284fc6585f71203297ebab6500e" category="inline-link-macro">CVE-2025-23109</block>
   <block id="fd2c12a453dd202f7117b96858090a49" category="list-text">其他依赖项：<block ref="7beaa9a23a5ebb4abc880f48947240a7" category="inline-link-macro-rx"></block></block>
+  <block id="1f07946fee6ac5cb85e38a3da3d8db2e" category="list-text">Trident 现在支持 Kubernetes 1.36。在升级 Kubernetes 之前升级 Trident。</block>
+  <block id="4713d9468516722d04cb8a63424d6222" category="list-text">Kubernetes 1.27 - 1.36</block>
+  <block id="203760c50a5659765fa822dc460e7e7b" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.36.x</block>
+  <block id="f3157f5bea9295ba633b817f5c01eba4" category="paragraph">1.27 - 1.36</block>
+  <block id="8f56aaf2c6729a76e30900b2be574507" category="cell">v1.27.0，v1.28.0，v1.29.0，v1.30.0，v1.31.0，v1.32.0，v1.33.0，v1.34.0，v1.36.0</block>
 </blocks>
