@@ -34,7 +34,7 @@ Trident 支持多个 Azure 云环境中的 Azure NetApp Files 后端。
 
 如果是首次使用 Azure NetApp Files 或在新位置使用，则需要一些初始配置才能设置 Azure NetApp Files 并创建 NFS 卷。请参阅 https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-quickstart-set-up-account-create-volumes["Azure：设置Azure NetApp Files 并创建NFS卷"^]。
 
-配置和使用 https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Files"^] 后端，您需要满足以下要求：
+要配置和使用 https://azure.microsoft.com/en-us/products/netapp/["Azure NetApp Files"^]后端，您需要以下内容：
 
 [NOTE]
 ====

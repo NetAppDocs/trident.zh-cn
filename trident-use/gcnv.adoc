@@ -32,7 +32,7 @@ NAS 卷提供基于文件的存储，并使用 NFS 或 SMB 协议进行访问。
 * Google Cloud NetApp Volumes 存储池
 
 
-要配置块 (iSCSI) 存储，请参见 xref:trident-use/gcnv-block.html[配置块存储 (iSCSI)]。
+要配置块 (iSCSI) 存储，请参见 link:gcnv-block.html["配置块存储 (iSCSI)"]。
 
 
 

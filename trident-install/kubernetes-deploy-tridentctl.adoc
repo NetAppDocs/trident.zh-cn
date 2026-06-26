@@ -151,7 +151,7 @@ trident-controller-679648bd45-cv2mx   6/6     Running   0          5m29s
 trident-node-linux-vgc8n              2/2     Running   0          5m29s
 ----
 
-NOTE: 如果安装程序未成功完成或 `trident-controller-<generated id>` (`trident-csi-<generated id>` 在23.01之前的版本中)不具有*正在运行*状态、表示未安装此平台。使用 ... `-d` to link:../troubleshooting.html#troubleshooting-an-unsuccessful-trident-deployment-using-tridentctl["打开调试模式"] 并对问题描述 进行故障排除。
+NOTE: 如果安装程序未成功完成或 `trident-controller-<generated id>` (`trident-csi-<generated id>`在 23.01 之前的版本中）未处于 *Running* 状态，则表示未安装平台。使用 `-d`来link:../troubleshooting.html#unsuccessful-trident-deployment-using-tridentctl["打开调试模式"]并对问题进行故障诊断。
 
 
 

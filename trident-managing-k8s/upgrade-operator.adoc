@@ -12,7 +12,7 @@ summary: 您可以使用操作员轻松升级现有的Trident安装。
 
 
 [role="lead"]
-您可以使用Trident操作员手动或使用Helm升级Trident。您可以从Trident操作员安装升级到另一个Trident操作员安装、也可以从安装升级 `tridentctl`到Trident操作员版本。在升级Trident操作员安装之前、请查看link:upgrade-trident.html#select-an-upgrade-method["选择升级方法"]。
+您可以使用 Trident 操作员手动或使用 Helm 升级 Trident。您可以从 Trident 操作员安装升级到另一个 Trident 操作员安装，或从 `tridentctl`安装升级到 Trident 操作员版本。在升级 Trident 操作员安装之前，请查看link:upgrade-trident.html#step-3-select-an-upgrade-method["选择升级方法"]。
 
 
 
@@ -26,7 +26,6 @@ NOTE: 要从使用命名空间范围的运算符(版本20.07到20.10)安装的Tr
 .关于此任务
 ｛\f270通过｝｛\f270｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270通过｝｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270｝
 
-* 对于运行Kubbernetes 1.24的集群，请使用 link:https://github.com/NetApp/trident/tree/stable/v25.02/deploy/bundle_pre_1_25.yaml["bundle_pre_1_25.yaml"^]。
 * 对于运行Kubernetes 1.25或更高版本的集群，请使用 link:https://github.com/NetApp/trident/tree/stable/v25.02/deploy/bundle_post_1_25.yaml["bundle_post_1_25.yaml"^]。
 
 

@@ -64,7 +64,7 @@ image::../media/aws-eks-05.png[Trident 附加组件活动状态]
 ----
 kubectl get pods -n trident
 ----
-. 继续设置并配置存储后端。有关信息，请参见 link:../trident-use/trident-fsx-storage-backend.html["配置存储后端"^]。
+. 继续设置并配置存储后端。有关信息，请参见link:trident-fsx-storage-backend.html["配置存储后端"]。
 
 
 

@@ -108,7 +108,7 @@ Cloud Volumes ONTAP 可为各种使用情形提供数据控制以及企业级存
 
 === Azure NetApp Files 后端驱动程序
 
-Trident使用 `azure-netapp-files`驱动程序管理link:https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Files"^]服务。
+Trident 使用  `azure-netapp-files` 驱动程序来管理 link:https://azure.microsoft.com/en-us/products/netapp/["Azure NetApp Files"^] 服务。
 
 有关此驱动程序及其配置方法的详细信息，请参见link:https://docs.netapp.com/us-en/trident/trident-use/anf.html["Azure NetApp Files 的 Trident 后端配置"^]。
 

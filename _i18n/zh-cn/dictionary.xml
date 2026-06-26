@@ -7,7 +7,6 @@
   <block id="253b40ae359ba25b56231803430c4873" category="section-title">ONTAP</block>
   <block id="cbb7697b4f6f189240d043ff70ca133c" category="admonition">Trident 支持上述所有 ONTAP 部署模式。</block>
   <block id="117bdbda976fe8b3212bc3b6327a0a1b" category="section-title">Cloud Volumes ONTAP</block>
-  <block id="5c04ffbd0c110bf7b37d6b95eb756b75" category="paragraph"><block ref="700b45b9fca207b66f675c8d5dfb073b" category="inline-link-rx"></block> 是一款纯软件存储设备，可在云中运行 ONTAP 数据管理软件。您可以将 Cloud Volumes ONTAP 用于生产工作负载、灾难恢复、 DevOps 、文件共享和数据库管理。它通过提供存储效率，高可用性，数据复制，数据分层和应用程序一致性，将企业级存储扩展到云。</block>
   <block id="4d82a1ec1af02725042c8c785564ee7a" category="section-title">适用于 NetApp ONTAP 的 Amazon FSX</block>
   <block id="27bb76bfb1e4f9966c31f5042348cd1e" category="section-title">Element 软件</block>
   <block id="231afe47f3f37d3808096b36c28b4ded" category="inline-link">Element</block>
@@ -16,7 +15,6 @@
   <block id="25f221cc63a7e1fa55b05c29420a72a2" category="paragraph"><block ref="2841e7defe3939e68d83d007d1ad666b" category="inline-link-rx"></block> 通过自动化执行日常任务并使基础架构管理员能够专注于更重要的功能，简化数据中心的管理和扩展。</block>
   <block id="be17f8b9c728a6cb61cad5a2609b3888" category="paragraph">Trident 完全支持 NetApp HCI 。Trident 可以直接在底层 NetApp HCI 存储平台上为容器化应用程序配置和管理存储设备。</block>
   <block id="7450cfde7058dc5e1f7909d0280fd7ae" category="section-title">Azure NetApp Files</block>
-  <block id="29e7ab00082418141d470583a19c28d3" category="paragraph"><block ref="2384314bcd106c8062815b2ed789c4ad" category="inline-link-rx"></block> 是一种企业级 Azure 文件共享服务，由 NetApp 提供支持。您可以在 Azure 中以本机方式运行要求最苛刻的基于文件的工作负载，同时享受 NetApp 应有的性能和丰富的数据管理功能。</block>
   <block id="5ee08ab883e000ce6b739dbb0b6ff376" category="summary">详细了解 Kubernetes 系统的各个部分。</block>
   <block id="607ae6360b32f1bd6e559e915d414fab" category="doc">Kubernetes 概念</block>
   <block id="d60f0fff1c23a02458849862f593357e" category="inline-link">Kubernetes 系统</block>
@@ -327,7 +325,6 @@
   <block id="36588ac65dcdb9b93916fb0ab708edb3" category="list-text"><block ref="36588ac65dcdb9b93916fb0ab708edb3" category="inline-link-rx"></block></block>
   <block id="ca7ab5ec4cba84fbef55956bb38759ce" category="paragraph">* Element 软件 *</block>
   <block id="e809d9f88c2933195c4d2ab379c1b5dc" category="inline-link">配置适用于 Linux 的 SolidFire</block>
-  <block id="ce0470e08aa854a8f93fa119434e8422" category="list-text"><block ref="ce0470e08aa854a8f93fa119434e8422" category="inline-link-rx"></block></block>
   <block id="d64280eb12d42bb67976ffba6d268e7b" category="paragraph">* NetApp HCI *</block>
   <block id="3bc72bedcc42d144356d4f933c48485d" category="inline-link">NetApp HCI 部署前提条件</block>
   <block id="85bfffc1a1f7aaabd6cf58841640c308" category="list-text"><block ref="85bfffc1a1f7aaabd6cf58841640c308" category="inline-link-rx"></block></block>
@@ -995,7 +992,6 @@
   <block id="86c5a11fba83815412aec79f67f2d276" category="list-text">您也可以通过生成安装 YAML 文件来配置代理 URL 。为此，可以使用 `tridentctl install -generate-custom-yaml` 创建 YAML 文件，并在 `trident dedeployment.yaml` 中为 `trident autosupport` 容器添加 ` -proxy-url` 参数。</block>
   <block id="8ec47dab227d183e0d3ad0cd529d289b" category="paragraph">要 ` 报告指标，您应生成自定义 YAML （使用` -generate-custom-yaml ` 标志）并对其进行编辑，以删除为 `trident 主` 容器调用的` -metrics 标志。</block>
   <block id="28b0abcecaf7a63edb46e4e137337018" category="doc">配置 Azure NetApp Files 后端</block>
-  <block id="07e7004c50a67a3e4e366b4ca1c28e3d" category="paragraph">配置和使用<block ref="24a785881ff1cdf191a2239811dc9597" category="inline-link-rx"></block> 后端，您需要满足以下要求：</block>
   <block id="66d640a9a050b05e6a914cbcd88a1e2e" category="list-text">`ssubscriptionID` 来自启用了 Azure NetApp Files 的 Azure 订阅。</block>
   <block id="b12fb354025b3dfa01277964eb72c060" category="inline-link">应用程序注册</block>
   <block id="f494e4df0fff53e809d6563f8ec1782f" category="inline-link">委派子网</block>
@@ -1622,10 +1618,7 @@
   <block id="28c142639a9bbdd526b8eb986c13907d" category="paragraph">无文件系统；原始块设备</block>
   <block id="98f770b0af18ca763421bac22b4b6805" category="section-title">功能</block>
   <block id="8ff961668c6784e84b25c265cbb629d7" category="paragraph">要了解有关跨命名空间卷访问的详细信息、请执行以下操作：</block>
-  <block id="f1cfea5f1444de607dfa549b3aa57010" category="inline-link-macro">在命名空间之间共享卷：对跨命名空间卷访问说Hello</block>
-  <block id="2780f690b7670efc296ac19ef3029d0c" category="list-text">请访问 <block ref="b0d29f1b2abb2cc552e4cc47177582ef" category="inline-link-macro-rx"></block>。</block>
   <block id="96e1384807331548bf745acde0fe1b73" category="inline-link-macro">NetAppTV</block>
-  <block id="bd2cc8575fe69c7f775292759380c838" category="inline-link-macro">bundle_pre_1_25.yaml</block>
   <block id="5a02ebff4889c2de0379a0fb10bed282" category="inline-link-macro">bundle_post_1_25.yaml</block>
   <block id="d59db7846bd10b6d60d21543df9faa9e" category="paragraph-title">您需要的内容</block>
   <block id="6c6e605e09d47da14693d106977b6eb0" category="section-title">管理<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 后端使用<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block></block>
@@ -1727,7 +1720,6 @@
   <block id="f6f19569d16b2b36f137e3df3e315626" category="list-text">。<block ref="39e7fa5a13dbc25a4aa8c4b323cd657c" prefix=" " category="inline-code"></block> 环境变量设置为指向您的Kubernetes集群配置。</block>
   <block id="a24b4ef46f44c1b54b99e62f49bef9af" category="section-title">选择安装方法</block>
   <block id="dcb987a2d08ee1a9198d1183b1a63a96" category="inline-link-macro">在方法之间移动</block>
-  <block id="e11c9248bc5d43c6663f67955adbc53b" category="paragraph">选择适合您的安装方法。您还应查看的注意事项 <block ref="e6ce874bf5f421a383109cc222a74763" category="inline-link-macro-rx"></block> 在做出决定之前。</block>
   <block id="bd1cc9ebdb33ed22a54815219f97af08" category="section-title">使用Trident运算符</block>
   <block id="b2ad529645b5bea51c4bcd516a5c5c8f" category="inline-link-macro">自定义Trident操作员部署</block>
   <block id="9d2c1d92b0ecb606394b40e3553d07d2" category="paragraph">使用Trident运算符的优势包括：</block>
@@ -1794,7 +1786,6 @@
   <block id="ca5380881d4e3b38f359d5d05acd6163" category="paragraph">您的安装状态应如下所示。</block>
   <block id="c5e8fc3926c956e64487a70aa036ec8c" category="paragraph">您可以使用POD创建状态或验证安装<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>。</block>
   <block id="5ba19178fb1b2111306714e923b35945" category="inline-link-macro">打开调试模式</block>
-  <block id="43e7d51a6323aabe7af3d192e157f5ed" category="admonition">如果安装程序未成功完成或<block ref="ce3abad3e11d6a43c5178e20a0c7d64b" prefix=" " category="inline-code"></block> <block ref="2903817a25b5de1e17a06122d71c5cf9" prefix="(" category="inline-code"></block> 在23.01之前的版本中)不具有*正在运行*状态、表示未安装此平台。使用 ...<block ref="9b017020b9d48d433ec90c548e6b5c70" prefix=" " category="inline-code"></block> to <block ref="82f062b46969132d4baf9d002395a676" category="inline-link-macro-rx"></block> 并对问题描述 进行故障排除。</block>
   <block id="5d8f25140dde9344f1318b1319929306" category="doc">手动部署Trident操作员(标准模式)</block>
   <block id="c35c65e4cd4cef23559781ed63709eb0" category="section-title">第4步：创建<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> 并安装Trident</block>
   <block id="a24e915be64ce870d285c6e28a6df3f5" category="list-text"><block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix="" category="inline-code"></block> 和<block ref="ea76b2438eb5996eb2c347e7341ed59a" prefix=" " category="inline-code"></block> 适用于ONTAP NAS后端。</block>
@@ -1911,7 +1902,6 @@
   <block id="bd4c4a75acd87c86694e9aca1e4050e2" category="cell">每个FlexVol 的最大LUN数必须在50、200范围内。仅限SAN。</block>
   <block id="e939be085c2babe4ff0f08e09d0cdfd2" category="cell">配置NFS或SMB卷创建。选项包括<block ref="2521ef5d58fc027d3121662b7d8f9ac2" prefix=" " category="inline-code"></block>，<block ref="79e0f325804dafbdaef73b3b17c0fd8d" prefix=" " category="inline-code"></block>或为空。*必须设置为<block ref="79e0f325804dafbdaef73b3b17c0fd8d" prefix=" " category="inline-code"></block> 对于SMB卷。*如果设置为空、则默认为NFS卷。</block>
   <block id="a8fe789c9febc6b76736fb83c90df2b7" category="cell">要为创建的卷分配的自适应 QoS 策略组。选择每个存储池或后端的qosPolicy或adaptiveQosPolicy之一。不受 ontap-nas-economy.</block>
-  <block id="8336fb38c3b943161d5d6e73af8f4a12" category="cell">启用LUKS加密。请参见 <block ref="3646c7a69a11bdd94c010bf856bda313" category="inline-link-macro-rx"></block>。仅限SAN。</block>
   <block id="8ba802b52dc84f4e82bfbbf2e2d4a807" category="cell">新卷的模式。*对于SMB卷保留为空。*</block>
   <block id="88b0b88c998957f004af42563d5e5b40" category="paragraph">使用<block ref="296026821ada2ab8aebcf13547a63df5" prefix=" " category="inline-code"></block>，<block ref="e12fdd044232e643620eed06bf33c7af" prefix=" " category="inline-code"></block>，和<block ref="1ad68a6a046942b7c1666aed825df70a" prefix=" " category="inline-code"></block>、您可以指定SMB卷并提供所需的Active Directory凭据。SMB卷支持使用<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 仅限驱动程序。</block>
   <block id="262309361fe5b6dcda3a2eae08a48c2d" category="section-title">选择合适的工具</block>
@@ -2419,7 +2409,6 @@ SMB</block>
   <block id="cfab1ba8c67c7c838db98d666f02a132" category="cell">--</block>
   <block id="1cf7168782187634fbc408c66b895dbc" category="section-title">社区支持</block>
   <block id="965b11d07d6acceebc9efec23e5e74a9" category="section-title">NetApp技术支持</block>
-  <block id="8f4c1b75985ff2903107b7115115ea58" category="list-text"><block ref="8f4c1b75985ff2903107b7115115ea58" category="inline-link-macro-rx"></block></block>
   <block id="0adc03eac86772ad2c75c8f140be417e" category="sidebar">知识和支持</block>
   <block id="fabfc25ef8996fd90836e58a4c0b26b6" category="sidebar">获取帮助</block>
   <block id="5248a0897439d95866d14416e307c927" category="sidebar">配置和管理后端</block>
@@ -2760,7 +2749,6 @@ SMB</block>
   <block id="694637a910367ab017767d1135910517" category="list-text">增加了在删除ONTAP驱动程序的快照期间、如果克隆与快照关联、则在执行克隆拆分之前的10秒延迟。</block>
   <block id="52a6fa0a11a7afe868a3a84e42cff7a1" category="list-text">从多平台映像清单中删除了内置证明框架。</block>
   <block id="1fc7da31107247b07ab3abf335b217de" category="section-title">23.10中的变化</block>
-  <block id="154244be43a4ba50080a256f5657b29a" category="list-text">使用 Trident 时可能会遇到的一个常见问题<block ref="4568986ef6397d7c901269fc0e190ede" category="inline-link-rx"></block> 租户和客户端密码来自权限不足的应用程序注册。有关完整的三项要求列表、请参见 <block ref="afedf4ee56554ea6e6b54e6aa206680c" category="inline-link-macro-rx"></block> Configuration</block>
   <block id="35140a26b22dd9ba254fba38858d8b10" category="cell">应用程序注册中的租户 ID
 
 如果在AKS集群上使用托管身份或云身份、则可选。</block>
@@ -2814,7 +2802,6 @@ SMB</block>
   <block id="cd41030284d3ee7b99fc16831ed79650" category="paragraph">ONTAP 存储系统具有最大卷数，具体取决于软件版本和硬件平台。请参见<block ref="bb9c67b5a4c15a85b5e6aa6c9afd0285" category="inline-link-rx"></block> 以 ONTAP 确定确切限制。当卷计数用尽时，配置操作不仅会对 Trident 失败，而且会对所有存储请求失败。</block>
   <block id="ed108e0380671c3131e1a4795b982a45" category="paragraph">服务质量（ QoS ）可确保关键工作负载的性能不会因争用工作负载而降级。ONTAP QoS 策略组为卷提供 QoS 选项，并使用户能够为一个或多个工作负载定义吞吐量上限。有关QoS的详细信息、请参见<block ref="721a1778a2025ec5868484b3888c0186" category="inline-link-rx"></block>。
 您可以在后端或存储池中指定 QoS 策略组，这些策略组将应用于该池或后端创建的每个卷。</block>
-  <block id="acd73d692aa90cacfe480ba8ba39cd5d" category="paragraph">块大小和带宽会直接影响 IOPS 数量。随着块大小的增加，系统会将带宽增加到处理较大块大小所需的级别。随着带宽的增加，系统能够达到的 IOPS 数量也会减少。请参见<block ref="c8976c50ed9f016849fdce232777cd31" category="inline-link-rx"></block> 有关 QoS 和性能的详细信息。</block>
   <block id="4e9b156e7e2788c8cd4b0877fd922657" category="inline-link-macro">24.02.</block>
   <block id="be90349da04be71a620e68314d810f7f" category="cell">2026年2月</block>
   <block id="4b7cb6c36399bdd4e8724de18a1c079b" category="cell">2027年2月</block>
@@ -2904,10 +2891,6 @@ SMB</block>
   <block id="e422e290c66eca7f882976f830b781b4" category="list-text">增加了对Kubnetes 1.30的支持。</block>
   <block id="190dbae19c88b1e68bf03f7783c5d5d1" category="list-text"><block ref="190dbae19c88b1e68bf03f7783c5d5d1" category="inline-link-rx"></block></block>
   <block id="430c6bcb8516befc45fb8173b0ca4e1f" category="list-text"><block ref="430c6bcb8516befc45fb8173b0ca4e1f" category="inline-link-rx"></block></block>
-  <block id="d7d36869f2f4aa1eb99a10008e153f20" category="list-text"><block ref="d7d36869f2f4aa1eb99a10008e153f20" category="inline-link-rx"></block></block>
-  <block id="f8b52d963f246a75dc6c8b78c954a4fd" category="list-text"><block ref="f8b52d963f246a75dc6c8b78c954a4fd" category="inline-link-rx"></block></block>
-  <block id="b6780b7b2561935ff862fe7126cde751" category="list-text"><block ref="b6780b7b2561935ff862fe7126cde751" category="inline-link-rx"></block></block>
-  <block id="b9a641d903e611a87a5e68ac7fdb0b84" category="list-text">Trident AutoSupport 不会收集或传输个人身份信息（ PiII ）或个人信息。它附带的<block ref="173a360b412944768c2ab13e6c8fd1c7" category="inline-link-rx"></block> 不适用于三端存储容器映像本身。您可以详细了解NetApp对数据安全和信任的承诺<block ref="d3cc55401bc8303e01c6b0c43ba0733f" category="inline-link-rx"></block>。</block>
   <block id="5ff83dbc70e496ea22b38ea61bb69f05" category="list-text">观看上的演示 <block ref="c27441bbbe62adf51ae6ecec41fde8bd" category="inline-link-macro-rx"></block>。</block>
   <block id="533a7baf9026dddae6baef47ea605b08" category="doc">部署示例应用程序</block>
   <block id="c09ee63e688125cf9517a66bb5a0a5a6" category="paragraph">以下示例显示了将PVC连接到POD的基本配置：*基本配置*：</block>
@@ -3367,7 +3350,6 @@ SMB</block>
   <block id="a958e7fa65b27b4be8589d6d0de8d135" category="list-text">检测当前安装的Trident版本(版本_n_)。</block>
   <block id="0efdc02c2d9fa1fcf31ff85fec4ed8de" category="summary">您可以使用操作员轻松升级现有的Trident安装。</block>
   <block id="9a98985a342ee2d7d213394e90d838a9" category="doc">使用Trident Operator或Helm升级Trident安装</block>
-  <block id="5430a6b8f98712c8210f8df2d906793a" category="paragraph">您可以使用Trident操作员手动或使用Helm升级Trident。您可以从Trident操作员安装升级到另一个Trident操作员安装、也可以从安装升级<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>到Trident操作员版本。在升级Trident操作员安装之前、请查看<block ref="5cffa5fbe758cc3901f0e33c78b29d1b" category="inline-link-macro-rx"></block>。</block>
   <block id="18466b7fafaca62c9c0d2438889ca0c6" category="admonition">要从使用命名空间范围的运算符(版本20.07到20.10)安装的Trident升级、请按照Trident的升级说明进行操作<block ref="567dd1ff029f25a404a69ff1e3c8d83b" category="inline-link-macro-rx"></block>。</block>
   <block id="76e06d694db0c428e4d51e3354a7a4bd" category="list-text">验证Trident版本：</block>
   <block id="1863fa40be678d4efa33c952a5cba52e" category="paragraph">您可以升级Trident Helm安装。</block>
@@ -3415,7 +3397,6 @@ SMB</block>
   <block id="9586fb9f48cc64f580092d7123d5acad" category="paragraph">请注意、在下表中、并非所有功能都通过Trident公开。如果需要某些功能，存储管理员必须在配置后应用这些功能。上标脚注区分了每个功能和驱动程序的功能。</block>
   <block id="5b003b29dfd53276a5b816a47ab32348" category="paragraph">Trident为ONTAP提供了2个SAN驱动程序、其功能如下所示。</block>
   <block id="3f89ded204a4589d3a6dc04e8b5f3199" category="verse-content-simple">脚注：是脚注：1[]：不受Trident管理是脚注：2[]：支持原始块卷</block>
-  <block id="e999eb209b6aaa7fd15151716377009a" category="paragraph">Trident使用<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block>驱动程序管理<block ref="d617d79fbb5ee3bc8bd280353eeb1349" category="inline-link-macro-rx"></block>服务。</block>
   <block id="67f0b796ae8988fe5446f8f925a4f9d8" category="inline-link-macro">Azure NetApp Files 的 Trident 后端配置</block>
   <block id="46a410b97b05c5034e7d6dd503471548" category="paragraph">有关此驱动程序及其配置方法的详细信息，请参见<block ref="be39645497306a87b14bbf7b3f50cd06" category="inline-link-macro-rx"></block>。</block>
   <block id="57c2378ca2b5638498fcfce53847fb9c" category="verse-content-simple">脚注：是脚注：1[]：不受Trident管理</block>
@@ -3470,7 +3451,6 @@ SMB</block>
   <block id="190c8d0a8c0f9d99e2a5cee87981451c" category="paragraph">详细了解Trident用于通信的端口。</block>
   <block id="cf99312afccffdb3b97f892cb91990a0" category="summary">如果您希望与Trident的REST API进行交互、则可以直接使用REST端点。</block>
   <block id="5eee484e5d1a379b56272cbb68f0b4a6" category="doc">Trident REST API</block>
-  <block id="01244d6a0ae311e8f26e37eff3b90b3a" category="paragraph">虽然<block ref="8321852d17a287399cb52ef30f4b21eb" category="inline-link-macro-rx"></block>这是与Trident REST API交互的最简单方式、但您也可以根据需要直接使用REST端点。</block>
   <block id="d802062141c45c0c8ed9e54ff53f4878" category="paragraph">对于在非Kubnetes部署中使用Trident作为独立二进制文件的高级安装、REST API非常有用。</block>
   <block id="daef2c20475904ee3d06d11ab5e5cc0a" category="paragraph">为了提高安全性、默认情况下、在Pod中运行时、Trident<block ref="aba3d4b49c454e1974970e7b5514b001" prefix=" " category="inline-code"></block>仅限于本地主机。要更改此行为、您需要在Pod配置中设置Trident的<block ref="38df54fe961fa2bf2a7f82a5854fabad" prefix=" " category="inline-code"></block>参数。</block>
   <block id="4e1a255728b39675b43f116f4cfb488b" category="paragraph">有关如何调用这些API的示例，请传递debug <block ref="9b017020b9d48d433ec90c548e6b5c70" prefix="(" category="inline-code"></block>)标志。有关详细信息，请参阅 <block ref="47a3478e106194126b8a4a249a182714" category="inline-link-macro-rx"></block>。</block>
@@ -3696,7 +3676,6 @@ SMB</block>
   <block id="b67b129bb636d36f948ca02b68bfa9bc" category="cell">集群或SVM管理LIF的IP地址可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义、例如：[28e8：d9fb：a825：b7bf：69a8：d02f：9e7b：3555]。如果在字段下<block ref="ac68bbf921d953d1cfab916cb6120864" prefix=" " category="inline-code"></block>提供<block ref="d731d2fecb66f9c4a30253bd316a220f" prefix=" " category="inline-code"></block>、则无需提供、<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block>因为Trident会从AWS检索SVM<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block>信息。因此、您必须提供SVM下某个用户的凭据(例如vsadmin)、并且该用户必须具有此<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block> 角色。</block>
   <block id="0ad999be0dea6cdee2afca2bcb6da8b1" category="paragraph">除了<block ref="6004af307fc2eed554c42ebaa4be8446" category="inline-link-macro-rx"></block>，要将FSx for ONTAP与Trident集成，您还需要：</block>
   <block id="6bb2a5c441a4e421f26e835928b68f1f" category="list-text">Trident EKS加载项不支持SMB卷。</block>
-  <block id="910bc8aad96dce304454db69330c4c1c" category="list-text">Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。有关详细信息、请参见 <block ref="5d9770278862f1ca4af19e761a5fa655" category="inline-link-macro-rx"></block> 。</block>
   <block id="3111c4c842496dcfcddb5de6e9f7ec11" category="list-text">在Trident 24.02之前的版本中、Trident无法删除在已启用自动备份的Amazon FSx文件系统上创建的卷。要在Trident 24.02或更高版本中防止此问题，请在AWS FSx for ONTAP的后端配置文件中指定<block ref="d731d2fecb66f9c4a30253bd316a220f" prefix=" " category="inline-code"></block>、AWS、<block ref="9af4d8381781baccb0f915e554f8798d" prefix=" " category="inline-code"></block>AWS<block ref="1e9c0fd1beef5ff8ed3bef2ae3b7e560" prefix=" " category="inline-code"></block>和AWS<block ref="ce656850400574e9f9cffb285ee8abc0" prefix=" " category="inline-code"></block>。</block>
   <block id="9f953e6f7a1bf75b24ad7c1f72aeda22" category="admonition">如果要为Trident指定IAM角色，则可以省略为Trident明确指定<block ref="1e9c0fd1beef5ff8ed3bef2ae3b7e560" prefix=" " category="inline-code"></block>、<block ref="c9ff119073ea2567730fb42e3a4fe805" prefix=" " category="inline-code"></block>和<block ref="ce656850400574e9f9cffb285ee8abc0" prefix=" " category="inline-code"></block>字段。有关详细信息，请参阅 <block ref="d3e98810edf44af02b30486ed13bd043" category="inline-link-macro-rx"></block>。</block>
   <block id="7b53d57c2eba03d6610dce9feca9a586" category="paragraph">Trident提供两种身份验证模式。</block>
@@ -4158,7 +4137,6 @@ SMB</block>
   <block id="c198f49680a4c22b6d731cdd7d7b513a" category="paragraph">您可以使用<block ref="cd4140d3de30b520500459331d08d2bf" prefix=" " category="inline-code"></block>命令查看安装详细信息、例如名称、命名空间、图表、状态、应用程序版本和修订版号。</block>
   <block id="d43d72969793ea80734b71e9c2406b2a" category="list-text">*保留集群上的附加软件*–此选项将删除Amazon EKS对任何设置的管理。此外、它还会使Amazon EKS无法通知您更新、并在您启动更新后自动更新Amazon EKS附加项。但是、它会保留集群上的附加软件。此选项可使附加组件成为自管理安装、而不是Amazon EKS附加组件。通过此选项、此附加组件不会出现停机。保留命令中的<block ref="4b4ac0f998920a46fd2015e11d01d3e7" prefix=" " category="inline-code"></block> 选项以保留此附加项。</block>
   <block id="03f2a9d8b5b9f1a03bc58b91a939d84f" category="paragraph"><block ref="ad43edaec055586043c762c9475bde5c" category="inline-link-macro-rx"></block> 是Google Cloud中的一项完全托管的文件存储服务、可提供高性能企业级文件存储。</block>
-  <block id="0ce84605b24873b2ee81987302d60089" category="paragraph"><block ref="bc468e9b0072cb6f1552f9bc0a3b6063" category="inline-link-rx"></block>是一种云原生文件服务、可通过NFS为NAS卷提供全闪存性能。此服务支持在GCP云中运行任何工作负载、包括传统应用程序。它提供了一种完全托管的服务，可提供稳定一致的高性能，即时克隆，数据保护以及对 Google Compute Engine （ GCE ）实例的安全访问。</block>
   <block id="afb432a9cb893dca3218bf5ed8f124b6" category="section-title">第6步：授予对AppVault对象的访问权限</block>
   <block id="518792e00e0ca0d711657c9051ae8b45" category="paragraph">要执行备份和快照等数据管理任务、集群管理员需要向各个用户授予对AppVault对象的访问权限。</block>
   <block id="3ce2b0dd65dc314e4d0ccf4ed02db5a7" category="list-text">创建并应用AppVault和机密组合YAML文件、以授予用户对AppVault的访问权限。例如、以下CR将授予用户对AppVault的访问权限<block ref="6ca05da537cc3daa1ec22134c0b69946" prefix=" " category="inline-code"></block>：</block>
@@ -4450,7 +4428,6 @@ SMB</block>
   <block id="e031968b595722f16da97146c3a92c69" category="list-text">NVMe/TCP +<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block>(原始设备)</block>
   <block id="381edc20137f75d1e418981c1361fd2c" category="list-text">FC +<block ref="1467a571dd94848f616edc4a0c33b927" prefix=" " category="inline-code"></block>(原始设备)</block>
   <block id="97949d2167cfb02925ebeb5fbc18e41c" category="admonition">使用或驱动程序时<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>、您需要将后端配置中的参数设置<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>、以便Trident可以限制通过受管导出策略应用了此内容的Kubornetes<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>节点的访问。</block>
-  <block id="f27e6cf95381139bd9916c64f178d212" category="list-text">对于运行Kubbernetes 1.24的集群，请使用 <block ref="ccef28639b5a7d8b851d32c1ca719ce3" category="inline-link-macro-rx"></block>。</block>
   <block id="b9f6abf28d1518cdaae0ed7e29a5727e" category="list-text">对于运行Kubernetes 1.25或更高版本的集群，请使用 <block ref="d1039b29d019902f70f499d65ede99cb" category="inline-link-macro-rx"></block>。</block>
   <block id="405c5315f2ee81c7d907857a97bc9ccc" category="list-text">将备份项目放在FlexVol volume上</block>
   <block id="f4d58905240b9c44d84e6ee73c8499ac" category="admonition">NetApp建议您保护与另一个SVM具有SnapMirror关系的FlexVol所在的SVM。</block>
@@ -4542,7 +4519,6 @@ SMB</block>
   <block id="5125c17a3f7aca891b87dc6ad4b9aa93" category="list-text">在EKS Kubernetes集群上、导航到*加载项*选项卡。</block>
   <block id="07a5364a7a995818398d39d8d5f84d64" category="list-text">找到*Next* NetApp Trident并选中Trident插件的复选框，然后单击*Next*。</block>
   <block id="7f3424d52d579a5a23fa5102f22de8bd" category="list-text">运行以下命令以验证Trident是否已正确安装在集群上：</block>
-  <block id="5b06ec175e810e88c7f4e485931d2ce9" category="list-text">继续设置并配置存储后端。有关信息，请参见 <block ref="a2c0b79bf795dfa2b95204a4216320db" category="inline-link-macro-rx"></block>。</block>
   <block id="2f3961a883aa613983c8f34a8add7695" category="paragraph-title">使用命令行界面安装NetApp Trident EKS加载项：</block>
   <block id="fa1234b3e3fcccb885405485ab5cbefb" category="paragraph-title">使用命令行界面卸载NetApp Trident EKS加载项：</block>
   <block id="aa8e98bf63904518342c90bd49a9ea9c" category="paragraph">以下命令将卸载Trident EKS加载项：</block>
@@ -4799,7 +4775,6 @@ SMB</block>
   <block id="5c43de330169c269435e59a6b0ec6a2e" category="paragraph">此<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>驱动程序会在自动管理的FlexVol卷池中将Docker卷创建为ONTAP qtrees。qtree 的扩展能力远高于此，每个集群节点最多可扩展 100 ， 000 个，每个集群最多可扩展 2 ， 400 ， 000 个，但某些功能会受到影响。该<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>驱动程序不支持Docker卷粒度快照或克隆。</block>
   <block id="a21d144a1c4c6283532b218d06e428b5" category="admonition">Docker Swarm目前不支持此<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>驱动程序、因为Docker Swarm不会在多个节点之间编排卷创建过程。</block>
   <block id="a742d54fecc7e60d5a6c56568622bf9d" category="paragraph">此<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>驱动程序会在自动管理的FlexVol卷共享池中将Docker卷创建为ONTAP LUN。这样，每个 FlexVol 就不会仅限于一个 LUN ，并且可以为 SAN 工作负载提供更好的可扩展性。根据存储阵列的不同， ONTAP 每个集群最多支持 16384 个 LUN 。由于卷是下面的 LUN ，因此此驱动程序支持 Docker 卷粒度快照和克隆。</block>
-  <block id="8d848c284e4e3a777487dbfd26724083" category="paragraph">有关适用于FlexGroup的FlexGroup和工作负载的信息，请参见<block ref="fd26d63759e7985cecb8814cdedc189b" category="inline-link-rx"></block>。</block>
   <block id="9e2ebdd267bef148382aa48682e06bc5" category="paragraph">要在同一环境中获得高级功能和大规模扩展，您可以运行多个Docker卷插件实例，其中一个使用，另一个<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>使用<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>。</block>
   <block id="86c8f953c394c19d7db6f6cf9882490e" category="paragraph"><block ref="6594f00105facbc68b3a919300221cc8" prefix="" category="inline-code"></block></block>
   <block id="fc03ab18d43301d015d44d432ae97eee" category="paragraph"><block ref="576b5b6204cfa4837c36a45307295380" prefix="" category="inline-code"></block><block ref="6d1394abf99896b6835a3be55cc2adce" prefix=" " category="inline-code"></block></block>
@@ -5166,7 +5141,6 @@ SMB</block>
   <block id="029fec6571d8c4d36438994c07941953" category="list-text">** 不适用于Trident版本 25.02 的 NFSv3。</block>
   <block id="87e881298a8d8cc2b3ffd068da55a0c1" category="list-text">EKS版本：1.32</block>
   <block id="38ec877f215b7bc2eb836f279c3374c5" category="list-text">安装方法：Helm 25.06 和 AWS 附加组件 25.06</block>
-  <block id="54cae3576f4c4ef43a60a75276a7afdb" category="paragraph">使用Trident<block ref="30e4ebd32bc870aef019efda0672389c" category="inline-link-macro-rx"></block>您可以一步部署Trident操作员并安装Trident 。</block>
   <block id="5912b080dcb9b431aedfe3f22784a527" category="paragraph">可以使用以下字符来定义虚拟池标签：</block>
   <block id="89ff245fa0048aa9d5eeb6153a82f880" category="list-text">大写字母<block ref="0c43922c2fd0b2886820ce8d59d0a425" prefix=" " category="inline-code"></block></block>
   <block id="568787cc8b0bed04e060c362d705b747" category="list-text">小写字母<block ref="dcb844fadbceca7867ca91e26174469b" prefix=" " category="inline-code"></block></block>
@@ -5607,7 +5581,6 @@ SMB</block>
   <block id="ebe98a8374dc31f4dd5bb51932ba3ba4" category="admonition">NetApp ASA r2 或 AFX 存储系统不支持卷组快照。</block>
   <block id="b3fd6a68d255a3fb79774387cf52d7e4" category="admonition">如果虚拟网络与Azure NetApp Files(ANF) 存储帐户位于不同的资源组中，则在配置后端资源组列表时，请为虚拟网络指定资源组。</block>
   <block id="8ab25113bce4fe0aa1a0fe85708c8fde" category="section-title">提供 SMB 卷</block>
-  <block id="6e6aa9c1336da72bae602de2bd041c8b" category="paragraph">您可以使用以下方式配置 SMB 卷：<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>司机。在你完成之前 <block ref="24f26185e00986318dc562523d4edbf6" category="inline-xref-macro-rx"></block> 请完成以下步骤： <block ref="2c87a2692f74b765fc7d12f8607c123c" category="inline-link-macro-rx"></block>。</block>
   <block id="8227b927875caa5115317241f2ef5aed" category="paragraph-title">SMB工具</block>
   <block id="07481e3d69515bb71aba543becb5f83d" category="paragraph"><block ref="2c87a2692f74b765fc7d12f8607c123c" category="inline-link-macro-rx"></block> 如果您正在使用：<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 为 SMB 提供卷。</block>
   <block id="d35c59236d3e20dddbaa302d4a00761e" category="paragraph">您可以使用以下方式配置 SMB 卷<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 司机。</block>
@@ -6503,7 +6476,6 @@ SMB</block>
   <block id="b99082a3eb962e1fa5d1fc28604f1a68" category="paragraph">将策略应用于现有 PVC：</block>
   <block id="7e6415021d7c4fadc0a16960769cd4af" category="paragraph">要将策略应用于现有 StorageClass：</block>
   <block id="6852d46a7f12e4ac5bd8135d2811f6f6" category="section-title">如果我同时在 StorageClass 和 PVC 上设置自动增长策略，会发生什么？</block>
-  <block id="bd17699641cf7343854a3198cdf7da2f" category="paragraph">PVC 注释始终优先。如果 PVC 具有<block ref="d3ebc760d856a789e9b6f2f04b100023" prefix=" " category="inline-code"></block>注释，则无论StorageClass指定什么，Trident 都会使用该值。有关详细信息，请参阅<block ref="d2839e2bf68ffd7fca8df7984b7e917b" category="inline-link-macro-rx"></block>。</block>
   <block id="1e2410d687cee7f9d4903b106dcffc9c" category="paragraph">例如，假设此 StorageClass：</block>
   <block id="3b719965029f11402bd8b5380f755e50" category="paragraph">此 PVC 覆盖 StorageClass 策略：</block>
   <block id="d6d85ac14273714d990863d333174c4a" category="paragraph">Trident 使用<block ref="1b6f2331613486099b517057aef06fe0" prefix=" " category="inline-code"></block>用于<block ref="9f405b89d6f90cccb2683dca5a203fb5" prefix=" " category="inline-code"></block>，而不是<block ref="b6d44ca8f1212b3baf6def1d5fe5ea90" prefix=" " category="inline-code"></block>。</block>
@@ -6657,7 +6629,6 @@ SMB</block>
   <block id="acadbe7a5cd9273b0ee5a279b032f7b0" category="paragraph">如果需要，您可以在本地生成和修改 Trident 用于安装的确切清单文件。请参阅 <block ref="4d27cf5886ab6094891bd8a1e3bc926c" category="inline-link-macro-rx"></block>。</block>
   <block id="365f044223bbae18d908189b4742ff4c" category="paragraph"><block ref="365f044223bbae18d908189b4742ff4c" category="inline-link-macro-rx"></block></block>
   <block id="218a0c4bd3daf2a2ce3574281b7ca0b2" category="paragraph">请检查 <block ref="d5658c9dfbfb4ef585182e92445a8919" category="inline-link-macro-rx"></block> 以确保您已满足安装先决条件，并为您的环境选择了正确的安装选项。</block>
-  <block id="fd70f1b164adc63154ddd14bc45da369" category="paragraph">除了 <block ref="f0147e8cec197bebba8f7503f81d4b69" category="inline-link-macro-rx"></block> 之外，您还需要 <block ref="fc0cdbd8defe0c7175199dd05a0f8e76" category="inline-link-macro-rx"></block>。</block>
   <block id="b7bec5d0d77ca93cd7a03308720c371e" category="paragraph">无论是手动部署还是使用 Helm，Trident 操作员都是简化安装和动态管理 Trident 资源的好方法。您甚至可以<block ref="a1f2adae0e8434fa57fbe3e21b52345e" category="inline-link-macro-rx"></block>使用<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>自定义资源 (CR) 中的属性。</block>
   <block id="778f8fc1f45a4176e0a6dc6c0c8048d8" category="paragraph">安装和升级 Trident 的众多<block ref="2b6c752c2a0adaf915d24df45e6dabc3" category="inline-link-macro-rx"></block>之一是自动处理 Trident 和 Kubernetes 对象，而不会中断现有的已挂载卷。通过这种方式，Trident 可以支持零停机时间升级，或<block ref="c0fb6b6f12bb8ae805a97690328ec023" category="inline-link-macro-rx"></block>。特别是，Trident 操作程序与 Kubernetes 集群进行通信以：</block>
   <block id="df59e976eeaa50e1f8a5a59704fbf6ca" category="list-text">如果您<block ref="4cb6ea02341de02a01b7d090723c78e1" category="inline-link-macro-rx"></block>，您可以使用<block ref="ecdd1f9daa1459f8b8c837369bdc27a9" prefix=" " category="inline-code"></block>一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：</block>
@@ -6688,7 +6659,6 @@ SMB</block>
   <block id="2cc40b9eb3f06619fcd9facbf4a21920" category="paragraph">NAS 卷提供基于文件的存储，并使用 NFS 或 SMB 协议进行访问。这些卷支持跨多个 pod 或节点的共享访问。</block>
   <block id="1935f97dad1b0c304f6abc254afe2de1" category="paragraph">块卷提供原始块存储，并作为连接到 Kubernetes 节点的 iSCSI 设备进行访问。当应用程序需要块级访问时，将使用这些卷。</block>
   <block id="f21b6a2382d256aa586680b59e096f52" category="list-text">Google Cloud NetApp Volumes 存储池</block>
-  <block id="3315682958a605a4533e397d630d9fd5" category="paragraph">要配置块 (iSCSI) 存储，请参见 <block ref="a4226c5d239e9ee0850d6130550adaf5" category="inline-xref-macro-rx"></block>。</block>
   <block id="9d2f541ab4662082ddc25455a6e6b777" category="paragraph">云身份使 Kubernetes 工作负载能够通过作为工作负载身份进行身份验证而不是使用静态凭据来访问 Google Cloud 资源。</block>
   <block id="2ffcf7a384e905c1da617f12771ee803" category="list-text">已在 GKE 群集上启用工作负载标识，已在节点池上启用元数据服务器</block>
   <block id="22f36643bcaa8e680a0c665e40bdc17f" category="list-text">具有 Google Cloud NetApp Volumes Admin 角色<block ref="04bf1a6a0250bc9d4cba09ee34106dfc" prefix="(" category="inline-code"></block>）的 Google Cloud 服务帐户或同等自定义角色</block>
@@ -6742,7 +6712,6 @@ SMB</block>
   <block id="cb182a02f5aa1ac8a7a2a4f14397a3b4" category="admonition">对于 Google Cloud NetApp Volumes UNIFIED 存储池，Trident 在卷操作期间应用 UNIFIED 特定的命名和验证规则。</block>
   <block id="45a3d3e8acfc9167865516499647195a" category="paragraph">定位卷时，Trident 可以评估多个兼容的卷名变体（例如，连字符和下划线格式），以提高导入和发现的可靠性。</block>
   <block id="3e9c774c40ebaa8bc6c065e6715290b8" category="cell">包含 FSx for ONTAP 凭据的 Kubernetes Secret 的名称</block>
-  <block id="24cea288ed5f6fc9b7c08e95b6463461" category="paragraph">有关后端参数的完整列表，请参阅：<block ref="f189fd85f853ba52a4458041a5711c17" category="inline-xref-macro-rx"></block>。</block>
   <block id="850f34ee07c1f7c733689432aa913d97" category="doc">配置 PVC</block>
   <block id="cb0040729f6ab230a60b480b317fab03" category="paragraph">本节包含有关如何创建使用已配置 Kubernetes StorageClass 来请求 PV 的 PersistentVolumeClaim（PVC）的说明。如果成功，您随后可以将该 PV 挂载到 pod。</block>
   <block id="8600b568bf793d635d66dbc65c77edc6" category="paragraph"><block ref="b1b93f46fc69df9fe663c091f4d6c2b4" category="inline-link-rx"></block>（PVC）是访问集群上 PersistentVolume 的请求。PVC 可以配置为请求特定大小或访问模式的存储。使用关联的 StorageClass，集群管理员可以控制超出 PersistentVolume 大小和访问模式的更多内容——例如性能或服务级别。</block>
@@ -6752,14 +6721,12 @@ SMB</block>
   <block id="962ef8b6f8710e2a8691044683805591" category="section-title">为 FSx for ONTAP 创建 Trident 后端配置 (TBC)</block>
   <block id="2a673b8d42dbadfd3526e120fc0bc016" category="paragraph">有两种方法可以将 Trident 后端配置为使用 FSx for ONTAP 文件系统：* 创建一个利用自动后端功能的 StorageClass。* 分别创建后端和 StorageClass。</block>
   <block id="f0177cdf4d35f6a71b4a28e75a4ac404" category="inline-xref-macro">配置 StorageClass 和 PVC</block>
-  <block id="a2e20c8e1b65e56ee81610e9d95b78ce" category="paragraph">本节中的步骤介绍了如何单独创建后端。有关如何使用 Automatic Backend 功能的信息，请参见 <block ref="b825ec6c5ef762e84c50ce9a86b6b5be" category="inline-xref-macro-rx"></block> 部分以了解更多信息。</block>
   <block id="45785995a830d1fc258f9f492e7419f3" category="doc">配置存储类</block>
   <block id="1a9cbcbc6ddc2988ba989623616f551f" category="paragraph"><block ref="da3f7f170e13df7f56e057fc4226aa85" category="inline-link-rx"></block> 标识置备程序并指示置备程序如何置备卷。本节将向您展示如何配置将 Trident 指定为置备程序的 Kubernetes StorageClass 对象。</block>
   <block id="181d66d2970ca0a79166620ff77f2365" category="section-title">创建 StorageClass 对象</block>
   <block id="210b23a19c97ecce400f85135dfa4f55" category="paragraph">当您为 FSx for ONTAP 创建 StorageClass 时，Trident 将自动创建后端配置。</block>
   <block id="509f5efbbc1d003a3134ba763ce9a153" category="admonition">如果要手动配置存储后端，请参阅 <block ref="f92675ea6cdcb434e9668b63d509b6c2" category="inline-xref-macro-rx"></block> 部分了解如何分别创建 Trident 后端和存储类。</block>
   <block id="9fdbc2bf1d74e1af2c19ff15c59205a5" category="paragraph">创建 StorageClass 时需要定义以下三个参数：</block>
-  <block id="4bac3033b4cd0f657a9175dd92932fd7" category="paragraph">您可以通过 StorageClass 传递可选的后端参数。在 StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> 部分中将所有可选值定义为字符串。有关后端参数的完整列表，请参阅：<block ref="f189fd85f853ba52a4458041a5711c17" category="inline-xref-macro-rx"></block>。</block>
   <block id="1ebccd08373f6e20b1548e7b97f25d9f" category="section-title">示例 StorageClass 配置文件。</block>
   <block id="e838148d72a21ebe7c26751f37c63e59" category="section-title">创建 StorageClass</block>
   <block id="3a0ab04525f748974131d078f6efe9a5" category="paragraph">创建配置文件后，请运行以下命令来创建存储类。</block>
@@ -6791,7 +6758,6 @@ SMB</block>
   <block id="a6a81819cd47e7b0e923e797ae4112ba" category="paragraph">^1^：ONTAP Select 或 FSx for ONTAP 系统不支持</block>
   <block id="ef316cded652e105fec19365cf7e97ba" category="section-title">创建存储类</block>
   <block id="229c01017effc9064e0cda054a83ffb6" category="paragraph">配置 StorageClass 后，您可以在 Kubernetes 中创建它。</block>
-  <block id="f187a9b6db1e4664e89d1b0a6ae8e5aa" category="paragraph">您可以使用 <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 驱动程序配置 SMB 卷。但是，要执行此操作，您必须完成以下步骤：<block ref="2c87a2692f74b765fc7d12f8607c123c" category="inline-link-macro-rx"></block>。</block>
   <block id="b808c0f6c02a2bfc490cec673c19e395" category="cell">协议 LIF 的 IP 地址。*ONTAP NAS 驱动程序*：NetApp 建议指定 dataLIF。如果未提供，Trident 会从 SVM 获取 dataLIF。您可以指定要用于 NFS 挂载操作的完全限定域名 (FQDN)，允许您创建轮询 DNS 以跨多个 dataLIF 进行负载平衡。可以在初始设置后更改。*ONTAP SAN 驱动程序*：不要为 iSCSI 指定。Trident 使用 ONTAP Selective LUN Map 来发现建立多路径会话所需的 iSCI LIF。如果明确定义了 dataLIF，则会生成警告。如果 Trident 是使用 IPv6 标志安装的，则可以设置为使用 IPv6 地址。IPv6 地址必须用方括号括起来，例如 [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]。</block>
   <block id="c0f12f4cfb79ab18be46d9a2f0eccd58" category="sidebar">配置存储类</block>
   <block id="6c8701a99958ffdb3999e3f1f6e5fdbf" category="sidebar">管理自动卷扩展</block>
@@ -6810,4 +6776,36 @@ SMB</block>
   <block id="203760c50a5659765fa822dc460e7e7b" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.36.x</block>
   <block id="f3157f5bea9295ba633b817f5c01eba4" category="paragraph">1.27 - 1.36</block>
   <block id="8f56aaf2c6729a76e30900b2be574507" category="cell">v1.27.0，v1.28.0，v1.29.0，v1.30.0，v1.31.0，v1.32.0，v1.33.0，v1.34.0，v1.36.0</block>
+  <block id="bd36045805a85f9665960a0f6f9e955f" category="list-text"><block ref="bd36045805a85f9665960a0f6f9e955f" category="inline-link-macro-rx"></block></block>
+  <block id="7244beaf9a5f0b906f65ac443dbf07a0" category="paragraph">有关 FlexGroups 和适用于 FlexGroups 的工作负载的信息，请参见<block ref="02927f5d2a03bd36432bf247f38d70d3" category="inline-link-rx"></block>。</block>
+  <block id="714ad635b7b855ea6b214ed7b344a93a" category="paragraph">Cloud Volumes ONTAP是一款纯软件存储设备，可在云中运行ONTAP数据管理软件。您可以将Cloud Volumes ONTAP用于生产工作负载、灾难恢复、DevOps、文件共享和数据库管理。它通过提供存储效率、高可用性、数据复制、数据分层和应用程序一致性，将企业存储扩展到云端。</block>
+  <block id="5090b1528d6e6561587ada33bf0caab6" category="paragraph"><block ref="67ffc9d81af4d4784973c007c719056a" category="inline-link-rx"></block> 是企业级 Azure 文件共享服务，由 NetApp 提供支持。您可以在 Azure 中以本机方式运行要求最苛刻的基于文件的工作负载，并提供您期望从 NetApp 获得的性能和丰富的数据管理。</block>
+  <block id="77b3d37737668900e7a3090c236b1f43" category="paragraph"><block ref="edd2b7aa1c7509676e2980018fef6c49" category="inline-link-rx"></block> 是一种云原生文件服务，通过 NFS 提供 NAS 卷，具有全闪存性能。此服务可让任何工作负载（包括旧版应用程序）在 GCP 云中运行。它提供完全托管的服务，具备一致的高性能、即时克隆、数据保护以及对 Google Compute Engine (GCE) 实例的安全访问。</block>
+  <block id="db7fc8df66e930e05282807a6ebd58f4" category="paragraph">除了 <block ref="1feb3274d112f2cef694d133af384cac" category="inline-link-macro-rx"></block> 之外，您还需要 <block ref="fc0cdbd8defe0c7175199dd05a0f8e76" category="inline-link-macro-rx"></block>。</block>
+  <block id="d88223d773f28ccdf21626fa17114e63" category="admonition">如果安装程序未成功完成或<block ref="ce3abad3e11d6a43c5178e20a0c7d64b" prefix=" " category="inline-code"></block> <block ref="2903817a25b5de1e17a06122d71c5cf9" prefix="(" category="inline-code"></block>在 23.01 之前的版本中）未处于 *Running* 状态，则表示未安装平台。使用<block ref="9b017020b9d48d433ec90c548e6b5c70" prefix=" " category="inline-code"></block>来<block ref="0c26927b9a8e07f011a7bc7653213d74" category="inline-link-macro-rx"></block>并对问题进行故障诊断。</block>
+  <block id="52c58f553a5ef6874859d0bf137653fc" category="paragraph">选择适合您的安装方法。您还应该在做出决定之前查看 <block ref="8566ad2be80f530306673ceb0a701406" category="inline-link-macro-rx"></block> 的注意事项。</block>
+  <block id="c4ca8360dfbe09e499694a13ac8fc34c" category="paragraph">您可以使用 Trident 操作员手动或使用 Helm 升级 Trident。您可以从 Trident 操作员安装升级到另一个 Trident 操作员安装，或从<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>安装升级到 Trident 操作员版本。在升级 Trident 操作员安装之前，请查看<block ref="ad3ae3ba576f54a9ed86202bbeedc293" category="inline-link-macro-rx"></block>。</block>
+  <block id="331e71f1eab1a418f719472f13aa8367" category="paragraph">Trident 使用 <block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block> 驱动程序来管理 <block ref="72aac22ad2323d491b69751decd3d6b3" category="inline-link-macro-rx"></block> 服务。</block>
+  <block id="6a19e2418aa5a7364cafc452caa81d8b" category="paragraph">块大小和带宽对 IOPS 数量有直接影响。随着块大小的增加，系统将带宽增加到处理较大块大小所需的级别。随着带宽的增加，系统能够实现的 IOPS 数量会减少。有关 QoS 和性能的更多信息，请参阅<block ref="967e30ab6321feb79b1f60d87637a623" category="inline-link-rx"></block>。</block>
+  <block id="afd3e82da8a12df46005660c5b0458ab" category="list-text"><block ref="afd3e82da8a12df46005660c5b0458ab" category="inline-link-rx"></block></block>
+  <block id="3659f55627e86bd71f85eb663d155fdb" category="list-text"><block ref="3659f55627e86bd71f85eb663d155fdb" category="inline-link-rx"></block></block>
+  <block id="948ce0d4338b9761e83a5c41c4e05b77" category="list-text"><block ref="948ce0d4338b9761e83a5c41c4e05b77" category="inline-link-rx"></block></block>
+  <block id="2f40f77c3e54025e1174369f0cadf798" category="list-text"><block ref="2f40f77c3e54025e1174369f0cadf798" category="inline-link-rx"></block></block>
+  <block id="23fa77f1c0d4c5e96d1f2a54b8e32db0" category="paragraph">虽然 <block ref="828eac22cdd627b36fb36a534a284377" category="inline-link-macro-rx"></block> 是与 Trident REST API 交互的最简单方法，但如果您愿意，可以直接使用 REST 端点。</block>
+  <block id="4d7f894e8ec350a861c28ea984648f59" category="paragraph">要配置和使用<block ref="22ab900b028c044945b4dba56093fe8f" category="inline-link-rx"></block>后端，您需要以下内容：</block>
+  <block id="e7bb046e30f86db134e86d3290c81c64" category="paragraph">要配置块 (iSCSI) 存储，请参见 <block ref="3150870319c1481f75f7b9459999b93e" category="inline-link-macro-rx"></block>。</block>
+  <block id="68cd07ab6c69e041267ae69393f6efaa" category="paragraph">PVC 注释始终优先。如果 PVC 具有<block ref="d3ebc760d856a789e9b6f2f04b100023" prefix=" " category="inline-code"></block>注释，则无论StorageClass指定什么，Trident 都会使用该值。有关详细信息，请参见 <block ref="b6777bc93e9dea2b2cf3298a1ccb67b9" category="inline-link-macro-rx"></block>。</block>
+  <block id="9ea1dc44c501f59786a0dd2c5ebc2d21" category="list-text">Trident AutoSupport 不会收集或传输个人身份信息 (PII) 或个人信息。它附带<block ref="ea14b34590cee15ec565ad8fd8feca2e" category="inline-link-rx"></block>，不适用于 Trident 容器图像本身。您可以了解有关 NetApp 对数据安全和信任承诺的更多信息<block ref="ea3b01bc03342a227ac7c6848f1e44fa" category="inline-link-rx"></block>。</block>
+  <block id="fbe2624c58581145645ce5b1bc51440f" category="list-text">继续设置并配置存储后端。有关信息，请参见<block ref="d88c516ea298c412aa042df86d7e6a6d" category="inline-link-macro-rx"></block>。</block>
+  <block id="205a1e1ed5ad95dadd41eeb066d60ac1" category="paragraph">有关后端参数的完整列表，请参阅：<block ref="d01a283ecefcf0ec5ea4ea8e78d3518d" category="inline-link-macro-rx"></block>。</block>
+  <block id="9502f88fbe245a8b7aaf0d7523fd74d1" category="cell">启用 LUKS 加密。请参见 <block ref="569f9f91cdcc19909b8acbf6f423daf7" category="inline-link-macro-rx"></block>。仅限 SAN。</block>
+  <block id="b160f94b047d691b98b2556cbb8a6765" category="paragraph">本节中的步骤介绍了如何单独创建后端。有关如何使用 Automatic Backend 功能的信息，请参见 <block ref="f9ef4344c4051a32be4e04cdc96a90e5" category="inline-link-macro-rx"></block> 部分以了解更多信息。</block>
+  <block id="cf6089f95441ea065a68f957cffe35db" category="inline-link">初始配置后更新 dataLIF</block>
+  <block id="7b8e5028b1a9deea477c9f992a8f4a9f" category="cell">协议 LIF 的 IP 地址。*ONTAP NAS 驱动程序*：NetApp 建议指定 dataLIF。如果未提供，Trident 将从 SVM 获取 dataLIF。可以指定要用于 NFS 挂载操作的完全限定域名 (FQDN)，允许您创建轮询 DNS 以跨多个 dataLIF 进行负载平衡。可以在初始设置后更改。请参阅<block ref="f93bef3d4bf20e9880f352d636878731" category="inline-link-rx"></block>。*ONTAP SAN 驱动程序*：不要为 iSCSI 指定。Trident 使用 ONTAP Selective LUN Map 来发现建立多路径会话所需的 iSCSI LIF。如果明确定义了 dataLIF，则会生成警告。如果使用 IPv6 标志安装了 Trident，则可以设置为使用 IPv6 地址。IPv6 地址必须以方括号定义，例如 [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]。</block>
+  <block id="9303b8f40cf82f5e37702c7a6387e725" category="inline-link-macro">ONTAP SAN 和 NAS 驱动程序集成</block>
+  <block id="74c8fe0ae57f8bdd9a6a73e05ee65a8b" category="paragraph">您可以使用 <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 驱动程序配置 SMB 卷。在完成<block ref="c0e593ebcf5aa364afa03985c32673ae" category="inline-link-macro-rx"></block>之前，请完成以下步骤：<block ref="5a96559e33c87b7cd646f9da5c804ffe" category="inline-link-macro-rx"></block>。</block>
+  <block id="ed3f08facccf88c0c8fb895fcb13ba18" category="paragraph">您可以通过 StorageClass 传递可选的后端参数。在 StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> 部分中将所有可选值定义为字符串。有关后端参数的完整列表，请参阅：<block ref="d01a283ecefcf0ec5ea4ea8e78d3518d" category="inline-link-macro-rx"></block>。</block>
+  <block id="b47863ca8303793c6edc0412cba0ba86" category="paragraph">您可以使用 <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 驱动程序配置 SMB 卷。但是，要执行此操作，您必须完成以下步骤：<block ref="543ecb8334f9fccbb514e5c7ef0f9169" category="inline-link-macro-rx"></block>。</block>
+  <block id="3ab416b72f7e6cf66a52a4fa23bd71bc" category="list-text">Trident 仅支持将 SMB 卷挂载到在 Windows 节点上运行的 Pod。有关详细信息，请参见 <block ref="543ecb8334f9fccbb514e5c7ef0f9169" category="inline-link-macro-rx"></block>。</block>
+  <block id="0aed33e870a02a203987e1f6cbeb75d8" category="list-text">使用 Trident 与<block ref="5990d744db8a85d254742635736f0912" category="inline-link-rx"></block>时可能遇到的常见问题是租户和客户端密码来自权限不足的应用程序注册。有关 Trident 要求的完整列表，请参阅<block ref="afedf4ee56554ea6e6b54e6aa206680c" category="inline-link-macro-rx"></block>配置。</block>
 </blocks>

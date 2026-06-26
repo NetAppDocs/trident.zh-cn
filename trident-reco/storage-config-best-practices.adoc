@@ -275,7 +275,7 @@ vserver nfs modify -vserver <svm_name> -showmount disabled
 
 NOTE: 虽然最大 IOPS 和突发 IOPS 可设置为高达 200 ， 000 ，但卷的实际最大性能受集群使用情况和每节点性能的限制。
 
-块大小和带宽会直接影响 IOPS 数量。随着块大小的增加，系统会将带宽增加到处理较大块大小所需的级别。随着带宽的增加，系统能够达到的 IOPS 数量也会减少。请参见 https://www.netapp.com/pdf.html?item=/media/10502-tr-4644pdf.pdf["SolidFire 服务质量"^] 有关 QoS 和性能的详细信息。
+块大小和带宽对 IOPS 数量有直接影响。随着块大小的增加，系统将带宽增加到处理较大块大小所需的级别。随着带宽的增加，系统能够实现的 IOPS 数量会减少。有关 QoS 和性能的更多信息，请参阅 https://www.netapp.com/pdf.html?item=/media/10502-tr-4644.pdf["SolidFire 服务质量"^]。
 
 
 
@@ -305,7 +305,7 @@ NOTE: 具有增强型 CSI 配置程序的 Trident 支持使用 CHAP 身份验证
 
 * Element 软件 *
 
-* https://www.netapp.com/pdf.html?item=/media/10507-tr4639pdf.pdf["配置适用于 Linux 的 SolidFire"^]
+* https://www.netapp.com/pdf.html?item=/media/10507-tr4639.pdf["配置适用于 Linux 的 SolidFire"^]
 
 
 * NetApp HCI *
@@ -318,9 +318,9 @@ NOTE: 具有增强型 CSI 配置程序的 Trident 支持使用 CHAP 身份验证
 
 * https://docs.netapp.com/us-en/ontap-apps-dbs/mysql/mysql-overview.html["基于 ONTAP 的 MySQL 最佳实践"^]
 * https://www.netapp.com/pdf.html?item=/media/10510-tr-4605.pdf["基于 SolidFire 的 MySQL 最佳实践"^]
-* https://www.netapp.com/pdf.html?item=/media/10513-tr-4635pdf.pdf["NetApp SolidFire 和 Cassandra"^]
-* https://www.netapp.com/pdf.html?item=/media/10511-tr4606pdf.pdf["SolidFire 上的 Oracle 最佳实践"^]
-* https://www.netapp.com/pdf.html?item=/media/10512-tr-4610pdf.pdf["SolidFire 上的 PostgreSQL 最佳实践"^]
+* https://www.netapp.com/pdf.html?item=/media/10513-tr-4635.pdf["NetApp SolidFire 和 Cassandra"^]
+* https://www.netapp.com/pdf.html?item=/media/10511-tr4606.pdf["SolidFire 上的 Oracle 最佳实践"^]
+* https://www.netapp.com/pdf.html?item=/media/10512-tr-4610.pdf["SolidFire 上的 PostgreSQL 最佳实践"^]
 
 
 并非所有应用程序都有特定的准则，与您的 NetApp 团队合作并使用非常重要 https://www.netapp.com/search/["NetApp 库"^] 以查找最新文档。
