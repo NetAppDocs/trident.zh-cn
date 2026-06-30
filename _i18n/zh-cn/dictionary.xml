@@ -6808,4 +6808,5 @@ SMB</block>
   <block id="b47863ca8303793c6edc0412cba0ba86" category="paragraph">您可以使用 <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 驱动程序配置 SMB 卷。但是，要执行此操作，您必须完成以下步骤：<block ref="543ecb8334f9fccbb514e5c7ef0f9169" category="inline-link-macro-rx"></block>。</block>
   <block id="3ab416b72f7e6cf66a52a4fa23bd71bc" category="list-text">Trident 仅支持将 SMB 卷挂载到在 Windows 节点上运行的 Pod。有关详细信息，请参见 <block ref="543ecb8334f9fccbb514e5c7ef0f9169" category="inline-link-macro-rx"></block>。</block>
   <block id="0aed33e870a02a203987e1f6cbeb75d8" category="list-text">使用 Trident 与<block ref="5990d744db8a85d254742635736f0912" category="inline-link-rx"></block>时可能遇到的常见问题是租户和客户端密码来自权限不足的应用程序注册。有关 Trident 要求的完整列表，请参阅<block ref="afedf4ee56554ea6e6b54e6aa206680c" category="inline-link-macro-rx"></block>配置。</block>
+  <block id="716408bdc95cd9a68b94d30cf1063020" category="section-title">26.06 中的新增功能</block>
 </blocks>
