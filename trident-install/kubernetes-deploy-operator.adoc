@@ -41,7 +41,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 请检查 link:kubernetes-deploy.html["安装概述"] 以确保您已满足安装先决条件，并为您的环境选择了正确的安装选项。
 
 .开始之前
-开始安装之前、请登录到Linux主机并验证它是否正在管理一个正常运行的、 link:requirements.html["支持的 Kubernetes 集群"^] 并且您拥有必要的特权。
+在开始安装之前，请登录到 Linux 主机并验证其是否正在管理工作，link:../trident-get-started/requirements.html["支持的 Kubernetes 集群"^]以及您是否具有必要的权限。
 
 
 NOTE: 使用 OpenShift 时，在以下所有示例中使用 `oc` 而不是 `kubectl` ，并首先以 * 系统： admin* 的身份运行 `oc login -u system ： admin` 或 `oc login -u Kube-admin` 进行登录。

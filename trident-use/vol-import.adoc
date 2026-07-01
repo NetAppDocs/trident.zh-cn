@@ -39,13 +39,13 @@ WARNING: 这对于块卷尤其重要、因为Kubnetes不会意识到先前的连
 * 现有卷大小在PVC中确定和设置。存储驱动程序导入卷后，系统将创建 PV ，并为其创建一个 Claims Ref 。
 +
 ** 回收策略最初设置为 `retain` 在PV中。Kubernetes 成功绑定 PVC 和 PV 后，将更新回收策略以匹配存储类的回收策略。
-** 存储类的回收策略为时 `delete`、删除PV时、存储卷将被删除。
+** 如果 Storage Class 的回收策略为 `delete`，Trident 会在删除 PV 时删除存储卷。
 
 
-* 默认情况下， Trident管理 PVC，并在后端重命名FlexVol volume和 LUN。你可以通过 `--no-manage`导入非托管卷的标志和 `--no-rename`标记以保留卷名。
+* 默认情况下，Trident 管理 PVC 并重命名 FlexVol 卷以及后端上的 LUN 或 qtree。您可以传递 `--no-manage`标记以导入非托管卷，并传递 `--no-rename`标记以保留卷名称。
 +
 **  `--no-manage`* - 如果您使用 `--no-manage`标志表明， Trident在对象的生命周期内不会对 PVC 或 PV 执行任何额外的操作。删除 PV 时，存储卷不会被删除，其他操作（如卷克隆和卷调整大小）也会被忽略。
-**  `--no-rename`* - 如果您使用 `--no-rename`标志， Trident在导入卷时保留现有卷名称，并管理卷的生命周期。此选项仅支持以下情况： `ontap-nas` ， `ontap-san` （包括ASA r2 系统） `ontap-san-economy`司机。
+**  `--no-rename`* - 如果使用  `--no-rename` 标志，Trident 将保留现有卷名并管理卷的生命周期。此选项仅支持  `ontap-nas`、 `ontap-san`（包括 ASA r2 系统）、 `ontap-san-economy` 和  `ontap-nas-economy`（qtree 导入）驱动程序。
 +
 
 TIP: 如果您想使用 Kubernetes 进行容器化工作负载，但又想在 Kubernetes 之外管理存储卷的生命周期，那么这些选项非常有用。
@@ -164,7 +164,7 @@ Trident支持使用和 `ontap-nas-flexgroup`驱动程序导入卷 `ontap-nas`。
 
 [NOTE]
 ====
-* Trident不支持使用 `ontap-nas-economy` 司机。
+* 该 `ontap-nas-economy`驱动程序在 qtree 级别管理存储，因此不支持单独导入 FlexVol 卷。要使用 `ontap-nas-economy`驱动程序导入 qtree，请参阅<<import-qtrees,导入 qtree>>（技术预览）。当 Trident 导入 qtree 时，它还会将父 FlexVol 作为包含该 qtree 的存储桶一并导入。
 * 。 `ontap-nas` 和 `ontap-nas-flexgroup` 驱动程序不允许使用重复的卷名称。
 
 
@@ -262,6 +262,68 @@ spec:
   storageClassName: <storage-class-name>
 ----
 --
+====
+
+
+=== 导入 qtree
+
+[NOTE]
+====
+Qtree 导入是 Trident 26.06 中的技术预览功能。技术预览功能不支持用于生产环境。
+
+====
+从 Trident 26.06 开始，您可以使用 `ontap-nas-economy`驱动程序将现有的 ONTAP qtree 导入 Trident。通过 FlexVol volume 和 qtree 名称以 `flexvol/qtree`格式标识 qtree，以及包含该 qtree 的后端的 UUID。<<概述和注意事项>>中的一般导入注意事项也适用于 qtree 导入。
+
+.使用 tridentctl 导入 qtree
+以  `flexvol/qtree` 格式将 qtree 指定为卷名称。以下示例从后端  `ontap_nas_economy` 上的 FlexVol volume  `flexvol1` 导入 qtree  `qtree1`：
+
+[listing]
+----
+tridentctl import volume ontap_nas_economy flexvol1/qtree1 -f <path-to-pvc-file>
+----
+要导入 qtree 而不重命名它，请添加 `--no-rename`标志。要导入 qtree 而不让 Trident 管理其生命周期，请添加 `--no-manage`标志。
+
+.使用 PVC 注释导入 qtree
+使用以下注释创建 PVC：
+
+[source, yaml]
+----
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: <pvc-name>
+  namespace: <namespace>
+  annotations:
+    trident.netapp.io/importOriginalName: "flexvol1/qtree1"
+    trident.netapp.io/importBackendUUID: "<backend-uuid>"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: <size>
+  storageClassName: <storage-class-name>
+----
+要保留现有 FlexVol 卷和 qtree 名称，请添加 `trident.netapp.io/importNoRename: "true"`注释。要将 qtree 导入为非托管，请添加 `trident.netapp.io/notManaged: "true"`注释。
+
+.命名和管理行为
+托管导入(默认):: Trident 重命名 qtree 以匹配 PVC 名称，并将 FlexVol 卷重命名为 `ontap-nas-economy`命名约定。接合路径不变。
+`--no-rename`:: Trident 保留现有的 FlexVol volume 和 qtree 名称。名称必须已遵循 Trident 命名约定，否则 Trident 无法管理 qtree 的删除或挂载操作。
+`--no-manage`:: Trident 引用 qtree 但不管理其生命周期。名称必须遵循 Trident 命名约定，Trident 不使用或管理 qtree 的自动导出策略。
+
+
+.导出策略行为
+如果后端使用自动导出策略，则导入的 qtree 使用每 qtree 导出策略模型，其中每个 qtree 都有自己的导出策略。Trident 在导入时为 qtree 分配一个空导出策略。在发布时，如果启用了自动导出且现有 FlexVol 导出策略为 `default`或为空，则 Trident 会将 FlexVol 卷更新为每个后端导出策略。
+
+[CAUTION]
+====
+更新 FlexVol 卷导出策略可能会中断当前挂载的同一 FlexVol 卷中的其他 qtree。仅在 FlexVol 卷中的 qtree 已卸载时才导入 qtree。
+
+====
+[WARNING]
+====
+不要将两个 Kubernetes 集群指向同一个活动 SVM，也不要导入另一个集群仍在管理的 qtree。如果两个集群管理同一个卷，冲突的操作可能会损坏或破坏数据。
+
 ====
 
 

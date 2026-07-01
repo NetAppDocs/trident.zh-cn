@@ -1,0 +1,187 @@
+---
+sidebar: sidebar 
+permalink: trident-use/vol-move.html 
+keywords: trident, volume move, move volume, ontap-san, iscsi, tridentvolumemove, non-disruptive, aggregate, node, relocate 
+summary: 使用 TridentVolumeMove 资源，无中断地将 iSCSI 卷移动到同一集群中的不同 ONTAP 节点和聚合。 
+---
+= 移动卷
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+从 Trident 26.06 开始，存储管理员可以无中断地将 iSCSI 卷移动到同一 ONTAP 集群中的不同 ONTAP 节点和聚合，同时使用该卷的工作负载保持运行。您可以使用 `TridentVolumeMove`自定义资源或 `tridentctl`等效资源以声明方式请求移动，Trident 将协调 ONTAP 和主机，确保 I/O 不会中断。
+
+
+
+== 要求
+
+卷移动仅适用于 iSCSI 卷的  `ontap-san` 驱动程序。不支持 NVMe 和 NAS 协议。
+
+在移动卷之前，请确保满足以下要求：
+
+* 后端使用  `ontap-san` 驱动程序与 ONTAP REST API。
+* ONTAP 集群至少有两个节点。
+* 您拥有以下凭据集之一：
++
+** 如果使用专用自定义 ONTAP 角色，则为 ONTAP 9.19.1 或更高版本。
+** 早期 ONTAP 版本上的集群管理员凭据。
+
+
+
+
+
+
+== 工作原理
+
+Trident 在同一 ONTAP 集群内的两个位置之间移动卷 (LUN)。在数据移动之前，Trident 会在现有路径旁边向目标添加新的 iSCSI 路径，以便主机多路径设备永远不会失去访问权限。ONTAP 完成移动后，Trident 会删除陈旧的源路径。
+
+Trident 通过一组有序状态驱动移动，这些状态在 `TridentVolumeMove`资源中可见，以便您可以跟踪移动进度。
+
+
+
+== 移动卷
+
+
+
+=== 识别卷和位置
+
+. 查找要移动的 PV 的名称。PV 名称也是移动资源的名称。
+. 在 ONTAP 集群中，记录该卷的当前（源）节点和聚合，并选择目标节点和聚合。
+
+
+
+
+=== 开始移动
+
+使用任一方法。两者都创建相同的 `TridentVolumeMove`资源，其名称为 PV 名称。
+
+[role="tabbed-block"]
+====
+.使用 tridentctl
+--
+[source, console]
+----
+tridentctl create volume-move \
+  --volume      pvc-8a814d62-bd58-4253-b0d1-82f2885db671 \
+  --source-node ontap-node-01 \
+  --source-pool aggr1_node01 \
+  --target-node ontap-node-02 \
+  --target-pool aggr1_node02 \
+  -n trident
+----
+`tvm` 是  `volume-move` 的别名。添加  `--delete-after-success 10m` 以在移动成功后自动删除资源。
+
+--
+.使用 TridentVolumeMove 资源
+--
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentVolumeMove
+metadata:
+  name: pvc-8a814d62-bd58-4253-b0d1-82f2885db671   # the PV to move
+  namespace: trident
+spec:
+  sourceNode: ontap-node-01
+  sourcePool: aggr1_node01
+  targetNode: ontap-node-02
+  targetPool: aggr1_node02
+  # deleteAfterSuccess: 10m   # optional
+----
+应用资源：
+
+[source, console]
+----
+kubectl apply -f tridentvolumemove.yaml
+----
+--
+====
+.规格字段
+`sourceNode` / `targetNode`:: ONTAP 节点名称（非 UUID）。
+`sourcePool` / `targetPool`:: ONTAP 聚合名称。
+`deleteAfterSuccess`:: 可选持续时间，例如 `30s`或 `10m`。设置为 `0`可立即删除资源，或省略此选项以保留资源。
+
+
+
+
+=== 监控移动
+
+使用 `tvm`简称或 `tridentvolumemove`跟踪进度：
+
+[source, console]
+----
+kubectl get tridentvolumemove -n trident
+----
+要查看当前状态和每个节点的进度，请描述资源：
+
+[source, console]
+----
+kubectl describe tridentvolumemove <pv-name> -n trident
+----
+卷可以在 `Moving`状态期间具有并发附件，因为 ONTAP 可能需要一段时间才能完成大卷的移动。为了确保无缝移动，Trident 在 Trident 控制器和 Trident 节点之间进行协调。每个状态按顺序执行以下步骤，最终以 `Succeeded`或 `Failed`结束。
+
+[cols="1,2"]
+|===
+| 状态 | 发生了什么 
+
+
+| `Pending` | Trident接受并验证移动请求，并在开始任何存储更改之前收集所需的信息。 
+
+
+| `ControllerStaging` | Trident 准备目标位置。它将目标节点的存储接口映射到 LUN 并更新 Kubernetes，以便将来节点重启时重新连接到正确的位置。 
+
+
+| `NodeStaging` | 在每个已挂载卷的主机上，Trident 会在现有路径旁边添加来自目标节点的新存储路径，以便 Pod 的 I/O 在两个路径集上继续进行。 
+
+
+| `Moving` | ONTAP 将卷数据复制并转移到目标聚合。这是最长的阶段，ONTAP 全程处理，而 Trident 持续轮询直至完成。在此状态下允许新发布。 
+
+
+| `ControllerUnstaging` | 数据移动完成。Trident 更新 Kubernetes 以从所需状态中删除源路径，然后从 LUN 中取消源节点的存储接口的映射。 
+
+
+| `NodeUnstaging` | 在每个主机上，Trident 会删除过时的源路径。主机只保留目标路径，多路径设备继续提供 I/O 服务而不会中断。 
+
+
+| `Succeeded` | 此卷在目标位置已完全移动并处于联机状态。Trident 会保留 `TridentVolumeMove`资源，如果您设置了 `deleteAfterSuccess`，则会自动将其删除。 
+
+
+| `Failed` | 无法恢复的错误导致移动停止或无法启动。Trident 重置卷状态，以便恢复正常操作，并保留带有错误消息的资源。请查看此消息，修复根本原因，删除此资源，然后重试。 
+|===
+该 `.status.attachments`列表报告了每个附加节点在其 `state`字段中的进度：
+
+[cols="1,2"]
+|===
+| 附加状态 | 含义 
+
+
+| `Pending` | 节点被标识为已连接；工作尚未启动。 
+
+
+| `Bridged` | 在现有路径旁边添加新的目标路径。 
+
+
+| `Migrated` | 现在通过新路径提供流量。 
+
+
+| `Cleaned` | 已从节点中删除过时的源路径。 
+
+
+| `Detached` | 节点在移动过程中分离，在 Trident 评估附加操作是否已准备好继续下一步时，该节点被排除在进一步考虑范围之外。 
+
+
+| `Failed` | 此节点上出现终端错误。查看消息。 
+|===
+
+
+=== 清理移动资源
+
+如果您设置了 `deleteAfterSuccess`，Trident 将自动删除该资源。否则，您可以手动将其删除。在请求对同一卷进行另一次移动之前，请确保该卷不存在处于  `Succeeded` 或  `Failed` 状态的  `TridentVolumeMove` 资源。
+
+[NOTE]
+====
+Trident不会自动删除失败的移动。Trident保留 `Failed`资源作为审计记录。修复根本原因后，请手动删除资源，然后重试。
+
+====

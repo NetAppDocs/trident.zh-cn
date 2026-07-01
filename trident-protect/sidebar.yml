@@ -36,12 +36,16 @@ entries:
     entries:
     - title: 使用Trident Protect 恢复应用程序
       url: "/trident-protect/trident-protect-restore-apps.html"
-    - title: 使用高级设置
+    - title: 使用高级还原设置
       url: "/trident-protect/trident-protect-restore-settings.html"
+    - title: 还原期间修改资源
+      url: "/trident-protect/trident-protect-resource-transformations.html"
   - title: 使用NetApp SnapMirror复制应用程序
     url: "/trident-protect/trident-protect-use-snapmirror-replication.html"
   - title: 迁移应用程序
     url: "/trident-protect/trident-protect-migrate-apps.html"
+  - title: 保护 KubeVirt 虚拟机
+    url: "/trident-protect/trident-protect-kubevirt-vms.html"
   - title: 使用Trident Protect 管理执行钩子
     url: "/trident-protect/trident-protect-use-execution-hooks.html"
 - title: 卸载Trident Protect

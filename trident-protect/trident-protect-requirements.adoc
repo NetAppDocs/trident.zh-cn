@@ -129,6 +129,8 @@ Trident Protect 24.10 在数据保护操作期间不会自动确保 KubeVirt VM 
 kubectl set env deployment/trident-protect-controller-manager NEPTUNE_VM_FREEZE=true -n trident-protect
 ----
 ====
+要了解如何使用 Trident Protect 定义应用程序和还原虚拟机，请参见 link:trident-protect-kubevirt-vms.html["使用 Trident Protect 保护 KubeVirt 虚拟机"]。
+
 
 
 == SnapMirror复制的要求

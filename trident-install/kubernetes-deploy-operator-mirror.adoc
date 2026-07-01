@@ -25,7 +25,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 ====
 []
 =====
-* Trident 现在支持 Kubernetes 1.35。在升级 Kubernetes 之前升级 Trident。
+* Trident 现在支持 Kubernetes 1.36。在升级 Kubernetes 之前升级 Trident。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
@@ -41,7 +41,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 请检查 link:kubernetes-deploy.html["安装概述"] 以确保您已满足安装先决条件，并为您的环境选择了正确的安装选项。
 
 .开始之前
-登录到Linux主机并验证它是否正在管理正常工作的和 link:requirements.html["支持的 Kubernetes 集群"^] 并且您拥有必要的特权。
+登录到 Linux 主机并验证其是否正在管理工作和link:../trident-get-started/requirements.html["支持的 Kubernetes 集群"]并且您具有必要的权限。
 
 
 NOTE: 使用 OpenShift 时，在以下所有示例中使用 `oc` 而不是 `kubectl` ，并首先以 * 系统： admin* 的身份运行 `oc login -u system ： admin` 或 `oc login -u Kube-admin` 进行登录。

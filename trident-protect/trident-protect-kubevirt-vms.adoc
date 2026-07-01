@@ -1,0 +1,568 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-kubevirt-vms.html 
+keywords: kubevirt, openshift virtualization, virtual machine, vm, backup, restore, includedvirtualmachines 
+summary: 使用 Trident Protect 保护 OpenShift Virtualization 上的 KubeVirt 虚拟机。备份命名空间中的所有虚拟机，或按名称定位特定的虚拟机。从备份或快照归档中选择性地还原单个虚拟机。 
+---
+= 使用 Trident Protect 保护 KubeVirt 虚拟机
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident Protect 支持您备份和恢复运行在 OpenShift Virtualization 上的 KubeVirt 虚拟机 (VM)。您可以一次性保护一个或多个命名空间中的所有 VM，也可以使用 `includedVirtualMachines` 字段按名称指定特定的 VM。Trident Protect 会在备份期间自动收集所有依赖的 VM 资源，在恢复期间，您可以恢复整个归档，也可以选择性地恢复单个 VM。
+
+
+
+== KubeVirt 保护模式
+
+Trident Protect 支持两种方式来定义要保护的 KubeVirt 虚拟机。定义应用程序时，请选择一种模式：
+
+[cols="1,1,2"]
+|===
+| 模式 | 字段 | Description 
+
+
+| 基于命名空间 | `includedNamespaces` | 保护一个或多个命名空间中的所有匹配资源。在命名空间条目上使用 `labelSelector`来控制动态包含哪些 VM。 
+
+
+| VM 范围 | `includedVirtualMachines` | 通过命名空间和名称保护特定 KubeVirt 虚拟机。当 VM 分布在多个命名空间中或不希望保护所有命名空间资源时，请使用此模式。 
+|===
+您必须在  `ApplicationSpec` 中指定恰好一个字段 (`includedNamespaces` 或  `includedVirtualMachines`)。您不能在同一个应用程序中同时使用两者。
+
+这两种模式都支持额外的筛选：
+
+* 使用 `resourceFilter`可包括或排除特定资源。
+* 使用 `includedClusterScopedResources`可包含兼容的集群范围的资源，例如 `StorageClass`对象。
+
+
+
+NOTE: Trident Protect 可以在数据保护操作期间冻结和解冻 KubeVirt VM 文件系统，以确保一致性。有关配置详细信息，请参见 link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["使用KubeVirt VM保护数据"]。
+
+
+
+== 备份和快照期间收集的资源
+
+当您为包含 KubeVirt 虚拟机的应用程序创建备份或快照时，Trident Protect 会收集选定的虚拟机资源并自动发现其依赖资源。
+
+集合行为适用于两种情况：
+
+* 使用 `includedVirtualMachines`的 VM 范围应用程序。
+* 包含 KubeVirt `VirtualMachine` 资源的基于命名空间的应用程序。
+
+
+
+
+=== VM 范围的集合
+
+对于 VM 范围的应用程序，Trident Protect 会从  `includedVirtualMachines` 中列出的每个  `VirtualMachine` 开始，并发现还原该 VM 所需的依赖资源。
+
+[cols="1,1,3"]
+|===
+| 资源类型 | 范围 | 如何发现 
+
+
+| `VirtualMachine` | 命名空间 | 从 `includedVirtualMachines`列表中直接匹配。 
+
+
+| `VirtualMachineInstance` | 命名空间 | 与 VM 相同的命名空间和名称（如果 VM 正在运行）。 
+
+
+| `VirtualMachineInstancetype` | 命名空间 | 被 `spec.instancetype`引用，当 `kind: VirtualMachineInstancetype`时。 
+
+
+| `VirtualMachineClusterInstancetype` | 集群 | 由  `spec.instancetype` 引用，当  `kind` 未设置或为  `kind: VirtualMachineClusterInstancetype` 时。 
+
+
+| `VirtualMachinePreference` | 命名空间 | 由 `spec.preference`在 `kind: VirtualMachinePreference`时引用。 
+
+
+| `VirtualMachineClusterPreference` | 集群 | 在  `kind` 未设置或为  `kind: VirtualMachineClusterPreference` 时由  `spec.preference` 引用。 
+
+
+| `DataVolume` | 命名空间 | 被引用 `spec.template.spec.volumes[].dataVolume.name`。 
+
+
+| `PersistentVolumeClaim` | 命名空间 | 从 DataVolume 支持的 PVC 中发现，这些 PVC 使用与 DataVolume 相同的名称； `persistentVolumeClaim.claimName` 中的直接 PVC 引用； `memoryDump.claimName` 中的内存转储 PVC；以及  `ephemeral.persistentVolumeClaim.claimName` 中的临时 PVC。 
+
+
+| `PersistentVolume` | 集群 | 通过使用 `spec.volumeName`从每个已收集的 PVC 的后备 PV 中发现。 
+
+
+| `Secret` | 命名空间 | 从 `secret.secretName`中的卷机密发现；containerDisk 映像拉取机密；CloudInitNoCloud 和 CloudInitConfigDrive 用户数据和网络数据机密引用；Sysprep 机密；KernelBoot 容器映像拉取机密；以及 AccessCredentials SSH 或密码机密。 
+
+
+| `ConfigMap` | 命名空间 | 从卷 ConfigMaps 中发现，位于 `configMap.name` 和 Sysprep ConfigMaps。 
+
+
+| `ServiceAccount` | 命名空间 | 从 `serviceAccount.serviceAccountName`卷引用中发现。 
+
+
+| `NetworkAttachmentDefinition` | 命名空间 | 当网络名称不包含  `/` 时，从  `spec.template.spec.networks[].multus.networkName` 中的 Multus 网络中发现。仅收集相同命名空间的 NetworkAttachmentDefinition 引用。跳过跨命名空间引用。 
+
+
+| `Pod` | 命名空间 | 已为  `virt-launcher` Pods 通过使用标签选择器发现  `kubevirt.io=virt-launcher,vm.kubevirt.io/name=<vmName>`。 
+
+
+| 存储类、Trident 卷和 Trident 后端 | 集群 | 收集方式与基于命名空间的应用程序相同，基于为 VM 发现的 PVC。 
+|===
+
+NOTE: 收集所有 VM 范围的命名空间资源后，Trident Protect 将应用标准 `resourceFilter`（如果已配置）。然后，集群范围的资源收集将正常进行。
+
+
+
+=== 基于命名空间的集合
+
+对于基于命名空间的应用程序，Trident Protect 会扫描选定的命名空间并收集所有匹配的资源。如果发现任何 KubeVirt `VirtualMachine` 对象，Trident Protect 将自动收集其依赖资源，包括实例类型、首选项和 `virt-launcher` Pod，与 VM 范围内的应用程序相同。
+
+这意味着，即使使用 `includedNamespaces`定义了应用程序，您的备份或快照中也会包含特定于 VM 的资源。
+
+
+
+== 使用基于命名空间的应用程序定义保护虚拟机
+
+创建基于命名空间的应用程序时，Trident Protect 会扫描选定的命名空间并收集所有资源，包括任何 KubeVirt VM。对于找到的每个虚拟机，Trident Protect 还会收集备份和还原该虚拟机所需的依赖资源。
+
+基于命名空间的应用程序 CR 示例：
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: <application_name>
+  namespace: <application_namespace>
+spec:
+  includedNamespaces:
+    - namespace: <vm_namespace>
+----
+创建应用程序后，请使用标准的 Trident Protect 工作流进行备份和快照：
+
+* 有关快照 YAML 示例，请参见 link:trident-protect-protect-apps.html#create-an-on-demand-snapshot["创建按需快照"]。
+* 有关备份 YAML 示例，请参见 link:trident-protect-protect-apps.html#create-an-on-demand-backup["创建按需备份"]。
+
+
+
+
+=== 还原基于命名空间的虚拟机应用程序的行为
+
+由于基于命名空间的应用程序从所选命名空间收集资源，因此备份或快照可以包括 KubeVirt 运行时对象和 KubeVirt 托管元数据。其中某些对象不应直接还原，因为它们表示来自源集群的运行时状态。
+
+在恢复期间，Trident Protect 应用 KubeVirt 感知转换来删除源集群元数据并跳过临时 KubeVirt 资源。这有助于 KubeVirt 在恢复的环境中重新创建虚拟机。
+
+[cols="1,2"]
+|===
+| 资源 | 转换 
+
+
+| VirtualMachine | 删除以 `kubevirt.io/`开头的标签和批注。 
+
+
+| VirtualMachineInstance | 删除以 `kubevirt.io/`开头的标签和批注。 
+
+
+| VirtualMachineInstanceMigration | 忽略而不还原。 
+
+
+| VirtualMachineSnapshot | 忽略而不还原。 
+
+
+| VirtualMachineSnapshotContent | 忽略而不还原。 
+
+
+| Pod (`virt-launcher`) | 当 Pod 具有 `kubevirt.io=virt-launcher`标签时跳过。 
+|===
+
+NOTE: Trident Protect 以定义的顺序恢复 KubeVirt 资源，以避免依赖性问题。CDI DataVolumes (`cdi.kubevirt.io`）将首先还原，以便在创建虚拟机对象之前提供虚拟机磁盘数据。之后，VirtualMachines (`kubevirt.io`）将在 VirtualMachineInstances 之前还原。
+
+
+
+== 使用标签选择器实现动态虚拟机保护
+
+如果要在不列出每个虚拟机名称的情况下动态保护虚拟机，请使用带有标签选择器的基于命名空间的应用程序定义。
+
+只有 VirtualMachine CR 需要标签。依赖资源（例如 DataVolumes、PVC、Secrets 和 ConfigMaps）会自动收集。
+
+.步骤
+. 使用共享标签标记虚拟机 CR：
++
+[source, console]
+----
+kubectl label virtualmachine <vm_name 1> app=<label_value> -n <vm_namespace>
+kubectl label virtualmachine <vm_name_2> app=<label_value> -n <vm_namespace>
+----
+. 使用 `includedNamespaces`和 `labelSelector`创建应用程序 CR：
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: <application_name>
+  namespace: <application_namespace>
+spec:
+  includedNamespaces:
+    - namespace: <vm_namespace>
+      labelSelector:
+        matchLabels:
+          app: <label_value>
+----
+. 使用标准 Trident Protect 工作流程创建备份和还原。
+
+
+*其他详细信息*：
+
+* 您可以随时通过更改标签来添加虚拟机或从保护中删除虚拟机：
+
+
+[source, console]
+----
+kubectl label virtualmachine <vm_name_to_add> app=<label_value> -n <vm_namespace>
+kubectl label virtualmachine <vm_name_to_remove> app=<different_label_value> -n <vm_namespace>
+----
+* 您还可以在多个命名空间中使用标签选择器：
+
+
+[source, yaml]
+----
+spec:
+  includedNamespaces:
+    - namespace: <vm_namespace_1>
+      labelSelector:
+        matchLabels:
+          <label_key>: <label_value>
+    - namespace: <vm_namespace_2>
+      labelSelector:
+        matchLabels:
+          <label_key>: <label_value>
+----
+
+
+== 使用 includedVirtualMachines 保护特定 VM
+
+如果要保护一个或多个命名空间中的 VirtualMachines 命名集，并从存档中选择性地还原特定虚拟机，请使用 `includedVirtualMachines`此选项。
+
+应用程序和还原 CR 都使用相同的 `includedVirtualMachines`选择器格式。
+
+在不同上下文中使用此选择器：
+
+* 在应用程序 CR 中，它定义了受保护的虚拟机。
+* 在还原CR中，它定义了从备份或快照存档还原的虚拟机。
+
+
+
+NOTE: 在还原 CR 时， `includedVirtualMachines`是可选的。如果不包括此字段，则会恢复整个存档。指定后，仅还原列出的虚拟机及其从属资源。
+
+下面的 YAML 显示了共享选择器结构：
+
+[source, yaml]
+----
+includedVirtualMachines:
+  - namespace: <vm_namespace_1>
+    names:
+      - <vm_name_1>
+      - <vm_name_2>
+  - namespace: <vm_namespace_2>
+    names:
+      - <vm_name_3>
+----
+
+NOTE:  `includedVirtualMachines`中的多个条目可以引用不同的命名空间，从而支持多命名空间 VM 感知应用程序定义和还原。
+
+[cols="1,1,2"]
+|===
+| 字段 | Type | Description 
+
+
+| namespace | string | 包含目标虚拟机对象的 Kubernetes 命名空间。 
+
+
+| 名称 | 字符串列表 | 该命名空间中的一个或多个虚拟机名称。 
+|===
+.基于 VM 的应用程序示例：
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: <application_name>
+  namespace: <application_namespace>
+spec:
+  includedVirtualMachines:
+    - namespace: <vm_namespace_1>
+      names:
+        - <vm_name_1>
+        - <vm_name_2>
+    - namespace: <vm_namespace_2>
+      names:
+        - <vm_name_3>
+  includedClusterScopedResources:
+    - group: storage.k8s.io
+      kind: StorageClass
+----
+
+
+== 还原特定 KubeVirt VM
+
+您可以在还原 CR 上使用 `includedVirtualMachines`，以仅还原备份、快照或复制快照存档中的选定 KubeVirt 虚拟机。
+
+在还原 CR 上指定 `includedVirtualMachines`时，Trident Protect 仅还原列出的 VirtualMachines 及其从属资源，例如 `VirtualMachineInstance`、 `DataVolume`、 `PersistentVolumeClaim`、 `PersistentVolume`、 `Secret`、 `ConfigMap`、 `ServiceAccount`以及其他与 VM 相关的对象。
+
+如果未在还原 CR 上指定 `includedVirtualMachines`，则 Trident Protect 将根据还原 CR 配置还原完整存档。
+
+
+
+=== 支持的恢复 CR 和 CLI 命令
+
+下表列出了支持 `includedVirtualMachines`的恢复 CR 及其相应的 CLI 命令。
+
+[cols="1,1,3"]
+|===
+| 还原 CR | CLI 命令 | Description 
+
+
+| `BackupRestore` | `tridentctl-protect create backuprestore` | 从备份还原到新的或不同的命名空间映射。支持 `namespaceMapping`和 `storageClassMapping`。 
+
+
+| `BackupInplaceRestore` | `tridentctl-protect create backupinplacerestore` | 从备份还原到原始命名空间或多个命名空间。 
+
+
+| `SnapshotRestore` | `tridentctl-protect create snapshotrestore` | 从快照还原到新的或不同的命名空间映射。支持 `namespaceMapping`和 `storageClassMapping`。 
+
+
+| `SnapshotInplaceRestore` | `tridentctl-protect create snapshotinplacerestore` | 从快照还原到原始命名空间或多个命名空间。 
+
+
+| `ReplicateSnapshotRestore` | 仅限 YAML，或使用受支持的 CLI 命令（如果在您的环境中可用） | 从复制的快照还原。支持 `namespaceMapping`、 `storageClassMapping`以及使用 `inPlaceRestore`标志进行就地还原。 
+|===
+
+NOTE: 在恢复命令中， `tridentctl-protect` CLI 没有用于 `includedVirtualMachines`的标志。要恢复特定的 VM，您必须使用 `kubectl apply`直接应用恢复 CR YAML 文件。您可以从头开始编写 YAML，也可以结合使用 CLI 和 `--dry-run --output yaml`来生成初始文件，在 `spec`下添加 `includedVirtualMachines`字段，然后应用该文件。
+
+
+
+=== VM 范围的还原行为
+
+恢复 CR 上的 `includedVirtualMachines`字段使用与应用程序 CR 相同的选择器格式：
+
+[source, yaml]
+----
+includedVirtualMachines:
+  - namespace: <source_vm_namespace>
+    names:
+      - <vm_name_1>
+      - <vm_name_2>
+----
+对于还原 CR， `includedVirtualMachines` 中的命名空间值是指备份、快照或复制快照存档中存在的源命名空间。
+
+如果使用 `namespaceMapping`，Trident Protect 首先从源存档中选择请求的虚拟机，然后在还原期间应用命名空间映射。如果使用 `storageClassMapping`，Trident Protect 会在还原转换阶段应用存储类映射。
+
+
+
+=== 使用 CLI 生成还原 YAML
+
+您可以使用 `tridentctl-protect`生成基本还原 CR，然后编辑 YAML 以添加 `includedVirtualMachines`。
+
+[source, console]
+----
+tridentctl-protect create <restore_command> <restore_name> \
+  <restore_options> \
+  --dry-run --output yaml > <restore_name>.yaml
+----
+编辑生成的 YAML 并在  `spec` 下添加  `includedVirtualMachines` 字段，然后应用该文件：
+
+[source, console]
+----
+kubectl apply -f <restore_name>.yaml
+----
+
+
+=== 示例：定义基于 VM 的应用程序
+
+以下应用程序保护两个命名空间中的三个特定虚拟机。
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Application
+metadata:
+  name: production-vms
+  namespace: prod
+spec:
+  includedVirtualMachines:
+    - namespace: prod
+      names:
+        - app-server
+        - database-server
+    - namespace: monitoring
+      names:
+        - prometheus-vm
+  includedClusterScopedResources:
+    - group: storage.k8s.io
+      kind: StorageClass
+----
+
+
+=== 示例：创建备份
+
+为基于 VM 的应用程序创建备份时，需使用标准备份 CR。备份 CR 上不需要特定于 VM 的字段。
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: Backup
+metadata:
+  name: daily-backup
+  namespace: prod
+spec:
+  applicationRef: production-vms
+  appVaultRef: s3-vault
+----
+
+
+=== 示例：从备份还原单个虚拟机
+
+以下示例仅从备份存档还原 `database-server`。存档中的其他虚拟机（例如 `app-server`和 `prometheus-vm`）将被跳过。
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: BackupRestore
+metadata:
+  name: restore-db-only
+  namespace: prod-vms-restore
+spec:
+  appVaultRef: s3-vault
+  appArchivePath: backups/production-vms/2026-03-10T00-00-00Z
+  namespaceMapping:
+    - source: prod
+      destination: prod-dr
+  includedVirtualMachines:
+    - namespace: prod
+      names:
+        - database-server
+----
+[source, console]
+----
+kubectl apply -f restore-db-only.yaml
+----
+仅 `database-server`及其依赖资源（例如 DataVolumes、PVC、PV、Secrets、ConfigMaps 和相关 KubeVirt 资源）将被还原。
+
+
+
+=== 示例：从备份原位还原单个虚拟机
+
+以下示例仅将 `database-server`从备份存档还原到其原始命名空间。
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: BackupInplaceRestore
+metadata:
+  name: ipr-db-only
+  namespace: prod
+spec:
+  appVaultRef: s3-vault
+  appArchivePath: backups/production-vms/2026-03-10T00-00-00Z
+  includedVirtualMachines:
+    - namespace: prod
+      names:
+        - database-server
+----
+[source, console]
+----
+kubectl apply -f ipr-db-only.yaml
+----
+
+
+=== 示例：从快照还原单个虚拟机
+
+以下示例仅从快照存档还原 `ubuntu-vm-blue-a627be38`。
+
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: SnapshotRestore
+metadata:
+  name: blue-vm-snap-restore
+  namespace: blue
+spec:
+  appVaultRef: my-appvault
+  appArchivePath: snapshots/protectctl-blue-vm/snap-1
+  includedVirtualMachines:
+    - namespace: blue
+      names:
+        - ubuntu-vm-blue-a627be38
+----
+[source, console]
+----
+kubectl apply -f blue-vm-snap-restore.yaml
+----
+
+
+=== 将虚拟机还原与其他筛选器相结合
+
+您可以在同一还原 CR 中将 `includedVirtualMachines`与 `resourceFilter`、 `namespaceMapping`和 `storageClassMapping`结合使用，以微调还原的内容。
+
+添加 `resourceFilter`时，Trident Protect 首先选择 `includedVirtualMachines`中列出的虚拟机及其依赖资源。然后，它应用资源过滤器来进一步缩小这些结果中包含或排除的内容。
+
+[source, yaml]
+----
+spec:
+  includedVirtualMachines:
+    - namespace: <vm_namespace>
+      names:
+        - <vm_name>
+  resourceFilter:
+    resourceSelectionCriteria: Include
+    resourceMatchers:
+      - kinds: ["PersistentVolumeClaim"]
+        names: ["<pvc_name>"]
+----
+对于 `BackupRestore`、 `SnapshotRestore`和 `ReplicateSnapshotRestore`， `namespaceMapping`和 `storageClassMapping`与 `includedVirtualMachines`协同工作。 `includedVirtualMachines`中的命名空间引用对应于存档中显示的源命名空间。命名空间和存储类映射在过滤完成后的还原转换阶段应用。
+
+有关还原行为详细信息，请参阅 link:trident-protect-restore-apps.html["使用Trident Protect 恢复应用程序"]。
+
+
+
+== 使用 CLI 创建 VM 范围的应用程序
+
+使用  `--virtual-machines` 标志将应用程序的范围限定为特定 KubeVirt 虚拟机，而不是整个命名空间。 `--virtual-machines` 标志与  `--namespaces` 互斥。
+
+.步骤
+. 通过运行以下命令之一创建应用程序，将括号中的值替换为您环境中的信息。 `--virtual-machines` 标志的格式为 `<namespace>(<vm_name>)`。对于多个虚拟机，请在括号内使用逗号分隔的名称：
++
+** 命名空间中的单个 VM：
++
+[source, console]
+----
+tridentctl-protect create application <application_name> \
+  -n <application_namespace> \
+  --virtual-machines "<vm_namespace>(<vm_name>)"
+----
+** 跨命名空间的多个虚拟机：
++
+[source, console]
+----
+tridentctl-protect create application <application_name> \
+  -n <application_namespace> \
+  --virtual-machines "<vm_namespace_1>(<vm_name_1>,<vm_name_2>),<vm_namespace_2>(<vm_name_3>)"
+----
+
+
+
+
+
+
+== 相关信息
+
+* link:trident-protect-manage-applications.html["定义要管理的应用程序"]
+* link:trident-protect-protect-apps.html["保护应用程序"]
+* link:trident-protect-restore-apps.html["使用Trident Protect 恢复应用程序"]
+* link:trident-protect-restore-settings.html["使用高级还原设置"]
+* link:trident-protect-cli.html["安装Trident Protect CLI 插件"]
+* link:trident-protect-appvault-custom-resources.html["使用AppVault对象管理分段"]
+

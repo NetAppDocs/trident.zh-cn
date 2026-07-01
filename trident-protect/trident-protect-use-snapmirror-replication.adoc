@@ -384,6 +384,17 @@ NOTE: 使用 CR 时，请在应用 CR 之前手动创建目标命名空间。Tri
 *** *spec.sourceApplicationName*:(_required_)此值必须与您在源应用程序CR中定义的源应用程序的名称匹配。
 *** *spec.sourceApplicationUID*: （必需）此值必须与您在源应用程序 CR 中定义的源应用程序的 UID 匹配。
 *** *spec.storageClassName*: (_可选_) 选择集群上有效的存储类的名称。存储类必须链接到与源环境建立对等连接的ONTAP存储 VM。如果未提供存储类，则默认使用集群上的默认存储类。
+*** *spec.storageClassMapping*：（_Optional_）将源存储类映射到同一 AMR 中各个 PVC 的目标存储类。每个条目都需要一个 `source`和 `destination`存储类名称。设置后， `storageClassMapping`将完全覆盖 `storageClassName`；没有匹配源条目的 PVC 使用集群默认存储类，而不是 `storageClassName`。
++
+在 AppMirrorRelationship CR 中使用 `storageClassMapping`时，请注意以下限制：
+
++
+**** `storageClassMapping` 完全覆盖  `storageClassName`。当两个字段都设置时， `storageClassName` 将被忽略。
+**** 源存储类在 `storageClassMapping`中没有匹配条目的 PVC 将使用集群默认存储类，而非 `storageClassName`。
+**** 每个条目都需要同时提供 `source`和 `destination`值。
+**** 更改目标存储类可能会强制删除并重新创建现有目标 PVC。
+
+
 *** *spec.rec发 规则*：定义UTC时间的开始日期和重复间隔。
 +
 YAML示例：
@@ -428,10 +439,14 @@ kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
 +
 [source, console]
 ----
-tridentctl-protect create appmirrorrelationship <name_of_appmirorrelationship> --destination-app-vault <my_vault_name> --source-app-vault <my_vault_name> --recurrence-rule <rule> --namespace-mapping <ns_mapping> --source-app-id <source_app_UID> --source-app <my_source_app_name> --storage-class <storage_class_name> -n <application_namespace>
+tridentctl-protect create appmirrorrelationship <name_of_appmirorrelationship> --destination-app-vault <my_vault_name> --source-app-vault <my_vault_name> --recurrence-rule <rule> --namespace-mapping <ns_mapping> --source-app-id <source_app_UID> --source-app <my_source_app_name> --storage-class <storage_class_name> --storageclass-mapping  <src_class:dst_class> -n <application_namespace>
 ----
 +
-* 示例： *
+
+NOTE: 使用 `--storageclass-mapping`将单个源存储类映射到目标存储类。指定一个或多个以逗号分隔的 `source:destination`对（例如， `"class-a:class-b,class-c:class-d"`）。使用 `*:destination-class`作为通配符，将所有未映射的 PVC 映射到单个目标存储类。设置 `--storageclass-mapping`后， `--storage-class`将被忽略。
+
++
+*使用单个目标存储类的示例 (`--storage-class`）：*
 
 +
 [source, console]

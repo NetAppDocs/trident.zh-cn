@@ -28,6 +28,8 @@ entries:
       url: "/trident-use/gcnv-examples.html"
     - title: 配置自动分层
       url: "/trident-use/gcnv-auto-tiering.html"
+    - title: 配置 ONTAP 模式存储池
+      url: "/trident-use/gcnv-ontap-mode.html"
   - title: NetApp HCI 或SolidFire
     url: "/trident-use/element.html"
   - title: ONTAP SAN 驱动程序
@@ -82,6 +84,8 @@ entries:
   entries:
   - title: 配置卷
     url: "/trident-use/vol-provision.html"
+  - title: 移动卷
+    url: "/trident-use/vol-move.html"
   - title: 展开卷
     url: "/trident-use/vol-expansion.html"
   - title: 了解 RWX NVMe 子系统限制

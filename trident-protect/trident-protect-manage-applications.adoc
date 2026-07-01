@@ -28,6 +28,9 @@ summary: 您可以通过创建应用程序 CR 和关联的 AppVault CR，让Trid
 
 您需要定义要使用Trident Protect 管理的每个应用程序。您可以通过手动创建应用程序 CR 或使用Trident Protect CLI 来定义要管理的应用程序。
 
+
+NOTE: 要定义通过名称而不是整个命名空间来保护特定 KubeVirt 虚拟机 (VM) 的 VM 范围应用程序，请使用应用程序 CR 中的 `spec.includedVirtualMachines`字段或 CLI 中的 `--virtual-machines`标志。有关详细信息、字段参考和 YAML 示例，请参阅 link:trident-protect-kubevirt-vms.html["使用 Trident Protect 保护 KubeVirt 虚拟机"]。
+
 [role="tabbed-block"]
 ====
 .使用CR添加应用程序
@@ -178,40 +181,43 @@ kubectl apply -f maria-app.yaml
 --
 .步骤
 . 使用以下示例之一创建并应用应用程序定义、将括号中的值替换为您环境中的信息。您可以使用逗号分隔列表和示例中显示的参数在应用程序定义中包括名称和资源。
-+
+
+
 创建应用时，您可以选择使用注解来指定应用在快照期间是否可以写入文件系统。这仅适用于从虚拟机定义的应用程序，例如 KubeVirt 环境，其中文件系统冻结发生在快照之前。如果您将注释设置为 `true`该应用程序忽略全局设置，可以在快照期间写入文件系统。如果你把它设置为 `false`该应用程序忽略全局设置，导致文件系统在快照期间冻结。如果使用了注解，但应用程序定义中没有虚拟机，则该注解将被忽略。如果您不使用注解，应用程序将遵循以下规则：link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["全球Trident Protect 冷冻设置"] 。
 
-+
-要在使用命令行界面创建应用程序时指定标注、可以使用标志。 `--annotation`
++ 使用 CLI 创建应用程序时，可以使用 `--annotation`标志指定注释。
+
++ * 创建应用程序并使用文件系统冻结行为的全局设置：
 
 +
-** 创建应用程序并使用文件系统冻结行为的全局设置：
-+
+
 [source, console]
 ----
 tridentctl-protect create application <my_new_app_cr_name> --namespaces <namespaces_to_include> --csr <cluster_scoped_resources_to_include> --namespace <my-app-namespace>
 ----
-** 创建应用程序并为文件系统冻结行为配置本地应用程序设置：
++ * 创建应用程序并配置文件系统冻结行为的本地应用程序设置：
+
 +
+
 [source, console]
 ----
 tridentctl-protect create application <my_new_app_cr_name> --namespaces <namespaces_to_include> --csr <cluster_scoped_resources_to_include> --namespace <my-app-namespace> --annotation protect.trident.netapp.io/skip-vm-freeze=<"true"|"false">
 ----
-** 您可以使用 `--resource-filter-include`和 `--resource-filter-exclude`用于包含或排除资源的标志 `resourceSelectionCriteria`例如组、种类、版本、标签、名称和命名空间，如下例所示：
++ * 可以使用 `--resource-filter-include`和 `--resource-filter-exclude`标志根据 `resourceSelectionCriteria`（例如组、种类、版本、标签、名称和命名空间）来包含或排除资源，如以下示例所示：
+
 +
+
 [source, console]
 ----
 tridentctl-protect create application <my_new_app_cr_name> --namespaces <namespaces_to_include> --csr <cluster_scoped_resources_to_include> --namespace <my-app-namespace> --resource-filter-include '[{"Group":"apps","Kind":"Deployment","Version":"v1","Names":["my-deployment"],"Namespaces":["my-namespace"],"LabelSelectors":["app=my-app"]}]'
 ----
-** 要定义仅限 PVC 的应用程序，还必须在资源筛选器中包含 `PersistentVolume`和 `VolumeSnapshotClass``。快照和备份操作依赖于 `PersistentVolume`（绑定到每个 PVC 的群集范围卷）和 `VolumeSnapshotClass`（快照驱动程序），如果没有它们，则会失败。例如：
++ *要定义仅限 PVC 的应用程序，您还必须在资源筛选器中包含 `PersistentVolume`和 `VolumeSnapshotClass``。快照和备份操作依赖于 `PersistentVolume`（绑定到每个 PVC 的集群范围卷）和 `VolumeSnapshotClass`（快照驱动程序），如果没有它们，则会失败。例如：
+
 +
+
 [source, console]
 ----
 tridentctl-protect create app my-pvc-app --namespaces <my-app-namespace> --resource-filter-include '[{"Kind":"PersistentVolumeClaim","Version":"v1"},{"Kind":"PersistentVolume","Version":"v1"},{"Kind":"VolumeSnapshotClass","Version":"v1"}]' -n <my-app-namespace>
 ----
-
-
-
-
 --
 ====

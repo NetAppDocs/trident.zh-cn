@@ -150,7 +150,7 @@ TNR（诱捕、绝育、放归）可能处于以下几种状态之一：
 
 
 
-NOTE: 您还可以使用其他方法来检测节点故障，具体方法请参见相关文档。<<Integrating Custom Node Health Check Solutions>>以下部分。
+NOTE: 您还可以使用其他方法来检测节点故障，如下面的 <<集成自定义节点健康检查解决方案>> 部分所述。
 
 看link:https://www.redhat.com/en/blog/node-health-check-operator["节点健康检查操作符"^]了解更多信息。
 

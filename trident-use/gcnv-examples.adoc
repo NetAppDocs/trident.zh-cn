@@ -290,6 +290,12 @@ spec:
 .适用于GKE的云身份
 [%collapsible]
 ====
+当您使用 GKE 云身份安装 Trident 时，后端将作为工作负载身份进行身份验证，并省略 `apiKey`块。云身份的配置方式对于两种 Google Cloud NetApp Volumes 驱动程序相同。唯一的区别是 `storageDriverName`值：对于 NAS（NFS 或 SMB）卷使用 `google-cloud-netapp-volumes`，对于 SAN（iSCSI 块）卷使用 `google-cloud-netapp-volumes-san`。
+
+
+NOTE: 对  `google-cloud-netapp-volumes-san` 驱动程序的云身份支持需要 Trident 26.06 或更高版本。SAN 卷是从 Flex Unified 存储池调配的，因此请将  `serviceLevel` 设置为  `flex`。
+
+.NAS 驱动程序（<code>google-cloud-netapp-volumes</code>）
 [source, yaml]
 ----
 apiVersion: trident.netapp.io/v1
@@ -304,6 +310,22 @@ spec:
   location: us-west2
   serviceLevel: Premium
   storagePool: pool-premium1
+----
+.SAN 驱动程序（<code>google-cloud-netapp-volumes-san</code>）
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentBackendConfig
+metadata:
+  name: backend-tbc-gcp-gcnv-san
+spec:
+  version: 1
+  storageDriverName: google-cloud-netapp-volumes-san
+  projectNumber: '012345678901'
+  network: gcnv-network
+  location: us-west2
+  serviceLevel: flex
+  storagePool: pool-flex1
 ----
 ====
 .支持的拓扑配置

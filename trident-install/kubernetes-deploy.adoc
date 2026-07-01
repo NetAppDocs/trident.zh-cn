@@ -25,7 +25,7 @@ summary: '您可以使用Trident操作员(手动或使用Helm)或与一起安装
 ====
 []
 =====
-* Trident 现在支持 Kubernetes 1.35。在升级 Kubernetes 之前升级 Trident。
+* Kubernetes 现在在 Trident 中受支持。在升级 Kubernetes 之前，请先升级 Trident。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
@@ -40,7 +40,7 @@ summary: '您可以使用Trident操作员(手动或使用Helm)或与一起安装
 
 无论您的安装路径如何、您都必须：
 
-* 对运行受支持的Kubernetes版本并启用了功能要求的受支持Kubernetes集群的完全权限。查看 link:requirements.html["要求"] 了解详细信息。
+* 运行受支持的 Kubernetes 版本的受支持的 Kubernetes 集群的完整权限，并启用了功能要求。查看 link:../trident-get-started/requirements.html["要求"] 了解详情。
 * 访问受支持的NetApp存储系统。
 * 能够从所有Kubernetes工作节点挂载卷。
 * 具有的Linux主机 `kubectl` (或 `oc`(如果您使用的是OpenShift)已安装并配置为管理要使用的Kubernetes集群。

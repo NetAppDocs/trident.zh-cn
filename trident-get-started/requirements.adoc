@@ -42,7 +42,7 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
 * Kubernetes 1.27 - 1.36
-* OpenShift 4.12、4.14 - 4.21 （如果您计划使用 OpenShift 4.19 的 iSCSI 节点准备，则支持的最低 Trident 版本为 25.06.1。）
+* OpenShift 4.12、4.14 - 4.22 （如果您计划使用 OpenShift 4.19 的 iSCSI 节点准备，则支持的最低 Trident 版本为 25.06.1。）
 +
 
 NOTE: Trident继续支持旧版 OpenShift 版本，与link:https://access.redhat.com/support/policy/updates/openshift["Red Hat 扩展更新支持 (EUS) 发布生命周期"]，即使它们依赖上游不再受官方支持的 Kubernetes 版本。在这种情况下安装Trident时，您可以放心地忽略有关 Kubernetes 版本的任何警告消息。
@@ -96,6 +96,49 @@ Trident支持以下用于KubeVirt和OpenShift虚拟化的ONTAP驱动程序：
 
 
 
+
+
+
+== Trident 支持 Kubernetes 上的 Kubernetes 和 OpenShift 托管控制平面
+
+从版本 26.06 开始，Trident 完全限定了 Kubernetes on Kubernetes 拓扑。Kubernetes 集群，其节点在基础架构（主机）集群上作为 KubeVirt 虚拟机运行。这种拓扑结构是托管控制平面产品（例如 OpenShift 虚拟化上的 OpenShift 托管控制平面 (HCP)）的基础。
+
+
+NOTE: 此配置在早期版本中可用，但完全限定从 26.06 开始。
+
+来宾（租户）集群使用 KubeVirt CSI 驱动程序(`kubevirt-csi`）作为其存储提供程序。当来宾集群中的工作负载请求 `PersistentVolumeClaim`时，KubeVirt CSI 驱动程序会在基础架构集群中创建相应的卷。Trident 从 ONTAP 配置卷，并将卷热插入来宾节点虚拟机。Trident 仅在基础架构集群中运行。来宾集群通过 KubeVirt CSI 驱动程序间接使用 ONTAP 存储。
+
+.要求：
+* Trident 已安装在具有受支持的 ONTAP 后端的基础架构集群上。
+* 基础设施集群中存在 Trident 存储类，供 KubeVirt CSI 驱动程序将来宾集群卷映射到其上。
+* KubeVirt 或 OpenShift Virtualization 部署在基础架构集群上，KubeVirt CSI 驱动程序安装在每个访客集群中。
+
+
+[cols="2,1"]
+|===
+| 组件 | version 
+
+
+| Trident | 26.06 
+
+
+| Kubernetes（基础设施和来宾集群） | 1.36 
+
+
+| KubeVirt | 1.9.0-beta.0 
+
+
+| 容器化数据导入器（CDI） | 1.65 
+|===
+.注意事项：
+* 在来宾集群中，卷在来宾节点虚拟机上显示为热插拔块设备。
+* KubeVirt CSI 驱动程序工作流不需要在访客集群中使用 Trident。您可以在基础架构集群中配置 ONTAP 后端和存储类。
+
+
+.直接在来宾集群中安装 Trident：
+您也可以直接在访客（租户）集群中安装 Trident。当您需要完整的 Trident 功能集（例如快照、克隆、卷调整大小和导入）时，请在访客集群中安装 Trident，这些功能 `kubevirt-csi`本身并不提供。
+
+在来宾群集中，使用基于 IP 的协议：NFS、iSCSI 和 NVMe/TCP。来宾群集不支持光纤通道 (FC)，因为来宾节点是没有直接 FC 连接的虚拟机。
 
 
 
@@ -223,7 +266,7 @@ link:../trident-reference/ports.html["Trident端口"]
 | Kubernetes版本 | 容器映像 
 
 
-| v1.27.0，v1.28.0，v1.29.0，v1.30.0，v1.31.0，v1.32.0，v1.33.0，v1.34.0，v1.36.0  a| 
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0  a| 
 * docker.io/netapp/trident:26.02.0
 * docker.io/netapp/trident-autosupport:26.02
 * registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
