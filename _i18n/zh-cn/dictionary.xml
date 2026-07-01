@@ -6441,7 +6441,6 @@ SMB</block>
   <block id="e2c49768b478259ae558315a6874896b" category="paragraph">在<block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>中，更新<block ref="b5184a708a9f3a0020e58d5d08445198" prefix=" " category="inline-code"></block>以反映图像注册表的位置。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。例如：</block>
   <block id="73321a84803ccb3eb0b3dc9281954ba7" category="list-text"><block ref="ca771b97d048ca724b0d35dbea604dba" prefix="" category="inline-code"></block> 如果您的镜像都位于一个注册表中。</block>
   <block id="f6742c05233fa63959541b8dde0d38c6" category="list-text"><block ref="b60c14c79386a1c34022777459be2c8d" prefix="" category="inline-code"></block> 如果您的 Trident 镜像位于与 CSI 镜像不同的注册表中。</block>
-  <block id="1005b3a0632a1617ff4b8822375abb93" category="list-text">请使用 <block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 命令，其中 <block ref="5949043f5e5709138a63b4badf24d7cc" prefix=" " category="inline-code"></block> 反映要升级到的版本。</block>
   <block id="f1462e5be0262f51cdc6fb6c3b5027dc" category="summary">如果使用 Red Hat OpenShift，则可以从社区操作员、基于 Helm 的安装或手动部署的操作员切换到经过认证的 Trident 操作员。</block>
   <block id="9e7ed03c18ddecce0aa7a5623628fe1a" category="doc">切换到 OpenShift 认证的 Trident 操作员</block>
   <block id="00e22a4bea8f6d3bb56845f5728a38f9" category="paragraph">您可以从社区操作员、基于 Helm 的安装或手动部署的操作员切换到 Red Hat OpenShift 认证的 Trident 操作员。每种方法的过程包括卸载现有操作员，然后使用 OperatorHub 安装认证操作员。</block>
@@ -7040,7 +7039,6 @@ SMB</block>
   <block id="b13e7f92158e2d6ba346b571aee8b380" category="list-text">修复了在 PersistentVolumeClaim 复制步骤期间使用稀疏副本执行虚拟机就地恢复后，受保护存储容量显著增加的问题。</block>
   <block id="38d46e9ad8b2e3b45e7d3575616bd141" category="list-text">修复了 Trident Protect 在确认删除 ONTAP 中的后备快照之前删除 Kubernetes 快照对象的问题；终结器现在等待<block ref="310a3378435f31620fbc3e7831ac7286" prefix=" " category="inline-code"></block>删除。</block>
   <block id="3966d9731b288d0d4e9c4d3f6a05580a" category="list-text">修复了当虚拟机冻结操作失败时快照无法继续的问题；冻结和解冻操作现在在失败时仍可继续执行。</block>
-  <block id="5257aa4d95dd7557fffeb780fa6e0e3c" category="list-text">修复了 KubeVirt 虚拟机应用程序在 AppMirrorRelationship 反向、反向重新同步和重新同步操作期间错误地重新创建 PersistentVolumeClaims 的问题。</block>
   <block id="2b236bfdf9cc698790948782ec210128" category="paragraph">Trident 通过提高多个存储驱动程序之间的并发性来提升控制器可扩展性。当您启用控制器可扩展性时，Trident 控制器会并行处理存储操作，而不是对其进行序列化，从而在具有大量并发操作的 Kubernetes 环境中提高吞吐量。</block>
   <block id="78dc497c3df8ed9a57327b68b8c63625" category="paragraph">在部署之前，请确定哪些 Trident 驱动程序在正式发布时支持控制器可扩展性，以及哪些驱动程序在 Trident 26.06 中作为技术预览版提供。这有助于您做出明智的部署决策并管理风险。控制器可扩展性默认处于禁用状态。</block>
   <block id="dd7353c4d7988d872335950049d0686a" category="paragraph">控制器可扩展性是指 Trident 控制器并行处理多个存储操作的能力，而不是在单个锁后对其进行序列化。这些操作包括卷创建、删除和调整大小；快照创建和删除；卷发布和取消发布；以及后端管理。</block>
@@ -7250,4 +7248,7 @@ SMB</block>
   <block id="813272d6e243a111c08f7de441091991" category="sidebar">保护 KubeVirt 虚拟机</block>
   <block id="78643b1159fb6f4708f959197aa4d58a" category="sidebar">配置 ONTAP 模式存储池</block>
   <block id="0678555704a75d8c6ba937ca89e44347" category="sidebar">移动卷</block>
+  <block id="53a1e3ed6dc9286a411ff4fdda7cb383" category="list-text">请使用 <block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 命令，其中 <block ref="86ec79e27e8639c8433f7ff62822e38f" prefix=" " category="inline-code"></block> 反映要升级到的版本。</block>
+  <block id="eec73d4903362fb244dc1fa04140d8c8" category="list-text">防止 ONTAP-SAN-ECONOMY 驱动程序在调整大小操作期间 Flexvol 收缩。</block>
+  <block id="7a1819119b273216b59fab874ebf86e8" category="list-text">修复了 KubeVirt 虚拟机应用程序在 AppMirrorRelationship 反向、反向重新同步和重新同步操作期间错误地重新创建 PersistentVolumeClaims 的问题。</block>
 </blocks>
