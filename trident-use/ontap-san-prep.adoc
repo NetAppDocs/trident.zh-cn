@@ -16,6 +16,7 @@ summary: 了解如何准备使用 ONTAP SAN 驱动程序配置 ONTAP 后端。
 
 
 
+[[requirements]]
 == 要求
 
 对于所有 ONTAP 后端，Trident 要求至少将一个聚合分配给 SVM。
@@ -29,6 +30,7 @@ NOTE: link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["AS
 
 
 
+[[authenticate-the-ontap-backend]]
 == 对ONTAP后端进行身份验证
 
 Trident提供了两种对ONTAP后端进行身份验证的模式。
@@ -44,6 +46,7 @@ WARNING: 如果您尝试同时提供*凭据和证书*、则后端创建将失败
 
 
 
+[[enable-credential-based-authentication]]
 === 启用基于凭据的身份验证
 
 Trident需要SVM范围/集群范围的管理员的凭据才能与ONTAP后端进行通信。建议使用标准的预定义角色，如 `admin`或 `vsadmin`。这样可以确保与未来ONTAP版本的正向兼容性、这些版本可能会公开未来Trident版本要使用的功能API。可以创建自定义安全登录角色并将其用于Trident、但不建议这样做。
@@ -87,6 +90,7 @@ password: password
 
 
 
+[[enable-certificate-based-authentication]]
 === 启用基于证书的身份验证
 
 新的和现有的后端可以使用证书并与 ONTAP 后端进行通信。后端定义需要三个参数。
@@ -172,6 +176,7 @@ tridentctl create backend -f cert-backend.json -n trident
 
 
 
+[[update-authentication-methods-or-rotate-credentials]]
 === 更新身份验证方法或轮换凭据
 
 您可以更新现有后端以使用其他身份验证方法或轮换其凭据。这两种方式都适用：使用用户名 / 密码的后端可以更新为使用证书；使用证书的后端可以更新为基于用户名 / 密码的后端。为此、您必须删除现有身份验证方法并添加新的身份验证方法。然后、使用包含所需参数的更新后端.json文件执行`tridentctl backend update`。
@@ -205,6 +210,7 @@ NOTE: 轮换密码时，存储管理员必须先在 ONTAP 上更新用户的密�
 
 
 
+[[create-custom-ontap-role-for-trident]]
 === 为Trident创建自定义ONTAP角色
 
 您可以创建Privileges最低的ONTAP集群角色、这样就不必使用ONTAP管理员角色在Trident中执行操作。如果在Trident后端配置中包含用户名、则Trident将使用您创建的ONTAP集群角色来执行操作。
@@ -264,6 +270,7 @@ NOTE: 轮换密码时，存储管理员必须先在 ONTAP 上更新用户的密�
 
 
 
+[[authenticate-connections-with-bidirectional-chap]]
 == 使用双向 CHAP 验证连接
 
 Trident可以使用和 `ontap-san-economy`驱动程序的双向CHAP对iSCSI会话进行身份验证 `ontap-san`。这需要在后端定义中启用此 `useCHAP`选项。设置为时 `true`，Trident会将SVM的默认启动程序安全性配置为双向CHAP，并设置后端文件中的用户名和密钥。NetApp 建议使用双向 CHAP 对连接进行身份验证。请参见以下配置示例：
@@ -291,6 +298,7 @@ WARNING: `useCHAP` 参数是一个布尔选项，只能配置一次。默认情�
 
 
 
+[[how-it-works]]
 === 工作原理
 
 如果将设置 `useCHAP`为true、则存储管理员将指示Trident在存储后端配置CHAP。其中包括：
@@ -308,6 +316,7 @@ WARNING: `useCHAP` 参数是一个布尔选项，只能配置一次。默认情�
 
 
 
+[[rotate-credentials-and-update-backends]]
 === 轮换凭证并更新后端
 
 您可以通过更新 `backend.json` 文件中的 CHAP 参数来更新 CHAP 凭据。这需要更新 CHAP 密码并使用 `tridentctl update` 命令反映这些更改。

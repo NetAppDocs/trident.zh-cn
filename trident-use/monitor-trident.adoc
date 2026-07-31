@@ -16,6 +16,7 @@ Trident提供了一组Prometheus指标端点、可用于监控Trident性能。
 
 
 
+[[overview]]
 == 概述
 
 通过Trident提供的指标、您可以执行以下操作：
@@ -36,12 +37,14 @@ NOTE: 默认情况下，Trident 的指标会暴露在目标端口上。 `8001`�
 
 
 
+[[step-1-define-a-prometheus-target]]
 == 第 1 步：定义 Prometheus 目标
 
 您应该定义一个 Prometheus 目标来收集指标并获取有关Trident管理的后端、它创建的卷等的信息。看link:https://prometheus-operator.dev/docs/developer/getting-started/["Prometheus Operator 文档"^]。
 
 
 
+[[step-2-create-a-prometheus-servicemonitor]]
 == 第 2 步：创建 Prometheus ServiceMonitor
 
 要使用 Trident 指标，您应创建一个 Prometheus ServiceMonitor ，该监控器可监控 `trident CSI` 服务并侦听 `mtrigics` 端口。示例 ServiceMonitor 如下所示：
@@ -73,6 +76,7 @@ spec:
 
 
 
+[[consume-trident-metrics-over-https]]
 === 通过 HTTPS 使用Trident指标
 
 要通过 HTTPS（端口 8444）使用Trident指标，您必须修改 ServiceMonitor 定义以包含 TLS 配置。你还需要复制 `trident-csi`秘密来自 `trident`将命名空间指向 Prometheus 运行所在的命名空间。您可以使用以下命令执行此操作：
@@ -126,6 +130,7 @@ Trident支持所有安装方法中的 HTTPS 指标：tridentctl、Helm chart 和
 
 
 
+[[step-3-query-trident-metrics-with-promql]]
 == 第 3 步：使用 PromQL 查询 Trident 指标
 
 PromQL 非常适合创建返回时间序列或表格数据的表达式。
@@ -134,6 +139,7 @@ PromQL 非常适合创建返回时间序列或表格数据的表达式。
 
 
 
+[[get-trident-health-information]]
 === 获取 Trident 运行状况信息
 
 * **来自Trident的HTTP 2XX响应的百分比**
@@ -159,6 +165,7 @@ sum by (operation) (trident_operation_duration_milliseconds_sum{success="true"})
 ----
 
 
+[[get-trident-usage-information]]
 === 获取Trident使用情况信息
 
 * 卷大小 * 平均值 *
@@ -177,6 +184,7 @@ sum (trident_volume_allocated_bytes) by (backend_uuid)
 ----
 
 
+[[get-individual-volume-usage]]
 === 获取单个卷的使用情况
 
 
@@ -191,6 +199,7 @@ kubelet_volume_stats_used_bytes / kubelet_volume_stats_capacity_bytes * 100
 ----
 
 
+[[learn-about-trident-autosupport-telemetry]]
 == 了解Trident AutoSupport遥测
 
 默认情况下、Trident会每天向NetApp发送Prometheus指标和基本后端信息。
@@ -228,6 +237,7 @@ items:
 
 
 
+[[disable-trident-metrics]]
 == 禁用Trident指标
 
 要 ` 报告指标，您应生成自定义 YAML （使用` -generate-custom-yaml ` 标志）并对其进行编辑，以删除为 `trident 主` 容器调用的` -metrics 标志。

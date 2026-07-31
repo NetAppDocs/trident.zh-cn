@@ -16,6 +16,7 @@ summary: 详细了解Trident通信所使用的端口。
 
 
 
+[[overview]]
 == 概述
 
 Trident 使用各种端口在 Kubernetes 集群内以及与存储后端进行通信。以下是关键端口、其用途和安全注意事项的摘要。
@@ -34,6 +35,7 @@ Trident 使用各种端口在 Kubernetes 集群内以及与存储后端进行通
 
 
 
+[[ports-for-controller-nodes]]
 === 控制器节点的端口
 
 这些端口主要用于 Trident operator（后端管理）。所有内部端口都是 pod 级；仅当主机防火墙干扰 CNI 时才允许在节点上使用。
@@ -59,6 +61,7 @@ Trident 使用各种端口在 Kubernetes 集群内以及与存储后端进行通
 |===
 
 
+[[ports-for-worker-nodes]]
 === 工作节点的端口
 
 这些端口用于 CSI 节点守护程序集和 pod 挂载。数据端口出站到存储数据 LIF；如果使用 NFSv3，则包括 NFSv3 附加组件（NFSv4 可选）。

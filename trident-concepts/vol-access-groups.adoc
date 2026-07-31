@@ -19,6 +19,7 @@ NOTE: 如果使用的是 CHAP ，请忽略此部分，建议使用此部分来�
 
 
 
+[[learn-about-volume-access-groups]]
 == 了解卷访问组
 
 Trident可以使用卷访问组来控制对其配置的卷的访问。如果禁用了CHAP、则它会查找名为的访问组 `trident`、除非您在配置中指定一个或多个访问组ID。

@@ -16,6 +16,7 @@ Trident操作员允许您使用规范中的属性自定义Trident安装 `Trident
 
 
 
+[[understanding-controller-pods-and-node-pods]]
 == 了解控制器Pod和节点Pod
 
 Trident在集群中的每个工作节点上以单个控制器 pod 和节点 pod 的形式运行。节点 pod 必须运行在您希望挂载Trident卷的任何主机上。
@@ -28,6 +29,7 @@ Kubernetes link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-p
 
 
 
+[[configuration-options]]
 == 配置选项
 
 
@@ -90,7 +92,7 @@ NOTE: 这 `k8sTimeout`参数仅适用于Trident安装。
 | `logFormat` | 要使用的Trident日志记录格式[text,json] | `"text"` 
 
 
-| `TridentImage` | 要安装的Trident映像 | `"netapp/trident:26.02"` 
+| `TridentImage` | 要安装的Trident映像 | `"netapp/trident:26.06"` 
 
 
 | `imageRegistry` | 内部注册表的路径、格式
@@ -265,6 +267,7 @@ NOTE: 有关格式化POD参数的详细信息、请参阅 link:https://kubernete
 
 
 
+[[sample-configurations]]
 == 配置示例
 
 您可以使用以下属性<<配置选项>>在定义时 `TridentOrchestrator`自定义您的安装。

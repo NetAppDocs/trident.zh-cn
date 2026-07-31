@@ -16,6 +16,7 @@ https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["适用
 
 
 
+[[requirements]]
 == 要求
 
 除了link:../trident-get-started/requirements.html["Trident要求"]，要将FSx for ONTAP与Trident集成，您还需要：
@@ -31,6 +32,7 @@ NOTE: 确保按照Amazon Linux和Ubuntu所需的节点准备步骤进行操作 h
 
 
 
+[[considerations]]
 == 注意事项
 
 * SMB卷：
@@ -49,6 +51,7 @@ NOTE: 如果要为Trident指定IAM角色，则可以省略为Trident明确指定
 
 
 
+[[simultaneous-usage-of-trident-saniscsi-and-ebs-csi-driver]]
 === 同时使用Trident SAN/iSCSI 和 EBS-CSI 驱动程序
 
 如果您计划将 ontap-san 驱动程序（例如 iSCSI）与 AWS（EKS、ROSA、EC2 或任何其他实例）一起使用，则节点上所需的多路径配置可能会与 Amazon Elastic Block Store (EBS) CSI 驱动程序冲突。为了确保多路径功能不会干扰同一节点上的 EBS 磁盘，您需要在多路径设置中排除 EBS。这个例子展示了 `multipath.conf`包含所需Trident设置的文件，同时将 EBS 磁盘排除在多路径之外：
@@ -67,6 +70,7 @@ blacklist {
 ----
 
 
+[[authentication]]
 == 身份验证
 
 Trident提供两种身份验证模式。
@@ -87,6 +91,7 @@ WARNING: Trident应以SVM用户身份运行、或者以具有相同角色的其�
 
 
 
+[[tested-amazon-machine-images-amis]]
 == 测试过的Amazon计算机映像(AMI)
 
 EKS集群支持各种操作系统、但AWS已针对容器和EKS优化了某些Amazon计算机映像(AMI)。以下 AMI 已通过 NetApp Trident 25.02 测试。
@@ -137,6 +142,7 @@ NOTE: 如果此处未列出您所需的AMI、并不表示它不受支持、而�
 
 
 
+[[find-more-information]]
 == 了解更多信息
 
 * https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["Amazon FSX for NetApp ONTAP 文档"^]

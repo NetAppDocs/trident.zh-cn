@@ -16,6 +16,7 @@ Trident为Trident流程编排程序提供了多个命令行选项。您可以使
 
 
 
+[[logging]]
 == 日志记录
 
 `-debug`:: 启用调试输出。
@@ -24,6 +25,7 @@ Trident为Trident流程编排程序提供了多个命令行选项。您可以使
 
 
 
+[[kubernetes]]
 == Kubernetes
 
 `-k8s_pod`:: 使用此选项或 `-k8s_api_server` 以启用Kubernetes支持。如果设置此值，则 Trident 将使用其所属 POD 的 Kubernetes 服务帐户凭据来联系 API 服务器。只有当 Trident 在启用了服务帐户的 Kubernetes 集群中作为 POD 运行时，此功能才有效。
@@ -32,6 +34,7 @@ Trident为Trident流程编排程序提供了多个命令行选项。您可以使
 
 
 
+[[docker]]
 == Docker
 
 `-volume_driver <name>`:: 注册Docker插件时使用的驱动程序名称。默认为 `netapp`。
@@ -41,6 +44,7 @@ Trident为Trident流程编排程序提供了多个命令行选项。您可以使
 
 
 
+[[rest]]
 == REST
 
 `-address <ip-or-host>`:: 指定要侦听的三端存储服务器的地址。默认为 localhost 。在本地主机上侦听并在 Kubernetes Pod 中运行时，无法从 Pod 外部直接访问 REST 接口。使用 ... `-address ""` 可从Pod IP地址访问REST接口。

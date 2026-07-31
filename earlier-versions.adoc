@@ -12,8 +12,9 @@ summary: 您可以使用版本选择器在最新版本和以前的四个版本�
 
 
 [role="lead"]
-如果您未运行 Trident 26.02，则可以根据 link:get-help.html["Trident支持生命周期"] 获得先前版本的文档。
+如果您未运行 Trident 26.06，则可以根据 link:get-help.html["Trident支持生命周期"] 获得先前版本的文档。
 
+* https://docs.netapp.com/us-en/trident-2602/index.html["Trident 26.02"^]
 * https://docs.netapp.com/us-en/trident-2510/index.html["Trident 25.10"^]
 * https://docs.netapp.com/us-en/trident-2506/index.html["Trident25.06"^]
 * https://docs.netapp.com/us-en/trident-2502/index.html["Trident 25.02"^]

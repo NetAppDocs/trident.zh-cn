@@ -13,6 +13,7 @@ summary: 配置 Trident 以从 Google Cloud NetApp Volumes 进行存储配置。
 
 
 
+[[overview]]
 == 概述
 
 Trident 支持用于 NAS (NFS 和 SMB) 和块 (iSCSI) 工作负载的 Google Cloud NetApp Volumes。
@@ -36,6 +37,7 @@ NAS 卷提供基于文件的存储，并使用 NFS 或 SMB 协议进行访问。
 
 
 
+[[prepare-to-configure]]
 == 准备配置
 
 云身份使 Kubernetes 工作负载能够通过作为工作负载身份进行身份验证而不是使用静态凭据来访问 Google Cloud 资源。
@@ -92,6 +94,8 @@ tridentctl install \
 ====
 
 
+[[configure-nas-storage]]
+[[nas]]
 == 配置 NAS 存储
 
 
@@ -101,6 +105,7 @@ NOTE: 对于 Google Cloud NetApp Volumes UNIFIED 存储池，Trident 在卷操�
 
 
 
+[[driver-details]]
 === 驱动程序详细信息
 
 Trident 提供  `google-cloud-netapp-volumes` 驱动程序，用于从 Google Cloud NetApp Volumes 配置 NAS 存储。
@@ -131,6 +136,7 @@ Rwo、ROX、rwx、RWOP
 |===
 
 
+[[configure-a-trident-nas-backend]]
 === 配置 Trident NAS 后端
 
 [source, yaml]
@@ -153,6 +159,7 @@ spec:
 ----
 
 
+[[provision-nas-volumes]]
 === 配置 NAS 卷
 
 NAS 卷使用 `google-cloud-netapp-volumes`后端进行调配，并支持 NFS 和 SMB 协议。

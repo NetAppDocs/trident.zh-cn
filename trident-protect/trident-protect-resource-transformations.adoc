@@ -18,6 +18,7 @@ summary: 使用资源转换在还原 Kubernetes 资源时对其进行修改。
 
 
 
+[[how-resource-modification-works]]
 == 资源修改的工作原理
 
  `SnapshotRestore`、 `BackupRestore`、 `AppMirrorRelationship` 以及其他恢复资源中的  `transformations` 字段允许您在恢复过程中修改 Kubernetes 资源。当需要对恢复后的应用程序进行与原始应用程序不同的配置时（例如，更改主机名、注册表 URL、资源限制或环境变量），此功能非常有用。
@@ -54,6 +55,7 @@ spec:
 ----
 
 
+[[supported-resources]]
 == 支持的资源
 
 您可以将资源转换与符合以下标准的资源一起使用：
@@ -69,12 +71,14 @@ NOTE: 当前不支持修改 PersistentVolumeClaims 和命名空间。
 
 
 
+[[supported-operations]]
 == 支持的操作
 
 您可以使用以下操作修改资源： `add`、 `copy`、 `move`、 `remove`、 `replace`和 `test`。
 
 
 
+[[add-a-value-to-a-resource]]
 === 向资源添加值
 
 使用  `add` 操作在指定路径上添加新字段或值。您可以将数据添加到对象或数组。
@@ -113,6 +117,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[copy-a-value-within-a-resource]]
 === 复制资源中的值
 
 使用  `copy` 操作将同一资源中的值从一个路径复制到另一个路径。源未更改。
@@ -149,6 +154,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[move-a-value-within-a-resource]]
 === 在资源内移动值
 
 使用  `move` 操作将同一资源内的值从一个路径移动到另一个路径。源被删除，值被放置在目的地。
@@ -185,6 +191,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[remove-a-value-from-a-resource]]
 === 从资源中删除值
 
 使用  `remove` 操作可删除指定路径中的字段或值。
@@ -223,6 +230,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[replace-a-value-within-a-resource]]
 === 替换资源中的值
 
 使用  `replace` 操作替换指定路径下资源中的现有值。JSON 路径必须已存在。
@@ -260,6 +268,7 @@ tridentctl-protect create snapshotrestore <restore_name> \
 ====
 
 
+[[test-the-resource-modification]]
 === 测试资源修改
 
 使用 `test`操作验证路径上的值是否与预期值匹配，然后再应用其他操作。如果测试失败，则回滚整个修改。

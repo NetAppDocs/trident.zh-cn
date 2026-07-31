@@ -21,6 +21,7 @@ summary: 适用于Docker的Trident可与适用于NetApp存储平台的Docker生�
 
 
 
+[[docker-managed-plugin-method-version-1-1317-03-and-later]]
 == Docker 托管插件方法（ 1.13/17.03 及更高版本）
 
 .开始之前
@@ -121,6 +122,7 @@ docker volume rm firstVolume
 
 
 
+[[traditional-method-version-1-12-or-earlier]]
 == 传统方法（ 1.12 或更早版本）
 
 .开始之前
@@ -151,8 +153,8 @@ curl -fsSL https://get.docker.com/ | sh
 +
 [source, console]
 ----
-wget https://github.com/NetApp/trident/releases/download/10.0/trident-installer-26.02.0.tar.gz
-tar zxf trident-installer-26.02.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/10.0/trident-installer-26.06.0.tar.gz
+tar zxf trident-installer-26.06.0.tar.gz
 ----
 .. 移动到托箱路径中的某个位置：
 +
@@ -231,6 +233,7 @@ docker volume rm trident_2
 
 
 
+[[start-trident-at-system-startup]]
 == 在系统启动时启动Trident
 
 有关基于系统d的系统的示例单元文件、请参见 `contrib/trident.service.example` 在Git repo.要对RHEL使用此文件、请执行以下操作：

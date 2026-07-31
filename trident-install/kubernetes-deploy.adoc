@@ -16,7 +16,8 @@ summary: '您可以使用Trident操作员(手动或使用Helm)或与一起安装
 
 
 
-== 有关 Trident 26.02 的关键信息
+[[critical-information-about-trident-26-06]]
+== 有关 Trident 26.06 的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -36,6 +37,7 @@ summary: '您可以使用Trident操作员(手动或使用Helm)或与一起安装
 ====
 
 
+[[before-you-begin]]
 == 开始之前
 
 无论您的安装路径如何、您都必须：
@@ -54,12 +56,14 @@ TIP: 如果您还没有熟悉link:../trident-get-started/intro.html["基本概�
 
 
 
+[[choose-your-installation-method]]
 == 选择安装方法
 
 选择适合您的安装方法。您还应该在做出决定之前查看 link:kubernetes-deploy.html#moving-between-installation-methods["在方法之间移动"] 的注意事项。
 
 
 
+[[using-the-trident-operator]]
 === 使用Trident运算符
 
 无论是手动部署还是使用 Helm，Trident 操作员都是简化安装和动态管理 Trident 资源的好方法。您甚至可以link:kubernetes-customize-deploy.html["自定义Trident操作员部署"]使用 `TridentOrchestrator`自定义资源 (CR) 中的属性。
@@ -121,6 +125,7 @@ NOTE: 如果集群升级到不受支持的版本、则操作员将阻止安装Tr
 ====
 
 
+[[using-tridentctl]]
 === 使用 `tridentctl`
 
 如果您的现有部署必须升级，或者您希望高度自定义您的部署，则应考虑。这是部署Trident的传统方法。
@@ -132,6 +137,7 @@ NOTE: 从22.04版开始、每次安装Trident时、不会再重新生成AES密�
 
 
 
+[[choose-your-installation-mode]]
 == 选择安装模式
 
 根据您的组织所需的_installation mode"(标准)、"Offline"(脱机)或"Remote"(远程)来确定部署过程。
@@ -171,6 +177,7 @@ NOTE: 无论注册表配置如何、CSI映像都必须驻留在一个注册表�
 ====
 
 
+[[select-the-process-based-on-your-method-and-mode]]
 == 根据您的方法和模式选择过程
 
 做出决定后、请选择相应的流程。
@@ -200,6 +207,7 @@ link:kubernetes-deploy-tridentctl.html["标准或脱机安装"]
 |===
 
 
+[[moving-between-installation-methods]]
 == 在安装方法之间移动
 
 您可以决定更改安装方法。在执行此操作之前、请考虑以下事项：
@@ -212,6 +220,7 @@ link:kubernetes-deploy-tridentctl.html["标准或脱机安装"]
 
 
 
+[[other-known-configuration-options]]
 == 其他已知配置选项
 
 在VMware Tanzu产品组合上安装Trident时：

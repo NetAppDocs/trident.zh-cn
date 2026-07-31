@@ -16,6 +16,7 @@ summary: 在配置Azure NetApp Files 后端之前、您需要确保满足以下�
 
 
 
+[[supported-azure-cloud-environments]]
 == 支持的 Azure 云环境
 
 Trident 支持多个 Azure 云环境中的 Azure NetApp Files 后端。
@@ -30,6 +31,7 @@ Trident 支持多个 Azure 云环境中的 Azure NetApp Files 后端。
 
 
 
+[[prerequisites-for-nfs-and-smb-volumes]]
 == NFS和SMB卷的前提条件
 
 如果是首次使用 Azure NetApp Files 或在新位置使用，则需要一些初始配置才能设置 Azure NetApp Files 并创建 NFS 卷。请参阅 https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-quickstart-set-up-account-create-volumes["Azure：设置Azure NetApp Files 并创建NFS卷"^]。
@@ -106,6 +108,7 @@ Trident 支持多个 Azure 云环境中的 Azure NetApp Files 后端。
 
 
 
+[[additional-requirements-for-smb-volumes]]
 == SMB卷的其他要求
 
 要创建SMB卷、您必须具有：

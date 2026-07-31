@@ -35,12 +35,14 @@ Trident Protect 使用 Kubernetes 的基于角色的访问控制 (RBAC) 模型�
 
 
 
+[[example-manage-access-for-two-groups-of-users]]
 == 示例：管理两组用户的访问权限
 
 例如、一个组织有一个集群管理员、一组工程用户和一组营销用户。集群管理员应完成以下任务、以创建一个环境、在此环境中、工程组和营销组各自只能访问分配给各自命名区域的资源。
 
 
 
+[[step-1-create-a-namespace-to-contain-resources-for-each-group]]
 === 第1步：创建一个命名空间以包含每个组的资源
 
 通过创建命名空间、您可以从逻辑上分离资源、并更好地控制谁有权访问这些资源。
@@ -62,6 +64,7 @@ kubectl create ns marketing-ns
 
 
 
+[[step-2-create-new-service-accounts-to-interact-with-resources-in-each-namespace]]
 === 第2步：创建新的服务帐户、以便与每个命名空间中的资源进行交互
 
 您创建的每个新命名空间都会附带一个默认服务帐户、但您应为每组用户创建一个服务帐户、以便将来根据需要在各个组之间进一步划分Privileges。
@@ -91,6 +94,7 @@ metadata:
 
 
 
+[[step-3-create-a-secret-for-each-new-service-account]]
 === 第3步：为每个新服务帐户创建一个密钥
 
 服务帐户密钥用于向服务帐户进行身份验证、如果泄露、可以轻松删除和重新创建。
@@ -126,6 +130,7 @@ type: kubernetes.io/service-account-token
 
 
 
+[[step-4-create-a-rolebinding-object-to-bind-the-clusterrole-object-to-each-new-service-account]]
 === 第4步：创建RoleBinding对象以将ClusterRole对象绑定到每个新服务帐户
 
 安装Trident Protect 时会创建一个默认的 ClusterRole 对象。您可以通过创建和应用 RoleBinding 对象将此 ClusterRole 绑定到服务帐户。
@@ -171,6 +176,7 @@ subjects:
 
 
 
+[[step-5-test-permissions]]
 === 第5步：测试权限
 
 测试权限是否正确。
@@ -192,6 +198,7 @@ kubectl auth can-i --as=system:serviceaccount:engineering-ns:eng-user get applic
 
 
 
+[[step-6-grant-access-to-appvault-objects]]
 === 第6步：授予对AppVault对象的访问权限
 
 要执行备份和快照等数据管理任务、集群管理员需要向各个用户授予对AppVault对象的访问权限。

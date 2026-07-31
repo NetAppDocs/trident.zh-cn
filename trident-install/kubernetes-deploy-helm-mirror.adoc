@@ -16,7 +16,8 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 
 
 
-== 有关 Trident 26.02 的关键信息
+[[critical-information-about-trident-26-06]]
+== 有关 Trident 26.06 的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -25,7 +26,7 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 ====
 []
 =====
-* Trident 现在支持 Kubernetes 1.35。在升级 Kubernetes 之前升级 Trident。
+* Trident 现在支持 Kubernetes 1.36。在升级 Kubernetes 之前升级 Trident。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
@@ -36,6 +37,7 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 ====
 
 
+[[deploy-the-trident-operator-and-install-trident-using-helm]]
 == 部署Trident操作员并使用Helm安装Trident
 
 使用Trident link:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Helm图表"^] 您可以一步部署Trident操作员并安装Trident。
@@ -70,7 +72,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2602.0 --set i
 --
 [source, console]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2602.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:26.02.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:26.02 --set tridentImage=<your-registry>/trident:26.02.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2602.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:26.06.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:26.06 --set tridentImage=<your-registry>/trident:26.06.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 ====
@@ -84,6 +86,7 @@ NOTE: 如果已为Trident创建命名空间、则`-create-namespace`参数不会
 
 
 
+[[pass-configuration-data-during-install]]
 == 在安装期间传递配置数据
 
 在安装期间，可以通过两种方式传递配置数据：
@@ -116,6 +119,7 @@ helm install <name> netapp-trident/trident-operator --version 100.2602.0  --crea
 ----
 
 
+[[configuration-options]]
 == 配置选项
 
 此表和 `values.yaml` 文件(属于Helm图表的一部分)提供了键列表及其默认值。

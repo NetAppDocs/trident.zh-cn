@@ -16,6 +16,7 @@ summary: 您可以找到一些很棒的NetApp Trident和Trident Protect 博客�
 
 
 
+[[trident-blogs]]
 == Trident博客
 
 * 2025年10月16日：link:https://www.netapp.com/blog/trident-25-10-advanced-kubernetes-storage-solutions/["面向 Kubernetes 的高级存储解决方案"^]
@@ -39,6 +40,7 @@ summary: 您可以找到一些很棒的NetApp Trident和Trident Protect 博客�
 
 
 
+[[trident-protect-blogs]]
 == Trident Protect博客
 
 * 2025年5月16日：link:https://community.netapp.com/t5/Tech-ONTAP-Blogs/Automating-registry-failover-for-disaster-recovery-with-Trident-protect-post/ba-p/460777["利用Trident Protect 的恢复后钩子实现注册表故障转移的自动化，以进行灾难恢复"^]

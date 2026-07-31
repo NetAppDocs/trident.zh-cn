@@ -16,6 +16,7 @@ summary: 使用Trident、您可以使用同一个K8s集群中不同命名空间�
 
 
 
+[[prerequisites]]
 == 前提条件
 
 克隆卷之前、请确保源后端和目标后端的类型相同、并且具有相同的存储类。
@@ -25,6 +26,7 @@ NOTE: 跨命名空间克隆仅支持 `ontap-san`和 `ontap-nas`存储驱动程�
 
 
 
+[[quick-start]]
 == 快速入门
 
 只需几个步骤即可设置卷克隆。
@@ -47,6 +49,7 @@ NOTE: 跨命名空间克隆仅支持 `ontap-san`和 `ontap-nas`存储驱动程�
 
 
 
+[[configure-the-source-and-destination-namespaces]]
 == 配置源和目标命名空间
 
 为确保安全性、跨命名空间克隆卷需要源命名空间所有者、集群管理员和目标命名空间所有者进行协作并采取相应操作。每个步骤都会指定用户角色。
@@ -121,6 +124,7 @@ spec:
 
 
 
+[[limitations]]
 == 限制
 
 * 对于使用PV-NAS经济型驱动程序配置的ONTAP、不支持只读克隆。

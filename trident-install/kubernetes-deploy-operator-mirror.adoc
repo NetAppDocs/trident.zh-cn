@@ -16,6 +16,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 
 
 
+[[critical-information-about-trident]]
 == 有关Trident的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
@@ -36,6 +37,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 ====
 
 
+[[manually-deploy-the-trident-operator-and-install-trident]]
 == 手动部署Trident操作员并安装Trident
 
 请检查 link:kubernetes-deploy.html["安装概述"] 以确保您已满足安装先决条件，并为您的环境选择了正确的安装选项。
@@ -72,18 +74,20 @@ kubectl run -i --tty ping --image=busybox --restart=Never --rm -- \
 ====
 
 
+[[step-1-download-the-trident-installer-package]]
 === 第1步：下载Trident安装程序包
 
 Trident安装程序包包含部署Trident Operator和安装Trident所需的一切。从下载并解压缩最新版本的Trident安装程序link:https://github.com/NetApp/trident/releases/latest["GitHub上的_assets_部分"^]。
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v6.0/trident-installer-26.02.0.tar.gz
-tar -xf trident-installer-26.02.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v6.0/trident-installer-26.06.0.tar.gz
+tar -xf trident-installer-26.06.0.tar.gz
 cd trident-installer
 ----
 
 
+[[step-2-create-the-tridentorchestrator-crd]]
 === 第2步：创建 `TridentOrchestrator` CRD
 
 创建 `TridentOrchestrator`自定义资源定义（CRD）。您将创建一个 `TridentOrchestrator`稍后自定义资源。使用适当的 CRD YAML 版本 `deploy/crds`创建 `TridentOrchestrator`CRD：
@@ -94,16 +98,18 @@ kubectl create -f deploy/crds/<VERSION>.yaml
 ----
 
 
+[[step-3-update-the-registry-location-in-the-operator]]
 === 第3步：更新操作符中的注册表位置
 
-在 `/deploy/operator.yaml`中，更新 `image: docker.io/netapp/trident-operator:26.02.0`以反映图像注册表的位置。您的 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident和CSI映像"] 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。例如：
+在 `/deploy/operator.yaml`中，更新 `image: docker.io/netapp/trident-operator:26.06.0`以反映图像注册表的位置。您的 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident和CSI映像"] 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。例如：
 
-* `image: <your-registry>/trident-operator:26.02.0` 如果您的镜像都位于一个注册表中。
-* `image: <your-registry>/netapp/trident-operator:26.02.0` 如果您的 Trident 镜像位于与 CSI 镜像不同的注册表中。
-
-
+* `image: <your-registry>/trident-operator:26.06.0` 如果您的镜像都位于一个注册表中。
+* `image: <your-registry>/netapp/trident-operator:26.06.0` 如果您的 Trident 镜像位于与 CSI 镜像不同的注册表中。
 
 
+
+
+[[step-4-deploy-the-trident-operator]]
 === 第4步：部署Trident操作员
 
 Trident安装程序提供了一个可用于安装操作员和创建关联对象的捆绑包文件。通过捆绑包文件、可以使用默认配置轻松部署操作员并安装Trident。
@@ -157,6 +163,7 @@ IMPORTANT: 在 Kubernetes 集群中只能有 * 一个操作符实例 * 。请勿
 
 
 
+[[step-5-update-the-image-registry-location-in-the-tridentorchestrator]]
 === 第5步：更新中的映像注册表位置 `TridentOrchestrator`
 
 Your link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident和CSI映像"] 可以位于一个注册表或不同的注册表中、但所有CSI映像都必须位于同一注册表中。更新 `deploy/crds/tridentorchestrator_cr.yaml` 根据注册表配置添加其他位置规格。
@@ -168,8 +175,8 @@ Your link:../trident-get-started/requirements.html#container-images-and-correspo
 [listing]
 ----
 imageRegistry: "<your-registry>"
-autosupportImage: "<your-registry>/trident-autosupport:26.02"
-tridentImage: "<your-registry>/trident:26.02.0"
+autosupportImage: "<your-registry>/trident-autosupport:26.06"
+tridentImage: "<your-registry>/trident:26.06.0"
 ----
 --
 .不同注册表中的映像
@@ -177,13 +184,14 @@ tridentImage: "<your-registry>/trident:26.02.0"
 [listing]
 ----
 imageRegistry: "<your-registry>"
-autosupportImage: "<your-registry>/trident-autosupport:26.02"
-tridentImage: "<your-registry>/trident:26.02.0"
+autosupportImage: "<your-registry>/trident-autosupport:26.06"
+tridentImage: "<your-registry>/trident:26.06.0"
 ----
 --
 ====
 
 
+[[step-6-create-the-tridentorchestrator-and-install-trident]]
 === 第6步：创建 `TridentOrchestrator` 并安装Trident
 
 现在、您可以创建 `TridentOrchestrator`并安装Trident。您也可以进一步link:kubernetes-customize-deploy.html["自定义Trident安装"]使用规范中的属性 `TridentOrchestrator`。以下示例显示了Trident和CSI映像位于不同注册表中的安装。
@@ -203,16 +211,16 @@ API Version: trident.netapp.io/v1
 Kind:        TridentOrchestrator
 ...
 Spec:
-  Autosupport Image:  <your-registry>/trident-autosupport:26.02
+  Autosupport Image:  <your-registry>/trident-autosupport:26.06
   Debug:              true
   Image Registry:     <your-registry>
   Namespace:          trident
-  Trident Image:      <your-registry>/trident:26.02.0
+  Trident Image:      <your-registry>/trident:26.06.0
 Status:
   Current Installation Params:
     IPv6:                       false
     Autosupport Hostname:
-    Autosupport Image:          <your-registry>/trident-autosupport:26.02
+    Autosupport Image:          <your-registry>/trident-autosupport:26.06
     Autosupport Proxy:
     Autosupport Serial Number:
     Debug:                      true
@@ -224,11 +232,11 @@ Status:
     Log Format:           text
     Probe Port:           17546
     Silence Autosupport:  false
-    Trident Image:        <your-registry>/trident:26.02.0
+    Trident Image:        <your-registry>/trident:26.06.0
   Message:                Trident installed
   Namespace:              trident
   Status:                 Installed
-  Version:                v26.02.0
+  Version:                v26.06.0
 Events:
     Type Reason Age From Message ---- ------ ---- ---- -------Normal
     Installing 74s trident-operator.netapp.io Installing Trident Normal
@@ -236,12 +244,14 @@ Events:
 ----
 
 
+[[verify-the-installation]]
 == 验证安装。
 
 可以通过多种方法验证您的安装。
 
 
 
+[[using-tridentorchestrator-status]]
 === 使用 `TridentOrchestrator` status
 
 的状态 `TridentOrchestrator` 指示安装是否成功、并显示已安装的Trident版本。在安装期间、的状态 `TridentOrchestrator` 更改自 `Installing` to `Installed`。如果您观察到 `Failed` 状态、并且操作员无法自行恢复、 link:../troubleshooting.html["检查日志"]。
@@ -274,6 +284,7 @@ Events:
 |===
 
 
+[[using-pod-creation-status]]
 === 正在使用POD创建状态
 
 您可以通过查看已创建Pod的状态来确认Trident安装是否已完成：
@@ -291,6 +302,7 @@ trident-operator-766f7b8658-ldzsv          1/1     Running   0           3m
 ----
 
 
+[[using-tridentctl]]
 === 使用 `tridentctl`
 
 您可以使用 `tridentctl`检查安装的Trident版本。
@@ -302,6 +314,6 @@ trident-operator-766f7b8658-ldzsv          1/1     Running   0           3m
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 26.02.0        | 26.02.0        |
+| 26.06.0        | 26.06.0        |
 +----------------+----------------+
 ----

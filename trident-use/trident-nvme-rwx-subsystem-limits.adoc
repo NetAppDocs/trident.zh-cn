@@ -16,6 +16,7 @@ summary: 了解 RWX NVMe 子系统限制，包括每卷 64 节点的限制、子
 
 
 
+[[understand-the-64-node-limit]]
 == 了解 64 节点限制
 
 如果您计划将 ReadWriteMany (RWX) 卷与 NVMe 协议一起使用，则单个 RWX NVMe 卷不能由 Kubernetes 群集中超过 64 个节点装载。
@@ -26,10 +27,12 @@ summary: 了解 RWX NVMe 子系统限制，包括每卷 64 节点的限制、子
 
 
 
+[[understand-nvme-subsystem-models]]
 == 了解 NVMe 子系统模型
 
 
 
+[[per-volume-subsystem-model-trident-releases-earlier-than-26-02]]
 === 每卷子系统模型（Trident 版本早于 26.02）
 
 在 26.02 之前的 Trident 版本中，RWX NVMe 卷使用每个卷的子系统模型进行调配。每个 RWX NVMe 卷都映射到 ONTAP 上其自己的专用 NVMe 子系统。
@@ -38,6 +41,7 @@ summary: 了解 RWX NVMe 子系统限制，包括每卷 64 节点的限制、子
 
 
 
+[[super-subsystem-model-introduced-in-trident-26-02]]
 === 超级子系统模型（在 Trident 26.02 中引入）
 
 从 Trident 26.02 开始，RWX NVMe 卷使用共享超级子系统模型。多个 RWX NVMe 卷共享同一个 NVMe 子系统。
@@ -48,6 +52,7 @@ summary: 了解 RWX NVMe 子系统限制，包括每卷 64 节点的限制、子
 
 
 
+[[identify-error-symptoms]]
 == 识别错误症状
 
 如果大规模创建或附加 RWX NVMe 卷，您可能会发现类似于以下错误：
@@ -60,12 +65,14 @@ Maximum number of controllers reached. No more controllers can be created.
 
 
 
+[[resolve-subsystem-limit-errors]]
 == 解决子系统限制错误
 
 要超越每卷子系统的限制并利用超级子系统模型，请升级到 Trident 26.02 或更高版本。
 
 
 
+[[upgrade-trident-to-apply-the-super-subsystem-model]]
 == 升级 Trident 以应用超级子系统模型
 
 要为 RWX NVMe 卷应用超级子系统模型：

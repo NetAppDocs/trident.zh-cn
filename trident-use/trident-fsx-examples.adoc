@@ -16,6 +16,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 
 
 
+[[backend-configuration-options]]
 == 后端配置选项
 
 有关后端配置选项，请参见下表：
@@ -116,6 +117,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 |===
 
 
+[[update-datalif-after-initial-configuration]]
 === 更新 `dataLIF` 初始配置后
 
 您可以在初始配置后更改dataLIF、方法是运行以下命令、为新的后端JSON文件提供更新后的dataLIF。
@@ -129,6 +131,7 @@ NOTE: 如果一个或多个Pod连接了PVC、则必须先关闭所有相应的Po
 
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 用于配置卷的后端配置选项
 
 您可以在中使用这些选项控制默认配置 `defaults` 配置部分。有关示例，请参见以下配置示例。
@@ -175,6 +178,7 @@ NOTE: 如果一个或多个Pod连接了PVC、则必须先关闭所有相应的Po
 |===
 
 
+[[example-configurations]]
 == 示例配置
 
 .配置SMB卷的存储类

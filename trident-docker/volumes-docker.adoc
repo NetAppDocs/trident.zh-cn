@@ -16,6 +16,7 @@ summary: '要创建卷、请使用标准 `docker volume`命令以及根据需要
 
 
 
+[[create-a-volume]]
 == 创建卷
 
 * 使用默认名称创建包含驱动程序的卷：
@@ -48,6 +49,7 @@ TIP: 卷大小以字符串表示，该字符串包含一个包含可选单元的
 
 
 
+[[remove-a-volume]]
 == 删除卷
 
 * 像删除任何其他 Docker 卷一样删除此卷：
@@ -66,6 +68,7 @@ IMPORTANT: 使用 `solidfire-san` 驱动程序时，上述示例将删除并清�
 
 
 
+[[clone-a-volume]]
 == 克隆卷
 
 使用时 `ontap-nas`， `ontap-san` ， 和 `solidfire-san`存储驱动程序， Trident可以克隆卷。使用时 `ontap-nas-flexgroup`或者 `ontap-nas-economy`驱动程序不支持克隆。从现有卷创建新卷将创建一个新的快照。
@@ -92,6 +95,7 @@ docker volume create -d <driver_name> --name <new_name> -o from=<source_docker_v
 
 
 
+[[example]]
 === 示例
 
 [source, console]
@@ -128,6 +132,7 @@ docker volume rm volFromSnap
 ----
 
 
+[[access-externally-created-volumes]]
 == 访问外部创建的卷
 
 如果容器没有分区、并且Trident支持其文件系统、则您可以使用Trident *仅*通过容器访问外部创建的块设备(或其克隆)(例如、 `ext4`无法通过Trident访问格式化的 `/dev/sdc1`)。

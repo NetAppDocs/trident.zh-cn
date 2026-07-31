@@ -16,6 +16,7 @@ summary: Trident提供了多种用于管理卷的功能。了解Trident为卷提
 
 
 
+[[managing-volumes]]
 == 管理卷
 
 请参见以下内容、了解如何使用Trident管理卷。

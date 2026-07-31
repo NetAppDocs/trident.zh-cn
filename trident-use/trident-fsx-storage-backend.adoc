@@ -13,12 +13,14 @@ summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以
 
 
 
+[[overview]]
 == 概述
 
 在使用 Trident 配置卷之前，您需要通过创建 Trident 后端配置 (TBC) 将存储后端与 Trident 集成。TBC 定义了 Trident 如何连接到存储后端，并为 Trident 管理存储资源提供了必要的信息。
 
 
 
+[[create-a-trident-backend-configuration-tbc-for-fsx-for-ontap]]
 == 为 FSx for ONTAP 创建 Trident 后端配置 (TBC)
 
 有两种方法可以将 Trident 后端配置为使用 FSx for ONTAP 文件系统：* 创建一个利用自动后端功能的 StorageClass。* 分别创建后端和 StorageClass。
@@ -110,6 +112,7 @@ backend-tbc-ontap-nas        tbc-ontap-nas        933e0071-66ce-4324-b9ff-f96d91
 
 
 
+[[fsx-for-ontap-driver-details]]
 == FSx for ONTAP驱动程序详细信息
 
 您可以使用以下驱动程序将Trident与Amazon FSx for NetApp ONTAP集成：
@@ -142,6 +145,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 ----
 
 
+[[backend-advanced-configuration-and-examples]]
 == 后端高级配置和示例
 
 有关后端配置选项，请参见下表：
@@ -242,6 +246,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 |===
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 用于配置卷的后端配置选项
 
 您可以在中使用这些选项控制默认配置 `defaults` 配置部分。有关示例，请参见以下配置示例。
@@ -288,6 +293,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 |===
 
 
+[[provision-smb-volumes]]
 == 提供 SMB 卷
 
 您可以使用  `ontap-nas` 驱动程序配置 SMB 卷。在完成link:trident-fsx-storage-backend.html#ontap-san-and-nas-driver-integration["ONTAP SAN 和 NAS 驱动程序集成"]之前，请完成以下步骤：link:worker-node-prep.html#prepare-to-provision-smb-volumes.html["准备配置SMB卷"]。

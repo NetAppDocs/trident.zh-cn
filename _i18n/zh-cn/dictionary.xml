@@ -5919,11 +5919,9 @@ SMB</block>
   <block id="1dba8f0975c45572eb495fa5122b37e8" category="cell">ONTAP（使用 LDAP 的 NFS/SMB）</block>
   <block id="b7f43df36fb2e13c1c3d456da9ceba9e" category="cell">类似；用于名称解析/身份验证；限制为 AD。</block>
   <block id="e447b6c9645ce6cd63337d813a552cd5" category="sidebar">Trident 对 ASA r2 存储系统的支持</block>
-  <block id="8d5731b8fc2479ac904701c0f079c178" category="paragraph">如果您未运行 Trident 26.02，则可以根据 <block ref="6d47e9235a19453f00cf246917b9e162" category="inline-link-macro-rx"></block> 获得先前版本的文档。</block>
   <block id="60706cc94c04d32db6c18b4fb8b21f21" category="inline-link">Trident 25.10</block>
   <block id="69a4986cbe93f4162ce953d8e917b215" category="list-text"><block ref="69a4986cbe93f4162ce953d8e917b215" category="inline-link-rx"></block></block>
   <block id="28b62bff68083dad22bdf1acf812f48a" category="list-text">Trident 现在支持 Kubernetes 1.35。在升级 Kubernetes 之前升级 Trident。</block>
-  <block id="ac6cc7900e3d9478b2fcf3a73c070b29" category="section-title">Trident 26.02 所需的容器映像</block>
   <block id="627219ce2083b03812e10846d1307811" category="list-text">*spec.runImmediately*：（_可选_）设置为 <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 以在创建计划时触发一次性的即时基线运行（根据保留设置进行备份和/或快照）。默认为 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。这不会修改后续重复周期。</block>
   <block id="b267d2c4b44dd537f81ddd4d1ca1cdd8" category="paragraph">立即运行的计划的示例 YAML：</block>
   <block id="ea89dfc546da2da95449976a3262efd9" category="list-text">*立即基线保护*：使用 <block ref="40c288e5937b634afc8b0a225fcdb4cf" prefix=" " category="inline-code"></block> 在创建计划时立即创建初始备份或快照，而不是等待第一个计划的运行时间。默认值为 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。</block>
@@ -5935,9 +5933,7 @@ SMB</block>
   <block id="4c563d04dfd50e6f3569cee14757b0d3" category="paragraph">您可以随时将快照还原到原始命名空间。当您执行就地恢复时，Trident Protect 会自动管理保护计划和正在进行的操作，以防止无效的恢复点：</block>
   <block id="d299403943c136e89dcdf76b975fa78e" category="paragraph">Trident Protect 版本遵循基于日期的<block ref="fb6921a005d395f9482cdac0306d4935" prefix=" " category="inline-code"></block>命名约定，其中"YY"是年份的最后两位数字，"MM"是月份。点版本遵循<block ref="d93ec759c4a0e8c1cf9c7653b2939656" prefix=" " category="inline-code"></block>约定，其中"X"是补丁级别。您将根据要升级的版本选择要升级到的版本。</block>
   <block id="0f76ee20ab451b4f754d9e30cde19650" category="list-text">您可以直接升级到安装版本的四个版本窗口内的任何目标版本。例如，您可以直接从 24.10（或任何 24.10 dot 版本）升级到 25.10。</block>
-  <block id="09a310b79e08f8c01b750026c4388289" category="list-text">如果您要从四发布窗口之外的版本进行升级，请执行多步骤升级。使用您要从<block ref="a799aa6eaf3a5192b34ea19f24bb716f" category="inline-link-macro-rx"></block>升级的升级说明升级到适合四发布窗口的最新版本。例如，如果您运行的是 24.10 并希望升级到 26.02：</block>
   <block id="03a081c9536ffc6b50cecf173b0dbc2c" category="list-text">首次从 24.10 升级到 25.02。</block>
-  <block id="c57146c5f38b336a75fd36e963d211fd" category="list-text">然后从 25.02 升级到 26.02。</block>
   <block id="f65c06826afa8d10471cd5dee9af7426" category="section-title">步骤 2：升级 Trident Protect</block>
   <block id="900b2ff0e4545565ae3f08238031bafd" category="section-title">26.02 中的新增功能</block>
   <block id="15472a280efaab6ff08ec110afd8de46" category="paragraph">了解 NetApp Trident 和 Trident Protect 的新功能，包括增强功能、修复和弃用。</block>
@@ -5979,8 +5975,6 @@ SMB</block>
   <block id="150fed11d160cf3a20a84935a6da6b2f" category="cell">存储后端的自定义名称</block>
   <block id="9c8376d30ef5d31c007585fb05add5db" category="cell">卷的 VNet 功能集，可以是<block ref="972e73b7a882d0802a4e3a16946a2f94" prefix=" " category="inline-code"></block>或<block ref="eb6d8ae6f20283755b339c0dc273988b" prefix=" " category="inline-code"></block>。并非所有地区都提供 Network Features，可能必须在订阅中启用。在未启用此功能时指定<block ref="b0fdc9c7b96e4249152c61b506703142" prefix=" " category="inline-code"></block>会导致卷配置失败。</block>
   <block id="eceb18783ab7d857705973afb0ba5ff1" category="cell">NFS 挂载选项的精细控制。SMB 卷将被忽略。要使用 NFS 版本 4.1 挂载卷，请在逗号分隔的挂载选项列表中包含<block ref="c72da907ddca73ee114d92e5e098ce0e" prefix=" " category="inline-code"></block>以选择 NFS v4.1。存储类定义中设置的挂载选项会覆盖后端配置中设置的挂载选项。</block>
-  <block id="ca4874fba63edd36a107178ef6510445" category="section-title">考虑 Azure 云环境（26.02）</block>
-  <block id="584e93b9019a1308f5373f467e2fa893" category="paragraph">从 26.02 版本开始，Trident 支持在多个 Azure 云环境中创建和管理 Azure NetApp Files 后端。</block>
   <block id="d20c4dcda0a96ffb3a3748cbe8aba81e" category="paragraph">支持的 Azure 云包括：</block>
   <block id="3dc82a397fa9254c0f558e04583621c3" category="list-text">Azure 商业版</block>
   <block id="e96e8d7b53ef3f92949dbe568dc848b6" category="list-text">Azure Government（Azure Government / MAG）</block>
@@ -6072,7 +6066,6 @@ SMB</block>
   <block id="ef8eb050000e134fa5a2198e8ff5038e" category="summary">使用 Trident，通过 Kubernetes 原生机制配置 Google Cloud NetApp Volumes 自动分层。</block>
   <block id="dab9b285e93c136eba2e723beb8edd60" category="doc">为 Google Cloud NetApp Volumes 配置自动分层</block>
   <block id="afb75f46d7710bfa697c616ccf2b5ea3" category="paragraph">自动分层允许 Trident 配置卷，自动将非活动数据从性能层移动到容量层。这降低了存储成本，同时保留了频繁访问数据的性能。</block>
-  <block id="5915b91d7147475077383a0b6bb57408" category="paragraph">Trident 仅在卷创建时应用自动分层设置。Trident 26.02 不支持预配后更改。</block>
   <block id="cb093658cef2560e46a3c54bec672cf8" category="section-title">自动分层</block>
   <block id="7b7bab0024c6202ad5a192ef0445195e" category="paragraph">自动分层根据访问模式将不经常访问的数据从性能层移动到容量层。数据移动是异步发生的，并不是立即发生的。</block>
   <block id="fabea8658161c3de0e08742a1ab72c7e" category="section-title">分层策略</block>
@@ -6092,13 +6085,10 @@ SMB</block>
   <block id="5d22c20e3e02066c0600a840e879938a" category="list-text">Trident 后端配置</block>
   <block id="3f5370cf58488d1347e8b2db4da682b2" category="list-text">存储池默认值</block>
   <block id="0312731ce473db488b555d6e91acb13f" category="paragraph">在较高优先级定义的设置将覆盖较低级别的值。</block>
-  <block id="45a07962bc89c0ea5e586076b72ee4c1" category="section-title">Trident 26.02 中支持的功能</block>
-  <block id="8f74a1c598301b0fdd0dd57f04ccc8c4" category="paragraph">Trident 26.02 支持 Google Cloud NetApp Volumes 的以下自动分层功能：</block>
   <block id="684a5d1cd198a69c43c096d24b821491" category="list-text">在卷配置期间启用或禁用自动分层</block>
   <block id="607c651949b262cfbdc3e4ee7b7fd396" category="list-text">在 Trident 后端配置中定义分层策略</block>
   <block id="75fee9b8deaef7c5c9a6e29cc9726463" category="list-text">使用 PVC 注释覆盖分层策略和每个卷的冷却天数</block>
   <block id="895e9c66fe1163df089f36df03d4ac52" category="list-text">为启用自动分层的卷配置冷却天数</block>
-  <block id="b2a4e6665c958003379aae04b8853635" category="section-title">Trident 26.02 中不支持的功能</block>
   <block id="a9983630391b773f642c371dc94873ea" category="paragraph">不支持以下操作：</block>
   <block id="6b4626d056df29f9ddfb1347a6afd7e4" category="list-text">创建卷后修改自动分层设置</block>
   <block id="1bb954f7eb53754523d7c2c696ee6cb7" category="list-text">使用 Kubernetes 更新更改现有卷的分层策略</block>
@@ -6428,19 +6418,11 @@ SMB</block>
   <block id="945c53097aed6aee6897384c32c13596" category="paragraph">例如，此策略设置<block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>的<block ref="b3b9f60c2eb049d3bcbddd22d73210ce" prefix=" " category="inline-code"></block>，但 Trident 对使用它的任何 SAN 卷应用 51 MB 增长：</block>
   <block id="a55370dbc1a259397316ceebdfed21b8" category="paragraph">要避免这种自动调整，请将<block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>设置为大于 50 MiB 的值：</block>
   <block id="b58eceaaba71c126318ed8daedaef74b" category="sidebar">配置自动分层</block>
-  <block id="4711816ecf930de7bedb0fff0ed5f46a" category="list-text">docker.io/netapp/trident:26.02.0</block>
-  <block id="d9d8d43f99f88fa1757ca456d25bffdc" category="list-text">docker.io/netapp/trident-autosupport:26.02</block>
   <block id="93284b31b63cc86c59eeb4dcd6ba1751" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v6.1.0</block>
   <block id="f5345a3e1ca4c50ed544fae4c14150b1" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v2.0.0</block>
   <block id="ed2e3a3511b1047c788e7fd621778ee2" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.5.0</block>
-  <block id="62b6189a1ca283e5a1f0152c40a1d139" category="list-text">docker.io/netapp/trident-operator:26.02.0（可选）</block>
   <block id="0adb26270c00fc572774f5cb57d01573" category="inline-link-macro">26.02</block>
   <block id="e352a332a817691cf8394c9b1288306f" category="paragraph"><block ref="e352a332a817691cf8394c9b1288306f" category="inline-link-macro-rx"></block></block>
-  <block id="ae86b0bdf0b542a819fd22e434545766" category="cell"><block ref="1d7ac1b2b38a742e32aa51ad1489b0a7" prefix="" category="inline-code"></block></block>
-  <block id="c28a6ef170d50135b201634575bf11b4" category="section-title">有关 Trident 26.02 的关键信息</block>
-  <block id="e2c49768b478259ae558315a6874896b" category="paragraph">在<block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>中，更新<block ref="b5184a708a9f3a0020e58d5d08445198" prefix=" " category="inline-code"></block>以反映图像注册表的位置。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。例如：</block>
-  <block id="73321a84803ccb3eb0b3dc9281954ba7" category="list-text"><block ref="ca771b97d048ca724b0d35dbea604dba" prefix="" category="inline-code"></block> 如果您的镜像都位于一个注册表中。</block>
-  <block id="f6742c05233fa63959541b8dde0d38c6" category="list-text"><block ref="b60c14c79386a1c34022777459be2c8d" prefix="" category="inline-code"></block> 如果您的 Trident 镜像位于与 CSI 镜像不同的注册表中。</block>
   <block id="f1462e5be0262f51cdc6fb6c3b5027dc" category="summary">如果使用 Red Hat OpenShift，则可以从社区操作员、基于 Helm 的安装或手动部署的操作员切换到经过认证的 Trident 操作员。</block>
   <block id="9e7ed03c18ddecce0aa7a5623628fe1a" category="doc">切换到 OpenShift 认证的 Trident 操作员</block>
   <block id="00e22a4bea8f6d3bb56845f5728a38f9" category="paragraph">您可以从社区操作员、基于 Helm 的安装或手动部署的操作员切换到 Red Hat OpenShift 认证的 Trident 操作员。每种方法的过程包括卸载现有操作员，然后使用 OperatorHub 安装认证操作员。</block>
@@ -7251,4 +7233,27 @@ SMB</block>
   <block id="53a1e3ed6dc9286a411ff4fdda7cb383" category="list-text">请使用 <block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block> 命令，其中 <block ref="86ec79e27e8639c8433f7ff62822e38f" prefix=" " category="inline-code"></block> 反映要升级到的版本。</block>
   <block id="eec73d4903362fb244dc1fa04140d8c8" category="list-text">防止 ONTAP-SAN-ECONOMY 驱动程序在调整大小操作期间 Flexvol 收缩。</block>
   <block id="7a1819119b273216b59fab874ebf86e8" category="list-text">修复了 KubeVirt 虚拟机应用程序在 AppMirrorRelationship 反向、反向重新同步和重新同步操作期间错误地重新创建 PersistentVolumeClaims 的问题。</block>
+  <block id="91d1a0ad77ca7fe00dec0239a8194b82" category="paragraph">如果您未运行 Trident 26.06，则可以根据 <block ref="6d47e9235a19453f00cf246917b9e162" category="inline-link-macro-rx"></block> 获得先前版本的文档。</block>
+  <block id="f4dfb48579d3f90a417158e53e75204a" category="inline-link">Trident 26.02</block>
+  <block id="20c6994509b12de80a77f23b290b8bcd" category="list-text"><block ref="20c6994509b12de80a77f23b290b8bcd" category="inline-link-rx"></block></block>
+  <block id="648540f1a67ebba0071e70944d7527c2" category="paragraph"><block ref="648540f1a67ebba0071e70944d7527c2" category="inline-link-macro-rx"></block></block>
+  <block id="172ebadfc5f13c0aff9b7f172bc4fed4" category="cell">2027年7月</block>
+  <block id="4aab0cfeaa9a8262994350900bdd20f2" category="cell">2028年7月</block>
+  <block id="f6d7c73fe3fc66fa560e7262f79f60ae" category="section-title">Trident 26.06 所需的容器映像</block>
+  <block id="f87a5c52c8ee3e84d33252d80679b335" category="list-text">docker.io/netapp/trident:26.06.0</block>
+  <block id="01d86b54453ee9aefd6e3ed4a3dc0dc2" category="list-text">docker.io/netapp/trident-autosupport:26.06</block>
+  <block id="9a3b823ceeb6fcbe9a5ac0a50b995ed0" category="list-text">docker.io/netapp/trident-operator:26.06.0（可选）</block>
+  <block id="c31dc22d9ccf9395630afa7de351d6bf" category="cell"><block ref="4e9f324b7febae0727b9d412cb49fa13" prefix="" category="inline-code"></block></block>
+  <block id="bcf817488b594e4daf83db1e5511242d" category="section-title">有关 Trident 26.06 的关键信息</block>
+  <block id="a67a4c76b07caa7907851893a5518350" category="paragraph">在<block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>中，更新<block ref="6225334d80f70f493ad5e35aee5b3e8c" prefix=" " category="inline-code"></block>以反映图像注册表的位置。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。例如：</block>
+  <block id="7559678ace63d5f03e465a5671cc7db3" category="list-text"><block ref="8e06db2260954a3b69d080710541061e" prefix="" category="inline-code"></block> 如果您的镜像都位于一个注册表中。</block>
+  <block id="ab4356213016ceded9dcaa8c910a0f8a" category="list-text"><block ref="b4b523778500749f975cd131bd70eaf0" prefix="" category="inline-code"></block> 如果您的 Trident 镜像位于与 CSI 镜像不同的注册表中。</block>
+  <block id="f651e630cf0f39102d38c494e842d244" category="list-text">如果您要从四版本窗口之外的版本进行升级，请执行多步骤升级。使用您要从<block ref="a799aa6eaf3a5192b34ea19f24bb716f" category="inline-link-macro-rx"></block>升级的升级说明升级到适合四发布窗口的最新版本。例如，如果您运行的是 24.10 并希望升级到 26.06：</block>
+  <block id="9cc871b3823d788a71b5fe7d98091be7" category="list-text">然后从 25.02 升级到 26.06。</block>
+  <block id="1d34a26ee46532c4d8a716d8ce3315d8" category="section-title">考虑 Azure 云环境（26.06）</block>
+  <block id="e4f47d019eda889a3f06c8ac6170ce36" category="paragraph">从 26.06 版本开始，Trident 支持在多个 Azure 云环境中创建和管理 Azure NetApp Files 后端。</block>
+  <block id="3c5b5c17f7a5e32f4971a6c47e9bc73b" category="paragraph">Trident 仅在卷创建时应用自动分层设置。Trident 26.06 不支持预配后更改。</block>
+  <block id="aa2d7ad72731a70cf1acfd5476327d88" category="section-title">Trident 26.06 中支持的功能</block>
+  <block id="a083a63746aa61c3da201d39ba7a4bc0" category="paragraph">Trident 26.06 支持 Google Cloud NetApp Volumes 的以下自动分层功能：</block>
+  <block id="e21cf8f8ea478f3204b9d99aa0b68e51" category="section-title">Trident 26.06 中不支持的功能</block>
 </blocks>

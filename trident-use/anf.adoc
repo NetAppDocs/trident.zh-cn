@@ -16,6 +16,7 @@ summary: 将 Azure NetApp Files 配置为 Trident 的后端，并使用 NFS 或 
 
 
 
+[[supported-azure-cloud-environments]]
 == 支持的 Azure 云环境
 
 Trident 支持多个 Azure 云环境中的 Azure NetApp Files 后端。
@@ -30,6 +31,7 @@ Trident 支持多个 Azure 云环境中的 Azure NetApp Files 后端。
 
 
 
+[[review-azure-netapp-files-driver-support]]
 == 查看 Azure NetApp Files 驱动程序支持
 
 Trident 提供了以下 Azure NetApp Files 存储驱动程序。
@@ -54,6 +56,7 @@ Rwo、ROX、rwx、RWOP
 |===
 
 
+[[review-considerations]]
 == 查看考虑事项
 
 * Azure NetApp Files 不支持小于 50 GiB 的卷。当请求较小的卷时，Trident 会创建 50-GiB 卷。
@@ -63,6 +66,7 @@ Rwo、ROX、rwx、RWOP
 
 
 
+[[use-managed-identities-for-aks]]
 == 对 AKS 使用托管标识
 
 Trident 支持 link:https://learn.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview["受管身份"^] AKS 集群。
@@ -116,6 +120,7 @@ tridentctl install --cloud-provider="Azure" -n trident
 ====
 
 
+[[use-workload-identity-for-aks]]
 == 使用 AKS 的工作负载标识
 
 工作负载标识使 Kubernetes Pod 能够通过作为工作负载标识进行身份验证来访问 Azure 资源。

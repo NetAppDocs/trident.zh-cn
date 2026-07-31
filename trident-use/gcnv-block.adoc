@@ -19,6 +19,7 @@ NOTE:  `google-cloud-netapp-volumes-san` 后端需要配置 iSCSI 块卷。 `goo
 
 
 
+[[overview]]
 == 概述
 
 Trident 支持 Google Cloud NetApp Volumes SAN (iSCSI) 工作负载，使用 `google-cloud-netapp-volumes-san`驱动程序。
@@ -35,6 +36,7 @@ SAN 卷从 Flex Unified 存储池进行调配，并作为 iSCSI 块设备呈现�
 
 
 
+[[flex-unified-storage-pools]]
 == Flex Unified 存储池
 
 Flex Unified 存储池使用 iSCSI 协议提供块存储，是 SAN 配置所必需的：
@@ -46,6 +48,7 @@ Flex Unified 存储池使用 iSCSI 协议提供块存储，是 SAN 配置所必�
 
 
 
+[[configure-a-trident-san-backend]]
 == 配置 Trident SAN 后端
 
 [source, yaml]
@@ -70,6 +73,7 @@ spec:
 ----
 
 
+[[create-a-storageclass]]
 == 创建 StorageClass
 
 配置 SAN 后端后，创建一个引用 `google-cloud-netapp-volumes-san`驱动程序的 StorageClass。
@@ -100,10 +104,12 @@ NOTE: SAN 驱动程序仅支持 Flex 服务级别，不使用特定于 NAS 的�
 
 
 
+[[provision-block-volumes]]
 == 配置块卷
 
 
 
+[[readwriteonce-rwo]]
 === ReadWriteOnce（RWO）
 
 [source, yaml]
@@ -122,6 +128,7 @@ spec:
 ----
 
 
+[[readwriteoncepod-rwop]]
 === ReadWriteOncePod（RWOP）
 
 [source, yaml]
@@ -140,6 +147,7 @@ spec:
 ----
 
 
+[[readonlymany-rox]]
 === ReadOnlyMany（ROX）
 
 ROX 的常见模式是克隆现有 ReadWriteOnce 卷并将克隆挂载为只读。
@@ -163,6 +171,7 @@ spec:
 ----
 
 
+[[readwritemany-rwx-raw-block-only]]
 === ReadWriteMany (RWX) — 仅原始块
 
 只有当 `volumeMode: Block`时才支持 ReadWriteMany。
@@ -184,6 +193,7 @@ spec:
 ----
 
 
+[[block-volume-behavior]]
 == 块卷行为
 
 块卷被调配为 iSCSI LUN，并作为块设备呈现给 Kubernetes 节点。
@@ -198,6 +208,7 @@ spec:
 
 
 
+[[access-modes]]
 == 访问模式
 
 Trident 配置的块卷支持以下访问模式：
@@ -210,6 +221,7 @@ Trident 配置的块卷支持以下访问模式：
 
 
 
+[[volumemode-behavior]]
 == volumeMode 行为
 
  `volumeMode` 字段控制块卷的暴露方式：
@@ -220,6 +232,7 @@ Trident 配置的块卷支持以下访问模式：
 
 
 
+[[supported-operations]]
 == 支持的操作
 
 使用  `google-cloud-netapp-volumes-san` 驱动程序配置的块卷支持：
@@ -234,6 +247,7 @@ Trident 配置的块卷支持以下访问模式：
 
 
 
+[[extra-gib-overprovisioning-behavior]]
 == 额外的 GiB 过度配置行为
 
 Google Cloud NetApp Volumes 块卷包括内部元数据开销。与调配的容量相比，这种开销减少了内核可见的设备大小。
@@ -259,10 +273,12 @@ Google Cloud NetApp Volumes 块卷包括内部元数据开销。与调配的容�
 
 
 
+[[pod-examples]]
 == Pod 示例
 
 
 
+[[filesystem-mounted-block-volume-rwo]]
 === 文件系统挂载的块卷 (RWO)
 
 [source, yaml]
@@ -286,6 +302,7 @@ spec:
 ----
 
 
+[[raw-block-device-rwx]]
 === 原始块设备 (RWX)
 
 [source, yaml]
@@ -309,6 +326,7 @@ spec:
 ----
 
 
+[[attach-and-mount-behavior]]
 == 连接和挂载行为
 
 对于从 Google Cloud NetApp Volumes 配置的 SAN 卷：

@@ -18,6 +18,7 @@ summary: 您可以使用 protectctl 命令创建和操作Trident Protect 自定�
 
 
 
+[[install-the-trident-protect-cli-plugin]]
 == 安装Trident Protect CLI 插件
 
 在使用命令行实用程序之前、您需要将其安装在用于访问集群的计算机上。根据您的计算机使用的是x64 CPU还是ARM CPU、执行以下步骤。
@@ -31,7 +32,7 @@ summary: 您可以使用 protectctl 命令创建和操作Trident Protect 自定�
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/26.06.0/tridentctl-protect-linux-amd64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/v26.06.0/tridentctl-protect-linux-amd64
 ----
 
 
@@ -43,7 +44,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/26.06.0/tridentctl-protect-linux-arm64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/v26.06.0/tridentctl-protect-linux-arm64
 ----
 
 
@@ -55,7 +56,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/26.06.0/tridentctl-protect-macos-amd64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/v26.06.0/tridentctl-protect-macos-amd64
 ----
 
 
@@ -67,7 +68,7 @@ curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/relea
 +
 [source, console]
 ----
-curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/26.06.0/tridentctl-protect-macos-arm64
+curl -L -o tridentctl-protect https://github.com/NetApp/tridentctl-protect/releases/download/v26.06.0/tridentctl-protect-macos-arm64
 ----
 
 
@@ -98,6 +99,7 @@ NOTE: 通过将插件复制到路径变量中的某个位置、您可以通过�
 
 
 
+[[view-trident-cli-plugin-help]]
 == 查看Trident命令行界面插件帮助
 
 您可以使用内置插件的帮助功能获取有关插件功能的详细帮助：
@@ -113,6 +115,7 @@ tridentctl-protect help
 
 
 
+[[enable-command-auto-completion]]
 == 启用命令自动完成
 
 安装Trident Protect CLI 插件后，您可以为某些命令启用自动补全功能。

@@ -16,6 +16,7 @@ summary: 查找有关将Trident与Docker结合使用时的已知问题的信息�
 
 
 
+[[upgrading-trident-docker-volume-plugin-to-20-10-and-later-from-older-versions-results-in-upgrade-failure-with-the-no-such-file-or-directory-error]]
 == 将 Trident Docker 卷插件从旧版本升级到 20.10 及更高版本会导致升级失败，并且不会显示此类文件或目录错误。
 
 .临时解决策
@@ -41,6 +42,7 @@ docker plugin install netapp/trident-plugin:20.10 --alias netapp --grant-all-per
 
 
 
+[[volume-names-must-be-a-minimum-of-2-characters-in-length]]
 == 卷名称的长度必须至少为 2 个字符。
 
 
@@ -48,6 +50,7 @@ NOTE: 这是 Docker 客户端的限制。客户端会将单个字符名称解释
 
 
 
+[[docker-swarm-has-certain-behaviors-that-prevent-trident-from-supporting-it-with-every-storage-and-driver-combination]]
 == Docker Swarm的某些行为会使Trident无法为每个存储和驱动程序组合提供支持。
 
 * Docker Swarm 目前使用卷名称而非卷 ID 作为其唯一卷标识符。
@@ -61,4 +64,5 @@ NetApp 已向 Docker 团队提供反馈，但没有任何迹象表明将来可�
 
 
 
+[[if-a-flexgroup-is-being-provisioned-ontap-does-not-provision-a-second-flexgroup-if-the-second-flexgroup-has-one-or-more-aggregates-in-common-with-the-flexgroup-being-provisioned]]
 == 如果要配置 FlexGroup ，则在第二个 FlexGroup 具有一个或多个与要配置的 FlexGroup 相同的聚合时， ONTAP 不会配置第二个 FlexGroup 。

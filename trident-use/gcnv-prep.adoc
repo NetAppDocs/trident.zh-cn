@@ -16,6 +16,7 @@ summary: 在配置Google Cloud NetApp Volumes后端之前、您需要确保满�
 
 
 
+[[prerequisites-for-nfs-or-smb-volumes]]
 == NFS 或 SMB 卷的先决条件
 
 如果是首次使用 Google Cloud NetApp Volumes 或在新位置使用，则需要一些初始配置才能设置 Google Cloud NetApp Volumes 并创建 NFS 或 SMB 卷。请参阅link:https://cloud.google.com/netapp/volumes/docs/before-you-begin/application-resilience["开始之前"^]。

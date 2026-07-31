@@ -21,6 +21,7 @@ NOTE: 当超过定义的利用率阈值时，卷的大小会自动增加。卷�
 
 
 
+[[requirements]]
 == 要求
 
 在配置自动卷扩展之前，请确保满足以下要求：
@@ -40,6 +41,7 @@ NOTE: 当超过定义的利用率阈值时，卷的大小会自动增加。卷�
 
 
 
+[[limitations]]
 == 限制
 
 * 早于 ONTAP 9.16.1 的 ONTAP Non-Volatile Memory Express 原始块卷不支持自动扩展。
@@ -58,6 +60,7 @@ NOTE: 当超过定义的利用率阈值时，卷的大小会自动增加。卷�
 
 
 
+[[provision-volumes-with-autogrow-policy]]
 == 使用自动增长策略配置卷
 
 可以在两个级别配置自动增长策略：
@@ -68,6 +71,7 @@ NOTE: 当超过定义的利用率阈值时，卷的大小会自动增加。卷�
 
 
 
+[[create-an-autogrow-policy]]
 == 创建 Autogrow 策略
 
 当卷达到定义的容量阈值时，Autogrow Policies 启用自动卷扩展。
@@ -92,6 +96,7 @@ Autogrow Policy 定义了卷在达到定义的容量阈值时如何自动扩展�
 
 
 
+[[autogrow-policy-specifications]]
 === Autogrow 策略规范
 
 Autogrow Policies 是 Kubernetes 自定义资源，定义如下：
@@ -114,6 +119,7 @@ Autogrow Policies 是 Kubernetes 自定义资源，定义如下：
 |===
 
 
+[[create-an-autogrow-policy]]
 == 创建 Autogrow 策略
 
 .步骤
@@ -153,6 +159,7 @@ standard-autogrow   80%              10%             Success
 
 
 
+[[policy-states]]
 == 策略状态
 
 创建策略后，Trident 验证规范并分配以下状态之一：
@@ -172,6 +179,7 @@ standard-autogrow   80%              10%             Success
 |===
 
 
+[[associate-a-policy-with-a-storageclass]]
 == 将策略与 StorageClass 关联
 
 您可以使用 `trident.netapp.io/autogrowPolicy`批注将自动增长策略与StorageClass关联起来。从该StorageClass配置的所有卷都会继承该策略。
@@ -218,6 +226,7 @@ production-db-policy
 
 
 
+[[policy-precedence]]
 == 策略优先级
 
 当在 StorageClass 和 PVC 上设置 Autogrow Policy 注释时，Trident 应用以下优先级规则：
@@ -248,12 +257,14 @@ production-db-policy
 |===
 
 
+[[configuration-examples]]
 == 配置示例
 
 以下示例显示了不同用例的常见 Autogrow Policy 配置。
 
 
 
+[[conservative-policy-for-production-databases]]
 === 生产数据库的保守策略
 
 [source, yaml]
@@ -269,6 +280,7 @@ spec:
 ----
 
 
+[[log-storage-with-fixed-growth-increments]]
 === 具有固定增长增量的日志存储
 
 [source, yaml]
@@ -284,6 +296,7 @@ spec:
 ----
 
 
+[[minimal-policy-with-defaults]]
 === 具有默认值的最小策略
 
 当您忽略 `growthAmount`和 `maxSize`时，Trident 使用默认值(`10%`增长，无限大小）：
@@ -299,6 +312,7 @@ spec:
 ----
 
 
+[[policy-with-a-custom-maxsize-and-default-growthamount]]
 === 具有自定义 maxSize 和默认 growthAmount 的策略
 
 [source, yaml]
@@ -313,6 +327,7 @@ spec:
 ----
 
 
+[[aggressive-growth-with-unlimited-maxsize]]
 === 无限制 maxSize 的激进增长
 
 [source, yaml]
@@ -327,6 +342,7 @@ spec:
 ----
 
 
+[[policy-with-fractional-percentages]]
 === 具有分数百分比的策略
 
 [source, yaml]
@@ -345,6 +361,7 @@ NOTE: 支持分数百分比。如果指定的小数位数超过三位，Trident 
 
 
 
+[[nas-storageclass-with-autogrow]]
 === 具有 Autogrow 的 NAS StorageClass
 
 [source, yaml]
@@ -363,6 +380,7 @@ allowVolumeExpansion: true
 ----
 
 
+[[san-storageclass-with-autogrow]]
 === SAN StorageClass 使用 Autogrow
 
 [source, yaml]

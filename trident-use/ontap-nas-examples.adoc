@@ -19,6 +19,7 @@ NOTE: 只有 `ontap-nas`NetApp AFX 系统支持 NFS 协议驱动程序；不支�
 
 
 
+[[backend-configuration-options]]
 == 后端配置选项
 
 在 Trident 后端配置中，无需指定您的系统是 NetApp AFX 存储系统。当您选择 `ontap-nas`作为 `storageDriverName`时，Trident 会自动检测 AFX 存储系统。某些后端配置参数不适用于 AFX 存储系统。
@@ -143,6 +144,7 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 |===
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 用于配置卷的后端配置选项
 
 您可以在中使用这些选项控制默认配置 `defaults` 配置部分。有关示例，请参见以下配置示例。
@@ -198,6 +200,7 @@ NOTE: 将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版�
 
 
 
+[[volume-provisioning-examples]]
 === 卷配置示例
 
 下面是一个定义了默认值的示例：
@@ -245,6 +248,7 @@ image::../media/volume-show-nas.png[显示了 volume show 命令的输出。]
 
 
 
+[[minimal-configuration-examples]]
 == 最低配置示例
 
 以下示例显示了将大多数参数保留为默认值的基本配置。这是定义后端的最简单方法。
@@ -427,6 +431,7 @@ labels:
 ====
 
 
+[[examples-of-backends-with-virtual-pools]]
 == 虚拟池后端示例
 
 在下面显示的示例后端定义文件中、为所有存储池设置了特定默认值、例如 `spaceReserve` 无、 `spaceAllocation` 为false、和 `encryption` 为false。虚拟池在存储部分中进行定义。
@@ -612,6 +617,7 @@ storage:
 ====
 
 
+[[map-backends-to-storageclasses]]
 == 将后端映射到 StorageClasses
 
 以下StorageClass定义请参见 <<虚拟池后端示例>>。使用 `parameters.selector` 字段中、每个StorageClass都会指出可用于托管卷的虚拟池。卷将在选定虚拟池中定义各个方面。
@@ -687,6 +693,7 @@ Trident将决定选择哪个虚拟池、并确保满足存储要求。
 
 
 
+[[update-datalif-after-initial-configuration]]
 == 更新 `dataLIF` 初始配置后
 
 您可以在初始配置后更改dataLIF、方法是运行以下命令、为新的后端JSON文件提供更新后的dataLIF。
@@ -700,10 +707,12 @@ NOTE: 如果一个或多个Pod连接了PVC、则必须先关闭所有相应的Po
 
 
 
+[[secure-smb-examples]]
 == 安全 SMB 示例
 
 
 
+[[backend-configuration-with-ontap-nas-driver]]
 === 使用 ontap-nas 驱动程序的后端配置
 
 [source, yaml]
@@ -726,6 +735,7 @@ spec:
 ----
 
 
+[[backend-configuration-with-ontap-nas-economy-driver]]
 === 使用 ontap-nas-economy 驱动程序的后端配置
 
 [source, yaml]
@@ -748,6 +758,7 @@ spec:
 ----
 
 
+[[backend-configuration-with-storage-pool]]
 === 具有存储池的后端配置
 
 [source, yaml]
@@ -775,6 +786,7 @@ spec:
 ----
 
 
+[[storage-class-example-with-ontap-nas-driver]]
 === 采用 ontap-nas 驱动程序的存储类示例
 
 [source, yaml]
@@ -800,6 +812,7 @@ NOTE: 确保添加 `annotations`启用安全 SMB。如果没有注释，安全 S
 
 
 
+[[storage-class-example-with-ontap-nas-economy-driver]]
 === 采用 ontap-nas-economy 驱动程序的存储类示例
 
 [source, yaml]
@@ -822,6 +835,7 @@ volumeBindingMode: Immediate
 ----
 
 
+[[pvc-example-with-a-single-ad-user]]
 === 具有单个 AD 用户的 PVC 示例
 
 [source, yaml]
@@ -847,6 +861,7 @@ spec:
 ----
 
 
+[[pvc-example-with-multiple-ad-users]]
 === 具有多个 AD 用户的 PVC 示例
 
 [source, yaml]

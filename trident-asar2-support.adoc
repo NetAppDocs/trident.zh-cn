@@ -31,6 +31,7 @@ Trident 为具有 Trident protect 的 ASA r2 系统提供有限的数据保护�
 
 
 
+[[supported-operations]]
 == 支持的操作
 
 * 配置持久卷 (PV)
@@ -43,6 +44,7 @@ Trident 为具有 Trident protect 的 ASA r2 系统提供有限的数据保护�
 
 
 
+[[unsupported-operations]]
 == 不支持的操作
 
 * 进行了加密

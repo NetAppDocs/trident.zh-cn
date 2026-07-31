@@ -34,6 +34,7 @@ grep "aes" /proc/cpuinfo
 
 
 
+[[enable-luks-encryption]]
 == 启用LUKS加密
 
 您可以对ONTAP SAN和ONTAP SAN经济卷使用Linux统一密钥设置(Unified Key Setup、LUKS)启用每个卷的主机端加密。
@@ -97,12 +98,14 @@ stringData:
 
 
 
+[[limitations]]
 === 限制
 
 LUKS加密的卷无法利用ONTAP 重复数据删除和数据压缩功能。
 
 
 
+[[backend-configuration-for-importing-luks-volumes]]
 == 用于导入LUKS卷的后端配置
 
 要导入LUN卷、必须在后端将设置 `luksEncryption`为(`true`。该 `luksEncryption`选项会告诉Trident卷是符合LUN (`true`(兼容)还是不符合LUN (`false`(兼容)，如以下示例所示。
@@ -124,6 +127,7 @@ defaults:
 ----
 
 
+[[pvc-configuration-for-importing-luks-volumes]]
 == 用于导入UKS卷的PVC配置
 
 要动态导入LUKS卷、请将标注设置 `trident.netapp.io/luksEncryption`为 `true`、并在PVC中包含启用了LUKS的存储类、如本示例所示。
@@ -147,6 +151,7 @@ spec:
 ----
 
 
+[[rotate-a-luks-passphrase]]
 == 轮换LUKS密码短语
 
 您可以轮换LUKS密码短语并确认轮换。
@@ -241,6 +246,7 @@ NOTE: 如果返回两个密码短语、例如 `luksPassphraseNames: ["B", "A"]`�
 
 
 
+[[enable-volume-expansion]]
 == 启用卷扩展
 
 您可以在LUKS加密的卷上启用卷扩展。

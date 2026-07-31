@@ -18,10 +18,12 @@ Trident 通过提高多个存储驱动程序之间的并发性来提升控制器
 
 
 
+[[key-concepts-and-definitions]]
 == 关键概念和定义
 
 
 
+[[controller-scalability]]
 === 控制器可扩展性
 
 控制器可扩展性是指 Trident 控制器并行处理多个存储操作的能力，而不是在单个锁后对其进行序列化。这些操作包括卷创建、删除和调整大小；快照创建和删除；卷发布和取消发布；以及后端管理。
@@ -30,6 +32,7 @@ Trident 通过提高多个存储驱动程序之间的并发性来提升控制器
 
 
 
+[[default-behavior-serial-mode]]
 == 默认行为（串行模式）
 
 默认情况下，Trident 控制器一次处理一个操作。每个创建、删除、调整大小或快照请求在 Trident 启动下一个之前完成。串行模式是所有安装支持的默认值，无需配置。
@@ -38,12 +41,14 @@ Trident 通过提高多个存储驱动程序之间的并发性来提升控制器
 
 
 
+[[controller-scalability-support]]
 == 控制器可扩展性支持
 
 Trident 支持针对不同存储驱动程序的不同成熟度级别的控制器可扩展性。
 
 
 
+[[general-availability]]
 === 正式发布
 
 以下驱动程序在 Trident 26.06 正式上市时支持控制器可扩展性：
@@ -64,6 +69,7 @@ The `google-cloud-netapp-volumes` 和 `google-cloud-netapp-volumes-san`驱动程
 ====
 
 
+[[technical-preview]]
 === 技术预览
 
 以下驱动程序支持将控制器可扩展性作为 Trident 26.06 的技术预览功能：
@@ -80,6 +86,7 @@ The `google-cloud-netapp-volumes` 和 `google-cloud-netapp-volumes-san`驱动程
 
 
 
+[[how-enableconcurrency-works]]
 == enableConcurrency 的工作原理
 
 当您将 `enableConcurrency`设置为 `true`时，Trident 会对控制器管理的所有后端应用并发处理。该设置同时应用于每个后端。您不能为单个后端或单个驱动程序启用它。
@@ -90,6 +97,7 @@ The `google-cloud-netapp-volumes` 和 `google-cloud-netapp-volumes-san`驱动程
 
 
 
+[[before-you-enable]]
 == 启用之前
 
 [IMPORTANT]
@@ -114,12 +122,14 @@ The `google-cloud-netapp-volumes` 和 `google-cloud-netapp-volumes-san`驱动程
 |===
 
 
+[[enable-controller-scalability]]
 == 启用控制器可扩展性
 
  `enableConcurrency` 配置选项控制控制器的可扩展性。在 Trident 安装期间或更新现有部署时，必须显式启用此选项。
 
 
 
+[[trident-operator-deployment]]
 === Trident 操作员部署
 
 要使用 Trident 运算符启用控制器可扩展性，请在 `TridentOrchestrator`自定义资源 (CR) 中将 `enableConcurrency`设置为 `true`。
@@ -164,6 +174,7 @@ kubectl get torc trident -o jsonpath='{.status.currentInstallationParams.enableC
 ----
 
 
+[[helm-deployment]]
 === Helm 部署
 
 要使用 Helm 启用控制器可扩展性，请将 `enableConcurrency`值设置为 `true`。
@@ -199,6 +210,7 @@ helm install trident netapp-trident/trident-operator --namespace trident --creat
 ----
 
 
+[[tridentctl-deployment]]
 === tridentctl 部署
 
 要使用  `tridentctl` 启用控制器可扩展性，请在安装过程中传递  `--enable-concurrency` 标志。
@@ -224,6 +236,7 @@ tridentctl install -n trident --enable-concurrency
 ----
 
 
+[[verify-that-controller-scalability-is-enabled]]
 === 验证是否已启用控制器可扩展性
 
 启用控制器可扩展性后，验证 Trident 控制器是否在启用并发的情况下运行。检查控制器 Pod 日志：
@@ -236,6 +249,7 @@ kubectl logs -n trident deploy/trident-controller | grep -i concurrency
 
 
 
+[[concurrency-behavior]]
 == 并发行为
 
 启用控制器可扩展性后，Trident 控制器将应用以下行为：
@@ -249,6 +263,7 @@ kubectl logs -n trident deploy/trident-controller | grep -i concurrency
 
 
 
+[[caveats-and-limitations]]
 == 注意事项和限制
 
 以下注意事项适用于 Trident 26.06 中的控制器可扩展性：
@@ -264,6 +279,7 @@ kubectl logs -n trident deploy/trident-controller | grep -i concurrency
 
 
 
+[[recommendations]]
 == 建议
 
 在启用控制器可扩展性之前，请完成以下步骤：

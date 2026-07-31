@@ -16,6 +16,7 @@ summary: '持久卷(PVs)的Kubbernetes卷快照支持卷的时间点副本。您
 
 
 
+[[overview]]
 == 概述
 
 卷快照受支持 `ontap-nas`， `ontap-nas-flexgroup` ， `ontap-san` ， `ontap-san-economy` ， `solidfire-san` ， `azure-netapp-files` ， 和 `google-cloud-netapp-volumes`司机。
@@ -30,6 +31,7 @@ NOTE: 如果在GKE环境中创建按需卷快照、请勿创建快照控制器�
 
 
 
+[[create-a-volume-snapshot]]
 == 创建卷快照
 
 .步骤
@@ -114,6 +116,7 @@ Status:
 
 
 
+[[create-a-pvc-from-a-volume-snapshot]]
 == 从卷快照创建PVC
 
 您可以使用 `dataSource` 使用名为的卷快照创建PVC `<pvc-name>` 作为数据源。创建 PVC 后，可以将其附加到 Pod 上，并像使用任何其他 PVC 一样使用。
@@ -147,6 +150,7 @@ spec:
 ----
 
 
+[[import-a-volume-snapshot]]
 == 导入卷快照
 
 Trident支持通过link:https://kubernetes.io/docs/concepts/storage/volume-snapshots/#static["Kubbernetes预配置快照过程"^]、集群管理员可以创建 `VolumeSnapshotContent`对象并导入在Trident外部创建的快照。
@@ -238,6 +242,7 @@ spec:
 
 
 
+[[recover-volume-data-using-snapshots]]
 == 使用快照恢复卷数据
 
 默认情况下、快照目录处于隐藏状态、以便最大程度地提高使用配置的卷的兼容性 `ontap-nas` 和 `ontap-nas-economy` 驱动程序。启用 `.snapshot` 目录以直接从快照恢复数据。
@@ -253,6 +258,7 @@ NOTE: 还原Snapshot副本时、现有卷配置将被覆盖。创建Snapshot副�
 
 
 
+[[in-place-volume-restoration-from-a-snapshot]]
 == 从快照原位还原卷
 
 Trident可使用(TSR) CR从快照快速原位还原卷 `TridentActionSnapshotRestore`。此CR用作要务Kubbernetes操作、在操作完成后不会持久保留。
@@ -352,12 +358,14 @@ metadata:
 ====
 
 
+[[delete-a-pv-with-associated-snapshots]]
 == 删除具有关联快照的PV
 
 删除具有关联快照的永久性卷时、相应的Trident卷将更新为"正在删除"状态。删除卷快照以删除Trident卷。
 
 
 
+[[deploy-a-volume-snapshot-controller]]
 == 部署卷快照控制器
 
 如果您的Kubernetes分发版不包含快照控制器和CRD、则可以按如下所示进行部署。
@@ -397,6 +405,7 @@ NOTE: 如有必要、打开 `deploy/kubernetes/snapshot-controller/rbac-snapshot
 
 
 
+[[related-links]]
 == 相关链接
 
 * link:../trident-concepts/snapshots.html["卷快照"]

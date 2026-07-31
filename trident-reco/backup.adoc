@@ -16,12 +16,14 @@ summary: 了解Trident以及使用Trident创建的卷的保护和恢复选项。
 
 
 
+[[trident-replication-and-recovery]]
 == Trident复制和恢复
 
 您可以创建备份、以便在发生灾难时还原Trident。
 
 
 
+[[trident-replication]]
 === Trident复制
 
 Trident使用Kubnetes CRD存储和管理自己的状态、并使用Kubnetes集群etCD存储其元数据。
@@ -37,6 +39,7 @@ NOTE: NetApp建议您保护与另一个SVM具有SnapMirror关系的FlexVol所在
 
 
 
+[[trident-recovery]]
 === Trident恢复
 
 您可以使用Kubenetes CRD和Kubenetes集群etCD快照恢复Trident。
@@ -50,6 +53,7 @@ NOTE: NetApp建议您保护与另一个SVM具有SnapMirror关系的FlexVol所在
 
 
 
+[[svm-replication-and-recovery]]
 == SVM复制和恢复
 
 Trident无法配置复制关系、但存储管理员可以使用 https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-svm-replication-concept.html["ONTAP SnapMirror"^]来复制SVM。
@@ -66,6 +70,7 @@ Trident无法配置复制关系、但存储管理员可以使用 https://docs.ne
 
 
 
+[[svm-replication]]
 === SVM复制
 
 您可以使用 link:https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-svm-replication-workflow-concept.html["ONTAP：SnapMirror SVM复制"^] 以创建SVM复制关系。
@@ -79,6 +84,7 @@ Trident无法配置复制关系、但存储管理员可以使用 https://docs.ne
 
 
 
+[[svm-recovery-using-trident]]
 === 使用Trident恢复SVM
 
 Trident不会自动检测SVM故障。如果发生灾难、管理员可以手动启动通过三项功能故障转移到新SVM的操作。
@@ -102,6 +108,7 @@ NOTE: 如果指定了 `-identity-preserve true`，则在激活目标SVM后，Tri
 
 
 
+[[volume-replication-and-recovery]]
 == 卷复制和恢复
 
 Trident无法配置SnapMirror复制关系、但是存储管理员可以使用link:https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-disaster-recovery-concept.html["ONTAP SnapMirror复制和恢复"^]来复制Trident创建的卷。
@@ -113,6 +120,7 @@ NOTE: 不支持导入 `ontap-nas-economy`，  `ontap-san-economy`或 `ontap-flex
 
 
 
+[[snapshot-data-protection]]
 == Snapshot数据保护
 
 您可以使用以下方式保护和还原数据：

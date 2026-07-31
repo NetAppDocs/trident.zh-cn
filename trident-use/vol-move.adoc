@@ -15,6 +15,7 @@ summary: 使用 TridentVolumeMove 资源，无中断地将 iSCSI 卷移动到同
 
 
 
+[[requirements]]
 == 要求
 
 卷移动仅适用于 iSCSI 卷的  `ontap-san` 驱动程序。不支持 NVMe 和 NAS 协议。
@@ -33,6 +34,7 @@ summary: 使用 TridentVolumeMove 资源，无中断地将 iSCSI 卷移动到同
 
 
 
+[[how-it-works]]
 == 工作原理
 
 Trident 在同一 ONTAP 集群内的两个位置之间移动卷 (LUN)。在数据移动之前，Trident 会在现有路径旁边向目标添加新的 iSCSI 路径，以便主机多路径设备永远不会失去访问权限。ONTAP 完成移动后，Trident 会删除陈旧的源路径。
@@ -41,10 +43,12 @@ Trident 通过一组有序状态驱动移动，这些状态在 `TridentVolumeMov
 
 
 
+[[move-a-volume]]
 == 移动卷
 
 
 
+[[identify-the-volume-and-locations]]
 === 识别卷和位置
 
 . 查找要移动的 PV 的名称。PV 名称也是移动资源的名称。
@@ -53,6 +57,7 @@ Trident 通过一组有序状态驱动移动，这些状态在 `TridentVolumeMov
 
 
 
+[[start-the-move]]
 === 开始移动
 
 使用任一方法。两者都创建相同的 `TridentVolumeMove`资源，其名称为 PV 名称。
@@ -106,6 +111,7 @@ kubectl apply -f tridentvolumemove.yaml
 
 
 
+[[monitor-the-move]]
 === 监控移动
 
 使用 `tvm`简称或 `tridentvolumemove`跟踪进度：
@@ -176,6 +182,7 @@ kubectl describe tridentvolumemove <pv-name> -n trident
 |===
 
 
+[[clean-up-the-move-resource]]
 === 清理移动资源
 
 如果您设置了 `deleteAfterSuccess`，Trident 将自动删除该资源。否则，您可以手动将其删除。在请求对同一卷进行另一次移动之前，请确保该卷不存在处于  `Succeeded` 或  `Failed` 状态的  `TridentVolumeMove` 资源。

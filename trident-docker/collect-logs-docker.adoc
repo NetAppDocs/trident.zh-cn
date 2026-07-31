@@ -16,6 +16,7 @@ summary: 您可以收集日志以帮助进行故障排除。收集日志的方�
 
 
 
+[[collect-logs-for-troubleshooting]]
 == 收集日志以进行故障排除
 
 .步骤
@@ -64,6 +65,7 @@ docker plugin enable <plugin>
 
 
 
+[[general-troubleshooting-tips]]
 == 一般故障排除提示
 
 * 新用户遇到的最常见问题是配置不当，导致插件无法初始化。如果发生这种情况，在尝试安装或启用插件时，您可能会看到如下消息：

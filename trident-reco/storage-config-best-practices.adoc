@@ -16,6 +16,7 @@ NetApp产品组合中的每个存储平台都具有独特的功能、无论应�
 
 
 
+[[platform-overview]]
 == 平台概述
 
 Trident 可与 ONTAP 和 Element 结合使用。没有一个平台比另一个平台更适合所有应用程序和场景，但是，在选择平台时，应考虑应用程序和设备管理团队的需求。
@@ -24,6 +25,7 @@ Trident 可与 ONTAP 和 Element 结合使用。没有一个平台比另一个�
 
 
 
+[[ontap-and-cloud-volumes-ontap-best-practices]]
 == ONTAP 和 Cloud Volumes ONTAP 最佳实践
 
 了解为 Trident 配置 ONTAP 和 Cloud Volumes ONTAP 的最佳实践。
@@ -32,6 +34,7 @@ Trident 可与 ONTAP 和 Element 结合使用。没有一个平台比另一个�
 
 
 
+[[use-svms-dedicated-to-trident]]
 === 使用专用于 Trident 的 SVM
 
 Storage Virtual Machine （ SVM ）可在 ONTAP 系统上的租户之间实现隔离和管理隔离。通过将 SVM 专用于应用程序，可以委派特权并应用最佳实践来限制资源消耗。
@@ -49,6 +52,7 @@ Storage Virtual Machine （ SVM ）可在 ONTAP 系统上的租户之间实现�
 
 
 
+[[limit-the-maximum-volume-count]]
 === 限制最大卷数
 
 ONTAP 存储系统具有最大卷数，具体取决于软件版本和硬件平台。请参见 https://hwu.netapp.com/["NetApp Hardware Universe"^] 以 ONTAP 确定确切限制。当卷计数用尽时，配置操作不仅会对 Trident 失败，而且会对所有存储请求失败。
@@ -72,6 +76,7 @@ vserver modify -vserver <svm_name> -max-volumes <num_of_volumes>
 
 
 
+[[clone-a-volume]]
 === 克隆卷
 
 NetApp Trident在使用时支持克隆卷 `ontap-nas`， `ontap-san` ， 和 `solidfire-san`存储驱动程序。使用时 `ontap-nas-flexgroup`或者 `ontap-nas-economy`驱动程序不支持克隆。从现有卷创建新卷将创建一个新的快照。
@@ -81,6 +86,7 @@ WARNING: 避免克隆与其他 StorageClass 关联的 PVC。请在同一 Storage
 
 
 
+[[limit-the-maximum-size-of-volumes-created-by-trident]]
 === 限制 Trident 创建的卷的最大大小
 
 要为 Trident 可以创建的卷配置最大大小，请在 `backend.json` 定义中使用 `limitVolumeSize` 参数。
@@ -89,18 +95,21 @@ WARNING: 避免克隆与其他 StorageClass 关联的 PVC。请在同一 Storage
 
 
 
+[[limit-the-maximum-size-of-flexvols-created-by-trident]]
 === 限制Trident创建的FlexVol的大小上限
 
 要配置用作ONTAP SAN经济型驱动程序和ONTAP NAS经济型驱动程序池的FlexVol的最大大小、请 `limitVolumePoolSize`在 `backend.json`定义中使用参数。
 
 
 
+[[configure-trident-to-use-bidirectional-chap]]
 === 配置 Trident 以使用双向 CHAP
 
 您可以在后端定义中指定 CHAP 启动程序以及目标用户名和密码，并在 SVM 上启用 Trident CHAP 。使用 `useCHAP` 参数在后端配置中、Trident使用CHAP对ONTAP 后端的iSCSI连接进行身份验证。
 
 
 
+[[create-and-use-an-svm-qos-policy]]
 === 创建并使用 SVM QoS 策略
 
 利用应用于 SVM 的 ONTAP QoS 策略，限制 Trident 配置的卷可使用的 IOPS 数量。这有助于实现 http://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-perf-mon/GUID-77DF9BAF-4ED7-43F6-AECE-95DFB0680D2F.html?cp=7_1_2_1_2["防止抢占资源"^] 或控制不足的容器，以使其不会影响 Trident SVM 以外的工作负载。
@@ -131,6 +140,7 @@ IMPORTANT: 如果 ONTAP 版本早于 9.8 ，则应将此 QoS 策略组分配给 
 
 
 
+[[create-qos-policy-groups-for-trident]]
 === 为 Trident 创建 QoS 策略组
 
 服务质量（ QoS ）可确保关键工作负载的性能不会因争用工作负载而降级。ONTAP QoS 策略组为卷提供 QoS 选项，并使用户能够为一个或多个工作负载定义吞吐量上限。有关QoS的详细信息、请参见 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-perf-mon/GUID-77DF9BAF-4ED7-43F6-AECE-95DFB0680D2F.html["通过 QoS 保证吞吐量"^]。
@@ -173,6 +183,7 @@ storage:
 
 
 
+[[limit-storage-resource-access-to-kubernetes-cluster-members]]
 === 将存储资源访问限制为 Kubernetes 集群成员
 
 限制对Trident创建的NFS卷、iSCSI LUN和FC LUN的访问是Kubbernetes部署安全防护的一个重要组成部分。这样可以防止不属于 Kubernetes 集群的主机访问卷并可能意外修改数据。
@@ -189,6 +200,7 @@ storage:
 
 
 
+[[use-a-dedicated-export-policy]]
 === 使用专用导出策略
 
 您应确保每个后端都有一个导出策略，该策略仅允许访问 Kubernetes 集群中的节点。｛\f270可以自动创建和管理导出策略｝｛\f151。｝通过这种方式， Trident 会限制对其配置给 Kubernetes 集群中节点的卷的访问，并简化节点的添加 / 删除。
@@ -203,6 +215,7 @@ storage:
 
 
 
+[[disable-showmount-for-the-application-svm]]
 === 禁用 `showmount` 用于应用程序SVM
 
 通过此 `showmount`功能、NFS客户端可以向SVM查询可用NFS导出的列表。部署到Kubnetes集群的Pod可以对发出 `showmount -e`命令、并接收可用挂载列表、包括其无权访问的挂载。虽然这本身并不会影响安全，但它确实会提供不必要的信息，可能有助于未经授权的用户连接到 NFS 导出。
@@ -215,18 +228,21 @@ vserver nfs modify -vserver <svm_name> -showmount disabled
 ----
 
 
+[[solidfire-best-practices]]
 == SolidFire 最佳实践
 
 了解为 Trident 配置 SolidFire 存储的最佳实践。
 
 
 
+[[create-solidfire-account]]
 === 创建 SolidFire 帐户
 
 每个 SolidFire 帐户都代表一个唯一的卷所有者，并接收自己的一组质询握手身份验证协议（ Challenge-Handshake Authentication Protocol ， CHAP ）凭据。您可以使用帐户名称和相对 CHAP 凭据或通过卷访问组访问分配给帐户的卷。一个帐户最多可以分配 2 ， 000 个卷，但一个卷只能属于一个帐户。
 
 
 
+[[create-a-qos-policy]]
 === 创建 QoS 策略
 
 如果要创建并保存可应用于多个卷的标准化服务质量设置，请使用 SolidFire 服务质量（ QoS ）策略。
@@ -279,6 +295,7 @@ NOTE: 虽然最大 IOPS 和突发 IOPS 可设置为高达 200 ， 000 ，但卷�
 
 
 
+[[solidfire-authentication]]
 === SolidFire 身份验证
 
 Element 支持两种身份验证方法： CHAP 和卷访问组（ VAG ）。CHAP 使用 CHAP 协议向后端对主机进行身份验证。卷访问组控制对其配置的卷的访问。NetApp 建议使用 CHAP 进行身份验证，因为它更简单，并且没有扩展限制。
@@ -292,6 +309,7 @@ NOTE: 具有增强型 CSI 配置程序的 Trident 支持使用 CHAP 身份验证
 
 
 
+[[where-to-find-more-information]]
 == 如何查找更多信息
 
 下面列出了一些最佳实践文档。搜索 https://www.netapp.com/search/["NetApp 库"^] 对于最新版本。

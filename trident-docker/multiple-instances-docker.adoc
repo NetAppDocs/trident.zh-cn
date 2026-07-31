@@ -16,6 +16,7 @@ summary: 如果希望同时提供多个存储配置，则需要多个 Trident �
 
 
 
+[[steps-for-docker-managed-plugin-version-1-1317-03-or-later]]
 == Docker 托管插件（ 1.13/17.03 或更高版本）的步骤
 
 . 启动指定别名和配置文件的第一个实例。
@@ -51,6 +52,7 @@ docker volume create -d silver --name ntapSilver
 
 
 
+[[steps-for-traditional-version-1-12-or-earlier]]
 == 传统（ 1.12 或更早版本）的步骤
 
 . 使用自定义驱动程序 ID 启动具有 NFS 配置的插件：

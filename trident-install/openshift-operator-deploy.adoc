@@ -19,6 +19,7 @@ summary: 如果使用Red Hat OpenShift、则可以使用操作员安装Trident�
 
 
 
+[[find-and-install-the-trident-operator]]
 == 找到并安装Trident运算符
 
 .步骤
@@ -97,6 +98,7 @@ image::../media/openshift-operator-08.png[已安装]
 
 
 
+[[uninstall-trident-operator]]
 == 卸载Trident操作员
 
 .步骤

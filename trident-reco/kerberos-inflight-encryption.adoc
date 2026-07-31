@@ -23,6 +23,7 @@ Trident支持将ONTAP用作存储后端的Kerberos加密：
 
 
 
+[[configure-in-flight-kerberos-encryption-with-on-premise-ontap-volumes]]
 == 使用内部ONTAP卷配置传输中的Kerberos加密
 
 您可以对受管集群与内部ONTAP存储后端之间的存储流量启用Kerberos加密。
@@ -40,6 +41,7 @@ NOTE: 只有使用存储驱动程序、才支持对使用内部ONTAP存储后端
 
 
 
+[[add-or-modify-ontap-export-policies]]
 === 添加或修改ONTAP导出策略
 
 您需要向现有ONTAP导出策略添加规则、或者创建新的导出策略、以便对ONTAP Storage VM根卷以及与上游Kubornetes集群共享的任何ONTAP卷支持Kerberos加密。您添加的导出策略规则或创建的新导出策略需要支持以下访问协议和访问权限：
@@ -77,6 +79,7 @@ NOTE: 只有使用存储驱动程序、才支持对使用内部ONTAP存储后端
 
 
 
+[[create-a-storage-backend]]
 === 创建存储后端
 
 您可以创建包含Kerberos加密功能的Trident存储后端配置。
@@ -144,6 +147,7 @@ tridentctl logs
 
 
 
+[[create-a-storage-class]]
 === 创建存储类。
 
 您可以创建存储类来配置采用Kerberos加密的卷。
@@ -202,12 +206,14 @@ ontap-nas-sc    csi.trident.netapp.io   15h
 
 
 
+[[provision-volumes]]
 === 配置卷
 
 创建存储后端和存储类后、您现在可以配置卷。有关说明，请参阅 https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html["配置卷"^]。
 
 
 
+[[configure-in-flight-kerberos-encryption-with-azure-netapp-files-volumes]]
 == 为Azure NetApp Files卷配置传输中的Kerberos加密
 
 您可以对受管集群与单个Azure NetApp Files存储后端或Azure NetApp Files存储后端虚拟池之间的存储流量启用Kerberos加密。
@@ -221,6 +227,7 @@ ontap-nas-sc    csi.trident.netapp.io   15h
 
 
 
+[[create-a-storage-backend]]
 === 创建存储后端
 
 您可以创建包含Kerberos加密功能的Azure NetApp Files存储后端配置。
@@ -347,6 +354,7 @@ tridentctl logs
 
 
 
+[[create-a-storage-class]]
 === 创建存储类。
 
 您可以创建存储类来配置采用Kerberos加密的卷。
@@ -391,6 +399,7 @@ sc-nfs       csi.trident.netapp.io   15h
 
 
 
+[[provision-volumes]]
 === 配置卷
 
 创建存储后端和存储类后、您现在可以配置卷。有关说明，请参阅 https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html["配置卷"^]。

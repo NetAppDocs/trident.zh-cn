@@ -17,24 +17,28 @@ summary: 使用 Trident，通过 Kubernetes 原生机制配置 Google Cloud NetA
 
 
 
+[[overview]]
 == 概述
 
 自动分层允许 Trident 配置卷，自动将非活动数据从性能层移动到容量层。这降低了存储成本，同时保留了频繁访问数据的性能。
 
-Trident 仅在卷创建时应用自动分层设置。Trident 26.02 不支持预配后更改。
+Trident 仅在卷创建时应用自动分层设置。Trident 26.06 不支持预配后更改。
 
 
 
+[[concepts]]
 == 概念
 
 
 
+[[auto-tiering]]
 === 自动分层
 
 自动分层根据访问模式将不经常访问的数据从性能层移动到容量层。数据移动是异步发生的，并不是立即发生的。
 
 
 
+[[tiering-policy]]
 === 分层策略
 
 分层策略确定是否为卷启用自动分层。
@@ -43,16 +47,19 @@ Trident 仅在卷创建时应用自动分层设置。Trident 26.02 不支持预�
 
 
 
+[[cooling-days]]
 === 冷却天数
 
 冷却天数指定数据块在符合分层条件之前必须保持非活动状态的最短天数。仅当分层策略设置为 `auto`时，才适用冷却天数。
 
 
 
+[[configuration-model]]
 == 配置模型
 
 
 
+[[configuration-scopes]]
 === 配置范围
 
 可以在多个范围内配置自动分层：
@@ -65,6 +72,7 @@ Trident 根据每个设置的定义位置确定有效配置。
 
 
 
+[[configuration-precedence]]
 === 配置优先级
 
 当在多个作用域中定义了相同的设置时，Trident 应用以下优先级顺序：
@@ -78,9 +86,10 @@ Trident 根据每个设置的定义位置确定有效配置。
 
 
 
-== Trident 26.02 中支持的功能
+[[supported-functionality-in-trident-26-06]]
+== Trident 26.06 中支持的功能
 
-Trident 26.02 支持 Google Cloud NetApp Volumes 的以下自动分层功能：
+Trident 26.06 支持 Google Cloud NetApp Volumes 的以下自动分层功能：
 
 * 在卷配置期间启用或禁用自动分层
 * 在 Trident 后端配置中定义分层策略
@@ -90,7 +99,8 @@ Trident 26.02 支持 Google Cloud NetApp Volumes 的以下自动分层功能：
 
 
 
-== Trident 26.02 中不支持的功能
+[[unsupported-functionality-in-trident-26-06]]
+== Trident 26.06 中不支持的功能
 
 不支持以下操作：
 
@@ -101,6 +111,7 @@ Trident 26.02 支持 Google Cloud NetApp Volumes 的以下自动分层功能：
 
 
 
+[[backend-configuration-parameters]]
 == 后端配置参数
 
 以下参数在 Trident 后端配置中定义时控制自动分层行为：
@@ -117,10 +128,12 @@ Trident 26.02 支持 Google Cloud NetApp Volumes 的以下自动分层功能：
 |===
 
 
+[[volume-level-overrides-using-persistentvolumeclaim-annotations]]
 == 使用 PersistentVolumeClaim 注释的卷级覆盖
 
 
 
+[[supported-annotations]]
 === 支持的注释
 
 PersistentVolumeClaim 批注允许按卷覆盖自动分层设置。
@@ -137,6 +150,7 @@ PersistentVolumeClaim 批注允许按卷覆盖自动分层设置。
 |===
 
 
+[[example-persistentvolumeclaim-with-auto-tiering-overrides]]
 === 示例：PersistentVolumeClaim 使用自动分层覆盖
 
 [source, yaml]
@@ -158,10 +172,12 @@ spec:
 ----
 
 
+[[behavior-and-limitations]]
 == 行为和限制
 
 
 
+[[provisioning-behavior]]
 === 配置行为
 
 * 自动分层设置仅在创建卷时进行评估和应用。
@@ -171,6 +187,7 @@ spec:
 
 
 
+[[platform-limitations]]
 === 平台限制
 
 * 只有 NAS 卷（NFS 和 SMB）才支持自动分层。
@@ -180,6 +197,7 @@ spec:
 
 
 
+[[supported-values]]
 === 支持的值
 
 *  `tieringMinimumCoolingDays` 的有效范围：2 到 183

@@ -16,6 +16,7 @@ summary: 在使用Trident运算符升级Trident之前、您应了解升级期间
 
 
 
+[[trident-operator-upgrade-handling]]
 == TRIdent操作员升级处理
 
 安装和升级 Trident 的众多link:../trident-install/kubernetes-deploy.html["使用啮合式操作员的优势"]之一是自动处理 Trident 和 Kubernetes 对象，而不会中断现有的已挂载卷。通过这种方式，Trident 可以支持零停机时间升级，或link:https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/["_滚动更新_"^]。特别是，Trident 操作程序与 Kubernetes 集群进行通信以：
@@ -34,6 +35,7 @@ TIP: 有关Kubnetes集群上Trident架构的详细信息，请参阅link:../trid
 
 
 
+[[operator-upgrade-workflow]]
 == 操作员升级工作流
 
 使用三端修复操作符启动升级时：

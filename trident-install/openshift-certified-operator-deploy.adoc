@@ -22,6 +22,7 @@ IMPORTANT: 请勿在卸载过程中删除 `TridentOrchestrator`自定义资源 (
 
 
 
+[[switch-from-the-community-operator]]
 == 从社区运营商切换
 
 .步骤
@@ -43,6 +44,7 @@ WARNING: 不要选择*从该操作符中删除所有操作数实例*。
 
 
 
+[[switch-from-a-helm-based-operator-installation]]
 == 从基于 Helm 的操作员安装切换
 
 .步骤
@@ -63,6 +65,7 @@ helm uninstall <release-name> -n trident
 
 
 
+[[switch-from-a-manually-deployed-operator]]
 == 从手动部署的 operator 切换
 
 如果您通过使用安装程序包中的  `bundle.yaml` 手动部署操作员来安装 Trident，请通过删除相同的清单来删除它。
@@ -79,6 +82,8 @@ kubectl delete -f deploy/bundle.yaml -n trident
 
 
 
+[[install-the-openshift-certified-operator]]
+[[install-certified]]
 == 安装 OpenShift 认证操作员
 
 .步骤
@@ -92,6 +97,7 @@ image::../media/openshift-operator-05.png[安装]
 
 
 
+[[verification]]
 == 验证
 
 * 检查控制台中的OperatorHub、确保已成功安装新的认证操作员。

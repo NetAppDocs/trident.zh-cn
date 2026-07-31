@@ -19,6 +19,7 @@ NOTE: 只有 `ontap-san`ASA r2 系统支持驱动程序（支持 iSCSI、NVMe/TC
 
 
 
+[[backend-configuration-options]]
 == 后端配置选项
 
 有关后端配置选项，请参见下表：
@@ -158,6 +159,7 @@ NOTE: NVMe 仅支持ONTAP REST API，不支持 ONTAPI (ZAPI)。
 |===
 
 
+[[recommendations-for-using-formatoptions]]
 === 有关使用formatOptions的建议
 
 Trident建议采用以下选项来加快格式化过程：
@@ -168,6 +170,7 @@ Trident建议采用以下选项来加快格式化过程：
 
 
 
+[[authenticate-trident-to-a-backend-svm-using-active-directory-credentials]]
 === 使用 Active Directory 凭据向后端 SVM 验证Trident 的身份
 
 您可以配置Trident以使用 Active Directory (AD) 凭据对后端 SVM 进行身份验证。在 AD 帐户可以访问 SVM 之前，您必须配置 AD 域控制器对集群或 SVM 的访问权限。对于使用 AD 帐户进行集群管理，您必须创建域隧道。参考 link:https://docs.netapp.com/us-en/ontap/authentication/enable-ad-users-groups-access-cluster-svm-task.html["在ONTAP中配置 Active Directory 域控制器访问"^] 了解详情。
@@ -190,6 +193,7 @@ Trident建议采用以下选项来加快格式化过程：
 
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 用于配置卷的后端配置选项
 
 您可以在中使用这些选项控制默认配置 `defaults` 配置部分。有关示例，请参见以下配置示例。
@@ -233,6 +237,7 @@ Trident建议采用以下选项来加快格式化过程：
 |===
 
 
+[[volume-provisioning-examples]]
 === 卷配置示例
 
 下面是一个定义了默认值的示例：
@@ -278,6 +283,7 @@ image::../media/vol-show-san.png[显示了 volume show 命令的输出。]
 
 
 
+[[minimal-configuration-examples]]
 == 最低配置示例
 
 以下示例显示了将大多数参数保留为默认值的基本配置。这是定义后端的最简单方法。
@@ -478,6 +484,7 @@ defaults:
 ====
 
 
+[[examples-of-backends-with-virtual-pools]]
 == 虚拟池后端示例
 
 在这些示例后端定义文件中、为所有存储池设置了特定默认值、例如 `spaceReserve` 无、 `spaceAllocation` 为false、和 `encryption` 为false。虚拟池在存储部分中进行定义。
@@ -622,6 +629,7 @@ storage:
 ====
 
 
+[[map-backends-to-storageclasses]]
 == 将后端映射到 StorageClasses
 
 以下StorageClass定义涉及 <<虚拟池后端示例>>。使用 `parameters.selector` 字段中、每个StorageClass都会指出可用于托管卷的虚拟池。卷将在选定虚拟池中定义各个方面。

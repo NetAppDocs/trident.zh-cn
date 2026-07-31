@@ -20,6 +20,7 @@ Trident支持在一个集群上的源卷与对等集群上的目标卷之间建�
 
 
 
+[[replication-prerequisites]]
 == 复制前提条件
 
 开始之前、请确保满足以下前提条件：
@@ -53,6 +54,7 @@ NOTE: ASA r2 系统不支持使用 SnapMirror 进行卷复制。有关 ASA r2 �
 
 
 
+[[create-a-mirrored-pvc]]
 == 创建镜像PVC
 
 按照以下步骤并使用CRD示例在主卷和二级卷之间创建镜像关系。
@@ -197,6 +199,7 @@ Trident将检查是否存在TridentMirorRelationship CRD、如果此关系不存
 
 
 
+[[volume-replication-states]]
 == 卷复制状态
 
 三级镜像关系(TCR)是一种CRD、表示PVC之间复制关系的一端。目标T关系 管理器具有一个状态、此状态会告知Trident所需的状态。目标T关系 管理器具有以下状态：
@@ -213,6 +216,7 @@ Trident将检查是否存在TridentMirorRelationship CRD、如果此关系不存
 
 
 
+[[promote-secondary-pvc-during-an-unplanned-failover]]
 == 在计划外故障转移期间提升辅助PVC
 
 在二级Kubbernetes集群上执行以下步骤：
@@ -222,6 +226,7 @@ Trident将检查是否存在TridentMirorRelationship CRD、如果此关系不存
 
 
 
+[[promote-secondary-pvc-during-a-planned-failover]]
 == 在计划内故障转移期间提升辅助PVC
 
 在计划内故障转移(迁移)期间、执行以下步骤以提升二级PVC：
@@ -246,6 +251,7 @@ spec:
 
 
 
+[[restore-a-mirror-relationship-after-a-failover]]
 == 在故障转移后还原镜像关系
 
 在还原镜像关系之前、请选择要用作新主卷的那一端。
@@ -257,12 +263,14 @@ spec:
 
 
 
+[[additional-operations]]
 == 其他操作
 
 Trident支持对主卷和二级卷执行以下操作：
 
 
 
+[[replicate-primary-pvc-to-a-new-secondary-pvc]]
 === 将主PVC复制到新的二级PVC
 
 确保您已有一个主PVC和一个次要PVC。
@@ -275,12 +283,14 @@ Trident支持对主卷和二级卷执行以下操作：
 
 
 
+[[resize-a-mirrored-primary-or-secondary-pvc]]
 === 调整镜像、主PVC或二级PVC的大小
 
 可以正常调整PVC的大小、如果数据量超过当前大小、ONTAP将自动扩展任何目标flevxvol。
 
 
 
+[[remove-replication-from-a-pvc]]
 === 从PVC中删除复制
 
 要删除复制、请对当前二级卷执行以下操作之一：
@@ -291,24 +301,28 @@ Trident支持对主卷和二级卷执行以下操作：
 
 
 
+[[delete-a-pvc-that-was-previously-mirrored]]
 === 删除PVC (之前已镜像)
 
 Trident会检查是否存在复制的PVC、并在尝试删除卷之前释放复制关系。
 
 
 
+[[delete-a-tmr]]
 === 删除TTr
 
 删除镜像关系一端的T磁 还原会导致剩余的T磁 还原在Trident完成删除之前过渡到_promoted _状态。如果选择删除的TMirror已处于_Promved"状态、则不存在现有镜像关系、此时TMirror将被删除、Trident会将本地PVC提升为_ReadWrite_。此删除操作将释放ONTAP中本地卷的SnapMirror元数据。如果此卷将来要在镜像关系中使用、则在创建新镜像关系时、它必须使用具有_re设立_卷复制状态的新TMirror。
 
 
 
+[[update-mirror-relationships-when-ontap-is-online]]
 == 在ONTAP联机时更新镜像关系
 
 建立镜像关系后、可以随时更新这些关系。您可以使用 `state: promoted` 或 `state: reestablished` 字段更新关系。将目标卷提升为常规ReadWrite卷时、可以使用_promotedSnapshotHandle_指定要将当前卷还原到的特定快照。
 
 
 
+[[update-mirror-relationships-when-ontap-is-offline]]
 == 在ONTAP脱机时更新镜像关系
 
 您可以使用CRD执行SnapMirror更新、而无需Trident直接连接到ONTAP集群。请参阅以下TridentAction镜像 更新的示例格式：

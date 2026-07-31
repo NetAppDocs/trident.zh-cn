@@ -16,6 +16,7 @@ summary: 在安装Trident之前、您应查看这些常规系统要求。特定�
 
 
 
+[[critical-information-about-trident]]
 == 有关Trident的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
@@ -36,6 +37,7 @@ summary: 在安装Trident之前、您应查看这些常规系统要求。特定�
 ====
 
 
+[[supported-frontends-orchestrators]]
 == 支持的前端（编排程序）
 
 Trident支持多个容器引擎和流程编排程序、其中包括：
@@ -59,6 +61,7 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高�
 
 
 
+[[supported-backends-storage]]
 == 支持的后端（存储）
 
 要使用Trident、您需要使用以下一个或多个受支持的后端：
@@ -74,6 +77,7 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高�
 
 
 
+[[trident-support-for-kubevirt-and-openshift-virtualization]]
 == Trident支持KubeVirt和OpenShift虚拟化
 
 .支持的存储驱动程序：
@@ -99,6 +103,7 @@ Trident支持以下用于KubeVirt和OpenShift虚拟化的ONTAP驱动程序：
 
 
 
+[[trident-support-for-kubernetes-on-kubernetes-and-openshift-hosted-control-planes]]
 == Trident 支持 Kubernetes 上的 Kubernetes 和 OpenShift 托管控制平面
 
 从版本 26.06 开始，Trident 完全限定了 Kubernetes on Kubernetes 拓扑。Kubernetes 集群，其节点在基础架构（主机）集群上作为 KubeVirt 虚拟机运行。这种拓扑结构是托管控制平面产品（例如 OpenShift 虚拟化上的 OpenShift 托管控制平面 (HCP)）的基础。
@@ -142,6 +147,7 @@ NOTE: 此配置在早期版本中可用，但完全限定从 26.06 开始。
 
 
 
+[[feature-requirements]]
 == 功能要求
 
 下表总结了此版本的Trident及其支持的Kubernetes版本提供的功能。
@@ -208,6 +214,7 @@ NOTE: 此配置在早期版本中可用，但完全限定从 26.06 开始。
 |===
 
 
+[[tested-host-operating-systems]]
 == 已测试主机操作系统
 
 虽然Trident不正式支持特定操作系统、但已知以下操作系统可以正常工作：
@@ -229,6 +236,7 @@ NOTE: NVMe/TCP需要RHEL 9或更高版本。
 
 
 
+[[host-configuration]]
 == 主机配置
 
 Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。要准备工作节点、必须根据您选择的驱动程序安装NFS、iSCSI或NVMe工具。
@@ -237,6 +245,7 @@ link:../trident-use/worker-node-prep.html["准备工作节点"]
 
 
 
+[[storage-system-configuration]]
 == 存储系统配置：
 
 Trident可能需要先对存储系统进行更改、然后后端配置才能使用它。
@@ -245,6 +254,7 @@ link:../trident-use/backends.html["配置后端"]
 
 
 
+[[trident-ports]]
 == Trident端口
 
 Trident需要访问特定端口才能进行通信。
@@ -253,13 +263,15 @@ link:../trident-reference/ports.html["Trident端口"]
 
 
 
+[[container-images-and-corresponding-kubernetes-versions]]
 == 容器映像以及相应的 Kubernetes 版本
 
 对于气隙安装、以下列表是安装Trident所需容器映像的参考。使用 `tridentctl images`命令验证所需容器映像的列表。
 
 
 
-=== Trident 26.02 所需的容器映像
+[[container-images-required-for-trident-26-06]]
+=== Trident 26.06 所需的容器映像
 
 [cols="2"]
 |===
@@ -267,14 +279,14 @@ link:../trident-reference/ports.html["Trident端口"]
 
 
 | v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0  a| 
-* docker.io/netapp/trident:26.02.0
-* docker.io/netapp/trident-autosupport:26.02
+* docker.io/netapp/trident:26.06.0
+* docker.io/netapp/trident-autosupport:26.06
 * registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
 * registry.k8s.io/sig-storage/csi-attacher:v4.10.0
 * registry.k8s.io/sig-storage/csi-resizer:v2.0.0
 * registry.k8s.io/sig-storage/csi-snapshotter:v8.5.0
 * registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
-* docker.io/netapp/trident-operator:26.02.0（可选）
+* docker.io/netapp/trident-operator:26.06.0（可选）
 
 
 |===

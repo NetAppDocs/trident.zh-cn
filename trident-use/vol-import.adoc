@@ -16,6 +16,7 @@ summary: '您可以使用  `tridentctl import` 或 PVC 注释将现有存储卷�
 
 
 
+[[overview-and-considerations]]
 == 概述和注意事项
 
 您可以将卷导入到Trident中、以便：
@@ -57,6 +58,7 @@ TIP: 如果您想使用 Kubernetes 进行容器化工作负载，但又想在 Ku
 
 
 
+[[import-a-volume]]
 == 导入卷
 
 您可以使用 `tridentctl import`或通过创建带有 Trident 导入注释的 PVC 来导入卷。
@@ -152,12 +154,14 @@ Trident 将自动导入卷并将其绑定到 PVC。
 ====
 
 
+[[examples]]
 == 示例
 
 查看以下卷导入示例、了解受支持的驱动程序。
 
 
 
+[[ontap-nas-and-ontap-nas-flexgroup]]
 === ONTAP NAS和ONTAP NAS FlexGroup
 
 Trident支持使用和 `ontap-nas-flexgroup`驱动程序导入卷 `ontap-nas`。
@@ -265,6 +269,7 @@ spec:
 ====
 
 
+[[import-qtrees]]
 === 导入 qtree
 
 [NOTE]
@@ -327,6 +332,7 @@ spec:
 ====
 
 
+[[ontap-san]]
 === ONTAP SAN
 
 Trident支持使用卷导入 `ontap-san` （iSCSI、NVMe/TCP 和 FC）和 `ontap-san-economy` 司机。
@@ -378,6 +384,7 @@ image:./san-import-igroup.png["映射到iqn和集群iqn的LUN的图像。"]
 ====
 
 
+[[ontap-san-economy-examples]]
 == ONTAP SAN-economy 示例
 
 以下示例演示如何为  `ontap-san-economy` 后端导入托管和非托管卷。
@@ -435,6 +442,7 @@ trident_lun_pool_xyz_randomstring/lun0
 ====
 
 
+[[element]]
 === Element
 
 Trident支持使用驱动程序导入NetApp Element软件和NetApp HCI卷 `solidfire-san`。
@@ -456,6 +464,7 @@ tridentctl import volume element_default element-managed -f pvc-basic-import.yam
 ----
 
 
+[[azure-netapp-files]]
 === Azure NetApp Files
 
 Trident支持使用驱动程序导入卷 `azure-netapp-files`。
@@ -477,6 +486,7 @@ tridentctl import volume azurenetappfiles_40517 importvol1 -f <path-to-pvc-file>
 ----
 
 
+[[google-cloud-netapp-volumes]]
 === Google Cloud NetApp卷
 
 Trident支持使用驱动程序导入卷 `google-cloud-netapp-volumes`。

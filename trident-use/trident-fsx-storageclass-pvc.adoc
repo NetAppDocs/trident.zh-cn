@@ -16,6 +16,7 @@ summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以
 
 
 
+[[create-a-storageclass-object]]
 == 创建 StorageClass 对象
 
 当您为 FSx for ONTAP 创建 StorageClass 时，Trident 将自动创建后端配置。
@@ -25,6 +26,7 @@ NOTE: 如果要手动配置存储后端，请参阅 <<create-a-kubernetes-storag
 
 
 
+[[specify-required-storageclass-parameters]]
 === 指定所需 StorageClass 参数
 
 创建 StorageClass 时需要定义以下三个参数：
@@ -184,6 +186,7 @@ metadata:
 
 
 
+[[create-a-kubernetes-storageclass-without-automatic-backend-configuration]]
 === 创建没有自动后端配置的 Kubernetes StorageClass
 
 如果要单独创建 Trident 后端和 StorageClass，请按照以下步骤操作。
@@ -198,6 +201,7 @@ Trident 只创建一次 VolumeSnapshotClass。Trident 会为后续的 StorageCla
 
 
 
+[[create-the-trident-backend]]
 === 创建 Trident 后端
 
 要创建 Trident 后端，需要创建 JSON 或 YAML 格式的配置文件。文件需要指定所需的存储类型（NAS 或 SAN）、文件系统和获取该文件的 SVM 以及使用该文件进行身份验证的方式。以下示例演示如何定义基于 NAS 的存储并使用 AWS 密钥将凭据存储到要使用的 SVM：
@@ -319,6 +323,7 @@ backend-tbc-ontap-nas        tbc-ontap-nas        933e0071-66ce-4324-b9ff-f96d91
 
 
 
+[[configure-a-storage-class-without-automatic-backend-configuration]]
 === 配置存储类*无*自动后端配置
 
 以下是与 Trident 和 FSx for ONTAP 配合使用的存储类配置示例。
@@ -447,12 +452,14 @@ basic-csi    csi.trident.netapp.io   15h
 ----
 
 
+[[provision-smb-volumes]]
 == 提供 SMB 卷
 
 您可以使用  `ontap-nas` 驱动程序配置 SMB 卷。但是，要执行此操作，您必须完成以下步骤：link:worker-node-prep.html#prepare-to-provision-smb-volumes["准备配置SMB卷"]。
 
 
 
+[[backend-advanced-configuration-and-examples]]
 == 后端高级配置和示例
 
 有关后端配置选项，请参见下表：
@@ -553,6 +560,7 @@ basic-csi    csi.trident.netapp.io   15h
 |===
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 用于配置卷的后端配置选项
 
 您可以在中使用这些选项控制默认配置 `defaults` 配置部分。有关示例，请参见以下配置示例。

@@ -16,6 +16,7 @@ summary: 了解如何使用 ONTAP NAS 驱动程序配置 ONTAP 后端。
 
 
 
+[[ontap-nas-driver-details]]
 == ONTAP NAS驱动程序详细信息
 
 Trident提供了以下NAS存储驱动程序来与ONTAP集群进行通信。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
@@ -71,6 +72,7 @@ Rwo、ROX、rwx、RWOP
 ====
 
 
+[[user-permissions]]
 == 用户权限
 
 Trident应以ONTAP或SVM管理员身份运行、通常使用集群用户 `vsadmin`或SVM用户、或者使用 `admin`具有相同角色的其他名称的用户。

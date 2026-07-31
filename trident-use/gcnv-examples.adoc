@@ -16,6 +16,7 @@ summary: 了解适用于Google Cloud NetApp卷的NFS和NFS后端配置选项并�
 
 
 
+[[backend-configuration-options]]
 == 后端配置选项
 
 每个后端都会在一个 Google Cloud 区域中配置卷。要在其他区域创建卷，您可以定义其他后端。
@@ -74,6 +75,7 @@ summary: 了解适用于Google Cloud NetApp卷的NFS和NFS后端配置选项并�
 |===
 
 
+[[volume-provisioning-options]]
 == 卷配置选项
 
 您可以在中控制默认卷配置 `defaults` 部分。
@@ -96,6 +98,7 @@ summary: 了解适用于Google Cloud NetApp卷的NFS和NFS后端配置选项并�
 |===
 
 
+[[example-configurations]]
 == 示例配置
 
 以下示例显示了将大多数参数保留为默认值的基本配置。这是定义后端的最简单方法。
@@ -354,6 +357,7 @@ supportedTopologies:
 ====
 
 
+[[whats-next]]
 == 下一步是什么？
 
 创建后端配置文件后，运行以下命令：
@@ -381,6 +385,7 @@ tridentctl logs
 
 
 
+[[storage-class-definitions]]
 == 存储类定义
 
 下面是有关上述后端的基本 `StorageClass` 定义。
@@ -434,6 +439,7 @@ parameters:
 
 
 
+[[example-definitions-for-smb-volumes]]
 === SMB卷的示例定义
 
 使用 `nasType`、 `node-stage-secret-name`和 `node-stage-secret-namespace`，您可以指定SMB卷并提供所需的Active Directory凭据。任何具有任何/无权限的Active Directory用户/密码均可用作节点阶段密钥。
@@ -494,6 +500,7 @@ NOTE: `nasType: smb` 支持SMB卷的池的筛选器。 `nasType: nfs` 或 `nasTy
 
 
 
+[[pvc-definition-example]]
 === PVC定义示例
 
 [source, yaml]

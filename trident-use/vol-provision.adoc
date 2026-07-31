@@ -16,6 +16,7 @@ summary: '创建一个使用已配置的Kubernetes StorageClass来请求对PV的
 
 
 
+[[overview]]
 == 概述
 
 A https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersigentVolumeClaim_"^] (PVC)是指请求访问集群上的永久卷。
@@ -26,6 +27,7 @@ A https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersigentVolu
 
 
 
+[[create-the-pvc]]
 == 创建PVC
 
 .步骤
@@ -74,6 +76,7 @@ kubectl delete pod pv-pod
 
 
 
+[[sample-manifests]]
 === 示例清单
 
 .PersentVolumeClaim示例清单

@@ -16,6 +16,7 @@ summary: 虚拟池在Trident的存储后端和KubeNet的StorageCluster之间提�
 
 
 
+[[learn-about-virtual-pools]]
 == 了解虚拟池
 
 存储管理员可以在JSON或YAML定义文件中的任何Trident后端定义虚拟池。

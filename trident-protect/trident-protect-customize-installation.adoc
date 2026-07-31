@@ -16,6 +16,7 @@ summary: 自定义Trident Protect 的默认设置，以满足您的特定需求�
 
 
 
+[[specify-trident-protect-container-resource-limits]]
 == 指定Trident Protect 容器资源限制
 
 安装Trident Protect 后，您可以使用配置文件来指定Trident Protect 容器的资源限制。设置资源限制可以控制Trident Protect 操作消耗集群资源的程度。
@@ -87,6 +88,7 @@ helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-p
 
 
 
+[[customize-security-context-constraints]]
 == 自定义安全上下文约束
 
 安装Trident Protect 后，您可以使用配置文件来修改Trident Protect 容器的 OpenShift 安全上下文约束 (SCC)。这些约束定义了 Red Hat OpenShift 集群中 pod 的安全限制。
@@ -134,6 +136,7 @@ helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-p
 
 
 
+[[configure-additional-trident-protect-helm-chart-settings]]
 == 配置其他Trident Protect 舵图设置
 
 您可以自定义 AutoSupport 设置、命名空间筛选和 OpenShift webhook 证书管理，以满足您的特定要求。下表描述了可用的配置参数：
@@ -209,6 +212,7 @@ helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-p
 ====
 
 
+[[restrict-trident-protect-pods-to-specific-nodes]]
 == 将Trident Protect Pod 限制在特定节点上
 
 您可以使用 Kubernetes nodeSelector 节点选择约束，根据节点标签来控制哪些节点有资格运行Trident Protect pod。默认情况下， Trident Protect 仅限于运行 Linux 的节点。您可以根据需要进一步自定义这些限制条件。

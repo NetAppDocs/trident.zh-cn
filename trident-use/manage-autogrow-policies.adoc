@@ -13,10 +13,12 @@ summary: 使用 Trident Autogrow Policies 管理自动卷扩展。
 
 
 
+[[view-autogrow-policies]]
 == 查看 Autogrow 策略
 
 
 
+[[list-all-policies]]
 === 列出所有策略
 
 使用  `kubectl` 列出集群中的所有 Autogrow Policies：
@@ -33,6 +35,7 @@ tridentctl get autogrowpolicy
 ----
 
 
+[[view-policy-details]]
 === 查看策略详细信息
 
 要查看策略的完整规范和状态：
@@ -49,6 +52,7 @@ tridentctl get autogrowpolicy production-db-policy -o yaml
 ----
 
 
+[[update-an-autogrow-policy]]
 == 更新 Autogrow 策略
 
 您可以修改现有策略以更改其阈值、增长量或最大大小。更改将立即对使用该策略的所有卷生效。
@@ -77,6 +81,7 @@ spec:
 
 
 
+[[update-considerations]]
 === 更新注意事项
 
 * *即时效果：* 所有使用该策略的卷将在下一次增长评估时采用新参数。
@@ -87,6 +92,7 @@ spec:
 
 
 
+[[delete-an-autogrow-policy]]
 == 删除 Autogrow 策略
 
 Autogrow Policies 使用终结器保护，以防止在卷主动使用时意外删除。
@@ -129,6 +135,7 @@ kubectl annotate pvc <pvc-name> \
 
 
 
+[[deletion-behavior]]
 === 删除行为
 
 [cols="1,2"]
@@ -146,10 +153,12 @@ kubectl annotate pvc <pvc-name> \
 |===
 
 
+[[monitor-autogrow-policy-usage]]
 == 监控 Autogrow 策略使用情况
 
 
 
+[[check-volumes-using-a-policy]]
 === 使用策略检查卷
 
 [source, console]
@@ -158,6 +167,7 @@ tridentctl get autogrowpolicy production-db-policy -o json | jq '.volumes'
 ----
 
 
+[[find-which-policy-a-volume-uses]]
 === 查找卷使用的策略
 
 [source, console]
@@ -166,6 +176,7 @@ kubectl get pvc database-pvc -o jsonpath='{.metadata.annotations.trident\.netapp
 ----
 
 
+[[monitor-policy-events]]
 === 监控策略事件
 
 [source, console]
@@ -174,6 +185,7 @@ kubectl get events --field-selector involvedObject.kind=TridentAutogrowPolicy
 ----
 
 
+[[supported-protocols]]
 == 支持的协议
 
 Autogrow 支持以下存储协议：
@@ -189,12 +201,14 @@ NOTE: 对于 SAN 卷，如果配置的 `growthAmount`为 50 MiB 或更少，Trid
 
 
 
+[[supported-backends]]
 == 支持的后端
 
 Autogrow 支持 ONTAP 后端。Autogrow 还支持 NAS 和 SAN 卷的 Google Cloud NetApp Volumes (GCNV)。
 
 
 
+[[known-limitations]]
 == 已知限制
 
 * *ONTAP NVMe 原始块卷：* 使用早于 9.16.1 的 ONTAP 版本创建的卷不支持自动增长。
@@ -203,10 +217,12 @@ Autogrow 支持 ONTAP 后端。Autogrow 还支持 NAS 和 SAN 卷的 Google Clou
 
 
 
+[[frequently-asked-questions]]
 == 常见问题解答
 
 
 
+[[when-does-trident-evaluate-the-threshold]]
 === Trident 何时评估阈值？
 
 Trident 持续监控卷使用情况。当使用的容量超过 `usedThreshold`时，Trident 会创建一个内部调整大小请求，并按配置的 `growthAmount`扩展卷。
@@ -226,6 +242,7 @@ spec:
 ----
 
 
+[[can-i-apply-a-policy-after-volumes-are-already-provisioned]]
 === 是否可以在已配置卷后应用策略？
 
 可以。您可以随时创建 Autogrow Policy，并通过添加或更新 `trident.netapp.io/autogrowPolicy`注释将其应用于现有 PVC。您无需重新创建 PVC 或 StorageClass。
@@ -248,6 +265,7 @@ kubectl annotate storageclass ontap-gold \
 ----
 
 
+[[what-happens-if-i-set-an-autogrow-policy-on-both-the-storageclass-and-the-pvc]]
 === 如果我同时在 StorageClass 和 PVC 上设置自动增长策略，会发生什么？
 
 PVC 注释始终优先。如果 PVC 具有 `trident.netapp.io/autogrowPolicy`注释，则无论StorageClass指定什么，Trident 都会使用该值。有关详细信息，请参见 link:automatic-volume-expansion.html#policy-precedence["策略优先级"]。
@@ -287,6 +305,7 @@ Trident 使用 `logs-policy`用于 `database-pvc`，而不是 `standard-agp`。
 
 
 
+[[how-do-i-disable-autogrow-for-a-specific-volume]]
 === 如何禁用特定卷的自动增长？
 
 将 PVC 注释设置为 `"none"`。此设置将覆盖该卷的任何 StorageClass 级别策略：
@@ -310,6 +329,7 @@ none
 ----
 
 
+[[what-happens-when-a-volume-reaches-maxsize]]
 === 当卷达到 maxSize 时会发生什么？
 
 Trident 停止扩展该卷。即使使用量继续增加超过  `usedThreshold`，它也不会为该卷创建进一步的调整大小请求。
@@ -341,6 +361,7 @@ spec:
 ----
 
 
+[[can-i-change-a-policy-without-restarting-volumes]]
 === 我可以在不重新启动卷的情况下更改策略吗？
 
 可以。更新策略时，使用该策略的所有卷将在下一次增长评估时采用新参数。不需要重新启动卷。
@@ -374,6 +395,7 @@ production-db-policy   75%              20%             Success
 ----
 
 
+[[why-is-my-policy-in-a-failed-state]]
 === 为什么我的策略处于失败状态？
 
  `Failed` 状态表示策略规范包含验证错误。运行以下命令来查看错误详细信息：
@@ -390,6 +412,7 @@ kubectl apply -f autogrow-policy.yaml
 ----
 
 
+[[why-cant-i-delete-a-policy]]
 === 为什么我无法删除策略？
 
 策略使用终结器保护。如果卷仍在使用该策略，则删除将进入 `Deleting`状态并等待您从策略中删除所有卷。
@@ -417,6 +440,7 @@ kubectl annotate pvc <pvc-name> \
 
 
 
+[[which-backends-does-autogrow-support]]
 === Autogrow 支持哪些后端？
 
 Autogrow 支持 ONTAP 后端。它还支持 NAS 和 SAN 卷的 Google Cloud NetApp Volumes (GCNV)。
@@ -463,6 +487,7 @@ allowVolumeExpansion: true
 ----
 
 
+[[what-is-the-minimum-growth-amount-for-san-volumes]]
 === SAN 卷的最低增长量是多少？
 
 对于 SAN 卷，有效最低增长量为 51 MB。如果将 `growthAmount`配置为 50 MiB 或更少，Trident 会自动将调整大小操作的增长增加到 51 MB。

@@ -19,6 +19,7 @@ NOTE: PSS将取代Pod安全策略(PSP)。PSP已在Kubernetes v1.21中弃用、�
 
 
 
+[[required-kubernetes-security-context-and-related-fields]]
 == 所需的Kubernetes安全上下文和相关字段
 
 [cols=","]
@@ -51,6 +52,7 @@ NOTE: PSS将取代Pod安全策略(PSP)。PSP已在Kubernetes v1.21中弃用、�
 |===
 
 
+[[pod-security-standards-pss]]
 == POD安全标准(PSS)
 
 [cols=",,"]
@@ -65,6 +67,7 @@ WARNING: 更改命名空间标签可能会导致Pod未计划、出现"创建时�
 
 
 
+[[pod-security-policies-psp]]
 == POD安全策略(PSP)
 
 [cols=",,"]
@@ -145,6 +148,7 @@ WARNING: 更改命名空间标签可能会导致Pod未计划、出现"创建时�
 |===
 
 
+[[security-context-constraints-scc]]
 == 安全上下文限制(SCC)
 
 [cols=",,"]
