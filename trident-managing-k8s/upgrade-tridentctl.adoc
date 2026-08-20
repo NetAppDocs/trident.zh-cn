@@ -18,7 +18,7 @@ summary: '您可以使用轻松升级现有的Trident安装 `tridentctl`。'
 卸载和重新安装Trident相当于升级。卸载Trident时、不会删除Trident部署所使用的永久性卷请求(PVC)和永久性卷(PV)。已配置的PV在Trident脱机时仍可用、Trident将在恢复联机后为在此期间创建的任何PVC配置卷。
 
 .开始之前
-请查看 link:upgrade-trident.html#select-an-upgrade-method["选择升级方法"] 升级之前 `tridentctl`。
+在使用 `tridentctl`进行升级之前，请先link:upgrade-trident.html#step-3-select-an-upgrade-method["选择升级方法"]审核。
 
 .步骤
 . 在中运行卸载命令 `tridentctl`以删除与Trident关联的所有资源、CRD和相关对象除外。

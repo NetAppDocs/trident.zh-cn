@@ -12,7 +12,7 @@ summary: 了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。�
 
 
 [role="lead"]
-了解如何在 Trident 安装中创建和使用 ONTAP SAN 驱动程序。本节提供了将后端映射到 StorageClasses 的后端配置示例和详细信息。link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2系统"^] 不同于其他 ONTAP 系统（ASA、AFF 和 FAS）的存储层实现。这些变化会影响某些标注参数的使用。link:https://docs.netapp.com/us-en/asa-r2/learn-more/hardware-comparison.html["详细了解 ASA r2 系统与其他 ONTAP 系统之间的差异"^]。在 Trident 后端配置中，无需指定您的系统是 ASA r2。当您选择 `ontap-san`作为 `storageDriverName`时，Trident 会自动检测 ASA r2 或其他 ONTAP 系统。某些后端配置参数不适用于 ASA r2 系统，如下表所示。
+创建 ONTAP SAN 驱动程序并在 Trident 安装中使用。本节提供后端配置示例以及将后端映射到 StorageClasses 的详细信息。link:https://docs.netapp.com/us-en/asa-r2/get-started/learn-about.html["ASA r2系统"^] 在其存储层的实现上与其他 ONTAP 系统（ASA、AFF 和 FAS）有所不同。这些差异会影响某些参数的使用，具体如注释所示。link:https://docs.netapp.com/us-en/asa-r2/learn-more/hardware-comparison.html["详细了解 ASA r2 系统与其他 ONTAP 系统之间的差异"^]。在 Trident 后端配置中，无需指定您的系统为 ASA r2。当您选择 `ontap-san`作为 `storageDriverName`时，Trident 会自动检测 ASA r2 或其他 ONTAP 系统。某些后端配置参数不适用于 ASA r2 系统，如下表所示。
 
 
 NOTE: 只有 `ontap-san`ASA r2 系统支持驱动程序（支持 iSCSI、NVMe/TCP 和 FC 协议）。
@@ -21,6 +21,8 @@ NOTE: 只有 `ontap-san`ASA r2 系统支持驱动程序（支持 iSCSI、NVMe/TC
 
 [[backend-configuration-options]]
 == 后端配置选项
+
+从 26.06 版本开始，您可以启用 ONTAP 均衡放置，以便 ONTAP 为新卷选择聚合。有关要求和示例，请参阅 link:ontap-balanced-placement.html["使用 ONTAP 后端的均衡放置"]。
 
 有关后端配置选项，请参见下表：
 
@@ -96,19 +98,28 @@ NOTE: 如果您使用的是"vsadmin"凭据、 `managementLIF`则必须是SVM的�
 | `sVM` | 要使用的 Storage Virtual Machine | 如果指定了 SVM `managementLIF` ，则派生 
 
 
-| `s存储前缀` | 在 SVM 中配置新卷时使用的前缀。无法稍后修改。要更新此参数、您需要创建一个新的后端。 | `trident` 
+| `s存储前缀` | 在 SVM 中预置新卷时使用的前缀。以后无法修改。要更新此参数，需要创建新的后端。 | `trident` 
 
 
 | `聚合`  a| 
-要配置的聚合（可选；如果设置了聚合，则必须将其分配给 SVM ）。对于 `ontap-nas-flexgroup`驱动程序、此选项将被忽略。如果未分配、则 可以使用任何可用聚合来配置FlexGroup卷。
+用于配置的聚合（可选；如果设置，则必须分配给 SVM）。对于 `ontap-nas-flexgroup`驱动程序，此选项将被忽略。如果未分配，则可以使用任何可用的聚合来配置 FlexGroup 卷。
 
 
-NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法是轮询SVM、而无需重新启动Trident控制器。在Trident中配置了特定聚合以配置卷后、如果将该聚合重命名或移出SVM、则在轮询SVM聚合时、后端将在Trident中变为故障状态。您必须将聚合更改为SVM上的聚合、或者将其全部删除、以使后端恢复联机。
+NOTE: 当聚合在 SVM 中更新时，它会通过轮询 SVM 自动在 Trident 中更新，而无需重新启动 Trident Controller。当您在 Trident 中配置了特定聚合以配置卷时，如果该聚合被重命名或移出 SVM，则在轮询 SVM 聚合时，后端将在 Trident 中移至失败状态。您必须将聚合更改为 SVM 上存在的聚合，或者将其完全删除，以使后端重新联机。
 
 *不要指定 ASA r2 系统*。
+
+*当 `useBalancedPlacement`设置为 `true`时，请勿指定。*
  a| 
 ""
 
+
+
+| `useBalancedPlacement`  a| 
+将新卷的聚合选择委托给 ONTAP [Boolean]。需要 ONTAP 9.19.1 或更高版本，并将 `useREST`设置为 `true`。不能与 `aggregate`结合使用。
+
+有关要求和示例，请参见 link:ontap-balanced-placement.html["使用 ONTAP 后端的均衡放置"]。
+| `false` 
 
 
 | `limitAggregateUsage` | 如果使用量超过此百分比，则配置失败。如果您使用的是Amazon FSx for NetApp ONTAP后端，请勿指定 `limitAggregateUsage`。提供的和 `vsadmin`不包含使用Trident检索聚合使用情况并对其进行限制所需的 `fsxadmin`权限。*不要指定 ASA r2 系统*。 | "" （默认情况下不强制实施） 
@@ -145,7 +156,7 @@ NOTE: NVMe 仅支持ONTAP REST API，不支持 ONTAPI (ZAPI)。
 
 
 | `formatOptions`  a| 
- `formatOptions`用于指定命令的命令行参数、每当对卷进行格式化时、都会应用这些参数 `mkfs`。这样、您可以根据偏好格式化卷。请确保指定与mkfs命令选项类似的格式选项，但不包括设备路径。示例："-E nobdiscard"
+使用 `formatOptions`为 `mkfs`命令指定命令行参数，该命令在卷格式化时应用。这允许您根据自己的偏好格式化卷。请务必指定与 mkfs 命令选项类似的 formatOptions，不包括设备路径。示例："-E nodiscard"
 
 *支持 `ontap-san`和 `ontap-san-economy`带有 iSCSI 协议的驱动程序。**此外，在使用 iSCSI 和 NVMe/TCP 协议时，支持 ASA r2 系统。*
  a| 
@@ -224,7 +235,7 @@ Trident建议采用以下选项来加快格式化过程：
 | `splitOnClone` | 创建克隆时，从其父级拆分该克隆 | false 
 
 
-| `加密` | 在新卷上启用NetApp卷加密(NVE)；默认为 `false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | “false” *如果指定，则设置为 `true`适用于 ASA r2 系统*。 
+| `加密` | 在新卷上启用 NetApp 卷加密 (NVE)；默认为 `false`。必须在集群上获得许可并启用 NVE 才能使用此选项。如果在后端启用了 NAE，则在 Trident 中配置的任何卷都将启用 NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | “false” *如果指定，则设置为 `true`适用于 ASA r2 系统*。 
 
 
 | `luksEncryption` | 启用LUKS加密。请参阅 link:../trident-reco/security-luks.html["使用Linux统一密钥设置(LUKS)"]。 | "" *设置为 `false`适用于 ASA r2 系统*。 
@@ -267,7 +278,7 @@ defaults:
 
 ----
 
-NOTE: 对于使用驱动程序创建的所有卷 `ontap-san`、Trident会向FlexVol额外添加10%的容量、以容纳LUN元数据。LUN 将使用用户在 PVC 中请求的确切大小进行配置。Trident会将10%的空间添加到FlexVol中(在ONTAP中显示为可用大小)。用户现在将获得所请求的可用容量。此更改还可防止 LUN 变为只读状态，除非已充分利用可用空间。这不适用于 ontap-san-economy.
+NOTE: 对于使用 `ontap-san`驱动程序创建的所有卷，Trident 会向 FlexVol 额外增加 10% 的容量以容纳 LUN 元数据。LUN 将按照用户在 PVC 中请求的确切大小进行配置。Trident 向 FlexVol 增加 10%（在 ONTAP 中显示为可用大小）。用户现在可以获得其所请求的可用容量。此更改还可防止 LUN 变为只读，除非可用空间已被完全利用。这不适用于 ontap-san-economy。
 
 对于定义的后端 `snapshotReserve`，Trident将按如下所示计算卷的大小：
 
@@ -401,6 +412,24 @@ chapTargetUsername: iJF4heBRT0TCwxyz
 chapUsername: uh2aNCLSd6cNwxyz
 username: vsadmin
 password: <password>
+----
+====
+.均衡放置示例
+[%collapsible]
+====
+此示例启用 ONTAP 平衡放置，以便 ONTAP 为新卷选择聚合。均衡放置需要 ONTAP 9.19.1 或更高版本。有关详细信息，请参阅 link:ontap-balanced-placement.html["使用 ONTAP 后端的均衡放置"]。
+
+[source, yaml]
+----
+---
+version: 1
+storageDriverName: ontap-san
+backendName: san-balanced-placement
+managementLIF: 10.0.0.1
+svm: svm_iscsi
+username: vsadmin
+password: <password>
+useBalancedPlacement: true
 ----
 ====
 .NVMe/TCP示例
@@ -632,9 +661,9 @@ storage:
 [[map-backends-to-storageclasses]]
 == 将后端映射到 StorageClasses
 
-以下StorageClass定义涉及 <<虚拟池后端示例>>。使用 `parameters.selector` 字段中、每个StorageClass都会指出可用于托管卷的虚拟池。卷将在选定虚拟池中定义各个方面。
+以下 StorageClass 定义请参阅<<虚拟池后端示例>>。使用 `parameters.selector`字段，每个 StorageClass 指定哪些虚拟池可用于托管卷。卷现在具有所选虚拟池中定义的属性。
 
-* 。 `protection-gold` StorageClass将映射到中的第一个虚拟池 `ontap-san` 后端。这是唯一提供金牌保护的池。
+* The `protection-gold` StorageClass 映射到 `ontap-san`后端的第一个虚拟池。这是唯一提供黄金级保护的池。
 +
 [source, yaml]
 ----
@@ -647,7 +676,7 @@ parameters:
   selector: "protection=gold"
   fsType: "ext4"
 ----
-* 。 `protection-not-gold` StorageClass将映射到中的第二个和第三个虚拟池 `ontap-san` 后端。只有这些池提供的保护级别不是gold。
+* The `protection-not-gold` StorageClass 映射到 `ontap-san`后端的第二个和第三个虚拟池。这些是唯一提供金级以外保护级别的池。
 +
 [source, yaml]
 ----
@@ -660,7 +689,7 @@ parameters:
   selector: "protection!=gold"
   fsType: "ext4"
 ----
-* 。 `app-mysqldb` StorageClass将映射到中的第三个虚拟池 `ontap-san-economy` 后端。这是为mysqldb类型的应用程序提供存储池配置的唯一池。
+* 该 `app-mysqldb` StorageClass 映射到 `ontap-san-economy`后端的第三个虚拟池。这是唯一为 mysqldb 类型应用程序提供存储池配置的池。
 +
 [source, yaml]
 ----
@@ -673,7 +702,7 @@ parameters:
   selector: "app=mysqldb"
   fsType: "ext4"
 ----
-* 。 `protection-silver-creditpoints-20k` StorageClass将映射到中的第二个虚拟池 `ontap-san` 后端。这是唯一提供银牌保护和20000个信用点的池。
+* The `protection-silver-creditpoints-20k` StorageClass 映射到 `ontap-san`后端的第二个虚拟池。这是唯一提供银级保护和 20000 积分的池。
 +
 [source, yaml]
 ----
@@ -686,7 +715,7 @@ parameters:
   selector: "protection=silver; creditpoints=20000"
   fsType: "ext4"
 ----
-* 。 `creditpoints-5k` StorageClass将映射到中的第三个虚拟池 `ontap-san` 中的后端和第四个虚拟池 `ontap-san-economy` 后端。这是唯一一款信用点数为5000的池产品。
+* The `creditpoints-5k` StorageClass 映射到 `ontap-san`后端的第三个虚拟池和 `ontap-san-economy`后端的第四个虚拟池。这些是唯一拥有 5000 个信用点的池产品。
 +
 [source, yaml]
 ----
@@ -699,7 +728,7 @@ parameters:
   selector: "creditpoints=5000"
   fsType: "ext4"
 ----
-* 。 `my-test-app-sc` StorageClass将映射到 `testAPP` 中的虚拟池 `ontap-san` 驱动程序 `sanType: nvme`。这是唯一的池产品 `testApp`。
+* The `my-test-app-sc` StorageClass 映射到 `ontap-san` 驱动程序中具有 `sanType: nvme` 的 `testAPP` 虚拟池。这是唯一提供 `testApp` 的池。
 +
 [source, yaml]
 ----
@@ -715,4 +744,4 @@ parameters:
 ----
 
 
-Trident将决定选择哪个虚拟池、并确保满足存储要求。
+Trident 决定选择哪个虚拟池，并确保满足存储要求。

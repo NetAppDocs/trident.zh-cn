@@ -319,7 +319,7 @@ backend-tbc-ontap-nas        tbc-ontap-nas        933e0071-66ce-4324-b9ff-f96d91
 ----
 
 
-有关其他配置选项的详细信息，请参见以下 <<Backend-advanced-configuration-and-examples>> 部分。
+有关其他配置选项的详细信息，请参见以下 <<first-link,后端高级配置和示例>> 部分。
 
 
 
@@ -459,8 +459,8 @@ basic-csi    csi.trident.netapp.io   15h
 
 
 
-[[backend-advanced-configuration-and-examples]]
-== 后端高级配置和示例
+[[first-linkbackend-advanced-configuration-and-examples]]
+== [[first-link]]后端高级配置和示例
 
 有关后端配置选项，请参见下表：
 

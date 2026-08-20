@@ -517,7 +517,7 @@ tridentctl-protect create vault StorageGridS3 <vault-name> \
 | `providerConfig.s3.secure` | 启用与 S3 端点的安全 HTTPS 通信。 | true | “真”，“假” 
 
 
-| `providerConfig.s3.proxyURL` | 指定用于连接到 S3 的代理服务器的 URL。 | 无 | http://proxy.example.com:8080[] 
+| `providerConfig.s3.proxyURL` | 指定用于连接到 S3 的代理服务器的 URL。 | 无 | \http://proxy.example.com:8080 
 
 
 | `providerConfig.s3.rootCA` | 提供用于 SSL/TLS 验证的自定义根 CA 证书。 | 无 | "CN=MyCustomCA" 

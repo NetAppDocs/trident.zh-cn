@@ -1,18 +1,16 @@
----
-sidebar: sidebar 
-permalink: trident-use/ontap-nas-examples.html 
-keywords: map backends, storage classes, trident backend, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, options, storageclasses, fsx, metrocluster 
-summary: 了解如何在Trident安装中创建和使用ONTAP NAS驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。 
----
 = ONTAP NAS配置选项和示例
-:hardbreaks:
 :allow-uri-read: 
-:icons: font
-:imagesdir: ../media/
 
+
+'''
+sidebar: sidebar permalink: trident-use/ontap-nas-examples.html keywords: map backends, storage classes, trident backend, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, options, storageclasses, fsx, metrocluster summary: 了解如何在 Trident 安装中创建和使用 ONTAP NAS 驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。---
+
+
+
+= ONTAP NAS配置选项和示例
 
 [role="lead"]
-了解如何在 Trident 安装中创建和使用 ONTAP NAS 驱动程序。本节提供了将后端映射到 StorageClasses 的后端配置示例和详细信息。从 25.10 版本开始，NetApp Trident 支持 link:https://docs.netapp.com/us-en/ontap-afx/index.html["NetApp AFX 存储系统"^]。NetApp AFX 存储系统与其他基于 ONTAP 的系统（ASA、AFF 和 FAS）在存储层的实现方面有所不同。
+创建并使用 ONTAP NAS 驱动程序以配合您的 Trident 安装。本节提供后端配置示例以及将后端映射到 StorageClasses 的详细信息。从 25.10 版本开始，NetApp Trident 支持link:https://docs.netapp.com/us-en/ontap-afx/index.html["NetApp AFX 存储系统"^]。NetApp AFX 存储系统在存储层的实现方面与其他基于 ONTAP 的系统（ASA、AFF 和 FAS）有所不同。
 
 
 NOTE: 只有 `ontap-nas`NetApp AFX 系统支持 NFS 协议驱动程序；不支持 SMB 协议。
@@ -23,6 +21,8 @@ NOTE: 只有 `ontap-nas`NetApp AFX 系统支持 NFS 协议驱动程序；不支�
 == 后端配置选项
 
 在 Trident 后端配置中，无需指定您的系统是 NetApp AFX 存储系统。当您选择 `ontap-nas`作为 `storageDriverName`时，Trident 会自动检测 AFX 存储系统。某些后端配置参数不适用于 AFX 存储系统。
+
+从 26.06 版本开始，您可以启用 ONTAP 平衡放置，以便 ONTAP 为新卷选择聚合。在 ONTAP 9.19.1 或更高版本上的 AFX 存储系统需要平衡放置。有关要求和示例，请参阅 link:ontap-balanced-placement.html["使用 ONTAP 后端的均衡放置"]。
 
 下表显示了后端配置选项：
 
@@ -84,20 +84,31 @@ NOTE: 仅适用于NetApp AFX 系统 `ontap-nas`已支持。
 在 SVM 中配置新卷时使用的前缀。设置后无法更新
 
 
-NOTE: 如果使用的ONTAP是包含24个或更多字符的storagePrefix、则qtrees不会嵌入存储前缀、但会显示在卷名称中。
+NOTE: 当使用 ontap-nas-economy 和包含 24 个或更多字符的 storagePrefix 时，qtree 没有嵌入存储前缀，尽管它位于卷名称中。
 | "三级联" 
 
 
 | `聚合`  a| 
-要配置的聚合（可选；如果设置了聚合，则必须将其分配给 SVM ）。对于 `ontap-nas-flexgroup`驱动程序、此选项将被忽略。如果未分配、则 可以使用任何可用聚合来配置FlexGroup卷。
+用于配置的聚合（可选；如果设置，则必须分配给 SVM）。对于 `ontap-nas-flexgroup`驱动程序，此选项将被忽略。如果未分配，则可以使用任何可用的聚合来配置 FlexGroup 卷。
 
 
-NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法是轮询SVM、而无需重新启动Trident控制器。在Trident中配置了特定聚合以配置卷后、如果将该聚合重命名或移出SVM、则在轮询SVM聚合时、后端将在Trident中变为故障状态。您必须将聚合更改为SVM上的聚合、或者将其全部删除、以使后端恢复联机。
+NOTE: 当聚合在 SVM 中更新时，它会通过轮询 SVM 自动在 Trident 中更新，而无需重启 Trident Controller。当您在 Trident 中配置了特定聚合以配置卷时，如果该聚合被重命名或移出 SVM，则在轮询 SVM 聚合时，后端将在 Trident 中移至失败状态。您必须将聚合更改为 SVM 上存在的聚合，或将其完全删除，以使后端恢复联机。
 
 *请勿指定用于 AFX 存储系统。*
+
+*当 `useBalancedPlacement`设置为 `true`时，请勿指定。*
  a| 
 ""
 
+
+
+| `useBalancedPlacement`  a| 
+将新卷的聚合选择委托给 ONTAP [Boolean]。需要 ONTAP 9.19.1 或更高版本，并将 `useREST`设置为 `true`。不能与 `aggregate`结合使用。
+
+有关要求和示例，请参见 link:ontap-balanced-placement.html["使用 ONTAP 后端的均衡放置"]。
+
+*如果指定，对于 ONTAP 9.19.1 或更高版本上的 AFX 存储系统，始终设置为 `true`。*
+| `false`； `true` 适用于 ONTAP 9.19.1 或更高版本上的 AFF 存储系统 
 
 
 | `limitAggregateUsage` | 如果使用率超过此百分比，则配置失败。*不适用于Amazon FSx for ONTAP*。*请勿指定用于 AFX 存储系统。* | "" （默认情况下不强制实施） 
@@ -107,7 +118,7 @@ NOTE: 在SVM中更新聚合后、该聚合将在Trident中自动更新、方法�
 要配置的聚合列表(可选；如果已设置、则必须将其分配给SVM)。分配给SVM的所有聚合均用于配置FlexGroup卷。支持* ONTAP－NAS－FlexGroup－Storage驱动程序。
 
 
-NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、方法是轮询SVM、而无需重新启动Trident控制器。在Trident中配置特定聚合列表以配置卷后、如果聚合列表重命名或移出SVM、则在轮询SVM聚合时、后端将在Trident中变为故障状态。您必须将聚合列表更改为SVM上的聚合列表、或者将其全部删除、以使后端恢复联机。
+NOTE: 在 SVM 中更新聚合列表时，Trident 会通过轮询 SVM 自动更新列表，而无需重新启动 Trident Controller。当您在 Trident 中配置了特定聚合列表以配置卷时，如果聚合列表被重命名或移出 SVM，则在轮询 SVM 聚合时，后端将在 Trident 中移至失败状态。您必须将聚合列表更改为 SVM 上存在的列表，或者将其完全删除，以使后端恢复联机。
 | "" 
 
 
@@ -122,7 +133,7 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 | `nasType` | 配置 NFS 或 SMB 卷的创建。选项有 `nfs`， `smb`或空值。设置为 null 则默认使用 NFS 卷。*如果指定，则始终设置为 `nfs`适用于 AFX 存储系统*。 | `nfs` 
 
 
-| `nfsMountOptions` | NFS挂载选项的逗号分隔列表。通常会在存储类中为Kubnetes-永久性 卷指定挂载选项、但如果在存储类中未指定挂载选项、则Trident将回退到使用存储后端配置文件中指定的挂载选项。如果在存储类或配置文件中未指定挂载选项、则Trident不会在关联的永久性卷上设置任何挂载选项。 | "" 
+| `nfsMountOptions` | NFS 挂载选项的逗号分隔列表。Kubernetes 持久卷的挂载选项通常在存储类中指定，但如果存储类中未指定挂载选项，Trident 将回退到使用存储后端配置文件中指定的挂载选项。如果存储类或配置文件中未指定挂载选项，Trident 不会在关联的持久卷上设置任何挂载选项。 | "" 
 
 
 | `qtreesPerFlexvol` | 每个 FlexVol 的最大 qtree 数，必须在 50 ， 300 范围内 | "200" 
@@ -175,7 +186,7 @@ NOTE: 在SVM中更新聚合列表后、此列表将在Trident中自动更新、�
 | `splitOnClone` | 创建克隆时，从其父级拆分该克隆 | false 
 
 
-| `加密` | 在新卷上启用NetApp卷加密(NVE)；默认为 `false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | false 
+| `加密` | 在新卷上启用 NetApp 卷加密 (NVE)；默认为 `false`。必须在集群上获得许可并启用 NVE 才能使用此选项。如果在后端启用了 NAE，则在 Trident 中配置的任何卷都将启用 NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | false 
 
 
 | `分层策略` | 使用"无"的层策略 |  
@@ -244,7 +255,7 @@ Total volume size = <PVC requested size> / (1 - (<snapshotReserve percentage> / 
 
 image::../media/volume-show-nas.png[显示了 volume show 命令的输出。]
 
-升级Trident时，先前安装的现有后端将按上述方式配置卷。对于升级前创建的卷，您应该调整其大小才能观察到更改。例如，一个 2 GiB 的 PVC 包含 `snapshotReserve=50`之前的结果是卷提供了 1 GiB 的可写空间。例如，将卷大小调整为 3 GiB，将在 6 GiB 的卷上为应用程序提供 3 GiB 的可写空间。
+升级 Trident 时，先前安装的现有后端将按上述方式配置卷。对于升级前创建的卷，应调整其卷的大小，以便观察更改。例如，使用 `snapshotReserve=50`早期版本的 2 GiB PVC 所创建的卷仅提供 1 GiB 的可写空间。例如，将卷的大小调整为 3 GiB，可在 6 GiB 卷上为应用程序提供 3 GiB 的可写空间。
 
 
 
@@ -364,6 +375,25 @@ autoExportCIDRs:
 username: admin
 password: password
 nfsMountOptions: nfsvers=4
+----
+====
+.均衡放置示例
+[%collapsible]
+====
+此示例启用 ONTAP 平衡放置，以便 ONTAP 为新卷选择聚合。均衡放置需要 ONTAP 9.19.1 或更高版本。有关详细信息，请参阅 link:ontap-balanced-placement.html["使用 ONTAP 后端的均衡放置"]。
+
+[source, yaml]
+----
+---
+version: 1
+storageDriverName: ontap-nas
+backendName: nas-balanced-placement
+managementLIF: 10.0.0.1
+dataLIF: 10.0.0.2
+svm: svm_nfs
+username: vsadmin
+password: password
+useBalancedPlacement: true
 ----
 ====
 .IPv6地址示例
@@ -620,9 +650,9 @@ storage:
 [[map-backends-to-storageclasses]]
 == 将后端映射到 StorageClasses
 
-以下StorageClass定义请参见 <<虚拟池后端示例>>。使用 `parameters.selector` 字段中、每个StorageClass都会指出可用于托管卷的虚拟池。卷将在选定虚拟池中定义各个方面。
+以下 StorageClass 定义请参阅 <<虚拟池后端示例>>。使用  `parameters.selector` 字段，每个 StorageClass 指定可用于托管卷的虚拟池。卷具有所选虚拟池中定义的属性。
 
-* 。 `protection-gold` StorageClass将映射到中的第一个和第二个虚拟池 `ontap-nas-flexgroup` 后端。这些池是唯一提供金牌保护的池。
+* The `protection-gold` StorageClass 映射到 `ontap-nas-flexgroup`后端的第一个和第二个虚拟池。这些是唯一提供黄金级保护的池。
 +
 [source, yaml]
 ----
@@ -635,7 +665,7 @@ parameters:
   selector: "protection=gold"
   fsType: "ext4"
 ----
-* 。 `protection-not-gold` StorageClass将映射到中的第三个和第四个虚拟池 `ontap-nas-flexgroup` 后端。这些池是唯一提供黄金级以外保护级别的池。
+* The `protection-not-gold` StorageClass 映射到 `ontap-nas-flexgroup`后端的第三和第四个虚拟池。这些是唯一提供黄金级别以外保护级别的池。
 +
 [source, yaml]
 ----
@@ -648,7 +678,7 @@ parameters:
   selector: "protection!=gold"
   fsType: "ext4"
 ----
-* 。 `app-mysqldb` StorageClass将映射到中的第四个虚拟池 `ontap-nas` 后端。这是为mysqldb类型的应用程序提供存储池配置的唯一池。
+* 该 `app-mysqldb` StorageClass 映射到 `ontap-nas`后端的第四个虚拟池。这是唯一为 mysqldb 类型应用程序提供存储池配置的池。
 +
 [source, yaml]
 ----
@@ -661,7 +691,7 @@ parameters:
   selector: "app=mysqldb"
   fsType: "ext4"
 ----
-*  `protection-silver-creditpoints-20k` StorageClass 将映射到 `ontap-nas-flexgroup`后端中的第三个虚拟池。这是唯一提供银级保护和 20000 creditpoints 的池。
+* The `protection-silver-creditpoints-20k` StorageClass 映射到 `ontap-nas-flexgroup`后端的第三个虚拟池。这是唯一提供银级保护和 20000 积分的池。
 +
 [source, yaml]
 ----
@@ -674,7 +704,7 @@ parameters:
   selector: "protection=silver; creditpoints=20000"
   fsType: "ext4"
 ----
-* 。 `creditpoints-5k` StorageClass将映射到中的第三个虚拟池 `ontap-nas` 中的后端和第二个虚拟池 `ontap-nas-economy` 后端。这是唯一一款信用点数为5000的池产品。
+* The `creditpoints-5k` StorageClass 映射到 `ontap-nas`后端的第三个虚拟池和 `ontap-nas-economy`后端的第二个虚拟池。这些是唯一拥有 5000 个信用点的池产品。
 +
 [source, yaml]
 ----
@@ -689,7 +719,7 @@ parameters:
 ----
 
 
-Trident将决定选择哪个虚拟池、并确保满足存储要求。
+Trident 决定选择哪个虚拟池，并确保满足存储要求。
 
 
 

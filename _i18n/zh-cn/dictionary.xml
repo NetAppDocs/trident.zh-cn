@@ -1880,7 +1880,6 @@
   <block id="1928bae58ae496b53ef1a163c3dbeeb4" category="cell">新卷的模式。对于SMB卷、*必须留空。*</block>
   <block id="3418e818bbbe397a49b7096a5ed87929" category="cell">由SVM派生</block>
   <block id="2da9f60cc5b99a5987580c38e6db0842" category="cell">受信任 CA 证书的 Base64 编码值。可选。用于基于证书的身份验证。</block>
-  <block id="a0de2cc0c77c388210e1f48423eea29c" category="cell">在 SVM 中配置新卷时使用的前缀。无法稍后修改。要更新此参数、您需要创建一个新的后端。</block>
   <block id="c59183b2f668b355e81e7bb1256f92b3" category="paragraph">您可以在中使用这些选项控制默认配置<block ref="a4a918a45181164207929d52aec36aec" prefix=" " category="inline-code"></block> 配置部分。有关示例，请参见以下配置示例。</block>
   <block id="e62f5d0a5a95571e25197caafe78cd98" category="section-title">卷配置示例</block>
   <block id="1b9ef354b22d8a8b125247fd538da4b2" category="section-title">虚拟池后端示例</block>
@@ -2190,7 +2189,6 @@
   <block id="6d2d3a9fb621ba23b0f8ec56dc8b0a24" category="section-title">第2步：确定原始安装方法</block>
   <block id="dccfb2ce978b2c73d6a7308a124d0043" category="section-title">第3步：选择升级方法</block>
   <block id="d6b7a42c6c41b071d2c80b3e4c2a7edf" category="inline-link-macro">选择升级方法</block>
-  <block id="ab639a35db468f671d4a76735e801015" category="paragraph">请查看 <block ref="5cffa5fbe758cc3901f0e33c78b29d1b" category="inline-link-macro-rx"></block> 升级之前<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>。</block>
   <block id="1d2d1200e759d67b259f843be2270f71" category="admonition">请勿中断升级过程。确保安装程序运行完毕。</block>
   <block id="053bfc722ec4b4805e32c307458f8ea5" category="paragraph">确保您使用的是正在运行的Kubbernetes集群 <block ref="d502dc64864e79085bee32826e6fe213" category="inline-link-macro-rx"></block>。</block>
   <block id="71530aef1814290453dc7add3bdae349" category="list-text">将集群范围的运算符部署在同一命名空间中。</block>
@@ -2203,11 +2201,6 @@
   <block id="574e53d92fdeaac37ba2d879a9b88f12" category="example-title">ONTAP NAS示例</block>
   <block id="bdb252122df8a6e68a54782628d1944f" category="example-title">ONTAP NAS FlexGroup示例</block>
   <block id="9561077d9ef091b88a253b8593eb8bfb" category="example-title">ONTAP NAS经济性示例</block>
-  <block id="eb2e955f1a984e2be0e3fa8cdbe6667c" category="paragraph">以下StorageClass定义请参见 <block ref="d690aebda44a37b8ae9c2c6f1918cb30" category="inline-xref-macro-rx"></block>。使用<block ref="bed471c4a88e25ac9a7e4a7b980700a8" prefix=" " category="inline-code"></block> 字段中、每个StorageClass都会指出可用于托管卷的虚拟池。卷将在选定虚拟池中定义各个方面。</block>
-  <block id="01eacb47d802acac83a7e60311768055" category="list-text">。<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> StorageClass将映射到中的第一个和第二个虚拟池<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 后端。这些池是唯一提供金牌保护的池。</block>
-  <block id="6b35cdd98b7f7e55e698a6d0628e18e0" category="list-text">。<block ref="afbfe298fa275e5fff1aca9b2f213d9a" prefix=" " category="inline-code"></block> StorageClass将映射到中的第三个和第四个虚拟池<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 后端。这些池是唯一提供黄金级以外保护级别的池。</block>
-  <block id="535efa214445261dfda5d5edc613e56b" category="list-text">。<block ref="65846755494383158592c748f74421ec" prefix=" " category="inline-code"></block> StorageClass将映射到中的第四个虚拟池<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 后端。这是为mysqldb类型的应用程序提供存储池配置的唯一池。</block>
-  <block id="0191eea3640b05213a7522d6581a2fd5" category="list-text">。<block ref="a96bee9dd30f3ea0af93b4c64ca1e4a4" prefix=" " category="inline-code"></block> StorageClass将映射到中的第三个虚拟池<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 中的后端和第二个虚拟池<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 后端。这是唯一一款信用点数为5000的池产品。</block>
   <block id="cd5dd52b9f0bba70b1336e13afe05818" category="paragraph">这是使用的基本配置<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 驱动程序。</block>
   <block id="31089bb4131b18ca65c3d384cdd49644" category="example-title">双向CHAP示例</block>
   <block id="17baa03e9287aee400bc2e606d247156" category="paragraph">这些示例使用创建后端<block ref="099cb468880f266cba40b49391fa46bc" prefix=" " category="inline-code"></block> 设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。</block>
@@ -2216,12 +2209,6 @@
   <block id="6b743d9085f7f94d7a334c4386fbe239" category="paragraph">在这些示例后端定义文件中、为所有存储池设置了特定默认值、例如<block ref="cae77b049bf504af7afc43b99b6c5213" prefix=" " category="inline-code"></block> 无、<block ref="45922ba6ba8428764f22ed06f814c762" prefix=" " category="inline-code"></block> 为false、和<block ref="5bdf74912a51c34815f11e9a3d20b609" prefix=" " category="inline-code"></block> 为false。虚拟池在存储部分中进行定义。</block>
   <block id="4930386ddaad825d64732ee9ec5e65b8" category="example-title">ONTAP SAN示例</block>
   <block id="8a10ba8eb41944c10648f18ba7e16239" category="example-title">ONTAP SAN经济性示例</block>
-  <block id="50543d5d423c4c1a0b4fdd41383189e5" category="paragraph">以下StorageClass定义涉及 <block ref="d690aebda44a37b8ae9c2c6f1918cb30" category="inline-xref-macro-rx"></block>。使用<block ref="bed471c4a88e25ac9a7e4a7b980700a8" prefix=" " category="inline-code"></block> 字段中、每个StorageClass都会指出可用于托管卷的虚拟池。卷将在选定虚拟池中定义各个方面。</block>
-  <block id="514e71168790374132badc1258ee5136" category="list-text">。<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> StorageClass将映射到中的第一个虚拟池<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 后端。这是唯一提供金牌保护的池。</block>
-  <block id="a9c41ef671a6da4ed0f439f86683b714" category="list-text">。<block ref="afbfe298fa275e5fff1aca9b2f213d9a" prefix=" " category="inline-code"></block> StorageClass将映射到中的第二个和第三个虚拟池<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 后端。只有这些池提供的保护级别不是gold。</block>
-  <block id="910ed65246d7ee240ec166f94b1fd5c9" category="list-text">。<block ref="65846755494383158592c748f74421ec" prefix=" " category="inline-code"></block> StorageClass将映射到中的第三个虚拟池<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 后端。这是为mysqldb类型的应用程序提供存储池配置的唯一池。</block>
-  <block id="fa03c7de8b1b7b7061bb536c211f3aaf" category="list-text">。<block ref="2e63b2ff91d4aeb88b54db5c90b71443" prefix=" " category="inline-code"></block> StorageClass将映射到中的第二个虚拟池<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 后端。这是唯一提供银牌保护和20000个信用点的池。</block>
-  <block id="ac996ac8e4442d8a2791ba8b1e301a02" category="list-text">。<block ref="a96bee9dd30f3ea0af93b4c64ca1e4a4" prefix=" " category="inline-code"></block> StorageClass将映射到中的第三个虚拟池<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 中的后端和第四个虚拟池<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 后端。这是唯一一款信用点数为5000的池产品。</block>
   <block id="b003731e1d339366ed065ffe5a0f50ca" category="paragraph">在下面所示的示例后端定义文件中、为所有存储池设置了特定的默认值、这些存储池设置了<block ref="599dcce2998a6b40b1e38e8c6006cb0a" prefix=" " category="inline-code"></block> 在Silver。虚拟池在中进行定义<block ref="ddecebdea58b5f264d27f1f7909bab74" prefix=" " category="inline-code"></block> 部分。在此示例中、某些存储池会设置自己的类型、而某些存储池会覆盖上面设置的默认值。</block>
   <block id="622bbef04f6f2121d92777cd7c59cc83" category="list-text">默认情况下、通过使用三端安装程序、可以在中部署操作员<block ref="47cb44be55a0dffa15dfc900a4c687be" prefix=" " category="inline-code"></block> 命名空间。如果<block ref="47cb44be55a0dffa15dfc900a4c687be" prefix=" " category="inline-code"></block> 命名空间不存在、请使用以下命令创建命名空间：</block>
   <block id="5bb66df6f3cd1e022e0cb84d5ef9e8e6" category="list-text">在非命名空间中部署操作员<block ref="47cb44be55a0dffa15dfc900a4c687be" prefix=" " category="inline-code"></block> 命名空间、更新<block ref="8610cac3beb01fb0b43bc94c587a807d" prefix=" " category="inline-code"></block>，<block ref="a3df76a4fb69b2a5e9ec42d242e90ea3" prefix=" " category="inline-code"></block> 和<block ref="9fa80de5781893b057ff1d535201893b" prefix=" " category="inline-code"></block> 并使用生成捆绑包文件<block ref="67b2cc1cd5b1570014463995fb2ada61" prefix=" " category="inline-code"></block>。</block>
@@ -2597,7 +2584,6 @@ SMB</block>
   <block id="b9fa7c201e2dc76fe12c8bb436c212ee" category="listing-title">基本NVMe/TCP配置</block>
   <block id="a242dbcec09373d25c5fb582f9f2cfc6" category="example-title">NVMe/TCP示例</block>
   <block id="3a3347de03ef37c1eb5eb525619ff905" category="paragraph">您必须在ONTAP后端为SVM配置NVMe。这是NVMe/TCP的基本后端配置。</block>
-  <block id="1b931baab9ca74be94af72763666c941" category="list-text">。<block ref="33aacad9b122abfdfadc06e3e7fa5f59" prefix=" " category="inline-code"></block> StorageClass将映射到<block ref="11e89beb13d19bf6e3ab7ed65673b27d" prefix=" " category="inline-code"></block> 中的虚拟池<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 驱动程序<block ref="6fa083b88d05083e680071073d06c3af" prefix=" " category="inline-code"></block>。这是唯一的池产品<block ref="5ca85ebb1d881fde490deaa5817c4ca5" prefix=" " category="inline-code"></block>。</block>
   <block id="497769c5c03818fffe81b6190ec47c82" category="section-title">命令和全局标志</block>
   <block id="66fa8a46aff90f5c8507c33a1cdc3e3f" category="paragraph">您可以运行<block ref="d7948c15bebd1e81a58fa7c99888c9c6" prefix=" " category="inline-code"></block> 以获取可用命令的列表<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 或附加<block ref="0c113ca6d57519b559ba5a426be3c6b6" prefix=" " category="inline-code"></block> 用于任何命令的标志、以获取该特定命令的选项和标志列表。</block>
   <block id="c6a354ad100a80a11b5358549fa08956" category="list-text"><block ref="657f8b8da628ef83cf69101b6817150a" prefix="" category="inline-code"></block></block>
@@ -3593,22 +3579,17 @@ SMB</block>
   <block id="cc368c6d3d859a01a63550429f01cb9c" category="list-text">您可以使用标志指定日志保留时间范围<block ref="86339c2ed773d5bd944b82d3086d3477" prefix=" " category="inline-code"></block>。例如：<block ref="e238339d491d4840f7d8e509bdbb7b63" prefix=" " category="inline-code"></block>。此信息通过随Trident一起安装的容器收集和发送<block ref="9d80ca17f097c8e365550f4036ccf0e3" prefix=" " category="inline-code"></block>。您可以从获取容器映像<block ref="1b00454f0ab35dcec2ee1a0061efc6e5" category="inline-link-rx"></block>。</block>
   <block id="b508f8888445cd57bcf910ed51afb0dd" category="paragraph">Trident发送的有效负载示例如下所示：</block>
   <block id="19398926f4bb3de321ccfc2488d606dd" category="section-title">禁用Trident指标</block>
-  <block id="053cd9e68cf6c155e5b93616bc7e3e32" category="summary">了解如何在Trident安装中创建和使用ONTAP NAS驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。</block>
   <block id="c31c728d8c1e31b350486f8db0ebd5df" category="cell">集群或SVM管理LIF的IP地址可以指定完全限定域名(FQDN)。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如<block ref="33e9328e92e3ef05629093b4693b3925" prefix=" " category="inline-code"></block>。有关无缝MetroCluster切换的信息，请参见<block ref="41195e18a4a81a05f5c5a6be365a5602" category="inline-xref-macro-rx"></block>。</block>
   <block id="5b487539b64483311ed87290e717353a" category="cell">启用自动创建和更新导出策略[布尔值]。使用<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>和<block ref="b9c40fbe9daa81e40e06509d5bbd5a6c" prefix=" " category="inline-code"></block>选项、Trident可以自动管理导出策略。</block>
   <block id="aeeba745624a2ddc45043c3be805561e" category="cell">用于筛选KubeNet节点IP的CIDR列表(启用时)。<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>使用<block ref="323e871cfe2e70ead9c713e8f3164f8f" prefix=" " category="inline-code"></block>和<block ref="b9c40fbe9daa81e40e06509d5bbd5a6c" prefix=" " category="inline-code"></block>选项、Trident可以自动管理导出策略。</block>
-  <block id="0b74b16550d48484341fc52ad7af0c7d" category="paragraph">要配置的聚合（可选；如果设置了聚合，则必须将其分配给 SVM ）。对于<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>驱动程序、此选项将被忽略。如果未分配、则 可以使用任何可用聚合来配置FlexGroup卷。</block>
-  <block id="f01b478814d1117e017539a48474a29d" category="admonition">在SVM中更新聚合后、该聚合将在Trident中自动更新、方法是轮询SVM、而无需重新启动Trident控制器。在Trident中配置了特定聚合以配置卷后、如果将该聚合重命名或移出SVM、则在轮询SVM聚合时、后端将在Trident中变为故障状态。您必须将聚合更改为SVM上的聚合、或者将其全部删除、以使后端恢复联机。</block>
   <block id="9b791871c2696d3b7bc8c95a1d487b58" category="cell">FlexgroupGroupGroupRegateList</block>
   <block id="77a0d40a429011d223a093dd3cf8713e" category="paragraph">要配置的聚合列表(可选；如果已设置、则必须将其分配给SVM)。分配给SVM的所有聚合均用于配置FlexGroup卷。支持* ONTAP－NAS－FlexGroup－Storage驱动程序。</block>
-  <block id="dbe23b2e968cff9eb3692844d1e75516" category="admonition">在SVM中更新聚合列表后、此列表将在Trident中自动更新、方法是轮询SVM、而无需重新启动Trident控制器。在Trident中配置特定聚合列表以配置卷后、如果聚合列表重命名或移出SVM、则在轮询SVM聚合时、后端将在Trident中变为故障状态。您必须将聚合列表更改为SVM上的聚合列表、或者将其全部删除、以使后端恢复联机。</block>
   <block id="5160493063ea2e4f1b1a6e3b951b0a53" category="cell">NFS挂载选项的逗号分隔列表。通常会在存储类中为Kubnetes-永久性 卷指定挂载选项、但如果在存储类中未指定挂载选项、则Trident将回退到使用存储后端配置文件中指定的挂载选项。如果在存储类或配置文件中未指定挂载选项、则Trident不会在关联的永久性卷上设置任何挂载选项。</block>
   <block id="8f0dd7b65e6130f3f55d984ebc34bbdb" category="cell">您可以指定以下选项之一：使用Microsoft管理控制台或ONTAP命令行界面创建的SMB共享的名称；允许Trident创建SMB共享的名称；或者、您可以将参数留空以防止对卷进行通用共享访问。对于内部ONTAP、此参数是可选的。此参数对于Amazon FSx for ONTAP后端为必填项、不能为空。</block>
   <block id="760f7a1b05bc9d3d50c534dc491c07d4" category="cell">在新卷上启用NetApp卷加密(NVE)；默认为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：<block ref="5113a2fb1642ecd23870711ba25c4ad7" category="inline-link-macro-rx"></block>。</block>
   <block id="9cae9ee80bd5bcfdc5aefb0ffdbdf25b" category="admonition">将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。</block>
   <block id="04475efebba67943de12a2269d2e0a7b" category="paragraph">此示例介绍如何指示Trident使用动态导出策略自动创建和管理导出策略。这对于和<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>驱动程序是相同的<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>。</block>
   <block id="917b750655d8fd1d6c961e661535fa99" category="paragraph">Trident会在"Comments"字段中设置配置标签。注释在FlexVol for或FlexGroup<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> for上设置<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>。配置时、Trident会将虚拟池上的所有标签复制到存储卷。为了方便起见、存储管理员可以按标签为每个虚拟池和组卷定义标签。</block>
-  <block id="fb66862ac33cf61ecc10382c3a42dee3" category="paragraph">Trident将决定选择哪个虚拟池、并确保满足存储要求。</block>
   <block id="3791349e449ca2bc9a8b7b7ed4c843de" category="list-text">Trident仅支持挂载到Windows节点上运行的Pod的SMB卷。有关详细信息、请参见 <block ref="688177e6b45c5d27a545463079c58d82" category="inline-xref-macro-rx"></block> 。</block>
   <block id="bef1bdf06ff1fb19147e51880974a6c5" category="paragraph">Trident提供了两种对ONTAP后端进行身份验证的模式。</block>
   <block id="c3ac6347a688cffd729947263e3387fb" category="list-text">基于证书：此模式需要在后端安装证书、Trident才能与ONTAP集群进行通信。此处，后端定义必须包含客户端证书，密钥和可信 CA 证书的 Base64 编码值（如果使用）（建议）。</block>
@@ -3641,12 +3622,10 @@ SMB</block>
   <block id="6e82d09aa274380adf21d56aaa3b0413" category="admonition">如果使用<block ref="d57551b1efacf8a7be84b4d10c5a6e99" prefix=" " category="inline-code"></block>参数、则需要集群管理员权限。将Amazon FSx for NetApp ONTAP与Trident结合使用时、<block ref="d57551b1efacf8a7be84b4d10c5a6e99" prefix=" " category="inline-code"></block>参数不适用于<block ref="6173aa5206484b5224450952747c7148" prefix=" " category="inline-code"></block>和<block ref="679500f227997b45be97e3ca8115c678" prefix=" " category="inline-code"></block>用户帐户。如果指定此参数，配置操作将失败。</block>
   <block id="8dbaef294ecadfe828f5bab1ae097d46" category="summary">了解如何在Trident安装中创建和使用ONTAP SAN驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。</block>
   <block id="c59bb4e25695c195dbaa360d34c9795e" category="cell"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix="" category="inline-code"></block></block>
-  <block id="091b358e8a9ea5e6b1137fbd4c18372f" category="paragraph"><block ref="ef225248e79c14501d51a4941b5ae5d1" prefix=" " category="inline-code"></block>用于指定命令的命令行参数、每当对卷进行格式化时、都会应用这些参数<block ref="899da842f7d2c1db0e3f8c88ad72507f" prefix=" " category="inline-code"></block>。这样、您可以根据偏好格式化卷。请确保指定与mkfs命令选项类似的格式选项，但不包括设备路径。示例："-E nobdiscard"</block>
   <block id="18eb1633594b2436e83e73071958b960" category="section-title">有关使用formatOptions的建议</block>
   <block id="f1e8c049fa2ad08b8d1a332e2d26163e" category="cell">要为创建的卷分配的 QoS 策略组。选择每个存储池 / 后端的 qosPolicy 或 adaptiveQosPolicy 之一。将QoS策略组与Trident结合使用需要使用ONTAP 9™8或更高版本。您应使用非共享QoS策略组、并确保此策略组分别应用于每个成分卷。共享QoS策略组会对所有工作负载的总吞吐量实施上限。</block>
   <block id="c598aba0725ffc7663bf0f4db1a3238f" category="cell"><block ref="80fd16da9d17abac4374b362f2e409fe" prefix="" category="inline-code"></block></block>
   <block id="a5b88f2b14a5b0fa1aa2bbed9eb87602" category="cell">限制<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>后端创建新的FlexVol卷以包含其LUN。仅会使用已有的FlexVol配置新的PV.</block>
-  <block id="e78c177a9e5dfcf995756c1f03c48529" category="admonition">对于使用驱动程序创建的所有卷<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>、Trident会向FlexVol额外添加10%的容量、以容纳LUN元数据。LUN 将使用用户在 PVC 中请求的确切大小进行配置。Trident会将10%的空间添加到FlexVol中(在ONTAP中显示为可用大小)。用户现在将获得所请求的可用容量。此更改还可防止 LUN 变为只读状态，除非已充分利用可用空间。这不适用于 ontap-san-economy.</block>
   <block id="2d4fda186ee0e99d76ee82d9cd36b908" category="paragraph">对于定义的后端<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block>，Trident将按如下所示计算卷的大小：</block>
   <block id="83e850c97b7044397eba3d214682be5b" category="list-text">基于证书：Trident还可以使用后端安装的证书与ONTAP集群进行通信。此处，后端定义必须包含客户端证书，密钥和可信 CA 证书的 Base64 编码值（如果使用）（建议）。</block>
   <block id="14bc1b6d66d79a6242106075078d6a75" category="paragraph">Trident可以使用和<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>驱动程序的双向CHAP对iSCSI会话进行身份验证<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>。这需要在后端定义中启用此<block ref="099cb468880f266cba40b49391fa46bc" prefix=" " category="inline-code"></block>选项。设置为时<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，Trident会将SVM的默认启动程序安全性配置为双向CHAP，并设置后端文件中的用户名和密钥。NetApp 建议使用双向 CHAP 对连接进行身份验证。请参见以下配置示例：</block>
@@ -4160,7 +4139,6 @@ SMB</block>
   <block id="36b37761159ed00a729b4f6fab9a0f02" category="paragraph-title">安装FC工具</block>
   <block id="f0ad3dc6a6ba17b1e77a2a4af657f22a" category="paragraph">使用适用于您的操作系统的命令安装FC工具。</block>
   <block id="553ac32ac6bcab84d5384eda7468d415" category="paragraph">Kubernetes集群中的所有工作节点都必须能够挂载为Pod配置的卷。要准备工作节点、必须根据您选择的驱动程序安装NFS、iSCSI、NVMe/TCP或FC工具。</block>
-  <block id="64467ac9530ff26c4e6495117175346d" category="admonition">如果使用的ONTAP是包含24个或更多字符的storagePrefix、则qtrees不会嵌入存储前缀、但会显示在卷名称中。</block>
   <block id="0d28255dc96cb23d422741096c09ce8e" category="paragraph"><block ref="256d12880dee7515c7ed6253fd0a228a" prefix="" category="inline-code"></block><block ref="bd5ed83ae12ddcfe924a6af54a0be554" prefix=" " category="inline-code"></block></block>
   <block id="15286900a0d0667ffc4d515aeec6a1d2" category="list-text">将插件二进制文件复制到路径变量中定义的位置。例如、<block ref="7512824c50c61ea8d89d0f193a4f72d1" prefix=" " category="inline-code"></block>或<block ref="ad2e864ce1a99daa836c3449f3ba705d" prefix=" " category="inline-code"></block>(您可能需要提升Privileges)：</block>
   <block id="cff063350a0daf1b0ee4c6c97eb2e2de" category="admonition">将备份还原到具有现有资源的其他命名空间不会更改与备份中的资源共享名称的任何资源。要还原备份中的所有资源、请删除并重新创建目标命名空间、或者将备份还原到新命名空间。</block>
@@ -5089,7 +5067,6 @@ SMB</block>
   <block id="3eef9a5398f4b353f217625ca5768cc0" category="cell"><block ref="60f649f49ce41c3f0123ddceb5c9f688" prefix="" category="inline-code"></block></block>
   <block id="b70d8bcceb91e3665bafe307a5b97682" category="example-title">具有手动 QoS 容量池的后端示例</block>
   <block id="a9d0225032890b6fff6306b9c33e2cc9" category="paragraph">对于快照预留 = 50% 且 PVC 请求 = 5 GiB 的情况，总卷大小为 5/.5 = 10 GiB，可用大小为 5 GiB，这正是用户在 PVC 请求中请求的大小。 <block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block>命令应显示与此示例类似的结果：</block>
-  <block id="b2badedae3a2fdd602b26112668ed612" category="paragraph">升级Trident时，先前安装的现有后端将按上述方式配置卷。对于升级前创建的卷，您应该调整其大小才能观察到更改。例如，一个 2 GiB 的 PVC 包含<block ref="01d8e11bde220373533705ed26796e25" prefix=" " category="inline-code"></block>之前的结果是卷提供了 1 GiB 的可写空间。例如，将卷大小调整为 3 GiB，将在 6 GiB 的卷上为应用程序提供 3 GiB 的可写空间。</block>
   <block id="d3b60a0dd59d810307a1e694f1de96a1" category="paragraph">1.1 是Trident为容纳 LUN 元数据而额外添加到FlexVol 的10%。对于<block ref="bb0d75280f9b683f2f1f0767fd0aff9b" prefix=" " category="inline-code"></block> = 5%，PVC 请求 = 5 GiB，则总卷大小为 5.79 GiB，可用大小为 5.5 GiB。 <block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block>命令应显示与此示例类似的结果：</block>
   <block id="d16fccbbd08210b8ff7b8b31329268bb" category="paragraph">Trident应该为该 PVC 创建一个 20 MiB 的 NFS PV：</block>
   <block id="59dd268b21bd1a23faa29555b52ba22b" category="paragraph">要将新创建的 20 MiB PV 调整为 1 GiB，请编辑 PVC 并设置<block ref="02b011e6fe36e26e5f7365ba08bf5a48" prefix=" " category="inline-code"></block>至 1 GiB：</block>
@@ -5764,7 +5741,6 @@ SMB</block>
   <block id="f81bcc66558000f7cfefd3cc20fd0a8e" category="cell"><block ref="3c9622a5d959b41abae2263f05892a60" prefix="" category="inline-code"></block></block>
   <block id="3de2fd08f537cf1bfbd8e7100fcd0978" category="cell">指定用于连接到 S3 的代理服务器的 URL。</block>
   <block id="6adf97f83acf6453d4a6a4b1070f3754" category="cell">无</block>
-  <block id="95dbd7d67755b93da5edf3f51015e334" category="cell"><block ref="95dbd7d67755b93da5edf3f51015e334" category="inline-link-rx"></block></block>
   <block id="c49bdad42b17110b2c040203c6bdb822" category="cell"><block ref="a9a9528efe7ca0e033e0fe2d3992f2ef" prefix="" category="inline-code"></block></block>
   <block id="2ec04adaedab334fde26b3e2e0589b33" category="cell">提供用于 SSL/TLS 验证的自定义根 CA 证书。</block>
   <block id="16046164c4b13ac28108d2ecbdabf10b" category="cell">"CN=MyCustomCA"</block>
@@ -6467,7 +6443,6 @@ SMB</block>
   <block id="11c1dbb3fa55c48a97462a616085ddfc" category="cell"><block ref="b326b5062b2f0e69046810717534cb09" prefix="" category="inline-code"></block>,<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block> (默认行为可能会有所不同。显式设置) NFSv3 的 "false"</block>
   <block id="826434aa2de870d45f65375eed4dd985" category="section-title">NFS 或 SMB 卷的先决条件</block>
   <block id="796744214a34447ec504843fb0c28924" category="paragraph">如果是首次使用 Google Cloud NetApp Volumes 或在新位置使用，则需要一些初始配置才能设置 Google Cloud NetApp Volumes 并创建 NFS 或 SMB 卷。请参阅<block ref="d2edeebd0b5ddcd8a293f6eb7960f37c" category="inline-link-macro-rx"></block>。</block>
-  <block id="f58d26da0e092aac8227607603acb293" category="list-text"><block ref="2e63b2ff91d4aeb88b54db5c90b71443" prefix=" " category="inline-code"></block> StorageClass 将映射到<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>后端中的第三个虚拟池。这是唯一提供银级保护和 20000 creditpoints 的池。</block>
   <block id="183d6aa6c2aa2a35b1017b0f500bf757" category="paragraph">有效值：<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。默认行为可能因 ONTAP 和 Trident 版本而异。明确设置以确保行为一致。</block>
   <block id="796f801ad41f96aeb2e1a1950ed629e4" category="list-text">*本地 ONTAP* - Trident 支持通过 NFSv3 和 NFSv4 连接从 Red Hat OpenShift 和上游 Kubernetes 集群到本地 ONTAP 卷的 Kerberos 加密。</block>
   <block id="9fe985de654739fa6f48edb0d49059b4" category="inline-link">NetApp NFSv4 增强功能和最佳实践指南</block>
@@ -6501,11 +6476,9 @@ SMB</block>
   <block id="d5c64803deffce85697dfc74edff222a" category="paragraph">要查看完整的故障排除文章列表，请参阅<block ref="57f5c759ada931c6a2051314ca6ee99e" category="inline-link-rx"></block>。</block>
   <block id="5244ac716dbb2dd029da822917011675" category="paragraph">自动分层通过 Trident 后端参数和 PersistentVolumeClaim 注释在卷配置期间进行配置。您可以使用 Trident 为 Google Cloud NetApp Volumes 配置自动分层。</block>
   <block id="5da21c390857453a730d154195b8d8c5" category="paragraph">您可以将 Trident 配置为使用 iSCSI 协议从 Google Cloud NetApp Volumes 配置块存储卷。SAN 卷使用<block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>存储驱动程序从 Flex Unified 存储池进行配置。</block>
-  <block id="7bd17d3f5d8aeed56a3d78c1a04e52d7" category="paragraph">了解如何在 Trident 安装中创建和使用 ONTAP NAS 驱动程序。本节提供了将后端映射到 StorageClasses 的后端配置示例和详细信息。从 25.10 版本开始，NetApp Trident 支持 <block ref="f33b68c7b6392c7aac0a8125f2e686d8" category="inline-link-macro-rx"></block>。NetApp AFX 存储系统与其他基于 ONTAP 的系统（ASA、AFF 和 FAS）在存储层的实现方面有所不同。</block>
   <block id="c32e295517ca2afdf0849a0ccf956198" category="paragraph">在 Trident 后端配置中，无需指定您的系统是 NetApp AFX 存储系统。当您选择<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>时，Trident 会自动检测 AFX 存储系统。某些后端配置参数不适用于 AFX 存储系统。</block>
   <block id="5d57df97e93c7218bf50f1ec5cda9223" category="paragraph">下表显示了后端配置选项：</block>
   <block id="aad38c18824e908ae7e8a835a9edae11" category="paragraph">了解使用 ONTAP NAS 驱动程序配置 ONTAP 后端的要求、身份验证选项和导出策略。从 25.10 版本开始，NetApp Trident 支持 <block ref="49c50fa35a079b2c52542809f887838b" category="inline-link-macro-rx"></block>。NetApp AFX 存储系统与其他 ONTAP 系统（ASA、AFF 和 FAS）在存储层的实现方面有所不同。在 Trident 后端配置中，无需指定您的系统是 AFX。当您选择<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>时，Trident 会自动检测 AFX 系统。</block>
-  <block id="240ec0d57a300e95ec2e7b3019dce531" category="paragraph">了解如何在 Trident 安装中创建和使用 ONTAP SAN 驱动程序。本节提供了将后端映射到 StorageClasses 的后端配置示例和详细信息。<block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block> 不同于其他 ONTAP 系统（ASA、AFF 和 FAS）的存储层实现。这些变化会影响某些标注参数的使用。<block ref="54401c26bff345016bccb2761388f645" category="inline-link-macro-rx"></block>。在 Trident 后端配置中，无需指定您的系统是 ASA r2。当您选择<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>时，Trident 会自动检测 ASA r2 或其他 ONTAP 系统。某些后端配置参数不适用于 ASA r2 系统，如下表所示。</block>
   <block id="eb2ee77e3bce8ac83a7ffb687fe6ba3f" category="paragraph">Trident 支持 AWS FSx for NetApp ONTAP (FSxN) 的自动后端配置。当您创建包含所需 FSxN 参数的 StorageClass 时，Trident 会自动创建相应的后端和 VolumeSnapshotClass。</block>
   <block id="a24b1fc957d4a3542de5e601eac1d28f" category="doc">部署应用程序</block>
   <block id="1c21e9c64b7661ab6b46e1a5d6c8bc6d" category="section-title">部署示例应用程序</block>
@@ -6639,7 +6612,6 @@ SMB</block>
   <block id="ec5fde32b22ac2335b49b73f395ffa3e" category="cell">配置的每个 PV 都是一个 qtree，每个 Amazon FSx for NetApp ONTAP 卷具有可配置数量的 qtree。</block>
   <block id="c2a07acac71825901cef17dc1565ca40" category="cell">每个已配置的 PV 都是一个完整的 Amazon FSx for NetApp ONTAP FlexGroup 卷。</block>
   <block id="a815866827f14ff7dc89e579b05df139" category="paragraph">创建配置文件后，运行以下命令以创建和验证 Trident 后端配置 (TBC)：</block>
-  <block id="d5918f11259043026811eb13735fc8a8" category="paragraph">有关其他配置选项的详细信息，请参见以下 <block ref="f3823c63584019f8993046bd2573c9b0" category="inline-xref-macro-rx"></block> 部分。</block>
   <block id="53a21bcdb24e291e71cf0f2572c48299" category="section-title">配置存储类*无*自动后端配置</block>
   <block id="7d6abad6d9b0cb2c17d374eb60cfd549" category="paragraph">以下是与 Trident 和 FSx for ONTAP 配合使用的存储类配置示例。</block>
   <block id="79aed0c0cab8f60748d97cff824e71d8" category="section-title">NFS 存储类</block>
@@ -6691,11 +6663,9 @@ SMB</block>
   <block id="fbe2624c58581145645ce5b1bc51440f" category="list-text">继续设置并配置存储后端。有关信息，请参见<block ref="d88c516ea298c412aa042df86d7e6a6d" category="inline-link-macro-rx"></block>。</block>
   <block id="205a1e1ed5ad95dadd41eeb066d60ac1" category="paragraph">有关后端参数的完整列表，请参阅：<block ref="d01a283ecefcf0ec5ea4ea8e78d3518d" category="inline-link-macro-rx"></block>。</block>
   <block id="9502f88fbe245a8b7aaf0d7523fd74d1" category="cell">启用 LUKS 加密。请参见 <block ref="569f9f91cdcc19909b8acbf6f423daf7" category="inline-link-macro-rx"></block>。仅限 SAN。</block>
-  <block id="b160f94b047d691b98b2556cbb8a6765" category="paragraph">本节中的步骤介绍了如何单独创建后端。有关如何使用 Automatic Backend 功能的信息，请参见 <block ref="f9ef4344c4051a32be4e04cdc96a90e5" category="inline-link-macro-rx"></block> 部分以了解更多信息。</block>
   <block id="cf6089f95441ea065a68f957cffe35db" category="inline-link">初始配置后更新 dataLIF</block>
   <block id="7b8e5028b1a9deea477c9f992a8f4a9f" category="cell">协议 LIF 的 IP 地址。*ONTAP NAS 驱动程序*：NetApp 建议指定 dataLIF。如果未提供，Trident 将从 SVM 获取 dataLIF。可以指定要用于 NFS 挂载操作的完全限定域名 (FQDN)，允许您创建轮询 DNS 以跨多个 dataLIF 进行负载平衡。可以在初始设置后更改。请参阅<block ref="f93bef3d4bf20e9880f352d636878731" category="inline-link-rx"></block>。*ONTAP SAN 驱动程序*：不要为 iSCSI 指定。Trident 使用 ONTAP Selective LUN Map 来发现建立多路径会话所需的 iSCSI LIF。如果明确定义了 dataLIF，则会生成警告。如果使用 IPv6 标志安装了 Trident，则可以设置为使用 IPv6 地址。IPv6 地址必须以方括号定义，例如 [28e8:d9fb:a825:b7bf:69a8:d02f:9e7b:3555]。</block>
   <block id="9303b8f40cf82f5e37702c7a6387e725" category="inline-link-macro">ONTAP SAN 和 NAS 驱动程序集成</block>
-  <block id="74c8fe0ae57f8bdd9a6a73e05ee65a8b" category="paragraph">您可以使用 <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 驱动程序配置 SMB 卷。在完成<block ref="c0e593ebcf5aa364afa03985c32673ae" category="inline-link-macro-rx"></block>之前，请完成以下步骤：<block ref="5a96559e33c87b7cd646f9da5c804ffe" category="inline-link-macro-rx"></block>。</block>
   <block id="ed3f08facccf88c0c8fb895fcb13ba18" category="paragraph">您可以通过 StorageClass 传递可选的后端参数。在 StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> 部分中将所有可选值定义为字符串。有关后端参数的完整列表，请参阅：<block ref="d01a283ecefcf0ec5ea4ea8e78d3518d" category="inline-link-macro-rx"></block>。</block>
   <block id="b47863ca8303793c6edc0412cba0ba86" category="paragraph">您可以使用 <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 驱动程序配置 SMB 卷。但是，要执行此操作，您必须完成以下步骤：<block ref="543ecb8334f9fccbb514e5c7ef0f9169" category="inline-link-macro-rx"></block>。</block>
   <block id="3ab416b72f7e6cf66a52a4fa23bd71bc" category="list-text">Trident 仅支持将 SMB 卷挂载到在 Windows 节点上运行的 Pod。有关详细信息，请参见 <block ref="543ecb8334f9fccbb514e5c7ef0f9169" category="inline-link-macro-rx"></block>。</block>
@@ -7256,4 +7226,94 @@ SMB</block>
   <block id="aa2d7ad72731a70cf1acfd5476327d88" category="section-title">Trident 26.06 中支持的功能</block>
   <block id="a083a63746aa61c3da201d39ba7a4bc0" category="paragraph">Trident 26.06 支持 Google Cloud NetApp Volumes 的以下自动分层功能：</block>
   <block id="e21cf8f8ea478f3204b9d99aa0b68e51" category="section-title">Trident 26.06 中不支持的功能</block>
+  <block id="7ba0dd834b932c7125765a293d38c4f6" category="paragraph">在使用<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>进行升级之前，请先<block ref="ad3ae3ba576f54a9ed86202bbeedc293" category="inline-link-macro-rx"></block>审核。</block>
+  <block id="c597b6d3ff43c74c218f020f7b29853a" category="cell">\http://proxy.example.com:8080</block>
+  <block id="5377d265895d6530f6cb2a5ab3ce2061" category="summary">Trident 支持 ONTAP 平衡放置，当 Trident 在 ONTAP 后端上配置卷时，将聚合选择委托给 ONTAP。</block>
+  <block id="901f4f445bbc05f94bb067ec51de8354" category="doc">使用 ONTAP 后端的均衡放置</block>
+  <block id="ca7d2dcdcf7fa0409648866b913b542b" category="paragraph">您可以在 ONTAP 后端上启用 ONTAP 平衡放置。通过平衡放置，ONTAP 为每个新卷选择最佳聚合，因此您无需在 Trident 中管理聚合分配。</block>
+  <block id="226b6165981f1f66d66191208e82292e" category="section-title">均衡放置的工作原理</block>
+  <block id="f044b3fdd7ebff327228d34944ee182e" category="paragraph">默认情况下，Trident 会发现分配给 SVM 的聚合，将每个聚合视为存储池，并在配置卷时选择聚合。</block>
+  <block id="29610e6ed4af39c140144e93b3d6e720" category="paragraph">启用均衡放置时：</block>
+  <block id="93b0a351e31ef7748afe60f34cb17d61" category="list-text">Trident 将整个 SVM 报告为单个存储池，而不是报告单个聚合。</block>
+  <block id="aab8f2d040c6d38d09664af25e8d1aea" category="list-text">ONTAP 为每个新卷选择聚合，并在可用聚合之间平衡卷。</block>
+  <block id="1c8d63d8f1656c7b5c8417357387c842" category="list-text">Trident 使用 ONTAP <block ref="dca71d8a4ebb83f856902a2c31dfcba0" prefix=" " category="inline-code"></block> REST API 创建卷。</block>
+  <block id="628487c888ccc3fac74a02a6ccf8ac8f" category="paragraph">均衡放置可用于统一 ONTAP 系统（AFF、FAS 和 ASA）和 NetApp AFX 存储系统。</block>
+  <block id="121c13dca45d32470148f13c6941c7d5" category="list-text">后端必须使用 ONTAP 9.19.1 或更高版本。</block>
+  <block id="f542740f4fbfabab62d1fb2fe85e74a2" category="list-text">Trident 必须使用 REST 与 ONTAP 通信。ZAPI 不支持均衡放置。</block>
+  <block id="3b0ab0e5025f1e931c04c48aa185866e" category="list-text">后端配置不得指定聚合。不能将平衡放置与显式聚合选择相结合。</block>
+  <block id="79fc99087ee7fced83ee467fea464b77" category="section-title">默认值</block>
+  <block id="036e443fb3cb4e0306bf789bf8da1a97" category="paragraph"><block ref="8523967970dcb6040c5c252d285a58c0" prefix=" " category="inline-code"></block> 的默认值取决于存储系统：</block>
+  <block id="f31303ddb8ada38aed08c2bb8f9d8e6c" category="cell">存储系统</block>
+  <block id="f4c6f851b00d5518bf888815de279aba" category="cell">说明</block>
+  <block id="6b01f9a175865be8a844c0affd4a02a8" category="cell">Unified ONTAP（AFF、FAS、ASA）</block>
+  <block id="485a254d0c3f823b9d6ffe32037b3e54" category="cell">除非您启用均衡放置，否则 Trident 会自动选择聚合。</block>
+  <block id="e0a18ef4ec357ef00c679cafacdfcfa1" category="cell">NetApp AFX（ONTAP 9.19.1 或更高版本）</block>
+  <block id="d710908ab8d316dff40503cccc72bb1a" category="cell">均衡放置为必填项。将<block ref="8523967970dcb6040c5c252d285a58c0" prefix=" " category="inline-code"></block>设置为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>会导致后端验证失败。</block>
+  <block id="8836093662f86ffe5c61f3af6f4f8812" category="cell">NetApp AFX（早于 ONTAP 9.19.1）</block>
+  <block id="c918c8868a0cd4d99a7f12366264c618" category="cell">平衡放置不可用。</block>
+  <block id="ea31310f7e3828f3a62f4e80a1c797d8" category="section-title">配置选项</block>
+  <block id="b3c793db1baf5ffb355076ab4eb19010" category="cell"><block ref="8523967970dcb6040c5c252d285a58c0" prefix="" category="inline-code"></block></block>
+  <block id="208fdcf212c761dc4b8ea62764eb460f" category="cell">将新卷的聚合选择委托给 ONTAP。在后端配置的根目录或单个虚拟池上设置此选项。</block>
+  <block id="4567ca4caf0d63729069f47d1742eece" category="cell"><block ref="68934a3e9455fa72420237eb05902327" prefix="" category="inline-code"></block>;<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 适用于 ONTAP 9.19.1 或更高版本的 AFX</block>
+  <block id="0fc10d0f90bb6bf46fb69522e526813e" category="section-title">使用虚拟池的均衡放置</block>
+  <block id="d868095465d4f20309bff56ad3cc293f" category="paragraph">无论是否使用虚拟池，均衡放置均可正常工作：</block>
+  <block id="07178c5fac405a0878c1e7d66393d67b" category="list-text">如果没有虚拟池，Trident 会将 SVM 报告为单个存储池，并使用平衡放置创建所有新卷。</block>
+  <block id="8d2e0f7e8f067df2079b3e24ddfd4a7b" category="list-text">使用虚拟池，Trident 会照常报告虚拟池并将卷与其匹配。如果匹配的虚拟池启用了平衡放置，则 ONTAP 会为卷选择聚合。</block>
+  <block id="f21977a786ef128614f8d64ce8110613" category="paragraph">在后端配置的根目录设置<block ref="8523967970dcb6040c5c252d285a58c0" prefix=" " category="inline-code"></block>可将其应用于所有虚拟池，或在单个虚拟池上进行设置以选择性地启用它。</block>
+  <block id="b1ef8efad15e2fde07986ad128e156a4" category="paragraph">以下示例在统一的 ONTAP 后端上实现平衡放置：</block>
+  <block id="fb203df776ad6b2174d3ad7cd1c25a72" category="paragraph">以下示例使用<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block>实现平衡放置：</block>
+  <block id="08287fcebbde9b32d85e0c7078398bc9" category="paragraph">以下示例仅在<block ref="e07e81c20cf5935f5225765f0af81755" prefix=" " category="inline-code"></block>虚拟池上启用平衡放置。Trident 继续为与<block ref="cab7e764b30007514145eaf2f6a7ed0f" prefix=" " category="inline-code"></block>虚拟池匹配的卷选择聚合：</block>
+  <block id="6ba877e6087784cff308aefc8aa43f8b" category="section-title">后端验证错误</block>
+  <block id="9c3873589ff6814a9dbdb9765fca8fab" category="paragraph">在以下情况下，后端创建或更新失败：</block>
+  <block id="254f642527b45bc260048e30704edb39" category="cell">配置</block>
+  <block id="24fd63da2d955a70be41faea7acb02b4" category="cell"><block ref="f3d25b6c0807d7a6f45f31eddcee8476" prefix="" category="inline-code"></block> 早于 9.19.1 的 ONTAP</block>
+  <block id="248b7a474e9d81c380a702f7ce8ce82f" category="cell">验证失败。升级到 ONTAP 9.19.1 或更高版本。</block>
+  <block id="554f1531471298d6cdf558e1d88c9087" category="cell"><block ref="f3d25b6c0807d7a6f45f31eddcee8476" prefix="" category="inline-code"></block> 在后端使用 ZAPI</block>
+  <block id="02ae4542957c3fd9c378ea3a3d0a2b09" category="cell">验证失败。配置后端以使用 REST。</block>
+  <block id="a7286af3897b0791ae8507fd69f3a51e" category="cell"><block ref="f3d25b6c0807d7a6f45f31eddcee8476" prefix="" category="inline-code"></block> 结合特定聚合</block>
+  <block id="f7af0e023dc087b7d5c16907b79c4bad" category="cell">验证失败。删除聚合配置或禁用平衡放置。</block>
+  <block id="057b2687591b3a31b14dba78c6b7d611" category="cell"><block ref="ecd0f9ed81ebb00c9d34989effc36922" prefix="" category="inline-code"></block> 在使用 ONTAP 9.19.1 或更高版本的 AFX 上</block>
+  <block id="4bb66497bc5009a192e4ed054023287c" category="cell">验证失败。ONTAP 9.19.1 或更高版本上的 AFX 需要平衡放置。</block>
+  <block id="6372286df7ae09afa69dbe6070fa1f7e" category="paragraph">sidebar: sidebar permalink: trident-use/ontap-nas-examples.html keywords: map backends, storage classes, trident backend, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, options, storageclasses, fsx, metrocluster summary: 了解如何在 Trident 安装中创建和使用 ONTAP NAS 驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。---</block>
+  <block id="9726f3cc0bb285cd4ca3c4d9d6de815e" category="paragraph">创建并使用 ONTAP NAS 驱动程序以配合您的 Trident 安装。本节提供后端配置示例以及将后端映射到 StorageClasses 的详细信息。从 25.10 版本开始，NetApp Trident 支持<block ref="f33b68c7b6392c7aac0a8125f2e686d8" category="inline-link-macro-rx"></block>。NetApp AFX 存储系统在存储层的实现方面与其他基于 ONTAP 的系统（ASA、AFF 和 FAS）有所不同。</block>
+  <block id="c81dd6a3a0f519696cd274574c4268bd" category="paragraph">从 26.06 版本开始，您可以启用 ONTAP 平衡放置，以便 ONTAP 为新卷选择聚合。在 ONTAP 9.19.1 或更高版本上的 AFX 存储系统需要平衡放置。有关要求和示例，请参阅 <block ref="deaf97e40b723f17c6bbd60f58aa3b91" category="inline-link-macro-rx"></block>。</block>
+  <block id="498001a61165984b9528afdebffef381" category="admonition">当使用 ontap-nas-economy 和包含 24 个或更多字符的 storagePrefix 时，qtree 没有嵌入存储前缀，尽管它位于卷名称中。</block>
+  <block id="614c5054b6c79865885d0afc0a541ace" category="paragraph">用于配置的聚合（可选；如果设置，则必须分配给 SVM）。对于<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>驱动程序，此选项将被忽略。如果未分配，则可以使用任何可用的聚合来配置 FlexGroup 卷。</block>
+  <block id="bf7da6c89c23db3eb094629def0f7f54" category="admonition">当聚合在 SVM 中更新时，它会通过轮询 SVM 自动在 Trident 中更新，而无需重启 Trident Controller。当您在 Trident 中配置了特定聚合以配置卷时，如果该聚合被重命名或移出 SVM，则在轮询 SVM 聚合时，后端将在 Trident 中移至失败状态。您必须将聚合更改为 SVM 上存在的聚合，或将其完全删除，以使后端恢复联机。</block>
+  <block id="cf2754c3ca8b1e0ae6dac9bd3eea77de" category="paragraph">*当<block ref="8523967970dcb6040c5c252d285a58c0" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>时，请勿指定。*</block>
+  <block id="3e9cc48572dd4ede63e65fa126ec57dc" category="paragraph">将新卷的聚合选择委托给 ONTAP [Boolean]。需要 ONTAP 9.19.1 或更高版本，并将<block ref="14d839191d1ecf387a15b5b0c802a8ae" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。不能与<block ref="39adbeb6bc21a3133e5fdcf1ec05d1a0" prefix=" " category="inline-code"></block>结合使用。</block>
+  <block id="15bac2276ad228871f235320729951ad" category="paragraph">有关要求和示例，请参见 <block ref="deaf97e40b723f17c6bbd60f58aa3b91" category="inline-link-macro-rx"></block>。</block>
+  <block id="085f69fc46cc4b65591fd3aea640c78e" category="paragraph">*如果指定，对于 ONTAP 9.19.1 或更高版本上的 AFX 存储系统，始终设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。*</block>
+  <block id="08a9f716b6abdb8a4914658825be41e9" category="cell"><block ref="68934a3e9455fa72420237eb05902327" prefix="" category="inline-code"></block>；<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 适用于 ONTAP 9.19.1 或更高版本上的 AFF 存储系统</block>
+  <block id="accbf3f657a8d5011d94ea8da829ec11" category="admonition">在 SVM 中更新聚合列表时，Trident 会通过轮询 SVM 自动更新列表，而无需重新启动 Trident Controller。当您在 Trident 中配置了特定聚合列表以配置卷时，如果聚合列表被重命名或移出 SVM，则在轮询 SVM 聚合时，后端将在 Trident 中移至失败状态。您必须将聚合列表更改为 SVM 上存在的列表，或者将其完全删除，以使后端恢复联机。</block>
+  <block id="cf59ef299dc5ea29fe7a98913222f36b" category="cell">NFS 挂载选项的逗号分隔列表。Kubernetes 持久卷的挂载选项通常在存储类中指定，但如果存储类中未指定挂载选项，Trident 将回退到使用存储后端配置文件中指定的挂载选项。如果存储类或配置文件中未指定挂载选项，Trident 不会在关联的持久卷上设置任何挂载选项。</block>
+  <block id="cef6a0e795197d21cb81fea8ff4a2a85" category="cell">在新卷上启用 NetApp 卷加密 (NVE)；默认为<block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。必须在集群上获得许可并启用 NVE 才能使用此选项。如果在后端启用了 NAE，则在 Trident 中配置的任何卷都将启用 NAE。有关详细信息，请参阅：<block ref="5113a2fb1642ecd23870711ba25c4ad7" category="inline-link-macro-rx"></block>。</block>
+  <block id="253c637735b7ab6cd98c1c8ecc634a5a" category="paragraph">升级 Trident 时，先前安装的现有后端将按上述方式配置卷。对于升级前创建的卷，应调整其卷的大小，以便观察更改。例如，使用<block ref="01d8e11bde220373533705ed26796e25" prefix=" " category="inline-code"></block>早期版本的 2 GiB PVC 所创建的卷仅提供 1 GiB 的可写空间。例如，将卷的大小调整为 3 GiB，可在 6 GiB 卷上为应用程序提供 3 GiB 的可写空间。</block>
+  <block id="a8f8d25fb144f1a5756f5cb8aa5567fd" category="example-title">均衡放置示例</block>
+  <block id="2d8fd04c2299dfcb5ca23e03bd1763fb" category="paragraph">此示例启用 ONTAP 平衡放置，以便 ONTAP 为新卷选择聚合。均衡放置需要 ONTAP 9.19.1 或更高版本。有关详细信息，请参阅 <block ref="deaf97e40b723f17c6bbd60f58aa3b91" category="inline-link-macro-rx"></block>。</block>
+  <block id="59a8a75a75d477b4d5bba5479a5bd9a8" category="paragraph">以下 StorageClass 定义请参阅 <block ref="d690aebda44a37b8ae9c2c6f1918cb30" category="inline-xref-macro-rx"></block>。使用 <block ref="bed471c4a88e25ac9a7e4a7b980700a8" prefix=" " category="inline-code"></block> 字段，每个 StorageClass 指定可用于托管卷的虚拟池。卷具有所选虚拟池中定义的属性。</block>
+  <block id="7db43d78615602f66a93f48a4e876931" category="list-text">The<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>后端的第一个和第二个虚拟池。这些是唯一提供黄金级保护的池。</block>
+  <block id="1c06f10acb6b469ed257109316342fe3" category="list-text">The<block ref="afbfe298fa275e5fff1aca9b2f213d9a" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>后端的第三和第四个虚拟池。这些是唯一提供黄金级别以外保护级别的池。</block>
+  <block id="3492d02807b24dfdd83ff9d421bea24e" category="list-text">该<block ref="65846755494383158592c748f74421ec" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>后端的第四个虚拟池。这是唯一为 mysqldb 类型应用程序提供存储池配置的池。</block>
+  <block id="522a58786d23f2d439e665e7445bc9f5" category="list-text">The<block ref="2e63b2ff91d4aeb88b54db5c90b71443" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>后端的第三个虚拟池。这是唯一提供银级保护和 20000 积分的池。</block>
+  <block id="dc848ffa983f3148dadb349b843b4c9a" category="list-text">The<block ref="a96bee9dd30f3ea0af93b4c64ca1e4a4" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>后端的第三个虚拟池和<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>后端的第二个虚拟池。这些是唯一拥有 5000 个信用点的池产品。</block>
+  <block id="2452641007da249b9cd2ca2cc94294fd" category="paragraph">Trident 决定选择哪个虚拟池，并确保满足存储要求。</block>
+  <block id="00fe482c23756a6bbebdda9953cf8b83" category="paragraph">创建 ONTAP SAN 驱动程序并在 Trident 安装中使用。本节提供后端配置示例以及将后端映射到 StorageClasses 的详细信息。<block ref="9f40590ca1185cea7261c2a60fc922ea" category="inline-link-macro-rx"></block> 在其存储层的实现上与其他 ONTAP 系统（ASA、AFF 和 FAS）有所不同。这些差异会影响某些参数的使用，具体如注释所示。<block ref="54401c26bff345016bccb2761388f645" category="inline-link-macro-rx"></block>。在 Trident 后端配置中，无需指定您的系统为 ASA r2。当您选择<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>作为<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>时，Trident 会自动检测 ASA r2 或其他 ONTAP 系统。某些后端配置参数不适用于 ASA r2 系统，如下表所示。</block>
+  <block id="008b5e2cfaee3690447fb0713d0be924" category="paragraph">从 26.06 版本开始，您可以启用 ONTAP 均衡放置，以便 ONTAP 为新卷选择聚合。有关要求和示例，请参阅 <block ref="deaf97e40b723f17c6bbd60f58aa3b91" category="inline-link-macro-rx"></block>。</block>
+  <block id="3e0e1d5f5b2e7b6cec19cf3819876fae" category="cell">在 SVM 中预置新卷时使用的前缀。以后无法修改。要更新此参数，需要创建新的后端。</block>
+  <block id="90c75fdb254b63d1300f06b29091b7a6" category="admonition">当聚合在 SVM 中更新时，它会通过轮询 SVM 自动在 Trident 中更新，而无需重新启动 Trident Controller。当您在 Trident 中配置了特定聚合以配置卷时，如果该聚合被重命名或移出 SVM，则在轮询 SVM 聚合时，后端将在 Trident 中移至失败状态。您必须将聚合更改为 SVM 上存在的聚合，或者将其完全删除，以使后端重新联机。</block>
+  <block id="1cdd62d90a11342b96f468ceab727e02" category="paragraph">使用<block ref="ef225248e79c14501d51a4941b5ae5d1" prefix=" " category="inline-code"></block>为<block ref="899da842f7d2c1db0e3f8c88ad72507f" prefix=" " category="inline-code"></block>命令指定命令行参数，该命令在卷格式化时应用。这允许您根据自己的偏好格式化卷。请务必指定与 mkfs 命令选项类似的 formatOptions，不包括设备路径。示例："-E nodiscard"</block>
+  <block id="a26eea7c993e2fb5714b2325f8835fd2" category="admonition">对于使用<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>驱动程序创建的所有卷，Trident 会向 FlexVol 额外增加 10% 的容量以容纳 LUN 元数据。LUN 将按照用户在 PVC 中请求的确切大小进行配置。Trident 向 FlexVol 增加 10%（在 ONTAP 中显示为可用大小）。用户现在可以获得其所请求的可用容量。此更改还可防止 LUN 变为只读，除非可用空间已被完全利用。这不适用于 ontap-san-economy。</block>
+  <block id="9c766704f3b84de363b39d55aaf56bc0" category="paragraph">以下 StorageClass 定义请参阅<block ref="d690aebda44a37b8ae9c2c6f1918cb30" category="inline-xref-macro-rx"></block>。使用<block ref="bed471c4a88e25ac9a7e4a7b980700a8" prefix=" " category="inline-code"></block>字段，每个 StorageClass 指定哪些虚拟池可用于托管卷。卷现在具有所选虚拟池中定义的属性。</block>
+  <block id="b9316760277c12cbe333f65214295889" category="list-text">The<block ref="63f9100803e1f67a5e33cbd5da9dbb33" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>后端的第一个虚拟池。这是唯一提供黄金级保护的池。</block>
+  <block id="d049423926860cf25023cae93e4a451c" category="list-text">The<block ref="afbfe298fa275e5fff1aca9b2f213d9a" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>后端的第二个和第三个虚拟池。这些是唯一提供金级以外保护级别的池。</block>
+  <block id="312de571890cffcc2bcc189cf3edf93c" category="list-text">该<block ref="65846755494383158592c748f74421ec" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>后端的第三个虚拟池。这是唯一为 mysqldb 类型应用程序提供存储池配置的池。</block>
+  <block id="44f0c99e5cdb300a962e45b97384761a" category="list-text">The<block ref="2e63b2ff91d4aeb88b54db5c90b71443" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>后端的第二个虚拟池。这是唯一提供银级保护和 20000 积分的池。</block>
+  <block id="34a85a5cbad93f1fd567df48ad878266" category="list-text">The<block ref="a96bee9dd30f3ea0af93b4c64ca1e4a4" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>后端的第三个虚拟池和<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>后端的第四个虚拟池。这些是唯一拥有 5000 个信用点的池产品。</block>
+  <block id="325cf3b58b41af52bb19bab5c2295284" category="list-text">The<block ref="33aacad9b122abfdfadc06e3e7fa5f59" prefix=" " category="inline-code"></block> StorageClass 映射到<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> 驱动程序中具有<block ref="6fa083b88d05083e680071073d06c3af" prefix=" " category="inline-code"></block> 的<block ref="11e89beb13d19bf6e3ab7ed65673b27d" prefix=" " category="inline-code"></block> 虚拟池。这是唯一提供<block ref="5ca85ebb1d881fde490deaa5817c4ca5" prefix=" " category="inline-code"></block> 的池。</block>
+  <block id="ef8af0f6277b21706a63061e4da6280b" category="paragraph">本节中的步骤介绍了如何单独创建后端。有关如何使用 Automatic Backend 功能的信息，请参见 <block ref="bc4ceb3f94009a122166806b2114be59" category="inline-link-macro-rx"></block> 部分以了解更多信息。</block>
+  <block id="910636ac8baee34d9916eff38415d716" category="paragraph">您可以使用 <block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 驱动程序配置 SMB 卷。在完成<block ref="b5aba1e0f36397ffbbd463ea77030b53" category="inline-link-macro-rx"></block>之前，请完成以下步骤：<block ref="543ecb8334f9fccbb514e5c7ef0f9169" category="inline-link-macro-rx"></block>。</block>
+  <block id="d25a42bf8872d5c2742f43937586ad40" category="inline-xref">后端高级配置和示例</block>
+  <block id="f3bbb160e5770652e96a6a7ce5e4aaa9" category="paragraph">有关其他配置选项的详细信息，请参见以下 <block ref="24ff2177ac2d3277f1e79fe1615781ee" category="inline-xref-macro-rx"></block> 部分。</block>
+  <block id="3929c8e22750fae0b1b6ca0e82f82fd3" category="section-title">[[first-link]]后端高级配置和示例</block>
 </blocks>
