@@ -47,7 +47,7 @@ entries:
     - title: 准备配置
       url: "/trident-use/ontap-nas-prep.html"
     - title: 配置选项和示例
-      url: trident-use/ontap-nas-examples.
+      url: "/trident-use/ontap-nas-examples.html"
   - title: 使用 ONTAP 后端的均衡放置
     url: "/trident-use/ontap-balanced-placement.html"
   - title: 适用于 NetApp ONTAP 的 Amazon FSX
