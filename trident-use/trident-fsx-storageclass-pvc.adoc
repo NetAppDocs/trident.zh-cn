@@ -348,7 +348,7 @@ parameters:
 ----
 
 
-==== 适用于 iSCSI 的 Storage Class
+==== iSCSI 的存储类
 
 使用此示例为使用 iSCSI 的卷设置 StorageClass：
 

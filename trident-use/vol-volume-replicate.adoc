@@ -233,19 +233,22 @@ Trident将检查是否存在TridentMirorRelationship CRD、如果此关系不存
 
 .步骤
 . 在主Kubbernetes集群上、创建PVC的快照、并等待创建快照。
-. 在主Kubnetes集群上、创建SnapshotInfo CR以获取内部详细信息。
+. 在主 Kubernetes 集群上，创建 TridentTridentSnapshotInfoCR 以获取内部详细信息。
 +
 .示例
 [source, yaml]
 ----
-kind: SnapshotInfo
+kind: TridentSnapshotInfo
 apiVersion: trident.netapp.io/v1
 metadata:
   name: csi-nas
 spec:
-  snapshot-name: csi-nas-snapshot
+  snapshotName csi-nas-snapshot
 ----
-. 在二级Kubernetes集群上、将_TridentMirorRelationship_ CR的_spec.state_字 段更新为_promoted_和_spec.promotedSnapshotHandle_、以成为快照的内部名称。
++
+.. 在辅助 Kubernetes 集群上，将 _TridentMirrorRelationship_ CR 的 _spec.state_ 字段更新为 _promoted_，并将 _spec.volumeMappings[].promotedSnapshotHandle_ 更新为快照的 internalName。
+
+
 . 在二级Kubernetes集群上、确认Trident镜像 关系的状态(stats.state字段)为已提升。
 
 

@@ -4323,8 +4323,6 @@ SMB</block>
   <block id="ffe4cfc202d643b50342b93a4a11a82f" category="section-title">在计划内故障转移期间提升辅助PVC</block>
   <block id="1d60b89a076d7f30b8efdef50e842f68" category="paragraph">在计划内故障转移(迁移)期间、执行以下步骤以提升二级PVC：</block>
   <block id="3310d9a60c164accb7c262ab6e9fbc65" category="list-text">在主Kubbernetes集群上、创建PVC的快照、并等待创建快照。</block>
-  <block id="8b17b79902950942165541a8ab704363" category="list-text">在主Kubnetes集群上、创建SnapshotInfo CR以获取内部详细信息。</block>
-  <block id="678346d79faaa65b2da52e6d7ddce845" category="list-text">在二级Kubernetes集群上、将_TridentMirorRelationship_ CR的_spec.state_字 段更新为_promoted_和_spec.promotedSnapshotHandle_、以成为快照的内部名称。</block>
   <block id="7b007b14980acd66e9301e02a5670f47" category="list-text">在二级Kubernetes集群上、确认Trident镜像 关系的状态(stats.state字段)为已提升。</block>
   <block id="f69101c0107c4bbf8f0ccc9141beb68b" category="section-title">在故障转移后还原镜像关系</block>
   <block id="9a023cbe1d3be933d8edb6228f9901ce" category="paragraph">在还原镜像关系之前、请选择要用作新主卷的那一端。</block>
@@ -6616,7 +6614,6 @@ SMB</block>
   <block id="7d6abad6d9b0cb2c17d374eb60cfd549" category="paragraph">以下是与 Trident 和 FSx for ONTAP 配合使用的存储类配置示例。</block>
   <block id="79aed0c0cab8f60748d97cff824e71d8" category="section-title">NFS 存储类</block>
   <block id="1aeaba8f713cb76c3933e520e71db58b" category="paragraph">您可以使用此示例为使用 NFS 的卷设置 StorageClass（有关属性的完整列表，请参阅下面的 Trident 属性部分）：</block>
-  <block id="3c2af55b3b722b8e55112e627dcfa582" category="section-title">适用于 iSCSI 的 Storage Class</block>
   <block id="157051d3c2492a3589f7ef937c9a3380" category="paragraph">使用此示例为使用 iSCSI 的卷设置 StorageClass：</block>
   <block id="5182a799b5d9bfc055f426543bab1173" category="section-title">使用 NFSv3 和 AWS Bottlerocket 的存储类</block>
   <block id="d95d0aae1fadec77938feae823d4861b" category="section-title">Trident StorageClass 属性</block>
@@ -7316,4 +7313,14 @@ SMB</block>
   <block id="d25a42bf8872d5c2742f43937586ad40" category="inline-xref">后端高级配置和示例</block>
   <block id="f3bbb160e5770652e96a6a7ce5e4aaa9" category="paragraph">有关其他配置选项的详细信息，请参见以下 <block ref="24ff2177ac2d3277f1e79fe1615781ee" category="inline-xref-macro-rx"></block> 部分。</block>
   <block id="3929c8e22750fae0b1b6ca0e82f82fd3" category="section-title">[[first-link]]后端高级配置和示例</block>
+  <block id="c3bd78da5a8e8ae22bd50629327c0c26" category="section-title">26.06.1 中的新增功能</block>
+  <block id="0063db86c3042093f4b48db59ca75d87" category="list-text">修复了 CSI 发布和卷移动之间的竞争问题，该问题可能导致使用过时的访问信息挂载卷。</block>
+  <block id="99bc89ae140f34c4ef13f436b3578358" category="list-text">修复了在节点注册完成之前 NodeGetInfo 可能返回空拓扑标签，导致拓扑感知配置失败的问题。</block>
+  <block id="8141a9378a82f2d156fbd38ada6c3466" category="list-text">修复了一个罕见的 NVMe 断开连接竞态问题，该问题可能会在另一个 Pod 仍在连接时拆除共享子系统。</block>
+  <block id="13d49e861126c9f4e8187c3ed601942a" category="list-text">修复了在并发情况下创建已挂载卷的克隆时 NVMe PVC 克隆发布失败（以及父命名空间映射不正确）的问题。</block>
+  <block id="92908f9dc019fbc39650b0f44ecbe68d" category="list-text">修复了在 ONTAP-SAN-Economy 后端上使用 nameTemplate 的 PVC 快照创建失败的问题。</block>
+  <block id="241bcdc29e2aecc9374092674e96e3b7" category="list-text">在 ONTAP 后端配置上添加了可选<block ref="c187d606271268ec08cafc7fe2d89aba" prefix=" " category="inline-code"></block>（秒），以设置每个后端的 REST 和 ZAPI API 客户端超时。</block>
+  <block id="69eb48c01ded3a79590a6ae42b855f34" category="section-title">iSCSI 的存储类</block>
+  <block id="791aed607ce65a32c8115590f604749d" category="list-text">在主 Kubernetes 集群上，创建 TridentTridentSnapshotInfoCR 以获取内部详细信息。</block>
+  <block id="e239ae5dff4b309ee9e4b5a6800472ca" category="list-text">在辅助 Kubernetes 集群上，将 _TridentMirrorRelationship_ CR 的 _spec.state_ 字段更新为 _promoted_，并将 _spec.volumeMappings[].promotedSnapshotHandle_ 更新为快照的 internalName。</block>
 </blocks>

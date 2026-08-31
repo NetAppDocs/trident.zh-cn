@@ -19,6 +19,44 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 
 
+[[whats-new-in-26-06-1]]
+== 26.06.1 中的新增功能
+
+了解 NetApp Trident 和 Trident Protect 的新功能，包括增强功能、修复和弃用。
+
+
+
+[[trident]]
+=== Trident
+
+
+
+==== 修复
+
+* *Kubernetes*：
++
+** 修复了 CSI 发布和卷移动之间的竞争问题，该问题可能导致使用过时的访问信息挂载卷。
+** 修复了在节点注册完成之前 NodeGetInfo 可能返回空拓扑标签，导致拓扑感知配置失败的问题。
+** 修复了一个罕见的 NVMe 断开连接竞态问题，该问题可能会在另一个 Pod 仍在连接时拆除共享子系统。
+** 修复了在并发情况下创建已挂载卷的克隆时 NVMe PVC 克隆发布失败（以及父命名空间映射不正确）的问题。
+** 修复了在 ONTAP-SAN-Economy 后端上使用 nameTemplate 的 PVC 快照创建失败的问题。
+
+
+
+
+
+
+==== 增强功能
+
+* *Kubernetes*：
++
+** 在 ONTAP 后端配置上添加了可选 `storageAPITimeout`（秒），以设置每个后端的 REST 和 ZAPI API 客户端超时。
+
+
+
+
+
+
 [[whats-new-in-26-06]]
 == 26.06 中的新增功能
 
