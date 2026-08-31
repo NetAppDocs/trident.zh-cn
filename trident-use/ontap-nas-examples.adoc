@@ -1,13 +1,15 @@
+---
+sidebar: sidebar 
+permalink: trident-use/ontap-nas-examples.html 
+keywords: map backends, storage classes, trident backend, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, options, storageclasses, fsx, metrocluster 
+summary: 了解如何在 Trident 安装中创建和使用 ONTAP NAS 驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。 
+---
 = ONTAP NAS配置选项和示例
+:hardbreaks:
 :allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
 
-
-'''
-sidebar: sidebar permalink: trident-use/ontap-nas-examples.html keywords: map backends, storage classes, trident backend, ontap-nas, ontap-nas-economy, ontap-nas-flexgroups, options, storageclasses, fsx, metrocluster summary: 了解如何在 Trident 安装中创建和使用 ONTAP NAS 驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。---
-
-
-
-= ONTAP NAS配置选项和示例
 
 [role="lead"]
 创建并使用 ONTAP NAS 驱动程序以配合您的 Trident 安装。本节提供后端配置示例以及将后端映射到 StorageClasses 的详细信息。从 25.10 版本开始，NetApp Trident 支持link:https://docs.netapp.com/us-en/ontap-afx/index.html["NetApp AFX 存储系统"^]。NetApp AFX 存储系统在存储层的实现方面与其他基于 ONTAP 的系统（ASA、AFF 和 FAS）有所不同。
