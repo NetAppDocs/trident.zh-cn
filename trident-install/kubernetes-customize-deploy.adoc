@@ -140,14 +140,11 @@ NOTE: 从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06
 
 
 | `enableConcurrency`  a| 
-支持并发Trident控制器操作以提高吞吐量。
+启用并发 Trident 控制器操作，以提高吞吐量。有关支持的驱动程序的详细信息，请参见链接：https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]。
+| `resources` 
 
 
-NOTE: *技术预览*：此功能为实验性功能，目前除了现有的ONTAP -SAN 驱动程序（统一ONTAP 9 中的 iSCSI 和 FCP 协议）技术预览版外，还支持ONTAP-NAS（仅限 NFS）和ONTAP -SAN（统一ONTAP 9 中的 NVMe）驱动程序的有限并行工作流程。
-| false 
-
-
-| `resources`  a| 
+ a| 
 设置 Kubernetes 对Trident控制器和节点 pod 的资源限制和请求。您可以为每个容器和边车配置 CPU 和内存，以管理 Kubernetes 中的资源分配。
 
 有关配置资源请求和限制的更多信息，请参阅link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/["Pod 和容器的资源管理"^]。
@@ -252,15 +249,10 @@ resources:
         limits:
           cpu:
           memory:
-----
+----| `httpsMetrics` 
 
 
-| `httpsMetrics` | 为 Prometheus 指标端点启用 HTTPS。 | false 
-
-
-| `hostNetwork`  a| 
-为Trident控制器启用主机联网功能。在多宿主网络中，当需要分离前端和后端流量时，这非常有用。
-| false 
+| 为 Prometheus 指标端点启用 HTTPS。 | false | `hostNetwork` 
 |===
 
 NOTE: 有关格式化POD参数的详细信息、请参阅 link:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/["将 Pod 分配给节点"^]。

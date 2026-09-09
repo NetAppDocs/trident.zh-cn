@@ -248,10 +248,7 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 
 
 | `enableConcurrency`  a| 
-支持并发Trident控制器操作以提高吞吐量。
-
-
-NOTE: *技术预览*：此功能为实验性功能，目前除了现有的ONTAP -SAN 驱动程序（统一ONTAP 9 中的 iSCSI 和 FCP 协议）技术预览版外，还支持ONTAP-NAS（仅限 NFS）和ONTAP -SAN（统一ONTAP 9 中的 NVMe）驱动程序的有限并行工作流程。
+启用并发 Trident 控制器操作，以提高吞吐量。有关支持的驱动程序的详细信息，请参见链接：https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]。
 | false 
 
 
