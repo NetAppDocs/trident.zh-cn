@@ -30,17 +30,17 @@ Trident根据您的版本提供三个支持级别。请参阅 link:https://mysup
 |===
 
 
-| version | 完全支持 | 支持有限 | 自助支持 
+| version | 全面支持终止 | 停止有限支持 | 自助支持终止 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident/index.html["26.06"^]
-| 2026年7月 | 2027年7月 | 2028年7月 
+| 2027年7月 | 2028年7月 | 2029年7月 
 
 
  a| 
 link:https://docs.netapp.com/us-en/trident/index.html["26.02"^]
-| 2026年2月 | 2027年2月 | 2028年2月 
+| 2027年2月 | 2028年2月 | 2029年2月 
 
 
  a| 

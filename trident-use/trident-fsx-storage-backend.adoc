@@ -158,7 +158,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 | `ve版本` |  | 始终为 1 
 
 
-| `storageDriverName` | 存储驱动程序的名称 | `ontap-nas`， `ontap-nas-economy`， `ontap-nas-flexgroup`， `ontap-san`， `ontap-san-economy` 
+| `storageDriverName` | 存储驱动程序的名称。创建后无法修改。要更新此参数，必须创建一个新的后端。 | `ontap-nas`， `ontap-nas-economy`， `ontap-nas-flexgroup`， `ontap-san`， `ontap-san-economy` 
 
 
 | `backendName` | 自定义名称或存储后端 | 驱动程序名称+"_"+ dataLIF 
@@ -197,7 +197,7 @@ backend-fsx-ontap-nas   backend-fsx-ontap-nas   7a551921-997c-4c37-a1d1-f2f4c87f
 | `sVM` | 要使用的 Storage Virtual Machine | 如果指定SVM管理LIF则派生。 
 
 
-| `s存储前缀` | 在 SVM 中配置新卷时使用的前缀。创建后无法修改。要更新此参数、您需要创建一个新的后端。 | `trident` 
+| `s存储前缀` | 在 SVM 中配置新卷时使用的前缀。创建后无法修改。要更新此参数、您需要创建一个新的后端。 | `trident` 注意：影响后端标识和卷命名的后端配置参数（如 `storageDriverName` 和 `storagePrefix`）在创建后无法更改。要更新这些参数，您必须创建一个新的后端。 
 
 
 | `limitAggregateUsage` | *请勿指定Amazon FSx for NetApp ONTAP。*提供的和 `vsadmin`不包含使用Trident检索聚合使用情况并对其进行限制所需的 `fsxadmin`权限。 | 请勿使用。 

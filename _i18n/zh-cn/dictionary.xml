@@ -7322,4 +7322,13 @@ SMB</block>
   <block id="053cd9e68cf6c155e5b93616bc7e3e32" category="summary">了解如何在 Trident 安装中创建和使用 ONTAP NAS 驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。</block>
   <block id="6385f58528c659bddf97b765fc51aebb" category="paragraph">启用并发 Trident 控制器操作，以提高吞吐量。有关支持的驱动程序的详细信息，请参见链接：https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]。</block>
   <block id="fa2a90c552980287d1861c7eac323e01" category="paragraph">要启用并发 Trident 控制器操作以提高吞吐量，请在安装过程中添加 <block ref="663f61c1cf47f8a531c8d769e8bf59f4" prefix=" " category="inline-code"></block> 选项，如本示例所示。有关支持的驱动程序的更多信息，请参见链接：https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]。</block>
+  <block id="47c02bc65a2a3f5c0f90a1cf7ed0ea36" category="cell">全面支持终止</block>
+  <block id="7f96dba5716924fd66233cd2846ba50c" category="cell">停止有限支持</block>
+  <block id="38a6591aed8a24a0fe052e68bcbd0ae0" category="cell">自助支持终止</block>
+  <block id="56ce5fa2307a3da023291685ccf4a432" category="cell">2029年7月</block>
+  <block id="f0a624939e52cadb47199d08a32ca6cb" category="cell">2029年2月</block>
+  <block id="2a5fa171033322358bf400252cfb6437" category="paragraph">存储驱动程序的名称。</block>
+  <block id="ff7ba160cdd39f6a0b7fe88ef8878c45" category="paragraph">创建后无法修改。要更新此参数，您必须创建一个新的后端。</block>
+  <block id="ce29b5f6c6b616b686e7705a75655bb6" category="cell">存储驱动程序的名称。创建后无法修改。要更新此参数，必须创建一个新的后端。</block>
+  <block id="aa7fcf992c04e66c97a2ecaecf8e9079" category="cell"><block ref="47cb44be55a0dffa15dfc900a4c687be" prefix="" category="inline-code"></block> 注意：影响后端标识和卷命名的后端配置参数（如<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block> 和<block ref="ed66bef2b107983b6e4066fddf8c45c3" prefix=" " category="inline-code"></block>）在创建后无法更改。要更新这些参数，您必须创建一个新的后端。</block>
 </blocks>

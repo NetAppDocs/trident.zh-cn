@@ -37,7 +37,9 @@ NOTE: 只有 `ontap-nas`NetApp AFX 系统支持 NFS 协议驱动程序；不支�
 
 
 | `storageDriverName`  a| 
-存储驱动程序的名称
+存储驱动程序的名称。
+
+创建后无法修改。要更新此参数，您必须创建一个新的后端。
 
 
 NOTE: 仅适用于NetApp AFX 系统 `ontap-nas`已支持。

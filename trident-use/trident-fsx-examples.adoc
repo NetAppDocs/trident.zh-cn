@@ -29,7 +29,7 @@ summary: 了解适用于ONTAP 的Amazon FSX的后端配置选项。本节提供�
 | `ve版本` |  | 始终为 1 
 
 
-| `storageDriverName` | 存储驱动程序的名称 | `ontap-nas`， `ontap-nas-economy`， `ontap-nas-flexgroup`， `ontap-san`， `ontap-san-economy` 
+| `storageDriverName` | 存储驱动程序的名称。创建后无法修改。要更新此参数，必须创建一个新的后端。 | `ontap-nas`， `ontap-nas-economy`， `ontap-nas-flexgroup`， `ontap-san`， `ontap-san-economy` 
 
 
 | `backendName` | 自定义名称或存储后端 | 驱动程序名称+"_"+ dataLIF 
