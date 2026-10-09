@@ -4,7 +4,7 @@ permalink: trident-concepts/snapshots.html
 keywords: provisioning, Trident 
 summary: 详细了解Trident如何为其驱动程序创建卷快照。 
 ---
-= 卷快照
+= Trident 卷快照创建
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

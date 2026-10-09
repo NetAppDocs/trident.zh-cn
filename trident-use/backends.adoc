@@ -4,7 +4,7 @@ permalink: trident-use/backends.html
 keywords: backends, storage system, anf, element, hci, solidfire, ontap, aff, fas, ontap select, configure backends, fsx 
 summary: 后端用于定义Trident与存储系统之间的关系。它会告诉Trident如何与该存储系统通信、以及Trident如何从该存储系统配置卷。 
 ---
-= 配置后端
+= 配置 Trident 后端
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

@@ -4,7 +4,7 @@ permalink: trident-reco/security-luks.html
 keywords: security, luks, linux unified key setup, encryption, key rotation, resizing, advanced encryption, rotation, key, import 
 summary: '您可以启用Linux统一密钥设置(Unified Key Setup、LKS)来对Trident上的ONTAP SAN和ONTAP SAN经济型卷进行加密。Trident支持对经过LUN加密的卷调整卷大小和密钥(密码短语)轮换。' 
 ---
-= Linux统一密钥设置(LUKS)
+= Trident Linux 统一密钥设置（LUKS）
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

@@ -4,7 +4,7 @@ permalink: trident-use/vol-custom-name.html
 keywords: volumes, volume name, custom volume name, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion, 
 summary: 'Trident支持为创建的卷分配有意义的名称和标签、以便更轻松地识别和监控这些卷、并轻松地将其映射到相应的Kubnetes资源(PVC)。' 
 ---
-= 自定义卷名称和标签
+= 自定义 Trident 卷名和标签
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

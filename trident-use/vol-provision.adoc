@@ -4,7 +4,7 @@ permalink: trident-use/vol-provision.html
 keywords: volumes, pvc, pv, persistentvolume, persistentvolumeclaim, mount, pod, provision 
 summary: '创建一个使用已配置的Kubernetes StorageClass来请求对PV的访问的永久性卷(PV)和永久性卷克莱姆(PVC)。然后、您可以将PV挂载到POD。' 
 ---
-= 配置卷
+= 预配 Trident 卷
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

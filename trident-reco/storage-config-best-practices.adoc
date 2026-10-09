@@ -4,7 +4,7 @@ permalink: trident-reco/storage-config-best-practices.html
 keywords: kubernetes, clusters, nodes, components, master, compute 
 summary: Kubernetes 集群通常由两种类型的节点组成，每种节点负责不同的功能方面。 
 ---
-= 存储配置
+= Trident 存储配置的最佳实践
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

@@ -4,7 +4,7 @@ permalink: trident-reco/backup.html
 keywords: data protection, replication, dr, disaster recovery, snapmirror, back up, snapshot, element, volume replication 
 summary: 了解Trident以及使用Trident创建的卷的保护和恢复选项。对于具有持久性要求的每个应用程序，您都应制定一个数据保护和恢复策略。 
 ---
-= 数据保护和灾难恢复
+= Trident 数据保护和灾难恢复
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

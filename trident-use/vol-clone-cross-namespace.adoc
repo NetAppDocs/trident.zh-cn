@@ -4,7 +4,7 @@ permalink: trident-use/vol-clone-cross-namespace.html
 keywords: volref, volume reference, clone, pvc, pv, namespace, cvna, cross-namespace, sharing, volumesnapshots 
 summary: 使用Trident、您可以使用同一个K8s集群中不同命名空间的现有卷或卷快照创建新卷。 
 ---
-= 跨命名空间克隆卷
+= 跨命名空间克隆 Trident 卷
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

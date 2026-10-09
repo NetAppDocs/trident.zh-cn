@@ -4,7 +4,7 @@ permalink: trident-install/kubernetes-customize-deploy-tridentctl.html
 keywords: deploy, Trident, methods, operator, tridentctl, helm, attributes, customize 
 summary: 您可以使用Trident安装程序自定义部署。 
 ---
-= 自定义tridentctl安装
+= 自定义 Trident tridentctl 安装
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

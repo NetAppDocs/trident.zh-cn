@@ -4,7 +4,7 @@ permalink: trident-managing-k8s/upgrade-operator-overview.html
 keywords: upgrade, trident, operator, helm, controller, daemonset, node pods, rolling upgrade, zero downtime 
 summary: 在使用Trident运算符升级Trident之前、您应了解升级期间发生的后台进程。其中包括对支持滚动更新的三项技术控制器、控制器Pod和节点Pod以及节点DemonSet进行的更改。 
 ---
-= 了解操作员升级工作流
+= 了解 Trident Operator 升级工作流程
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

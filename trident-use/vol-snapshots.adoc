@@ -4,7 +4,7 @@ permalink: trident-use/vol-snapshots.html
 keywords: volumes, on-demand volume snapshots, create snapshots, backends, kubernetes, create PVCs, PVCs, snapshot, volume snapshot, import snapshot, recover data 
 summary: '持久卷(PVs)的Kubbernetes卷快照支持卷的时间点副本。您可以为使用Trident创建的卷创建快照、导入在Trident外部创建的快照、从现有快照创建新卷以及从快照恢复卷数据。' 
 ---
-= 使用快照
+= 使用 Trident 快照
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

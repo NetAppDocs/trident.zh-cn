@@ -19,6 +19,42 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 
 
+[[whats-new-in-26-06-2]]
+== 26.06.2 中的新增功能
+
+了解 NetApp Trident 和 Trident Protect 的新功能，包括增强功能、修复和弃用。
+
+
+
+[[trident]]
+=== Trident
+
+
+
+==== 增强功能
+
+* *Kubernetes*：
++
+** 增加了对 Kubernetes 1.37 的支持。
+
+
+
+
+
+
+==== 修复
+
+* *Kubernetes*：
++
+** 修复了当 Trident 控制器重新启动或 `TridentBackendConfig`更新时，ONTAP-NAS 导出策略规则被静默删除的问题，该问题发生在 `enableConcurrency`设置为 `true`时。这可能导致已挂载的卷无法访问（link:https://github.com/NetApp/trident/issues/1166["问题 #1166"]、link:https://github.com/NetApp/trident/issues/1179["问题 #1179"]）。
+** 修复了后端更新在发生非实质性更改（例如凭据和 QoS）时运行每卷孤立扫描的问题，这可能会在大型后端上阻塞 CSI 操作数小时。现在，扫描仅在 SVM 或存储前缀更改时运行。
+** 修复了 Trident 调试日志中出现的凭据，包括 CSI gRPC 请求转储、启动环境转储以及 CRD 控制器记录的 `TridentBackendConfig`规范。启动环境转储现在仅记录 Trident 自身的 `TRIDENT_*`变量的值，并按名称列出其他变量。
+
+
+
+
+
+
 [[whats-new-in-26-06-1]]
 == 26.06.1 中的新增功能
 

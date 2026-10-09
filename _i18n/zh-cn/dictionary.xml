@@ -1231,7 +1231,6 @@
   <block id="bbe2bfefd5797bb567e3da92f68ce8d1" category="sidebar">自定义 tridentctl 部署</block>
   <block id="58eaebf972358f1cf03d386a4ade1a0f" category="sidebar">下一步是什么？</block>
   <block id="bffb766af67c15f14cae35f03dd6f4a9" category="sidebar">使用 kubectl 执行后端管理</block>
-  <block id="748a22b5f1312291ad55429ba4b809a0" category="sidebar">使用 tridentctl 执行后端管理</block>
   <block id="e08bfc79c5202517b3814efd6e82fb2c" category="sidebar">升级或卸载 Trident</block>
   <block id="05d68d1b7214c73141ed12aaed0c2ab5" category="list-text">如果 Trident 日志中的信息不足，您可以根据安装选项将 ` -d` 标志传递到 install 参数，尝试为 Trident 启用调试模式。</block>
   <block id="bc6de9cad530a57dba08ff711f4a6b5f" category="paragraph">然后，使用 ` ./tridentctl logs -n trident` 并在日志中搜索 `level=debug msg` 来确认是否设置了调试。</block>
@@ -1534,7 +1533,6 @@
   <block id="05f901da7fdacb9ca59e3d7e2d40f98d" category="cell"><block ref="0f4137ed1502b5045d6083aa258b5c42" prefix="" category="inline-code"></block></block>
   <block id="a3ff66cf5848a34d56915c8e879a5d52" category="section-title">配置示例</block>
   <block id="5f82f4ab2783617b6e62bdd43d4a4e49" category="doc">准备使用ONTAP SAN驱动程序配置后端</block>
-  <block id="19eb1a22d8687def5fb4904d3402728a" category="doc">在命名空间之间共享NFS卷</block>
   <block id="6b456f0abe4c4d2f0beb62e5985136cf" category="list-text">可通过多个级别的访问控制来确保安全性</block>
   <block id="6e5d93bf8e8aaaa4795a50f012bc8fea" category="list-text">适用于所有Trident NFS卷驱动程序</block>
   <block id="0ece56dd58b5aabac15e0d0a30553bc0" category="list-text">不依赖于tridentctl或任何其他非本机Kubernetes功能</block>
@@ -2848,7 +2846,6 @@ SMB</block>
   <block id="ae7206c28f1d0ee5f9f116f1cfe22c54" category="cell">用于创建自定义卷名称的模板。</block>
   <block id="b797b4560e6c4ae4e13d035bbce23b4d" category="example-title">使用nameTemplate的后端配置示例</block>
   <block id="f1b9eac8c1d92956d7734db32c5e55d9" category="list-text">正常或非正常关闭K8s节点(24.06)</block>
-  <block id="3c49604e542827bab74a3fdc9c521379" category="doc">自定义卷名称和标签</block>
   <block id="52929ef06c83a3071dc677c6076f8eb3" category="paragraph">可自定义的卷名称和标签支持：</block>
   <block id="ba7ad86bd3d0a50a4a04306d941e6c28" category="list-text">卷创建、导入和克隆操作。</block>
   <block id="4c71628145ace597229ccf6ca6fdc8bf" category="section-title">可自定义卷名称的关键行为</block>
@@ -3371,7 +3368,6 @@ SMB</block>
   <block id="9cf6e031ec85179307403b10689113c9" category="paragraph">然后，您可以使用将恢复的卷导入到Trident中<block ref="b0a81d9cb6f9ea994a428f959b11d3c6" category="inline-link-macro-rx"></block>。</block>
   <block id="3c520ff745f4964007340c06ce483d92" category="summary">部署Trident时、请遵循此处列出的建议。</block>
   <block id="4ac9935cf245d076d6ef4babd8659321" category="paragraph"><block ref="c41296e544cd0faaa4fe4e8b22535287" category="inline-link-rx"></block>在不同应用程序之间实现管理隔离、是资源共享的障碍。例如，一个命名空间中的 PVC 不能从另一个命名空间中使用。Trident为Kubenetes集群中的所有名称区提供PV资源、从而利用提升了Privileges的服务帐户。</block>
-  <block id="f53e7cca65962add5f429193e9cbdb7c" category="doc">集成Trident</block>
   <block id="ef77c788fd33425198e77cd3ce7c4525" category="paragraph">要集成Trident、需要集成以下设计和架构要素：驱动程序选择和部署、存储类设计、虚拟池设计、永久性卷请求(PVC)对存储配置的影响、卷操作以及使用Trident部署OpenShift服务。</block>
   <block id="9586fb9f48cc64f580092d7123d5acad" category="paragraph">请注意、在下表中、并非所有功能都通过Trident公开。如果需要某些功能，存储管理员必须在配置后应用这些功能。上标脚注区分了每个功能和驱动程序的功能。</block>
   <block id="5b003b29dfd53276a5b816a47ab32348" category="paragraph">Trident为ONTAP提供了2个SAN驱动程序、其功能如下所示。</block>
@@ -5280,8 +5276,6 @@ SMB</block>
   <block id="d11ec52e40490f88487a9042fdcfbce4" category="list-text">对于<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>，<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ， 和<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block>驱动程序中，每个持久卷 (PV) 都映射到一个FlexVol volume。因此，卷快照被创建为NetApp快照。NetApp快照技术比同类快照技术具有更高的稳定性、可扩展性、可恢复性和性能。这些快照副本在创建所需时间和存储空间方面都非常高效。</block>
   <block id="493d70b01045b3860d249e304254b4c7" category="paragraph">使用Trident，您可以利用 VolumeSnapshots 从中创建新的 PV。使用FlexClone技术从这些快照创建 PV（适用于受支持的ONTAP后端）执行。从快照创建 PV 时，后备卷是快照父卷的FlexClone 。这<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block>驱动程序使用 Element 软件卷克隆从快照创建 PV。它在这里从 Element 快照创建一个克隆。</block>
   <block id="25f96c73018ecdf4416a2540508d0a38" category="paragraph">使用时<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>，<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ， 和<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block>存储驱动程序， Trident可以克隆卷。使用时<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>或者<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>驱动程序不支持克隆。从现有卷创建新卷将创建一个新的快照。</block>
-  <block id="04405dc8db6e17d7853c7b251f054223" category="list-text">registry.k8s.io/sig-storage/csi-attacher:v4.10.0</block>
-  <block id="d49d35d0964102edd30044f046d62050" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0</block>
   <block id="a3bfe8b87df4b85184ac2c726bd7b15e" category="list-text"><block ref="1a368feb8bb72ef66bb194b43d0a15b3" prefix="" category="inline-code"></block>*</block>
   <block id="e344165681ff8191ed4faed24ded7cc3" category="paragraph">Trident在集群中的每个工作节点上以单个控制器 pod 和节点 pod 的形式运行。节点 pod 必须运行在您希望挂载Trident卷的任何主机上。</block>
   <block id="2cfd796902655e533881e53b6b9743ed" category="inline-link-macro">使用Trident实现有状态应用程序的故障转移自动化</block>
@@ -6389,9 +6383,6 @@ SMB</block>
   <block id="945c53097aed6aee6897384c32c13596" category="paragraph">例如，此策略设置<block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>的<block ref="b3b9f60c2eb049d3bcbddd22d73210ce" prefix=" " category="inline-code"></block>，但 Trident 对使用它的任何 SAN 卷应用 51 MB 增长：</block>
   <block id="a55370dbc1a259397316ceebdfed21b8" category="paragraph">要避免这种自动调整，请将<block ref="b8975976fc99a32ebfa6029b743acee3" prefix=" " category="inline-code"></block>设置为大于 50 MiB 的值：</block>
   <block id="b58eceaaba71c126318ed8daedaef74b" category="sidebar">配置自动分层</block>
-  <block id="93284b31b63cc86c59eeb4dcd6ba1751" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v6.1.0</block>
-  <block id="f5345a3e1ca4c50ed544fae4c14150b1" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v2.0.0</block>
-  <block id="ed2e3a3511b1047c788e7fd621778ee2" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.5.0</block>
   <block id="0adb26270c00fc572774f5cb57d01573" category="inline-link-macro">26.02</block>
   <block id="e352a332a817691cf8394c9b1288306f" category="paragraph"><block ref="e352a332a817691cf8394c9b1288306f" category="inline-link-macro-rx"></block></block>
   <block id="f1462e5be0262f51cdc6fb6c3b5027dc" category="summary">如果使用 Red Hat OpenShift，则可以从社区操作员、基于 Helm 的安装或手动部署的操作员切换到经过认证的 Trident 操作员。</block>
@@ -6630,10 +6621,6 @@ SMB</block>
   <block id="8e31ed98521d2fbd01629de60bdbfd6a" category="list-text">Go 运行时：<block ref="472bd143483bc49bc89effbd314435c0" category="inline-link-macro-rx"></block></block>
   <block id="278b5284fc6585f71203297ebab6500e" category="inline-link-macro">CVE-2025-23109</block>
   <block id="fd2c12a453dd202f7117b96858090a49" category="list-text">其他依赖项：<block ref="7beaa9a23a5ebb4abc880f48947240a7" category="inline-link-macro-rx"></block></block>
-  <block id="1f07946fee6ac5cb85e38a3da3d8db2e" category="list-text">Trident 现在支持 Kubernetes 1.36。在升级 Kubernetes 之前升级 Trident。</block>
-  <block id="4713d9468516722d04cb8a63424d6222" category="list-text">Kubernetes 1.27 - 1.36</block>
-  <block id="203760c50a5659765fa822dc460e7e7b" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.36.x</block>
-  <block id="f3157f5bea9295ba633b817f5c01eba4" category="paragraph">1.27 - 1.36</block>
   <block id="bd36045805a85f9665960a0f6f9e955f" category="list-text"><block ref="bd36045805a85f9665960a0f6f9e955f" category="inline-link-macro-rx"></block></block>
   <block id="7244beaf9a5f0b906f65ac443dbf07a0" category="paragraph">有关 FlexGroups 和适用于 FlexGroups 的工作负载的信息，请参见<block ref="02927f5d2a03bd36432bf247f38d70d3" category="inline-link-rx"></block>。</block>
   <block id="714ad635b7b855ea6b214ed7b344a93a" category="paragraph">Cloud Volumes ONTAP是一款纯软件存储设备，可在云中运行ONTAP数据管理软件。您可以将Cloud Volumes ONTAP用于生产工作负载、灾难恢复、DevOps、文件共享和数据库管理。它通过提供存储效率、高可用性、数据复制、数据分层和应用程序一致性，将企业存储扩展到云端。</block>
@@ -6687,7 +6674,6 @@ SMB</block>
   <block id="ab69d9120992b9296c38d9e4447f1558" category="paragraph-title">直接在来宾集群中安装 Trident：</block>
   <block id="d09686be8886e8eaf49a77f8b1785c59" category="paragraph">您也可以直接在访客（租户）集群中安装 Trident。当您需要完整的 Trident 功能集（例如快照、克隆、卷调整大小和导入）时，请在访客集群中安装 Trident，这些功能<block ref="9b2a6a8c098cece12ac0a8f284a1a269" prefix=" " category="inline-code"></block>本身并不提供。</block>
   <block id="f02d97ba74a486c6f9a21ae16d123b52" category="paragraph">在来宾群集中，使用基于 IP 的协议：NFS、iSCSI 和 NVMe/TCP。来宾群集不支持光纤通道 (FC)，因为来宾节点是没有直接 FC 连接的虚拟机。</block>
-  <block id="3cbfe5af574efdb4391d1d3e321c8cee" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0</block>
   <block id="e9d36c266026dc04d43783120d0a2d1d" category="paragraph">登录到 Linux 主机并验证其是否正在管理工作和<block ref="958ebeab180637e89445160bac2d22e7" category="inline-link-macro-rx"></block>并且您具有必要的权限。</block>
   <block id="0d8f30017a3c82df9a5d969fa5e4586f" category="paragraph">在开始安装之前，请登录到 Linux 主机并验证其是否正在管理工作，<block ref="f546aa86570a808d23361d7f4e2a08c3" category="inline-link-macro-rx"></block>以及您是否具有必要的权限。</block>
   <block id="4badcdbd19fc30efbca0c1955df11f87" category="list-text">Kubernetes 现在在 Trident 中受支持。在升级 Kubernetes 之前，请先升级 Trident。</block>
@@ -7203,10 +7189,7 @@ SMB</block>
   <block id="648540f1a67ebba0071e70944d7527c2" category="paragraph"><block ref="648540f1a67ebba0071e70944d7527c2" category="inline-link-macro-rx"></block></block>
   <block id="172ebadfc5f13c0aff9b7f172bc4fed4" category="cell">2027年7月</block>
   <block id="4aab0cfeaa9a8262994350900bdd20f2" category="cell">2028年7月</block>
-  <block id="f6d7c73fe3fc66fa560e7262f79f60ae" category="section-title">Trident 26.06 所需的容器映像</block>
-  <block id="f87a5c52c8ee3e84d33252d80679b335" category="list-text">docker.io/netapp/trident:26.06.0</block>
   <block id="01d86b54453ee9aefd6e3ed4a3dc0dc2" category="list-text">docker.io/netapp/trident-autosupport:26.06</block>
-  <block id="9a3b823ceeb6fcbe9a5ac0a50b995ed0" category="list-text">docker.io/netapp/trident-operator:26.06.0（可选）</block>
   <block id="c31dc22d9ccf9395630afa7de351d6bf" category="cell"><block ref="4e9f324b7febae0727b9d412cb49fa13" prefix="" category="inline-code"></block></block>
   <block id="bcf817488b594e4daf83db1e5511242d" category="section-title">有关 Trident 26.06 的关键信息</block>
   <block id="a67a4c76b07caa7907851893a5518350" category="paragraph">在<block ref="02f3115b006f7541a477d52ea8c0f861" prefix=" " category="inline-code"></block>中，更新<block ref="6225334d80f70f493ad5e35aee5b3e8c" prefix=" " category="inline-code"></block>以反映图像注册表的位置。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。例如：</block>
@@ -7331,4 +7314,56 @@ SMB</block>
   <block id="ff7ba160cdd39f6a0b7fe88ef8878c45" category="paragraph">创建后无法修改。要更新此参数，您必须创建一个新的后端。</block>
   <block id="ce29b5f6c6b616b686e7705a75655bb6" category="cell">存储驱动程序的名称。创建后无法修改。要更新此参数，必须创建一个新的后端。</block>
   <block id="aa7fcf992c04e66c97a2ecaecf8e9079" category="cell"><block ref="47cb44be55a0dffa15dfc900a4c687be" prefix="" category="inline-code"></block> 注意：影响后端标识和卷命名的后端配置参数（如<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block> 和<block ref="ed66bef2b107983b6e4066fddf8c45c3" prefix=" " category="inline-code"></block>）在创建后无法更改。要更新这些参数，您必须创建一个新的后端。</block>
+  <block id="93fbc816e8bf100e5538c460cbfded25" category="doc">Trident 卷配置流程</block>
+  <block id="7abc4557b186fa5fe308fb648a0c1759" category="doc">Trident 卷快照创建</block>
+  <block id="4d701192205744a3a09c06efb968dc59" category="doc">Trident 虚拟存储池配置</block>
+  <block id="92cde28a49290d108fcbcc24221bac54" category="doc">Trident 卷访问组管理</block>
+  <block id="59d40127a6af11747a793d61df5338e5" category="doc">Trident 和 Kubernetes 与 NetApp 产品的集成</block>
+  <block id="0aa4c54ee2846cd1ee10e094f05cfa48" category="list-text">Trident 现在支持 Kubernetes 1.37。在升级 Kubernetes 之前，请先升级 Trident。</block>
+  <block id="fb969327dd7c5284cf39ef2077642427" category="list-text">Kubernetes 1.27 - 1.37</block>
+  <block id="1f8bad982c95fa13c1c3b93510b02a5e" category="list-text">Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.37.x</block>
+  <block id="d03983e9fca4277cf0919e8bea0c196c" category="paragraph">1.27 - 1.37</block>
+  <block id="ba8ebafc2389dabfa3286dbc34aec82b" category="section-title">Trident 26.06.2 所需的容器镜像</block>
+  <block id="df499232b0659c7b92a4bb7def65662d" category="cell">v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、v1.32.0、v1.33.0、v1.34.0、v1.35.0、v1.36.0、v1.37.0</block>
+  <block id="add431fb6c7231214d4cc5b3f76a2a96" category="list-text">docker.io/netapp/trident:26.06.2</block>
+  <block id="2c3f6f002722bde0c2e5610ddd0a46b8" category="list-text">docker.io/netapp/trident-operator:26.06.2（可选）</block>
+  <block id="39b839ecfa8ad2cd1a2a661969868248" category="list-text">registry.k8s.io/sig-storage/csi-attacher:v4.11.0</block>
+  <block id="a24cc2fae2df54a2712abf546e031441" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.18.0</block>
+  <block id="d61443f5de6e680d2193b40d5e49f950" category="list-text">registry.k8s.io/sig-storage/csi-provisioner:v6.3.0</block>
+  <block id="ed11c5a031bd827baa31f76e4b76e814" category="list-text">registry.k8s.io/sig-storage/csi-resizer:v2.1.0</block>
+  <block id="6aa4aa1c57132c60ac255cec26f70cf2" category="list-text">registry.k8s.io/sig-storage/csi-snapshotter:v8.6.0</block>
+  <block id="9e2275a440e88168522f5dec7521d5b2" category="doc">自定义 Trident tridentctl 安装</block>
+  <block id="66a65e8f59856ace86e7d0ab11d6ee2f" category="doc">了解 Trident Operator 升级工作流程</block>
+  <block id="835d266e43d7fc9ad169db97e5f68bb6" category="doc">使用 tridentctl 升级 Trident</block>
+  <block id="17bc6151a1580a16ea3a0bb054635da1" category="doc">Trident 数据保护和灾难恢复</block>
+  <block id="b6e5e8475937d3c120e40df57517dc2b" category="doc">Trident 部署建议</block>
+  <block id="d3eb63882efa67a778e4946e3f147dbe" category="doc">将 Trident 与 Kubernetes 集成</block>
+  <block id="6765fc072b17914d8078ae519719dac3" category="doc">Trident Kerberos 传输中加密</block>
+  <block id="85c3ba6a32bf7bad0c1de9edded9a5c9" category="doc">Trident Linux 统一密钥设置（LUKS）</block>
+  <block id="d51e7b5d90845c1a14a02bc8865f816a" category="doc">Trident 安全建议</block>
+  <block id="11c409432b2783da745e2f3c5305a019" category="doc">Trident 存储配置的最佳实践</block>
+  <block id="0aa58f379bc7aae0f4d89e420ac722aa" category="section-title">26.06.2 中的新增功能</block>
+  <block id="9fed2c5f98e24bcd80d1becb14f7b9b9" category="list-text">增加了对 Kubernetes 1.37 的支持。</block>
+  <block id="fb40a6ba370ad5533a7ce3c5414b2332" category="inline-link-macro">问题 #1166</block>
+  <block id="f97a774ca034ed32bdbb15bc881ffb74" category="inline-link-macro">问题 #1179</block>
+  <block id="8ad55c17d13f4d9d068c35356fccb76e" category="list-text">修复了当 Trident 控制器重新启动或<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block>更新时，ONTAP-NAS 导出策略规则被静默删除的问题，该问题发生在<block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>时。这可能导致已挂载的卷无法访问（<block ref="2f681c0904e60dd8ca3ac232198e1fde" category="inline-link-macro-rx"></block>、<block ref="2bde1c55e1c876ea9a5b30e5998e20a4" category="inline-link-macro-rx"></block>）。</block>
+  <block id="1ff7a86a442328eb4c73362f63bafe93" category="list-text">修复了后端更新在发生非实质性更改（例如凭据和 QoS）时运行每卷孤立扫描的问题，这可能会在大型后端上阻塞 CSI 操作数小时。现在，扫描仅在 SVM 或存储前缀更改时运行。</block>
+  <block id="4cd96d766317606681a187daeabb7e65" category="list-text">修复了 Trident 调试日志中出现的凭据，包括 CSI gRPC 请求转储、启动环境转储以及 CRD 控制器记录的<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block>规范。启动环境转储现在仅记录 Trident 自身的<block ref="9587dd0b7e1ce8ba3ecc5647ca653baf" prefix=" " category="inline-code"></block>变量的值，并按名称列出其他变量。</block>
+  <block id="878e26ce593b81438793485a524bfdd4" category="doc">使用 kubectl 管理 Trident 后端</block>
+  <block id="ef729a4d7079ef5170ca33d7a2b2ff5b" category="doc">使用 tridentctl 管理 Trident 后端</block>
+  <block id="b0fdb9fb8ca9c19b8f0e60918e66c855" category="doc">选择 Trident 后端管理方法</block>
+  <block id="f94175d68584fa6fbcca90393df1f78c" category="doc">配置 Trident 后端</block>
+  <block id="efbe44f08e5bb483af8587f9aa173ffb" category="doc">创建 Trident 存储类</block>
+  <block id="95f086d73ced21ab39864fbcdafc5593" category="doc">管理 Trident 存储类</block>
+  <block id="3262a5dac33954f8bce5abaf56b06897" category="doc">监控 Trident 存储操作</block>
+  <block id="ce8c3a3d9a1addd78a106ad7348abd3b" category="doc">跨命名空间克隆 Trident 卷</block>
+  <block id="4c4aeb85b1b22846a524105b5bf4631f" category="doc">自定义 Trident 卷名和标签</block>
+  <block id="53ec4d965298dbd0a7cd7654f4cffcda" category="doc">扩展 Trident 卷</block>
+  <block id="26dc9e2c8cafa5e40766157e25e3db26" category="doc">使用 Trident 卷组快照</block>
+  <block id="451317abd90ea542d26ebad3c7e3b63a" category="doc">导入 Trident 卷</block>
+  <block id="4f180ac6611922295d16ff6c0c4c68a6" category="doc">执行 Trident 卷操作</block>
+  <block id="dc5de362a9aac689498b3450bb50f2d1" category="doc">预配 Trident 卷</block>
+  <block id="e52c3cee59da6b9b8b87a9baa0cd4b45" category="doc">使用 Trident 快照</block>
+  <block id="2e521bb61d9127d4460f3262267cd834" category="doc">跨命名空间共享 Trident NFS 卷</block>
+  <block id="64fc6c7cb21b21d1926676a7cc84c9cf" category="doc">准备 Trident Worker 节点</block>
 </blocks>

@@ -4,7 +4,7 @@ permalink: trident-use/worker-node-prep.html
 keywords: storage class, manage storage class, storage classes, kubernetes storage classes, worker node, nfs, iscsi, kubernetes clusters, self-healing, healing, nvme, tcp 
 summary: Kubernetes 集群中的所有工作节点都需要能够挂载为 Pod 配置的卷。如果您在其中一个后端使用的是 ontap-nas ， ontap-nas-economy. ontap-nas-flexgroup 驱动程序，则您的工作节点需要 NFS 工具。否则，它们需要使用 iSCSI 工具。 
 ---
-= 准备工作节点
+= 准备 Trident Worker 节点
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

@@ -4,7 +4,7 @@ permalink: trident-reco/kerberos-inflight-encryption.html
 keywords: Trident, backend, storage, encryption, kerberos 
 summary: 您可以配置加密以保护Trident与存储后端之间的流量。 
 ---
-= Kerberos传输中加密
+= Trident Kerberos 传输中加密
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

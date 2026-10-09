@@ -4,7 +4,7 @@ permalink: trident-concepts/virtual-storage-pool.html
 keywords: virtual pools, Trident, backends 
 summary: 虚拟池在Trident的存储后端和KubeNet的StorageCluster之间提供了一个抽象层。管理员可以通过这些协议以一种通用的，与后端无关的方式定义各个方面，例如每个后端的位置，性能和保护，而不会使 StorageClass 指定要用于满足所需条件的物理后端，后端池或后端类型。 
 ---
-= 虚拟池
+= Trident 虚拟存储池配置
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

@@ -4,7 +4,7 @@ permalink: trident-use/manage-stor-class.html
 keywords: storage class, manage storage class, storage classes, kubernetes storage classes 
 summary: 您可以查看现有存储类、设置默认存储类、确定存储类后端以及删除存储类。 
 ---
-= 管理存储类
+= 管理 Trident 存储类
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

@@ -4,7 +4,7 @@ permalink: trident-reco/deploy-reco.html
 keywords: deployment, deploy, trident, namespace 
 summary: 部署Trident时、请遵循此处列出的建议。 
 ---
-= 部署
+= Trident 部署建议
 :hardbreaks:
 :allow-uri-read: 
 :icons: font

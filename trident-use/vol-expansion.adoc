@@ -4,7 +4,7 @@ permalink: trident-use/vol-expansion.html
 keywords: volumes, on-demand volume snapshots, expand volumes, iscsci volumes, nfs volumes, expand, expansion 
 summary: Trident使Kubnetes用户能够在创建卷后对其进行扩展。查找有关扩展iSCSI、FC和NFS卷所需配置的信息。 
 ---
-= 展开卷
+= 扩展 Trident 卷
 :hardbreaks:
 :allow-uri-read: 
 :icons: font
