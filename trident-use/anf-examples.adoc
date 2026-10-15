@@ -65,6 +65,9 @@ Azure NetApp Files后端提供了这些配置选项。
 如果在AKS集群上启用了受管标识、则为可选。 |  
 
 
+| `cloudConfiguration.cloudName` | 标识后端的 Azure 云环境。使用 Azure Government 时设置为 `AzureGovernment`。 |  
+
+
 | `resourceGroups` | 用于筛选已发现资源的资源组列表 | "[]" （无筛选器） 
 
 
@@ -117,10 +120,18 @@ NOTE: 有关网络功能的详细信息、请参见 link:https://docs.microsoft.
 
 * Azure 商业版
 * Azure Government（Azure Government / MAG）
+* Azure 中国
 
 
 部署 Trident 或创建 Azure NetApp Files 后端时，请确保 Azure Resource Manager 和身份验证终结点与 Azure 云环境匹配。如果端点不匹配， `tridentctl`无法进行身份验证，并且后端创建失败。
 
+对于 Azure Government 后端，请在后端配置中设置 `cloudConfiguration.cloudName`：
+
+[source, yaml]
+----
+cloudConfiguration:
+  cloudName: AzureGovernment
+----
 
 
 [[required-permissions-and-resources]]

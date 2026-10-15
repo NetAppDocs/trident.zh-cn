@@ -116,7 +116,7 @@ Trident无法配置SnapMirror复制关系、但是存储管理员可以使用lin
 然后，您可以使用将恢复的卷导入到Trident中link:../trident-use/vol-import.html["tridentctrd卷导入"]。
 
 
-NOTE: 不支持导入 `ontap-nas-economy`，  `ontap-san-economy`或 `ontap-flexgroup-economy` 驱动程序。
+NOTE:  `ontap-san-economy` 驱动程序支持卷导入。使用  `ontap-nas-economy` 驱动程序导入 Qtree 是一项技术预览功能，不支持在生产环境中使用。 `ontap-flexgroup-economy` 驱动程序不支持导入。有关详细信息，请参见 link:../trident-use/vol-import.html["导入 Trident 卷"]。
 
 
 

@@ -164,14 +164,24 @@ metadata:
   name: csi-nas
 spec:
   state: established
+  replicationPolicy: MirrorAllSnapshots
+  replicationSchedule: 5min
   volumeMappings:
   - localPVCName: csi-nas
     remoteVolumeHandle: "datavserver:trident_pvc_3bedd23c_46a8_4384_b12b_3c38b313c1e1"
 ----
 +
-Trident将使用配置的关系策略名称(或ONTAP的默认策略)创建SnapMirror关系并对其进行初始化。
+TMR `spec` 有四个顶级字段： `state`，用于设置所需的关系状态（请参阅 <<卷复制状态>>）； `volumeMappings`，用于将本地 PVC 与其远程卷句柄相关联；以及下面描述的可选  `replicationPolicy` 和  `replicationSchedule` 字段。
 
-.. 使用先前创建的StorageClass创建一个PVC以用作二级(SnapMirror目标)。
+
+
+
+
+ `replicationPolicy` 和  `replicationSchedule` 字段是可选的。将  `replicationPolicy` 设置为 ONTAP 上的异步 SnapMirror 策略的名称，并将  `replicationSchedule` 设置为 ONTAP 计划的名称。如果省略任一字段，Trident 将使用在后端配置的相应复制策略或计划。在创建关系时设置这些字段；建立关系后无法更改策略或计划。要使用不同的设置，请删除并重新创建 TMR。
+
+Trident 使用配置的复制策略和计划创建并初始化 SnapMirror 关系。
+
+. 使用先前创建的StorageClass创建一个PVC以用作二级(SnapMirror目标)。
 +
 .示例
 [source, yaml]
@@ -192,8 +202,6 @@ storageClassName: csi-nas
 ----
 +
 Trident将检查是否存在TridentMirorRelationship CRD、如果此关系不存在、则无法创建卷。如果存在此关系、Trident将确保将新FlexVol volume放置到与镜像关系中定义的远程SVM建立对等关系的SVM上。
-
-
 
 
 
@@ -261,7 +269,7 @@ spec:
 
 .步骤
 . 在二级Kubernetes集群上、确保已更新TundentMirorRelationship上的_spic.netVolumeHandle_字段的值。
-. 在二级Kubernetes集群上，将Trident镜像 关系的_spec.mirector_字段更新到 `reestablished`。
+. 在辅助 Kubernetes 集群上，将 TridentMirrorRelationship 的 _spec.state_ 字段更新为 `reestablished`。
 
 
 

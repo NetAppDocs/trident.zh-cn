@@ -57,7 +57,7 @@ IMPORTANT: 在私有存储库中安装Trident时、如果 `imageRegistry`使用�
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. 使用 `helm install`并指定部署和映像注册表位置的名称。您的 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident和CSI映像"] 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。在示例中， `100.2602.0`是您要安装的 Trident 版本。
+. 使用 `helm install`并指定部署和映像注册表位置的名称。您的 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident和CSI映像"] 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。在示例中， `100.2606.0`是您要安装的 Trident 版本。
 +
 [role="tabbed-block"]
 ====
@@ -65,14 +65,14 @@ helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 --
 [source, console]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2602.0 --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2606.0 --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 .不同注册表中的映像
 --
 [source, console]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2602.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:26.06.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:26.06 --set tridentImage=<your-registry>/trident:26.06.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2606.0 --set imageRegistry=<your-registry> --set operatorImage=<your-registry>/trident-operator:26.06.0 --set tridentAutosupportImage=<your-registry>/trident-autosupport:26.06 --set tridentImage=<your-registry>/trident:26.06.0 --create-namespace --namespace <trident-namespace> --set nodePrep={iscsi}
 ----
 --
 ====
@@ -105,17 +105,17 @@ NOTE: 如果已为Trident创建命名空间、则`-create-namespace`参数不会
 在命令行上指定覆盖。
 
 |===
-例如，要更改 `debug`的默认值，请运行以下命令，其中 `100.2602.0`是您要安装的 Trident 版本：
+例如，要更改 `debug`的默认值，请运行以下命令，其中 `100.2606.0`是您要安装的 Trident 版本：
 
 [source, console]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2602.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 100.2606.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 要添加nodePrep值、请运行以下命令：
 
 [source, console]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2602.0  --create-namespace --namespace trident --set nodePrep={iscsi}
+helm install <name> netapp-trident/trident-operator --version 100.2606.0  --create-namespace --namespace trident --set nodePrep={iscsi}
 ----
 
 

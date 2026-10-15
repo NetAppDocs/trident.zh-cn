@@ -268,6 +268,30 @@ link:../trident-reference/ports.html["Trident端口"]
 
 对于气隙安装、以下列表是安装Trident所需容器映像的参考。使用 `tridentctl images`命令验证所需容器映像的列表。
 
+从 Trident 26.06 开始提供 Kubernetes 1.37 支持。下面的 26.06.2 映像列表包括 Kubernetes 1.37 的映像。
+
+
+
+[[container-images-required-for-trident-26-06-0]]
+=== Trident 26.06.0 所需的容器镜像
+
+[cols="2"]
+|===
+| Kubernetes版本 | 容器映像 
+
+
+| v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0  a| 
+* docker.io/netapp/trident:26.06.0
+* docker.io/netapp/trident-autosupport:26.06
+* docker.io/netapp/trident-operator:26.06.0（可选）
+* registry.k8s.io/sig-storage/csi-attacher:v4.11.0
+* registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.17.0
+* registry.k8s.io/sig-storage/csi-provisioner:v6.3.0
+* registry.k8s.io/sig-storage/csi-resizer:v2.1.0
+* registry.k8s.io/sig-storage/csi-snapshotter:v8.6.0
+
+
+|===
 
 
 [[container-images-required-for-trident-26-06-2]]

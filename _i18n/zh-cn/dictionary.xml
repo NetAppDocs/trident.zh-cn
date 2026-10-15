@@ -2145,7 +2145,6 @@
   <block id="cceb49886fed38f241928d51abab95a2" category="section-title">卷复制和恢复</block>
   <block id="815f28e53ebfb423dfe835a845095bf6" category="inline-link-macro">ONTAP SnapMirror复制和恢复</block>
   <block id="c3c343b5a84229bd5095fd09f2afc5f5" category="inline-link-macro">tridentctrd卷导入</block>
-  <block id="d8d9dfeae772da34290b750d0f848a26" category="admonition">不支持导入<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>， <block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>或<block ref="70d5dbddc55e3700ddbc8d21f0de22a3" prefix=" " category="inline-code"></block> 驱动程序。</block>
   <block id="b489b293d6cbe8b86835d3cac8c315fb" category="section-title">Snapshot数据保护</block>
   <block id="f332d72a4b78e34e31131f3a98c98053" category="paragraph">您可以使用以下方式保护和还原数据：</block>
   <block id="97fb495fd3b6672c40bb0092ca102eca" category="list-text">外部快照控制器和CRD、用于为永久性卷(PVs)创建Kubbernetes卷快照。</block>
@@ -4303,7 +4302,6 @@ SMB</block>
   <block id="ce01c03f932076e82348fc5aaefacc7d" category="list-text">在二级Kubbernetes集群上执行以下步骤：</block>
   <block id="dbe7fac150e57be9bc0d8e046792f4c3" category="list-text">使用trident.netapp.io/replication: true参数创建StorageClass。</block>
   <block id="01d68e0f9630c032dc8a33358e46e65b" category="list-text">使用目标和源信息创建镜像关系CR。</block>
-  <block id="b4dcd7f617380594be36d544e6823841" category="paragraph">Trident将使用配置的关系策略名称(或ONTAP的默认策略)创建SnapMirror关系并对其进行初始化。</block>
   <block id="4ba5d2a91c95149a7ad924ebd0d9503d" category="list-text">使用先前创建的StorageClass创建一个PVC以用作二级(SnapMirror目标)。</block>
   <block id="14c271d9e62dcf6baaab0fde456f080f" category="paragraph">Trident将检查是否存在TridentMirorRelationship CRD、如果此关系不存在、则无法创建卷。如果存在此关系、Trident将确保将新FlexVol volume放置到与镜像关系中定义的远程SVM建立对等关系的SVM上。</block>
   <block id="e71d1a5cbaac30e63ed507e4b62c705f" category="section-title">卷复制状态</block>
@@ -4323,7 +4321,6 @@ SMB</block>
   <block id="f69101c0107c4bbf8f0ccc9141beb68b" category="section-title">在故障转移后还原镜像关系</block>
   <block id="9a023cbe1d3be933d8edb6228f9901ce" category="paragraph">在还原镜像关系之前、请选择要用作新主卷的那一端。</block>
   <block id="1c7011adbcc0afa258396aff4f10266b" category="list-text">在二级Kubernetes集群上、确保已更新TundentMirorRelationship上的_spic.netVolumeHandle_字段的值。</block>
-  <block id="ffb25f01fda2538ae98bc0c4b4d465a6" category="list-text">在二级Kubernetes集群上，将Trident镜像 关系的_spec.mirector_字段更新到<block ref="036bbe13de7250844b100bc381b59214" prefix=" " category="inline-code"></block>。</block>
   <block id="41a593c0bede63aac2726a18e4599087" category="section-title">其他操作</block>
   <block id="567147b40ff26562a6dfcddbde29e62e" category="paragraph">Trident支持对主卷和二级卷执行以下操作：</block>
   <block id="253093d00b66ff2357df5085c04b2758" category="section-title">将主PVC复制到新的二级PVC</block>
@@ -5287,7 +5284,6 @@ SMB</block>
   <block id="e88be9be38b264da972dbe7aed0d8b93" category="list-text">容器名称按其在 pod 规范中的显示方式列出。</block>
   <block id="ea59db5901a073416d8796bed04dddb5" category="list-text">边车列在每个主集装箱下方。</block>
   <block id="46dae802e97f6d812c44ca5bb195ea47" category="list-text">检查TORC的<block ref="7b54c4f2d7fe24eb4666be34acbf75ac" prefix=" " category="inline-code"></block>用于查看当前应用值的字段。</block>
-  <block id="4a60d2fff997f6f3d9f8c6079b571355" category="section-title">关于Trident 25.10 的关键信息</block>
   <block id="90c0ecd3ada12b8e2971f5a66c8850b9" category="cell">允许启用强制分离功能。您可以通过与节点健康检查 (NHC) 操作符集成来自动执行强制分离过程。有关信息，请参阅<block ref="b527eafc73367312d2cf15ed698bf909" category="inline-link-macro-rx"></block>。</block>
   <block id="c1ece52281680ed5cdb19a2c782c2f54" category="cell"><block ref="55b558c7ef820e6e00e5993b9e55d93b" prefix="" category="inline-code"></block></block>
   <block id="ca805cfeede3ffd0058179d42f85ee4e" category="paragraph">设置 Kubernetes 对Trident控制器、节点和操作员 pod 的资源限制和请求。您可以为每个容器和边车配置 CPU 和内存，以管理 Kubernetes 中的资源分配。</block>
@@ -5886,7 +5882,6 @@ SMB</block>
   <block id="e447b6c9645ce6cd63337d813a552cd5" category="sidebar">Trident 对 ASA r2 存储系统的支持</block>
   <block id="60706cc94c04d32db6c18b4fb8b21f21" category="inline-link">Trident 25.10</block>
   <block id="69a4986cbe93f4162ce953d8e917b215" category="list-text"><block ref="69a4986cbe93f4162ce953d8e917b215" category="inline-link-rx"></block></block>
-  <block id="28b62bff68083dad22bdf1acf812f48a" category="list-text">Trident 现在支持 Kubernetes 1.35。在升级 Kubernetes 之前升级 Trident。</block>
   <block id="627219ce2083b03812e10846d1307811" category="list-text">*spec.runImmediately*：（_可选_）设置为 <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 以在创建计划时触发一次性的即时基线运行（根据保留设置进行备份和/或快照）。默认为 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。这不会修改后续重复周期。</block>
   <block id="b267d2c4b44dd537f81ddd4d1ca1cdd8" category="paragraph">立即运行的计划的示例 YAML：</block>
   <block id="ea89dfc546da2da95449976a3262efd9" category="list-text">*立即基线保护*：使用 <block ref="40c288e5937b634afc8b0a225fcdb4cf" prefix=" " category="inline-code"></block> 在创建计划时立即创建初始备份或快照，而不是等待第一个计划的运行时间。默认值为 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。</block>
@@ -6399,9 +6394,6 @@ SMB</block>
   <block id="5a450639fa89231b036826f5af7d71cd" category="paragraph">如果您通过使用安装程序包中的 <block ref="0d472c887b61206765c1caa63a9290ec" prefix=" " category="inline-code"></block> 手动部署操作员来安装 Trident，请通过删除相同的清单来删除它。</block>
   <block id="038293ff84b09b1a0092a33fdf412425" category="list-text">使用捆绑清单删除操作员部署：</block>
   <block id="f5c23abe35c557b95db4b3fce1038b0e" category="sidebar">切换至 OpenShift 认证 Trident 操作员</block>
-  <block id="fd271eb2e0c07a35a036e5d3d38f7295" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署和映像注册表位置的名称。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。在示例中，<block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本。</block>
-  <block id="b1a6996825cda91a559712aa47487d56" category="paragraph">例如，要更改<block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>的默认值，请运行以下命令，其中<block ref="64bf780034fbb05b851c4a4fedbc6d2a" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本：</block>
-  <block id="4b4a2f07a31fb7ce67a051d38cdb07a1" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署的名称，如下例所示，其中<block ref="5b8b118bf0117b802a69cacdb76c3dc5" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本。</block>
   <block id="16b97664881a67a27dea071f7290ff06" category="paragraph">Trident 从 StorageClass 定义中导出后端配置。当您应用 StorageClass 时，Trident 验证所需的参数，创建后端，并使用状态注释 StorageClass。</block>
   <block id="3d4d8632d9ddb90edb43db4b7c53a227" category="paragraph">Trident 只创建一次 VolumeSnapshotClass。Trident 会为后续的 StorageClasses 重复使用同一个 VolumeSnapshotClass。</block>
   <block id="6c60936b230f8221d8dfdd63e27e1ff4" category="paragraph">要触发自动后端创建，请在 StorageClass<block ref="166e64f6c3677d0c513901242a3e702d" prefix=" " category="inline-code"></block> 节中定义所需的参数。</block>
@@ -6483,7 +6475,6 @@ SMB</block>
   <block id="218a0c4bd3daf2a2ce3574281b7ca0b2" category="paragraph">请检查 <block ref="d5658c9dfbfb4ef585182e92445a8919" category="inline-link-macro-rx"></block> 以确保您已满足安装先决条件，并为您的环境选择了正确的安装选项。</block>
   <block id="b7bec5d0d77ca93cd7a03308720c371e" category="paragraph">无论是手动部署还是使用 Helm，Trident 操作员都是简化安装和动态管理 Trident 资源的好方法。您甚至可以<block ref="a1f2adae0e8434fa57fbe3e21b52345e" category="inline-link-macro-rx"></block>使用<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>自定义资源 (CR) 中的属性。</block>
   <block id="778f8fc1f45a4176e0a6dc6c0c8048d8" category="paragraph">安装和升级 Trident 的众多<block ref="2b6c752c2a0adaf915d24df45e6dabc3" category="inline-link-macro-rx"></block>之一是自动处理 Trident 和 Kubernetes 对象，而不会中断现有的已挂载卷。通过这种方式，Trident 可以支持零停机时间升级，或<block ref="c0fb6b6f12bb8ae805a97690328ec023" category="inline-link-macro-rx"></block>。特别是，Trident 操作程序与 Kubernetes 集群进行通信以：</block>
-  <block id="df59e976eeaa50e1f8a5a59704fbf6ca" category="list-text">如果您<block ref="4cb6ea02341de02a01b7d090723c78e1" category="inline-link-macro-rx"></block>，您可以使用<block ref="ecdd1f9daa1459f8b8c837369bdc27a9" prefix=" " category="inline-code"></block>一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：</block>
   <block id="8edaa40191fd981b339b65738ae96ecc" category="admonition">在切换安装方法之前，请查看 <block ref="d9897dfd3f891279098b72584e2caa99" category="inline-link-macro-rx"></block>。</block>
   <block id="a91a374e8f989d015a82975728b4b552" category="paragraph">一般来说，您应该使用与初始安装相同的方法进行升级，但您可以<block ref="be81b6c3db35f66680ab7fc08ff1a8b2" category="inline-link-macro-rx"></block>。升级 Trident 有两种选择。</block>
   <block id="a92191d3aca5303d4e3dde63b3f7fb5a" category="list-text">重新安装 Trident。请参阅 <block ref="0a88f85b526e3c78d37b0fe4e95e5edc" category="inline-link-macro-rx"></block>。</block>
@@ -7366,4 +7357,24 @@ SMB</block>
   <block id="e52c3cee59da6b9b8b87a9baa0cd4b45" category="doc">使用 Trident 快照</block>
   <block id="2e521bb61d9127d4460f3262267cd834" category="doc">跨命名空间共享 Trident NFS 卷</block>
   <block id="64fc6c7cb21b21d1926676a7cc84c9cf" category="doc">准备 Trident Worker 节点</block>
+  <block id="7916dc52b9abb193722daaeb0de2d60b" category="paragraph">从 Trident 26.06 开始提供 Kubernetes 1.37 支持。下面的 26.06.2 映像列表包括 Kubernetes 1.37 的映像。</block>
+  <block id="2e43f1c519e4ecb61781347e29f73868" category="section-title">Trident 26.06.0 所需的容器镜像</block>
+  <block id="3cbfe5af574efdb4391d1d3e321c8cee" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0</block>
+  <block id="f87a5c52c8ee3e84d33252d80679b335" category="list-text">docker.io/netapp/trident:26.06.0</block>
+  <block id="9a3b823ceeb6fcbe9a5ac0a50b995ed0" category="list-text">docker.io/netapp/trident-operator:26.06.0（可选）</block>
+  <block id="2c5cc0fc2f7b351430f2273c60a55ce8" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.17.0</block>
+  <block id="1b1bd3d817b55a37d7ba69f588363889" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署和映像注册表位置的名称。您的 <block ref="57de9a35aeedde82408b1e047030d221" category="inline-link-macro-rx"></block> 可以位于一个注册表或不同的注册表中，但所有 CSI 映像必须位于同一注册表中。在示例中，<block ref="2f1944f6f13a74763bbba63a5524cb17" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本。</block>
+  <block id="1369b7b6434fa56cdab21d07a18531fb" category="paragraph">例如，要更改<block ref="ad42f6697b035b7580e4fef93be20b4d" prefix=" " category="inline-code"></block>的默认值，请运行以下命令，其中<block ref="2f1944f6f13a74763bbba63a5524cb17" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本：</block>
+  <block id="2555b84d4b6caf6c54c076e2fe163167" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block>并指定部署的名称，如下例所示，其中<block ref="2f1944f6f13a74763bbba63a5524cb17" prefix=" " category="inline-code"></block>是您要安装的 Trident 版本。</block>
+  <block id="39b365c32bfda56a977434757d7dbeb6" category="list-text">如果您<block ref="4cb6ea02341de02a01b7d090723c78e1" category="inline-link-macro-rx"></block>，您可以使用<block ref="e5e8d5e699ad056ca1288855bb50e9ac" prefix=" " category="inline-code"></block>一步升级。如果您没有添加 Helm 存储库或无法使用它进行升级：</block>
+  <block id="7025f9b1df4a60725a7af1d637587d57" category="admonition"><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 驱动程序支持卷导入。使用 <block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 驱动程序导入 Qtree 是一项技术预览功能，不支持在生产环境中使用。<block ref="70d5dbddc55e3700ddbc8d21f0de22a3" prefix=" " category="inline-code"></block> 驱动程序不支持导入。有关详细信息，请参见 <block ref="789b6758f1cde553cc7d543061e548ae" category="inline-link-macro-rx"></block>。</block>
+  <block id="2c7a15b5360cdb2834a297c73c8a1280" category="cell"><block ref="2c2dd2a1737a7ba68195b912fe21b1cf" prefix="" category="inline-code"></block></block>
+  <block id="c5fb579991f2b764a4cb58f667d44f5f" category="cell">标识后端的 Azure 云环境。使用 Azure Government 时设置为<block ref="061204a9983f0aecdfd52c97ddaa16de" prefix=" " category="inline-code"></block>。</block>
+  <block id="2407236f70cfb3e6a9089a8ae4f42493" category="list-text">Azure 中国</block>
+  <block id="9b344e55b72fd40d7385656b99fa94a9" category="paragraph">对于 Azure Government 后端，请在后端配置中设置<block ref="2c2dd2a1737a7ba68195b912fe21b1cf" prefix=" " category="inline-code"></block>：</block>
+  <block id="af4b8a0f9788e5acca098a74e4e135c2" category="list-text">*目标命名空间所有者：* 在目标命名空间中创建一个引用源 PVC 的 TridentVolumeReference CR<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block>。</block>
+  <block id="19704ca08fc90aa29f659214e1a39c56" category="paragraph">TMR<block ref="b979c2934ac0b4ba3f08dabfdd1b2299" prefix=" " category="inline-code"></block> 有四个顶级字段：<block ref="9ed39e2ea931586b6a985a6942ef573e" prefix=" " category="inline-code"></block>，用于设置所需的关系状态（请参阅 <block ref="68821a44f80ee7ba834fd66b403afa8b" category="inline-xref-macro-rx"></block>）；<block ref="702c93403507671a294b4511027e9c46" prefix=" " category="inline-code"></block>，用于将本地 PVC 与其远程卷句柄相关联；以及下面描述的可选 <block ref="041b1bcc7dd53968be908fb3b8c2e25e" prefix=" " category="inline-code"></block> 和 <block ref="576f0eafb190414d70d5c731b2b6a5eb" prefix=" " category="inline-code"></block> 字段。</block>
+  <block id="abb338587ff0e42588275a0c5807c75a" category="paragraph"><block ref="041b1bcc7dd53968be908fb3b8c2e25e" prefix=" " category="inline-code"></block> 和 <block ref="576f0eafb190414d70d5c731b2b6a5eb" prefix=" " category="inline-code"></block> 字段是可选的。将 <block ref="041b1bcc7dd53968be908fb3b8c2e25e" prefix=" " category="inline-code"></block> 设置为 ONTAP 上的异步 SnapMirror 策略的名称，并将 <block ref="576f0eafb190414d70d5c731b2b6a5eb" prefix=" " category="inline-code"></block> 设置为 ONTAP 计划的名称。如果省略任一字段，Trident 将使用在后端配置的相应复制策略或计划。在创建关系时设置这些字段；建立关系后无法更改策略或计划。要使用不同的设置，请删除并重新创建 TMR。</block>
+  <block id="bd6e5449a9dedf8ce1f979d098c41e44" category="paragraph">Trident 使用配置的复制策略和计划创建并初始化 SnapMirror 关系。</block>
+  <block id="2fd154f7e5b13f400a56486bd38bdabf" category="list-text">在辅助 Kubernetes 集群上，将 TridentMirrorRelationship 的 _spec.state_ 字段更新为<block ref="036bbe13de7250844b100bc381b59214" prefix=" " category="inline-code"></block>。</block>
 </blocks>
