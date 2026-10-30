@@ -47,7 +47,7 @@ Trident 为具有 Trident protect 的 ASA r2 系统提供有限的数据保护�
 [[unsupported-operations]]
 == 不支持的操作
 
-* 进行了加密
+* Linux 统一密钥设置（LUKS）加密
 * SnapMirror 卷复制
 * 限制聚合使用
 * 空间预留模式

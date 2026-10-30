@@ -1,0 +1,236 @@
+---
+sidebar: sidebar 
+permalink: trident-use/cosi.html 
+keywords: COSI, object storage, StorageGRID, ONTAP S3, BucketClaim, BucketAccess 
+summary: 使用 Trident 和容器对象存储接口配置和访问 S3 存储桶。 
+---
+= 使用 COSI 配置对象存储
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+使用容器对象存储接口（COSI）通过 Trident 管理的 Kubernetes 资源为 Kubernetes 工作负载配置 S3 存储桶。
+
+
+
+[[overview]]
+== 概述
+
+COSI 可将对象存储提供商连接到 Kubernetes 工作负载。Trident 可提供以下资源：
+
+* `TridentObjectStore`：将 Trident 连接到对象存储系统及其凭据。在 Trident 命名空间中创建此资源。
+* `BucketClass`：定义对象存储选择和存储桶删除策略。
+* `BucketClaim`：请求一个存储桶。
+* `BucketAccessClass`：定义如何配置对存储桶的访问。
+* `BucketAccess`：请求一个或多个存储桶的凭据。
+
+
+Trident 通过以下对象存储驱动程序支持 COSI：
+
+* StorageGRID：全面可用。
+* ONTAP S3：技术预览。
+
+
+Trident 支持 S3 协议。在初始版本中，仅支持路径样式 S3 寻址。
+
+
+
+[[requirements-and-limitations]]
+== 要求和限制
+
+* 在 `TridentOrchestrator`自定义资源 （TORC） 中同时启用 `enableConcurrency`和 `enableCOSI`。默认情况下，COSI 未启用。
+* 在启用控制器并发之前，请验证所有配置的 Trident 后端是否使用受支持的驱动程序。不支持的后端驱动程序会阻止 Trident 启动；请参见 link:controller-scalability.html#before-you-enable["在您启用控制器可扩展性之前"]。
+* 请勿将 Trident COSI 与社区 COSI 控制器一起运行。
+* 初始版本使用 `objectstorage.k8s.io/v1alpha2` COSI API。
+* StorageGRID `TridentObjectStore` 资源使用长期有效的租户根凭据。每个 `TridentObjectStore` 连接到一个 StorageGRID 租户；多个资源可以连接到同一个租户。将凭据存储在 Trident 命名空间的 Kubernetes Secret 中，并根据您的安全要求对其进行保护。
+* 一个 StorageGRID `BucketAccess` 最多支持八个存储桶。
+
+
+有关并发控制器操作的一般信息，请参见 link:controller-scalability.html["控制器可扩展性"]。
+
+
+
+[[enable-cosi]]
+== 启用 COSI
+
+在 `TridentOrchestrator` 规范中设置这两个选项：
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  namespace: trident
+  enableConcurrency: true
+  enableCOSI: true
+----
+使用常规操作员工作流程应用 TORC 或更新现有资源。有关配置 TORC 的详细信息，请参见link:../trident-install/kubernetes-customize-deploy.html["自定义Trident操作员安装"]。
+
+
+
+[[configure-a-storagegrid-object-store]]
+== 配置 StorageGRID 对象存储
+
+在 Trident 命名空间中使用 StorageGRID 租户凭据创建 Kubernetes Secret：
+
+[source, yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tenant3
+  namespace: trident
+type: Opaque
+stringData:
+  username: <tenant-root-username>
+  password: <tenant-root-password>
+----
+创建一个引用 Secret 的 `TridentObjectStore`。将示例端点和帐户 ID 替换为您 StorageGRID 环境的值：
+
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentObjectStore
+metadata:
+  name: trident-tenant3
+  namespace: trident
+spec:
+  accountId: "<account-id>"
+  credentials:
+    secretName: tenant3
+  labels:
+    tenantInstance: three
+  managementEndpoint: https://<storagegrid-management-endpoint>
+  objectStoreDriver: storage-grid
+  s3Endpoint: https://<storagegrid-s3-endpoint>
+----
+应用这两种资源：
+
+[source, console]
+----
+kubectl apply -f tenant-secret.yaml
+kubectl apply -f trident-object-store.yaml
+----
+
+
+[[configure-an-ontap-s3-object-store]]
+== 配置 ONTAP S3 对象存储
+
+[NOTE]
+====
+通过 COSI 提供的 ONTAP S3 支持是 Trident 26.10 中的技术预览版，不支持在生产环境中使用。在正式发布之前，配置字段和行为可能会发生变化。
+
+====
+在 Trident 命名空间中使用 ONTAP S3 用户凭据创建 Kubernetes Secret，然后创建一个引用该 Secret 的 `TridentObjectStore`。将占位符替换为您 ONTAP S3 环境的值：
+
+[source, yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ontap-s3-credentials
+  namespace: trident
+type: Opaque
+stringData:
+  username: "<user>"
+  password: "<password>"
+---
+apiVersion: trident.netapp.io/v1
+kind: TridentObjectStore
+metadata:
+  name: ontap-s3
+  namespace: trident
+spec:
+  objectStoreDriver: ontap-s3
+  objectStoreName: ontap-object-store
+  managementEndpoint: "<management-endpoint>"
+  svmName: "<svm-name>"
+  storagePrefix: trident
+  credentials:
+    secretName: ontap-s3-credentials
+----
+ `storagePrefix` 是可选的，省略时默认为  `trident`。应用 Secret 和  `TridentObjectStore`：
+
+[source, console]
+----
+kubectl apply -f ontap-s3-object-store.yaml
+----
+
+
+[[create-a-bucketclass-and-request-a-bucket]]
+== 创建 BucketClass 并请求存储桶
+
+ `BucketClass` 可以使用标签选择器、对象存储类型或两者来选择对象存储。如果没有选择参数，Trident 可以从所有已配置的对象存储中进行选择。
+
+[source, yaml]
+----
+apiVersion: objectstorage.k8s.io/v1alpha2
+kind: BucketClass
+metadata:
+  name: sg-delete
+spec:
+  driverName: cosi.trident.netapp.io
+  deletionPolicy: Delete
+  parameters:
+    selector: tenantInstance=three
+    objectStoreType: storage-grid
+----
+创建一个使用该类的 `BucketClaim`：
+
+[source, yaml]
+----
+apiVersion: objectstorage.k8s.io/v1alpha2
+kind: BucketClaim
+metadata:
+  name: claim-a1
+  namespace: default
+spec:
+  bucketClassName: sg-delete
+  protocols:
+    - S3
+----
+当 Trident 处理声明时，它会选择一个匹配的对象存储。如果多个存储匹配，Trident 会随机选择一个，以便在匹配的存储之间分配存储桶。
+
+
+
+[[grant-workload-access-to-a-bucket]]
+== 授予对存储桶的工作负载访问权限
+
+创建 `BucketAccessClass`以定义访问配置：
+
+[source, yaml]
+----
+apiVersion: objectstorage.k8s.io/v1alpha2
+kind: BucketAccessClass
+metadata:
+  name: sg-access
+spec:
+  authenticationType: Key
+  driverName: cosi.trident.netapp.io
+  multiBucketAccess: MultipleBuckets
+----
+创建一个引用存储桶声明的 `BucketAccess`：
+
+[source, yaml]
+----
+apiVersion: objectstorage.k8s.io/v1alpha2
+kind: BucketAccess
+metadata:
+  name: sg-claim-a1
+  namespace: default
+spec:
+  bucketAccessClassName: sg-access
+  bucketClaims:
+    - accessMode: ReadWrite
+      accessSecretName: sg-claim-a1
+      bucketClaimName: claim-a1
+  protocol: S3
+----
+Trident 创建一个包含存储桶访问信息的 Kubernetes Secret。工作负载可以使用标准的 Kubernetes Secret 机制来使用此 Secret。生成的 Secret 包括 S3 连接详细信息，例如存储桶标识符、端点、区域和访问密钥。请勿将生成的 Secret 暴露给未经授权的用户或工作负载。
+
+生成的 Secret 包括诸如 `COSI_S3_ACCESS_KEY_ID`、 `COSI_S3_ACCESS_SECRET_KEY`、 `COSI_S3_ADDRESSING_STYLE`、 `COSI_S3_BUCKET_ID`、 `COSI_S3_ENDPOINT`和 `COSI_S3_REGION`等键。

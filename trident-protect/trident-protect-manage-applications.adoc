@@ -51,6 +51,7 @@ NOTE: 要定义通过名称而不是整个命名空间来保护特定 KubeVirt �
 **** *labelSelecter*：(_可 选_)根据集群范围的资源的标签对其进行筛选。
 
 
+*** *spec.volumeGroups*: (_可选_) 使用此属性可将相关卷一起创建快照，作为崩溃一致的卷组快照。有关详细信息，请参阅 link:trident-protect-volume-group-snapshots.html["将卷组快照与 Trident Protect 结合使用"]。
 *** *metadata.annotations.protect.trident.netapp.io/skip-vm-freeze*: (_可选_) 此注解仅适用于从虚拟机定义的应用程序，例如 KubeVirt 环境，其中文件系统冻结发生在快照之前。指定此应用程序在快照期间是否可以写入文件系统。如果设置为 true，应用程序将忽略全局设置，并且可以在快照期间写入文件系统。如果设置为 false，应用程序将忽略全局设置，并且在快照期间文件系统将被冻结。如果指定了注解，但应用程序定义中没有虚拟机，则忽略该注解。如未特别说明，则申请流程如下：link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["全球Trident Protect 冷冻设置"] 。
 +
 [NOTE]

@@ -16,8 +16,8 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 
 
 
-[[critical-information-about-trident-26-06]]
-== 有关 Trident 26.06 的关键信息
+[[critical-information-about-trident-26-10]]
+== 有关 Trident 26.10 的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -26,7 +26,7 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 ====
 []
 =====
-* Trident 现在支持 Kubernetes 1.37。在升级 Kubernetes 之前，请先升级 Trident。
+* Trident 26.10 支持 Kubernetes 1.27 到 1.37。在升级 Kubernetes 之前，请检查 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident要求"] 中的特定版本镜像列表。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
@@ -54,11 +54,11 @@ summary: 您可以使用Helm部署Trident操作员并安装Trident。此过程�
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 ----
-. 使用 `helm install`并指定部署的名称，如下例所示，其中 `100.2606.0`是您要安装的 Trident 版本。
+. 使用 `helm install`并指定部署的名称，如下例所示，其中 `100.2610.0`是您要安装的 Trident 版本。
 +
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2606.0 --create-namespace --namespace <trident-namespace>
+helm install <name> netapp-trident/trident-operator --version 100.2610.0 --create-namespace --namespace <trident-namespace>
 ----
 +
 
@@ -89,11 +89,11 @@ NOTE: 如果已为Trident创建命名空间、则`-create-namespace`参数不会
 在命令行上指定覆盖。
 
 |===
-例如，要更改 `debug`的默认值，请运行以下命令，其中 `100.2606.0`是您要安装的 Trident 版本：
+例如，要更改 `debug`的默认值，请运行以下命令，其中 `100.2610.0`是您要安装的 Trident 版本：
 
 [listing]
 ----
-helm install <name> netapp-trident/trident-operator --version 100.2606.0  --create-namespace --namespace trident --set tridentDebug=true
+helm install <name> netapp-trident/trident-operator --version 100.2610.0  --create-namespace --namespace trident --set tridentDebug=true
 ----
 
 
@@ -190,6 +190,9 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 | `tridentSilenceAutosupport` | 允许禁用Trident定期AutoSupport报告。 | `false` 
 
 
+| `tridentExcludeAutosupport` | 当设置为 `true`时，Trident 在安装期间不会设置 AutoSupport 容器。 | `false` 
+
+
 | `tridentAutosupportImageTag` | 允许覆盖Trident AutoSupport容器的映像标记。 | `<version>` 
 
 
@@ -229,13 +232,19 @@ WARNING: 请勿从values.yaml文件中删除默认相关性。如果要提供自
 | `enableForceDetach` | 允许启用强制分离功能。 | `false` 
 
 
+| `enableDataLIFRefresh` | 当 LIF 被添加、删除或分配新地址时，刷新已发布卷的 NVMe 数据 LIF。适用于 `ontap-san`（含 `sanType: nvme`）（在统一 ONTAP 上）以及 ASA r2 上的 NVMe/TCP。有关更多信息，请参见link:../trident-use/refresh-nvme-data-lifs.html["刷新 NVMe 数据 LIF"]。 | `false` 
+
+
 | `excludePodSecurityPolicy` | 从创建过程中排除操作员POD安全策略。 | `false` 
 
 
-| `cloudProvider` | 设置为 `"Azure"` 在AKS集群上使用托管身份或云身份时。如果在EKS集群上使用云标识、请设置为"Aws"。 | `""` 
+| `cloudProvider` | 在 AKS 集群上使用托管标识或云标识时设置为 `"Azure"`，在 EKS 集群上使用云标识时设置为 `"AWS"`，或者在 GKE 上使用云标识或在 OpenShift 上使用 Workload Identity Federation 时设置为 `"GCP"`。 | `""` 
 
 
-| `cloudIdentity` | 在AKS集群上使用云标识时、设置为工作负载标识("azure.Workload .Identity /client-id：XXXXXX-xxxx-xxxx-xxxx-xxxxxxxxxxx")。在Trident集群上使用云身份时、设置为eks.amazonaws.com/role-arn: AWS IAM角色("eks arn：aws：iam：：：12356：roe/EAM-roe"")。 | `""` 
+| `cloudIdentity` | 在 AKS 集群上使用云标识时，设置为工作负载标识（"azure.workload.identity/client-id: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"）。在 EKS 集群上使用云标识时，设置为 AWS IAM 角色（"'eks.amazonaws.com/role-arn: arn:aws:iam::123456:role/trident-role'"）。在 GKE 上使用云标识时，设置为 GKE 云标识注释。请勿为 OpenShift Workload Identity Federation 设置。 | `""` 
+
+
+| `gcpWIFAudience` | 在 OpenShift 上与 Google Cloud Workload Identity Federation 一起使用的投影服务帐户令牌的受众。使用提供商的规范资源名称。有关详细信息，请参见 link:../trident-use/gcnv.html#openshift-wif["使用 Workload Identity Federation 配置 Google Cloud NetApp Volumes"]。 | `""` 
 
 
 | `iscsiSelfHealingInterval` | 调用iSCSI自我修复的间隔。 | `5m0s` 

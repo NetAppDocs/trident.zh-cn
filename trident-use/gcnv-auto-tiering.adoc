@@ -22,7 +22,7 @@ summary: 使用 Trident，通过 Kubernetes 原生机制配置 Google Cloud NetA
 
 自动分层允许 Trident 配置卷，自动将非活动数据从性能层移动到容量层。这降低了存储成本，同时保留了频繁访问数据的性能。
 
-Trident 仅在卷创建时应用自动分层设置。Trident 26.06 不支持预配后更改。
+Trident 仅在卷创建时应用自动分层设置。Trident 26.10 不支持预配后更改。
 
 
 
@@ -86,10 +86,10 @@ Trident 根据每个设置的定义位置确定有效配置。
 
 
 
-[[supported-functionality-in-trident-26-06]]
-== Trident 26.06 中支持的功能
+[[supported-functionality-in-trident-26-10]]
+== Trident 26.10 中支持的功能
 
-Trident 26.06 支持 Google Cloud NetApp Volumes 的以下自动分层功能：
+Trident 26.10 支持 Google Cloud NetApp Volumes 的以下自动分层功能：
 
 * 在卷配置期间启用或禁用自动分层
 * 在 Trident 后端配置中定义分层策略
@@ -99,8 +99,8 @@ Trident 26.06 支持 Google Cloud NetApp Volumes 的以下自动分层功能：
 
 
 
-[[unsupported-functionality-in-trident-26-06]]
-== Trident 26.06 中不支持的功能
+[[unsupported-functionality-in-trident-26-10]]
+== Trident 26.10 中不支持的功能
 
 不支持以下操作：
 

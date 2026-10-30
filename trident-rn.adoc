@@ -19,8 +19,8 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 
 
-[[whats-new-in-26-06-2]]
-== 26.06.2 中的新增功能
+[[whats-new-in-26-10]]
+== 26.10 中的新增功能
 
 了解 NetApp Trident 和 Trident Protect 的新功能，包括增强功能、修复和弃用。
 
@@ -35,10 +35,122 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 * *Kubernetes*：
 +
-** 增加了对 Kubernetes 1.37 的支持。
+** 添加了对从 StorageGRID 基于 COSI 动态配置对象存储分段的支持。有关详细信息，请参见 link:trident-use/cosi.html["使用 COSI 配置对象存储"]。
+** 添加了对定期刷新 NVMe 数据 LIF 的支持，以检测和适应配置更改。有关详细信息，请参见 link:trident-use/refresh-nvme-data-lifs.html["刷新 NVMe 数据 LIF"]。
+** 添加了对由 ONTAP-SAN 和 ONTAP-SAN-Economy 驱动程序配置的新卷上的 ONTAP 自动调整大小的支持。有关详细信息，请参见 link:trident-use/ontap-autosize.html["配置 ONTAP 卷自动调整大小"]。
+** 增加了对 Kubernetes 1.37 的支持。有关支持的版本和所需的映像，请参见 link:trident-get-started/requirements.html["Trident要求"]。
+** 为 CommVault 和 Rubrik 备份添加了备份克隆 PVC 识别，以跳过 ONTAP 卷恢复队列（问题 link:https://github.com/NetApp/trident/issues/1182["#1182"]）。
+** 为新的 NVMe RWX 卷添加了 `maxNamespacesPerSuperSubsystem`后端选项。有关详细信息，请参见link:trident-use/trident-nvme-rwx-subsystem-limits.html["NVMe RWX 子系统限制"]。
+** 通过 `TridentNode` 规范和状态增加了基于 CRD 的 CSI 节点注册，替换了 Kubernetes 部署的 HTTPS 控制器反向通道。
+** 添加了安装程序支持，以便在 OpenShift 上为 Google Cloud Workload Identity Federation (WIF) 投影具有可配置受众的服务帐户令牌。有关安装和后端配置的详细信息，请参见 link:trident-use/gcnv.html#openshift-wif["使用 Workload Identity Federation 配置 Google Cloud NetApp Volumes"]。
+** 在 `trident_backend_info`指标中添加了 `backend_state`标签，以在 Prometheus 中标识各个后端的运行状况（Issue link:https://github.com/NetApp/trident/issues/1088["#1088"]）。有关 Trident 指标的信息，请参见link:trident-use/monitor-trident.html["监控Trident"]。
+
+
+* 添加了对通过 iSCSI 由 ONTAP-SAN 驱动程序配置的 RWX 卷的 LUKS 加密的支持。有关详细信息，请参见 link:trident-reco/security-luks.html["使用Linux统一密钥设置(LUKS)"]。
+* 为 ONTAP-NAS-FlexGroup 驱动程序和 Docker 添加了 GA 并发支持；ASA r2 并发现在是 GA，已从 Technical Preview 毕业。有关支持的驱动程序和行为，请参见link:trident-use/controller-scalability.html["控制器可扩展性"]。
+* 通过使用路径删除和 iSCSI 自我修复，增加了在并非所有 iSCSI 路径都可用时对 CSI 卷扩展的支持。有关详细信息，请参见link:trident-use/vol-expansion.html["展开卷"]。
+* 添加了  `trident.netapp.io/unixGroupID` PVC 注释，以便在创建具有 root squash 的 ONTAP-NAS 和 ONTAP-NAS-FlexGroup 卷时设置 ONTAP 卷 UNIX 组 ID（Issue link:https://github.com/NetApp/trident/issues/1079["#1079"]）。
+* 添加了对 NVMe/TCP、NFSv4 和 iSCSI（问题 link:https://github.com/NetApp/trident/issues/806["#806"]）的 Talos OS 支持。有关受支持的平台和工作节点要求，请参见 link:trident-get-started/requirements.html["Trident要求"] 和 link:trident-use/worker-node-prep.html["准备工作节点"]。
+* 添加了可选  `storageAPITimeout` 后端参数以配置每个后端的 ONTAP REST 和 ZAPI 客户端超时。
+* 添加了 `useRESTSQLBypass` ONTAP 后端选项，以将 `SQL=false`添加到 ONTAP REST 名称查找中。
+* 已将 ONTAP-NAS-Economy qtree 导入从 Technical Preview 提升为 GA。有关导入说明，请参见 link:trident-use/vol-import.html["导入 Trident 卷"]。
 
 
 
+
+==== 修复
+
+* *Kubernetes*：
++
+** 修复了当  `enableConcurrency` 为  `true` 时，在后端更新或控制器重新启动期间 ONTAP-NAS 导出策略规则被错误删除的问题（问题 link:https://github.com/NetApp/trident/issues/1166["#1166"]，link:https://github.com/NetApp/trident/issues/1179["#1179"]）。有关导出策略配置，请参见 link:trident-use/ontap-nas-examples.html["ONTAP NAS配置选项和示例"]。
+** 修复了非实质性后端更新（例如凭据或 QoS 更改）触发每个卷的孤立扫描，从而可能阻塞大型后端上的 CSI 操作的问题。现在，扫描仅在 SVM 或存储前缀更改时运行。
+** 已修复出现在调试日志中的凭据，包括 CSI gRPC 请求转储、启动环境输出和已记录的 `TridentBackendConfig`规范。启动输出现在仅记录 Trident `TRIDENT_*` 变量的值，并按名称列出其他变量。
+** 修复了 CSI 发布和卷移动之间的竞争，这可能会使用过时的访问信息附加卷。有关卷移动的详细信息，请参见 link:trident-use/vol-move.html["移动卷"]。
+** 修复了  `NodeGetInfo` 在节点注册完成之前返回空拓扑标签的问题，这可能会导致拓扑感知配置失败（问题 link:https://github.com/NetApp/trident/issues/1131["#1131"]）。有关拓扑感知配置，请参见 link:trident-use/csi-topology.html["使用 CSI 拓扑配置存储"]。
+** 修复了一个罕见的 NVMe 断开连接竞态条件，该竞态条件可能会在连接另一个 Pod 时拆除共享子系统。
+** 修复了在并发下克隆已挂载卷时 NVMe PVC 克隆发布失败和不正确的父命名空间映射的问题。
+** 修复了在配置了 `nameTemplate`的 ONTAP-SAN-Economy 后端上 PVC 的快照创建失败问题。有关后端配置示例，请参见 link:trident-use/ontap-san-examples.html["ONTAP SAN配置选项和示例"]。
+** 修复了如果在 REST 名称索引同步之前删除新创建的 FlexVol，ONTAP REST 后端会将其孤立的问题；Trident 现在通过 UUID 删除卷。
+** 修复了无法访问后端 LIF 时控制器启动挂起的问题。受影响的后端被标记 `Failed`并继续启动。
+** 修复了使用多键节点选择器配置时，Operator 管理的控制器和节点 Pod 在每次调谐时重新启动的问题。有关节点选择器配置，请参见 link:trident-install/kubernetes-customize-deploy.html["自定义Trident操作员安装"]。
+** 修复了 TridentConfigurator 创建的 Azure NetApp Files `TridentBackendConfig` 资源缺少创建后验证所需的 `trident.netapp.io/configurator` 标签的问题。
+** 修复了 Trident CSI 服务使用 IPv6 ClusterIP 时节点注册失败的问题（Issue link:https://github.com/NetApp/trident/issues/1164["#1164"]）。
+** 修复了在过时的卷发布仍在取消发布时，如果工作节点被删除并重新加入，会导致 Trident 节点被永久移除的问题。
+** 修复了当 Trident 的缓存导出策略过期时，ONTAP-NAS 卷在已附加的节点上丢失 NFS 导出访问权限的问题。有关导出策略配置，请参阅 link:trident-use/ontap-nas-examples.html["ONTAP NAS配置选项和示例"]。
+** 修复了 `tridentctl`安装清理会删除节点修复模板 CRD 的问题，这可能会阻止后续启用强制分离的安装。有关安装详细信息，请参见link:trident-install/kubernetes-deploy-tridentctl.html["使用trdentcl安装Trident"]。
+** 通过添加重试延迟，修复了快照删除调用导致 ONTAP API 不堪重负的问题。有关快照操作，请参见 link:trident-use/vol-snapshots.html["管理快照"]。
+** 修复了 Trident operator Helm chart 的 AutoSupport 镜像助手注释和 cloudProvider 值引用。
+** 修复了针对繁忙或现有作业的 ONTAP ZAPI 卷创建处理，以便 CSI 重试不会过早销毁 FlexVols 或导致创建/销毁循环。
+** 修复了重试不再存在的一致性组的卷组快照时出现的崩溃问题。有关卷组快照，请参见 link:trident-use/vol-group-snapshots.html["创建卷组快照"]。
+** 删除了基于支持的最低和最高 Kubernetes 版本的 Trident 支持警告。
+
+
+* 修复了共享命名锁中的竞争条件，该竞争条件可能允许在同一资源上执行重叠操作。
+* 修复了在找不到快照时 ASA 驱动程序初始化失败的问题。
+* 修复了当集群节点不在主 HA 区域时，针对区域 Flex Unified 池的 GCNV 配置问题；Trident 不再将该 HA 区域视为必需的 CSI 拓扑。可用区池保持不变。有关 Flex Unified 配置，请参见 link:trident-use/gcnv-block.html["配置块存储 (iSCSI)"]。
+* 修复了当规范后端标识与 Trident 卷名称不同时，GCNV Flex 统一 NAS 和 SAN 卷在后端协调期间被错误标记为孤立的问题（问题 link:https://github.com/NetApp/trident/issues/1189["#1189"]）。有关 GCNV 后端配置，请参见 link:trident-use/gcnv.html["配置 Google Cloud NetApp Volumes"]。
+* 修复了传输内置于内核的主机上的 NVMe/TCP 检测（问题 link:https://github.com/NetApp/trident/issues/1019["#1019"]）。有关节点要求，请参见 link:trident-use/worker-node-prep.html["准备工作节点"]。
+* 修复了 ONTAP-NAS 和 ONTAP-NAS-FlexGroup 扩展在 ONTAP 卷已经足够大以满足请求（包括快照预留）时无限期重试的问题。有关卷扩展，请参见 link:trident-use/vol-expansion.html["展开卷"]。
+* 修复了由于缺少连接路径而导致卷挂载失败的问题。有关 ONTAP NAS 配置，请参见 link:trident-use/ontap-nas.html["配置 ONTAP NAS 驱动程序"]。
+* 修复了当 `storagePrefix`包含短划线时 ONTAP-SAN-Economy 卷创建失败的问题。有关后端配置选项，请参见 link:trident-use/ontap-san-examples.html["ONTAP SAN配置选项和示例"]。
+* 修复了使用自动导出策略发布只读 ONTAP-NAS 克隆的问题，从而保留源 FlexVol 导出规则。有关 ONTAP NAS 配置，请参见link:trident-use/ontap-nas-examples.html["ONTAP NAS配置选项和示例"]。
+* 已修复 HTTP 传输重试行为（问题 link:https://github.com/NetApp/trident/issues/1139["#1139"]）。
+* 修复了 ghost-device 检测跳过 SCSI 设备删除（问题 link:https://github.com/NetApp/trident/issues/1161["#1161"]）的问题。
+* 已修复启用并发的配置选择所选节点的首选区域以外的拓扑区域的问题。有关并发和拓扑行为，请参见 link:trident-use/controller-scalability.html["控制器可扩展性"]。
+* 修复了启用并发时等效后端之间卷放置不均衡的问题；现在会像非并发配置一样，随机均匀地选择后端。有关详细信息，请参见 link:trident-use/controller-scalability.html["控制器可扩展性"]。
+* 修复了在 Trident 节点 pod 启动期间主机网络地址表发生更改时，节点注册时缺少 IP 地址（这可能会删除 NFS 导出策略规则）的问题。
+* 修复了克隆创建在 REST 轮询之后继续进行并将 PVC 绑定为未拆分的 FlexClone 的问题；Trident 现在会观察到后续的创建作业失败。
+* 已修复 ONTAP-SAN 卷扩展在节点上错误报告调整大小失败的问题。有关卷扩展，请参阅 link:trident-use/vol-expansion.html["展开卷"]。
+
+
+
+
+==== 试验性增强功能
+
+
+NOTE: 不适用于生产环境。
+
+* *［技术预览］* *Kubernetes*：添加了对 ONTAP S3 中基于 COSI 的对象存储桶动态配置的支持。有关详细信息，请参见 link:trident-use/cosi.html["使用 COSI 配置对象存储"]。
+
+
+
+
+[[trident-protect]]
+=== Trident保护
+
+
+
+==== 增强功能
+
+* 添加了对 AppVault 快照和备份元数据加密的支持。为每个 AppVault 使用自定义保管库密码。轮换保管库密码会重新加密元数据加密密钥，并更新 AppVault 中的每个 Kopia 和 Restic 存储库。要了解更多信息，请参阅 link:trident-protect/trident-protect-encrypt-appvault-metadata.html["加密 Trident Protect 快照和备份的 AppVault 元数据"^]。
+* 添加了在还原期间保留 KubeVirt 虚拟机 MAC 地址的支持，这在应用程序许可证绑定到 MAC 地址时非常有用。要启用它，请将 protect.trident.netapp.io/retain-mac-address 注释设置为“true”。要了解更多信息，请参阅 link:trident-protect/trident-protect-restore-settings.html#supported-annotations["使用高级Trident Protect 恢复设置"^]。
+* 添加了对卷组快照的支持，该快照可在同一时间点捕获应用程序的相关持久卷声明。通过标签、KubeVirt 虚拟机或两者，在应用程序自定义资源上的 `spec.volumeGroups`中定义卷组。要了解更多信息，请参阅link:trident-protect/trident-protect-volume-group-snapshots.html["将卷组快照与 Trident Protect 结合使用"^]。
+* 添加了对故障切换到已复制应用程序的早期快照的支持，允许从数据损坏或受损之前的某个时间点进行恢复。要了解更多信息，请参阅 link:trident-protect/trident-protect-failover-older-snapshot.html["使用 Trident Protect 故障切换到较旧的快照"^]。
+
+
+
+
+==== 修复
+
+* 修复了 Trident Protect 安装在 `trident-protect-pre-upgrade-hook`作业中失败的问题，原因是缺少 `trident-protect-controller-manager` ServiceAccount（link:https://github.com/NetApp/trident/issues/1154["问题 #1154"]）。
+* 已修复仅限 PVC 的恢复，使其仅在所有者存在时才包含 `ownerReference`。
+
+
+
+
+[[whats-new-in-26-06-2]]
+== 26.06.2 中的新增功能
+
+了解 NetApp Trident 和 Trident Protect 的新功能，包括增强功能、修复和弃用。
+
+
+
+[[trident]]
+=== Trident
+
+
+
+==== 增强功能
 
 
 
@@ -186,7 +298,7 @@ NOTE: 不适用于生产环境。
 * 添加了 OpenShift Service CA Operator 集成，以自动化 Trident Protect 准入 Webhook 的 TLS 证书管理。通过在 Helm 值中将  `useOpenshiftServiceCA` 设置为  `true` 来启用。要了解更多信息，请参阅 link:trident-protect/trident-protect-customize-installation.html["定制Trident Protect 安装"^]。
 * 新增了对在 OpenShift Virtualization 上备份和恢复 KubeVirt VM 的支持。保护命名空间中的所有 VM 或按名称定位特定 VM，并选择性地从备份或快照中恢复单个 VM。要了解更多信息，请参见 link:trident-protect/trident-protect-kubevirt-vms.html["使用 Trident Protect 保护 KubeVirt 虚拟机"^]。
 * 添加了对资源转换的支持，使您可以在还原过程中添加、删除和修改 Kubernetes 资源属性。要了解更多信息，请参阅 link:trident-protect/trident-protect-resource-transformations.html["使用自定义资源还原资源时修改资源"]。
-* 新增对  `storageClassMapping` 在 AppMirrorRelationship (AMR) 中的支持，在单个 AMR 定义中实现单个 PVC 的存储类映射。要了解更多信息，请参阅 link:trident-protect/trident-protect-use-snapmirror-replication.html["使用NetApp SnapMirror和Trident Protect 复制应用程序"^]。
+* 新增对  `storageClassMapping` 在 AppMirrorRelationship (AMR) 中的支持，在单个 AMR 定义中实现单个 PVC 的存储类映射。要了解更多信息，请参阅 link:trident-protect/trident-protect-use-snapmirror-replication.html["使用 Trident Protect 设置和管理应用程序复制"^]。
 
 
 
@@ -1127,7 +1239,7 @@ IMPORTANT: 只有启用了非正常节点关闭功能门的Kubernetes版本才�
 == 2001年23月的变更
 
 
-IMPORTANT: 现在、在Trident中支持Kubnetes 1.27。请先升级Trident、然后再升级Kubernetes。
+IMPORTANT: 现在、在Trident中支持Kubnetes 1.27。在升级Kubernetes之前升级Trident。
 
 
 

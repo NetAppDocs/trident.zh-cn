@@ -16,15 +16,15 @@ summary: '您可以使用安装Trident `tridentctl`。此过程适用于Trident�
 
 
 
-[[critical-information-about-trident10]]
-== 关于Trident10的关键信息
+[[critical-information-about-trident-26-10]]
+== 有关 Trident 26.10 的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
 .<strong>与Trident </strong>相关的信息
 [%collapsible%open]
 ====
-* 现在、在Trident中支持Kubnetes 1.27。在升级Kubernetes之前升级Trident。
+* Trident 26.10 支持 Kubernetes 1.37。在升级 Kubernetes 之前升级 Trident。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
@@ -78,8 +78,8 @@ Trident安装程序包会创建Trident Pod、配置用于保持其状态的CRD�
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v26.06.0/trident-installer-26.06.0.tar.gz
-tar -xf trident-installer-26.06.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v26.10.0/trident-installer-26.10.0.tar.gz
+tar -xf trident-installer-26.10.0.tar.gz
 cd trident-installer
 ----
 
@@ -102,14 +102,14 @@ cd trident-installer
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:26.06 --trident-image <your-registry>/trident:26.06.0
+./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:26.10 --trident-image <your-registry>/trident:26.10.0
 ----
 --
 .不同注册表中的映像
 --
 [listing]
 ----
-./tridentctl install -n trident --image-registry <your-registry> --autosupport-image <your-registry>/trident-autosupport:26.06 --trident-image <your-registry>/trident:26.06.0
+./tridentctl install -n trident --image-registry <csi-registry> --autosupport-image <autosupport-registry>/trident-autosupport:26.10 --trident-image <trident-registry>/trident:26.10.0
 ----
 --
 ====
@@ -173,7 +173,7 @@ NOTE: 如果安装程序未成功完成或 `trident-controller-<generated id>` (
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 26.06.0        | 26.06.0        |
+| 26.10.0        | 26.10.0        |
 +----------------+----------------+
 ----
 
@@ -211,5 +211,15 @@ tridentctl install --enable-force-detach=true -n trident
 [listing]
 ----
 tridentctl install --enable-concurrency -n trident
+----
+====
+.刷新 NVMe 数据 LIF
+[%collapsible]
+====
+要在 LIF 配置更改时刷新已发布卷的 NVMe 数据 LIF，请使用 `--enable-datalif-refresh`安装 Trident。有关支持的驱动程序和配置详细信息，请参见link:../trident-use/refresh-nvme-data-lifs.html["刷新 NVMe 数据 LIF"]。
+
+[listing]
+----
+tridentctl install --enable-datalif-refresh -n trident
 ----
 ====

@@ -4,6 +4,8 @@ title: 使用Trident
 entries:
 - title: 准备工作节点
   url: "/trident-use/worker-node-prep.html"
+- title: 使用 COSI 配置对象存储
+  url: "/trident-use/cosi.html"
 - title: 配置和管理后端
   entries:
   - title: 概述
@@ -40,6 +42,8 @@ entries:
       url: "/trident-use/ontap-san-prep.html"
     - title: 配置选项和示例
       url: "/trident-use/ontap-san-examples.html"
+    - title: 刷新 NVMe 数据 LIF
+      url: "/trident-use/refresh-nvme-data-lifs.html"
   - title: ONTAP NAS 驱动程序
     entries:
     - title: 概述
@@ -96,6 +100,8 @@ entries:
     url: "/trident-use/controller-scalability.html"
   - title: 自动卷扩展
     url: "/trident-use/automatic-volume-expansion.html"
+  - title: 配置 ONTAP 卷自动调整大小
+    url: "/trident-use/ontap-autosize.html"
   - title: 管理自动卷扩展
     url: "/trident-use/manage-autogrow-policies.html"
   - title: 导入卷

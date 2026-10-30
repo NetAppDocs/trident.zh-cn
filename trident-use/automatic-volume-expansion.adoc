@@ -16,6 +16,8 @@ summary: 使用 Trident Autogrow Policies 配置和管理自动卷扩展。
 * 卷可以达到的最大大小
 
 
+Trident Autogrow 策略扩展了 PVC。这与 link:ontap-autosize.html["ONTAP 卷自动调整大小"] 不同，后者会扩展底层 FlexVol，而不改变 PVC 大小。
+
 
 NOTE: 当超过定义的利用率阈值时，卷的大小会自动增加。卷永远不会自动缩减。
 

@@ -12,7 +12,7 @@ summary: '您可以启用Linux统一密钥设置(Unified Key Setup、LKS)来对T
 
 
 [role="lead"]
-您可以启用Linux统一密钥设置(Unified Key Setup、LKS)来对Trident上的ONTAP SAN和ONTAP SAN经济型卷进行加密。Trident支持对经过LUN加密的卷进行密码短语轮换和卷扩展。
+Linux 统一密钥设置（LUKS）是一种磁盘加密规范。Trident 使用 LUKS 为 ONTAP SAN 和 ONTAP SAN ECONOMY 卷提供基于每个卷的主机端加密，并支持密码短语轮换和卷扩展。
 
 在Trident中，根据的建议，经过LUN加密的卷使用AES-XTS-PLAN 64 cypher和模式link:https://csrc.nist.gov/publications/detail/sp/800-38e/final["NIST"^]。
 
@@ -95,6 +95,48 @@ stringData:
   luks-passphrase: secretA
 ----
 
+
+
+
+[[use-luks-with-rwx-raw-block-volumes]]
+== 将 LUKS 与 RWX 原始块卷一起使用
+
+从 Trident 26.10 开始，您可以使用 `ReadWriteMany`（RWX）访问模式将 LUKS 加密与连接到多个 Kubernetes 节点的基于 iSCSI 的原始块卷结合使用。这对于 KubeVirt 虚拟机等工作负载非常有用，这些工作负载在实时迁移期间需要在目标节点上挂载相同的加密卷，而此时该卷仍挂载在源节点上。
+
+RWX LUKS 支持仅限于原始块卷。不支持文件系统模式 RWX LUKS 卷。应用程序负责协调对解密数据的并发访问；Trident 仅协调 LUKS 操作。
+
+按照<<启用LUKS加密>>中的说明，在后端、StorageClass和密码短语 Secret 上配置 LUKS。然后使用 `volumeMode: Block`和 `ReadWriteMany`创建 PVC：
+
+[source, yaml]
+----
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-rwx-pvc
+  namespace: my-app
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Block
+  storageClassName: san-luks-rwx
+  resources:
+    requests:
+      storage: 10Gi
+----
+多个节点上的 Pod 可以将此 PVC 作为原始块设备附加。Trident 在首次附加时使用 LUKS2 格式化该设备，并在后续节点上打开现有的加密卷。支持现有的 LUKS 操作，包括密码短语轮换和卷扩展。
+
+
+
+[[why-trident-serializes-luks-operations]]
+=== 为什么 Trident 序列化 LUKS 操作
+
+LUKS2 在块设备的开头存储其加密标头的冗余副本。 `cryptsetup` 可以在检测到副本不同时修复标头，包括在执行看似只读的命令期间。它的锁定是节点本地的，无法协调其他节点上的操作。如果一个节点正在更新标头，而另一个节点正在运行  `cryptsetup`，则第二个节点可能会触发标头修复并中断更新，从而可能损坏标头。
+
+为了防止并发标头访问， Trident 为每个 RWX LUKS 卷使用 Kubernetes 租约。在节点对该卷运行任何 `cryptsetup`命令之前，它必须持有该租约。Trident 在操作成功后释放该租约。如果在持有该租约期间另一个节点请求操作， Trident 会返回一个可重试的错误，并且 Kubernetes 会在稍后重试。不同卷上的操作是独立的。
+
+如果  `cryptsetup` 操作失败，Trident 故意保留租约，因此只有同一个节点可以重试。带有原因  `LeaseRetained` 的警告事件会记录故障。租约不会自动过期；只有在确认其持有者节点上没有运行任何  `cryptsetup` 操作后，管理员才应删除租约。有关恢复步骤，请参见 <<rwx-luks-stuck-lease,修复 RWX Linux 统一密钥设置（LUKS）卷的停滞租约>>。
+
+由于节点轮流打开卷，因此在许多不同节点上启动工作负载可能需要比使用未加密卷更长的时间。Kubernetes 在当前操作完成后会重试瞬态锁定错误。在大规模横向扩展期间，Pod 可能会在 `ContainerCreating`中停留更长时间；同一节点上的工作负载可以共享单个打开的设备映射。
 
 
 

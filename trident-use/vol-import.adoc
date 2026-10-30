@@ -168,7 +168,7 @@ Trident支持使用和 `ontap-nas-flexgroup`驱动程序导入卷 `ontap-nas`。
 
 [NOTE]
 ====
-* 该 `ontap-nas-economy`驱动程序在 qtree 级别管理存储，因此不支持单独导入 FlexVol 卷。要使用 `ontap-nas-economy`驱动程序导入 qtree，请参阅<<import-qtrees,导入 qtree>>（技术预览）。当 Trident 导入 qtree 时，它还会将父 FlexVol 作为包含该 qtree 的存储桶一并导入。
+* 要使用 `ontap-nas-economy`驱动程序导入 qtree，请参阅<<import-qtrees,导入 NFS qtree>>。当 Trident 导入 qtree 时，它也会将父 FlexVol 作为包含 qtree 的存储桶导入。必须单独导入 qtree。
 * 。 `ontap-nas` 和 `ontap-nas-flexgroup` 驱动程序不允许使用重复的卷名称。
 
 
@@ -274,10 +274,10 @@ spec:
 
 [NOTE]
 ====
-Qtree 导入是 Trident 26.06 中的技术预览功能。技术预览功能不支持用于生产环境。
+Qtree 导入是 Trident 26.10 中的技术预览功能。技术预览功能不支持用于生产环境。
 
 ====
-从 Trident 26.06 开始，您可以使用 `ontap-nas-economy`驱动程序将现有的 ONTAP qtree 导入 Trident。通过 FlexVol volume 和 qtree 名称以 `flexvol/qtree`格式标识 qtree，以及包含该 qtree 的后端的 UUID。<<概述和注意事项>>中的一般导入注意事项也适用于 qtree 导入。
+您可以使用 `ontap-nas-economy`驱动程序将现有的 ONTAP qtree 导入到 Trident 中。通过 `flexvol/qtree`格式的 FlexVol volume 和 qtree 名称，以及包含该 qtree 的后端的 UUID 来标识 qtree。<<概述和注意事项>>中的一般导入注意事项也适用于 qtree 导入。
 
 .使用 tridentctl 导入 qtree
 以  `flexvol/qtree` 格式将 qtree 指定为卷名称。以下示例从后端  `ontap_nas_economy` 上的 FlexVol volume  `flexvol1` 导入 qtree  `qtree1`：

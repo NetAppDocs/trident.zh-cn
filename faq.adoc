@@ -384,7 +384,7 @@ ONTAP 驱动程序支持精简或厚配置。ONTAP 驱动程序默认为精简�
 [[can-i-grow-nfs-pvcs-that-were-created-by-trident]]
 === 是否可以增加Trident创建的NFS PVC的大小？
 
-是。您可以扩展由Trident创建的PVC。请注意，卷自动增长是一项 ONTAP 功能，不适用于 Trident 。
+可以。您可以扩展由 Trident 创建的 NFS PVC。Trident Autogrow Policies 可以根据容量阈值自动扩展 PVC。ONTAP 卷自动调整大小是独立的，适用于受支持的 ONTAP SAN 驱动程序：它会增加后备 FlexVol 的大小，而不改变 PVC 的大小。有关详细信息，请参见link:trident-use/ontap-autosize.html["ONTAP 卷自动调整大小"^]。
 
 
 

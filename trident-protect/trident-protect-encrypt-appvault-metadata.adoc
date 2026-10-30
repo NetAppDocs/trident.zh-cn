@@ -1,0 +1,349 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-encrypt-appvault-metadata.html 
+keywords: trident protect, appvault, encryption, metadata, password, password rotation, vault password, secret, kopia, restic 
+summary: 您可以加密 Trident Protect 存储在 AppVault 中的快照和备份元数据，并更改保护加密数据的密码。 
+---
+= 加密 Trident Protect 快照和备份的 AppVault 元数据
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+您可以加密 Trident Protect 存储在 AppVault 中的快照和备份元数据，包括 Kubernetes Secrets 中的敏感信息。您还可以更改保护加密数据的密码。一次密码更改将重新加密元数据加密密钥，并将 AppVault 中的每个 Kopia 存储库和每个 Restic 存储库移动到新密码。
+
+默认情况下禁用加密。启用后，Trident Protect 会在将元数据存储到 AppVault 之前加密新的快照和备份元数据。这将保护您的应用程序资源，包括 Secrets 中的敏感信息，除非您从应用程序快照或备份中明确排除这些资源。
+
+保管库密码可以保护加密数据的密钥。请注意以下行为：
+
+* 更改保管库密码时，Trident Protect 将使用新密码保护相同的密钥。它不会重写已加密的数据。
+* 启用加密之前存储的数据仍然可读。
+* 即使您稍后关闭新数据的加密，已加密的数据仍然可读。
+
+
+.关于此任务
+启用加密时，除非您指定自定义密码，否则 Trident Protect 将使用不安全的默认密码。为每个 AppVault 创建一个自定义保管库密码，并在 `spec.vaultPasswordSecretRef`中引用它。
+
+如果使用默认密码启用了加密，并在稍后添加自定义密码，则必须轮换密码，以便将现有数据和存储库移至自定义密码。请参阅 <<轮换保管库密码>>。
+
+为每个 AppVault 使用唯一的自定义密码。每次为一个 AppVault 轮换密码，并在开始另一次密码更改之前确认轮换已完成。
+
+.开始之前
+请确保您具备以下条件：
+
+* 访问 `trident-protect`命名空间。
+* 创建 Kubernetes Secrets 和修补 AppVault 自定义资源（CR）的权限。
+* 为每个 AppVault 计划一个单独的密码 Secret。
+
+
+
+
+[[enable-metadata-encryption]]
+== 启用元数据加密
+
+您可以通过为 Trident Protect 设置 Helm 值来启用元数据加密。
+
+.步骤
+. 使用 `values.yaml`文件将 `resourceBackupEncryptionEnabled`设置为 `true`：
++
+.. 将以下内容添加到您的 `values.yaml` 文件中：
++
+[source, yaml]
+----
+resourceBackupEncryptionEnabled: true
+----
+.. 应用此文件：
++
+[source, console]
+----
+helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-protect -f values.yaml --reuse-values
+----
+
+
+. 或者，使用 Helm `--set` 标志将 `resourceBackupEncryptionEnabled`设置为 `true`：
++
+[source, console]
+----
+helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-protect \
+  --set resourceBackupEncryptionEnabled=true \
+  --reuse-values
+----
+
+
+.结果
+Trident Protect 加密新的快照和备份元数据。
+
+.下一步是什么？
+为每个 AppVault 创建自定义保管库密码。在此之前，Trident Protect 使用不安全的默认密码。
+
+
+
+[[create-a-custom-vault-password]]
+== 创建自定义保管库密码
+
+要使用自己的密码，请创建一个包含该密码的 Kubernetes Secret，然后在 AppVault 中引用该 Secret。
+
+.关于此任务
+如果在创建 AppVault 时配置自定义密码，则在存储任何数据之前，AppVault 会立即使用自定义密码。您无需轮换密码。
+
+如果 AppVault 已经具有 Kopia 或 Restic 存储库，则添加新密码不会更改这些存储库的密码。请勿使用本节中的步骤。相反，请按照 <<轮换保管库密码>> 中的步骤操作。
+
+该 `VAULT_PASSWORD`值必须满足以下要求：
+
+* 不能为空
+* 必须小于 64 KiB
+* 不得包含 NUL 字符
+* 不得包含换行符
+* 不得以空格或其他空白字符开头或结尾
+
+
+密码可以包含其他字符，包括非 ASCII 字符。
+
+.步骤
+. 在与 AppVault 相同的命名空间中创建一个 Secret。该 Secret 必须包含一个名为 `VAULT_PASSWORD`的键：
++
+[source, console]
+----
+kubectl -n trident-protect create secret generic vault-password \
+  --from-literal=VAULT_PASSWORD='<password>'
+----
++
+
+NOTE: 如果 AppVault 报告密码无效，请根据上述要求检查该 `VAULT_PASSWORD`值。常见原因是空值、尾随换行或密码开头或结尾有空格。
+
+. 在 AppVault CR 的 `spec.vaultPasswordSecretRef`字段中引用 Secret：
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppVault
+metadata:
+  name: my-vault
+  namespace: trident-protect
+spec:
+  vaultPasswordSecretRef: vault-password
+  providerType: <provider-type>
+  providerConfig:
+    <provider-configuration>
+----
++
+如果 `spec.vaultPasswordSecretRef`为空，AppVault 将使用不安全的默认密码。
+
+
+
+.结果
+AppVault 使用您的自定义密码来保护元数据加密密钥。
+
+
+
+[[rotate-the-vault-password]]
+== 轮换保管库密码
+
+您可以轮换已存储数据的 AppVault 的密码。一次轮换会重新加密元数据加密密钥，并将 AppVault 中的每个 Kopia 存储库和每个 Restic 存储库移动到新密码。
+
+.关于此任务
+在轮换过程中，Trident Protect 会执行以下操作：
+
+* 等待 AppVault 正在运行的备份和还原作业完成后再启动。
+* 使用新密码保护元数据加密密钥 (`metadata-key.json`）。它不会重写归档对象。
+* 查找 AppVault 前缀下的每个 Kopia 存储库和每个 Restic 存储库，并将其密码更改为新密码。已使用新密码打开的存储库不会更改。
+* 跳过备份或还原作业仍在使用的存储库，稍后重试。
+* 暂停引用 AppVault 的已启用计划。对于每个计划，Trident Protect 将 `spec.enabled`设置为 `false`，并添加以下注释：
++
+[source, yaml]
+----
+protect.trident.netapp.io/vault-password-rotation-suspended: <namespace>/<appvault-name>
+----
+
+
+轮换完成后，Trident Protect 将再次仅启用具有此注释的计划。如果轮换失败，它将从停止的位置恢复。已使用新密码的存储库不会再次更改。
+
+.开始之前
+请确保您具备以下条件：
+
+* 符合<<创建自定义保管库密码,保管库密码要求>>的新密码。
+* 没有其他 AppVault 正在轮换其密码。如果多个 AppVaults 共享相同的存储桶和前缀，则其中只有一个可以轮换密码。请参阅 <<管理共享存储桶的 AppVaults 的轮换>>。
+
+
+.步骤
+. 使用与当前 Secret 名称不同的名称创建新 Secret：
++
+[source, console]
+----
+kubectl -n trident-protect create secret generic vault-password-new \
+  --from-literal=VAULT_PASSWORD='<new-password>'
+----
++
+
+IMPORTANT: 在轮换完成之前，请勿编辑或删除当前的 Secret。在每个存储库使用新密码之前，Trident Protect 需要当前密码才能打开现有数据。如果过早删除当前 Secret，请使用相同的名称和原始 `VAULT_PASSWORD`值重新创建它。
+
+. 启用轮换并将 AppVault 设置为使用新密钥。将 `my-vault`替换为您 AppVault 的名称：
++
+[source, console]
+----
+kubectl -n trident-protect patch appvault my-vault --type merge --patch '
+spec:
+  enableRotation: true
+  vaultPasswordSecretRef: vault-password-new
+'
+----
++
+
+NOTE: 您必须先将 `spec.enableRotation`设置为 `true`，然后才能更改密码。如果是 `false`，AppVault 将报告轮换已禁用，并且不会更改密码。
+
+. 按照 <<监控密码轮换>> 中的步骤监控轮换。
+. 轮换完成后，如果没有其他内容使用它，请删除上一个 Secret。
+
+
+.结果
+元数据加密密钥以及 AppVault 中的每个 Kopia 和 Restic 存储库都受到新密码的保护，并且重新启用了 Trident Protect 暂停的计划。
+
+
+
+[[monitor-password-rotation]]
+== 监控密码轮换
+
+您可以检查密码轮换的进度并确认其已完成。
+
+.步骤
+. 查看 AppVault：
++
+[source, console]
+----
+kubectl -n trident-protect get appvault my-vault --output yaml
+----
+. 在输出中，检查 `status.vaultPasswordRotation`部分。正在轮换时，如下所示：
++
+[source, yaml]
+----
+status:
+  vaultPasswordRotation:
+    state: Rotating
+    rotated: 3
+    pending: 1
+    message: <message>
+----
++
+下表描述了这些字段：
+
++
+|===
+| 字段 | Description 
+
+
+| status.vaultPasswordRotation.state | 当前旋转状态。 
+
+
+| status.vaultPasswordRotation.rotated | 现在使用新密码的存储库数。 
+
+
+| status.vaultPasswordRotation.pending | 由于备份或还原正在使用而跳过的存储库数。 
+
+
+| status.vaultPasswordRotation.message | 最新进度或失败消息。 
+|===
+
+
+.结果
+当满足以下所有条件时，轮换完成：
+
+* `status.vaultPasswordRotation` 不存在。
+* `status.previousRepositoryPasswordSecretRef` 为空。
+* `status.repositoryPasswordSecretRef` 匹配 `spec.vaultPasswordSecretRef`。
+
+
+.下一步是什么？
+如果轮换未完成，请检查以下内容：
+
+* *轮换未开始*： `spec.enableRotation`可能是 `false`。将其设置为 `true`，然后将 `spec.vaultPasswordSecretRef`设置为新的 Secret。
+* *存储库保持待处理*：备份或还原作业仍在使用它们。等待作业完成。Trident Protect 会自动重试待处理的存储库。
+* *轮换未开始，因为另一个 AppVault 拥有锁*：请参阅 <<管理共享存储桶的 AppVaults 的轮换>>。
+* *消息字段报告失败*：解决消息描述的问题。轮换从停止的位置恢复。
+
+
+
+
+[[migrate-from-datamoverpasswordsecretref]]
+== 迁移自 dataMoverPasswordSecretRef
+
+如果现有 AppVault 使用较旧的 `spec.dataMoverPasswordSecretRef`字段，则可以将其移动到 `spec.vaultPasswordSecretRef`。
+
+.关于此任务
+Trident Protect 保留  `spec.dataMoverPasswordSecretRef` 以实现向后兼容。对新的 AppVaults 使用  `spec.vaultPasswordSecretRef`。
+
+.步骤
+. 将 `spec.dataMoverPasswordSecretRef`及其 Secret 保留在原位。
+. 使用 `spec.vaultPasswordSecretRef`将密码轮换为新的 Secret。按照<<轮换保管库密码>>中的步骤进行操作。
+. 轮换完成后，从 AppVault 中移除 `spec.dataMoverPasswordSecretRef`。
+. 如果没有其他对象使用它，请删除旧密钥。
+
+
+
+
+[[manage-rotation-for-appvaults-that-share-a-bucket]]
+== 管理共享存储桶的 AppVaults 的轮换
+
+如果多个 AppVaults 使用相同的存储桶和前缀，则其中只有一个可以轮换密码。
+
+.关于此任务
+密码轮换使用名为 `password-rotation.lock`的锁定文件。该锁定记录了允许轮换存储桶和前缀密码的 AppVault 的 UID。如果第二个 AppVault 具有 `spec.enableRotation: true`，并且该锁定指定了不同的 AppVault，则第二个 AppVault 无法轮换。
+
+.步骤
+[role="tabbed-block"]
+====
+.将轮换转移到另一个 AppVault
+--
+. 在拥有该锁的 AppVault 上，清除 `spec.enableRotation`：
++
+[source, console]
+----
+kubectl -n trident-protect patch appvault <current-owner> --type merge --patch '
+spec:
+  enableRotation: false
+'
+----
+. 等待锁被移除。
+. 在下一个应轮换的 AppVault 上，将 `spec.enableRotation`设置为 `true`：
++
+[source, console]
+----
+kubectl -n trident-protect patch appvault <new-owner> --type merge --patch '
+spec:
+  enableRotation: true
+'
+----
+
+
+--
+.移除已删除的 AppVault 遗留的锁定
+--
+如果拥有锁的 AppVault 不复存在且锁未被移除，例如在崩溃后，请执行这些步骤。
+
+. 从存储桶中的 AppVault 前缀中删除  `password-rotation.lock` 文件。
+. 在应轮换的 AppVault 上，将 `spec.enableRotation`设置为 `true`：
++
+[source, console]
+----
+kubectl -n trident-protect patch appvault <appvault-name> --type merge --patch '
+spec:
+  enableRotation: true
+'
+----
+
+
+--
+====
+
+
+[[related-information]]
+== 相关信息
+
+* link:trident-protect-appvault-custom-resources.html["使用Trident Protect AppVault 对象来管理存储桶。"]
+* link:trident-protect-customize-installation.html["定制Trident Protect 安装"]
+* link:trident-protect-protect-apps.html["保护应用程序"]
+* link:trident-protect-restore-apps.html["使用Trident Protect 恢复应用程序"]
+

@@ -16,9 +16,13 @@ summary: 通过使用自动保护策略或临时创建快照和备份来保护�
 [role="lead"]
 您可以使用自动保护策略或临时保护策略，通过拍摄快照和备份来保护Trident Protect 管理的所有应用程序。
 
+[NOTE]
+====
+* 您可以配置Trident Protect 在数据保护操作期间冻结和解冻文件系统。link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["了解更多关于使用Trident Protect 配置文件系统冻结的信息"]。
+* 要在同一时间点对应用程序的相关卷进行快照，请在应用程序中定义卷组。请参阅 link:trident-protect-volume-group-snapshots.html["将卷组快照与 Trident Protect 结合使用"]。
 
-NOTE: 您可以配置Trident Protect 在数据保护操作期间冻结和解冻文件系统。link:trident-protect-requirements.html#protecting-data-with-kubevirt-vms["了解更多关于使用Trident Protect 配置文件系统冻结的信息"]。
 
+====
 
 
 [[create-an-on-demand-snapshot]]

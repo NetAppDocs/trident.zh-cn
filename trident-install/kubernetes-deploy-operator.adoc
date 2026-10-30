@@ -16,8 +16,8 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 
 
 
-[[critical-information-about-trident-26-06]]
-== 有关 Trident 26.06 的关键信息
+[[critical-information-about-trident-26-10]]
+== 有关 Trident 26.10 的关键信息
 
 *您必须阅读以下有关Trident的重要信息。*
 
@@ -26,7 +26,7 @@ summary: 您可以手动部署Trident操作员以安装Trident。此过程适用
 ====
 []
 =====
-* Trident 现在支持 Kubernetes 1.37。在升级 Kubernetes 之前，请先升级 Trident。
+* Trident 26.10 支持 Kubernetes 1.27 到 1.37。在升级 Kubernetes 之前，请检查 link:../trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["Trident要求"] 中的特定版本镜像列表。
 * Trident会严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或 `find_multipaths: yes` 或 `find_multipaths: smart` multipath.conf文件中的值将导致挂载失败。Trident已建议使用 `find_multipaths: no` 自21.07版起。
@@ -81,8 +81,8 @@ Trident安装程序包包含部署Trident Operator和安装Trident所需的一�
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v26.06.0/trident-installer-26.06.0.tar.gz
-tar -xf trident-installer-26.06.0.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v26.10.0/trident-installer-26.10.0.tar.gz
+tar -xf trident-installer-26.10.0.tar.gz
 cd trident-installer
 ----
 
@@ -180,7 +180,7 @@ Status:
   Current Installation Params:
     IPv6:                      false
     Autosupport Hostname:
-    Autosupport Image:         netapp/trident-autosupport:26.06
+    Autosupport Image:         netapp/trident-autosupport:26.10
     Autosupport Proxy:
     Autosupport Serial Number:
     Debug:                     true
@@ -190,10 +190,10 @@ Status:
     Kubelet Dir:          /var/lib/kubelet
     Log Format:           text
     Silence Autosupport:  false
-    Trident Image:        netapp/trident:26.06.0
+    Trident Image:        netapp/trident:26.10.0
   Message:                  Trident installed  Namespace:                trident
   Status:                   Installed
-  Version:                  v26.06.0
+  Version:                  v26.10.0
 Events:
     Type Reason Age From Message ---- ------ ---- ---- -------Normal
     Installing 74s trident-operator.netapp.io Installing Trident Normal
@@ -271,6 +271,6 @@ trident-operator-766f7b8658-ldzsv          1/1     Running   0           3m
 +----------------+----------------+
 | SERVER VERSION | CLIENT VERSION |
 +----------------+----------------+
-| 26.06.0        | 26.06.0        |
+| 26.10.0        | 26.10.0        |
 +----------------+----------------+
 ----

@@ -18,6 +18,17 @@ summary: 下面是此版本的已知问题。
 
 
 
+[[volumes-remain-attached-after-upgrading-from-trident-22-10-or-earlier]]
+== 从 Trident 22.10 或更早版本升级后，卷仍保持连接状态
+
+此问题影响在附加卷时直接从 Trident 22.10 或更早版本升级到 Trident 26.10 的客户。从 Trident 23.01 或更高版本升级不会受到影响。
+
+升级后，受影响的卷可能无法分离。使用 ReadWriteOnce（RWO）卷的 Pod 无法移动到其他节点，并且可能会报告多重连接错误。删除 PersistentVolume（PV）也可能挂起。
+
+要解决此问题，请在存在陈旧卷挂载的节点上，从该卷的 `globalmount`目录中删除残留的 `volumePublishInfo.json`文件。
+
+
+
 [[volumesnapshots-not-reaching-readytouse-state]]
 == VolumeSnapshots 未到达 ReadyToUse 状态
 

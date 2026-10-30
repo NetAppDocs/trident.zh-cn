@@ -130,6 +130,15 @@ Trident 使用  `azure-netapp-files` 驱动程序来管理 link:https://azure.mi
 
 
 
+[[google-cloud-netapp-volumes-backend-drivers]]
+=== Google Cloud NetApp Volumes 后端驱动程序
+
+Trident 支持用于 NAS 工作负载的 `google-cloud-netapp-volumes`驱动程序和用于 SAN（iSCSI）工作负载的 `google-cloud-netapp-volumes-san`。在 GCP 上运行的 OpenShift 集群上，从 Trident 26.10 开始，这两个驱动程序都支持 Google Cloud Workload Identity Federation。这包括自我管理的 OpenShift 容器平台（OCP，包括 IPI 部署）和 OpenShift Dedicated（OSD）。
+
+有关后端配置和 WIF 先决条件，请参见link:../trident-use/gcnv.html["配置 Google Cloud NetApp Volumes"]和link:../trident-use/gcnv-block.html["为 SAN 工作负载配置 Google Cloud NetApp Volumes"]。
+
+
+
 [[storage-class-design]]
 == 存储类设计
 
@@ -313,7 +322,7 @@ CAUTION: 自 Red Hat OpenShift 3.9 版开始，官方文档出于对数据损坏
 要确保底层服务使用正确的存储、请务必根据部署方法配置Ansensant变量。让我们来看看每种部署方法的选项。
 
 
-NOTE: 下表仅包含与日志记录服务相关的存储配置相关的变量。您可以找到其他选项、应根据您的部署查看、配置和使用这些选项link:https://docs.openshift.com/container-platform/3.11/install_config/aggregate_logging.html["Red Hat OpenShift日志记录文档"^]。
+NOTE: 下表仅包含与日志记录服务相关的存储配置变量。您可以在 link:https://docs.redhat.com/en/documentation/openshift_container_platform/3.11/html/configuring_clusters/install-config-aggregate-logging-sizing["Red Hat OpenShift日志记录文档"^] 中找到其他选项，应根据您的部署情况进行查看、配置和使用。
 
 下表中的变量将导致 Ansible 攻略手册使用提供的详细信息为日志记录服务创建 PV 和 PVC 。与在 OpenShift 安装后使用组件安装攻略手册相比，此方法的灵活性明显降低，但是，如果您有可用的现有卷，则可以选择此方法。
 
@@ -372,7 +381,7 @@ NOTE: 下表仅包含与日志记录服务相关的存储配置相关的变量�
 
 如果要在初始 OpenShift 安装过程中部署日志记录，则只需遵循标准部署过程即可。Ansible 将配置和部署所需的服务和 OpenShift 对象，以便在 Ansible 完成后立即提供此服务。
 
-但是，如果在初始安装后进行部署，则 Ansible 需要使用组件攻略手册。此过程可能会随OpenShift的不同版本略有不同、因此请务必阅读并遵循link:https://docs.openshift.com/container-platform/3.11/welcome/index.html["Red Hat OpenShift Container Platform 3.11文档"^]您的版本。
+但是，如果您在初始安装后进行部署，则 Ansible 需要使用组件攻略。此过程可能会因 OpenShift 的不同版本而略有不同，因此请务必阅读并遵循link:https://docs.openshift.com/en/documentation/openshift_container_platform/3.11/["Red Hat OpenShift Container Platform 3.11文档"^]您的版本。
 
 
 
@@ -430,4 +439,4 @@ NOTE: 下表仅包含与存储配置相关的变量，因为这些变量与指�
 
 使用在主机 / 清单文件中定义的适当 Ansible 变量，使用 Ansible 部署服务。如果您在 OpenShift 安装时进行部署，则系统将自动创建和使用 PV 。如果您要使用组件操作手册进行部署、则在安装OpenShift后、Ansable会创建所需的任何PVC、并在Trident为其配置存储后部署该服务。
 
-上述变量以及部署过程可能会随 OpenShift 的每个版本而发生变化。请务必查看并遵循link:https://docs.openshift.com/container-platform/3.11/install_config/cluster_metrics.html["Red Hat的OpenShift部署指南"^]您的版本、以便为您的环境配置此版本。
+上述变量以及部署过程可能会随着 OpenShift 的每个版本而变化。确保查看并遵循 link:https://docs.redhat.com/en/documentation/openshift_container_platform/3.11/html/configuring_clusters/install-config-cluster-metrics["Red Hat的OpenShift部署指南"^] 您的版本，以便为您的环境配置。

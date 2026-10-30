@@ -1,0 +1,136 @@
+---
+sidebar: sidebar 
+permalink: trident-protect/trident-protect-failover-older-snapshot.html 
+keywords: trident protect, netapp, snapmirror, failover, older snapshot, recovery point, ransomware, AppMirrorRelationship, promotedSnapshot 
+summary: 将复制的应用程序故障切换到较早的快照，允许从数据损坏或受损之前的某个时间点进行恢复。 
+---
+= 使用 Trident Protect 故障切换到较旧的快照
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+使用 Trident Protect 将复制的应用程序故障转移到较早的快照，从而允许从数据损坏或受损之前的某个时间点进行恢复。默认情况下，故障转移使用最近传输的快照。
+
+
+CAUTION: 故障转移到较旧的快照会导致 ONTAP SnapMirror 删除目标集群上比所选快照更新的快照，因为它们不再有效。仅当可以接受此数据丢失时，才在此过程中添加注释。
+
+.开始之前
+* AppMirrorRelationship 存在且处于 `Established`状态。要创建一个，请参阅link:trident-protect-use-snapmirror-replication.html#set-up-a-replication-relationship["设置复制关系"]。要验证状态，请运行 `kubectl get amr -n <namespace> <relationship_name> -o=jsonpath='{.status}'`。
+* 源和目标集群使用带有 SnapMirror 复制的 ONTAP 存储后端。不支持 Azure NetApp Files 和其他非 ONTAP 后端。请参阅link:trident-protect-requirements.html#requirements-for-snapmirror-replication["SnapMirror复制的要求"]。
+* 源应用程序上存在一个快照计划（ `snapshotRetention` 大于 1）。
+
+
+
+
+[[identify-the-snapshot]]
+== 识别快照
+
+每个快照都有一个完成时间，因此您可以选择所需的时间点。
+
+.步骤
+. 在源集群上，列出快照：
++
+[source, console]
+----
+kubectl get snapshots -n my-app-namespace
+----
+. 查找要故障切换到的快照。使用该 `completionTimestamp`值选择时间点。
+. 获取该快照的归档路径：
++
+[source, console]
+----
+kubectl get snapshots <snapshot_name> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
+----
+. 记录路径的最后一部分，即最后一个斜杠之后的所有内容。此部分为 _basename_。例如：
++
+[listing]
+----
+20231114173500_schedule-20231114173500_f8df8bd3-a727-4a14-b954-9666aa618b55
+----
++
+
+NOTE: 使用基本名称，而不是快照自定义资源的名称。
+
+
+
+.结果
+将记录选定快照的基本名称。
+
+
+
+[[fail-over-to-the-selected-snapshot]]
+== 故障切换到选定快照
+
+指定要提升的快照，并通过添加注释来确认数据丢失。
+
+.步骤
+. 在目标集群上，将注释添加到 AppMirrorRelationship。如果没有注释，故障转移只能使用最近传输的快照。
++
+[source, console]
+----
+kubectl annotate appmirrorrelationship <relationship_name> -n my-app-namespace protect.trident.netapp.io/allow-promotion-with-older-snapshots="true"
+----
+. 编辑 AppMirrorRelationship CR 文件（例如， `trident-protect-relationship.yaml`）：
++
+** 将 *spec.desiredState* 设置为 `Promoted`。
+** 将 *spec.promotedSnapshot* 设置为您在 <<识别快照>> 中记录的基础名称。
++
+例如：
+
++
+[source, yaml]
+----
+apiVersion: protect.trident.netapp.io/v1
+kind: AppMirrorRelationship
+metadata:
+  name: <relationship_name>
+  namespace: <namespace>
+  annotations:
+    protect.trident.netapp.io/allow-promotion-with-older-snapshots: "true"
+spec:
+  desiredState: Promoted
+  promotedSnapshot: <basename>
+----
+
+
+. 应用CR：
++
+[source, console]
+----
+kubectl apply -f trident-protect-relationship.yaml -n my-app-namespace
+----
+. 检查关系的状态：
++
+[source, console]
+----
+kubectl get amr -n my-app-namespace <relationship_name> -o=jsonpath='{.status}' | jq
+----
+
+
+.结果
+关系移动到 `Promoted`状态，应用程序使用来自所选快照的数据在目标集群上运行。
+
+如果关系保持在  `Promoting` 状态，并且  `status.error` 显示  `The snapshot provided is invalid or older than the most recently transferred snapshot`，则说明注释缺失或未设置为  `true`。请添加注释并重试。
+
+.下一步是什么？
+要返回到原始集群，请执行link:trident-protect-use-snapmirror-replication.html#reverse-resync-a-failed-over-replication-relationship["反向重新同步"]，然后link:trident-protect-use-snapmirror-replication.html#reverse-application-replication-direction["反转复制方向"]。
+
+
+CAUTION: 要返回到原始集群，请不要执行正常的重新同步。正常的重新同步会丢弃故障转移的应用程序，并将关系返回到最新的源快照。
+
+
+
+[[related-information]]
+== 相关信息
+
+* link:trident-protect-use-snapmirror-replication.html["使用 Trident Protect 设置和管理应用程序复制"]
+* link:trident-protect-use-snapmirror-replication.html#fail-over-to-destination-cluster["故障转移到目标集群"]
+* link:trident-protect-use-snapmirror-replication.html#resync-a-failed-over-replication-relationship["重新同步故障转移复制关系"]
+* link:trident-protect-use-snapmirror-replication.html#fail-back-applications-to-the-original-source-cluster["将应用程序故障恢复到原始源集群"]
+* link:trident-protect-protect-apps.html#create-a-data-protection-schedule["创建数据保护计划"]
+

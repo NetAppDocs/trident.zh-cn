@@ -40,6 +40,9 @@ NOTE: 确保 AppVault CR 位于安装了Trident Protect 的集群上。如果 Ap
 
 
 
+NOTE: 要加密快照和备份元数据或更改保管库密码，请使用  `spec.vaultPasswordSecretRef` 字段。请参阅 link:trident-protect-encrypt-appvault-metadata.html["加密 Trident Protect 快照和备份的 AppVault 元数据"]。
+
+
 
 ==== 创建数据移动工具存储库密码密钥
 

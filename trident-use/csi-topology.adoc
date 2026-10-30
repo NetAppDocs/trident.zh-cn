@@ -44,7 +44,7 @@ kubectl version
 Client Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.3", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:50:19Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.3", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:41:49Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"linux/amd64"}
 ----
-* 集群中的节点应具有可引入拓扑感知的标签(`topology.kubernetes.io/region`和 `topology.kubernetes.io/zone`)。在安装Trident之前，这些标签*应出现在群集中的节点上*，以便Trident能够识别拓扑。
+* 集群中的节点应具有引入拓扑感知的标签  `topology.kubernetes.io/region` 和 `topology.kubernetes.io/zone`）。 `topology.kubernetes.io/region` 标签对于 Trident 中的拓扑感知配置是必需的。在安装 Trident 之前，这些标签应存在于节点上。如果在安装后添加或更改拓扑标签，只需重新启动 Trident 节点 Pod 即可让 Trident 获取这些更改。
 +
 [listing]
 ----

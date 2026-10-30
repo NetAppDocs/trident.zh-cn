@@ -162,6 +162,8 @@ helm upgrade trident-protect -n trident-protect netapp-trident-protect/trident-p
 
 | useOpenshiftServiceCA | boolean | 启用与 OpenShift 的本地 Service CA Operator 的集成，以便为 Trident Protect 准入 webhook 自动创建和注入 TLS 证书。设置为 `true`时，Service CA Operator 会自动管理 webhook TLS 证书。仅在 OpenShift 集群上使用。（默认值： `false`） 
 |===
+要加密快照和备份元数据，请参阅 link:trident-protect-encrypt-appvault-metadata.html["加密 Trident Protect 快照和备份的 AppVault 元数据"]。
+
 您可以使用 YAML 配置文件或命令行标志配置这些选项：
 
 [role="tabbed-block"]
