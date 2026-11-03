@@ -24,6 +24,11 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 了解 NetApp Trident 和 Trident Protect 的新功能，包括增强功能、修复和弃用。
 
+[WARNING]
+====
+请勿从 Trident 25.10 或任何早期版本升级到 Trident 26.10.0。在启动过程中，Trident 节点 Pod 可能会分离仍在使用的卷。受影响的 Pod 可能会失败并出现错误 `volume ... is not staged`。在升级之前，请等待包含此修复程序的版本。有关详细信息，请参见 link:known-issues.html["已知问题"]。
+
+====
 
 
 [[trident]]

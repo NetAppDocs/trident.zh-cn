@@ -38,11 +38,49 @@ NOTE: SAN 驱动程序仅支持块工作负载。要配置 NAS 卷，请使用 `
 
 WIF 将投影的 Kubernetes 服务帐户令牌交换为短期的 Google Cloud 凭据。Trident 在调用 Google Cloud NetApp Volumes API 时使用这些凭据来模拟 Google Cloud 服务帐户。
 
-为 OpenShift 集群配置 Google Cloud Workload Identity Pool 和 OIDC 提供程序。提供程序颁发者必须与令牌的 `iss`声明相匹配，其属性映射必须将 `assertion.sub`映射到 `google.subject`，并且其允许的受众必须与令牌的 `aud`声明相匹配。
+为 OpenShift 集群配置 Google Cloud Workload Identity Pool 和 OIDC 提供程序。提供程序颁发者必须与令牌的 `iss`声明相匹配，并且其属性映射必须将 `assertion.sub`映射到 `google.subject`。
 
-在 Trident 将模拟的 Google Cloud 服务帐户上，向 Trident 控制器服务帐户的 WIF 主体授予 `roles/iam.workloadIdentityUser`角色。对于默认的 Trident 控制器服务帐户，令牌主题为 `system:serviceaccount:trident:trident-controller`；请使用为您的安装配置的主题。在包含 Google Cloud NetApp Volumes 资源的项目上，向模拟的服务帐户授予 `roles/netapp.admin`或同等权限。
+使用提供程序资源名称作为 WIF 受众安装 Trident。这会使 Trident 将控制器服务帐户令牌投影到 `/var/run/secrets/wif-token/token`。
 
-投影令牌必须在 `/var/run/secrets/wif-token/token`处对 Trident 控制器可用。将 `wipCredentialConfig.audience`设置为与令牌和提供商允许的受众相同的受众。将以下节添加到下面所示的 SAN 后端的 `spec`中，并将占位符替换为您环境中的值：
+.Trident 运算符
+[source, yaml]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  namespace: trident
+  cloudProvider: GCP
+  gcpWIFAudience: "//iam.googleapis.com/projects/<wif-pool-project-number>/locations/global/workloadIdentityPools/<pool-id>/providers/<provider-id>"
+----
+.掌舵
+[source, console]
+----
+helm install trident <trident-operator-package> \
+  --namespace trident \
+  --create-namespace \
+  --set cloudProvider=GCP \
+  --set-string gcpWIFAudience="//iam.googleapis.com/projects/<wif-pool-project-number>/locations/global/workloadIdentityPools/<pool-id>/providers/<provider-id>"
+----
+.Tridentctl
+[source, console]
+----
+tridentctl install \
+  --namespace trident \
+  --cloud-provider GCP \
+  --gcp-wif-audience "//iam.googleapis.com/projects/<wif-pool-project-number>/locations/global/workloadIdentityPools/<pool-id>/providers/<provider-id>"
+----
+为 Trident 安装和 `wipCredentialConfig.audience`使用相同的受众。请勿同时配置 GKE `cloudIdentity`或 `--cloud-identity`。请勿修补控制器 Deployment 以添加投影令牌；Trident operator 可以覆盖该更改。
+
+[IMPORTANT]
+====
+在 OpenShift Dedicated 上，OIDC 提供程序可以与其他 OpenShift 组件共享。如果提供程序的 `allowedAudiences`列表为空，则 Google 接受提供程序的规范资源名称（带或不带 `https://`前缀），因此上述受众无需更改提供程序。请勿仅为 Trident 设置明确的受众列表。如果提供程序已有明确的受众，请在保留每个现有值的同时追加 Trident 受众。替换该列表可能会阻止其他 OpenShift 组件交换令牌。
+
+====
+向 Trident 控制器服务帐户的 WIF 主体授予 Trident 将模拟的 Google Cloud 服务帐户上的 `roles/iam.workloadIdentityUser`角色。对于默认的 Trident 控制器服务帐户，令牌主体为 `system:serviceaccount:trident:trident-controller`；请使用为您的安装配置的主体。在包含 Google Cloud NetApp Volumes 资源的项目上，向模拟的服务帐户授予 `roles/netapp.admin`或同等权限。
+
+将以下节添加到 SAN 后端的  `spec`：
 
 [source, yaml]
 ----

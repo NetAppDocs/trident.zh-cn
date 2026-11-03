@@ -110,6 +110,11 @@ tridentctl install \
 
 WIF 将投影的 Kubernetes 服务帐户令牌交换为短期的 Google Cloud 凭据。Trident 使用这些凭据模拟 Google Cloud 服务帐户；该服务帐户的 IAM 角色授权其 Google Cloud NetApp Volumes API 调用。这样可以避免在后端配置中存储长期的服务帐户密钥。
 
+[IMPORTANT]
+====
+在 OpenShift Dedicated 上，OIDC 提供程序可以与其他 OpenShift 组件共享。如果提供程序的 `allowedAudiences`列表为空，则 Google 接受提供程序的规范资源名称（带或不带 `https://`前缀），因此 Trident 受众无需更改提供程序。请勿仅为 Trident 设置明确的受众列表。如果提供程序已经有明确的受众，请在保留每个现有值的同时追加 Trident 受众。替换列表可能会导致其他 OpenShift 组件无法交换令牌。
+
+====
 
 
 ==== 准备 OpenShift 集群
@@ -197,11 +202,6 @@ oc -n trident get deploy trident-controller -o yaml
 
 为集群配置 Google Cloud Workload Identity Pool 和 OIDC 提供程序。提供程序颁发者必须与令牌的 `iss`声明相匹配，并且其属性映射必须将 `assertion.sub`映射到 `google.subject`。提供程序允许的受众必须与投影令牌的 `aud`声明相匹配。
 
-[CAUTION]
-====
-对于 OSD，请勿替换或限制共享提供商的受众列表。当 `allowedAudiences`为空时，Google 接受提供商的规范资源名称，无论是否带有 `https://`前缀。设置 `--allowed-audiences`将替换该默认列表，并可能阻止其他 OSD 组件交换令牌。仅当提供商已有显式列表时才添加受众，并保留每个现有值。请勿将属性条件添加到 OSD 的共享提供商。请参见 Google Cloud link:https://docs.cloud.google.com/iam/docs/reference/rest/v1/projects.locations.workloadIdentityPools.providers#Oidc["OIDC 提供程序参考"^]。
-
-====
 仅在使用 OIDC 发现时才需要公共 `.well-known/openid-configuration` 和 JWKS 端点。Google 还支持使用 `jwksJson` 或 `--jwk-json-path` 直接上传 JWKS。
 
 在 Trident 将模拟的 Google Cloud 服务帐户上，向 WIF 主体授予 `roles/iam.workloadIdentityUser`角色。对于 `system:serviceaccount:trident:trident-controller`的令牌主题，主体具有以下形式：
