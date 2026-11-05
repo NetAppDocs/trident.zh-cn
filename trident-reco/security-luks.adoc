@@ -134,7 +134,7 @@ LUKS2 在块设备的开头存储其加密标头的冗余副本。 `cryptsetup` 
 
 为了防止并发标头访问， Trident 为每个 RWX LUKS 卷使用 Kubernetes 租约。在节点对该卷运行任何 `cryptsetup`命令之前，它必须持有该租约。Trident 在操作成功后释放该租约。如果在持有该租约期间另一个节点请求操作， Trident 会返回一个可重试的错误，并且 Kubernetes 会在稍后重试。不同卷上的操作是独立的。
 
-如果  `cryptsetup` 操作失败，Trident 故意保留租约，因此只有同一个节点可以重试。带有原因  `LeaseRetained` 的警告事件会记录故障。租约不会自动过期；只有在确认其持有者节点上没有运行任何  `cryptsetup` 操作后，管理员才应删除租约。有关恢复步骤，请参见 <<rwx-luks-stuck-lease,修复 RWX Linux 统一密钥设置（LUKS）卷的停滞租约>>。
+如果  `cryptsetup` 操作失败，Trident 故意保留租约，因此只有同一个节点可以重试。带有原因  `LeaseRetained` 的警告事件会记录故障。租约不会自动过期；只有在确认其持有者节点上没有运行任何  `cryptsetup` 操作后，管理员才应删除租约。有关恢复步骤，请参见 link:rwx-luks-stuck-lease.html["修复 RWX Linux 统一密钥设置（LUKS）卷的停滞租约"]。
 
 由于节点轮流打开卷，因此在许多不同节点上启动工作负载可能需要比使用未加密卷更长的时间。Kubernetes 在当前操作完成后会重试瞬态锁定错误。在大规模横向扩展期间，Pod 可能会在 `ContainerCreating`中停留更长时间；同一节点上的工作负载可以共享单个打开的设备映射。
 
