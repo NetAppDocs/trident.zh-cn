@@ -21,11 +21,6 @@ summary: Trident遵循四个月的发布节奏、每年发布三个主要版本�
 
 升级到最新版本的Trident时、请考虑以下事项：
 
-[WARNING]
-====
-请勿从 Trident 25.10 或任何早期版本升级到 Trident 26.10.0。在启动过程中，Trident 节点 Pod 可能会分离仍在使用的卷。受影响的 Pod 可能会失败并出现错误 `volume ... is not staged`。即使升级在其他方面处于受支持的四个版本窗口内，此问题也适用。在升级之前，请等待包含此修复程序的版本。有关详细信息，请参见 link:../known-issues.html["已知问题"]。
-
-====
 * 在给定的Kubnetes集群中的所有名称区中只应安装一个Trident实例。
 * Trident 23.07及更高版本需要v1卷快照、不再支持Alpha或Beta快照。
 * 升级时、请务必在"由Trident使用"中 `StorageClasses`提供 `parameter.fsType`。您可以在不中断已有卷的情况下删除和重新创建 `StorageClasses`卷。
@@ -52,9 +47,6 @@ Trident版本遵循基于日期的 `YY.MM`命名约定、其中"YY"是一年的�
 
 
 
-
-
-NOTE: 在OpenShift容器平台上使用TRIDent操作程序进行升级时、应升级到TRIDent 21.01.1或更高版本。21.01.0 版发布的 Trident 运算符包含一个已知的问题描述，该 已在 21.01.1 中修复。有关详细信息、请参见 https://github.com/NetApp/trident/issues/517["GitHub 上的问题描述详细信息"^]。
 
 
 
