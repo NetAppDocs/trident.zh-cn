@@ -49,7 +49,7 @@ WARNING: 安装程序 zip 文件中提供的 `tridentctl` 二进制文件是经�
 
 [WARNING]
 ====
-请勿升级到 Trident 26.10.1。在启动过程中，Trident 节点 Pod 可能会分离仍在使用的卷。受影响的 Pod 可能会失败并出现错误 `volume ... is not staged`。此问题已在 Trident 26.10.1 中修复。改为升级到 Trident 26.10.1 或更高版本。
+请勿升级到 Trident 26.10.0。在启动过程中，Trident 节点 Pod 可能会分离仍在使用的卷。受影响的 Pod 可能会失败并出现错误 `volume ... is not staged`。此问题已在 Trident 26.10.1 中得到修复。请改为升级到 Trident 26.10.1 或更高版本。
 
 ====
 
