@@ -7435,11 +7435,6 @@ SMB</block>
   <block id="661e48e3ddcb4ee665d58f7e5e1c6681" category="list-text">源和目标集群使用带有 SnapMirror 复制的 ONTAP 存储后端。不支持 Azure NetApp Files 和其他非 ONTAP 后端。请参阅<block ref="670bdb44a12521f652832ff70a2b48a9" category="inline-link-macro-rx"></block>。</block>
   <block id="ef284a298a0c724678206bb6ba103de7" category="list-text">源应用程序上存在一个快照计划（<block ref="460d2880d85882a9c98985b9b97c15f8" prefix=" " category="inline-code"></block> 大于 1）。</block>
   <block id="5de50c48c56db2fa0806da49412703bd" category="section-title">识别快照</block>
-  <block id="1a157faa616e61a92bf557ba68abe72c" category="paragraph">每个快照都有一个完成时间，因此您可以选择所需的时间点。</block>
-  <block id="0ac971abb32150cb232a1abb0082f500" category="list-text">在源集群上，列出快照：</block>
-  <block id="2394dfdac35ebd284555d0101e404df3" category="list-text">查找要故障切换到的快照。使用该<block ref="369e101dc6bf4c62661cf5aa4b24d2c8" prefix=" " category="inline-code"></block>值选择时间点。</block>
-  <block id="8480a49548657339b304ce0f98735b0b" category="list-text">获取该快照的归档路径：</block>
-  <block id="5ca06174a57c94edb13ef971d48bd2af" category="list-text">记录路径的最后一部分，即最后一个斜杠之后的所有内容。此部分为 _basename_。例如：</block>
   <block id="d4e5a5e14e40c7d660cb667ba2083dda" category="admonition">使用基本名称，而不是快照自定义资源的名称。</block>
   <block id="e8b0579b405ef1127f2cff3c747506d8" category="paragraph">将记录选定快照的基本名称。</block>
   <block id="295f97215fb39c0acd113fe01d547678" category="section-title">故障切换到选定快照</block>
@@ -7954,4 +7949,13 @@ SMB</block>
   <block id="0bb25bc3cf1d0c26ca853353a2dd7109" category="paragraph">systemctl start trident</block>
   <block id="f2f8542f9f112ea6545bf028e893aadc" category="paragraph">systemctl status trident</block>
   <block id="4e7dcfae0cbac5529245e0641c2da2e4" category="paragraph">请勿升级到 Trident 26.10.0。在启动过程中，Trident 节点 Pod 可能会分离仍在使用的卷。受影响的 Pod 可能会失败并出现错误<block ref="8307b5796c66c457d6a138b37abe40c5" prefix=" " category="inline-code"></block>。此问题已在 Trident 26.10.1 中得到修复。请改为升级到 Trident 26.10.1 或更高版本。</block>
+  <block id="79c2ec5d9abadd1928864428c124fbf6" category="paragraph">每个快照都有一个完成时间。在源集群上使用<block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block>或使用 CLI 获取其归档路径。</block>
+  <block id="9cf75acdd1d73c0ba1f192ebd7c1af71" category="admonition">当源集群关闭或快照自定义资源不可用时，请使用 CLI。在目标集群或具有源 AppVault 的任何集群上运行该命令。</block>
+  <block id="5d4b81a0f1df6afa40e2dcbfe2ecdd96" category="open-title">使用 kubectl</block>
+  <block id="4f058c5bfefb1ec708b6b944c62f9a4d" category="paragraph">在源集群上使用<block ref="0f12ee5c9f1dd90158580f1c292b0d37" prefix=" " category="inline-code"></block>获取归档路径。</block>
+  <block id="ad5d0860ae49b0980945c7619f60967c" category="list-text">在源集群上，列出快照并记下所需快照的<block ref="369e101dc6bf4c62661cf5aa4b24d2c8" prefix=" " category="inline-code"></block>：</block>
+  <block id="3cc16137e98111ef3413864a0173b086" category="list-text">获取其存档路径：</block>
+  <block id="875a912cbb29f994f1b2176315627605" category="paragraph">使用 Trident Protect CLI 获取存档路径。在目标集群上，或在任何具有源 AppVault 的集群上，列出快照。<block ref="87fb568bfdc633ffd5dee0f22cb4606c" prefix=" " category="inline-code"></block> 是完成时间，<block ref="5ffb5f0d0de78321df46fc7c93ca64a3" prefix=" " category="inline-code"></block> 是存档路径。</block>
+  <block id="a912c0a1c642f7dc58bec8536841ad2b" category="admonition">源应用程序的 AppVault CR 必须存在于运行命令的集群上，并且您的环境必须能够连接到 AppVault CR 中定义的对象存储桶。如果网络限制阻止访问，请从集群上的 Pod 内运行 CLI。</block>
+  <block id="d9f64db02c827452abb5970dc13d7416" category="paragraph">basename 是路径中最后一个斜杠之后的所有内容。例如：</block>
 </blocks>

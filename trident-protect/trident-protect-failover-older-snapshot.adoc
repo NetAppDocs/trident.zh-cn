@@ -30,33 +30,56 @@ CAUTION: 故障转移到较旧的快照会导致 ONTAP SnapMirror 删除目标�
 [[identify-the-snapshot]]
 == 识别快照
 
-每个快照都有一个完成时间，因此您可以选择所需的时间点。
+每个快照都有一个完成时间。在源集群上使用 `kubectl`或使用 CLI 获取其归档路径。
 
-.步骤
-. 在源集群上，列出快照：
+
+NOTE: 当源集群关闭或快照自定义资源不可用时，请使用 CLI。在目标集群或具有源 AppVault 的任何集群上运行该命令。
+
+[role="tabbed-block"]
+====
+.使用 kubectl
+--
+在源集群上使用 `kubectl`获取归档路径。
+
+. 在源集群上，列出快照并记下所需快照的 `completionTimestamp`：
 +
 [source, console]
 ----
 kubectl get snapshots -n my-app-namespace
 ----
-. 查找要故障切换到的快照。使用该 `completionTimestamp`值选择时间点。
-. 获取该快照的归档路径：
+. 获取其存档路径：
 +
 [source, console]
 ----
 kubectl get snapshots <snapshot_name> -n my-app-namespace -o jsonpath='{.status.appArchivePath}'
 ----
-. 记录路径的最后一部分，即最后一个斜杠之后的所有内容。此部分为 _basename_。例如：
-+
+
+
+--
+.使用命令行界面
+--
+使用 Trident Protect CLI 获取存档路径。在目标集群上，或在任何具有源 AppVault 的集群上，列出快照。 `TIMESTAMP` 是完成时间， `PATH` 是存档路径。
+
+[source, console]
+----
+tridentctl-protect get appvaultcontent <source_appvault_name> \
+--app <app_name> \
+--show-resources snapshot \
+--show-paths
+----
+
+NOTE: 源应用程序的 AppVault CR 必须存在于运行命令的集群上，并且您的环境必须能够连接到 AppVault CR 中定义的对象存储桶。如果网络限制阻止访问，请从集群上的 Pod 内运行 CLI。
+
+--
+====
+basename 是路径中最后一个斜杠之后的所有内容。例如：
+
 [listing]
 ----
 20231114173500_schedule-20231114173500_f8df8bd3-a727-4a14-b954-9666aa618b55
 ----
-+
 
 NOTE: 使用基本名称，而不是快照自定义资源的名称。
-
-
 
 .结果
 将记录选定快照的基本名称。
