@@ -81,7 +81,7 @@ Trident安装程序包包含部署Trident Operator和安装Trident所需的一�
 
 [listing]
 ----
-wget https://github.com/NetApp/trident/releases/download/v26.10.0/trident-installer-26.10.1.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v26.10.1/trident-installer-26.10.1.tar.gz
 tar -xf trident-installer-26.10.1.tar.gz
 cd trident-installer
 ----

@@ -12,7 +12,7 @@ summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以
 
 
 [role="lead"]
-https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["适用于 NetApp ONTAP 的 Amazon FSX"^] 是一项完全托管的 AWS 服务，运行由 NetApp ONTAP 存储操作系统支持的文件系统。它提供 ONTAP 功能、性能和管理，具有 AWS 的可扩展性和操作简便性。文件系统是 Amazon FSx 中的主要资源，类似于本地 ONTAP 集群。每个文件系统包含一个或多个存储虚拟机 (SVM)，每个 SVM 包含一个或多个存储文件和目录的卷。这种集成使在 Amazon Elastic Kubernetes Service (EKS) 中运行的 Kubernetes 集群能够为块和文件工作负载配置 ONTAP 支持的持久卷。
+https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["适用于 NetApp ONTAP 的 Amazon FSX"^] 是一项完全托管的 AWS 服务，运行由 NetApp ONTAP 存储操作系统支持的文件系统。它提供了 ONTAP 的功能、性能和管理，同时具备 AWS 的可扩展性和操作简便性。文件系统是 Amazon FSx 中的主要资源，类似于本地 ONTAP 集群。每个文件系统包含一个或多个存储虚拟机（SVM），每个 SVM 包含一个或多个存储文件和目录的卷。这种集成使自我管理的 Kubernetes 集群、Amazon Elastic Kubernetes Service（EKS）集群和自我管理的 OpenShift 集群能够为块和文件工作负载配置由 ONTAP 支持的持久卷。
 
 
 
@@ -21,7 +21,7 @@ https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html["适用
 
 除了link:../trident-get-started/requirements.html["Trident要求"]，要将FSx for ONTAP与Trident集成，您还需要：
 
-* 已安装 `kubectl` 的现有 Amazon EKS 集群或自管理 Kubernetes 集群。
+* 安装了 `kubectl`的现有自托管 Kubernetes 集群或 Amazon EKS 集群，或者安装了 `oc`的自托管 OpenShift 集群。
 * 可从集群的工作节点访问的现有Amazon FSx for NetApp ONTAP文件系统和Storage Virtual Machine (SVM)。
 * 为准备工作的工作节点 link:worker-node-prep.html["NFS或iSCSI"]。
 +
@@ -40,6 +40,11 @@ NOTE: 确保按照Amazon Linux和Ubuntu所需的节点准备步骤进行操作 h
 ** SMB卷支持使用 `ontap-nas` 仅限驱动程序。
 ** Trident EKS加载项不支持SMB卷。
 ** Trident 仅支持将 SMB 卷挂载到在 Windows 节点上运行的 Pod。有关详细信息，请参见 link:worker-node-prep.html#prepare-to-provision-smb-volumes["准备配置SMB卷"]。
+
+
+* 自我管理的 OpenShift 集群：
++
+** 对于推荐的 Trident 集成（使用 AWS Secrets Manager secret 作为 FSx for ONTAP 凭据），OpenShift 上的 Trident 控制器 Pod 必须在将 `hostNetwork`设置为 `true`的情况下运行。
 
 
 * 在Trident 24.02之前的版本中、Trident无法删除在已启用自动备份的Amazon FSx文件系统上创建的卷。要在Trident 24.02或更高版本中防止此问题，请在AWS FSx for ONTAP的后端配置文件中指定 `fsxFilesystemID`、AWS、 `apikey`AWS `apiRegion`和AWS `secretKey`。

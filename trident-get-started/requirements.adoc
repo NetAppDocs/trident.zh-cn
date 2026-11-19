@@ -44,12 +44,14 @@ Trident支持多个容器引擎和流程编排程序、其中包括：
 
 * Anthos On－Prem (VMware)和Anthos on Bare metal 1.16
 * Kubernetes 1.27 - 1.37
+* OpenShift 5.0
 * OpenShift 4.12、4.14 - 4.22 （如果您计划使用 OpenShift 4.19 的 iSCSI 节点准备，则支持的最低 Trident 版本为 25.06.1。）
 +
 
 NOTE: Trident继续支持旧版 OpenShift 版本，与link:https://access.redhat.com/support/policy/updates/openshift["Red Hat 扩展更新支持 (EUS) 发布生命周期"]，即使它们依赖上游不再受官方支持的 Kubernetes 版本。在这种情况下安装Trident时，您可以放心地忽略有关 Kubernetes 版本的任何警告消息。
 
-* Rancher Kubernetes Engine 2 (RKE2) v1.28.x - 1.37.x
+* SUSE Rancher Kubernetes Engine 2（RKE2）v1.28.x - 1.37.x
+* SUSE 虚拟化（Harvester）1.8.x - 1.9.x（NFS、iSCSI、NVMe/TCP 和 FC）
 * 适用于 NFSv4、iSCSI 和 NVMe/TCP 的 Talos OS。每种协议都需要以下 Talos 系统扩展；请与 Sidero Labs 确认这些要求。
 +
 ** NFSv4： `siderolabs/nfs-utils`
@@ -84,15 +86,22 @@ WARNING: 在将安装了Trident的Kubernetes集群从1.25升级到1.26或更高�
 
 
 
-[[trident-support-for-kubevirt-and-openshift-virtualization]]
-== Trident支持KubeVirt和OpenShift虚拟化
+[[trident-support-for-kubevirt-openshift-virtualization-and-suse-virtualization]]
+== Trident 支持 KubeVirt、OpenShift 虚拟化和 SUSE 虚拟化
 
 .支持的存储驱动程序：
-Trident支持以下用于KubeVirt和OpenShift虚拟化的ONTAP驱动程序：
+Trident 支持以下用于 KubeVirt、OpenShift 虚拟化和 SUSE 虚拟化的 ONTAP 驱动程序：
 
 * ontap-NAS
 * NVMe-SAN (iSCSI、FCP、基于的ONTAP)
 * ONTAP—SAN经济型(仅限iSCSI)
+
+
+.SUSE 虚拟化认证报告
+使用 SUSE Virtualization 验证了以下 Trident 26.10 配置。测试由 Suresh Thoppay 提供：
+
+* link:https://netapp-my.sharepoint.com/:w:/p/lrico/IQAF9GNKmi64SKJIhoBo4QcOASK58qAyI3j-Gm5QCd4fHa8?e=Z8G3cO["采用 SUSE Virtualization 1.8.2 的 Trident 26.10"^]
+* link:https://netapp-my.sharepoint.com/:w:/p/lrico/IQCwh98Enw7CTYcbu_fRhSS0AVN__iDN_jYFTvVrELgxNYI?e=dLNcqx["使用 SUSE Virtualization 1.9.1 的 Trident 26.10"^]
 
 
 .注意事项：
@@ -287,7 +296,7 @@ link:../trident-reference/ports.html["Trident端口"]
 | Kubernetes版本 | 容器映像 
 
 
-| v1.27.0、v1.28.0、v1.29.0、v1.30.0、v1.31.0、v1.32.0、v1.33.0、v1.34.0、v1.35.0、v1.36.0、v1.37.0  a| 
+| v1.37.0  a| 
 * docker.io/netapp/trident:26.10.1
 * docker.io/netapp/trident-autosupport:26.10
 * docker.io/netapp/trident-operator:26.10.1（可选）

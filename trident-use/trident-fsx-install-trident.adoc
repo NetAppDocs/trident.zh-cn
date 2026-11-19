@@ -27,13 +27,14 @@ Trident 简化了 Kubernetes 中 Amazon FSx for NetApp ONTAP 存储管理，使�
 
 [role="tabbed-block"]
 ====
-.Pod 身份
+.Pod 身份（EKS）
 --
 . 添加Trident Helm存储库：
 +
 [source, console]
 ----
 helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
+helm repo update
 ----
 . 使用以下示例安装 Trident：
 +
@@ -53,13 +54,12 @@ helm list -n trident
 [listing]
 ----
 NAME                NAMESPACE   REVISION    UPDATED                                 STATUS       CHART                          APP VERSION
-
 trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT    deployed     trident-operator-100.2502.0    25.02.0
 ----
 
 
 --
-.服务帐户协会 (IRSA)
+.服务帐户的 IAM 角色 (IRSA) (EKS)
 --
 . 添加Trident Helm存储库：
 +
@@ -72,10 +72,10 @@ helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 [source, console]
 ----
 helm install trident-operator netapp-trident/trident-operator --version 100.2502.1  \
---set cloudProvider="AWS" \
---set cloudIdentity="'eks.amazonaws.com/role-arn: arn:aws:iam::<accountID>:role/<AmazonEKS_FSxN_CSI_DriverRole>'" \
---namespace trident \
---create-namespace
+  --set cloudProvider="AWS" \
+  --set cloudIdentity="'eks.amazonaws.com/role-arn: arn:aws:iam::<accountID>:role/<AmazonEKS_FSxN_CSI_DriverRole>'" \
+  --namespace trident \
+  --create-namespace
 ----
 +
 您可以使用 `helm list`命令查看安装详细信息、例如名称、命名空间、图表、状态、应用程序版本和修订版号。
@@ -92,6 +92,42 @@ NAME                NAMESPACE   REVISION    UPDATED                             
 
 trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT    deployed     trident-operator-100.2510.0    25.10.0
 ----
+
+
+--
+.自我管理的 OpenShift 的 IAM 角色
+--
+. 添加Trident Helm存储库：
++
+[source, console]
+----
+helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
+helm repo update
+----
+. 使用以下示例安装 Trident：
++
+[source, console]
+----
+helm install trident-operator netapp-trident/trident-operator --version 100.2606.1 --namespace trident --set hostNetwork=true --create-namespace
+----
++
+您可以使用 `helm list`命令查看安装详细信息、例如名称、命名空间、图表、状态、应用程序版本和修订版号。
+
++
+[source, console]
+----
+helm list -n trident
+----
++
+[listing]
+----
+NAME               NAMESPACE   REVISION   UPDATED                                  STATUS     CHART                         APP VERSION
+trident-operator   trident     1          2026-11-10 16:58:16.108649912 -0600 CST  deployed   trident-operator-100.2606.1   26.06.1
+----
++
+
+NOTE: 当启用 `hostNetwork` 时，自我管理的 OpenShift 安装程序不会创建 Trident 在 TCP 端口 8443 上所需的安全组规则。将 TCP 端口 8443 的入站规则从 VPC CIDR 添加到由 OpenShift 安装程序创建的 `<cluster_name>-<random_string>-node` 和 `<cluster_name>-<random_string>-controlplane` 安全组。
+
 
 
 --

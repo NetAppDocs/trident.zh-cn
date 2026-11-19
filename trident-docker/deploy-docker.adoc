@@ -153,141 +153,130 @@ curl -fsSL https://get.docker.com/ | sh
 +
 [source, console]
 ----
-----trident-installer-26.10.1.tar.gz
-wget https://github.com/NetApp/trident/releases/download/10.0/
-tar zxf trident-installer-26.10.1.tar.gz
+wget https://github.com/NetApp/trident/releases/download/v26.10.1/trident-installer-26.10.1.tar.gz
+tar -xf trident-installer-26.10.1.tar.gz
+cd trident-installer
 ----
-
-
-
-
-[listing]
-----
-.. Move to a location in the bin path:
+.. 移动到 bin 路径中的位置：
 +
-[source,console]
+[source, console]
 ----
-sudo mv trident-installer/extras/bin/trident /usr/local/bin/ sudo chown root:root /usr/local/bin/trident sudo chmod 755 /usr/local/bin/trident
-
-[listing]
+sudo mv trident-installer/extras/bin/trident /usr/local/bin/
+sudo chown root:root /usr/local/bin/trident
+sudo chmod 755 /usr/local/bin/trident
 ----
-.. Create a location for the configuration file:
+.. 为配置文件创建一个位置：
 +
-[source,console]
+[source, console]
 ----
 sudo mkdir -p /etc/netappdvp
-
-[listing]
 ----
-.. Create the configuration file:
+.. 创建配置文件：
 +
-[source,console]
+[source, console]
 ----
 cat << EOF > /etc/netappdvp/ontap-nas.json
-
-[listing]
 ----
 +
-[source,json]
+[source, json]
 ----
-{ "version": 1, "storageDriverName": "ontap-nas", "managementLIF": "10.0.0.1", "dataLIF": "10.0.0.2", "svm": "svm_nfs", "username": "vsadmin", "password": "password", "aggregate": "aggr1" } EOF
+{
+  "version": 1,
+  "storageDriverName": "ontap-nas",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.2",
+  "svm": "svm_nfs",
+  "username": "vsadmin",
+  "password": "password",
+  "aggregate": "aggr1"
+}
+EOF
+----
 
-[listing]
-----
-. After placing the binary and creating the configuration file, start the Trident daemon using the desired configuration file.
+
+. 放置二进制文件并创建配置文件后，使用所需的配置文件启动 Trident 守护程序。
 +
-[source,console]
+[source, console]
 ----
 sudo trident --config=/etc/netappdvp/ontap-nas.json
-
-[listing]
 ----
 +
-NOTE: Unless specified, the default name for the volume driver is "netapp".
-+
-After the daemon is started, you can create and manage volumes by using the Docker CLI interface.
 
-. Create a volume:
+NOTE: 除非指定，否则卷驱动程序的默认名称为 "netapp"。
+
 +
-[source,console]
+守护进程启动后，您可以使用 Docker CLI 界面创建和管理卷。
+
+. 创建卷：
++
+[source, console]
 ----
 docker volume create -d netapp --name trident_1
-
-[listing]
 ----
-. Provision a Docker volume when starting a container:
+. 启动容器时预配 Docker 卷：
 +
-[source,console]
+[source, console]
 ----
 docker run --rm -it --volume-driver netapp --volume trident_2:/my_vol alpine ash
-
-[listing]
 ----
-. Remove a Docker volume:
+. 删除 Docker 卷：
 +
-[source,console]
+[source, console]
 ----
 docker volume rm trident_1
-
-[listing]
 ----
 +
-[source,console]
+[source, console]
 ----
 docker volume rm trident_2
-
-[listing]
 ----
 
-== Start Trident at system startup
 
-A sample unit file for systemd based systems can be found at `contrib/trident.service.example` in the Git repo. To use the file with RHEL, do the following:
 
-. Copy the file to the correct location.
+
+[[start-trident-at-system-startup]]
+== 在系统启动时启动 Trident
+
+可以在 Git 存储库中的 `contrib/trident.service.example`找到基于 systemd 的系统的示例单元文件。要将文件与 RHEL 一起使用，请执行以下操作：
+
+. 将文件复制到正确的位置。
 +
-You should use unique names for the unit files if you have more than one instance running.
+如果有多个实例正在运行，则应为单元文件使用唯一的名称。
+
 +
-[source,console]
+[source, console]
 ----
 cp contrib/trident.service.example /usr/lib/systemd/system/trident.service
-
-[listing]
 ----
-. Edit the file, change the description (line 2) to match the driver name and the configuration file path (line 9) to reflect your environment.
-. Reload systemd for it to ingest changes:
+. 编辑文件，更改描述（第 2 行）以匹配驱动程序名称和配置文件路径（第 9 行）以反映您的环境。
+. 重新加载 systemd 以使其获取更改：
 +
-[source,console]
+[source, console]
 ----
 systemctl daemon-reload
-
-[listing]
 ----
-. Enable the service.
+. 启用服务。
 +
-This name varies depending on what you named the file in the `/usr/lib/systemd/system` directory.
+此名称因您在  `/usr/lib/systemd/system` 目录中为文件命名的名称而异。
+
 +
-[source,console]
+[source, console]
 ----
 systemctl enable trident
-
-[listing]
 ----
-. Start the service.
+. 启动服务。
 +
-[source,console]
+[source, console]
 ----
 systemctl start trident
-
-[listing]
 ----
-. View the status.
+. 查看状态。
 +
-[source,console]
+[source, console]
 ----
 systemctl status trident
-
-[listing]
 ----
 
-NOTE: Any time you modify the unit file, run the `systemctl daemon-reload` command for it to be aware of the changes.
-----
+
+
+NOTE: 每当您修改单元文件时，请运行  `systemctl daemon-reload` 命令以了解更改。

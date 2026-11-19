@@ -86,7 +86,7 @@ kubectl get pvc
 
 [listing]
 ----
-NAME        STATUS VOLUME     CAPACITY ACCESS MODES STORAGECLASS AGE
-pvc-storage Bound  pv-name 2Gi      RWO                       5m
+NAME       STATUS   VOLUME       CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+fsx-demo   Bound    pvc-volume   1Gi        RWX            fsx-nfs        <unset>                 13s
 ----
 有关存储类如何与和参数交互以控制Trident如何配置卷的详细信息 `PersistentVolumeClaim`、请参见link:../trident-reference/objects.html["Kubernetes 和 Trident 对象"]。

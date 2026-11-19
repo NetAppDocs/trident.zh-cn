@@ -19,10 +19,20 @@ summary: '通过将Trident与Amazon FSx for NetApp ONTAP结合使用、您可以
 [[create-a-storageclass-object]]
 == 创建 StorageClass 对象
 
-当您为 FSx for ONTAP 创建 StorageClass 时，Trident 将自动创建后端配置。
+当您为 FSx for ONTAP 创建 StorageClass 时，Trident 可以自动创建后端配置。
+
+要手动配置存储后端，请参阅 <<create-a-kubernetes-storageclass-without-automatic-backend-configuration>>，了解有关单独创建 Trident 后端和 StorageClass 的说明。
 
 
-NOTE: 如果要手动配置存储后端，请参阅 <<create-a-kubernetes-storageclass-without-automatic-backend-configuration>> 部分了解如何分别创建 Trident 后端和存储类。
+NOTE: 在 OpenShift 上，您必须单独创建 Trident 后端和 StorageClass。
+
+
+
+==== 了解自动后端配置的工作原理
+
+Trident 从 StorageClass 定义中导出后端配置。当您应用 StorageClass 时，Trident 验证所需的参数，创建后端，并使用状态注释 StorageClass。
+
+Trident 只创建一次 VolumeSnapshotClass。Trident 会为后续的 StorageClasses 重复使用同一个 VolumeSnapshotClass。
 
 
 
@@ -42,7 +52,7 @@ NOTE: 如果要手动配置存储后端，请参阅 <<create-a-kubernetes-storag
 | `storageDriverName` | 是的。 | string | Trident 存储驱动程序（例如， `ontap-nas` 或  `ontap-san`） 
 
 
-| `credentialsName` | 是的。 | string | 包含 FSx for ONTAP 凭据的 Kubernetes Secret 的名称 
+| `credentialsName` | 是的。 | string | 包含 FSx for ONTAP 凭据的 Kubernetes Secret 或 AWS Secrets Manager secret ARN 的名称 
 |===
 
 
@@ -193,14 +203,6 @@ metadata:
 
 
 
-==== 了解自动后端配置的工作原理
-
-Trident 从 StorageClass 定义中导出后端配置。当您应用 StorageClass 时，Trident 验证所需的参数，创建后端，并使用状态注释 StorageClass。
-
-Trident 只创建一次 VolumeSnapshotClass。Trident 会为后续的 StorageClasses 重复使用同一个 VolumeSnapshotClass。
-
-
-
 [[create-the-trident-backend]]
 === 创建 Trident 后端
 
@@ -219,11 +221,14 @@ metadata:
   namespace: trident
 spec:
   version: 1
+  defaults:
+    skipRecoveryQueue: "true"
   storageDriverName: ontap-nas
   backendName: tbc-ontap-nas
   svm: svm-name
   aws:
     fsxFilesystemID: fs-xxxxxxxxxx
+    apiRegion: us-west-2
   credentials:
     name: "arn:aws:secretsmanager:us-west-2:xxxxxxxx:secret:secret-name"
     type: awsarn
@@ -243,13 +248,16 @@ spec:
   },
   "spec": {
     "version": 1,
+    "defaults": {
+      "skipRecoveryQueue": "true"
+    },
     "storageDriverName": "ontap-nas",
     "backendName": "tbc-ontap-nas",
     "svm": "svm-name",
     "aws": {
-      "fsxFilesystemID": "fs-xxxxxxxxxx"
+      "fsxFilesystemID": "fs-xxxxxxxxxx",
+      "apiRegion": "us-west-2"
     },
-    "managementLIF": null,
     "credentials": {
       "name": "arn:aws:secretsmanager:us-west-2:xxxxxxxx:secret:secret-name",
       "type": "awsarn"
@@ -314,7 +322,6 @@ Kubectl get tbc -n trident
 [listing]
 ----
 NAME                         BACKEND NAME         BACKEND UUID                           PHASE   STATUS
-
 backend-tbc-ontap-nas        tbc-ontap-nas        933e0071-66ce-4324-b9ff-f96d916ac5e9   Bound   Success
 ----
 
@@ -341,6 +348,9 @@ kind: StorageClass
 metadata:
   name: ontap-gold
 provisioner: csi.trident.netapp.io
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
 parameters:
   backendType: "ontap-nas"
   provisioningType: "thin"
@@ -448,7 +458,6 @@ kubectl get sc basic-csi
 ----
 NAME         PROVISIONER             AGE
 basic-csi    csi.trident.netapp.io   15h
-
 ----
 
 
