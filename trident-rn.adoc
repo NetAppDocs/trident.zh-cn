@@ -1607,7 +1607,7 @@ WARNING: v21.10.0 版本具有一个问题描述，在删除节点并将其重�
 * Trident现在会 (`fsType=""`对存储类中未指定的卷强制使用空白 `fsType`) `fsType`。使用Kubernetes 1.17或更高版本时、Trident支持为NFS卷提供空白 `fsType`。对于iSCSI卷、在使用安全上下文强制实施时、您需要在StorageClass上 `fsGroup`设置 `fsType`。
 * 在多个Trident实例中使用后端时、每个后端配置文件应为ONTAP后端设置不同的值、或者为SolidFire后端 `storagePrefix`设置不同的值 `TenantName`。Trident无法检测其他Trident实例已创建的卷。尝试在ONTAP或SolidFire后端创建现有卷会成功、因为Trident会将卷创建视为一项具有等量功能的操作。如果 `storagePrefix`或 `TenantName`不不同、则在同一后端创建的卷可能会发生名称冲突。
 * 在安装Trident (使用或Trident操作员)以及使用 `tridentctl`管理Trident时 `tridentctl`、您应确保 `KUBECONFIG`已设置环境变量。这是指示应处理的Kubbernetes集群所必需的 `tridentctl`。在使用多个Kubnetes环境时、您应确保 `KUBECONFIG`文件的来源准确无误。
-* 要对 iSCSI PV 执行联机空间回收，工作节点上的底层操作系统可能需要将挂载选项传递到卷。这一点适用于RERL/Red Hat Enterprise Linux CoreTM OS (RHCOS)实例、此实例需要 `discard` https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["挂载选项"^]；请确保在n ü^中包含discard mountOption、以支持联机块丢弃[`StorageClass`。
+* 要对 iSCSI PV 执行在线空间回收，工作节点上的底层操作系统可能需要将装载选项传递到卷。对于 RHEL/Red Hat Enterprise Linux CoreOS (RHCOS) 实例，需要 `discard` https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/managing_file_systems/discarding-unused-blocks_managing-file-systems["挂载选项"^]；请确保在[`StorageClass`^] 中包含 discard mountOption 以支持在线块丢弃。
 * 如果每个Kubornetes集群具有多个Trident实例、则Trident无法与其他实例进行通信、并且无法发现其创建的其他卷、如果在一个集群中运行多个实例、则会导致出现意外且不正确的行为。每个Kubnetes集群只应有一个Trident实例。
 * 如果在Trident脱机时从Kubnetes中删除基于Trident的 `StorageClass`对象、则Trident不会在其数据库恢复联机后从其数据库中删除相应的存储类。您应使用或REST API删除这些存储类 `tridentctl`。
 * 如果用户在删除相应的PVC之前删除了Trident配置的PV、则Trident不会自动删除后备卷。您应通过或REST API删除此卷 `tridentctl`。
