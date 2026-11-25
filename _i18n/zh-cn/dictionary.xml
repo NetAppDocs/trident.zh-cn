@@ -834,7 +834,6 @@
   <block id="5f4dcc3b5aa765d61d8327deb882cf99" category="paragraph">password</block>
   <block id="4d3fd9a7ab4c84b857fc26b2633237d0" category="paragraph">连接到集群 /SVM 的密码。用于基于凭据的身份验证</block>
   <block id="19dce7ac7f5290fc8fa218ad0c858df5" category="paragraph">客户端权限密钥</block>
-  <block id="8c5e8d4f9acf9295e1a96feef0c0b516" category="paragraph">客户端专用密钥的 Base64 编码值。用于基于证书的身份验证</block>
   <block id="039e9d80fa53ba861c06b590ba3f9d34" category="paragraph">用户名</block>
   <block id="a7128cd45d4a277fe5c6ed6f6c4238f7" category="paragraph">入站用户名。如果 useCHAP=true ，则为必需项。适用于 `ontap-san` 和 `ontap-san-economy.`</block>
   <block id="f9d0dc78b203f2c1106dc0c7d58a5397" category="paragraph">chapInitiatorSecret</block>
@@ -1045,7 +1044,6 @@
   <block id="64a8f71bee95a6635e88bce00f1a2d3c" category="paragraph">已知问题用于确定可能会阻止您成功使用本产品的问题。</block>
   <block id="6d791d3b45515fd8619e489b938f39e8" category="inline-link">挂载选项</block>
   <block id="0821431aba133adbfa7fa0ca1781eedd" category="list-text">ONTAP 不能同时配置多个 FlexGroup ，除非聚合集对于每个配置请求是唯一的。</block>
-  <block id="ba09ee47d11962c1ccd13d7e1f10e6c5" category="doc">文档的早期版本</block>
   <block id="89bcbd8e4ba49b7310e9fa748e878c4b" category="inline-link-macro">部署的前提条件</block>
   <block id="88f0ab229fa9d759d74fcf6ab7cc17b1" category="section-title">Docker 托管插件方法（ 1.13/17.03 及更高版本）</block>
   <block id="135b308ed83c53f1516b7c754566d1c4" category="admonition-title">开始之前</block>
@@ -1200,7 +1198,6 @@
   <block id="48cbf13b390ff021b130d5f372147af5" category="paragraph">NetApp 已向 Docker 团队提供反馈，但没有任何迹象表明将来可以采用。</block>
   <block id="29cff148f43bc689eb14447b333f6f83" category="section-title">如果要配置 FlexGroup ，则在第二个 FlexGroup 具有一个或多个与要配置的 FlexGroup 相同的聚合时， ONTAP 不会配置第二个 FlexGroup 。</block>
   <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="sidebar">发行说明</block>
-  <block id="93168a8084b3e838d2932c4734bd234e" category="sidebar">早期版本</block>
   <block id="312b0dc38b01ff32c1b2f5f81ee1ab2d" category="sidebar">使用 Trident 操作员进行部署</block>
   <block id="e0e3d7f1aacdf4a8196132549709430c" category="sidebar">使用 tridentctl 进行部署</block>
   <block id="386307d41b3f4169a1e6e046a727cdd2" category="sidebar">使用 Trident 操作员进行升级</block>
@@ -2040,7 +2037,6 @@
   <block id="c1fd85851a162222ab0690383666bd47" category="paragraph"><block ref="05b6053c41a2130afd6fc3b158bda4e6" prefix="" category="inline-code"></block></block>
   <block id="bf0a8b77dbb95465376fb2cfec90b422" category="paragraph"><block ref="76bb7251da6a3c88e629c03a402b9d15" prefix="" category="inline-code"></block></block>
   <block id="1dedbfd605df8b562acc8f759a8e9acc" category="list-text">运行的Kubernetes集群 <block ref="229e1052bb9ecd8cf2680d6f44691174" category="inline-link-macro-rx"></block></block>
-  <block id="17c5eeb01739643b5aef94fe18b6c849" category="paragraph">您可以使用版本选择器在最新版本和以前的四个版本之间导航、也可以使用以下链接。</block>
   <block id="2122a8acb599837078e6b76436e892c4" category="list-text">现在、在Trident中支持Kubnetes 1.27。在升级Kubernetes之前升级Trident。</block>
   <block id="38a0b9f59e6fe23e1617dc0e78498afe" category="section-title">有关强制断开的详细信息</block>
   <block id="20c0c9efee2da2645ec0eefaf3c75d8c" category="inline-link-macro">Kubnetes：节点非正常关闭</block>
@@ -2322,7 +2318,6 @@ SMB</block>
   <block id="33ab2c3f94452baf7f17dab03982edfb" category="paragraph">之后<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> 更新后、操作员将处理更新并修补现有安装。这可能会触发创建新Pod以相应地修改安装。</block>
   <block id="ac0482b416d6b2d907db760f79e018a7" category="example-title">&lt;strong&gt; Clean重新安装&lt;/strong&gt;</block>
   <block id="6429305365094c29848a93a6d17a7f53" category="list-text">https://github.com/NetApp/trident/tree/master/trident-installer/sample-input[sample输入^]目录包含https://github.com/NetApp/trident/blob/master/trident-installer/sample-input/storage-class-samples/storage-class-basic.yaml.templ等示例<block ref="9abb8c7777ddb413820ee07d5d93aa4a" prefix="[" category="inline-code"></block>^)和链接：https://github.com/NetApp/trident/blob/master/trident-installer/sample-input/storage-class-samples/storage-class-bronze-default.yaml<block ref="69ae2d9a6d831af7488e53fec053b77e" prefix="[" category="inline-code"></block>^。</block>
-  <block id="2251733916a92fc0c61d943165128928" category="inline-link-macro">早期版本</block>
   <block id="7bd3bf704987c7c25848acd94f0e499d" category="list-text">使用 ...<block ref="8dd3e3fab389d3d56b4dbea697d52e91" prefix=" " category="inline-code"></block> 检查Pod。</block>
   <block id="672218727121432fb7209f42c6a00514" category="list-text"><block ref="672218727121432fb7209f42c6a00514" category="inline-link-macro-rx"></block></block>
   <block id="a81c3a8630da0b8548245caae368a3c2" category="inline-link-macro">了解操作员升级工作流</block>
@@ -2352,7 +2347,6 @@ SMB</block>
   <block id="55f6e2744208ccefe34f3e05ced2c988" category="section-title">卸载Helm安装</block>
   <block id="99dec4df69ba043a5eb3118e1e0b364e" category="section-title">卸载<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 安装</block>
   <block id="3ef75911ec16a9d0ba70cfd4e68dcb71" category="section-title">升级手动安装</block>
-  <block id="b0e74afe1fdeb605b5c47b501c43b71b" category="inline-link-macro">您安装的版本</block>
   <block id="eb7a4fa3d9aff7ec5b23abb8b82d516b" category="paragraph">｛\f270通过｝｛\f270｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270通过｝｛\f151、｝｛\f270｝｛\f270｝｛\f151、｝｛\f270｝</block>
   <block id="613909529798c8a2543da8e954e5d742" category="section-title">从升级<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 安装到TRIdent操作员</block>
   <block id="9142b40107d9c5a0b86ef0ce8c25a88b" category="paragraph">您可以从升级到最新版本的Trident操作员<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 安装。现有后端和PVC将自动可用。</block>
@@ -2931,18 +2925,6 @@ SMB</block>
   <block id="284bb2f9d2596017aa72985df760fdb3" category="list-text">如果仅使用后端范围的igroup (自23.04起已弃用)、则iSCSI自行恢复功能将启动SCSI重新检查、以确定SCSI总线中的确切LUN ID。</block>
   <block id="0d6cf1de077f00140ee25c03f94e4805" category="list-text">如果混合使用了每个节点的igroub和后端范围的igroux、则iSCSI自我修复功能将对SCSI总线中的确切LUN ID启动SCSI重新检查。</block>
   <block id="472039bf3422ff2697dba6fc9fdd57d8" category="inline-link-macro">Trident支持生命周期</block>
-  <block id="c45d9c1b397ff706a7a39c069930c677" category="inline-link">Trident 24.06</block>
-  <block id="d0fd12656eeec63fe137c83181c17c0b" category="list-text"><block ref="d0fd12656eeec63fe137c83181c17c0b" category="inline-link-rx"></block></block>
-  <block id="45d1e500370372fc7e76e110b5aff92d" category="inline-link">Trident 24.02</block>
-  <block id="b735f50352c31f80267e7a6fc57ce804" category="list-text"><block ref="b735f50352c31f80267e7a6fc57ce804" category="inline-link-rx"></block></block>
-  <block id="b4dfeb42b5c9816777494eeb7a772461" category="inline-link">Trident 23.10</block>
-  <block id="55cad0455da7cf59434d9f8ff225c39b" category="list-text"><block ref="55cad0455da7cf59434d9f8ff225c39b" category="inline-link-rx"></block></block>
-  <block id="8806d0d5f26e8a704b5d26c076c531bd" category="inline-link">Trident 23.07</block>
-  <block id="9c74a4e8266dd7e50d12a159c32d6b10" category="list-text"><block ref="9c74a4e8266dd7e50d12a159c32d6b10" category="inline-link-rx"></block></block>
-  <block id="3a4e6f76b26aa8878f5798aba052777c" category="inline-link">Trident 23.04</block>
-  <block id="5bff8eb1dea519dd15a076031fa9f288" category="list-text"><block ref="5bff8eb1dea519dd15a076031fa9f288" category="inline-link-rx"></block></block>
-  <block id="5382f4fbc3622ef143d9ddbe033351ab" category="inline-link">Trident 23.01</block>
-  <block id="a9425b076f0cf301dc3a2d77e67816ca" category="list-text"><block ref="a9425b076f0cf301dc3a2d77e67816ca" category="inline-link-rx"></block></block>
   <block id="c48696f9d5a5a881f7f2f08fd40ce424" category="summary">查找有关Trident安装、配置、升级和故障排除的常见问题解答。</block>
   <block id="d9aca3de44ae0828dd89d53663e6e4c8" category="section-title">Trident的发布频率如何？</block>
   <block id="d68e1eab03012de1cfe733b0e5a56e0a" category="paragraph">从24.02版开始、Trident每四个月发布一次：2月、6月和10月。</block>
@@ -3279,7 +3261,6 @@ SMB</block>
   <block id="424054df70ee64ca6c70f04f668acb1e" category="paragraph">tridentctd支持类似于kubectd的插件。如果插件二进制文件名遵循"tridentcts-tld"方案&lt;plugin&gt;、并且二进制文件位于列出了路径环境变量的文件夹中、则tridentctL)将检测插件。所有检测到的插件都会在trdentctrd帮助的插件部分中列出。您也可以通过在环境变量TRIDENTCTL_plugin_path中指定plugin文件夹来限制搜索(示例：<block ref="d8923b227a7eb64a54abbd6aa4ee0f6d" prefix=" " category="inline-code"></block>)。如果使用了变量、则trdencdld仅在指定文件夹中搜索。</block>
   <block id="deeb141b9b83e90418e171a1871e4c4c" category="summary">您应使用与安装Trident相同的方法卸载Trident。如果您需要修复在升级、依赖关系问题或升级失败或不完整后发现的错误、则应卸载Trident、然后按照该版本的特定说明重新安装早期版本。</block>
   <block id="7fdff6d1496ee07f5530882ace839236" category="paragraph">您应使用与安装Trident相同的方法卸载Trident。</block>
-  <block id="e2f3eebc5fb0722c4ff76f470c4c3644" category="list-text">如果您需要修复在升级、依赖关系问题或升级失败或不完整后发现的错误，则应卸载Trident，然后按照适用于该版本的特定说明重新安装早期版本<block ref="e168bf6cc8da3b05fae6b22bcd12ba37" category="inline-link-macro-rx"></block>。这是将_降 级_降级到早期版本的唯一建议方法。</block>
   <block id="0a5e338ee1a9820e7a4a7d64f09e4a90" category="inline-link-macro">完全删除Trident和CRD</block>
   <block id="bfc34bbf9ae6407400b3d77e0e84543b" category="list-text">为了便于升级和重新安装、卸载Trident不会删除Trident创建的CRD或相关对象。如果需要完全删除Trident及其所有数据，请参见<block ref="a2addcf593ef6071e49d2a678662f830" category="inline-link-macro-rx"></block>。</block>
   <block id="39596b8f60148eb1bbb5294ed08b18e3" category="paragraph">如果要停用Kubnetes集群、则必须在卸载之前删除使用Trident创建的卷的所有应用程序。这样可以确保在删除之前、在Kubbernetes节点上未取消对这些PVC的审核。</block>
@@ -3297,7 +3278,6 @@ SMB</block>
   <block id="a958e7fa65b27b4be8589d6d0de8d135" category="list-text">检测当前安装的Trident版本(版本_n_)。</block>
   <block id="0efdc02c2d9fa1fcf31ff85fec4ed8de" category="summary">您可以使用操作员轻松升级现有的Trident安装。</block>
   <block id="9a98985a342ee2d7d213394e90d838a9" category="doc">使用Trident Operator或Helm升级Trident安装</block>
-  <block id="18466b7fafaca62c9c0d2438889ca0c6" category="admonition">要从使用命名空间范围的运算符(版本20.07到20.10)安装的Trident升级、请按照Trident的升级说明进行操作<block ref="567dd1ff029f25a404a69ff1e3c8d83b" category="inline-link-macro-rx"></block>。</block>
   <block id="76e06d694db0c428e4d51e3354a7a4bd" category="list-text">验证Trident版本：</block>
   <block id="1863fa40be678d4efa33c952a5cba52e" category="paragraph">您可以升级Trident Helm安装。</block>
   <block id="b2095ed231848e69cbd92e44defb033b" category="admonition">在将安装了Trident的Kubernetes集群从1.24升级到1.25或更高版本时、您必须<block ref="cd01e1bae83933b9c59c914bc71332ac" prefix=" " category="inline-code"></block>先更新values.yaml以设置为或添加到<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>命令、<block ref="96d5d0b9a6e3e01b2ae2ed889f75d22e" prefix=" " category="inline-code"></block>然后才能升级集群。<block ref="94ef2a130a825358ab3002442d6e5145" prefix=" " category="inline-code"></block></block>
@@ -3451,7 +3431,6 @@ SMB</block>
   <block id="b1ae71d1cd3967fcca9453f4087b19ef" category="list-text">增加了对Kubnetes 1.25的支持。您必须先将Trident升级到22.10、然后才能升级到Kubbernetes 1.25。</block>
   <block id="95b61962ec35cc252a4791e4101c5aaa" category="list-text">现在、ONTAP SAN卷将使用每个节点的igroup、并且仅将LUN映射到igroup、而将其主动发布到这些节点、以改善我们的安全状况。如果Trident确定在不影响活动工作负载的情况下安全执行此操作、现有卷将有机会切换到新的igroup方案。</block>
   <block id="5e65f8ef909da6c604c403e32b1b48ee" category="paragraph">添加了一个新的<block ref="305368b4f0d008a807e095ab9da58448" category="inline-link-macro-rx"></block>(PSS)部分，详细介绍了Trident在安装时启用的权限。</block>
-  <block id="1709d6f66b1414fcc9f298c36d33f86b" category="paragraph">NetApp 不断改进和完善其产品和服务。下面是Trident中的一些最新功能。有关以前版本的信息，请参阅<block ref="25da125dffad1d6323c21354bccf0203" category="inline-link-rx"></block>。</block>
   <block id="0e258ce589a7c5edca46e96701e7a846" category="list-text">修复了在SolidFire卷上创建32个快照时Trident性能降低的问题。</block>
   <block id="abf7e791f62ca6d68b31527c63563786" category="list-text">修复了Trident在关闭时记录致命错误的问题(GitHub问题597)。</block>
   <block id="20179fee7c8b97f5118f8bb139c3e3ee" category="list-text">修复了所有Trident安装程序都可以将纯KubeNet标识为OpenShift的问题(GitHub第639期)。</block>
@@ -4327,8 +4306,6 @@ SMB</block>
   <block id="378e6f0ba7080535a4462b5311befb40" category="paragraph">运行此命令可显示AppVault中的可用备份、包括其原始集群、相应的应用程序名称、时间戳和归档路径。</block>
   <block id="053aba80de03f3fdf626d1c858342330" category="list-text">使用AppVault名称和归档路径将应用程序还原到目标集群：</block>
   <block id="4ef55c1fec2de9218af40d16cbc021a4" category="list-text">使用以下命令还原应用程序、将括号中的值替换为环境中的信息。命名空间映射参数使用冒号分隔的命名空间将源命名空间映射到正确的目标命名空间、格式为SOURCE1：dest1、Source2：dest2。例如：</block>
-  <block id="41ee1e1e674f49a8e3c78fc5517b1b83" category="inline-link">Trident 24.10</block>
-  <block id="330905133ec61fb32dbdb0593cf466a2" category="list-text"><block ref="330905133ec61fb32dbdb0593cf466a2" category="inline-link-rx"></block></block>
   <block id="14151311f8b442ecc7db1533868dccd9" category="paragraph">尽管不建议这样做、但您可以对两个Trident实例使用相同的后端SVM。在安装期间为每个实例指定一个唯一的卷名称和/或在文件中指定一个唯一的<block ref="641b2675465e765661450709e2351a8e" prefix=" " category="inline-code"></block>参数<block ref="57a3822fdb39e72cdc47d89fd04ce467" prefix=" " category="inline-code"></block>。这是为了确保不会对这两个实例使用相同的FlexVol volume。</block>
   <block id="c45e7f5f358ba554413458272da37266" category="paragraph">该驱动程序可<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>在同一个FlexVol volume中创建多达200个qtrees (可在50到300之间配置)、每个集群节点创建100、000个qtrees、每个集群创建240万个qtrees。当您输入由经济型驱动程序提供服务的新<block ref="2b3f8e4d49589c4452db0a07d619d824" prefix=" " category="inline-code"></block>时、驱动程序将查看是否已存在可为新qtree提供服务的FlexVol volume。如果不存在可为qtree提供服务的FlexVol volume、则会创建一个新的FlexVol volume。</block>
   <block id="53f6fbaa0c2bc4ebb4fc98f8a0337c54" category="paragraph">此功能也适用于<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>驱动程序、但适用于FlexVol volume级别粒度、而不适用于qtree级别粒度。要为Trident配置的卷创建快照、请将backend参数选项设置为ONTAP后端<block ref="0a236e7685e50a59df980d0a30929d6c" prefix=" " category="inline-code"></block>上定义的所需快照策略。Trident无法识别存储控制器创建的任何快照。</block>
@@ -4431,7 +4408,6 @@ SMB</block>
   <block id="fcc539559cb740199f02074f11b246c3" category="paragraph">如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如<block ref="33e9328e92e3ef05629093b4693b3925" prefix=" " category="inline-code"></block>。</block>
   <block id="3b4dab2ec7635dde859482b32c23ab9f" category="paragraph">有关无缝MetroCluster切换的信息，请参见<block ref="41195e18a4a81a05f5c5a6be365a5602" category="inline-xref-macro-rx"></block>。</block>
   <block id="2c8c9fb51502e9a1b2d2539b4d21a27b" category="cell">协议 LIF 的 IP 地址。如果Trident是使用IPv6标志安装的、则可以设置为使用IPv6地址。IPv6地址必须用方括号定义，例如<block ref="33e9328e92e3ef05629093b4693b3925" prefix=" " category="inline-code"></block>。*不指定iSCSI。*Trident使用<block ref="2de2f329c45219df280af5a70ed7a17c" category="inline-link-macro-rx"></block>发现建立多路径会话所需的iSCSI LUN。如果明确定义、则会生成警告<block ref="ea76b2438eb5996eb2c347e7341ed59a" prefix=" " category="inline-code"></block>。*省略MetroCluster。*请参见<block ref="41195e18a4a81a05f5c5a6be365a5602" category="inline-xref-macro-rx"></block>。</block>
-  <block id="1f5f7f2866fe3a2c557b2ea38e4c2137" category="cell">用于为iSCSI、<block ref="eac89e2640666fd1076a776e4b748fae" prefix=" " category="inline-code"></block>NVMe/TCP或基于光纤通道的<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block>SCSI (FC)选择<block ref="39eea648dab96b0ee6022dabb38bc420" prefix=" " category="inline-code"></block>。</block>
   <block id="b1b6ee25d859768bce6271cfb4265c37" category="admonition">如果您在NetApp ONTAP上使用Amazon FSx和、NetApp建议您为Trident指定DNS名称、而不是IP地址。</block>
   <block id="d5be4c1bab384a780d2912d10b295308" category="paragraph">要进行无缝切换和切回、请使用指定SVM<block ref="a6ea6092cb7b9c5f31909eb4be8fa5ea" prefix=" " category="inline-code"></block>、并省略这些<block ref="924ff83ff1e671bacfb07ff12b845703" prefix=" " category="inline-code"></block>参数。例如：</block>
   <block id="c905ec8a79a58aa12ad3c7ae35e3127d" category="example-title">基于FC的SCSI (FCP)示例</block>
@@ -4789,13 +4765,10 @@ SMB</block>
   <block id="4d1a32c0e466ff9011c60655b98dbf71" category="inline-link-macro">使用 Amazon EKS 插件自动为 FSx for ONTAP 配置 Trident 后端</block>
   <block id="607ed18429282657fb3f6b377df32f8c" category="inline-link-macro">NetApp Trident 与 Google Cloud NetApp Volumes 的 SMB 协议</block>
   <block id="ee031d295c711ed3119e4ca1bf2829b1" category="inline-link-macro">释放 NetApp ASA r2 系统对 Kubernetes 块存储的强大功能</block>
-  <block id="a1862e00d8111386cdf238bd23bb97db" category="inline-link">Trident 25.02</block>
-  <block id="25bdd2f6eb0ca7663bf4152396a74a09" category="list-text"><block ref="25bdd2f6eb0ca7663bf4152396a74a09" category="inline-link-rx"></block></block>
   <block id="e26bc895e5bb00237e35bd08e101a228" category="inline-link-macro">25.06</block>
   <block id="e388180fa8946253a28286d92fcbc393" category="cell">2028年6月</block>
   <block id="61a3094d46fa14bffb9067eeb8d3405a" category="paragraph"><block ref="61a3094d46fa14bffb9067eeb8d3405a" category="inline-link-macro-rx"></block></block>
   <block id="843e8c92f2887fa83e4564f86e6a7ca0" category="list-text">您可以直接升级到已安装版本的四个版本窗口中的任何目标版本。例如、您可以直接从24.06 (或任何24.06 DOT版本)升级到25.06。</block>
-  <block id="d4ea8129c0158e8c6ac0b3bb00a333e5" category="list-text">如果要从四个版本窗口之外的版本进行升级、请执行多步骤升级。按照您要升级的的升级说明升级到适合四个版本窗口的 <block ref="a799aa6eaf3a5192b34ea19f24bb716f" category="inline-link-macro-rx"></block> 最新版本。例如、如果您运行的是23.07并希望升级到25.06：</block>
   <block id="96643a0b653f3484db440bd905d8e591" category="list-text">首次从23.07升级到24.06。</block>
   <block id="0d5f6bd4062e1e564fa83bfc5eb6a64c" category="list-text">然后从24.06升级到25.06。</block>
   <block id="bc08c4a5eed12311fe8187fb000dd58a" category="paragraph">有关 Amazon S3 策略的更多信息，请参阅<block ref="61017e44ea21b481e69f04f8ac510768" category="inline-link-rx"></block> 。</block>
@@ -5067,8 +5040,6 @@ SMB</block>
   <block id="1ad8c45e73d79fb1d5606c962d0f3cda" category="list-text">选择所需的选项，然后单击“*安装*”以打开操作员配置。</block>
   <block id="3bcd8afe0d2e66ac8ee08b64d8ab5aa9" category="admonition">确保选择最新的 Operator 版本。</block>
   <block id="e1834934410991eaa116cd9cffd2e554" category="list-text">保留所有参数，然后单击“*安装*”。</block>
-  <block id="8b29df4adf6fbbaec0828beed4564d1b" category="list-text">单击“查看操作员”可查看操作员的详细信息。</block>
-  <block id="7b61a3bcc8bbd41470bf0de7fcfd839e" category="list-text">单击“YAML 视图”并将以下内容粘贴到表单中：</block>
   <block id="5df2f935f2bc3df2c6378f665b3d6659" category="list-text">您可以添加<block ref="e9a7558decb5e432d8b7c4d536cc9876" prefix=" " category="inline-code"></block>在所有 OpenShift 工作节点上配置和启用 iSCSI 和 Multipath 服务的参数。</block>
   <block id="f61306bfa8c6de676059739358d4479f" category="list-text">单击“创建”； Trident Orchestrator 将完全安装。</block>
   <block id="7f95b6a9d45bd5ee11107a5abb5dd69c" category="section-title">卸载Trident操作员</block>
@@ -5093,12 +5064,10 @@ SMB</block>
   <block id="4bdb23ea513714e3ddde2986c05c669f" category="inline-link-macro">增强数据一致性：使用Trident在 OpenShift 虚拟化中使用卷组快照</block>
   <block id="a21cecd213989d401167ec6cfba8d998" category="list-text">2024年11月11日： <block ref="daed3e0cfbeb06368e36167c5fc4f468" category="inline-link-macro-rx"></block></block>
   <block id="dcae39a3bdbd6a2685507ccc14623d62" category="list-text">将 Prometheus ServiceMonitor CRD 应用到集群：</block>
-  <block id="710d51eba716c95765550f52a1c4fd61" category="cell"><block ref="4aff31f193e6ea4df2a1c4f841bad5d6" prefix="" category="inline-code"></block></block>
   <block id="68087b4c898b9466dc989d8086e173dc" category="cell">覆盖大多数 Kubernetes API 操作的默认 180 秒超时（如果非零，则以秒为单位）。</block>
   <block id="bd3dd99c8eae44e2ae2bfc8f00dc3db0" category="cell"><block ref="045117b0e0a11a242b9765e79cbf113f" prefix="" category="inline-code"></block></block>
   <block id="44a97f581d6467983edc4e5900722f32" category="list-text">如果您有一个基于手动操作员的部署，并且想要使用基于 Helm 的Trident操作员部署，则应先手动卸载操作员，然后执行 Helm 安装。这使得 Helm 能够使用所需的标签和注释来部署Trident操作符。如果不这样做，基于 Helm 的Trident操作员部署将因标签验证错误和注释验证错误而失败。</block>
   <block id="96fa331785e435bbddfc7f404fa5ce84" category="list-text">如果你有一个<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block>基于部署，无需卸载Trident即可进行基于 Helm 或基于 Operator 的部署。</block>
-  <block id="ebc465247274e830568c785a604321aa" category="paragraph">Kubernetes 操作超时。</block>
   <block id="487b75b94dd20a59c7005f9de6a6c4a0" category="admonition">这<block ref="d5276bb17ae062102e883a18454c2f1b" prefix=" " category="inline-code"></block>参数仅适用于Trident安装。</block>
   <block id="0784343c721b59e3c2426a1b76297982" category="admonition">这<block ref="b958a6de9ca123713491252f2ab02f59" prefix=" " category="inline-code"></block>参数仅适用于Trident安装。</block>
   <block id="1fceae4a3c0d1966481601a7ac4d1f83" category="cell">自动支持代理</block>
@@ -5207,8 +5176,6 @@ SMB</block>
   <block id="7cf94358f605f1f7e8dbc9526c3af907" category="cell">trident.netapp.io/skipRecoveryQueue</block>
   <block id="fd94acda3d48b098f39b5364b959552d" category="cell">跳过恢复队列</block>
   <block id="7ea9fc727097fba59345a8e9de8695fa" category="cell">ontap-nas、ontap-nas-economy、ontap-nas-flexgroup、ontap-san、ontap-san-economy</block>
-  <block id="2f2d18de2d892d2628bd1d6072de9b16" category="inline-link">Trident25.06</block>
-  <block id="9266010dfc4c6c6414f01708ce347cc8" category="list-text"><block ref="9266010dfc4c6c6414f01708ce347cc8" category="inline-link-rx"></block></block>
   <block id="6437a2e69fcb32c6cdefec8d1f3273ba" category="paragraph">截至今日，我们的产品已提供按需快照支持。<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> ，<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> ，<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block> ，<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> ，<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> ， 和<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block>后端驱动程序。</block>
   <block id="58ae73775a90ed0f630510fb5ac16d15" category="inline-link-macro">25.10</block>
   <block id="9067fce7e82eb78564685065686e7c0a" category="paragraph"><block ref="9067fce7e82eb78564685065686e7c0a" category="inline-link-macro-rx"></block></block>
@@ -5821,8 +5788,6 @@ SMB</block>
   <block id="1dba8f0975c45572eb495fa5122b37e8" category="cell">ONTAP（使用 LDAP 的 NFS/SMB）</block>
   <block id="b7f43df36fb2e13c1c3d456da9ceba9e" category="cell">类似；用于名称解析/身份验证；限制为 AD。</block>
   <block id="e447b6c9645ce6cd63337d813a552cd5" category="sidebar">Trident 对 ASA r2 存储系统的支持</block>
-  <block id="60706cc94c04d32db6c18b4fb8b21f21" category="inline-link">Trident 25.10</block>
-  <block id="69a4986cbe93f4162ce953d8e917b215" category="list-text"><block ref="69a4986cbe93f4162ce953d8e917b215" category="inline-link-rx"></block></block>
   <block id="627219ce2083b03812e10846d1307811" category="list-text">*spec.runImmediately*：（_可选_）设置为 <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block> 以在创建计划时触发一次性的即时基线运行（根据保留设置进行备份和/或快照）。默认为 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。这不会修改后续重复周期。</block>
   <block id="b267d2c4b44dd537f81ddd4d1ca1cdd8" category="paragraph">立即运行的计划的示例 YAML：</block>
   <block id="ea89dfc546da2da95449976a3262efd9" category="list-text">*立即基线保护*：使用 <block ref="40c288e5937b634afc8b0a225fcdb4cf" prefix=" " category="inline-code"></block> 在创建计划时立即创建初始备份或快照，而不是等待第一个计划的运行时间。默认值为 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>。</block>
@@ -5944,11 +5909,9 @@ SMB</block>
   <block id="0963baeb80881f2591bd06d7c9106b2c" category="section-title">查看策略详细信息</block>
   <block id="98f5cd9a2cbea70399d87c5824290f9d" category="section-title">更新 Autogrow 策略</block>
   <block id="d73a44f1efd76ad4c6b0a239a95393b5" category="section-title">删除 Autogrow 策略</block>
-  <block id="a7d2fe608fafbe7aab36a7d35c1c1f76" category="summary">了解控制器的可扩展性、并发行为和功能成熟度。</block>
   <block id="3e763e2b1294995bd50b4c7f4ec3e8b2" category="doc">控制器可扩展性</block>
   <block id="e04993fd01b523a76b5b9a538805b2d6" category="section-title">关键概念和定义</block>
   <block id="21613907b762f0cc51bc3d23de9acf49" category="section-title">控制器可扩展性支持</block>
-  <block id="17f275435be27f21cff221ebd3078f0b" category="section-title">正式发布</block>
   <block id="3d7dbef0187f91e8bfc32cbc02f806d2" category="section-title">启用控制器可扩展性</block>
   <block id="33993cacba834442900d968ea88eeba2" category="section-title">Trident 操作员部署</block>
   <block id="6df2d6528f4849d5cbf16290f4d980aa" category="section-title">新安装</block>
@@ -5959,7 +5922,6 @@ SMB</block>
   <block id="0b2b95346a7f91dffbae23958f65ce9c" category="paragraph">或者，在自定义<block ref="ba05023d0f1b5d4b64b6cad4cf9a7ecd" prefix=" " category="inline-code"></block> 文件中将<block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block> 设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>：</block>
   <block id="d7cc744370e9beae47649c3607911efc" category="section-title">tridentctl 部署</block>
   <block id="a6f89df8745142ea39be8e5c221eaadd" category="paragraph">要使用 <block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 启用控制器可扩展性，请在安装过程中传递 <block ref="663f61c1cf47f8a531c8d769e8bf59f4" prefix=" " category="inline-code"></block> 标志。</block>
-  <block id="bd2f8366d8a87985dea56cffa8f903f7" category="section-title">技术预览</block>
   <block id="d37cb90ffa088c33ec5d2fac523c8cf7" category="section-title">并发行为</block>
   <block id="924b1402bc80f16f1f2aee38bf373f90" category="section-title">注意事项和限制</block>
   <block id="5259ae4afb5996ff48788b2fa720114c" category="section-title">建议</block>
@@ -6409,9 +6371,6 @@ SMB</block>
   <block id="7d46dc6377e8ce5df89a34c4ad4e2991" category="image-alt">Trident 附加组件活动状态</block>
   <block id="2c0204a63fd46aab7636df3eb5f83972" category="paragraph">使用 <block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 实用程序，您可以运行 <block ref="b5eda0a74558a342cf659187f06f746f" prefix=" " category="inline-code"></block> 命令来获取从属卷。有关详细信息，请参见 link:../trident-reference/trident-cl.html<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix="[" category="inline-code"></block> 命令和选项]。</block>
   <block id="955581130750cc1758fa61171c2e0575" category="paragraph">Netapp Trident 支持在公共云或本地所有流行 NetApp 存储平台上使用和管理存储资源，包括本地 ONTAP 集群（AFF、FAS 和 ASA）、ONTAP Select、Cloud Volumes ONTAP、Element 软件（NetApp HCI、SolidFire）、Azure NetApp Files、Amazon FSx for NetApp ONTAP 和 Google Cloud NetApp Volumes。</block>
-  <block id="1868784d55625cd96ac74dd1393e90f9" category="paragraph">UI 提供了默认示例。您可以直接编辑它，而不是复制完整配置。</block>
-  <block id="ca375865284ae4e0a7735a38800e6c18" category="paragraph">可选：启用并发</block>
-  <block id="a7dfe0e5a21691eba1519b710d8d3a75" category="paragraph">要启用并发，请将以下字段添加到规范：</block>
   <block id="e462982ca8759f37262a2a6a8451e97c" category="paragraph">自动卷扩展使 Trident 配置的持久卷能够在使用的容量达到定义的阈值时自动增长。此功能可降低运营开销，并有助于防止因容量耗尽而导致的应用程序中断。使用 Autogrow Policies 实现自动卷扩展。Autogrow Policy 定义：</block>
   <block id="be5604670da5d8891500d723278316d1" category="list-text">非易失性内存快速通道 (NVMe)</block>
   <block id="69ce754add983294c9646b227af63485" category="list-text">光纤通道协议 (FCP)</block>
@@ -6872,30 +6831,10 @@ SMB</block>
   <block id="dd7353c4d7988d872335950049d0686a" category="paragraph">控制器可扩展性是指 Trident 控制器并行处理多个存储操作的能力，而不是在单个锁后对其进行序列化。这些操作包括卷创建、删除和调整大小；快照创建和删除；卷发布和取消发布；以及后端管理。</block>
   <block id="b827656f7c03a84a9eec841a3ade5a73" category="paragraph">启用控制器可扩展性时，不同卷和后端上的操作会同时进行。这增加了吞吐量，并减少了具有大量并发 PersistentVolumeClaim 和 VolumeSnapshot 操作的环境中的端到端操作时间。</block>
   <block id="f1a5faafa169183c19702f8a50ad7f4e" category="section-title">默认行为（串行模式）</block>
-  <block id="1f0d67c18fbf2d1bafc6ce9be9111d65" category="paragraph">默认情况下，Trident 控制器一次处理一个操作。每个创建、删除、调整大小或快照请求在 Trident 启动下一个之前完成。串行模式是所有安装支持的默认值，无需配置。</block>
-  <block id="171475435f2b9baf282aa0c7e50ff896" category="paragraph">串行模式足以满足大多数工作负载的要求。仅当操作量在串行处理下产生积压时，才启用控制器可扩展性。</block>
-  <block id="984f6a78be7a7be4718af1d7a71808e6" category="paragraph">Trident 支持针对不同存储驱动程序的不同成熟度级别的控制器可扩展性。</block>
   <block id="e2d6f8e11389cc3db586674fbf6b435b" category="paragraph">The<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block> 和<block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>驱动程序不同。Trident 仅支持<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>。请勿在后端配置或示例中使用<block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>。</block>
   <block id="f6dd9691ac42776e5f7f6bd2182f9fb4" category="list-text"><block ref="19597d63b6d41cad3fbece8a4b08d9b5" prefix="" category="inline-code"></block> (SAN 和 NVMe)</block>
-  <block id="213d00ebffa67947644df91fc7b89ec8" category="paragraph">此驱动程序具有以下限制：</block>
-  <block id="a8f7aef5eac440389a4ce3e1edb0bec4" category="list-text">控制器并发性仅可用于评估和测试。</block>
-  <block id="d9b978398ead99e55f2c50e5991f5eb2" category="list-text">行为可能因版本不同而有所变化。</block>
-  <block id="3e7ac5c341e3bbb8d6dfca1c09dc6599" category="list-text">NetApp 不建议在生产环境中使用。</block>
   <block id="7fa29dd0e21d4182aa81a3766defacd8" category="section-title">enableConcurrency 的工作原理</block>
-  <block id="1b19cdead624e77e8abc05cd66538f45" category="paragraph">当您将<block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>时，Trident 会对控制器管理的所有后端应用并发处理。该设置同时应用于每个后端。您不能为单个后端或单个驱动程序启用它。</block>
-  <block id="627ef3a1e90588daa1cc0d6b0d22a935" category="paragraph">每个配置的后端都必须使用正式发布或技术预览列表中的驱动程序。如果任何后端使用不受支持的驱动程序，则 Trident 不会启动，并且 Trident 不会添加使用不受支持的驱动程序的后端。</block>
-  <block id="fdc6793d9c4d240381dfc489a6f6928f" category="paragraph">要恢复启动，请删除或重新配置使用不受支持的驱动程序的任何后端，或禁用控制器可扩展性。</block>
   <block id="2646f4a8608cfd55ea63645e7e538bc5" category="section-title">启用之前</block>
-  <block id="98cbc988108d5b70778972286d6fbae5" category="paragraph">在启用控制器可扩展性之前，请确认每个已配置的后端均使用正式发布或技术预览列表中的驱动程序。如果任何后端使用不受支持的驱动程序，则在启用该功能后，Trident 将无法启动。</block>
-  <block id="ad372e68120a8061ceb399ebe5658254" category="paragraph">使用下表来决定是否启用控制器可扩展性。</block>
-  <block id="f67cf47d898e9c3d0e9f1a1e861056bf" category="cell">如果您的环境</block>
-  <block id="d48a5cda4bc91670bf431856c381ab40" category="cell">操作</block>
-  <block id="21f712b06d30f5c37652aecacc1124d1" category="cell">仅使用受支持的驱动程序，并遇到控制器操作积压</block>
-  <block id="0f232b64f748ecf7e7e1258aa8679a1e" category="cell">启用控制器可扩展性。</block>
-  <block id="29543f9a0433d487ca9cb5713593b299" category="cell">使用任何不受支持的驱动程序</block>
-  <block id="ddf4119d818a6b4eaa5a2b9bd0335419" category="cell">保留默认串行模式。不要启用控制器可扩展性。</block>
-  <block id="6d38c3dbeeddaf1fd12ee33e8beecd1d" category="cell">处理低操作量且无积压</block>
-  <block id="dc0e242df03d4ed1a6436b81faefe482" category="cell">保留默认串行模式。</block>
   <block id="f97cb7d19b627db6a9727f9de4606a22" category="paragraph"><block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block> 配置选项控制控制器的可扩展性。在 Trident 安装期间或更新现有部署时，必须显式启用此选项。</block>
   <block id="62135685adb197869866695df22120f2" category="paragraph">要使用 Trident 运算符启用控制器可扩展性，请在<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>自定义资源 (CR) 中将<block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>。</block>
   <block id="e23dd382e2bb957c2302b7d7622f9c33" category="paragraph">创建或编辑<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block> CR 并将<block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block>设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>：</block>
@@ -6911,20 +6850,12 @@ SMB</block>
   <block id="97b4262422499e46aa1f44275ce278f5" category="list-text">仅从资源读取的操作与该资源上的其他读取操作同时进行。</block>
   <block id="3311a05fd283a483b7c0eb0c9344a053" category="list-text">Trident 将并发 ONTAP API 请求限制为每个管理 LIF 20 个，以防止后端存储系统过载。</block>
   <block id="f0d69cc459b42b6bb6689b3576962349" category="list-text">如果多个后端共享相同的管理 LIF，则它们共享此 20 个请求的限制。</block>
-  <block id="1901101bb6595b77e7053e164fe81447" category="list-text">控制器可扩展性仅支持一般可用性和技术预览列表中的驱动程序。有关详细信息，请参见 <block ref="e775c19bcd26c93f19dae525559f0770" category="inline-xref-macro-rx"></block>。</block>
   <block id="7b5ba0ca92b27cfd042734dac9cdb4ac" category="list-text">Trident 控制器在内部管理并发。此版本不提供用户可配置的并发限制。</block>
   <block id="8a0de91527d7ee550fd8aebda3c2cce9" category="list-text">整体吞吐量取决于正在使用的存储驱动程序、后端响应能力和 Kubernetes API 服务器性能。</block>
   <block id="4284a6a99987baa75dbee580ae6637e5" category="list-text">高并发可能会增加后端存储系统的负载。</block>
   <block id="7897b302164e80cd2b3eb71773b47c90" category="list-text">控制器的可扩展性行为在所有驱动程序中并不相同。</block>
-  <block id="664cdb68693ede10651b1a577ba48f58" category="list-text">技术预览驱动程序在高负载下可能表现出不一致的性能，并且可能在不同版本之间改变行为。</block>
   <block id="604ced9bb707fe11f938238e0a01b324" category="list-text">由于并行执行，调试并发操作可能会更加复杂。指标和日志可以显示交错操作输出。</block>
-  <block id="c666e21de58511a39694b52e03411474" category="paragraph">在启用控制器可扩展性之前，请完成以下步骤：</block>
-  <block id="d564ee65b4e4a38d0f864f8540612c84" category="list-text">确认每个配置的后端都使用一般可用性或技术预览列表中的驱动程序。</block>
-  <block id="d0099eab7bd6edc06726057b56753e3e" category="list-text">在将更改应用于生产之前，请先在非生产集群中测试更改。</block>
-  <block id="0a3ea9e3176262c6dfa4bb14c7563fc6" category="list-text">应用更改后，验证是否已启用控制器可扩展性。</block>
-  <block id="10cc117343ec090091cd5fc7e7c310da" category="paragraph">使用控制器可扩展性操作时，请应用以下一般建议：</block>
   <block id="01bb9c48bb4167ee8d0287db3c03be9c" category="list-text">对于需要高可扩展性的生产环境，请使用正式发布版驱动程序。</block>
-  <block id="05c72ad312294ace14237a9273d7ad6a" category="list-text">仅在非生产环境中评估技术预览驱动程序。</block>
   <block id="c4d06709378bbb5b22ac666acafa0e16" category="list-text">大规模运行时监控后端和控制器性能。</block>
   <block id="ea23709e9263e62f842d73cafbc348df" category="list-text">请勿在自动化脚本中假设操作顺序。</block>
   <block id="4e86b8f48a549a425fa2180205394960" category="paragraph">当您使用 GKE 云身份安装 Trident 时，后端将作为工作负载身份进行身份验证，并省略<block ref="c9ff119073ea2567730fb42e3a4fe805" prefix=" " category="inline-code"></block>块。云身份的配置方式对于两种 Google Cloud NetApp Volumes 驱动程序相同。唯一的区别是<block ref="d45aebe724c55b101f2ae8924ba3d486" prefix=" " category="inline-code"></block>值：对于 NAS（NFS 或 SMB）卷使用<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>，对于 SAN（iSCSI 块）卷使用<block ref="0ffa63dea74ac96b64836a273ee062bb" prefix=" " category="inline-code"></block>。</block>
@@ -7067,8 +6998,6 @@ SMB</block>
   <block id="0678555704a75d8c6ba937ca89e44347" category="sidebar">移动卷</block>
   <block id="eec73d4903362fb244dc1fa04140d8c8" category="list-text">防止 ONTAP-SAN-ECONOMY 驱动程序在调整大小操作期间 Flexvol 收缩。</block>
   <block id="7a1819119b273216b59fab874ebf86e8" category="list-text">修复了 KubeVirt 虚拟机应用程序在 AppMirrorRelationship 反向、反向重新同步和重新同步操作期间错误地重新创建 PersistentVolumeClaims 的问题。</block>
-  <block id="f4dfb48579d3f90a417158e53e75204a" category="inline-link">Trident 26.02</block>
-  <block id="20c6994509b12de80a77f23b290b8bcd" category="list-text"><block ref="20c6994509b12de80a77f23b290b8bcd" category="inline-link-rx"></block></block>
   <block id="648540f1a67ebba0071e70944d7527c2" category="paragraph"><block ref="648540f1a67ebba0071e70944d7527c2" category="inline-link-macro-rx"></block></block>
   <block id="172ebadfc5f13c0aff9b7f172bc4fed4" category="cell">2027年7月</block>
   <block id="4aab0cfeaa9a8262994350900bdd20f2" category="cell">2028年7月</block>
@@ -7175,7 +7104,6 @@ SMB</block>
   <block id="791aed607ce65a32c8115590f604749d" category="list-text">在主 Kubernetes 集群上，创建 TridentTridentSnapshotInfoCR 以获取内部详细信息。</block>
   <block id="e239ae5dff4b309ee9e4b5a6800472ca" category="list-text">在辅助 Kubernetes 集群上，将 _TridentMirrorRelationship_ CR 的 _spec.state_ 字段更新为 _promoted_，并将 _spec.volumeMappings[].promotedSnapshotHandle_ 更新为快照的 internalName。</block>
   <block id="053cd9e68cf6c155e5b93616bc7e3e32" category="summary">了解如何在 Trident 安装中创建和使用 ONTAP NAS 驱动程序。本节提供了后端配置示例以及有关如何将后端映射到 StorageClasses 的详细信息。</block>
-  <block id="6385f58528c659bddf97b765fc51aebb" category="paragraph">启用并发 Trident 控制器操作，以提高吞吐量。有关支持的驱动程序的详细信息，请参见链接：https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]。</block>
   <block id="fa2a90c552980287d1861c7eac323e01" category="paragraph">要启用并发 Trident 控制器操作以提高吞吐量，请在安装过程中添加 <block ref="663f61c1cf47f8a531c8d769e8bf59f4" prefix=" " category="inline-code"></block> 选项，如本示例所示。有关支持的驱动程序的更多信息，请参见链接：https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]。</block>
   <block id="47c02bc65a2a3f5c0f90a1cf7ed0ea36" category="cell">全面支持终止</block>
   <block id="7f96dba5716924fd66233cd2846ba50c" category="cell">停止有限支持</block>
@@ -7237,7 +7165,6 @@ SMB</block>
   <block id="64fc6c7cb21b21d1926676a7cc84c9cf" category="doc">准备 Trident Worker 节点</block>
   <block id="3cbfe5af574efdb4391d1d3e321c8cee" category="cell">v1.27.0, v1.28.0, v1.29.0, v1.30.0, v1.31.0, v1.32.0, v1.33.0, v1.34.0, v1.35.0, v1.36.0</block>
   <block id="2c5cc0fc2f7b351430f2273c60a55ce8" category="list-text">registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.17.0</block>
-  <block id="7025f9b1df4a60725a7af1d637587d57" category="admonition"><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 驱动程序支持卷导入。使用 <block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 驱动程序导入 Qtree 是一项技术预览功能，不支持在生产环境中使用。<block ref="70d5dbddc55e3700ddbc8d21f0de22a3" prefix=" " category="inline-code"></block> 驱动程序不支持导入。有关详细信息，请参见 <block ref="789b6758f1cde553cc7d543061e548ae" category="inline-link-macro-rx"></block>。</block>
   <block id="2c7a15b5360cdb2834a297c73c8a1280" category="cell"><block ref="2c2dd2a1737a7ba68195b912fe21b1cf" prefix="" category="inline-code"></block></block>
   <block id="c5fb579991f2b764a4cb58f667d44f5f" category="cell">标识后端的 Azure 云环境。使用 Azure Government 时设置为<block ref="061204a9983f0aecdfd52c97ddaa16de" prefix=" " category="inline-code"></block>。</block>
   <block id="2407236f70cfb3e6a9089a8ae4f42493" category="list-text">Azure 中国</block>
@@ -7248,9 +7175,6 @@ SMB</block>
   <block id="bd6e5449a9dedf8ce1f979d098c41e44" category="paragraph">Trident 使用配置的复制策略和计划创建并初始化 SnapMirror 关系。</block>
   <block id="2fd154f7e5b13f400a56486bd38bdabf" category="list-text">在辅助 Kubernetes 集群上，将 TridentMirrorRelationship 的 _spec.state_ 字段更新为<block ref="036bbe13de7250844b100bc381b59214" prefix=" " category="inline-code"></block>。</block>
   <block id="0406d6d74f60ba2c6f159acd8ec39fe3" category="paragraph">您可以通过 <block ref="f05311f373ee14a3af3c60c2790709f1" category="inline-link-macro-rx"></block> 配置 Trident Protect 24.10 来管理数据保护操作期间虚拟机文件系统的冻结和解冻，然后使用以下命令：</block>
-  <block id="b946bbde5980c7b2e883cae71054f8ee" category="paragraph">如果您未运行 Trident 26.10，则可以根据 <block ref="6d47e9235a19453f00cf246917b9e162" category="inline-link-macro-rx"></block> 获得先前版本的文档。</block>
-  <block id="334a133ff08c4dadb2af36f2b1c9f1c6" category="inline-link">Trident 26.06</block>
-  <block id="2f5154285bcc098076baef3c0246fa8c" category="list-text"><block ref="2f5154285bcc098076baef3c0246fa8c" category="inline-link-rx"></block></block>
   <block id="94d852be64579a03785f8126dce23194" category="inline-link-macro">ONTAP 卷自动调整大小</block>
   <block id="85f97c151cfe4a92c49f46664053600c" category="paragraph">可以。您可以扩展由 Trident 创建的 NFS PVC。Trident Autogrow Policies 可以根据容量阈值自动扩展 PVC。ONTAP 卷自动调整大小是独立的，适用于受支持的 ONTAP SAN 驱动程序：它会增加后备 FlexVol 的大小，而不改变 PVC 的大小。有关详细信息，请参见<block ref="756d4a0516957f8f26c64062743e5ac9" category="inline-link-macro-rx"></block>。</block>
   <block id="ae0ed8d0e910769af348e3a943a88167" category="inline-link-macro">26.10</block>
@@ -7437,7 +7361,6 @@ SMB</block>
   <block id="88971c6dff50cd592e033fa37bc2f0b8" category="cell">protect.trident.netapp.io/retain-mac-address</block>
   <block id="53f2577ac72526c643a0b7b560851162" category="cell">对于 KubeVirt 虚拟机，请设置为<block ref="ebc576222020c2a2ae2fc769169f1d2a" prefix=" " category="inline-code"></block>以在还原时保留第一个网络接口的 MAC 地址，例如当应用程序许可证绑定到该地址时。适用于所有还原 CR 类型和 AppMirrorRelationship（在提升关系之前进行设置）。默认情况下，Trident Protect 会删除此 MAC 地址以防止冲突。如果源虚拟机仍在同一网络上运行，请先将其关闭或还原到隔离网络，以避免 MAC 地址重复。</block>
   <block id="96c3286001ac8ebf6e5f4df084f5a024" category="cell">未设置（MAC 地址已删除）</block>
-  <block id="a5589969ae7091f15ee7a2509bb8dfc8" category="list-text">如果您要从四发布窗口之外的版本进行升级，请执行多步骤升级。使用您要从<block ref="a799aa6eaf3a5192b34ea19f24bb716f" category="inline-link-macro-rx"></block>升级的升级说明升级到适合四发布窗口的最新版本。例如，如果您运行的是 24.10 并希望升级到 26.10：</block>
   <block id="cc1551a37cd52895c341fc978ff07c1a" category="list-text">首次从 24.10 升级到 25.06。</block>
   <block id="8dd275d4684bcd23d89c5292a7b8fc51" category="list-text">然后从 25.06 升级到 26.10。</block>
   <block id="79b6880507055afcab793d03f1289e27" category="list-text">*metadata.annotations.protect.trident.netapp.io/retain-mac-address*：（_可选_）设置为<block ref="ebc576222020c2a2ae2fc769169f1d2a" prefix=" " category="inline-code"></block>以保留目标集群上 KubeVirt 虚拟机的 MAC 地址。请参阅<block ref="cf85d34a2501a03e04af1a5a753874b6" category="inline-link-macro-rx"></block>。</block>
@@ -7628,9 +7551,7 @@ SMB</block>
   <block id="b69b6e684724957b48a9820d0e6f028f" category="list-text">已修复仅限 PVC 的恢复，使其仅在所有者存在时才包含<block ref="0c49338edddbc04f7cbd33594a31c000" prefix=" " category="inline-code"></block>。</block>
   <block id="8c9f1034427a86feb447c23cb93cbd7c" category="list-text">新增对 <block ref="e28ab870e47892fbd81eca8fc84c45ac" prefix=" " category="inline-code"></block> 在 AppMirrorRelationship (AMR) 中的支持，在单个 AMR 定义中实现单个 PVC 的存储类映射。要了解更多信息，请参阅 <block ref="fb9af19df83305ed0e2401c59f148610" category="inline-link-macro-rx"></block>。</block>
   <block id="f54e46319b5367958a900a17d8fc5334" category="paragraph">Trident Autogrow 策略扩展了 PVC。这与 <block ref="393332c3692707127ed7f23d7a353cb6" category="inline-link-macro-rx"></block> 不同，后者会扩展底层 FlexVol，而不改变 PVC 大小。</block>
-  <block id="79f7db0b70b4d627e100e006130746b7" category="paragraph">在部署之前，请确定哪些 Trident 驱动程序在正式发布时支持控制器可扩展性，以及哪些驱动程序在 Trident 26.10 中作为技术预览版提供。这有助于您做出明智的部署决策并管理风险。控制器可扩展性默认处于禁用状态。</block>
   <block id="584baab85e866d19c2c1351d688b6261" category="paragraph">以下驱动程序在 Trident 26.10 正式上市时支持控制器可扩展性：</block>
-  <block id="9e575baf73cf9245c857a33cf1348966" category="paragraph">以下驱动程序支持将控制器可扩展性作为 Trident 26.10 的技术预览功能：</block>
   <block id="854e430c0b20ace7e7e3c440c07ee4d2" category="paragraph">以下注意事项适用于 Trident 26.10 中的控制器可扩展性：</block>
   <block id="f2a79e9611d56c5600b31eeef854b379" category="summary">使用 Trident 和容器对象存储接口配置和访问 S3 存储桶。</block>
   <block id="8b45856ffafaa264e7a189c1c4efc020" category="paragraph">使用容器对象存储接口（COSI）通过 Trident 管理的 Kubernetes 资源为 Kubernetes 工作负载配置 S3 存储桶。</block>
@@ -7982,4 +7903,46 @@ SMB</block>
   <block id="ed512e1d39482533d83a0a5c9f3f7491" category="list-text">当使用运行 RHEL/Red Hat Enterprise Linux CoreOS (RHCOS) 的工作节点并配合 FC PVs 时，请在 <block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> StorageClass 中指定 mountOption 以执行内联空间回收。请参阅<block ref="39abe31e08fa522dc5c9e44f023189e0" category="inline-link-rx"></block>。</block>
   <block id="97153228c65de8ff5f41d3c9002c2323" category="list-text">要对 iSCSI PV 执行在线空间回收，工作节点上的底层操作系统可能需要将装载选项传递到卷。对于 RHEL/Red Hat Enterprise Linux CoreOS (RHCOS) 实例，需要<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block><block ref="dcb791b017dc01f9bdeee0969588a09a" category="inline-link-rx"></block>；请确保在<block ref="15699dd651c6fec3ed329f2bf55d54b4" category="inline-link-rx"></block><block ref="e1e2a331ab1d8dccfea06fc8e04e2f5d" prefix="[" category="inline-code"></block>^] 中包含 discard mountOption 以支持在线块丢弃。</block>
   <block id="9c2830886715ed70283933187320a758" category="list-text">当使用运行 RHEL/Red Hat Enterprise Linux CoreOS (RHCOS) 的工作节点并配合 iSCSI PV 时，请在 StorageClass 中指定<block ref="70f68bb2f748b85de6526bfe236ea1e9" prefix=" " category="inline-code"></block> mountOption，以执行内联空间回收。请参阅<block ref="39abe31e08fa522dc5c9e44f023189e0" category="inline-link-rx"></block>。</block>
+  <block id="2eddef7fd1a1cf579f2ec533a848aba2" category="cell"><block ref="461bb9ff58156120103535333e397d4d" prefix="" category="inline-code"></block></block>
+  <block id="cbddac19987b107acefb48e2ce2db278" category="paragraph">在 Trident 开始拆分在快照删除期间使快照保持忙碌状态的克隆之前等待的秒数。默认值为<block ref="641bed6f12f5f0033edd3827deec6759" prefix=" " category="inline-code"></block>秒（24 小时）。在默认值或更高值时，当 ONTAP 返回“snapshot busy”错误时，Trident 会应用指数退避，从 5 分钟开始，上限为 1 小时；在间隔内的重试不会调用 ONTAP。低于<block ref="641bed6f12f5f0033edd3827deec6759" prefix=" " category="inline-code"></block>时，Trident 会在每次 CSI 重试时调用 ONTAP，并且不使用退避。</block>
+  <block id="29e633dce834853b95ae280907bbed41" category="paragraph"><block ref="641bed6f12f5f0033edd3827deec6759" prefix="" category="inline-code"></block></block>
+  <block id="d54bd90dec2c3c82867734c8844b5d6d" category="paragraph">Kubernetes 操作超时，以整数秒为单位指定。</block>
+  <block id="8f6c08227a11c89c47d71368ee8be24b" category="paragraph">启用并发 Trident 控制器操作，以提高吞吐量。</block>
+  <block id="aed942e952c7872e31878ac732d5dbef" category="admonition">在 Trident 安装期间或更新现有部署时，必须显式启用此选项。</block>
+  <block id="24de1f904ec330ef9230dc8e03d30dca" category="paragraph">有关支持的驱动程序的更多信息，请参见链接：https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]。</block>
+  <block id="6a02436061265ceeba64876e93f7a4f9" category="list-text">单击 *View Operator* 以查看 Operator 详细信息。选择 *Trident Orchestrator* 选项卡，然后单击 *Create instance*。</block>
+  <block id="14be32f7ba8f84704f4c312900ff7857" category="list-text">在创建表单中，选择 *YAML 视图* 并编辑 UI 提供的<block ref="ae61bf6af1a7406b62c72a4bef1ab62d" prefix=" " category="inline-code"></block>示例。请勿将其替换为单独的完整配置。</block>
+  <block id="48dacced6ec94c5cb4d6937f05d93ba8" category="paragraph">要启用并发，请在现有<block ref="084d5d41838f6b2d8b0c1f1176d66d01" prefix=" " category="inline-code"></block>部分下添加<block ref="a4e7c85b25780d3405c35482fbcee8c3" prefix=" " category="inline-code"></block>：</block>
+  <block id="0919404c158a119162b6d17412099e85" category="list-text">如果您需要修复升级后发现的错误、依赖问题或升级不成功或未完成的错误，则应卸载 Trident 并使用该版本的特定说明重新安装早期版本。这是_降级_到早期版本的唯一建议方法。</block>
+  <block id="6cb6457c77d43e645e6ad531fd87c3e7" category="admonition">要从使用命名空间作用域运算符（版本 20.07 至 20.10）安装的 Trident 进行升级，请使用已安装 Trident 版本的升级说明。</block>
+  <block id="c6e5aff4c5e70680da18857e52172127" category="list-text">如果您要从四发布窗口之外的版本进行升级，请执行多步骤升级。使用您要升级的早期版本的升级说明，升级到符合四版本窗口的最新版本。例如，如果您运行的是 23.07 并希望升级到 25.06：</block>
+  <block id="2e70b47949012cf02943c8e4a0aee0bf" category="list-text">如果您要从四发布窗口之外的版本进行升级，请执行多步骤升级。使用您要升级的早期版本的升级说明，升级到符合四版本窗口的最新版本。例如，如果您运行的是 24.10 并希望升级到 26.10：</block>
+  <block id="dbd99c5a621a4214b07e05028525602a" category="admonition"><block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 驱动程序支持卷导入。使用 <block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block> 驱动程序导入 Qtree 是一项技术预览功能，不支持在生产环境中使用。<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block> 驱动程序不支持导入。有关详细信息，请参见 <block ref="789b6758f1cde553cc7d543061e548ae" category="inline-link-macro-rx"></block>。</block>
+  <block id="a5f3bd6ab015dbbb8b7d917312c67e5d" category="paragraph">NetApp 正在不断改进和增强其产品和服务。以下是 Trident 中的一些最新功能。</block>
+  <block id="7866a1b570218718d3d6e2c2edf7aa5e" category="paragraph">客户端私钥的 Base64 编码值。用于基于证书的身份验证。</block>
+  <block id="fbdb5122847464abafb6b8fbf22ce698" category="paragraph">使用基于证书的身份验证时，除了通过<block ref="52c7b8f36716d3230d8fac3536f346c7" prefix=" " category="inline-code"></block>引用此 Secret 外，还需在<block ref="913a4b06671d1e04e6582a85afe3abbe" prefix=" " category="inline-code"></block> spec 中包含<block ref="79fffaff4013c1e8c508e76646eca77b" prefix=" " category="inline-code"></block>参数。如果使用受信任的 CA，还需在后端 spec 中包含<block ref="8468461bca00a47ab5ddba2afc45f52c" prefix=" " category="inline-code"></block>。有关详细信息，请参见<block ref="3f6dcd924a8de49d7dd2ce73ebeff2c3" category="inline-link-macro-rx"></block>。</block>
+  <block id="6a6de0ba319e24e0d4b8c88f30d37ffd" category="summary">了解控制器可扩展性、并发行为和支持的驱动程序。</block>
+  <block id="232abcc66c62ecea4d83b09a47f7d830" category="paragraph">默认情况下，<block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block> 设置为 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，并且 Trident 在串行模式下运行。</block>
+  <block id="16c8dc3326a9086ad075f5b20d9bd835" category="paragraph">默认情况下，<block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block> 设置为 <block ref="68934a3e9455fa72420237eb05902327" prefix=" " category="inline-code"></block>，并且对于所有新安装和从早期 Trident 版本的升级，Trident 均在串行模式下运行。串行模式无需配置，所有后端和驱动程序在没有额外配置的情况下均可正常运行。除非您明确将 <block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block> 设置为 <block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>，否则运行时行为不会发生更改。</block>
+  <block id="e287ed68766445199e03b92b9c2deca4" category="paragraph">此<block ref="b061e443e106870da185a3681948cf1b" prefix=" " category="inline-code"></block>选项是一个全局的、全有或全无的设置。它不能局限于单个驱动程序或后端。当您将其设置为<block ref="b326b5062b2f0e69046810717534cb09" prefix=" " category="inline-code"></block>时，所有后端将同时切换到并发模式。</block>
+  <block id="cac6e07598ded0310d149b680bf30e41" category="paragraph">在启用控制器可扩展性之前，请验证每个后端是否都使用受支持的驱动程序。如果任何后端使用不受支持的驱动程序，Trident 将拒绝启动，并且所有后端的所有存储操作都将失败。启用并发时，Trident 还将拒绝添加使用不受支持的驱动程序的新后端。</block>
+  <block id="1fb8b4cf2eb662a53a31d55f96367038" category="paragraph">要识别后端使用的驱动程序，请运行：</block>
+  <block id="59afb7c545fbf908f85da358b8b5c1a7" category="paragraph">如果 Trident 因为后端使用了不受支持的驱动程序而拒绝启动，请删除或重新配置该后端，或禁用控制器可扩展性。</block>
+  <block id="b0e25bd1cf79f84511d98b045a2457a3" category="paragraph">在启用控制器可扩展性之前，请确定 Trident 安装中每个后端的驱动程序类型。运行<block ref="c3faf5c8de9f21f7eddb5f1c840000c0" prefix=" " category="inline-code"></block>，然后使用下表确定您的环境是否已准备就绪。</block>
+  <block id="4bc98c974aa2bf22885b446cf0cd1187" category="cell">您的后端环境</block>
+  <block id="d783da95dc35f014ecd1112ff6616cc3" category="cell">是否可以启用并发？</block>
+  <block id="ae651cf36408bd2f7e664d908b21b5d8" category="cell">生产就绪？</block>
+  <block id="746b231b966af15f3cff713ca45075eb" category="cell">参考</block>
+  <block id="bc37bb82b38f09d1482ed32e07033cbe" category="cell">所有后端均使用受支持的驱动程序 <block ref="19597d63b6d41cad3fbece8a4b08d9b5" prefix="(" category="inline-code"></block> SAN 和 NVMe，<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>，<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>，<block ref="caafdf62a2c609bfa5316118231a1007" prefix=" " category="inline-code"></block>，<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>，<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block>，<block ref="94594b2ccbc8e0d220ad37504461650b" prefix=" " category="inline-code"></block>，<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block>，<block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block>）</block>
+  <block id="78a9f0798250b9d130c9b5a796c78249" category="cell">在生产环境中可安全启用。所有受支持的驱动程序都将以并发模式运行。</block>
+  <block id="c98768a9aa83e1785730528af8f21a32" category="cell">任何后端都使用不支持的驱动程序</block>
+  <block id="d583affab7577ab88eacfd34fd3030a0" category="cell">Trident 将拒绝启动，所有后端的所有存储操作都将失败。在启用之前删除或迁移不受支持的后端。</block>
+  <block id="fe3945abeda43e6cc5b43ef6d8c0c3a4" category="list-text">控制器可扩展性仅支持 <block ref="e775c19bcd26c93f19dae525559f0770" category="inline-xref-macro-rx"></block> 中列出的驱动程序。</block>
+  <block id="ef256d87faf95f110f29ea5864731778" category="paragraph">启用控制器可扩展性之前：</block>
+  <block id="567ba9ec095da2b004f688e222879a5c" category="list-text">运行<block ref="c3faf5c8de9f21f7eddb5f1c840000c0" prefix=" " category="inline-code"></block>并记下每个后端的驱动程序类型。</block>
+  <block id="27ad6aa45078cc7ae77bddfe13abd2a7" category="list-text">确认您的 Trident 版本的受支持驱动程序列表中显示了每个驱动程序。</block>
+  <block id="0c34dbbf81eef6e49ac262dfca0a301e" category="list-text">如果任何驱动程序不在受支持的列表中，请停止。在将这些后端删除或迁移到受支持的驱动程序之前，请勿启用并发。</block>
+  <block id="d0ac9b93d6abf70c9d08992a81176f8a" category="list-text">启用后，请使用<block ref="8e2b0b24a8b447cbe2bd763f0c39872b" prefix=" " category="inline-code"></block>检查控制器日志。</block>
+  <block id="2dc11fec2fedacf3c4fc55861afb6a28" category="list-text">启用后监控后端和 Kubernetes API 服务器性能。</block>
+  <block id="52a1e17b2cf234e9d16ad9ae6b10c8ee" category="cell">用于选择<block ref="39eea648dab96b0ee6022dabb38bc420" prefix=" " category="inline-code"></block>（用于 iSCSI）、<block ref="eac89e2640666fd1076a776e4b748fae" prefix=" " category="inline-code"></block>（用于 NVMe/TCP）或<block ref="0f64d0456878c73cbec1ccea842a6f14" prefix=" " category="inline-code"></block>（用于基于光纤通道（FC）的 SCSI）。注意：<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block> 驱动程序仅支持 iSCSI <block ref="39eea648dab96b0ee6022dabb38bc420" prefix="(" category="inline-code"></block>）。</block>
 </blocks>

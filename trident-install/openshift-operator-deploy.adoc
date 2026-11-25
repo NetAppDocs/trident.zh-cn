@@ -40,48 +40,18 @@ NOTE: 确保选择最新的 Operator 版本。
 +
 image::../media/openshift-operator-03.png[安装]
 
-. 单击“查看操作员”可查看操作员的详细信息。
+. 单击 *View Operator* 以查看 Operator 详细信息。选择 *Trident Orchestrator* 选项卡，然后单击 *Create instance*。
+. 在创建表单中，选择 *YAML 视图* 并编辑 UI 提供的 `TridentOrchestrator`示例。请勿将其替换为单独的完整配置。
 +
-image::../media/openshift-operator-07.png[已安装]
+要启用并发，请在现有 `spec:`部分下添加 `enableConcurrency: true`：
 
-. 单击“YAML 视图”并将以下内容粘贴到表单中：
 +
 [source, yaml]
 ----
-apiVersion: trident.netapp.io/v1
-kind: TridentOrchestrator
-metadata:
-  name: trident
-  namespace: openshift-operators
-spec:
-  IPv6: false
-  debug: false
-  nodePrep:
-  - iscsi
-  imageRegistry: ''
-  k8sTimeout: 180s
-  namespace: trident
-  silenceAutosupport: false
+  enableConcurrency: true
 ----
-+
-[NOTE]
-====
-UI 提供了默认示例。您可以直接编辑它，而不是复制完整配置。
-
-====
 
 
-[NOTE]
-====
-可选：启用并发
-
-要启用并发，请将以下字段添加到规范：
-
-[source, yaml]
-----
-enableConcurrency: true
-----
-====
 [NOTE]
 ====
 * Red Hat Enterprise Linux CoreOS (RHCOS) 未启用和配置 iSCSI。

@@ -152,7 +152,7 @@ NOTE: NVMe 仅支持ONTAP REST API，不支持 ONTAPI (ZAPI)。
 
  a| 
 `sanType`
-| 用于为iSCSI、 `nvme`NVMe/TCP或基于光纤通道的 `fcp`SCSI (FC)选择 `iscsi`。 | `iscsi` 如果为空 
+| 用于选择(`iscsi`（用于 iSCSI）、 `nvme`（用于 NVMe/TCP）或 `fcp`（用于基于光纤通道（FC）的 SCSI）。注意： `ontap-san-economy` 驱动程序仅支持 iSCSI (`iscsi`）。 | `iscsi` 如果为空 
 
 
 | `formatOptions`  a| 
@@ -235,6 +235,9 @@ Trident建议采用以下选项来加快格式化过程：
 | `splitOnClone` | 创建克隆时，从其父级拆分该克隆 | false 
 
 
+| `cloneSplitDelay` | 在 Trident 开始拆分在快照删除期间使快照保持忙碌状态的克隆之前等待的秒数。默认值为 `86400`秒（24 小时）。在默认值或更高值时，当 ONTAP 返回“snapshot busy”错误时，Trident 会应用指数退避，从 5 分钟开始，上限为 1 小时；在间隔内的重试不会调用 ONTAP。低于 `86400`时，Trident 会在每次 CSI 重试时调用 ONTAP，并且不使用退避。 | `86400` 
+
+
 | `加密` | 在新卷上启用 NetApp 卷加密 (NVE)；默认为 `false`。必须在集群上获得许可并启用 NVE 才能使用此选项。如果在后端启用了 NAE，则在 Trident 中配置的任何卷都将启用 NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | “false” *如果指定，则设置为 `true`适用于 ASA r2 系统*。 
 
 
@@ -242,6 +245,9 @@ Trident建议采用以下选项来加快格式化过程：
 
 
 | `分层策略` | 分层策略使用“无” *不要为 ASA r2 系统指定*。 |  
+
+
+| `skipRecoveryQueue` | 删除卷时，绕过存储中的恢复队列，立即删除卷。 | `""` 
 
 
 | `nameTemplate` | 用于创建自定义卷名称的模板。 | "" 

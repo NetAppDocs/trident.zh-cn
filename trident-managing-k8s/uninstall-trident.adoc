@@ -15,7 +15,7 @@ summary: 您应使用与安装Trident相同的方法卸载Trident。如果您需
 您应使用与安装Trident相同的方法卸载Trident。
 
 .关于此任务
-* 如果您需要修复在升级、依赖关系问题或升级失败或不完整后发现的错误，则应卸载Trident，然后按照适用于该版本的特定说明重新安装早期版本link:../earlier-versions.html["version"]。这是将_降 级_降级到早期版本的唯一建议方法。
+* 如果您需要修复升级后发现的错误、依赖问题或升级不成功或未完成的错误，则应卸载 Trident 并使用该版本的特定说明重新安装早期版本。这是_降级_到早期版本的唯一建议方法。
 * 为了便于升级和重新安装、卸载Trident不会删除Trident创建的CRD或相关对象。如果需要完全删除Trident及其所有数据，请参见link:../troubleshooting.html#completely-remove-trident-and-crds["完全删除Trident和CRD"]。
 
 

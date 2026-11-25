@@ -41,8 +41,6 @@ sidebar:
     entries:
     - title: 新增功能
       url: "/trident-rn.html"
-    - title: 早期版本
-      url: "/earlier-versions.html"
     - title: Trident 对 ASA r2 存储系统的支持
       url: "/trident-asar2-support.html"
     - title: 已知问题

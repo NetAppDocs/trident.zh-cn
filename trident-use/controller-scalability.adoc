@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: trident-use/controller-scalability.html 
 keywords: trident, controller scalability, concurrency, san, nas, san-nvme, gcnv, ontap-nas-economy, ontap-san-economy, ontap-nas-flexgroup, asa-r2 
-summary: 了解控制器的可扩展性、并发行为和功能成熟度。 
+summary: 了解控制器可扩展性、并发行为和支持的驱动程序。 
 ---
 = 控制器可扩展性
 :hardbreaks:
@@ -14,7 +14,7 @@ summary: 了解控制器的可扩展性、并发行为和功能成熟度。
 [role="lead"]
 Trident 通过提高多个存储驱动程序之间的并发性来提升控制器可扩展性。当您启用控制器可扩展性时，Trident 控制器会并行处理存储操作，而不是对其进行序列化，从而在具有大量并发操作的 Kubernetes 环境中提高吞吐量。
 
-在部署之前，请确定哪些 Trident 驱动程序在正式发布时支持控制器可扩展性，以及哪些驱动程序在 Trident 26.10 中作为技术预览版提供。这有助于您做出明智的部署决策并管理风险。控制器可扩展性默认处于禁用状态。
+默认情况下， `enableConcurrency` 设置为  `false`，并且 Trident 在串行模式下运行。
 
 
 
@@ -35,24 +35,16 @@ Trident 通过提高多个存储驱动程序之间的并发性来提升控制器
 [[default-behavior-serial-mode]]
 == 默认行为（串行模式）
 
-默认情况下，Trident 控制器一次处理一个操作。每个创建、删除、调整大小或快照请求在 Trident 启动下一个之前完成。串行模式是所有安装支持的默认值，无需配置。
-
-串行模式足以满足大多数工作负载的要求。仅当操作量在串行处理下产生积压时，才启用控制器可扩展性。
+默认情况下， `enableConcurrency` 设置为  `false`，并且对于所有新安装和从早期 Trident 版本的升级，Trident 均在串行模式下运行。串行模式无需配置，所有后端和驱动程序在没有额外配置的情况下均可正常运行。除非您明确将  `enableConcurrency` 设置为  `true`，否则运行时行为不会发生更改。
 
 
 
 [[controller-scalability-support]]
 == 控制器可扩展性支持
 
-Trident 支持针对不同存储驱动程序的不同成熟度级别的控制器可扩展性。
-
-
-
-[[general-availability]]
-=== 正式发布
-
 以下驱动程序在 Trident 26.10 正式上市时支持控制器可扩展性：
 
+* `asa-r2` (SAN 和 NVMe)
 * `ontap-san`
 * `ontap-NAS`
 * `ontap-nas-economy.`
@@ -70,56 +62,40 @@ The `google-cloud-netapp-volumes` 和 `google-cloud-netapp-volumes-san`驱动程
 ====
 
 
-[[technical-preview]]
-=== 技术预览
-
-以下驱动程序支持将控制器可扩展性作为 Trident 26.10 的技术预览功能：
-
-* `asa-r2` (SAN 和 NVMe)
-
-
-此驱动程序具有以下限制：
-
-* 控制器并发性仅可用于评估和测试。
-* 行为可能因版本不同而有所变化。
-* NetApp 不建议在生产环境中使用。
-
-
-
-
 [[how-enableconcurrency-works]]
 == enableConcurrency 的工作原理
 
-当您将 `enableConcurrency`设置为 `true`时，Trident 会对控制器管理的所有后端应用并发处理。该设置同时应用于每个后端。您不能为单个后端或单个驱动程序启用它。
+此 `enableConcurrency`选项是一个全局的、全有或全无的设置。它不能局限于单个驱动程序或后端。当您将其设置为 `true`时，所有后端将同时切换到并发模式。
 
-每个配置的后端都必须使用正式发布或技术预览列表中的驱动程序。如果任何后端使用不受支持的驱动程序，则 Trident 不会启动，并且 Trident 不会添加使用不受支持的驱动程序的后端。
+[IMPORTANT]
+====
+在启用控制器可扩展性之前，请验证每个后端是否都使用受支持的驱动程序。如果任何后端使用不受支持的驱动程序，Trident 将拒绝启动，并且所有后端的所有存储操作都将失败。启用并发时，Trident 还将拒绝添加使用不受支持的驱动程序的新后端。
 
-要恢复启动，请删除或重新配置使用不受支持的驱动程序的任何后端，或禁用控制器可扩展性。
+====
+要识别后端使用的驱动程序，请运行：
+
+[source, console]
+----
+tridentctl get backends -n trident
+----
+如果 Trident 因为后端使用了不受支持的驱动程序而拒绝启动，请删除或重新配置该后端，或禁用控制器可扩展性。
 
 
 
 [[before-you-enable]]
 == 启用之前
 
-[IMPORTANT]
-====
-在启用控制器可扩展性之前，请确认每个已配置的后端均使用正式发布或技术预览列表中的驱动程序。如果任何后端使用不受支持的驱动程序，则在启用该功能后，Trident 将无法启动。
+在启用控制器可扩展性之前，请确定 Trident 安装中每个后端的驱动程序类型。运行 `tridentctl get backends -n trident`，然后使用下表确定您的环境是否已准备就绪。
 
-====
-使用下表来决定是否启用控制器可扩展性。
-
-[cols="1,1"]
+[cols="2,1,1,3"]
 |===
-| 如果您的环境 | 操作 
+| 您的后端环境 | 是否可以启用并发？ | 生产就绪？ | 参考 
 
 
-| 仅使用受支持的驱动程序，并遇到控制器操作积压 | 启用控制器可扩展性。 
+| 所有后端均使用受支持的驱动程序 (`asa-r2` SAN 和 NVMe， `ontap-san`， `ontap-nas`， `ontap-nas-economy`， `ontap-nas-flexgroup`， `ontap-san-economy`， `google-cloud-netapp-volumes`， `azure-netapp-files`， `solidfire-san`） | 是的。 | 是的。 | 在生产环境中可安全启用。所有受支持的驱动程序都将以并发模式运行。 
 
 
-| 使用任何不受支持的驱动程序 | 保留默认串行模式。不要启用控制器可扩展性。 
-
-
-| 处理低操作量且无积压 | 保留默认串行模式。 
+| 任何后端都使用不支持的驱动程序 | 否 | 否 | Trident 将拒绝启动，所有后端的所有存储操作都将失败。在启用之前删除或迁移不受支持的后端。 
 |===
 
 
@@ -269,12 +245,11 @@ kubectl logs -n trident deploy/trident-controller | grep -i concurrency
 
 以下注意事项适用于 Trident 26.10 中的控制器可扩展性：
 
-* 控制器可扩展性仅支持一般可用性和技术预览列表中的驱动程序。有关详细信息，请参见 <<before-you-enable,启用之前>>。
+* 控制器可扩展性仅支持 <<before-you-enable,启用之前>> 中列出的驱动程序。
 * Trident 控制器在内部管理并发。此版本不提供用户可配置的并发限制。
 * 整体吞吐量取决于正在使用的存储驱动程序、后端响应能力和 Kubernetes API 服务器性能。
 * 高并发可能会增加后端存储系统的负载。
 * 控制器的可扩展性行为在所有驱动程序中并不相同。
-* 技术预览驱动程序在高负载下可能表现出不一致的性能，并且可能在不同版本之间改变行为。
 * 由于并行执行，调试并发操作可能会更加复杂。指标和日志可以显示交错操作输出。
 
 
@@ -283,17 +258,17 @@ kubectl logs -n trident deploy/trident-controller | grep -i concurrency
 [[recommendations]]
 == 建议
 
-在启用控制器可扩展性之前，请完成以下步骤：
+启用控制器可扩展性之前：
 
-. 确认每个配置的后端都使用一般可用性或技术预览列表中的驱动程序。
-. 在将更改应用于生产之前，请先在非生产集群中测试更改。
-. 应用更改后，验证是否已启用控制器可扩展性。
+. 运行 `tridentctl get backends -n trident`并记下每个后端的驱动程序类型。
+. 确认您的 Trident 版本的受支持驱动程序列表中显示了每个驱动程序。
+. 如果任何驱动程序不在受支持的列表中，请停止。在将这些后端删除或迁移到受支持的驱动程序之前，请勿启用并发。
+. 启用后，请使用 `kubectl logs -n trident deploy/trident-controller | grep -i concurrency`检查控制器日志。
+. 启用后监控后端和 Kubernetes API 服务器性能。
++
+** 对于需要高可扩展性的生产环境，请使用正式发布版驱动程序。
+** 大规模运行时监控后端和控制器性能。
+** 请勿在自动化脚本中假设操作顺序。
 
 
-使用控制器可扩展性操作时，请应用以下一般建议：
-
-* 对于需要高可扩展性的生产环境，请使用正式发布版驱动程序。
-* 仅在非生产环境中评估技术预览驱动程序。
-* 大规模运行时监控后端和控制器性能。
-* 请勿在自动化脚本中假设操作顺序。
 

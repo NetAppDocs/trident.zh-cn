@@ -76,11 +76,11 @@ WARNING: `spec.namespace`在中指定 `TridentOrchestrator`以表示安装Triden
 
 
 | `k8sTimeout`  a| 
-Kubernetes 操作超时。
+Kubernetes 操作超时，以整数秒为单位指定。
 
 
 NOTE: 这 `k8sTimeout`参数仅适用于Trident安装。
-| `180sec` 
+| `180` 
 
 
 | `silenceAutosupport` | 不要向NetApp发送AutoSupport捆绑包
@@ -148,7 +148,12 @@ NOTE: 从 OpenShift 4.19 开始，此功能支持的最低Trident版本为 25.06
 
 
 | `enableConcurrency`  a| 
-启用并发 Trident 控制器操作，以提高吞吐量。有关支持的驱动程序的详细信息，请参见链接：https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]。
+启用并发 Trident 控制器操作，以提高吞吐量。
+
+
+WARNING: 在 Trident 安装期间或更新现有部署时，必须显式启用此选项。
+
+有关支持的驱动程序的更多信息，请参见链接：https://docs.netapp.com/us-en/trident/trident-use/controller-scalability.html#controller-scalability[Controller Scalability documentation]。
 | `enableCOSI` 
 
 

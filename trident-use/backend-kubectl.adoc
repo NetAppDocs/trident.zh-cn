@@ -144,7 +144,9 @@ password
 | ONTAP  a| 
 客户端权限密钥
  a| 
-客户端专用密钥的 Base64 编码值。用于基于证书的身份验证
+客户端私钥的 Base64 编码值。用于基于证书的身份验证。
+
+使用基于证书的身份验证时，除了通过 `spec.credentials`引用此 Secret 外，还需在 `TridentBackendConfig` spec 中包含 `clientCertificate`参数。如果使用受信任的 CA，还需在后端 spec 中包含 `trustedCACertificate`。有关详细信息，请参见link:ontap-san-prep.html#enable-certificate-based-authentication["启用基于证书的身份验证"]。
 
 
 

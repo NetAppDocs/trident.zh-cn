@@ -120,8 +120,8 @@ ssl modify -vserver <vserver-name> -server-enabled true -client-enabled true -co
 +
 [listing]
 ----
-security certificate install -type client-ca -cert-name <certificate-name> -vserver <vserver-name>
-security ssl modify -vserver <vserver-name> -client-enabled true
+security certificate install -type client-ca -cert-name <certificate-name>
+security ssl modify -client-enabled true
 ----
 +
 

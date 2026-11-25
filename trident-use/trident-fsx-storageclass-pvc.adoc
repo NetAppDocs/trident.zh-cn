@@ -600,6 +600,9 @@ basic-csi    csi.trident.netapp.io   15h
 | `splitOnClone` | 创建克隆时，从其父级拆分该克隆 | `false` 
 
 
+| `cloneSplitDelay` | 在 Trident 开始拆分在快照删除期间使快照保持忙碌状态的克隆之前等待的秒数。默认值为 `86400`秒（24 小时）。在默认值或更高值时，当 ONTAP 返回“snapshot busy”错误时，Trident 会应用指数退避，从 5 分钟开始，上限为 1 小时；在间隔内的重试不会调用 ONTAP。低于 `86400`时，Trident 会在每次 CSI 重试时调用 ONTAP，并且不使用退避。 | `86400` 
+
+
 | `加密` | 在新卷上启用NetApp卷加密(NVE)；默认为 `false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Trident如何与NVE和NAE配合使用"]。 | `false` 
 
 
